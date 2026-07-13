@@ -313,9 +313,20 @@ body.cl-menu-open { overflow: hidden; }
 }
 .brand-mark{width:9px;height:9px;border-radius:2px;flex:none;background:var(--em);box-shadow:0 0 14px rgba(52,211,153,.55)}
 .logo-btn{display:inline-flex;align-items:center;gap:10px}
+/* Aurora-фон (как на главной) */
+#cl-aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#cl-aurora b{position:absolute;border-radius:50%;filter:blur(70px);display:block}
+#cl-aurora .a1{width:60vw;height:60vw;left:-15vw;top:-10vw;background:radial-gradient(circle,rgba(52,211,153,.13),transparent 62%);animation:aur1 28s ease-in-out infinite}
+#cl-aurora .a2{width:50vw;height:50vw;right:-12vw;top:22vh;background:radial-gradient(circle,rgba(30,122,87,.17),transparent 62%);animation:aur2 34s ease-in-out infinite}
+@keyframes aur1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,4vh) scale(1.12)}}
+@keyframes aur2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-5vw,6vh) scale(1.1)}}
+.wrap{position:relative;z-index:1}
+@media(prefers-reduced-motion:reduce){#cl-aurora b{animation:none}}
 </style>
 </head>
 <body style="background:#0B0F0D;margin:0">
+
+<div id="cl-aurora" aria-hidden="true"><b class="a1"></b><b class="a2"></b></div>
 
 <!-- ─── НАВИГАЦИЯ (байт-в-байт с главной) ─── -->
 <nav id="cl-nav" class="w-full z-50 px-8 py-6 flex justify-between items-center">

@@ -43,8 +43,16 @@ body.cl-menu-open{overflow:hidden}
 #cl-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 @media(max-width:768px){#cl-hamburger{display:flex}}
 @media(max-width:400px){#cl-nav-cta{display:none !important}}
+#cl-aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#cl-aurora b{position:absolute;border-radius:50%;filter:blur(70px);display:block}
+#cl-aurora .a1{width:60vw;height:60vw;left:-15vw;top:-10vw;background:radial-gradient(circle,rgba(52,211,153,.12),transparent 62%);animation:aur1 28s ease-in-out infinite}
+#cl-aurora .a2{width:50vw;height:50vw;right:-12vw;top:24vh;background:radial-gradient(circle,rgba(30,122,87,.15),transparent 62%);animation:aur2 34s ease-in-out infinite}
+@keyframes aur1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,4vh) scale(1.12)}}
+@keyframes aur2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-5vw,6vh) scale(1.1)}}
+@media(prefers-reduced-motion:reduce){#cl-aurora b{animation:none}}
 .pd-page {
-  background: #0B0F0D;
+  background: transparent;
+  position: relative; z-index: 1;
   color: #d4d4d8;
   font-family: 'Plus Jakarta Sans', sans-serif;
   padding: 50px 24px 110px;
@@ -74,6 +82,8 @@ body.cl-menu-open{overflow:hidden}
 </style>
 </head>
 <body>
+
+<div id="cl-aurora" aria-hidden="true"><b class="a1"></b><b class="a2"></b></div>
 
 <nav id="cl-nav" class="w-full px-8 py-6 flex justify-between items-center">
   <a href="/" class="logo-btn font-bold uppercase text-sm select-none"><img src="/mark-transparent.svg" alt="" width="18" height="18" style="flex:none">Closery</a>
