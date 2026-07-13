@@ -604,6 +604,42 @@ html, body { background: #0B0F0D; }
   .hero-line > span { transform: none !important; animation: none !important; }
   .hw-live i { animation: none !important; }
 }
+
+/* ═══ ЛОГОТИПЫ КЛИЕНТОВ (Workstream C) ═══ */
+.logo-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px 40px; }
+.logo-item {
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: clamp(15px,2vw,20px);
+  letter-spacing: .04em; color: var(--cl-muted); opacity: .55;
+  filter: grayscale(1); transition: opacity .3s, color .3s, transform .3s;
+}
+.logo-item:hover { opacity: 1; color: var(--cl-em); transform: translateY(-2px); }
+.logo-item .seg { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500;
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--cl-faint); margin-top: 4px; }
+.logo-sep { width: 1px; height: 34px; background: var(--cl-line); flex: none; }
+@media (max-width: 640px) { .logo-sep { display: none; } }
+
+/* ═══ СТЕНА РЕЗУЛЬТАТОВ (Workstream C) ═══ */
+.results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+  background: var(--cl-line); border: 1px solid var(--cl-line); border-radius: 16px; overflow: hidden; }
+@media (min-width: 768px) { .results-grid { grid-template-columns: repeat(3, 1fr); } }
+.result-cell {
+  background: linear-gradient(180deg, rgba(21,29,24,.6), rgba(11,15,13,.6));
+  padding: 34px 24px; text-align: center; position: relative; overflow: hidden;
+  transition: background .35s;
+}
+.result-cell:hover { background: linear-gradient(180deg, rgba(52,211,153,.06), rgba(11,15,13,.6)); }
+.result-cell::before { content: ''; position: absolute; width: 180px; height: 180px; border-radius: 50%;
+  top: -80px; right: -60px; background: radial-gradient(circle, rgba(52,211,153,.10), transparent 70%);
+  opacity: 0; transition: opacity .35s; pointer-events: none; }
+.result-cell:hover::before { opacity: 1; }
+.result-num {
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; letter-spacing: -.02em;
+  font-size: clamp(30px,4vw,44px); color: var(--cl-em); line-height: 1;
+  text-shadow: 0 0 22px rgba(52,211,153,.35); margin-bottom: 12px;
+  display: flex; align-items: baseline; justify-content: center; gap: .04em;
+}
+.result-num .pre { font-size: .6em; color: var(--cl-em); opacity: .7; }
+.result-cap { font-size: 12.5px; color: var(--cl-muted); line-height: 1.5; max-width: 220px; margin: 0 auto; }
 </style>
 </head>
 <body>
@@ -715,6 +751,20 @@ html, body { background: #0B0F0D; }
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ─── ЛОГОТИПЫ КЛИЕНТОВ ─── -->
+  <section class="py-12 px-4 md:px-8 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center text-[10px] uppercase tracking-[.24em] text-[#5F6B64] mb-8 reveal">Строили и разгоняли продажи для</div>
+      <div class="logo-strip reveal rd1">
+        <span class="logo-item">CDEK<span class="seg">Логистика</span></span>
+        <span class="logo-sep"></span>
+        <span class="logo-item">MarketGuru<span class="seg">SaaS для селлеров</span></span>
+        <span class="logo-sep"></span>
+        <span class="logo-item">UniBox<span class="seg">E-com · фулфилмент</span></span>
+      </div>
     </div>
   </section>
 
@@ -964,6 +1014,43 @@ html, body { background: #0B0F0D; }
     </div>
   </section>
 
+  <!-- ─── СТЕНА РЕЗУЛЬТАТОВ ─── -->
+  <section id="results" class="section-padding px-4 md:px-8 border-t border-white/5">
+    <div class="max-w-6xl mx-auto cl-center">
+      <div class="text-center mb-6 reveal"><div class="em-tag">Результаты в цифрах</div></div>
+      <h2 class="cl-h2 has-sub reveal">След системы — суммарно</h2>
+      <p class="cl-sub text-[#9BA8A0] text-lg max-w-2xl reveal rd1">
+        Не обещания в презентации, а построенное руками по одной методологии: цифры плюс люди.
+      </p>
+      <div class="results-grid reveal rd1">
+        <div class="result-cell">
+          <div class="result-num"><span class="pre">≈</span><span data-target="1" data-suffix=" млрд ₽">0</span></div>
+          <div class="result-cap">Суммарная выручка построенных отделов</div>
+        </div>
+        <div class="result-cell">
+          <div class="result-num"><span data-target="8" data-suffix="×">0</span></div>
+          <div class="result-cap">Рост выручки UniBox за 9 месяцев</div>
+        </div>
+        <div class="result-cell">
+          <div class="result-num"><span data-target="100" data-suffix=" млн">0</span></div>
+          <div class="result-cap">Планка MarketGuru, не покорявшаяся 3 года</div>
+        </div>
+        <div class="result-cell">
+          <div class="result-num"><span data-target="12">0</span></div>
+          <div class="result-cap">Отделов продаж построено с нуля</div>
+        </div>
+        <div class="result-cell">
+          <div class="result-num"><span data-target="34" data-suffix="%">0</span></div>
+          <div class="result-cap">Конверсия из аудита в оплату</div>
+        </div>
+        <div class="result-cell">
+          <div class="result-num"><span data-target="90" data-suffix=" дней">0</span></div>
+          <div class="result-cap">Полный цикл коммерческого блока под ключ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── ОСНОВАТЕЛЬ ─── -->
   <section id="founder" class="section-padding px-4 md:px-8 border-t border-white/5">
     <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
@@ -1164,16 +1251,30 @@ html, body { background: #0B0F0D; }
     }
     requestAnimationFrame(tick);
   }
+  var statEls = Array.prototype.slice.call(document.querySelectorAll('[data-target]'));
+  function fireStat(el) {
+    if (el._counted) return;
+    el._counted = true;
+    animateStat(el);
+  }
   var statObs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.isIntersecting && !e.target._counted) {
-        e.target._counted = true;
-        animateStat(e.target);
-        statObs.unobserve(e.target);
-      }
+      if (e.isIntersecting) { fireStat(e.target); statObs.unobserve(e.target); }
     });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('[data-target]').forEach(function (el) { statObs.observe(el); });
+  }, { threshold: 0.25 });
+  statEls.forEach(function (el) { statObs.observe(el); });
+  // Надёжный фолбэк на скролл/ресайз — на случай, если IO не сработал
+  function checkStats() {
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    statEls.forEach(function (el) {
+      if (el._counted) return;
+      var r = el.getBoundingClientRect();
+      if (r.top < vh * 0.9 && r.bottom > 0) fireStat(el);
+    });
+  }
+  window.addEventListener('scroll', checkStats, { passive: true });
+  window.addEventListener('resize', checkStats);
+  checkStats();
 
 
   /* ─── ПРЕМИУМ-МОТОРИКА (Workstream A) ─── */
