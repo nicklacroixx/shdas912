@@ -47,6 +47,35 @@
   .mono{font-family:'JetBrains Mono',monospace}
   .wrap{max-width:880px;margin:0 auto;padding:0 28px}
 
+  /* ---------- аврора-фон (как на главной) ---------- */
+  #cl-aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  #cl-aurora b{position:absolute;border-radius:50%;filter:blur(70px);display:block}
+  #cl-aurora .a1{width:60vw;height:60vw;left:-15vw;top:-10vw;background:radial-gradient(circle,rgba(52,211,153,.12),transparent 62%);animation:aur1 28s ease-in-out infinite}
+  #cl-aurora .a2{width:50vw;height:50vw;right:-12vw;top:24vh;background:radial-gradient(circle,rgba(30,122,87,.15),transparent 62%);animation:aur2 34s ease-in-out infinite}
+  @keyframes aur1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,4vh) scale(1.12)}}
+  @keyframes aur2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-5vw,6vh) scale(1.1)}}
+  header,main,footer{position:relative;z-index:1}
+
+  /* ---------- reveal (как на главной) ---------- */
+  .reveal{opacity:0;transform:translateY(26px);
+    transition:opacity .72s cubic-bezier(.16,1,.3,1),transform .72s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  .rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    #cl-aurora b{animation:none}
+  }
+
+  /* ---------- логотипы компаний (как на главной) ---------- */
+  .case-logo{
+    position:absolute;top:18px;right:26px;
+    height:20px;width:auto;max-width:104px;object-fit:contain;
+    filter:brightness(0) invert(1);opacity:.38;
+    transition:opacity .3s ease;
+  }
+  .case:hover .case-logo{opacity:.7}
+  @media(max-width:680px){.case-logo{height:16px;max-width:84px;top:16px;right:20px}}
+
   /* ---------- навбар (идентичен главной) ---------- */
   #cl-nav{position:sticky;top:0;z-index:60;display:flex;justify-content:space-between;align-items:center;width:100%;padding:1.5rem 2rem;background:rgba(11,15,13,.2);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 4px 24px rgba(0,0,0,.25);transition:background .4s,box-shadow .4s,border-color .4s}
   #cl-nav.cl-scrolled{background:rgba(11,15,13,.6);-webkit-backdrop-filter:blur(28px) saturate(200%);backdrop-filter:blur(28px) saturate(200%);border-bottom-color:rgba(52,211,153,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 8px 32px rgba(0,0,0,.5)}
@@ -157,6 +186,7 @@
   }
   .case-actions li span{color:var(--muted)}
   .case-result{
+    position:relative;
     padding:20px 26px 24px;
     background:rgba(52,211,153,.03);
   }
@@ -248,6 +278,8 @@
 </head>
 <body>
 
+<div id="cl-aurora" aria-hidden="true"><b class="a1"></b><b class="a2"></b></div>
+
 <nav id="cl-nav">
   <a href="/" class="logo-btn"><img src="/mark-transparent.svg" alt="" width="18" height="18" style="flex:none">Closery</a>
   <div class="nav-links">
@@ -276,10 +308,10 @@
 
 <header>
   <div class="wrap">
-    <div class="page-tag">Кейсы / Карьерный трек</div>
-    <h1>10 лет в коммерции: от менеджера до коммерческого директора и <em>построения коммерческих блоков с нуля</em></h1>
-    <p class="subtitle">Три проекта, три разные точки входа — кризис, ноль, масштабирование. Один подход: управление на цифрах, а не на ощущениях.</p>
-    <div class="track">
+    <div class="page-tag reveal">Кейсы / Карьерный трек</div>
+    <h1 class="reveal rd1">10 лет в коммерции: от менеджера до коммерческого директора и <em>построения коммерческих блоков с нуля</em></h1>
+    <p class="subtitle reveal rd2">Три проекта, три разные точки входа — кризис, ноль, масштабирование. Один подход: управление на цифрах, а не на ощущениях.</p>
+    <div class="track reveal rd3">
       <span><b>2021–2023</b> MarketGuru — рост в SaaS</span>
       <span><b>2023–2025</b> UniBox — коммерция с нуля</span>
       <span><b>2025–2026</b> CDEK (франчайзи) — антикризис</span>
@@ -290,7 +322,7 @@
 <main class="wrap">
 
   <!-- CASE 1: CDEK -->
-  <section class="case">
+  <section class="case reveal">
     <div class="case-head">
       <div class="case-index">CASE 01 / АНТИКРИЗИС</div>
       <div class="case-title">CDEK — франчайзи-точка</div>
@@ -307,6 +339,7 @@
         </ul>
       </div>
       <div class="case-result">
+        <img src="/clients/cdek.svg" alt="CDEK" class="case-logo" loading="lazy">
         <h3>Результат</h3>
         <div class="result-num">Топ-5 сети</div>
         <div class="result-label">возврат точки с 30-го места за 4,5 месяца</div>
@@ -320,7 +353,7 @@
   </section>
 
   <!-- CASE 2: UniBox -->
-  <section class="case">
+  <section class="case reveal">
     <div class="case-head">
       <div class="case-index">CASE 02 / С НУЛЯ</div>
       <div class="case-title">UniBox — e-com, маркетплейсы</div>
@@ -338,6 +371,7 @@
         </ul>
       </div>
       <div class="case-result">
+        <img src="/clients/unibox.svg" alt="UniBox" class="case-logo" loading="lazy">
         <h3>Результат</h3>
         <div class="result-num">1,5 → 12,3 млн ₽</div>
         <div class="result-label">месячная выручка проекта за 9 месяцев — рост ×8</div>
@@ -351,7 +385,7 @@
   </section>
 
   <!-- CASE 3: MarketGuru -->
-  <section class="case">
+  <section class="case reveal">
     <div class="case-head">
       <div class="case-index">CASE 03 / КОНВЕРСИЯ И МЕТОДОЛОГИЯ</div>
       <div class="case-title">MarketGuru — SaaS для селлеров</div>
@@ -368,6 +402,7 @@
         </ul>
       </div>
       <div class="case-result">
+        <img src="/clients/marketguru.svg" alt="MarketGuru" class="case-logo" loading="lazy">
         <h3>Результат</h3>
         <div class="result-num">6 месяцев</div>
         <div class="result-label">подряд рекордов компании по выручке — отдел рос вровень с проектом</div>
@@ -381,7 +416,7 @@
   </section>
 
   <!-- BRIDGE -->
-  <section class="bridge">
+  <section class="bridge reveal">
     <h2>Как это переносится на ваш бизнес</h2>
     <p class="lead">Три разных проекта — один повторяемый набор инструментов. Он и есть продукт Closery: коммерческий блок за 90 дней.</p>
     <div class="bridge-grid">
@@ -422,6 +457,10 @@
   window.addEventListener('scroll',upd,{passive:true}); upd();
   var h=document.getElementById('cl-hamburger'), m=document.getElementById('cl-mob-menu');
   if(h){h.addEventListener('click',function(){var o=m.classList.toggle('open');h.classList.toggle('open',o);h.setAttribute('aria-expanded',String(o));document.body.classList.toggle('cl-menu-open',o);});}
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
 })();
 </script>
 <script src="/cookie-consent.js" defer></script>
