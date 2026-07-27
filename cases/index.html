@@ -18,22 +18,27 @@
 <meta property="og:url" content="https://closery.ru/cases/">
 <meta property="og:title" content="Closery — Кейсы">
 <meta property="og:description" content="CDEK: 30-е место → топ-5 сети. UniBox: с нуля до 12,3 млн ₽/мес. MarketGuru: 34% конверсии и 6 месяцев рекордов.">
-<meta property="og:image" content="https://closery.ru/mark-512.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://closery.ru/og-image.png">
+<meta property="og:image" content="https://closery.ru/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
 <style>
   :root{
-    --bg:#0B0F0D;
-    --surface:#111713;
-    --surface-2:#151D18;
-    --line:rgba(80,220,160,.14);
-    --line-soft:rgba(255,255,255,.07);
-    --emerald:#34D399;
-    --emerald-dim:#1E7A57;
-    --text:#E8EFEA;
-    --muted:#9BA8A0;
-    --faint:#5F6B64;
+    --bg:var(--cl-bg);
+    --surface:var(--cl-surface);
+    --surface-2:var(--cl-surface2);
+    --line:var(--cl-line);
+    --line-soft:var(--cl-line-soft);
+    --emerald:var(--cl-em);
+    --emerald-dim:var(--cl-em-dim);
+    --text:var(--cl-text);
+    --muted:var(--cl-muted);
+    --faint:var(--cl-faint);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
