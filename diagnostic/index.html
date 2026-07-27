@@ -328,6 +328,23 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;padding:1px 6px;font-si
 .cases-grid b{font-size:26px;font-weight:800;color:var(--teal);display:block;margin-bottom:4px;text-shadow:0 0 20px rgba(52,211,153,.4)}
 .cases-grid span{font-size:11.5px;color:var(--ink-2);line-height:1.5;display:block}
 .cases-grid small{display:block;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-top:8px}
+/* Ключевые параметры: голые факты об обороте */
+.km{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft)}
+@media(max-width:820px){.km{grid-template-columns:repeat(2,1fr)}}
+.km>div{background:var(--bg);padding:13px 15px}
+.km .kk{display:block;font-size:8.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+.km .kv{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:#fff;line-height:1.2}
+.km .kd{display:block;font-size:10.5px;color:var(--ink-3);margin-top:3px}
+/* Цена одного шага — единица измерения масштаба задачи */
+.step-price{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);margin-top:16px}
+@media(max-width:640px){.step-price{grid-template-columns:1fr}}
+.step-price>div{background:var(--surface);padding:13px 16px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.step-price span{font-size:12.5px;color:var(--ink-2);line-height:1.4}
+.step-price b{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--teal);white-space:nowrap}
+.horizon{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line-soft)}
+.horizon>div{flex:1 1 200px}
+.horizon .hk{display:block;font-size:8.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+.horizon .hv{font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700}
 /* ─── Блоки разбора 2.0 ─── */
 /* Вывод нормы: показываем, из чего она сложилась именно для этой компании */
 .bench{display:flex;flex-wrap:wrap;gap:10px 26px;margin-bottom:14px}
@@ -335,6 +352,12 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;padding:1px 6px;font-si
 .bench .bk{display:block;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
 .bench .bv{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--teal)}
 .bench-note{font-size:12.5px;color:var(--ink-2);line-height:1.55;border-top:1px solid var(--line-soft);padding-top:12px}
+.bench-set{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
+.bench-set label{font-size:11.5px;color:var(--ink-3)}
+.bench-set input{width:72px;background:var(--surface);border:1px solid var(--line);color:var(--ink);
+  font-family:'JetBrains Mono',monospace;font-size:13px;padding:6px 9px;text-align:center}
+.bench-set input:focus{outline:none;border-color:var(--teal)}
+.bench-set span{font-size:12px;color:var(--ink-3)}
 /* Воронка в три этапа */
 .fn-stage{display:grid;grid-template-columns:120px 1fr 92px;align-items:center;gap:12px;margin-bottom:9px}
 @media(max-width:560px){.fn-stage{grid-template-columns:96px 1fr 78px;gap:8px}}
@@ -370,18 +393,6 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;padding:1px 6px;font-si
 .gapbox{border-left:2px solid var(--warn);padding:14px 18px;background:rgba(251,191,36,.05);font-size:13.5px;color:var(--ink-2);line-height:1.65}
 .gapbox.match{border-left-color:var(--teal);background:rgba(52,211,153,.05)}
 .gapbox h4{font-size:14px;color:#fff;font-weight:700;margin:0 0 7px}
-/* Разбор, написанный поверх готового расчёта */
-.llm-h{font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin:18px 0 8px}
-.llm-h:first-child{margin-top:0}
-.llm-body p{font-size:13.5px;color:var(--ink-2);line-height:1.7;margin:0 0 10px}
-.llm-body p:last-child{margin-bottom:0}
-.llm-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
-.llm-bar input{flex:1 1 220px;min-width:0;background:var(--surface);border:1px solid var(--line);
-  color:var(--ink);font-family:inherit;font-size:12px;padding:8px 10px}
-.llm-bar input:focus{outline:none;border-color:var(--teal)}
-.llm-bar select{background:var(--surface);border:1px solid var(--line);color:var(--ink-2);font-family:inherit;font-size:11px;padding:8px 10px}
-.llm-hint{font-size:11.5px;color:var(--ink-3);line-height:1.5;margin-top:8px}
-.llm-err{font-size:12px;color:var(--bad);margin-top:8px;line-height:1.5}
 /* Демо-режим (?test=1): цифры случайные. Пометка обязана быть заметной,
    чтобы при быстром показе их не приняли за реальный расчёт. */
 .demo-banner{display:flex;align-items:center;gap:12px;border:1px solid #fbbf24;
@@ -489,6 +500,13 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;padding:1px 6px;font-si
   .pr-ledger-total.good b{color:var(--pr-accent)}
 
   /* ── Нумерованные списки (проблемы / рекомендации) ── */
+  /* Ключевые параметры в печати */
+  .pr-km{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--pr-line);
+    border:1px solid var(--pr-line);margin:14px 0 4px}
+  .pr-km>div{background:var(--pr-paper);padding:9px 11px}
+  .pr-km .k{display:block;font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pr-ink-3);margin-bottom:3px}
+  .pr-km .v{font-family:var(--pr-serif);font-size:14px;font-weight:700;color:var(--pr-ink);line-height:1.2;display:block}
+  .pr-km .d{display:block;font-size:8.5px;color:var(--pr-ink-3);margin-top:2px}
   /* ─── Блоки разбора 2.0 в печати ─── */
   .pr-bench{display:flex;gap:18px;margin:14px 0 12px}
   .pr-bench>div{flex:1;border:1px solid var(--pr-line);padding:10px 12px}
@@ -584,7 +602,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;padding:1px 6px;font-si
   <a href="/#founder"    onclick="clCloseMob()">Основатель</a>
   <a href="/diagnostic"  class="nav-dna" onclick="clCloseMob()">Диагностика</a>
 </div>
-<div class="shell"><main class="flow" id="flow"><!-- Intro --><section class="intro" id="introScreen"><div class="eyebrow">Диагностика коммерческого блока</div><h1>Сколько денег ваш бизнес <em>теряет прямо сейчас</em> — в цифрах, а не на словах</h1><p>Коммерческий МРТ просканирует маркетинг, продажи, команду, управление и экономику вашей компании. Нормы считаются под ваш профиль — сегмент, чек, цикл сделки, — а не по рынку вообще. По ходу ответов система находит главное ограничение роста, показывает, на каком этапе воронки течёт, и считает, сколько из потерь реально вернуть за квартал.</p><div class="intro-meta"><div><b>60 вопросов</b>по шести системам</div><div><b>90 дней</b>дорожная карта на выходе</div><div><b>₽ в год</b>потери и возврат в цифрах</div></div><div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn-primary" id="btnStart">Начать сканирование →</button></div></section><!-- Question card renders here --><section id="questionScreen" style="display:none"><div style="position:relative;display:inline-block"><div class="section-tag" id="sectionTag"></div><div class="section-nav" id="sectionNav"></div></div><div id="cardHost"></div><div class="insight" id="insightBox"></div></section><!-- Final screen --><section class="final" id="finalScreen"></section></main><!-- ================= DASHBOARD ================= --><aside class="dash" id="dash"><div class="panel"><div class="panel-h">Индекс коммерческой зрелости <span class="live-dot"></span></div><div class="gauge-wrap"><div class="gauge"><svg viewBox="0 0 160 160"><circle class="track" cx="80" cy="80" r="70"></circle><circle class="scanline" cx="80" cy="80" r="70" id="scanLine"></circle><circle class="val" cx="80" cy="80" r="70" id="gaugeVal"></circle></svg><div class="gauge-num"><b id="indexNum">—</b><span>из 100</span></div></div><div class="gauge-side"><div class="verdict" id="indexVerdict">Сканер готов</div><p id="indexDesc">Отвечайте на вопросы — индекс и оценки систем будут пересчитываться после каждого ответа.</p></div></div></div><div class="panel loss-panel"><div class="panel-h">Потенциально теряете</div><div class="loss-num" id="lossNum">— ₽/год</div><div class="loss-sub" id="lossSub">Оценка недополученной прибыли по финансовой модели. Уточняется с каждым ответом.</div><div class="sanity-warn" id="sanityWarn" style="display:none"></div><div class="loss-factors" id="lossFactors"></div></div><div class="constraint-card"><div class="panel-h">Главное ограничение роста</div><div class="constraint-name" id="constraintName">Определяется…</div><div class="constraint-why" id="constraintWhy">Нужно больше данных для постановки диагноза.</div></div><div class="panel"><div class="panel-h">Системы бизнеса</div><div class="cat-rows" id="catRows"></div></div><div class="panel"><div class="panel-h">Находки сканера <span class="find-count" id="findCount"></span></div><div id="findRows"><div class="empty-note">// пока чисто</div></div></div><div class="panel"><div class="panel-h">Потенциал роста</div><div class="growth-rows" id="growthRows"><div class="empty-note">// появится после блока «Финансы»</div></div></div></aside></div><div class="print-report" id="printReport"></div><script>
+<div class="shell"><main class="flow" id="flow"><!-- Intro --><section class="intro" id="introScreen"><div class="eyebrow">Диагностика коммерческого блока</div><h1>Сколько денег ваш бизнес <em>теряет прямо сейчас</em> — в цифрах, а не на словах</h1><p>Коммерческий МРТ просканирует маркетинг, продажи, команду, управление и экономику вашей компании. Нормы считаются под ваш профиль — сегмент, чек, цикл сделки, — а не по рынку вообще. По ходу ответов система находит главное ограничение роста, показывает, на каком этапе воронки теряются заявки, и считает, сколько из потерь реально вернуть за квартал.</p><div class="intro-meta"><div><b>60 вопросов</b>по шести системам</div><div><b>90 дней</b>дорожная карта на выходе</div><div><b>₽ в год</b>потери и возврат в цифрах</div></div><div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn-primary" id="btnStart">Начать сканирование →</button></div></section><!-- Question card renders here --><section id="questionScreen" style="display:none"><div style="position:relative;display:inline-block"><div class="section-tag" id="sectionTag"></div><div class="section-nav" id="sectionNav"></div></div><div id="cardHost"></div><div class="insight" id="insightBox"></div></section><!-- Final screen --><section class="final" id="finalScreen"></section></main><!-- ================= DASHBOARD ================= --><aside class="dash" id="dash"><div class="panel"><div class="panel-h">Индекс коммерческой зрелости <span class="live-dot"></span></div><div class="gauge-wrap"><div class="gauge"><svg viewBox="0 0 160 160"><circle class="track" cx="80" cy="80" r="70"></circle><circle class="scanline" cx="80" cy="80" r="70" id="scanLine"></circle><circle class="val" cx="80" cy="80" r="70" id="gaugeVal"></circle></svg><div class="gauge-num"><b id="indexNum">—</b><span>из 100</span></div></div><div class="gauge-side"><div class="verdict" id="indexVerdict">Сканер готов</div><p id="indexDesc">Отвечайте на вопросы — индекс и оценки систем будут пересчитываться после каждого ответа.</p></div></div></div><div class="panel loss-panel"><div class="panel-h">Потенциально теряете</div><div class="loss-num" id="lossNum">— ₽/год</div><div class="loss-sub" id="lossSub">Оценка недополученной прибыли по финансовой модели. Уточняется с каждым ответом.</div><div class="sanity-warn" id="sanityWarn" style="display:none"></div><div class="loss-factors" id="lossFactors"></div></div><div class="constraint-card"><div class="panel-h">Главное ограничение роста</div><div class="constraint-name" id="constraintName">Определяется…</div><div class="constraint-why" id="constraintWhy">Нужно больше данных для постановки диагноза.</div></div><div class="panel"><div class="panel-h">Системы бизнеса</div><div class="cat-rows" id="catRows"></div></div><div class="panel"><div class="panel-h">Находки сканера <span class="find-count" id="findCount"></span></div><div id="findRows"><div class="empty-note">// пока чисто</div></div></div><div class="panel"><div class="panel-h">Потенциал роста</div><div class="growth-rows" id="growthRows"><div class="empty-note">// появится после блока «Финансы»</div></div></div></aside></div><div class="print-report" id="printReport"></div><script>
 const ClsMRI = (() => {
 'use strict';
 const C = {
@@ -662,7 +680,7 @@ const QUESTIONS = [
       {v:'many',  t:'Четверо и больше / тендер, комитет'}
     ],
     score:v => v==='many' ? [{cat:'sales', delta:-4}] : v==='one' ? [{cat:'sales', delta:+4}] : [],
-    insight:v => v==='many' ? {tone:'warn', text:'<b>Решение принимает группа.</b> Это не плохо — но означает, что сделка живёт долго, а менеджеру нужен навык вести несколько ЛПР одновременно. Норма конверсии для вас ниже рыночной.'} : null },
+    insight:v => v==='many' ? {tone:'warn', text:'<b>Решение принимает группа.</b> Это не плохо — но означает, что сделка живёт долго, а менеджеру нужен навык вести несколько ЛПР одновременно. Ориентир конверсии для вас ниже рыночной.'} : null },
   { id:'repeat_nature', section:'business', type:'select',
     title:'Продукт по своей природе повторный?',
     sub:'Определяет, какая доля повторных продаж для вас нормальна.',
@@ -1207,6 +1225,16 @@ const Scoring = {
 // цифру нельзя оспорить «а у нас другая специфика» и нельзя зашаблонить.
 const Profile = {
   cycleDays(){ const n = Number(State.answers.deal_cycle); return isFinite(n) && n > 0 ? n : 21; },
+  // Клиент вправе не согласиться с расчётным ориентиром: у него может быть
+  // своя проверенная цифра по нише. Тогда считаем по ней — это снимает
+  // главное возражение «откуда вы взяли эту норму» прямо на созвоне.
+  hasOverride(){ const v = Number(State.answers._conv_override); return isFinite(v) && v > 0; },
+  setOverride(v){
+    const n = Number(v);
+    if (isFinite(n) && n > 0) State.answers._conv_override = Math.min(95, Math.max(1, Math.round(n)));
+    else delete State.answers._conv_override;
+    Storage.save();
+  },
   build(){
     const a = State.answers;
     const check = FinModel.num('avg_check');
@@ -1219,7 +1247,9 @@ const Profile = {
     const checkAdj = check == null ? 1.00
                    : check > 500000 ? 0.70 : check > 100000 ? 0.85 : check >= 15000 ? 1.00 : 1.15;
     const dmAdj    = ({one:1.10, few:1.00, many:0.85})[a.decision_makers] || 1.00;
-    const convTarget = Math.round(Math.min(45, Math.max(3, convBase * cycleAdj * checkAdj * dmAdj)));
+    const convTarget = this.hasOverride()
+      ? Number(a._conv_override)
+      : Math.round(Math.min(45, Math.max(3, convBase * cycleAdj * checkAdj * dmAdj)));
 
     const repeatTarget = ({subscription:60, recurring:40, project:25, oneoff:10})[a.repeat_nature]
                       || (audience === 'b2c' ? 35 : 30);
@@ -1232,6 +1262,7 @@ const Profile = {
   },
   // Человеческая расшифровка: из чего сложилась норма именно для них
   explain(){
+    if (this.hasOverride()) return 'ваша цифра по нише — ' + State.answers._conv_override + '%';
     const p = this.build(), a = State.answers, parts = [];
     parts.push(({b2b:'B2B', b2c:'B2C', mixed:'B2B + B2C'})[p.audience]);
     if (p.check != null) parts.push('чек ' + Fmt.money(p.check));
@@ -1265,7 +1296,7 @@ const Funnel = {
     return {leads, dialogs, deals, conv, reachRate, closeRate,
             closeNorm, reachNorm:this.REACH_NORM, partial:false};
   },
-  // Где именно течёт — контакт, закрытие или оба этапа
+  // Где именно теряются заявки — на контакте, на закрытии или на обоих этапах
   diagnose(){
     const f = this.build();
     if (!f || f.partial) return null;
@@ -1276,14 +1307,14 @@ const Funnel = {
     // в тексте обязана совпадать с цифрой в статье потерь.
     const lost = Math.round(f.leads * Math.max(0, f.reachNorm - f.reachRate));
     const rPct = Math.round(f.reachRate * 100), cPct = Math.round(f.closeRate * 100);
-    if (reachBad && closeBad) return {kind:'both', title:'Течёт на обоих этапах',
-      text:`До разговора доходит ${rPct}% заявок при норме ${Math.round(f.reachNorm*100)}% — это ${lost} заявок в месяц сверх нормы. И из состоявшихся разговоров закрывается ${cPct}% при норме ${Math.round(f.closeNorm*100)}%. Чинить последовательно: сначала контакт — он дешевле и быстрее, потом закрытие.`};
-    if (reachBad) return {kind:'reach', title:'Проблема не в продажах — в контакте',
-      text:`Дозвон ${rPct}% при норме ${Math.round(f.reachNorm*100)}% — это ${lost} заявок в месяц, потерянных сверх нормы, ещё до первого разговора. Те, до кого доходят, закрываются нормально: ${cPct}%. Значит, лечить нужно скорость ответа и регламент касаний, а не навык продаж.`};
-    if (closeBad) return {kind:'close', title:'Разговор есть — денег нет',
-      text:`Дозвон здоровый: ${rPct}% заявок доходит до разговора. Но из этих разговоров закрывается только ${cPct}% при норме ${Math.round(f.closeNorm*100)}%. Проблема на этапе закрытия: работа с возражениями, квалификация, доведение до решения.`};
-    return {kind:'ok', title:'Воронка работает ровно',
-      text:`Дозвон ${rPct}% и закрытие ${cPct}% — оба этапа в пределах нормы вашего профиля. Рост здесь даст не починка воронки, а объём и средний чек.`};
+    if (reachBad && closeBad) return {kind:'both', title:'Потери на обоих этапах',
+      text:`До разговора доходит ${rPct}% заявок при ориентире ${Math.round(f.reachNorm*100)}% — это ${lost} заявок в месяц сверх нормы. И из состоявшихся разговоров закрывается ${cPct}% при ориентире ${Math.round(f.closeNorm*100)}%. Чинить последовательно: сначала контакт — он дешевле и быстрее, потом закрытие.`};
+    if (reachBad) return {kind:'reach', title:'Узкое место — этап контакта',
+      text:`Дозвон ${rPct}% при ориентире ${Math.round(f.reachNorm*100)}% — это ${lost} заявок в месяц, потерянных сверх нормы, ещё до первого разговора. Те, до кого доходят, закрываются нормально: ${cPct}%. Значит, лечить нужно скорость ответа и регламент касаний, а не навык продаж.`};
+    if (closeBad) return {kind:'close', title:'Узкое место — этап закрытия',
+      text:`Дозвон здоровый: ${rPct}% заявок доходит до разговора. Но из этих разговоров закрывается только ${cPct}% при ориентире ${Math.round(f.closeNorm*100)}%. Проблема на этапе закрытия: работа с возражениями, квалификация, доведение до решения.`};
+    return {kind:'ok', title:'Воронка в пределах ориентира',
+      text:`Дозвон ${rPct}% и закрытие ${cPct}% — оба этапа в пределах ориентира вашего профиля. Рост здесь даст не починка воронки, а объём и средний чек.`};
   }
 };
 
@@ -1327,11 +1358,11 @@ const Capacity = {
     if (!c || !s) return null;
     const load = Math.round(c.load), norm = c.loadNorm;
     if (s === 'overload') return {tone:'bad', title:'Отдел перегружен',
-      text:`На одного продающего приходится ${load} лидов в месяц при норме ${norm} для вашего цикла сделки. Часть заявок теряется не из-за навыка, а из-за того, что их физически некому обработать. Нанимать здесь дешевле, чем учить.`};
+      text:`На одного продающего приходится ${load} лидов в месяц при ориентире ${norm} для вашего цикла сделки. Часть заявок теряется не из-за навыка, а из-за того, что их физически некому обработать. Нанимать здесь дешевле, чем учить.`};
     if (s === 'starving') return {tone:'warn', title:'Отдел недозагружен',
-      text:`На одного продающего приходится всего ${load} лидов в месяц при норме ${norm}. Люди простаивают — узкое место не в продажах, а в маркетинге. Усиление отдела продаж сейчас денег не принесёт: им нечего обрабатывать.`};
+      text:`На одного продающего приходится всего ${load} лидов в месяц при ориентире ${norm}. Люди простаивают — узкое место не в продажах, а в маркетинге. Усиление отдела продаж сейчас денег не принесёт: им нечего обрабатывать.`};
     return {tone:'good', title:'Нагрузка в норме',
-      text:`${load} лидов на продающего при норме ${norm} — ресурс сбалансирован. Рост конверсии не упрётся в нехватку рук.`};
+      text:`${load} лидов на продающего при ориентире ${norm} — ресурс сбалансирован. Рост конверсии не упрётся в нехватку рук.`};
   }
 };
 
@@ -1371,19 +1402,19 @@ const FinModel = {
     if (f && !f.partial && check !== null){
       if (f.reachRate < f.reachNorm){
         const missed = f.leads * (f.reachNorm - f.reachRate);
-        push('reach_gap', `Дозвон ${Math.round(f.reachRate*100)}% при норме ${Math.round(f.reachNorm*100)}%`,
+        push('reach_gap', `Дозвон ${Math.round(f.reachRate*100)}% при ориентире ${Math.round(f.reachNorm*100)}%`,
           missed * f.closeRate * check * C.MONTHS * m,
           `${Math.round(missed)} заявок в месяц, с которыми просто не поговорили. Они уже оплачены маркетингом — это чистый убыток на входе.`, 'reach');
       }
       if (f.closeRate < f.closeNorm){
-        push('close_gap', `Закрытие ${Math.round(f.closeRate*100)}% при норме ${Math.round(f.closeNorm*100)}%`,
+        push('close_gap', `Закрытие ${Math.round(f.closeRate*100)}% при ориентире ${Math.round(f.closeNorm*100)}%`,
           f.dialogs * (f.closeNorm - f.closeRate) * check * C.MONTHS * m,
           'Разговор состоялся, деньги не пришли. Здесь работают скрипт, работа с возражениями и доведение до решения.', 'close');
       }
     } else if (leads !== null && conv !== null && check !== null && conv < p.convTarget){
       // Диалоги не заполнены — считаем общий разрыв без разбивки по этапам
       const perPoint = leads * 0.01 * check * C.MONTHS * m;
-      push('conv_gap', `Конверсия ${conv}% при норме ${p.convTarget}% для вашего профиля`,
+      push('conv_gap', `Конверсия ${conv}% при ориентире ${p.convTarget}% для вашего профиля`,
         leads * (p.convTarget - conv) / 100 * check * C.MONTHS * m,
         `Каждый пункт конверсии при ваших объёмах — ${Fmt.money(perPoint)} в год.`, 'conv');
     }
@@ -1391,7 +1422,7 @@ const FinModel = {
     // ── Повторные продажи против нормы для природы продукта ──
     if (leads !== null && conv !== null && check !== null && repeat !== null && repeat < p.repeatTarget){
       const clientsMo = leads * conv / 100;
-      push('repeat_gap', `Повторные ${repeat}% при норме ${p.repeatTarget}% для вашего типа продукта`,
+      push('repeat_gap', `Повторные ${repeat}% при ориентире ${p.repeatTarget}% для вашего типа продукта`,
         clientsMo * (p.repeatTarget - repeat) / 100 * check * C.MONTHS * m,
         'Повторная продажа обходится в 5–7 раз дешевле новой: контакт и доверие уже оплачены.', 'repeat');
     }
@@ -1560,6 +1591,58 @@ const FinModel = {
     return total > 0 && total < C.DIAG_PRICE;
   }
 };
+// ═══ КЛЮЧЕВЫЕ ПАРАМЕТРЫ КОММЕРЧЕСКОГО БЛОКА ═══
+// Первичный скрининг: голые факты о машине, через которую идут деньги.
+// Без интерпретации и без оценок — только то, что клиент сам назвал,
+// сведённое в одну таблицу. Это фундамент разговора: прежде чем спорить
+// о потерях, обе стороны смотрят на одни и те же цифры оборота.
+//
+// Второй блок — «цена одного шага». Он отвечает на вопрос, который
+// собственник задаёт про любую цифру: «и что, много это или мало?».
+// Один пункт конверсии в год — самая честная единица измерения
+// масштаба задачи, и она же обычно самая крупная.
+const KeyMetrics = {
+  build(){
+    const b = FinModel.base();
+    const f = Funnel.build();
+    const cap = Capacity.build();
+    const {leads, conv, check, m, revenue, repeat} = b;
+    if (leads == null || conv == null || check == null) return null;
+
+    const dealsMo   = leads * conv / 100;
+    const annualRev = revenue != null ? revenue * C.MONTHS : dealsMo * check * C.MONTHS;
+    const annualGP  = FinModel.annualGP();
+    const heads     = cap && cap.effective > 0 ? cap.effective : null;
+
+    return {
+      // ── Факты ──
+      revenueMo: revenue, revenueYr: annualRev, gpYr: annualGP,
+      leads, dialogs: f && !f.partial ? f.dialogs : null,
+      dealsMo, dealsYr: dealsMo * C.MONTHS, check, conv, margin: b.margin, m,
+      repeat,
+      reachRate: f && !f.partial ? f.reachRate : null,
+      closeRate: f && !f.partial ? f.closeRate : null,
+      managers: cap ? cap.managers : null,
+      loadPerHead: cap && cap.load != null ? cap.load : null,
+      revPerHead: heads && annualRev ? annualRev / heads : null,
+
+      // ── Цена одного шага ──
+      perConvPoint:  leads * 0.01 * check * C.MONTHS * m,
+      perReachPoint: f && !f.partial ? leads * 0.01 * f.closeRate * check * C.MONTHS * m : null,
+      perCheck10:    dealsMo * check * 0.10 * C.MONTHS * m,
+      perRepeatPoint: dealsMo * 0.01 * check * C.MONTHS * m,
+      perLead:       check * conv / 100 * m,
+      perMonthLost:  FinModel.totalLoss() / C.MONTHS
+    };
+  },
+
+  // Горизонт: систему строят не на один год
+  horizon(years = 3){
+    const loss = FinModel.totalLoss();
+    const rec  = FinModel.recoverable();
+    return {years, loss: loss * years, recovered: rec * years};
+  }
+};
 const Constraint = {
   detect(){
     const a = State.answers;
@@ -1579,11 +1662,11 @@ const Constraint = {
     // если перегружен, конверсия падает не от навыка, а от нехватки рук.
     const capState = Capacity.state(), cap = Capacity.build();
     if (capState === 'starving')
-      add(92, 'Маркетинг', `На продающего приходится ${Math.round(cap.load)} лидов в месяц при норме ${cap.loadNorm}. Отдел недозагружен в ${(cap.loadNorm/cap.load).toFixed(1)} раза — узкое место в потоке лидов, а не в продажах.`);
+      add(92, 'Маркетинг', `На продающего приходится ${Math.round(cap.load)} лидов в месяц при ориентире ${cap.loadNorm}. Отдел недозагружен в ${(cap.loadNorm/cap.load).toFixed(1)} раза — узкое место в потоке лидов, а не в продажах.`);
     if (capState === 'overload')
-      add(87, 'Команда', `На продающего приходится ${Math.round(cap.load)} лидов при норме ${cap.loadNorm}. Заявки теряются не из-за навыка, а из-за того, что их некому обработать.`);
+      add(87, 'Команда', `На продающего приходится ${Math.round(cap.load)} лидов при ориентире ${cap.loadNorm}. Заявки теряются не из-за навыка, а из-за того, что их некому обработать.`);
 
-    // Норма конверсии — из профиля бизнеса, а не единая для всех
+    // Ориентир конверсии — из профиля бизнеса, а не единая для всех
     const p = Profile.build();
     const conv = num('conversion');
     const fd = Funnel.diagnose();
@@ -1592,9 +1675,9 @@ const Constraint = {
     else if (fd && fd.kind === 'close')
       add(83, 'Продажи', fd.text);
     else if (conv !== null && conv < p.convTarget * 0.5)
-      add(85, 'Продажи', `Конверсия ${conv}% при норме ${p.convTarget}% для вашего профиля — воронка теряет большую часть оплаченных лидов.`);
+      add(85, 'Продажи', `Конверсия ${conv}% при ориентире ${p.convTarget}% для вашего профиля — воронка теряет большую часть оплаченных лидов.`);
     else if (conv !== null && conv < p.convTarget)
-      add(60, 'Продажи', `Конверсия ${conv}% ниже нормы ${p.convTarget}% для вашего профиля — деньги теряются между заявкой и оплатой.`);
+      add(60, 'Продажи', `Конверсия ${conv}% ниже ориентира ${p.convTarget}% для вашего профиля — деньги теряются между заявкой и оплатой.`);
     const rev = num('revenue'), profit = num('profit');
     if (rev && profit !== null && profit / rev < 0.10)
       add(82, 'Экономика', `Рентабельность ${(profit/rev*100).toFixed(1)}% — бизнес работает почти в ноль. Расти без запаса прочности опасно.`);
@@ -1762,9 +1845,9 @@ const GoalGap = {
     bits.push(`Цель на год — ${g.goalLabel}. Это ${Fmt.money(g.target)} выручки в месяц вместо нынешних ${Fmt.money(g.revenue)}.`);
     bits.push(`Чтобы дойти туда <b>только за счёт трафика</b>, при текущей конверсии ${g.conv}% нужно ${Math.round(g.requiredLeads)} лидов в месяц вместо ${g.leads} — это ×${g.leadsMult.toFixed(1)} к бюджету на маркетинг.`);
     if (g.convFeasible)
-      bits.push(`Либо <b>только за счёт конверсии</b> — поднять её до ${g.requiredConv.toFixed(1)}%. Это в пределах нормы вашего профиля (${g.convTarget}%), то есть достижимо без роста бюджета.`);
+      bits.push(`Либо <b>только за счёт конверсии</b> — поднять её до ${g.requiredConv.toFixed(1)}%. Это в пределах ориентира вашего профиля (${g.convTarget}%), то есть достижимо без роста бюджета.`);
     else
-      bits.push(`Либо <b>только за счёт конверсии</b> — поднять её до ${g.requiredConv.toFixed(1)}%, что выше нормы вашего профиля (${g.convTarget}%). В одиночку этот путь цель не даёт.`);
+      bits.push(`Либо <b>только за счёт конверсии</b> — поднять её до ${g.requiredConv.toFixed(1)}%, что выше ориентира вашего профиля (${g.convTarget}%). В одиночку этот путь цель не даёт.`);
     if (g.capacityOk === false)
       bits.push(`И отдельно: заявленной пропускной способности на такую выручку <b>не хватит</b> — упрётесь в исполнение раньше, чем в продажи.`);
     bits.push(g.convFeasible
@@ -2051,7 +2134,7 @@ const Feedback = {
     deal_cycle: v => Number(v) <= 21 ? {tone:'good', text:'Короткий цикл — деньги не замораживаются в воронке.'}
                    : Number(v) === 60 ? {tone:'warn', text:'Цикл 1–3 месяца: каждая сделка требует системы касаний, иначе «протухает».'} : null,
     repeat_pct: v => v >= 30 ? {tone:'good', text:`Повторные <b>${v}%</b> — база работает на вас. Это самые дешёвые деньги в бизнесе.`}
-                   : v >= 20 ? {tone:'warn', text:`Повторные <b>${v}%</b> — приемлемо, но до нормы 30% лежат лёгкие деньги.`} : null,
+                   : v >= 20 ? {tone:'warn', text:`Повторные <b>${v}%</b> — приемлемо, но до ориентира 30% лежат лёгкие деньги.`} : null,
     repeat_block: v => v === 'oneoff' ? {tone:'warn', text:'Разовый продукт — тогда решают чек, конверсия и рекомендации. Модель перенастроена.'}
                      : v === 'nobody' ? {tone:'bad', text:'База есть, а работать с ней некому. Это готовая точка роста с самым быстрым эффектом.'}
                      : v === 'noreason' ? {tone:'warn', text:'Нет продуктовой линейки для возврата — LTV упирается в потолок первой сделки.'} : null,
@@ -2380,164 +2463,67 @@ const FlowUI = {
   esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
                           .replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 };
-// ═══ LLM-СЛОЙ ═══
-// Ядро остаётся детерминированным: все цифры, диагноз, приоритеты и план
-// считает код выше. Модель НЕ считает и НЕ придумывает числа — она получает
-// уже готовый расчёт и пишет поверх него связный разбор на языке ниши клиента.
-// Без ключа инструмент работает полностью, просто без этой секции.
-const LLM = {
-  KEY_STORE: 'closery_api_key',
-  MODEL_STORE: 'closery_api_model',
-  ENDPOINT: 'https://api.anthropic.com/v1/messages',
-
-  key(){ try{ return localStorage.getItem(this.KEY_STORE) || ''; }catch(e){ return ''; } },
-  setKey(v){ try{ v ? localStorage.setItem(this.KEY_STORE, v.trim()) : localStorage.removeItem(this.KEY_STORE); }catch(e){} },
-  model(){ try{ return localStorage.getItem(this.MODEL_STORE) || 'claude-opus-5'; }catch(e){ return 'claude-opus-5'; } },
-  setModel(v){ try{ localStorage.setItem(this.MODEL_STORE, v); }catch(e){} },
-  available(){ return !!this.key(); },
-
-  // Готовый расчёт — модель работает поверх него, а не вместо него
-  payload(){
-    const a = State.answers;
-    const p = Profile.build();
-    const f = Funnel.build();
-    const fd = Funnel.diagnose();
-    const cap = Capacity.build();
-    const perc = Perception.build();
-    const idx = Scoring.index(true) ?? 0;
-    const cats = Scoring.categories();
-    return {
-      компания: a.company, ниша: a.niche, продукт: a.product,
-      сегмент: a.audience, чек: a.avg_check, маржа: a.margin,
-      выручка_в_месяц: a.revenue, прибыль_в_месяц: a.profit,
-      индекс_зрелости: idx,
-      оценки_систем: Object.fromEntries(Object.entries(CAT_LABELS).map(([k,l]) => [l, cats[k].touched ? cats[k].score : null])),
-      нормы_профиля: {конверсия: p.convTarget, повторные: p.repeatTarget,
-                      скорость_ответа: Profile.respLabel(), лидов_на_продавца: p.loadNorm,
-                      как_выведены: Profile.explain()},
-      воронка: f && !f.partial ? {лиды: f.leads, диалоги: f.dialogs,
-                      дозвон: Math.round(f.reachRate*100)+'%', закрытие: Math.round(f.closeRate*100)+'%',
-                      норма_закрытия: Math.round(f.closeNorm*100)+'%', диагноз: fd && fd.title} : null,
-      пропускная_способность: cap ? {лидов_на_продающего: Math.round(cap.load), норма: cap.loadNorm,
-                      состояние: Capacity.state(), предел_сделок: cap.cap} : null,
-      главное_ограничение: (Constraint.detect() || {}).name,
-      потери_в_год: FinModel.totalLoss(),
-      статьи_потерь: FinModel.losses().map(l => ({причина: l.label, рублей_в_год: l.val})),
-      возврат_за_90_дней: FinModel.recoverable(),
-      возможности: FinModel.opportunities().map(o => ({из: o.from, рублей: o.value, недель: o.weeks,
-                      ответственный: o.owner, первый_шаг: o.step})),
-      расхождение_мнения_и_данных: perc ? {тип: perc.kind, считает: perc.believed, данные: perc.data} : null,
-      разрыв_до_цели: GoalGap.text(),
-      качество_данных: DataQuality.text(),
-      что_сломается_при_росте: a.growth_ready,
-      причина_отказов: a.lost_reason,
-      кого_считает_виноватым: a.attribution
-    };
-  },
-
-  SYSTEM: `Ты — старший консультант по построению коммерческих отделов. Тебе передан ГОТОВЫЙ расчёт диагностики компании: все цифры уже посчитаны детерминированной моделью.
-
-ТВОЯ ЗАДАЧА: написать связный разбор на языке ниши клиента, опираясь только на переданные цифры.
-
-ЖЁСТКИЕ ПРАВИЛА:
-1. НЕ считай и НЕ придумывай числа. Используй только те, что переданы. Если числа нет — не упоминай его.
-2. Не обещай конкретных финансовых результатов. Возврат из расчёта — это оценка модели, называй его оценкой, а не гарантией.
-3. Запрещённые формулировки: «микробизнес», «×2 к выручке» и любые обещания результата в цифрах, «отдел продаж под ключ», «бизнес полетит в космос», «лидерство на рынке», гарантия конкретной выручки.
-4. Не продавай и не хвали Closery. Клиент уже заплатил за разбор — он ждёт анализа, а не рекламы.
-5. Обращайся на «вы», без панибратства. Тон — спокойный, прямой, без драматизации и без утешений.
-6. Каждое утверждение — либо цифра из расчёта, либо проверяемый факт о его бизнесе.
-7. Пиши по-русски. Никакого markdown, только чистый текст с абзацами.
-
-ФОРМАТ ОТВЕТА — ровно три блока, каждый начинается со своего заголовка на отдельной строке:
-
-ЧТО ПРОИСХОДИТ
-Два-три абзаца: как связаны между собой найденные проблемы в терминах именно этой ниши. Не перечисляй находки списком — покажи причинно-следственную цепь.
-
-ЧТО ЭТО ЗНАЧИТ ДЛЯ ВАС
-Один-два абзаца: чем это обернётся для собственника лично — его время, риски, устойчивость бизнеса. Если данные и мнение собственника расходятся, скажи об этом прямо и объясни, почему это дорого.
-
-С ЧЕГО НАЧАТЬ В ПОНЕДЕЛЬНИК
-Три-четыре конкретных действия на ближайшие две недели. Каждое — одним предложением, начиная с глагола. Только то, что следует из расчёта.`,
-
-  async generate(onChunk){
-    const key = this.key();
-    if (!key) throw new Error('Ключ не задан');
-    const res = await fetch(this.ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'x-api-key': key,
-        'anthropic-version': '2023-06-01',
-        // Обязателен для вызова из браузера
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: this.model(),
-        max_tokens: 4000,
-        stream: true,
-        thinking: {type: 'adaptive'},
-        system: this.SYSTEM,
-        messages: [{role: 'user', content:
-          'Расчёт диагностики:\n\n' + JSON.stringify(this.payload(), null, 1) +
-          '\n\nНапиши разбор по заданному формату.'}]
-      })
-    });
-    if (!res.ok){
-      const t = await res.text().catch(()=> '');
-      throw new Error(`API ${res.status}: ${t.slice(0,200)}`);
-    }
-    // Разбор SSE-потока
-    const reader = res.body.getReader();
-    const dec = new TextDecoder();
-    let buf = '', text = '';
-    while (true){
-      const {done, value} = await reader.read();
-      if (done) break;
-      buf += dec.decode(value, {stream:true});
-      const lines = buf.split('\n');
-      buf = lines.pop();
-      for (const line of lines){
-        if (!line.startsWith('data:')) continue;
-        const raw = line.slice(5).trim();
-        if (!raw || raw === '[DONE]') continue;
-        let ev; try{ ev = JSON.parse(raw); }catch(e){ continue; }
-        if (ev.type === 'content_block_delta' && ev.delta && ev.delta.type === 'text_delta'){
-          text += ev.delta.text;
-          if (onChunk) onChunk(text);
-        }
-      }
-    }
-    return text;
-  },
-
-  // Три блока ответа → HTML
-  render(text){
-    const heads = ['ЧТО ПРОИСХОДИТ', 'ЧТО ЭТО ЗНАЧИТ ДЛЯ ВАС', 'С ЧЕГО НАЧАТЬ В ПОНЕДЕЛЬНИК'];
-    const esc = s => FlowUI.esc(s);
-    let html = '', rest = text;
-    const idxs = heads.map(h => ({h, i: rest.indexOf(h)})).filter(x => x.i >= 0);
-    if (!idxs.length) return `<div class="llm-body">${esc(text).replace(/\n{2,}/g,'</p><p>').replace(/\n/g,'<br>')}</div>`;
-    idxs.forEach((x, n) => {
-      const from = x.i + x.h.length;
-      const to = n+1 < idxs.length ? idxs[n+1].i : rest.length;
-      const body = rest.slice(from, to).trim();
-      html += `<div class="llm-h">${esc(x.h)}</div><div class="llm-body"><p>${
-        esc(body).split(/\n{2,}/).join('</p><p>').replace(/\n/g,'<br>')}</p></div>`;
-    });
-    return html;
-  }
-};
 const Final = {
+  // Первичный скрининг: факты об обороте до всякой интерпретации
+  kmHTML(){
+    const k = KeyMetrics.build();
+    if (!k) return '';
+    const M = v => Fmt.money(Math.round(v));
+    const cell = (label, val, sub) => `<div><span class="kk">${label}</span><span class="kv">${val}</span>${sub?`<span class="kd">${sub}</span>`:''}</div>`;
+    const facts = [
+      k.revenueMo != null ? cell('Выручка', M(k.revenueMo) + '/мес', M(k.revenueYr) + ' в год') : '',
+      k.gpYr ? cell('Валовая прибыль', M(k.gpYr) + '/год', `маржа ${k.margin != null ? k.margin + '%' : '30% (принято)'}`) : '',
+      cell('Лиды', k.leads + '/мес', k.dialogs != null ? `диалогов ${k.dialogs}/мес` : ''),
+      cell('Сделки', Math.round(k.dealsMo) + '/мес', Math.round(k.dealsYr) + ' в год'),
+      cell('Средний чек', M(k.check), ''),
+      cell('Конверсия', k.conv + '%',
+        k.reachRate != null ? `дозвон ${Math.round(k.reachRate*100)}% × закрытие ${Math.round(k.closeRate*100)}%` : 'лид → оплата'),
+      k.managers != null ? cell('Продающих', k.managers + ' чел.',
+        k.loadPerHead != null ? `${Math.round(k.loadPerHead)} лидов на человека` : '') : '',
+      k.revPerHead ? cell('Выручка на продающего', M(k.revPerHead) + '/год', '') : ''
+    ].filter(Boolean).join('');
+
+    const price = [
+      `<div><span>Один пункт конверсии</span><b>${M(k.perConvPoint)}/год</b></div>`,
+      k.perReachPoint ? `<div><span>Один пункт дозвона</span><b>${M(k.perReachPoint)}/год</b></div>` : '',
+      `<div><span>+10% к среднему чеку</span><b>${M(k.perCheck10)}/год</b></div>`,
+      `<div><span>Один пункт повторных продаж</span><b>${M(k.perRepeatPoint)}/год</b></div>`,
+      `<div><span>Валовая прибыль с одного лида</span><b>${M(k.perLead)}</b></div>`,
+      k.perMonthLost > 0 ? `<div><span>Месяц без изменений</span><b>−${M(k.perMonthLost)}</b></div>` : ''
+    ].filter(Boolean).join('');
+
+    const h = KeyMetrics.horizon(3);
+    return `<div class="km">${facts}</div>
+      <div class="bench-note" style="border:none;padding:14px 0 0">Это ваши собственные цифры, сведённые в одну таблицу — до всяких выводов. Дальше в отчёте каждая оценка опирается только на них.</div>
+      <div class="panel-h" style="margin-top:20px">Цена одного шага</div>
+      <div class="bench-note" style="border:none;padding:0 0 10px">Сколько стоит сдвинуть каждую шкалу на один пункт при текущем обороте. Это единица измерения масштаба задачи.</div>
+      <div class="step-price">${price}</div>
+      ${h.loss > 0 ? `<div class="horizon">
+        <div><span class="hk">Потери за 3 года</span><span class="hv sc-bad">${M(h.loss)}</span></div>
+        <div><span class="hk">Возврат за 3 года</span><span class="hv sc-good">${M(h.recovered)}</span></div>
+        <div><span class="hk">Горизонт</span><span class="hv" style="color:var(--ink-2)">система строится не на год</span></div>
+      </div>` : ''}`;
+  },
+
   // Общие куски разбора, чтобы экран и PDF не расходились в цифрах
   benchHTML(){
     const p = Profile.build();
+    const custom = Profile.hasOverride();
     return `<div class="bench">
-        <div><span class="bk">Норма конверсии</span><span class="bv">${p.convTarget}%</span></div>
-        <div><span class="bk">Норма повторных</span><span class="bv">${p.repeatTarget}%</span></div>
-        <div><span class="bk">Норма ответа</span><span class="bv">${Profile.respLabel()}</span></div>
+        <div><span class="bk">Конверсия${custom?' · ваша':''}</span><span class="bv">${p.convTarget}%</span></div>
+        <div><span class="bk">Повторные продажи</span><span class="bv">${p.repeatTarget}%</span></div>
+        <div><span class="bk">Скорость ответа</span><span class="bv">${Profile.respLabel()}</span></div>
         <div><span class="bk">Лидов на продавца</span><span class="bv">${p.loadNorm}</span></div>
       </div>
-      <div class="bench-note">Нормы выведены под ваш профиль: <b>${Profile.explain()}</b>. Мы не сравниваем вас со «средней температурой по рынку» — B2B-проект с длинным циклом и интернет-магазин не могут иметь одинаковую норму конверсии.</div>`;
+      <div class="bench-note">Ориентир рассчитан под ваш профиль: <b>${Profile.explain()}</b>. Это <b>расчёт модели, а не отраслевая статистика</b> — ниши и аудитории различаются, и точной публичной нормы по вашему рынку не существует. Если у вас есть своя проверенная цифра, поставьте её: весь расчёт пересчитается под неё.
+        <div class="bench-set">
+          <label for="convOverride">Конверсия в вашей нише:</label>
+          <input type="number" id="convOverride" min="1" max="95" placeholder="${p.convTarget}" value="${custom ? p.convTarget : ''}">
+          <span>%</span>
+          <button class="btn-ghost" id="btnConvSet">Пересчитать</button>
+          ${custom ? '<button class="btn-ghost" id="btnConvReset">Вернуть расчётный</button>' : ''}
+        </div>
+      </div>`;
   },
   funnelHTML(){
     const f = Funnel.build(), d = Funnel.diagnose();
@@ -2630,9 +2616,11 @@ const Final = {
 
       ${opBits.length ? `<div class="op-note"><b>Для оператора · в отчёт клиенту не попадает</b>${opBits.map(t=>`<div>${t}</div>`).join('')}</div>` : ''}
 
-      <div class="panel" style="margin-bottom:22px"><div class="panel-h">Норма для вашего профиля</div>${this.benchHTML()}</div>
+      ${this.kmHTML() ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Ключевые параметры коммерческого блока</div>${this.kmHTML()}</div>` : ''}
 
-      ${this.funnelHTML() ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Где именно течёт воронка</div>${this.funnelHTML()}</div>` : ''}
+      <div class="panel" style="margin-bottom:22px"><div class="panel-h">Расчётный ориентир для вашего профиля</div>${this.benchHTML()}</div>
+
+      ${this.funnelHTML() ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Разбор воронки по этапам</div>${this.funnelHTML()}</div>` : ''}
 
       ${capNote ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Пропускная способность</div><div class="fn-verdict" style="margin-top:0;border-left-color:${capNote.tone==='bad'?'var(--bad)':capNote.tone==='warn'?'var(--warn)':'var(--teal)'}"><b>${capNote.title}.</b> ${capNote.text}</div></div>` : ''}
 
@@ -2665,16 +2653,6 @@ const Final = {
       ${upside.length ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Сверх возврата потерь</div>
         ${upside.map(u=>`<div class="opp"><div class="opp-top"><span>${u.label}</span><b>+${Fmt.money(u.value)}/год</b></div><div class="opp-step">${u.note}</div></div>`).join('')}</div>` : ''}
 
-      <div class="panel" style="margin-bottom:22px"><div class="panel-h">Развёрнутый разбор</div>
-        <div class="llm-bar">
-          <input type="password" id="llmKey" placeholder="sk-ant-… ключ Anthropic" value="${FlowUI.esc(LLM.key())}" autocomplete="off">
-          <select id="llmModel"><option value="claude-opus-5">Opus 5</option><option value="claude-sonnet-5">Sonnet 5</option></select>
-          <button class="btn-ghost" id="btnLLM" style="flex:none">Собрать разбор</button>
-        </div>
-        <div id="llmOut"></div>
-        <div class="llm-hint">Цифры выше уже посчитаны и не изменятся — модель пишет связный текст поверх готового расчёта на языке вашей ниши. Ключ хранится только в этом браузере и уходит напрямую в api.anthropic.com. Один разбор стоит порядка 5–15 ₽.</div>
-      </div>
-
       <div class="panel" style="margin-bottom:22px"><div class="panel-h">Качество данных</div><div class="bench-note" style="border:none;padding:0">${DataQuality.text()}</div></div>
 
       ${feedAll.length ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Полный лог сканера · ${feedAll.length} наход${plural(feedAll.length,'ка','ки','ок')}</div><div class="find-grid">${feedAll.map(f=>`<div class="find-row"><span class="find-dot ${f.tone}"></span><span>${f.text}</span></div>`).join('')}</div></div>` : ''}
@@ -2693,31 +2671,20 @@ const Final = {
     document.getElementById('btnPDF').onclick = ()=>Report.printPDF();
     document.getElementById('btnBook').onclick = ()=>window.open(C.BOOKING_URL, '_blank');
 
-    // Разбор поверх расчёта — опционально, инструмент работает и без него
-    const kIn = document.getElementById('llmKey');
-    const mSel = document.getElementById('llmModel');
-    const out = document.getElementById('llmOut');
-    const btn = document.getElementById('btnLLM');
-    if (kIn && btn){
-      mSel.value = LLM.model();
-      kIn.addEventListener('change', ()=>LLM.setKey(kIn.value));
-      mSel.addEventListener('change', ()=>LLM.setModel(mSel.value));
-      btn.onclick = async ()=>{
-        LLM.setKey(kIn.value); LLM.setModel(mSel.value);
-        if (!LLM.available()){ out.innerHTML = '<div class="llm-err">Нужен ключ Anthropic — получить можно на console.anthropic.com → API Keys.</div>'; return; }
-        btn.disabled = true; btn.textContent = 'Собираю…';
-        out.innerHTML = '<div class="empty-note">// модель читает расчёт…</div>';
-        try{
-          const text = await LLM.generate(partial => { out.innerHTML = LLM.render(partial); });
-          out.innerHTML = LLM.render(text);
-          Final._llmText = text;
-        }catch(e){
-          out.innerHTML = `<div class="llm-err">Не получилось: ${FlowUI.esc(e.message)}</div>`;
-        }finally{
-          btn.disabled = false; btn.textContent = 'Пересобрать разбор';
-        }
-      };
-    }
+    // Замена расчётного ориентира на свою цифру по нише — пересобираем экран
+    const setBtn = document.getElementById('btnConvSet');
+    if (setBtn) setBtn.onclick = ()=>{
+      const v = document.getElementById('convOverride').value;
+      if (!v || Number(v) <= 0) return;
+      Profile.setOverride(v);
+      const y = window.scrollY; this.show(); window.scrollTo(0, y);
+    };
+    const resetBtn = document.getElementById('btnConvReset');
+    if (resetBtn) resetBtn.onclick = ()=>{
+      Profile.setOverride(null);
+      const y = window.scrollY; this.show(); window.scrollTo(0, y);
+    };
+
     document.getElementById('btnRestart').onclick = ()=>{ if(confirm('Начать диагностику заново? Текущие ответы будут удалены.')){ Storage.clear(); location.reload(); } };
   }
 };
@@ -2800,8 +2767,40 @@ const Report = {
       ${quote ? `<div class="pr-quote">${quote}</div>` : ''}
       <div class="pr-card"><div class="pr-h2">Три главные причины <i>·</i></div><ul class="pr-list pr-red">${probs.slice(0,3).map((pr,i)=>`<li><span class="n">${i+1}</span><span><b class="hd">${pr.title}</b>${pr.money?` — <span class="money">−${Fmt.money(pr.money)}/год</span>`:''}</span></li>`).join('') || '<li>Критичных причин не обнаружено — редкий случай.</li>'}</ul></div>`);
 
-    // ── Профиль и норма ──
-    page('ПРОФИЛЬ И НОРМА', `
+    // ── Ключевые параметры: факты до всякой интерпретации ──
+    const km = KeyMetrics.build();
+    if (km){
+      const M = v => Fmt.money(Math.round(v));
+      const h = KeyMetrics.horizon(3);
+      const cell = (k,v,d) => `<div><span class="k">${k}</span><span class="v">${v}</span>${d?`<span class="d">${d}</span>`:''}</div>`;
+      page('КЛЮЧЕВЫЕ ПАРАМЕТРЫ', `
+        <div class="pr-tag">Первичный скрининг</div>
+        <div class="pr-title">Машина, через которую идут деньги</div>
+        <div class="pr-lede">Ваши собственные цифры, сведённые в одну таблицу — до всяких выводов. Дальше в отчёте каждая оценка опирается только на них.</div>
+        <div class="pr-km">
+          ${km.revenueMo != null ? cell('Выручка', M(km.revenueMo)+'/мес', M(km.revenueYr)+' в год') : ''}
+          ${km.gpYr ? cell('Валовая прибыль', M(km.gpYr)+'/год', 'маржа '+(km.margin!=null?km.margin+'%':'30% (принято)')) : ''}
+          ${cell('Лиды', km.leads+'/мес', km.dialogs!=null?'диалогов '+km.dialogs+'/мес':'')}
+          ${cell('Сделки', Math.round(km.dealsMo)+'/мес', Math.round(km.dealsYr)+' в год')}
+          ${cell('Средний чек', M(km.check), '')}
+          ${cell('Конверсия', km.conv+'%', km.reachRate!=null?`дозвон ${Math.round(km.reachRate*100)}% × закрытие ${Math.round(km.closeRate*100)}%`:'лид → оплата')}
+          ${km.managers!=null?cell('Продающих', km.managers+' чел.', km.loadPerHead!=null?Math.round(km.loadPerHead)+' лидов на человека':''):''}
+          ${km.revPerHead?cell('Выручка на продающего', M(km.revPerHead)+'/год',''):''}
+        </div>
+        <div class="pr-h2" style="margin-top:18px">Цена одного шага <i>·</i></div>
+        <div class="pr-lede" style="margin-bottom:8px">Сколько стоит сдвинуть каждую шкалу на один пункт при текущем обороте. Это единица измерения масштаба задачи.</div>
+        <ul class="pr-ledger good">
+          <li><span class="lbl">Один пункт конверсии</span><b>${M(km.perConvPoint)}/год</b></li>
+          ${km.perReachPoint?`<li><span class="lbl">Один пункт дозвона</span><b>${M(km.perReachPoint)}/год</b></li>`:''}
+          <li><span class="lbl">+10% к среднему чеку</span><b>${M(km.perCheck10)}/год</b></li>
+          <li><span class="lbl">Один пункт повторных продаж</span><b>${M(km.perRepeatPoint)}/год</b></li>
+          <li><span class="lbl">Валовая прибыль с одного лида</span><b>${M(km.perLead)}</b></li>
+        </ul>
+        ${h.loss>0?`<div class="pr-callout"><b>Горизонт.</b> Система строится не на один год. При текущих параметрах за три года это <b>${M(h.loss)}</b> недополученной валовой прибыли, из которых <b>${M(h.recovered)}</b> возвращаются найденными решениями.</div>`:''}`);
+    }
+
+    // ── Профиль и ориентир ──
+    page('ПРОФИЛЬ И ОРИЕНТИР', `
       <div class="pr-tag">С чем сравниваем</div>
       <div class="pr-title">Норма считается под ваш бизнес, а не по рынку вообще</div>
       <div class="pr-lede">B2B-проект с длинным циклом и интернет-магазин не могут иметь одинаковую норму конверсии. Ниже — нормы, выведенные из вашего профиля: <b>${Profile.explain()}</b>.</div>
@@ -2812,7 +2811,7 @@ const Report = {
         <div><span class="k">Лидов на продавца</span><span class="v">${p.loadNorm}</span></div>
       </div>
       ${f && !f.partial ? `
-      <div class="pr-h2" style="margin-top:20px">Где течёт воронка <i>·</i></div>
+      <div class="pr-h2" style="margin-top:20px">Разбор воронки по этапам <i>·</i></div>
       <div class="pr-fn">
         <div class="pr-fn-row"><span class="l">Лиды</span><span class="pr-fn-bar"><i style="width:100%"></i></span><span class="v">${f.leads}</span></div>
         <div class="pr-fn-row"><span class="l">Диалоги</span><span class="pr-fn-bar"><i style="width:${Math.max(2,f.reachRate*100)}%"></i><u style="left:${f.reachNorm*100}%"></u></span><span class="v" style="color:${f.reachRate<f.reachNorm?'var(--pr-bad)':'var(--pr-accent)'}">${Math.round(f.reachRate*100)}%</span></div>
@@ -2856,22 +2855,6 @@ const Report = {
       <div class="pr-title">Ваша картина и картина по цифрам</div>
       ${perc ? `<div class="pr-h2">${perc.title} <i>·</i></div><div class="pr-callout ${perc.kind==='match'?'':'warn'}">${perc.text}</div>` : ''}
       ${goal ? `<div class="pr-h2" style="margin-top:18px">Разрыв до вашей цели <i>·</i></div><div class="pr-lede">${goal}</div>` : ''}`);
-
-    // ── Развёрнутый разбор, если оператор его собрал ──
-    if (Final._llmText){
-      const blocks = ['ЧТО ПРОИСХОДИТ','ЧТО ЭТО ЗНАЧИТ ДЛЯ ВАС','С ЧЕГО НАЧАТЬ В ПОНЕДЕЛЬНИК'];
-      const t = Final._llmText;
-      const found = blocks.map(h=>({h, i:t.indexOf(h)})).filter(x=>x.i>=0);
-      const body = found.length
-        ? found.map((x,n)=>{
-            const from = x.i + x.h.length, to = n+1<found.length ? found[n+1].i : t.length;
-            return `<div class="pr-h2" style="margin-top:${n?16:0}px">${x.h.charAt(0)+x.h.slice(1).toLowerCase()} <i>·</i></div>` +
-                   t.slice(from,to).trim().split(/\n{2,}/).map(par=>`<div class="pr-lede">${FlowUI.esc(par)}</div>`).join('');
-          }).join('')
-        : `<div class="pr-lede">${FlowUI.esc(t)}</div>`;
-      page('РАЗБОР', `<div class="pr-tag">Развёрнутый разбор</div>
-        <div class="pr-title">Как это связано между собой</div>${body}`);
-    }
 
     // ── Дорожная карта ──
     if (waves.length) page('ROADMAP 90 ДНЕЙ', `
@@ -2977,10 +2960,42 @@ const TestFill = {
   pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; },
   int(min,max){ return Math.floor(min + Math.random()*(max-min+1)); },
   textPool: ['Работаем с 2019 года, команда растёт постепенно.', 'Пока не сформулировано чётко.', 'Качество и скорость обработки заказа.'],
+  // Экономическое ядро генерируется ПЕРВЫМ и связно, в диапазоне реального
+  // ICP (выручка 3–30 млн ₽/мес из позиционирования). Раньше чек и лиды
+  // брались независимо и случайно, из-за чего демо лепило микробизнесы
+  // с выручкой ~300 тыс/мес — и все суммы потерь выглядели несерьёзно,
+  // хотя модель считала их верно. Демо врало вниз, а не модель.
+  core(){
+    const check   = this.pick([15000, 40000, 80000, 150000, 400000, 800000]);
+    const target  = this.int(3, 30) * 1000000;              // цель 3–30 млн ₽/мес
+    // Число сделок держим в разумных рамках, выручку пересчитываем от него —
+    // иначе дешёвый чек на 30 млн даёт тысячи сделок и сотни менеджеров
+    const dealsMo = Math.min(500, Math.max(3, Math.round(target / check)));
+    const revenue = dealsMo * check;
+    const margin  = this.int(20, 55);
+    const conv    = this.int(4, 22);
+    const leads   = Math.round(dealsMo / (conv/100));
+    const dialogs = Math.max(1, Math.round(leads * (0.45 + Math.random()*0.5)));
+    // Штат считаем от сделок: одна сделка — это работа, а не один лид.
+    // Нижнюю границу держим не по сделкам, а по лидам — иначе выходит
+    // один человек на сотни заявок и абсурдная выручка на продающего.
+    const byDeals = Math.round(dealsMo / this.int(5, 15));
+    const byLeads = Math.round(leads / this.int(60, 140));
+    const managers= Math.min(40, Math.max(1, byDeals, byLeads));
+    return {revenue, check, margin, conv, dealsMo, leads, dialogs, managers,
+            profit: Math.round(revenue * (0.05 + Math.random()*0.20)),
+            capacity: Math.round(dealsMo * (1.1 + Math.random()*1.8))};
+  },
   random(){
     const a = {};
+    const K = this.core();
+    // Экономическое ядро подставляем как есть; остальное досоздаём по типу
+    const CORE = {revenue:K.revenue, profit:K.profit, avg_check:K.check, margin:K.margin,
+                  conversion:K.conv, leads_month:K.leads, dialogs:K.dialogs,
+                  managers:K.managers, capacity:K.capacity};
     for (const q of QUESTIONS){
       if (q.when && !q.when(a)) continue;
+      if (q.id in CORE){ a[q.id] = CORE[q.id]; continue; }
       switch(q.type){
         case 'text':
           a[q.id] = q.id === 'company' ? this.pick(this.companies) : q.id === 'niche' ? this.pick(this.niches) : q.id === 'site' ? '' : 'Тест';
@@ -2999,36 +3014,17 @@ const TestFill = {
           if (!a[q.id].length) a[q.id] = [this.pick(q.options).v];
           break;
         case 'percent':
-          a[q.id] = q.id === 'conversion' ? this.int(6,32) : q.id === 'repeat_pct' ? this.int(5,42) : q.id === 'margin' ? this.int(15,55) : this.int(50,150);
+          a[q.id] = q.id === 'repeat_pct' ? this.int(5,42) : this.int(50,150);
           break;
         case 'money':
-          if (q.id === 'avg_check') a[q.id] = this.int(2,50) * 1000;
-          else if (q.id === 'revenue') {
-            const leads = Number(a.leads_month)||20, conv = Number(a.conversion)||15, check = Number(a.avg_check)||10000;
-            const funnelMonthly = leads*conv/100*check;
-            a[q.id] = Math.round(funnelMonthly * (0.9 + Math.random()*4));
-          }
-          else if (q.id === 'profit') a[q.id] = Math.round(Number(a.revenue||100000) * (0.04 + Math.random()*0.22));
-          else if (Math.random() > 0.4) a[q.id] = this.int(1,80) * 1000;
+          // ltv / cac / cost_per_lead / prior_spend — производные от чека
+          if (q.id === 'ltv') a[q.id] = Math.round(K.check * (1.2 + Math.random()*2));
+          else if (q.id === 'cac' || q.id === 'cost_per_lead') a[q.id] = Math.round(K.check * (0.03 + Math.random()*0.12));
+          else if (Math.random() > 0.4) a[q.id] = Math.round(K.check * (0.5 + Math.random()*4));
           else a[q.id] = '';
           break;
         case 'number':
-          if (q.id === 'leads_month') a[q.id] = this.int(4,180);
-          else if (q.id === 'managers') a[q.id] = this.int(0,12);
-          else if (q.id === 'headcount') a[q.id] = this.int(2,40);
-          // Диалогов не может быть больше, чем лидов, — иначе воронка
-          // разваливается и дозвон считается больше 100%.
-          else if (q.id === 'dialogs') {
-            const leads = Number(a.leads_month) || 20;
-            a[q.id] = Math.max(1, Math.round(leads * (0.35 + Math.random()*0.6)));
-          }
-          // Пропускная способность не может быть меньше того, что уже делают,
-          // иначе демо выдаёт логически невозможный бизнес.
-          else if (q.id === 'capacity') {
-            const leads = Number(a.leads_month) || 20, conv = Number(a.conversion) || 10;
-            const deals = Math.max(1, leads * conv / 100);
-            a[q.id] = Math.round(deals * (1.1 + Math.random()*2.2));
-          }
+          if (q.id === 'headcount') a[q.id] = Math.max(2, K.managers + this.int(3, 25));
           else a[q.id] = this.int(1,20);
           break;
         default: break;
@@ -3082,8 +3078,8 @@ const App = {
 };
 document.addEventListener('DOMContentLoaded', ()=>App.init());
 // Наружу отдаём модули модели — для проверки расчётов и отладки в консоли
-return { State, Scoring, FinModel, Profile, Funnel, Capacity,
-         Constraint, Problems, Perception, GoalGap, DataQuality, Roadmap, Final, Report };
+return { State, Scoring, FinModel, Profile, Funnel, Capacity, KeyMetrics,
+         Constraint, Problems, Perception, GoalGap, DataQuality, Roadmap, Final, Report, TestFill };
 })();
 </script>
 <script>
