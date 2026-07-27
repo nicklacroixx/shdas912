@@ -23,4 +23,19 @@
   --cl-muted: #9BA8A0;
   --cl-faint: #5F6B64;
   --cl-ink: #07110C;
+
+  /* шрифты: текст — Manrope (полная кириллица), логотип — Plus Jakarta Sans (латиница) */
+  --cl-sans: 'Manrope', system-ui, sans-serif;
+  --cl-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --cl-wordmark: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+}
+
+/* Слово CLOSERY в логотипе набирается только Plus Jakarta Sans —
+   в Manrope у него другой рисунок, и логотип перестаёт совпадать с файлами.
+   Селектор с .closery-land нужен, чтобы перебить правило главной страницы. */
+.logo-btn,
+.closery-land .logo-btn,
+.cl-wordmark,
+.closery-land .cl-wordmark {
+  font-family: var(--cl-wordmark) !important;
 }
