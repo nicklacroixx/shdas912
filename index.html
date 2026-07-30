@@ -277,6 +277,25 @@ footer{border-top:1px solid var(--rule);padding:clamp(44px,6vw,62px) 0 clamp(52p
 /* ── гейт видимости: показываем страницу только когда критичные шрифты точно готовы ── */
 html:not(.fonts-ready) body{opacity:0}
 body{opacity:1;transition:opacity .18s ease}
+
+/* ── мобильное меню (гамбургер) ── */
+.bar-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:30px;height:30px;
+  cursor:pointer;background:none;border:none;padding:4px;flex:none}
+.bar-burger span{display:block;height:2px;background:#fff;border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+.bar-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.bar-burger.open span:nth-child(2){opacity:0}
+.bar-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.bar-mobile{display:none;flex-direction:column;position:fixed;top:70px;left:0;right:0;
+  background:rgba(9,13,12,.97);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--rule);z-index:100}
+.bar-mobile.open{display:flex}
+.bar-mobile a{padding:16px var(--gut);color:var(--ink-2);text-decoration:none;
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  border-bottom:1px solid var(--rule)}
+.bar-mobile a:last-child{border-bottom:none}
+.bar-mobile a:hover,.bar-mobile a.on{color:var(--ok)}
+@media(max-width:700px){.bar-burger{display:flex}.bar-cta{display:none}}
+
 </style>
 <script>
 (function(){
@@ -310,9 +329,12 @@ body{opacity:1;transition:opacity .18s ease}
       <a class="bar-lnk" href="#route">Проект</a>
       <a class="bar-lnk" href="#founder">Основатель</a>
       <a class="bar-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на разбор</a>
+    
+      <button class="bar-burger" id="barBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </div>
 </header>
+<div class="bar-mobile" id="barMobile"><a href="/mrt-demo/">Демо-МРТ</a><a href="/cases/">Кейсы</a><a href="#route">Проект</a><a href="#founder">Основатель</a></div>
 
 <main id="top">
 
@@ -569,6 +591,24 @@ body{opacity:1;transition:opacity .18s ease}
     els.forEach(function(e){io.observe(e)});
   }
 
+})();
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('barBurger');
+  var menu = document.getElementById('barMobile');
+  if(!btn||!menu) return;
+  btn.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+    });
+  });
 })();
 </script>
 </body>
