@@ -6,28 +6,18 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://closery.ru/diagnostic/</loc>
+    <loc>https://closery.ru/mrt-demo.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://closery.ru/dna/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://closery.ru/policy/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://closery.ru/offer/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://closery.ru/cases/</loc>
+    <loc>https://closery.ru/cases.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://closery.ru/policy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
 </urlset>

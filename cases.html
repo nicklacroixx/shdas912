@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кейсы · Closery</title>
+<meta name="description" content="Три проекта, три точки входа — кризис, ноль, масштабирование. Один подход: управление на цифрах, а не на ощущениях.">
+<style>
+/* Шрифты хранятся локально: никаких обращений к сторонним серверам */
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{
+  --bg:#090D0C;--paper:#121A18;--paper-2:#16201D;--rule:#1F2B27;--rule-2:#2E3D38;
+  --ink:#F1F6F3;--ink-2:#9AA8A2;--ink-3:#5B6863;--loss:#F0555A;--loss-soft:#E4676B;--ok:#34D399;
+  --disp:'Unbounded','Onest',system-ui,sans-serif;--ui:'Onest',system-ui,sans-serif;
+  --doc:'Source Serif 4',Georgia,serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+  --brand:'Plus Jakarta Sans',var(--ui);--gut:clamp(20px,5vw,48px);--r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);line-height:1.55;
+  font-feature-settings:"tnum" 1;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(1300px 700px at 6% -14%,rgba(52,211,153,.10),transparent 58%),
+             radial-gradient(1100px 620px at 98% 0%,rgba(240,85,90,.055),transparent 56%)}
+main,header.bar,footer{position:relative;z-index:1}
+.w{max-width:1120px;margin:0 auto;padding:0 var(--gut)}
+.w-wide{max-width:1440px;margin:0 auto;padding:0 var(--gut)}
+a{color:inherit}:focus-visible{outline:2px solid var(--ok);outline-offset:3px}
+
+header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+  border-bottom:1px solid var(--rule)}
+.bar-in{display:flex;justify-content:space-between;align-items:center;height:70px;gap:20px}
+.logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);
+  font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:#fff;
+  transition:letter-spacing .35s,color .22s;white-space:nowrap}
+.logo i{width:9px;height:9px;border-radius:2px;flex:none;background:var(--ok);box-shadow:0 0 16px rgba(52,211,153,.65);transition:box-shadow .3s}
+.logo:hover{letter-spacing:.3em;color:var(--ok)}
+.logo:hover i{box-shadow:0 0 26px rgba(52,211,153,.95)}
+.bar-nav{display:flex;align-items:center;gap:clamp(14px,2.4vw,30px)}
+.bar-lnk{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink-2);transition:color .2s,letter-spacing .3s;white-space:nowrap}
+.bar-lnk:hover{color:var(--ok);letter-spacing:.2em}
+.bar-lnk.on{color:var(--ok)}
+@media(max-width:760px){.bar-lnk{display:none}}
+.btn,.bar-cta{font-family:var(--disp);font-weight:500;letter-spacing:-.03em;color:var(--ink);
+  text-decoration:none;border:1px solid rgba(52,211,153,.5);
+  background:linear-gradient(180deg,rgba(52,211,153,.14),rgba(52,211,153,.06));
+  transition:border-color .22s,box-shadow .3s,background .22s,transform .18s}
+.btn:hover,.bar-cta:hover{border-color:var(--ok);box-shadow:0 0 28px rgba(52,211,153,.2);
+  background:linear-gradient(180deg,rgba(52,211,153,.24),rgba(52,211,153,.1))}
+.bar-cta{font-size:12px;border-radius:9px;padding:12px 20px;white-space:nowrap}
+.btn{display:inline-block;font-size:14px;padding:17px 30px;border-radius:10px}
+.btn:hover{transform:translateY(-2px)}
+
+.label{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ok);display:block;margin-bottom:18px;opacity:.85}
+h1{font-family:var(--disp);font-size:clamp(25px,4.1vw,44px);line-height:1.2;font-weight:600;
+  letter-spacing:-.045em;max-width:20ch}
+h2{font-family:var(--disp);font-size:clamp(21px,3.1vw,36px);line-height:1.2;font-weight:600;letter-spacing:-.04em}
+.lede{font-size:clamp(16px,1.8vw,19px);line-height:1.62;color:var(--ink-2);max-width:60ch;margin-top:24px}
+.head{padding:clamp(50px,7vw,86px) 0 clamp(34px,4.4vw,48px)}
+.sec{padding:clamp(70px,9vw,120px) 0;border-top:1px solid var(--rule)}
+.sec-head{margin-bottom:clamp(30px,4.4vw,50px)}
+
+/* таймлайн */
+.tl{display:grid;grid-template-columns:1fr;gap:14px;margin-top:clamp(34px,4.4vw,48px)}
+@media(min-width:820px){.tl{grid-template-columns:repeat(3,1fr)}}
+.tl>div{background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);
+  border:1px solid var(--rule);border-radius:var(--r);padding:22px 22px 24px}
+.tl dt{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--ok);margin-bottom:12px}
+.tl dd{font-size:16.5px;font-weight:600;letter-spacing:-.02em;line-height:1.35}
+
+/* кейс */
+.case{padding:clamp(34px,4.6vw,52px) 0;border-top:1px solid var(--rule)}
+.case-top{margin-bottom:clamp(26px,3.4vw,36px)}
+.case-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--loss-soft);display:block;margin-bottom:16px}
+.case-h{font-family:var(--disp);font-size:clamp(22px,3.2vw,34px);font-weight:600;letter-spacing:-.04em;line-height:1.2}
+.case-role{font-size:16px;color:var(--ink-2);margin-top:12px}
+.case-role span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink-3);display:block;margin-top:6px}
+.case-ctx{font-size:16.5px;color:var(--ink-2);line-height:1.62;max-width:64ch;margin-top:20px}
+.case-grid{display:grid;grid-template-columns:1fr;gap:clamp(26px,3.4vw,40px)}
+@media(min-width:920px){.case-grid{grid-template-columns:1.25fr 1fr}}
+.blk-t{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:18px}
+.did{border-top:1px solid var(--rule)}
+.did li{list-style:none;border-bottom:1px solid var(--rule);padding:16px 0;font-size:15.5px;
+  color:var(--ink-2);line-height:1.6;display:grid;grid-template-columns:22px 1fr;gap:10px}
+.did li::before{content:"—";color:var(--ok);font-family:var(--mono)}
+.did b{color:var(--ink);font-weight:600;display:block;margin-bottom:3px}
+.res{display:grid;grid-template-columns:1fr;gap:14px}
+.res>div{background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);
+  border:1px solid var(--rule);border-radius:var(--r);padding:22px 22px 24px}
+.res b{display:block;font-family:var(--disp);font-size:clamp(21px,2.7vw,27px);font-weight:600;
+  color:var(--ok);letter-spacing:-.04em;line-height:1.1;text-shadow:0 0 32px rgba(52,211,153,.28)}
+.res span{display:block;font-size:14.5px;color:var(--ink-2);margin-top:10px;line-height:1.55}
+.transfer{margin-top:clamp(26px,3.4vw,34px);border-left:2px solid var(--ok);padding-left:22px;
+  font-size:16.5px;color:var(--ink);line-height:1.55;max-width:58ch}
+.transfer b{font-weight:600}
+
+.how{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:820px){.how{grid-template-columns:repeat(3,1fr)}}
+.how>div{background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);
+  border:1px solid var(--rule);border-radius:var(--r);padding:28px 24px}
+.how dt{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ok);margin-bottom:14px}
+.how b{display:block;font-size:19px;font-weight:700;margin-bottom:10px;letter-spacing:-.022em}
+.how p{font-size:15px;color:var(--ink-2);line-height:1.6}
+
+.end{padding:clamp(80px,11vw,150px) 0;border-top:1px solid var(--rule)}
+.cta-wrap{margin-top:26px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.btn-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+footer{border-top:1px solid var(--rule);padding:34px 0 58px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.07em;color:var(--ink-3);line-height:2}
+@keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.head{animation:pgIn .6s cubic-bezier(.2,.7,.3,1) .04s both}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="w-wide bar-in">
+    <a class="logo" href="index.html"><i></i>Closery</a>
+    <nav class="bar-nav">
+      <a class="bar-lnk" href="mrt-demo.html">Демо-МРТ</a>
+      <a class="bar-lnk on" href="cases.html">Кейсы</a>
+      <a class="bar-lnk" href="index.html#route">Проект</a>
+      <a class="bar-lnk" href="index.html#founder">Основатель</a>
+      <a class="bar-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на разбор</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="w head">
+  <span class="label">Кейсы / Карьерный трек</span>
+  <h1>10 лет в коммерции: от менеджера до коммерческого директора и построения коммерческих блоков с нуля</h1>
+  <p class="lede">Три проекта, три разные точки входа — кризис, ноль, масштабирование. Один подход: управление на цифрах, а не на ощущениях.</p>
+  <dl class="tl">
+    <div><dt>2021–2023</dt><dd>MarketGuru — рост в SaaS</dd></div>
+    <div><dt>2023–2025</dt><dd>UniBox — коммерция с нуля</dd></div>
+    <div><dt>2025–2026</dt><dd>CDEK (франчайзи) — антикризис</dd></div>
+  </dl>
+</div>
+
+<section class="w case">
+  <div class="case-top">
+    <span class="case-tag">Case 01 / Антикризис</span>
+    <h2 class="case-h">CDEK — франчайзи-точка</h2>
+    <div class="case-role">Антикризисный коммерческий директор<span>апрель 2025 — январь 2026</span></div>
+    <p class="case-ctx">Некогда один из топовых франчайзи сети — на момент прихода 30-е место в рейтинге. Продажи держатся на входящих и истории, найм — 6 человек в год, отделы конфликтуют.</p>
+  </div>
+  <div class="case-grid">
+    <div>
+      <div class="blk-t">Что сделано</div>
+      <ul class="did">
+        <li><span><b>Пересобрана система продаж</b>Воронка и ежедневные метрики действий каждого сотрудника в общей таблице — результат стал следствием считаемых действий, а не «хорошего месяца».</span></li>
+        <li><span><b>Перестроены найм и адаптация</b>С 6 новых сотрудников в год до конвейера с ёмкостью 100+ — без участия топов в онбординге.</span></li>
+        <li><span><b>Починена коммуникация между отделами</b>eNPS 71% → 97%.</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="blk-t">Результат</div>
+      <div class="res">
+        <div><b>Топ-5 сети</b><span>возврат точки с 30-го места за 4,5 месяца</span></div>
+        <div><b>Выручка ×2</b><span>за 10 месяцев работы</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="transfer">В вашем бизнесе это модуль <b>«результат виден в цифрах каждый день»</b> — ставится в рознице и B2B одинаково.</p>
+</section>
+
+<section class="w case">
+  <div class="case-top">
+    <span class="case-tag">Case 02 / С нуля</span>
+    <h2 class="case-h">UniBox — e-com, маркетплейсы</h2>
+    <div class="case-role">Коммерческий директор — весь коммерческий блок<span>декабрь 2023 — март 2025</span></div>
+    <p class="case-ctx">Только открывшийся бизнес: из активов — склад. Ни отдела, ни лидгена, ни упакованного продукта. Бюджета на платный трафик нет.</p>
+  </div>
+  <div class="case-grid">
+    <div>
+      <div class="blk-t">Что сделано</div>
+      <ul class="did">
+        <li><span><b>Продукт упакован под одну ЦА</b>Оффер, УТП, презентации, ценностная отстройка.</span></li>
+        <li><span><b>Отдел из 8 человек</b>Менее чем за 90 дней.</span></li>
+        <li><span><b>Холодный лидген и партнёрский канал</b>Карго, аналитические сервисы, эксперты WB/Ozon — в пике 7–8 горячих лидов в день без рекламного бюджета.</span></li>
+        <li><span><b>Контроль сделок</b>Время реакции на новый лид — со 150 минут до 3.</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="blk-t">Результат</div>
+      <div class="res">
+        <div><b>1,5 → 12,3 млн ₽</b><span>месячная выручка проекта за 9 месяцев — рост ×8</span></div>
+        <div><b>Контур с нуля</b><span>коммерческий блок построен полностью с нуля</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="transfer">Это ядро продукта Closery — <b>коммерческий блок с нуля за 90 дней</b>.</p>
+</section>
+
+<section class="w case">
+  <div class="case-top">
+    <span class="case-tag">Case 03 / Конверсия и методология</span>
+    <h2 class="case-h">MarketGuru — SaaS для селлеров</h2>
+    <div class="case-role">Менеджер → руководитель продаж за 5 месяцев<span>август 2021 — октябрь 2023</span></div>
+    <p class="case-ctx">Рост внутри быстрорастущего SaaS: от лучших личных цифр в отделе — до руководства отделом и постановки методологии, которая работает после ухода.</p>
+  </div>
+  <div class="case-grid">
+    <div>
+      <div class="blk-t">Что сделано</div>
+      <ul class="did">
+        <li><span><b>Конверсия отдела из Zoom-аудита в оплату</b>34% — сильнейший показатель ниши.</span></li>
+        <li><span><b>Методология продаж и онбординг</b>Подняли результат каждого менеджера; 10+ скриптов используются до сих пор.</span></li>
+        <li><span><b>Выращены 3 РОПа</b>Оставшиеся в проекте после ухода.</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="blk-t">Результат</div>
+      <div class="res">
+        <div><b>6 месяцев</b><span>подряд рекордов компании по выручке — отдел рос вровень с проектом</span></div>
+        <div><b>Работает без автора</b><span>признак методологии, а не таланта</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="transfer">Та же механика — <b>из разбора в оплату</b> — строится в вашей воронке.</p>
+</section>
+
+<section class="sec">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label">Как это переносится на ваш бизнес</span>
+      <h2>Три разных проекта — один повторяемый набор инструментов</h2>
+      <p class="lede">Он и есть продукт Closery: коммерческий блок за 90 дней.</p>
+    </div>
+    <dl class="how">
+      <div><dt>01 / Цифры</dt><b>Управляемость</b><p>Воронка, метрики действий, план — результат перестаёт быть «погодой» и становится следствием.</p></div>
+      <div><dt>02 / Люди</dt><b>Команда и найм</b><p>Конвейер найма и адаптации, стандарты работы, мотивация от результата — без ручного управления собственником.</p></div>
+      <div><dt>03 / Каналы</dt><b>Поток клиентов</b><p>Работающие каналы усиливаются, сгорающие — останавливаются. Партнёрка и база дают лиды без роста бюджета.</p></div>
+    </dl>
+  </div>
+</section>
+
+<section class="end">
+  <div class="w">
+    <h2>Начнём с разбора</h2>
+    <p class="lede">Разбор идёт по вашим цифрам: воронка, конверсии, экономика, люди, управление. На выходе вы получаете ведомость — где коммерция теряет деньги, сколько стоит каждая течь и что закрывать первым.</p>
+    <div class="cta-wrap">
+      <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на разбор</a>
+      <span class="btn-note">120–150 минут · 50 000 ₽ · идёт в зачёт</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="w">
+    CLOSERY · Система, которая не держится на собственнике<br>
+    ИП Клименко Николай Витальевич · ИНН 632200739609 · ОГРНИП 326632700116702
+  </div>
+</footer>
+
+</body>
+</html>

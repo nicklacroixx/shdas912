@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Демо-МРТ · Closery</title>
+<meta name="description" content="Восемь вопросов из шестидесяти. Показывает, как Коммерческое МРТ считает потери — на вашей воронке.">
+<style>
+/* Шрифты хранятся локально: никаких обращений к сторонним серверам */
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{
+  --bg:#090D0C;--paper:#121A18;--paper-2:#16201D;--rule:#1F2B27;--rule-2:#2E3D38;
+  --ink:#F1F6F3;--ink-2:#9AA8A2;--ink-3:#5B6863;--loss:#F0555A;--loss-soft:#E4676B;--ok:#34D399;
+  --disp:'Unbounded','Onest',system-ui,sans-serif;--ui:'Onest',system-ui,sans-serif;
+  --doc:'Source Serif 4',Georgia,serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+  --brand:'Plus Jakarta Sans',var(--ui);--gut:clamp(20px,5vw,44px);--r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);line-height:1.55;
+  font-feature-settings:"tnum" 1;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(1300px 700px at 6% -14%,rgba(52,211,153,.10),transparent 58%),
+             radial-gradient(1100px 620px at 98% 0%,rgba(240,85,90,.055),transparent 56%)}
+main,header.bar,footer{position:relative;z-index:1}
+.w{max-width:1180px;margin:0 auto;padding:0 var(--gut)}
+.w-wide{max-width:1440px;margin:0 auto;padding:0 var(--gut)}
+a{color:inherit}:focus-visible{outline:2px solid var(--ok);outline-offset:3px}
+
+/* ── шапка: один в один с главной ── */
+header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+  border-bottom:1px solid var(--rule)}
+.bar-in{display:flex;justify-content:space-between;align-items:center;height:70px;gap:20px}
+.logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);
+  font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:#fff;
+  transition:letter-spacing .35s,color .22s;white-space:nowrap}
+.logo i{width:9px;height:9px;border-radius:2px;flex:none;background:var(--ok);box-shadow:0 0 16px rgba(52,211,153,.65);transition:box-shadow .3s}
+.logo:hover{letter-spacing:.3em;color:var(--ok)}
+.logo:hover i{box-shadow:0 0 26px rgba(52,211,153,.95)}
+.bar-nav{display:flex;align-items:center;gap:clamp(14px,2.4vw,30px)}
+.bar-lnk{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink-2);transition:color .2s,letter-spacing .3s;white-space:nowrap}
+.bar-lnk:hover{color:var(--ok);letter-spacing:.2em}
+.bar-lnk.on{color:var(--ok)}
+@media(max-width:700px){.bar-lnk{display:none}}
+
+/* ── кнопки: одна гарнитура везде ── */
+.btn,.bar-cta{font-family:var(--ui);font-weight:600;color:var(--ink);text-decoration:none;
+  border:1px solid rgba(52,211,153,.5);background:linear-gradient(180deg,rgba(52,211,153,.14),rgba(52,211,153,.06));
+  transition:border-color .22s,box-shadow .3s,background .22s,transform .18s}
+.btn:hover,.bar-cta:hover{border-color:var(--ok);box-shadow:0 0 28px rgba(52,211,153,.2);
+  background:linear-gradient(180deg,rgba(52,211,153,.24),rgba(52,211,153,.1))}
+.bar-cta{font-family:var(--disp);font-weight:500;font-size:12px;letter-spacing:-.03em;
+  border-radius:9px;padding:12px 20px;white-space:nowrap}
+.btn{display:inline-block;font-family:var(--disp);font-weight:500;font-size:14px;letter-spacing:-.03em;
+  padding:17px 30px;border-radius:10px}
+.btn:hover{transform:translateY(-2px)}
+
+.head{padding:clamp(46px,6.5vw,76px) 0 clamp(26px,3.6vw,36px)}
+.label{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ok);display:block;margin-bottom:16px;opacity:.85}
+h1{font-family:var(--disp);font-size:clamp(23px,3.8vw,42px);line-height:1.22;font-weight:600;
+  letter-spacing:-.045em;max-width:18ch}
+.lede{font-size:clamp(15.5px,1.7vw,18px);line-height:1.6;color:var(--ink-2);max-width:64ch;margin-top:20px}
+.lede strong{color:var(--ink);font-weight:600}
+
+.grid{display:grid;grid-template-columns:1fr;gap:22px;padding-bottom:clamp(56px,8vw,100px)}
+@media(min-width:1000px){
+  .grid{grid-template-columns:1fr 1.02fr;gap:26px;align-items:stretch}
+  .grid>*{display:flex;flex-direction:column}
+  .card{flex:1 1 auto;display:flex;flex-direction:column}
+}
+.card{background:linear-gradient(168deg,var(--paper-2),var(--paper) 62%);border:1px solid var(--rule-2);
+  border-radius:var(--r);box-shadow:0 40px 90px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.055);overflow:hidden}
+.card-top{padding:18px clamp(18px,2.4vw,24px);border-bottom:1px solid var(--rule-2);
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.card-top b{font-family:var(--doc);font-size:18px;font-weight:600}
+.card-top span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.sub{padding:11px clamp(18px,2.4vw,24px);background:rgba(255,255,255,.02);border-bottom:1px solid var(--rule);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+
+.q{padding:13px clamp(18px,2.4vw,24px);border-bottom:1px solid var(--rule);
+  display:grid;grid-template-columns:1fr 132px;gap:14px;align-items:center}
+.q:last-child{border-bottom:none}
+.q label{font-size:15px;color:var(--ink);font-weight:500;line-height:1.35}
+.q label i{display:block;font-style:normal;font-size:12px;color:var(--ink-3);margin-top:3px;font-weight:400}
+.q .in{display:grid;grid-template-columns:96px 28px;gap:8px;align-items:center;justify-content:end}
+.q input{width:96px;background:rgba(0,0,0,.3);border:1px solid var(--rule-2);border-radius:8px;color:var(--ink);
+  font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:15px;padding:9px 8px;
+  text-align:center;letter-spacing:.02em}
+.q input::-webkit-outer-spin-button,.q input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.q input::placeholder{color:var(--ink-3);opacity:.55}
+.q input:focus{border-color:var(--ok);outline:none}
+.q .unit{font-family:var(--mono);font-size:12px;color:var(--ink-3);text-align:left}
+.q.wide{grid-template-columns:1fr}
+.seg{display:flex;gap:6px;margin-top:10px}
+.seg button{flex:1;font-family:var(--ui);font-size:13.5px;font-weight:600;color:var(--ink-2);
+  background:transparent;border:1px solid var(--rule-2);border-radius:8px;padding:9px 6px;cursor:pointer;transition:all .2s}
+.seg button[aria-pressed=true]{color:var(--ink);background:rgba(52,211,153,.16);border-color:rgba(52,211,153,.55)}
+
+/* ── результат ── */
+.res{position:relative}
+.res-body{display:flex;flex-direction:column;height:100%;transition:filter .45s,opacity .45s}
+.res.locked .res-body{filter:blur(9px);opacity:.45;pointer-events:none;user-select:none}
+.lock{position:absolute;inset:0;z-index:5;display:none;align-items:center;justify-content:center;text-align:center;padding:30px}
+.res.locked .lock{display:flex}
+.lock div{max-width:32ch}
+.lock b{display:block;font-family:var(--doc);font-size:20px;font-weight:600;margin-bottom:10px}
+.lock span{display:block;font-size:14.5px;color:var(--ink-2);line-height:1.6}
+.lock i{display:block;font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ok);margin-top:16px;line-height:1.2}
+.lock i span{font:inherit;color:inherit;vertical-align:baseline}
+.norm{padding:18px clamp(18px,2.4vw,24px);border-bottom:1px solid var(--rule);
+  background:linear-gradient(180deg,rgba(52,211,153,.07),transparent);flex:1 1 auto;
+  display:flex;flex-direction:column;justify-content:center}
+.norm b{display:block;font-family:var(--mono);font-size:20px;color:var(--ok);font-variant-numeric:tabular-nums;margin-bottom:8px}
+.norm span{display:block;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.rrow{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline;
+  padding:15px clamp(18px,2.4vw,24px);border-bottom:1px solid var(--rule)}
+.rrow-t{font-size:15px;color:var(--ink);font-weight:500;line-height:1.4}
+.rrow-t i{display:block;font-style:normal;font-size:12px;color:var(--ink-3);margin-top:5px;line-height:1.55}
+.rrow-v{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:16px;color:var(--loss);white-space:nowrap}
+.rrow.ok .rrow-v{color:var(--ok)}
+.rrow.ok .rrow-t{color:var(--ink-2)}
+.dbl{height:3px;margin:0 clamp(18px,2.4vw,24px);border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
+.rrow.total{border-bottom:none;padding:20px clamp(18px,2.4vw,24px) 22px;
+  background:linear-gradient(180deg,transparent,rgba(240,85,90,.07))}
+.rrow.total .rrow-t{font-family:var(--doc);font-size:18px;font-weight:600}
+.rrow.total .rrow-v{font-size:clamp(20px,3vw,28px);letter-spacing:-.02em;text-shadow:0 0 30px rgba(240,85,90,.35)}
+
+.cta-wrap{margin-top:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.btn-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.reset{background:none;border:none;color:var(--ink-3);font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:0;transition:color .2s}
+.reset:hover{color:var(--ok)}
+footer{border-top:1px solid var(--rule);padding:32px 0 54px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.07em;color:var(--ink-3);line-height:2}
+
+@keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.head{animation:pgIn .6s cubic-bezier(.2,.7,.3,1) .04s both}
+.grid>*:nth-child(1){animation:pgIn .65s cubic-bezier(.2,.7,.3,1) .12s both}
+.grid>*:nth-child(2){animation:pgIn .65s cubic-bezier(.2,.7,.3,1) .2s both}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="w-wide bar-in">
+    <a class="logo" href="index.html"><i></i>Closery</a>
+    <nav class="bar-nav">
+      <a class="bar-lnk on" href="mrt-demo.html">Демо-МРТ</a>
+      <a class="bar-lnk" href="cases.html">Кейсы</a>
+      <a class="bar-lnk" href="index.html#route">Проект</a>
+      <a class="bar-lnk" href="index.html#founder">Основатель</a>
+      <a class="bar-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на разбор</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="w head">
+  <span class="label">Демо-МРТ · 8 вопросов из 60</span>
+  <h1>Как считается ведомость потерь</h1>
+  <p class="lede">Это не диагностика, а её принцип. Восемь вопросов о воронке — и видно, где уходят деньги и сколько это стоит в год. <strong>Ориентир конверсии считается под ваш профиль</strong>: аудитория, чек и длина цикла, — а не берётся из среднего по рынку.</p>
+</div>
+
+<div class="w grid">
+
+  <div>
+    <div class="card">
+      <div class="card-top"><b>Ваша воронка</b><span>сегодняшние цифры</span></div>
+
+      <div class="q wide"><label>Кому продаёте<i>от этого зависит ориентир конверсии</i>
+        <div class="seg" id="aud">
+          <button type="button" data-k="b2b" aria-pressed="false">B2B</button>
+          <button type="button" data-k="b2c" aria-pressed="false">B2C</button>
+          <button type="button" data-k="mixed" aria-pressed="false">Смешанно</button>
+        </div></label></div>
+
+      <div class="q"><label for="leads">Заявок в месяц<i>все обращения: сайт, звонки, мессенджеры</i></label>
+        <div class="in"><input id="leads" type="text" inputmode="numeric" autocomplete="off" placeholder="150"><span class="unit">шт</span></div></div>
+      <div class="q"><label for="dial">Из них дошло до разговора<i>состоялся диалог, а не «недозвон»</i></label>
+        <div class="in"><input id="dial" type="text" inputmode="numeric" autocomplete="off" placeholder="140"><span class="unit">шт</span></div></div>
+      <div class="q"><label for="conv">Конверсия заявка → оплата<i>доля всех заявок, дошедших до денег</i></label>
+        <div class="in"><input id="conv" type="text" inputmode="decimal" autocomplete="off" placeholder="25"><span class="unit">%</span></div></div>
+      <div class="q"><label for="check">Средний чек<i>средняя сумма одной сделки</i></label>
+        <div class="in"><input id="check" type="text" inputmode="numeric" autocomplete="off" placeholder="85 000"><span class="unit">₽</span></div></div>
+      <div class="q"><label for="margin">Маржа<i>валовая, до постоянных расходов</i></label>
+        <div class="in"><input id="margin" type="text" inputmode="numeric" autocomplete="off" placeholder="50"><span class="unit">%</span></div></div>
+      <div class="q"><label for="cycle">Цикл сделки<i>от заявки до денег, в днях</i></label>
+        <div class="in"><input id="cycle" type="text" inputmode="numeric" autocomplete="off" placeholder="15"><span class="unit">дн</span></div></div>
+      <div class="q"><label for="repeat">Покупают повторно за год<i>доля клиентов, которые вернулись</i></label>
+        <div class="in"><input id="repeat" type="text" inputmode="numeric" autocomplete="off" placeholder="15"><span class="unit">%</span></div></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card res locked" id="res">
+      <div class="lock"><div>
+        <b>Ведомость появится здесь</b>
+        <span>Заполните восемь полей слева — расчёт идёт по вашим цифрам, а не по средним по рынку.</span>
+        <i><span id="lockN">0</span> из 8 заполнено</i>
+      </div></div>
+
+      <div class="res-body">
+        <div class="card-top"><b>Ведомость потерь</b><span>в год · валовая прибыль</span></div>
+
+        <div class="norm">
+          <b id="n-val">—</b>
+          <span id="n-txt">—</span>
+        </div>
+
+        <div class="sub">Где уходят деньги</div>
+
+        <div class="rrow" id="r-reach">
+          <div class="rrow-t"><span class="rt">Заявки, до которых не дошли</span><i class="rd">—</i></div>
+          <div class="rrow-v">—</div></div>
+
+        <div class="rrow" id="r-close">
+          <div class="rrow-t"><span class="rt">Разговоры без оплаты</span><i class="rd">—</i></div>
+          <div class="rrow-v">—</div></div>
+
+        <div class="rrow" id="r-repeat">
+          <div class="rrow-t"><span class="rt">База, которая не вернулась</span><i class="rd">—</i></div>
+          <div class="rrow-v">—</div></div>
+
+        <div class="dbl"></div>
+        <div class="rrow total"><div class="rrow-t">Не заработано за год</div><div class="rrow-v" id="tot">—</div></div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Пройти полное МРТ</a>
+      <span class="btn-note">120–150 минут · 50 000 ₽ · идёт в зачёт</span>
+      <button class="reset" type="button" id="reset">Сбросить</button>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  <div class="w">
+    CLOSERY · Демо-МРТ — восемь вопросов из шестидесяти.<br>
+    Ориентиры и модель взяты из Коммерческого МРТ.
+  </div>
+</footer>
+
+<script>
+/* Модель из Коммерческого МРТ (diagnostic): Profile.build + Funnel.
+   Каждая статья считается независимо и ограничена собственным потолком —
+   поэтому строки не влияют друг на друга, а их сумма всегда равна итогу. */
+(function(){
+  var REACH_NORM=0.75, CLOSE_UPLIFT=1.30, MONTHS=12;
+  var aud=null;
+  var F=['leads','dial','conv','check','margin','cycle','repeat'], el={};
+  F.forEach(function(k){el[k]=document.getElementById(k)});
+
+  function raw(v){return String(v).replace(/[^0-9.,]/g,'').replace(',','.');}
+  function n(v,min,max){var x=parseFloat(raw(v)); if(!isFinite(x))return null;
+    if(min!=null&&x<min)x=min; if(max!=null&&x>max)x=max; return x;}
+  function group(v){
+    var s=raw(v); if(s==='')return '';
+    var p=s.split('.'), i=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,'\u00A0');
+    return p.length>1 ? i+','+p[1] : i;
+  }
+  function money(v){return (v<0?'\u2212':'')+Math.abs(Math.round(v/1000)*1000).toLocaleString('ru-RU')+' \u20BD';}
+  function pct(x){return Math.round(x*100)+'%';}
+
+  function profile(check,cycle){
+    var convBase={b2b:22,b2c:8,mixed:14}[aud||'b2b'];
+    var cycleAdj=cycle>=120?0.70:cycle>=60?0.85:cycle>=21?1.00:1.15;
+    var checkAdj=check>500000?0.70:check>100000?0.85:check>=15000?1.00:1.15;
+    return {convTarget:Math.round(Math.min(45,Math.max(3,convBase*cycleAdj*checkAdj))),
+            repeatTarget:(aud==='b2c')?35:30};
+  }
+
+  function filled(){
+    var k=aud?1:0;
+    F.forEach(function(f){var v=parseFloat(raw(el[f].value)); if(raw(el[f].value)!==''&&isFinite(v))k++;});
+    return k;
+  }
+
+  function row(id,val,txt){
+    var e=document.getElementById(id);
+    e.classList.toggle('ok', val<=0);
+    e.querySelector('.rd').textContent=txt;
+    e.querySelector('.rrow-v').textContent = val>0 ? money(-val) : '0 \u20BD';
+  }
+
+  function calc(){
+    var k=filled();
+    document.getElementById('lockN').textContent=k;
+    document.getElementById('res').classList.toggle('locked', k<8);
+    if(k<8) return;
+
+    var leads=n(el.leads.value,1), dial=n(el.dial.value,1), conv=n(el.conv.value,.1,100),
+        check=n(el.check.value,1), margin=n(el.margin.value,1,95), cycle=n(el.cycle.value,1),
+        repeat=n(el.repeat.value,0,100), m=margin/100;
+
+    var p=profile(check,cycle);
+    var deals=leads*conv/100;
+    var reachRate=Math.min(1,dial/leads), closeRate=Math.min(1,deals/dial);
+    var closeNorm=Math.min(.95,(p.convTarget/100)/REACH_NORM);
+    var closeTarget=Math.min(closeNorm, closeRate*CLOSE_UPLIFT);
+
+    // 1. заявки, до которых не дошли — по ВАШЕЙ же конверсии закрытия
+    var missed=Math.max(0,leads*(REACH_NORM-reachRate));
+    var vReach=missed*closeRate*check*MONTHS*m;
+    // 2. разговоры без оплаты — рост конверсии этапа на 30%, но не выше ориентира
+    var vClose=dial*Math.max(0,closeTarget-closeRate)*check*MONTHS*m;
+    // 3. база — годовые клиенты против ориентира по типу аудитории
+    var vRepeat=deals*MONTHS*Math.max(0,p.repeatTarget-repeat)/100*check*m;
+
+    document.getElementById('n-val').textContent='Ориентир конверсии: '+p.convTarget+'% · у вас '+conv+'%';
+    document.getElementById('n-txt').textContent='Считается под ваш профиль: '+
+      ({b2b:'B2B',b2c:'B2C',mixed:'B2B + B2C'})[aud||'b2b']+', чек '+Math.round(check).toLocaleString('ru-RU')+
+      ' \u20BD, цикл '+(cycle>=120?'4+ месяца':cycle>=60?'\u22482 месяца':cycle>=21?'\u22483 недели':'до недели')+
+      '. Если по вашей нише ориентир другой — на разборе считаем по вашей цифре.';
+
+    row('r-reach', vReach, missed>0
+      ? 'До разговора доходит '+pct(reachRate)+' заявок при норме '+pct(REACH_NORM)+'. Это '+Math.round(missed)+
+        ' заявок в месяц, уже оплаченных маркетингом. Считаем по вашей же конверсии закрытия — '+pct(closeRate)+'.'
+      : 'Дозвон '+pct(reachRate)+' — норма '+pct(REACH_NORM)+' выполняется. На входе не теряется ничего.');
+
+    row('r-close', vClose, vClose>0
+      ? 'Из разговоров закрывается '+pct(closeRate)+'. Считаем скромно: рост этапа на 30%, до '+pct(closeTarget)+
+        ' — это '+(dial*(closeTarget-closeRate)).toFixed(1)+' сделки в месяц сверх текущего.'
+      : 'Закрытие '+pct(closeRate)+' — этап работает на уровне ориентира вашего профиля.');
+
+    row('r-repeat', vRepeat, vRepeat>0
+      ? 'Возвращается '+repeat+'% при ориентире '+p.repeatTarget+'% для вашей аудитории. База за год — '+
+        Math.round(deals*MONTHS)+' клиентов, повторная продажа дешевле новой в 5–7 раз.'
+      : 'Повторные '+repeat+'% при ориентире '+p.repeatTarget+'% — база работает.');
+
+    document.getElementById('tot').textContent=money(-(vReach+vClose+vRepeat));
+  }
+
+  function digitsBefore(s,pos){var c=0; for(var i=0;i<pos;i++){ if(/[0-9]/.test(s[i])) c++; } return c;}
+  function caretAfter(s,d){var c=0; for(var i=0;i<s.length;i++){ if(/[0-9]/.test(s[i])){c++; if(c===d) return i+1;} } return d===0?0:s.length;}
+
+  F.forEach(function(k){
+    el[k].addEventListener('input',function(){
+      var before=this.value, pos=this.selectionStart||0, d=digitsBefore(before,pos);
+      var out=group(before);
+      if(out!==before){ this.value=out; try{ var np=caretAfter(out,d); this.setSelectionRange(np,np); }catch(e){} }
+      calc();
+    });
+  });
+  document.getElementById('aud').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b)return;
+    aud=b.dataset.k;
+    [].forEach.call(this.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x===b)});
+    calc();
+  });
+  document.getElementById('reset').addEventListener('click',function(){
+    F.forEach(function(k){el[k].value=''}); calc();
+  });
+  calc();
+})();
+</script>
+</body>
+</html>
