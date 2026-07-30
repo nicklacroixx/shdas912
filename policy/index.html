@@ -144,7 +144,30 @@ footer{border-top:1px solid var(--rule);padding:34px 0 58px;font-family:var(--mo
 @keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .head{animation:pgIn .6s cubic-bezier(.2,.7,.3,1) .04s both}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* ── гейт видимости: показываем страницу только когда критичные шрифты точно готовы ── */
+html:not(.fonts-ready) body{opacity:0}
+body{opacity:1;transition:opacity .18s ease}
 </style>
+<script>
+(function(){
+  var html = document.documentElement;
+  var done = false;
+  function ready(){ if (done) return; done = true; html.classList.add('fonts-ready'); }
+  if (window.document && document.fonts && document.fonts.load) {
+    Promise.all([
+      document.fonts.load('600 1em Unbounded'),
+      document.fonts.load('500 1em Unbounded'),
+      document.fonts.load('400 1em Onest'),
+      document.fonts.load('600 1em Onest'),
+      document.fonts.load('400 1em "JetBrains Mono"'),
+      document.fonts.load('800 1em "Plus Jakarta Sans"')
+    ]).then(ready).catch(ready);
+    setTimeout(ready, 800);
+  } else {
+    ready();
+  }
+})();
+</script>
 <style>
 .doc{max-width:74ch}
 .doc h2{font-size:clamp(19px,2.4vw,26px);margin:clamp(38px,5vw,54px) 0 16px}
