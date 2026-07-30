@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Кейсы · Closery</title>
-<meta name="description" content="Три проекта, три точки входа — кризис, ноль, масштабирование. Один подход: управление на цифрах, а не на ощущениях.">
+<title>Политика конфиденциальности · Closery</title>
+<meta name="description" content="Сайт closery.ru не собирает персональные данные, не устанавливает cookie и не использует аналитические сервисы.">
+<meta name="robots" content="noindex">
 <style>
 /* Шрифты хранятся локально: никаких обращений к сторонним серверам */
 @font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
@@ -144,143 +145,73 @@ footer{border-top:1px solid var(--rule);padding:34px 0 58px;font-family:var(--mo
 .head{animation:pgIn .6s cubic-bezier(.2,.7,.3,1) .04s both}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
+<style>
+.doc{max-width:74ch}
+.doc h2{font-size:clamp(19px,2.4vw,26px);margin:clamp(38px,5vw,54px) 0 16px}
+.doc p{font-size:16.5px;line-height:1.7;color:var(--ink-2);margin-top:14px}
+.doc p strong{color:var(--ink);font-weight:600}
+.doc ul{margin-top:16px;border-top:1px solid var(--rule)}
+.doc li{list-style:none;border-bottom:1px solid var(--rule);padding:14px 0;font-size:16px;
+  color:var(--ink-2);line-height:1.6;display:grid;grid-template-columns:22px 1fr;gap:10px}
+.doc li::before{content:"—";color:var(--ok);font-family:var(--mono)}
+.meta{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);margin-top:clamp(40px,5vw,56px);padding-top:22px;border-top:1px solid var(--rule);line-height:2}
+</style>
 </head>
 <body>
 
 <header class="bar">
   <div class="w-wide bar-in">
-    <a class="logo" href="index.html"><i></i>Closery</a>
+    <a class="logo" href="/"><i></i>Closery</a>
     <nav class="bar-nav">
-      <a class="bar-lnk" href="mrt-demo.html">Демо-МРТ</a>
-      <a class="bar-lnk on" href="cases.html">Кейсы</a>
-      <a class="bar-lnk" href="index.html#route">Проект</a>
-      <a class="bar-lnk" href="index.html#founder">Основатель</a>
-      <a class="bar-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на разбор</a>
+      <a class="bar-lnk" href="/mrt-demo/">Демо-МРТ</a>
+      <a class="bar-lnk" href="/cases/">Кейсы</a>
+      <a class="bar-lnk" href="/#route">Проект</a>
+      <a class="bar-lnk" href="/#founder">Основатель</a>
+      <a class="bar-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Написать в Telegram</a>
     </nav>
   </div>
 </header>
 
 <main>
-
 <div class="w head">
-  <span class="label">Кейсы / Карьерный трек</span>
-  <h1>10 лет в коммерции: от менеджера до коммерческого директора и построения коммерческих блоков с нуля</h1>
-  <p class="lede">Три проекта, три разные точки входа — кризис, ноль, масштабирование. Один подход: управление на цифрах, а не на ощущениях.</p>
-  <dl class="tl">
-    <div><dt>2021–2023</dt><dd>MarketGuru — рост в SaaS</dd></div>
-    <div><dt>2023–2025</dt><dd>UniBox — коммерция с нуля</dd></div>
-    <div><dt>2025–2026</dt><dd>CDEK (франчайзи) — антикризис</dd></div>
-  </dl>
+  <span class="label">Правовая информация</span>
+  <h1>Политика конфиденциальности</h1>
+  <p class="lede">Короткая версия: сайт не собирает о вас ничего. Ниже — то же самое подробно.</p>
 </div>
 
-<section class="w case">
-  <div class="case-top">
-    <span class="case-tag">Case 01 / Антикризис</span>
-    <h2 class="case-h">CDEK — франчайзи-точка</h2>
-    <div class="case-role">Антикризисный коммерческий директор<span>апрель 2025 — январь 2026</span></div>
-    <p class="case-ctx">Некогда один из топовых франчайзи сети — на момент прихода 30-е место в рейтинге. Продажи держатся на входящих и истории, найм — 6 человек в год, отделы конфликтуют.</p>
-  </div>
-  <div class="case-grid">
-    <div>
-      <div class="blk-t">Что сделано</div>
-      <ul class="did">
-        <li><span><b>Пересобрана система продаж</b>Воронка и ежедневные метрики действий каждого сотрудника в общей таблице — результат стал следствием считаемых действий, а не «хорошего месяца».</span></li>
-        <li><span><b>Перестроены найм и адаптация</b>С 6 новых сотрудников в год до конвейера с ёмкостью 100+ — без участия топов в онбординге.</span></li>
-        <li><span><b>Починена коммуникация между отделами</b>eNPS 71% → 97%.</span></li>
-      </ul>
-    </div>
-    <div>
-      <div class="blk-t">Результат</div>
-      <div class="res">
-        <div><b>Топ-5 сети</b><span>возврат точки с 30-го места за 4,5 месяца</span></div>
-        <div><b>Выручка ×2</b><span>за 10 месяцев работы</span></div>
-      </div>
-    </div>
-  </div>
-  <p class="transfer">В вашем бизнесе это модуль <b>«результат виден в цифрах каждый день»</b> — ставится в рознице и B2B одинаково.</p>
-</section>
+<div class="w doc" style="padding-bottom:clamp(60px,8vw,110px)">
 
-<section class="w case">
-  <div class="case-top">
-    <span class="case-tag">Case 02 / С нуля</span>
-    <h2 class="case-h">UniBox — e-com, маркетплейсы</h2>
-    <div class="case-role">Коммерческий директор — весь коммерческий блок<span>декабрь 2023 — март 2025</span></div>
-    <p class="case-ctx">Только открывшийся бизнес: из активов — склад. Ни отдела, ни лидгена, ни упакованного продукта. Бюджета на платный трафик нет.</p>
-  </div>
-  <div class="case-grid">
-    <div>
-      <div class="blk-t">Что сделано</div>
-      <ul class="did">
-        <li><span><b>Продукт упакован под одну ЦА</b>Оффер, УТП, презентации, ценностная отстройка.</span></li>
-        <li><span><b>Отдел из 8 человек</b>Менее чем за 90 дней.</span></li>
-        <li><span><b>Холодный лидген и партнёрский канал</b>Карго, аналитические сервисы, эксперты WB/Ozon — в пике 7–8 горячих лидов в день без рекламного бюджета.</span></li>
-        <li><span><b>Контроль сделок</b>Время реакции на новый лид — со 150 минут до 3.</span></li>
-      </ul>
-    </div>
-    <div>
-      <div class="blk-t">Результат</div>
-      <div class="res">
-        <div><b>1,5 → 12,3 млн ₽</b><span>месячная выручка проекта за 9 месяцев — рост ×8</span></div>
-        <div><b>Контур с нуля</b><span>коммерческий блок построен полностью с нуля</span></div>
-      </div>
-    </div>
-  </div>
-  <p class="transfer">Это ядро продукта Closery — <b>коммерческий блок с нуля за 90 дней</b>.</p>
-</section>
+  <h2>Кто владелец сайта</h2>
+  <p>Индивидуальный предприниматель Клименко Николай Витальевич.<br>
+  ИНН 632200739609 · ОГРНИП 326632700116702.<br>
+  Связь: <a href="https://t.me/klimenko_prod" target="_blank" rel="noopener" style="color:var(--ok)">Telegram</a>.</p>
 
-<section class="w case">
-  <div class="case-top">
-    <span class="case-tag">Case 03 / Конверсия и методология</span>
-    <h2 class="case-h">MarketGuru — SaaS для селлеров</h2>
-    <div class="case-role">Менеджер → руководитель продаж за 5 месяцев<span>август 2021 — октябрь 2023</span></div>
-    <p class="case-ctx">Рост внутри быстрорастущего SaaS: от лучших личных цифр в отделе — до руководства отделом и постановки методологии, которая работает после ухода.</p>
-  </div>
-  <div class="case-grid">
-    <div>
-      <div class="blk-t">Что сделано</div>
-      <ul class="did">
-        <li><span><b>Конверсия отдела из Zoom-аудита в оплату</b>34% — сильнейший показатель ниши.</span></li>
-        <li><span><b>Методология продаж и онбординг</b>Подняли результат каждого менеджера; 10+ скриптов используются до сих пор.</span></li>
-        <li><span><b>Выращены 3 РОПа</b>Оставшиеся в проекте после ухода.</span></li>
-      </ul>
-    </div>
-    <div>
-      <div class="blk-t">Результат</div>
-      <div class="res">
-        <div><b>6 месяцев</b><span>подряд рекордов компании по выручке — отдел рос вровень с проектом</span></div>
-        <div><b>Работает без автора</b><span>признак методологии, а не таланта</span></div>
-      </div>
-    </div>
-  </div>
-  <p class="transfer">Та же механика — <b>из разбора в оплату</b> — строится в вашей воронке.</p>
-</section>
+  <h2>Какие данные собирает сайт</h2>
+  <p><strong>Никакие.</strong> На сайте нет форм обратной связи, регистрации, личного кабинета и любых других способов передать нам имя, телефон, почту или иные сведения о себе.</p>
+  <ul>
+    <li><span>Формы заявок отсутствуют — связаться можно только через мессенджер по вашей инициативе.</span></li>
+    <li><span>Файлы cookie сайтом не устанавливаются.</span></li>
+    <li><span>Системы веб-аналитики и счётчики посещаемости не подключены.</span></li>
+    <li><span>Рекламные и трекинговые пиксели не используются.</span></li>
+    <li><span>Шрифты и изображения загружаются с этого же сайта, а не со сторонних серверов.</span></li>
+  </ul>
+  <p>Расчёты в разделе «Демо-МРТ» выполняются целиком в вашем браузере. Введённые цифры никуда не передаются и нигде не сохраняются: достаточно закрыть вкладку, чтобы они исчезли.</p>
 
-<section class="sec">
-  <div class="w">
-    <div class="sec-head">
-      <span class="label">Как это переносится на ваш бизнес</span>
-      <h2>Три разных проекта — один повторяемый набор инструментов</h2>
-      <p class="lede">Он и есть продукт Closery: коммерческий блок за 90 дней.</p>
-    </div>
-    <dl class="how">
-      <div><dt>01 / Цифры</dt><b>Управляемость</b><p>Воронка, метрики действий, план — результат перестаёт быть «погодой» и становится следствием.</p></div>
-      <div><dt>02 / Люди</dt><b>Команда и найм</b><p>Конвейер найма и адаптации, стандарты работы, мотивация от результата — без ручного управления собственником.</p></div>
-      <div><dt>03 / Каналы</dt><b>Поток клиентов</b><p>Работающие каналы усиливаются, сгорающие — останавливаются. Партнёрка и база дают лиды без роста бюджета.</p></div>
-    </dl>
-  </div>
-</section>
+  <h2>Переход в Telegram</h2>
+  <p>Кнопки «Написать в Telegram» ведут в мессенджер. С момента перехода начинают действовать условия и политика конфиденциальности Telegram — мы на них не влияем. Переписка, которую вы начинаете сами, используется только для ответа на ваш вопрос и не передаётся третьим лицам.</p>
 
-<section class="end">
-  <div class="w">
-    <h2>Начнём с разбора</h2>
-    <p class="lede">Разбор идёт по вашим цифрам: воронка, конверсии, экономика, люди, управление. На выходе вы получаете ведомость — где коммерция теряет деньги, сколько стоит каждая течь и что закрывать первым.</p>
-    <div class="cta-wrap">
-      <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на разбор</a>
-      <span class="btn-note">120–150 минут · 50 000 ₽ · идёт в зачёт</span>
-    </div>
-  </div>
-</section>
+  <h2>Технические данные хостинга</h2>
+  <p>Как и любой сайт в интернете, наш обслуживается хостинг-провайдером, который в силу самой природы сетевого соединения видит IP-адреса обращающихся устройств. Владелец сайта к этим сведениям не обращается, не накапливает и не использует их.</p>
 
+  <h2>Ваши права</h2>
+  <p>Поскольку персональные данные не собираются и не обрабатываются, запросы на доступ, изменение или удаление данных не имеют предмета. Если у вас есть вопрос о том, как устроен сайт, напишите в Telegram — ответим.</p>
+
+  <h2>Изменения</h2>
+  <p>Если на сайте появятся формы, аналитика или иные инструменты сбора данных, эта страница будет обновлена до их запуска, а не после.</p>
+
+  <div class="meta">Редакция от 30 июля 2026 года<br>closery.ru</div>
+</div>
 </main>
 
 <footer>
