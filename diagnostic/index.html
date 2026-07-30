@@ -6,6 +6,9 @@
 <title>Закрытая диагностика · Closery</title>
 <meta name="description" content="Коммерческий МРТ: 60 вопросов по шести системам бизнеса. Нормы под ваш профиль, разбор воронки по этапам, финмодель потерь и дорожная карта на 90 дней.">
 <meta name="robots" content="noindex, nofollow">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/unbounded-cyrillic-600-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/onest-cyrillic-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-latin-800-normal.woff2" crossorigin>
 <style>
 /* Шрифты хранятся локально: никаких обращений к сторонним серверам */
 @font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
@@ -437,16 +440,28 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
   color:var(--ink-3);border:1px solid var(--line-soft);border-radius:5px;padding:3px 7px}
 .opp-step{font-size:12px;color:var(--ink-2);margin-top:7px;line-height:1.5}
 .opp-cap{font-size:11.5px;color:var(--warn);margin-top:5px;line-height:1.5}
-/* Волны дорожной карты */
-.wave{border:1px solid var(--line-soft);border-radius:10px;padding:16px 18px;margin-bottom:12px;background:var(--surface)}
-.wave-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px;flex-wrap:wrap}
-.wave-h b{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
-.wave-h span{font-size:12px;color:var(--ink-2)}
-.wave-h em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--teal)}
-.wave ul{list-style:none;margin:0;padding:0}
-.wave li{font-size:12.5px;color:var(--ink-2);line-height:1.55;padding:5px 0 5px 16px;position:relative}
-.wave li::before{content:'';position:absolute;left:0;top:12px;width:5px;height:5px;background:var(--teal);border-radius:50%}
+/* Волны дорожной карты — крупные пронумерованные карточки, не сливаются друг с другом */
+.wave-grid{display:flex;flex-direction:column;gap:20px}
+.wave{position:relative;border:1px solid var(--line-soft);border-radius:14px;padding:22px 22px 20px 26px;
+  background:linear-gradient(168deg,rgba(52,211,153,.055),var(--surface) 55%);
+  box-shadow:0 18px 40px rgba(0,0,0,.28);overflow:hidden}
+.wave::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--teal);box-shadow:0 0 12px rgba(52,211,153,.5)}
+.wave-num{position:absolute;right:20px;top:18px;font-family:var(--mono);font-size:34px;font-weight:700;
+  color:rgba(52,211,153,.14);line-height:1;pointer-events:none}
+.wave-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap;position:relative}
+.wave-h b{font-family:var(--disp);font-size:16px;font-weight:600;letter-spacing:-.01em;color:#fff}
+.wave-h span{font-size:12.5px;color:var(--ink-2)}
+.wave-h em{font-style:normal;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--teal)}
+.wave ul{list-style:none;margin:0;padding:0;position:relative}
+.wave li{font-size:13px;color:var(--ink-2);line-height:1.55;padding:6px 0 6px 16px;position:relative}
+.wave li::before{content:'';position:absolute;left:0;top:13px;width:5px;height:5px;background:var(--teal);border-radius:50%}
 .wave li b{color:#fff;font-weight:600}
+/* Разделители смысловых блоков отчёта — чтобы стена панелей читалась по частям */
+.report-section-h{display:flex;align-items:center;gap:14px;margin:44px 0 20px}
+.report-section-h b{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--teal);white-space:nowrap}
+.report-section-h::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--line-soft),transparent)}
+.report-section-h:first-child{margin-top:0}
 /* Расхождение «вы думаете vs данные» */
 .gapbox{border-left:2px solid var(--warn);border-radius:0 8px 8px 0;padding:14px 18px;background:rgba(251,191,36,.05);font-size:13.5px;color:var(--ink-2);line-height:1.65}
 .gapbox.match{border-left-color:var(--teal);background:rgba(52,211,153,.05)}
@@ -698,13 +713,12 @@ body:not(.cl-unlocked) .gate{display:flex}
   // страницы, это не защита от целенаправленного обхода, а барьер от случайных
   // переходов/индексации — вместе с meta robots noindex.
   var ACCESS_CODE = '228';
-  var LS_KEY = 'cl-diag-access';
   var body = document.body;
+  // Код намеренно не запоминается между визитами — гейт должен спрашивать
+  // его при каждом заходе (в т.ч. при показе на созвоне).
   function unlock(){
     body.classList.add('cl-unlocked');
-    try{ localStorage.setItem(LS_KEY, '1'); }catch(e){}
   }
-  try{ if (localStorage.getItem(LS_KEY) === '1') unlock(); }catch(e){}
   var input = document.getElementById('gateInput');
   var btn = document.getElementById('gateSubmit');
   var err = document.getElementById('gateError');
@@ -2755,10 +2769,11 @@ const Final = {
   roadmapHTML(){
     const waves = Roadmap.build();
     if (!waves.length) return '';
-    return waves.map(w => `<div class="wave">
+    return `<div class="wave-grid">${waves.map((w,i) => `<div class="wave">
+        <div class="wave-num">${String(i+1).padStart(2,'0')}</div>
         <div class="wave-h"><b>${w.label}</b><span>${w.focus}</span><em>+${Fmt.money(w.value)}/год</em></div>
         <ul>${w.items.map(o=>`<li><b>${o.step}</b> — ${o.owner}, ${o.weeks} нед.${o.dep?' · после того, как закрыт предыдущий блок':''}</li>`).join('')}</ul>
-      </div>`).join('');
+      </div>`).join('')}</div>`;
   },
 
   show(){
@@ -2825,6 +2840,8 @@ const Final = {
 
       ${opBits.length ? `<div class="op-note"><b>Для оператора · в отчёт клиенту не попадает</b>${opBits.map(t=>`<div>${t}</div>`).join('')}</div>` : ''}
 
+      <div class="report-section-h"><b>Цифры вашего профиля</b></div>
+
       ${this.kmHTML() ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Ключевые параметры коммерческого блока</div>${this.kmHTML()}</div>` : ''}
 
       <div class="panel" style="margin-bottom:22px"><div class="panel-h">Расчётный ориентир для вашего профиля</div>${this.benchHTML()}</div>
@@ -2832,6 +2849,8 @@ const Final = {
       ${this.funnelHTML() ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Разбор воронки по этапам</div>${this.funnelHTML()}</div>` : ''}
 
       ${capNote ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Пропускная способность</div><div class="fn-verdict" style="margin-top:0;border-left-color:${capNote.tone==='bad'?'var(--bad)':capNote.tone==='warn'?'var(--warn)':'var(--teal)'}"><b>${capNote.title}.</b> ${capNote.text}</div></div>` : ''}
+
+      <div class="report-section-h"><b>Где теряются деньги</b></div>
 
       <div class="final-cols">
         <div class="panel"><div class="panel-h">Главные проблемы${probs.length?` · ${probs.length} из ${FinModel.losses().length + Problems.structural().length}`:''}</div>
@@ -2857,30 +2876,28 @@ const Final = {
 
       ${goal ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Разрыв до вашей цели</div><div class="bench-note" style="border:none;padding:0">${goal}</div></div>` : ''}
 
-      ${opps.length ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Что делать: 90 дней по волнам</div>${this.roadmapHTML()}</div>` : ''}
+      ${opps.length ? `<div class="report-section-h"><b>План действий</b></div>
+      <div class="panel" style="margin-bottom:22px"><div class="panel-h">Что делать: 90 дней по волнам</div>${this.roadmapHTML()}</div>` : ''}
 
       ${upside.length ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Сверх возврата потерь</div>
         ${upside.map(u=>`<div class="opp"><div class="opp-top"><span>${u.label}</span><b>+${Fmt.money(u.value)}/год</b></div><div class="opp-step">${u.note}</div></div>`).join('')}</div>` : ''}
+
+      <div class="report-section-h"><b>Детали разбора</b></div>
 
       <div class="panel" style="margin-bottom:22px"><div class="panel-h">Качество данных</div><div class="bench-note" style="border:none;padding:0">${DataQuality.text()}</div></div>
 
       ${feedAll.length ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Полный лог сканера · ${feedAll.length} наход${plural(feedAll.length,'ка','ки','ок')}</div><div class="find-grid">${feedAll.map(f=>`<div class="find-row"><span class="find-dot ${f.tone}"></span><span>${f.text}</span></div>`).join('')}</div></div>` : ''}
 
-      <div class="cta-panel"><h3>Следующий шаг</h3>
-        <p>Разбор показал, где бизнес теряет деньги и что из этого возвращается за квартал. На стратегической сессии Closery мы соберём это в план внедрения под вашу команду и ресурсы.</p>
+      <div class="cta-panel"><h3>Отчёт готов</h3>
+        <p>Сохраните разбор в PDF — цифры, находки и дорожная карта останутся у вас.</p>
         <div class="final-actions">
-          <button class="btn-primary" id="btnBook">Записаться на стратегическую сессию →</button>
-          <button class="btn-ghost" id="btnPDF">Скачать PDF-отчёт</button>
-          <button class="btn-ghost" id="btnRestart">Пройти заново</button>
+          <button class="btn-primary" id="btnPDF">Скачать PDF-отчёт →</button>
         </div>
       </div>`;
 
     el.classList.add('visible');
     window.scrollTo({top:0, behavior:'smooth'});
     document.getElementById('btnPDF').onclick = ()=>Report.printPDF();
-    document.getElementById('btnBook').onclick = ()=>window.open(C.BOOKING_URL, '_blank');
-
-    document.getElementById('btnRestart').onclick = ()=>{ if(confirm('Начать диагностику заново? Текущие ответы будут удалены.')){ Storage.clear(); location.reload(); } };
   }
 };
 const Report = {

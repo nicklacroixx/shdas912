@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Демо-МРТ · Closery</title>
 <meta name="description" content="Восемь вопросов из шестидесяти. Показывает, как Коммерческое МРТ считает потери — на вашей воронке.">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/unbounded-cyrillic-600-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/onest-cyrillic-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-latin-800-normal.woff2" crossorigin>
 <style>
 /* Шрифты хранятся локально: никаких обращений к сторонним серверам */
 @font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
@@ -137,7 +140,7 @@ h1{font-family:var(--disp);font-size:clamp(23px,3.8vw,42px);line-height:1.22;fon
 .lock span{display:block;font-size:14.5px;color:var(--ink-2);line-height:1.6}
 .lock i{display:block;font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--ok);margin-top:16px;line-height:1.2}
-.lock i span{font:inherit;color:inherit;vertical-align:baseline}
+.lock i span{display:inline;font:inherit;color:inherit;vertical-align:baseline}
 .norm{padding:18px clamp(18px,2.4vw,24px);border-bottom:1px solid var(--rule);
   background:linear-gradient(180deg,rgba(52,211,153,.07),transparent);flex:1 1 auto;
   display:flex;flex-direction:column;justify-content:center}
