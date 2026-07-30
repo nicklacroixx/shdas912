@@ -475,8 +475,9 @@ footer{border-top:1px solid var(--rule);padding:32px 0 54px;font-family:var(--mo
 
 /* ── гейт доступа: закрытая ссылка, не бейзовая защита — см. отчёт ── */
 body:not(.cl-unlocked) header.bar,body:not(.cl-unlocked) .shell,body:not(.cl-unlocked) footer{display:none}
-.gate{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;background:var(--bg);padding:24px}
-body:not(.cl-unlocked) .gate{display:flex}
+.gate{display:none;position:fixed;inset:0;z-index:200;grid-template-columns:1fr;align-items:center;justify-content:center;background:var(--bg);padding:24px}
+body:not(.cl-unlocked) .gate{display:grid}
+.gate>*{grid-column:1;grid-row:1;justify-self:center}
 .gate-card{max-width:420px;width:100%;background:var(--surface);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
   border:1px solid var(--line-soft);border-radius:var(--r);padding:40px 36px;box-shadow:var(--shadow);
   text-align:left;position:relative;overflow:hidden}
