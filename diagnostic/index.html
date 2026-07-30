@@ -11,35 +11,35 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-latin-800-normal.woff2" crossorigin>
 <style>
 /* Шрифты хранятся локально: никаких обращений к сторонним серверам */
-@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/unbounded-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:block;src:url(/fonts/unbounded-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:block;src:url(/fonts/unbounded-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:block;src:url(/fonts/unbounded-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:block;src:url(/fonts/unbounded-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:block;src:url(/fonts/unbounded-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:block;src:url(/fonts/unbounded-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:block;src:url(/fonts/onest-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:block;src:url(/fonts/onest-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:block;src:url(/fonts/onest-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:block;src:url(/fonts/onest-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:block;src:url(/fonts/onest-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:block;src:url(/fonts/onest-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:block;src:url(/fonts/onest-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:block;src:url(/fonts/onest-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:block;src:url(/fonts/onest-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:block;src:url(/fonts/onest-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:block;src:url(/fonts/onest-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:block;src:url(/fonts/onest-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:block;src:url(/fonts/jetbrains-mono-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:block;src:url(/fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:block;src:url(/fonts/jetbrains-mono-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:block;src:url(/fonts/jetbrains-mono-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:block;src:url(/fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:block;src:url(/fonts/jetbrains-mono-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:block;src:url(/fonts/source-serif-4-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:block;src:url(/fonts/source-serif-4-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:block;src:url(/fonts/source-serif-4-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:block;src:url(/fonts/plus-jakarta-sans-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:block;src:url(/fonts/plus-jakarta-sans-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 
 :root{
   --bg:#090D0C;--paper:#121A18;--paper-2:#16201D;--rule:#1F2B27;--rule-2:#2E3D38;
@@ -246,12 +246,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .conv-bench-row span{font-size:13px;color:var(--ink-2)}
 .conv-bench-row b{font-family:var(--mono);font-size:18px;color:var(--ok);font-variant-numeric:tabular-nums}
 .conv-bench label{display:block;font-size:12.5px;color:var(--ink-3);line-height:1.5;margin-bottom:10px}
-.conv-bench-input-row{position:relative;max-width:160px}
-.conv-bench-input-row input{width:100%;padding:12px 40px 12px 14px;border:1px solid var(--line);border-radius:8px;
-  background:rgba(0,0,0,.25);color:var(--ink);font-family:var(--mono);font-size:14px;outline:none;transition:border-color .2s}
-.conv-bench-input-row input:focus{border-color:var(--ok);box-shadow:0 0 0 2px rgba(52,211,153,.18)}
-.conv-bench-input-row input::placeholder{color:var(--ink-3)}
-.conv-bench-input-row .unit{right:14px}
+.conv-bench-input-row{max-width:180px}
 .opts{display:grid;gap:10px}
 .opts.cols-2{grid-template-columns:1fr 1fr}
 @media(max-width:560px){.opts.cols-2{grid-template-columns:1fr}}
@@ -514,6 +509,16 @@ body:not(.cl-unlocked) .gate{display:flex}
 .gate-error.show{display:block}
 .gate-note{margin-top:20px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 @media(max-width:480px){.gate-card{padding:30px 24px}.gate-input-row{flex-direction:column}.gate-input-row .btn-primary{justify-content:center}}
+/* ── подтверждение доступа: короткая анимация вместо мгновенного скачка в инструмент ── */
+.gate-card{transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.gate-card.leaving{opacity:0;transform:scale(.97);pointer-events:none}
+.gate-unlock{display:none;flex-direction:column;align-items:center;gap:18px;text-align:center;opacity:0;
+  transition:opacity .4s var(--ease)}
+.gate-unlock.show{display:flex;opacity:1}
+.gate-unlock .proc-check{color:var(--ok)}
+.gate-unlock.show .proc-check{opacity:1;transform:scale(1);transition-delay:2.7s}
+.gate-val{animation-name:procSpin;animation-timing-function:linear;animation-fill-mode:forwards;animation-duration:3.2s}
+#accessGate.leaving{opacity:0;transition:opacity .5s var(--ease)}
 
 .print-report{display:none}
 @media print{
@@ -688,7 +693,7 @@ body:not(.cl-unlocked) .gate{display:flex}
 <body>
 
 <div class="gate" id="accessGate">
-  <div class="gate-card">
+  <div class="gate-card" id="gateCard">
     <div class="eyebrow">Закрытый доступ</div>
     <h1 class="gate-title">Доступ по коду</h1>
     <p class="gate-sub">Диагностика передаётся напрямую по ссылке с кодом доступа. Введите код, который вам прислали.</p>
@@ -705,6 +710,11 @@ body:not(.cl-unlocked) .gate{display:flex}
     <div class="gate-error" id="gateError">Неверный код. Попробуйте ещё раз.</div>
     <div class="gate-note">Closery · закрытая диагностика</div>
   </div>
+  <div class="gate-unlock" id="gateUnlock">
+    <div class="proc-ring"><svg viewBox="0 0 160 160"><circle class="proc-track" cx="80" cy="80" r="70"></circle><circle class="proc-val gate-val" cx="80" cy="80" r="70"></circle></svg><div class="proc-check">✓</div></div>
+    <div class="proc-title" id="gateUnlockTitle">Код принят</div>
+    <p class="proc-status" id="gateUnlockStatus">Открываем диагностику…</p>
+  </div>
 </div>
 <script>
 (function(){
@@ -714,10 +724,29 @@ body:not(.cl-unlocked) .gate{display:flex}
   // переходов/индексации — вместе с meta robots noindex.
   var ACCESS_CODE = '228';
   var body = document.body;
+  var gate = document.getElementById('accessGate');
+  var gateCard = document.getElementById('gateCard');
+  var gateUnlock = document.getElementById('gateUnlock');
+  var gateUnlockStatus = document.getElementById('gateUnlockStatus');
   // Код намеренно не запоминается между визитами — гейт должен спрашивать
   // его при каждом заходе (в т.ч. при показе на созвоне).
+  // Разблокировка — не мгновенный скачок: короткая анимация (кольцо +
+  // смена статуса) на 3-4 секунды, потом плавное появление инструмента.
   function unlock(){
-    body.classList.add('cl-unlocked');
+    gateCard.classList.add('leaving');
+    setTimeout(function(){
+      gateUnlock.classList.add('show');
+    }, 200);
+    setTimeout(function(){
+      gateUnlockStatus.textContent = 'Готово';
+    }, 2700);
+    setTimeout(function(){
+      gate.classList.add('leaving');
+    }, 3400);
+    setTimeout(function(){
+      body.classList.add('cl-unlocked');
+      gate.style.display = 'none';
+    }, 3900);
   }
   var input = document.getElementById('gateInput');
   var btn = document.getElementById('gateSubmit');
@@ -731,9 +760,12 @@ body:not(.cl-unlocked) .gate{display:flex}
     eye.setAttribute('aria-label', showing ? 'Показать код' : 'Скрыть код');
     input.focus();
   });
+  var unlocking = false;
   function tryUnlock(){
+    if (unlocking) return;
     var v = (input.value || '').trim().toUpperCase();
     if (v && v === ACCESS_CODE.trim().toUpperCase()){
+      unlocking = true;
       err.classList.remove('show');
       input.classList.remove('error');
       unlock();
@@ -763,7 +795,7 @@ body:not(.cl-unlocked) .gate{display:flex}
   <div class="w-wide bar-in">
     <a class="logo" href="/"><i></i>Closery</a>
     <nav class="bar-nav">
-      <span class="bar-progress"><span id="progressLabel">0%</span></span>
+      <span class="bar-progress" style="display:none"><span id="progressLabel">0%</span></span>
     </nav>
   </div>
   <div id="navProgressTrack"><div id="progressFill"></div></div>
@@ -2572,8 +2604,8 @@ const FlowUI = {
       convBenchHTML = `<div class="conv-bench">
         <div class="conv-bench-row"><span>Расчётный ориентир для вашего профиля</span><b id="convBenchVal">${p.convTarget}%</b></div>
         <label for="convNiche">Знаете точную цифру по своей нише? Впишите — посчитаем весь отчёт по ней вместо ориентира</label>
-        <div class="conv-bench-input-row">
-          <input type="number" id="convNiche" min="1" max="95" placeholder="${p.convTarget}" value="${custom?p.convTarget:''}"><span class="unit">%</span>
+        <div class="q-input unit-wrap conv-bench-input-row">
+          <input type="number" id="convNiche" inputmode="numeric" min="1" max="95" placeholder="${p.convTarget}" value="${custom?p.convTarget:''}"><span class="unit">%</span>
         </div>
       </div>`;
     }
@@ -2813,13 +2845,24 @@ const Final = {
       if (loss > 0) mirror += ` Разрыв между целью и текущей точкой стоит примерно <b class="sc-bad">${Fmt.money(loss/12)}</b> каждый месяц.`;
     }
 
-    // Служебный блок — только для оператора, в PDF не попадает
+    // Личная пометка для Николая — в отчёт клиенту и в PDF не попадает.
+    // Две части: техническая проверка данных (совпадают ли цифры) — и
+    // с кем имеем дело, через что дожимать. С этим клиентом можно
+    // работать почти всегда, вопрос только в том, на какую слабину давить.
     const opBits = [];
     if (FinModel.belowPrice()) opBits.push(`Найденные потери (${Fmt.money(loss)}/год) меньше цены самой диагностики. Продавать систему на этой цифре нельзя — либо перепроверить ввод, либо клиент не по чеку.`);
     const attr = Perception.attributionFlag();
     if (attr) opBits.push(attr.text);
     const cons = FinModel.consistency();
     if (cons) opBits.push('Цифры не сходятся: ' + cons.text);
+
+    const leverageBits = [];
+    leverageBits.push(`Индекс ${idx}/100 — ${zone==='bad'?'красная зона, проблем много, есть чем давить':zone==='warn'?'жёлтая зона, зацепки есть, но их меньше':'зелёная зона, слабых мест мало — давить будет нечем, упор на амбицию роста'}.`);
+    if (c) leverageBits.push(`Главный крючок — ограничение роста «${c.name.toLowerCase()}»: заходить в разговор через него.`);
+    if (a.if_nothing) leverageBits.push(`Страх бездействия («${nothingTxt}») — ${a.if_nothing==='crisis'?'высокий, сам произнёс «кассовый разрыв», можно давить напрямую':a.if_nothing==='slowdeath'?'средний, дожимать цифрами потерь, а не эмоцией':a.if_nothing==='grow'?'низкий, работает только через недополученный рост, не через страх':'низкий, придётся создавать срочность самому — сам её не видит'}.`);
+    if (loss > 0) leverageBits.push(`Потери ${Fmt.moneyYear(loss)} против чека ${Fmt.money(C.DIAG_PRICE)} — окупаемость сама по себе сильный аргумент, можно вести сделку через неё.`);
+    if (attr) leverageBits.push('Сопротивление: склонен объяснять провалы внешними причинами — заранее готовить контраргумент через цифры, не спорить на словах.');
+    leverageBits.push('Вывод: работать можно — вопрос не «можно ли», а через какую из точек выше вести сделку.');
 
     const feedAll = Feedback.collect().sort((x,y)=>(x.tone==='bad'?0:1)-(y.tone==='bad'?0:1));
     const plural = (n, one, few, many) => n%10===1&&n%100!==11 ? one : [2,3,4].includes(n%10)&&![12,13,14].includes(n%100) ? few : many;
@@ -2838,7 +2881,9 @@ const Final = {
         </div>
       </div></div>
 
-      ${opBits.length ? `<div class="op-note"><b>Для оператора · в отчёт клиенту не попадает</b>${opBits.map(t=>`<div>${t}</div>`).join('')}</div>` : ''}
+      ${opBits.length ? `<div class="op-note"><b>Для Николая · проверка данных · в отчёт клиенту не попадает</b>${opBits.map(t=>`<div>${t}</div>`).join('')}</div>` : ''}
+
+      <div class="op-note"><b>Для Николая · с кем имеем дело · в отчёт клиенту не попадает</b>${leverageBits.map(t=>`<div>${t}</div>`).join('')}</div>
 
       <div class="report-section-h"><b>Цифры вашего профиля</b></div>
 
