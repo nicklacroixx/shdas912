@@ -202,20 +202,21 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .out li b{color:var(--ink);font-weight:700}
 
 /* ── маршрут ── */
-.price-stagger{display:grid;gap:24px;grid-template-columns:repeat(12,1fr)}
-.price-blk{background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);
+.price-stagger{display:grid;gap:20px;grid-template-columns:repeat(2,1fr)}
+.price-blk{position:relative;overflow:hidden;background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);
   border:1px solid var(--rule-2);border-radius:var(--r);padding:clamp(24px,3vw,32px);box-shadow:var(--shadow)}
-.price-blk strong{display:block;font-family:var(--disp);font-size:clamp(17px,2vw,20px);font-weight:600;
-  color:var(--ok);margin-bottom:12px;letter-spacing:-.026em}
+.price-blk::before{content:'';position:absolute;top:-60px;right:-60px;width:160px;height:160px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.03) 0%,transparent 70%);pointer-events:none}
+.price-blk strong{display:block;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ok);margin-bottom:14px}
 .price-blk p{font-size:15px;color:var(--ink-2);line-height:1.66}
 .price-blk p+p{margin-top:14px}
-.price-blk-a{grid-column:1/8}
-.price-blk-b{grid-column:4/11;margin-top:32px}
-.price-blk-c{grid-column:6/13;margin-top:32px}
-@media(max-width:860px){
-  .price-stagger{grid-template-columns:1fr;gap:16px}
-  .price-blk-a,.price-blk-b,.price-blk-c{grid-column:1;margin-top:0}
-}
+.price-blk-roi{background:linear-gradient(168deg,rgba(52,211,153,.1),var(--paper) 72%);border-color:rgba(52,211,153,.35)}
+.price-blk-roi::before{background:radial-gradient(circle,rgba(52,211,153,.16) 0%,transparent 70%)}
+.price-roi-stat{display:block;font-family:var(--disp);font-weight:600;font-size:clamp(20px,2.4vw,26px);
+  letter-spacing:-.03em;line-height:1.2;color:#fff;margin-bottom:14px}
+.price-roi-stat em{font-style:normal;color:var(--ok);text-shadow:0 0 26px rgba(52,211,153,.4)}
+@media(max-width:760px){.price-stagger{grid-template-columns:1fr}}
 .route{border-top:1px solid var(--rule)}
 .leak{display:grid;grid-template-columns:1fr;gap:16px;padding:clamp(26px,3.8vw,36px) 0;border-bottom:1px solid var(--rule)}
 @media(min-width:920px){.leak{grid-template-columns:100px 1fr 1.2fr;gap:36px;align-items:start}}
@@ -514,18 +515,23 @@ body{opacity:1;transition:opacity .18s ease}
       <h2 class="rv">Разбор идёт в зачёт, проект — по вилке</h2>
     </div>
     <div class="price-stagger rv">
-      <div class="price-blk price-blk-a">
+      <div class="price-blk">
         <strong>Разбор</strong>
         <p>120 – 150 минут. На выходе — ведомость потерь по вашим цифрам: где утекает, сколько каждая течь стоит в год, что закрывать первым. Документ остаётся у вас в любом случае: с ним можно работать самому, отдать своему РОПу или пойти с ним к другому подрядчику. Если после разбора решите делать проект — эти 50 000 ₽ идут в зачёт, то есть разбор становится бесплатным.</p>
       </div>
-      <div class="price-blk price-blk-b">
+      <div class="price-blk">
         <strong>Проект</strong>
-        <p>Вилка зависит от числа течей и размера отдела. Точная сумма называется на разборе — после того, как потери посчитаны, а не до. Оплата по этапам, каждый принимается отдельно, выход на любом. Ориентир простой: проект окупается, если закрыта одна течь из ведомости. Первой всегда закрывается самая дорогая.</p>
+        <p>Вилка зависит от числа течей и размера отдела. Точная сумма называется на разборе — после того, как потери посчитаны, а не до. Оплата по этапам, каждый принимается отдельно, выход на любом.</p>
       </div>
-      <div class="price-blk price-blk-c">
+      <div class="price-blk">
         <strong>Чем это отличается от найма</strong>
-        <p>Сильный коммерческий директор стоит 1–1,5 млн ₽ в месяц, и первый понятный результат вы увидите через полгода. Я работаю 90 дней и выхожу. Разница даже не в деньгах — в том, что остаётся после. Там остаётся человек, которого можно потерять вместе со всем, что он знал. Здесь — система, которая принадлежит компании. И результат. Результат, который заставил компанию стать прибыльнее.</p>
+        <p>Сильный коммерческий директор стоит 1–1,5 млн ₽ в месяц, и первый понятный результат вы увидите через полгода. Я работаю 90 дней и выхожу. Разница даже не в деньгах — в том, что остаётся после. Там остаётся человек, которого можно потерять вместе со всем, что он знал. Здесь — система, которая принадлежит компании.</p>
         <p>На эти 90 дней я принимаю те же решения, что коммерческий директор, и отвечаю за ту же цифру. С одним отличием: я обязан уйти и оставить всё работающим без себя.</p>
+      </div>
+      <div class="price-blk price-blk-roi">
+        <strong>Окупаемость</strong>
+        <span class="price-roi-stat">Одна закрытая течь — и проект уже <em>окупился</em></span>
+        <p>Любой проект стоит мерить именно этой категорией — не суммой чека, а тем, за сколько он себя отбивает. Здесь ответ не обещание, а математика ведомости: первой всегда закрывается самая дорогая течь, и её одной обычно хватает, чтобы отбить всю стоимость проекта. Остальные — уже чистый плюс.</p>
       </div>
     </div>
   </div>
