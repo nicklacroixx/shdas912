@@ -70,6 +70,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     radial-gradient(1100px 620px at 98% 0%, rgba(240,85,90,.055), transparent 56%),
     radial-gradient(900px 900px at 50% 118%, rgba(52,211,153,.045), transparent 60%);}
 main,header.bar,footer{position:relative;z-index:1}
+#siteField{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;display:block}
+@media(prefers-reduced-motion:reduce){#siteField{display:none}}
 .w{max-width:1120px;margin:0 auto;padding:0 var(--gut)}
 .w-wide{max-width:1440px;margin:0 auto;padding:0 var(--gut)}
 a{color:inherit}
@@ -203,7 +205,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 
 /* ── маршрут ── */
 .price-stagger{display:grid;gap:20px;grid-template-columns:repeat(2,1fr)}
-.price-blk{position:relative;overflow:hidden;background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);
+.price-blk{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);
   border:1px solid var(--rule-2);border-radius:var(--r);padding:clamp(24px,3vw,32px);box-shadow:var(--shadow)}
 .price-blk::before{content:'';position:absolute;top:-60px;right:-60px;width:160px;height:160px;
   border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.03) 0%,transparent 70%);pointer-events:none}
@@ -430,6 +432,8 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 </script>
 </head>
 <body>
+
+<canvas id="siteField" aria-hidden="true"></canvas>
 
 <div id="intro" aria-hidden="true">
   <canvas id="introCanvas"></canvas>
@@ -772,21 +776,26 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     <div class="price-stagger rv">
       <div class="price-blk">
         <strong>Разбор</strong>
-        <p>120 – 150 минут. На выходе — ведомость потерь по вашим цифрам: где утекает, сколько каждая течь стоит в год, что закрывать первым. Документ остаётся у вас в любом случае: с ним можно работать самому, отдать своему РОПу или пойти с ним к другому подрядчику. Если после разбора решите делать проект — эти 50 000 ₽ идут в зачёт, то есть разбор становится бесплатным.</p>
+        <p>120–150 минут. На выходе — ведомость потерь: где утекает, сколько это стоит в год, что закрывать первым.</p>
+        <p>Документ ваш в любом случае. Работайте сами, отдайте РОПу или другому подрядчику.</p>
+        <p>Пойдёте в проект — 50 000 ₽ идут в зачёт. Разбор становится бесплатным.</p>
       </div>
       <div class="price-blk">
         <strong>Проект</strong>
-        <p>Вилка зависит от числа течей и размера отдела. Точная сумма называется на разборе — после того, как потери посчитаны, а не до. Оплата по этапам, каждый принимается отдельно, выход на любом.</p>
+        <p>Вилка зависит от числа течей и размера отдела. Сумма называется на разборе — после расчёта потерь, не раньше.</p>
+        <p>Оплата по этапам. Каждый принимается отдельно. Выйти можно на любом.</p>
       </div>
       <div class="price-blk">
         <strong>Чем это отличается от найма</strong>
-        <p>Сильный коммерческий директор стоит 1–1,5 млн ₽ в месяц, и первый понятный результат вы увидите через полгода. Я работаю 90 дней и выхожу. Разница даже не в деньгах — в том, что остаётся после. Там остаётся человек, которого можно потерять вместе со всем, что он знал. Здесь — система, которая принадлежит компании.</p>
-        <p>На эти 90 дней я принимаю те же решения, что коммерческий директор, и отвечаю за ту же цифру. С одним отличием: я обязан уйти и оставить всё работающим без себя.</p>
+        <p>Коммерческий директор — 1–1,5 млн ₽/мес, первый результат через полгода. Я — 90 дней, и выхожу.</p>
+        <p>Разница не в деньгах. Директора можно потерять вместе со всем, что он знал. Систему — нет: она принадлежит компании.</p>
+        <p>Решения те же. Цифра та же. Разница одна: я обязан уйти.</p>
       </div>
       <div class="price-blk price-blk-roi">
         <strong>Окупаемость</strong>
         <span class="price-roi-stat">Одна закрытая течь — и вы уже прошли <em>точку окупаемости</em></span>
-        <p>Любой проект стоит мерить именно этой категорией — не суммой чека, а тем, за сколько он себя отбивает. Здесь ответ не обещание, а математика ведомости: первой всегда закрывается самая дорогая течь, и её одной обычно хватает, чтобы отбить всю стоимость проекта. Остальные — уже маржинальная прибыль на годы вперёд, без дополнительных вложений.</p>
+        <p>Проект мерят не чеком, а тем, за сколько он отбивается.</p>
+        <p>Первой закрывается самая дорогая течь — обычно этого хватает, чтобы отбить всю стоимость проекта. Остальное — чистая прибыль на годы вперёд.</p>
         <p class="price-roi-tag"><span class="mini-logo"><i></i>Closery</span> — ваша лучшая инвестиция.</p>
       </div>
     </div>
@@ -915,5 +924,121 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   });
 })();
 </script>
+<script>
+/* Фоновое поле частиц: на весь сайт, сдержанное, реагирует на курсор локально */
+(function(){
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(rm || !window.requestAnimationFrame) return;
+
+  var canvas = document.getElementById('siteField');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+  var W = 0, H = 0;
+  var particles = [];
+  var mouse = {x:-9999, y:-9999, active:false};
+  var raf = null;
+
+  function resize(){
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W+'px'; canvas.style.height = H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    build();
+  }
+
+  function build(){
+    var area = W*H;
+    var count = Math.max(34, Math.min(72, Math.round(area/26000)));
+    particles = [];
+    for(var i=0;i<count;i++){
+      var big = Math.random() < 0.09;
+      particles.push({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        vx: (Math.random()-0.5)*0.055,
+        vy: (Math.random()-0.5)*0.055 - 0.012, /* лёгкий дрейф вверх, как пыль в свете */
+        size: big ? (3.2+Math.random()*2.6) : (0.9+Math.random()*1.8),
+        baseAlpha: big ? (0.16+Math.random()*0.14) : (0.06+Math.random()*0.16),
+        rot: Math.random()*Math.PI,
+        rotSpeed: (Math.random()-0.5)*0.0035,
+        pulsePhase: Math.random()*Math.PI*2
+      });
+    }
+  }
+
+  window.addEventListener('mousemove', function(e){
+    mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true;
+  }, {passive:true});
+  window.addEventListener('mouseleave', function(){ mouse.active = false; });
+  document.addEventListener('touchmove', function(e){
+    if(e.touches && e.touches[0]){ mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; mouse.active = true; }
+  }, {passive:true});
+  document.addEventListener('touchend', function(){ mouse.active = false; });
+
+  var INFLUENCE = 190; /* радиус локального влияния курсора */
+  var t = 0;
+
+  function frame(){
+    t += 1;
+    ctx.clearRect(0,0,W,H);
+
+    for(var i=0;i<particles.length;i++){
+      var p = particles[i];
+
+      var dx = p.x - mouse.x, dy = p.y - mouse.y;
+      var dist = Math.sqrt(dx*dx+dy*dy);
+      var influenced = mouse.active && dist < INFLUENCE;
+
+      if(influenced){
+        var f = (1 - dist/INFLUENCE);
+        /* тангенциальная составляющая — лёгкое кружение вокруг курсора */
+        var tx = -dy/(dist||1), ty = dx/(dist||1);
+        p.x += tx * f * 0.9 + (mouse.x - p.x) * f * 0.006;
+        p.y += ty * f * 0.9 + (mouse.y - p.y) * f * 0.006;
+      } else {
+        p.x += p.vx;
+        p.y += p.vy;
+      }
+
+      p.rot += p.rotSpeed;
+
+      if(p.x < -20) p.x = W+20; if(p.x > W+20) p.x = -20;
+      if(p.y < -20) p.y = H+20; if(p.y > H+20) p.y = -20;
+
+      var pulse = 0.85 + Math.sin(t*0.012 + p.pulsePhase) * 0.15;
+      var alpha = p.baseAlpha * pulse * (influenced ? 1.8 : 1);
+      var size = p.size * (influenced ? 1.25 : 1);
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = 'rgba(52,211,153,'+alpha.toFixed(3)+')';
+      if(influenced){ ctx.shadowColor = 'rgba(52,211,153,0.7)'; ctx.shadowBlur = size*2; }
+      ctx.fillRect(-size/2, -size/2, size, size);
+      ctx.restore();
+    }
+
+    raf = requestAnimationFrame(frame);
+  }
+
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 150);
+  });
+
+  var docVisible = true;
+  document.addEventListener('visibilitychange', function(){
+    docVisible = !document.hidden;
+    if(docVisible && !raf) frame();
+    if(!docVisible && raf){ cancelAnimationFrame(raf); raf = null; }
+  });
+
+  resize();
+  frame();
+})();
+</script>
+
 </body>
 </html>
