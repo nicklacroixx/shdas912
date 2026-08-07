@@ -1178,7 +1178,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   var input = document.getElementById('hourIncome');
   var out = document.getElementById('hourRate');
   if(!input || !out) return;
-  var WORK_HOURS_MONTH = 168; /* 21 рабочий день × 8 часов */
+  var WORK_HOURS_MONTH = 126; /* 21 рабочий день × 6 эффективных часов */
   var fmt = new Intl.NumberFormat('ru-RU', {maximumFractionDigits:0});
 
   function calc(){
