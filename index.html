@@ -925,7 +925,8 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 })();
 </script>
 <script>
-/* Фоновое поле частиц: на весь сайт, сдержанное, реагирует на курсор локально */
+/* Фоновое поле частиц: на весь сайт. Инерционная физика (импульс+демпфирование),
+   не мгновенная телепортация к курсору — так движение читается как течение, а не дёрганье. */
 (function(){
   var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(rm || !window.requestAnimationFrame) return;
@@ -949,19 +950,23 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 
   function build(){
     var area = W*H;
-    var count = Math.max(34, Math.min(72, Math.round(area/26000)));
+    var count = Math.max(32, Math.min(64, Math.round(area/29000)));
     particles = [];
     for(var i=0;i<count;i++){
-      var big = Math.random() < 0.09;
+      var front = Math.random() < 0.16; /* передний, более крупный и отзывчивый слой — ощущение глубины */
+      var ang = Math.random()*Math.PI*2;
+      var driftSpeed = 0.0016 + Math.random()*0.0022;
       particles.push({
         x: Math.random()*W,
         y: Math.random()*H,
-        vx: (Math.random()-0.5)*0.055,
-        vy: (Math.random()-0.5)*0.055 - 0.012, /* лёгкий дрейф вверх, как пыль в свете */
-        size: big ? (3.2+Math.random()*2.6) : (0.9+Math.random()*1.8),
-        baseAlpha: big ? (0.16+Math.random()*0.14) : (0.06+Math.random()*0.16),
+        vx: 0, vy: 0,
+        ax: Math.cos(ang)*driftSpeed,
+        ay: Math.sin(ang)*driftSpeed - driftSpeed*0.35, /* лёгкий уклон вверх, как пыль в свете */
+        front: front,
+        size: front ? (3+Math.random()*2.4) : (0.9+Math.random()*1.6),
+        baseAlpha: front ? (0.15+Math.random()*0.13) : (0.05+Math.random()*0.14),
         rot: Math.random()*Math.PI,
-        rotSpeed: (Math.random()-0.5)*0.0035,
+        rotSpeed: (Math.random()-0.5)*0.003,
         pulsePhase: Math.random()*Math.PI*2
       });
     }
@@ -976,45 +981,54 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   }, {passive:true});
   document.addEventListener('touchend', function(){ mouse.active = false; });
 
-  var INFLUENCE = 190; /* радиус локального влияния курсора */
+  var INFLUENCE = 200; /* радиус локального влияния курсора */
+  var DAMPING = 0.945;
   var t = 0;
+  var lastTs = 0;
 
-  function frame(){
-    t += 1;
+  function frame(ts){
+    var dt = lastTs ? Math.min(2.2, (ts-lastTs)/16.67) : 1;
+    lastTs = ts;
+    t += dt;
+
     ctx.clearRect(0,0,W,H);
 
     for(var i=0;i<particles.length;i++){
       var p = particles[i];
 
+      /* фоновая тяга — почти постоянное, очень медленное течение */
+      p.vx += p.ax*dt; p.vy += p.ay*dt;
+
       var dx = p.x - mouse.x, dy = p.y - mouse.y;
       var dist = Math.sqrt(dx*dx+dy*dy);
       var influenced = mouse.active && dist < INFLUENCE;
+      var weight = p.front ? 1 : 0.45;
 
       if(influenced){
-        var f = (1 - dist/INFLUENCE);
-        /* тангенциальная составляющая — лёгкое кружение вокруг курсора */
-        var tx = -dy/(dist||1), ty = dx/(dist||1);
-        p.x += tx * f * 0.9 + (mouse.x - p.x) * f * 0.006;
-        p.y += ty * f * 0.9 + (mouse.y - p.y) * f * 0.006;
-      } else {
-        p.x += p.vx;
-        p.y += p.vy;
+        var f = (1 - dist/INFLUENCE) * weight;
+        var d = dist || 1;
+        var tx = -dy/d, ty = dx/d; /* тангенциальная — лёгкое кружение вокруг курсора */
+        p.vx += (tx*0.42 + (mouse.x-p.x)/d*0.05) * f * dt;
+        p.vy += (ty*0.42 + (mouse.y-p.y)/d*0.05) * f * dt;
       }
 
-      p.rot += p.rotSpeed;
+      var damp = Math.pow(DAMPING, dt);
+      p.vx *= damp; p.vy *= damp;
+      p.x += p.vx*dt; p.y += p.vy*dt;
+      p.rot += p.rotSpeed*dt;
 
       if(p.x < -20) p.x = W+20; if(p.x > W+20) p.x = -20;
       if(p.y < -20) p.y = H+20; if(p.y > H+20) p.y = -20;
 
       var pulse = 0.85 + Math.sin(t*0.012 + p.pulsePhase) * 0.15;
-      var alpha = p.baseAlpha * pulse * (influenced ? 1.8 : 1);
-      var size = p.size * (influenced ? 1.25 : 1);
+      var alpha = p.baseAlpha * pulse * (influenced ? 1.7 : 1);
+      var size = p.size * (influenced ? 1.2 : 1);
 
       ctx.save();
       ctx.translate(p.x, p.y);
       ctx.rotate(p.rot);
       ctx.fillStyle = 'rgba(52,211,153,'+alpha.toFixed(3)+')';
-      if(influenced){ ctx.shadowColor = 'rgba(52,211,153,0.7)'; ctx.shadowBlur = size*2; }
+      if(influenced || p.front){ ctx.shadowColor = 'rgba(52,211,153,0.65)'; ctx.shadowBlur = size*1.6; }
       ctx.fillRect(-size/2, -size/2, size, size);
       ctx.restore();
     }
@@ -1028,15 +1042,13 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     resizeTimer = setTimeout(resize, 150);
   });
 
-  var docVisible = true;
   document.addEventListener('visibilitychange', function(){
-    docVisible = !document.hidden;
-    if(docVisible && !raf) frame();
-    if(!docVisible && raf){ cancelAnimationFrame(raf); raf = null; }
+    if(!document.hidden && !raf){ lastTs = 0; raf = requestAnimationFrame(frame); }
+    if(document.hidden && raf){ cancelAnimationFrame(raf); raf = null; }
   });
 
   resize();
-  frame();
+  raf = requestAnimationFrame(frame);
 })();
 </script>
 
