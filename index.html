@@ -51,7 +51,7 @@
   --loss-dim:#8C3E42;
   --ok:#34D399;
   --ok-soft:#7FE9C0;
-  --disp:'Unbounded','Onest',system-ui,sans-serif;
+  --disp:'Unbounded','Plus Jakarta Sans','Onest',system-ui,sans-serif;
   --ui:'Onest',system-ui,-apple-system,sans-serif;
   --doc:'Source Serif 4',Georgia,serif;
   --mono:'JetBrains Mono',ui-monospace,'SF Mono',monospace;
@@ -69,6 +69,10 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     radial-gradient(1300px 700px at 6% -14%, rgba(52,211,153,.10), transparent 58%),
     radial-gradient(1100px 620px at 98% 0%, rgba(240,85,90,.055), transparent 56%),
     radial-gradient(900px 900px at 50% 118%, rgba(52,211,153,.045), transparent 60%);}
+/* подсветка, идущая за курсором — на весь сайт, не привязана к отдельной секции */
+html::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(520px 520px at var(--mx,50%) var(--my,20%),rgba(52,211,153,.09),transparent 62%);
+  transition:opacity .4s ease;opacity:var(--glow-on,0)}
 main,header.bar,footer{position:relative;z-index:1}
 #siteField{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;display:block}
 @media(prefers-reduced-motion:reduce){#siteField{display:none}}
@@ -79,6 +83,8 @@ a{color:inherit}
 
 .label{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--ok);display:block;margin-bottom:18px;opacity:.85}
+.label b{color:var(--ink-3);font-weight:400;margin-right:.7em;letter-spacing:.1em;opacity:.9}
+.fig{font-family:'JetBrains Mono','Plus Jakarta Sans',ui-monospace,'SF Mono',monospace;font-weight:700;letter-spacing:-.01em;color:var(--ok-soft)}
 .display{font-family:var(--disp);font-size:clamp(29px,5.1vw,60px);line-height:1.14;
   font-weight:600;letter-spacing:-.045em}
 .display span{color:var(--loss-soft)}
@@ -109,8 +115,8 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .bar-lnk{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
   text-decoration:none;color:var(--ink-2);transition:color .2s ease,letter-spacing .3s ease;white-space:nowrap}
 .bar-lnk:hover{color:var(--ok);letter-spacing:.2em}
-.bar-cta{font-family:var(--disp);font-weight:500;font-size:12px;letter-spacing:-.03em;
-  text-decoration:none;color:var(--ink);border:1px solid rgba(52,211,153,.5);border-radius:9px;padding:11px 20px;
+.bar-cta{font-family:var(--mono);font-weight:600;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink);border:1px solid rgba(52,211,153,.5);border-radius:9px;padding:12px 20px;
   background:linear-gradient(180deg,rgba(52,211,153,.14),rgba(52,211,153,.06));white-space:nowrap;
   transition:border-color .22s,color .22s,box-shadow .3s,background .22s}
 .bar-cta:hover{border-color:var(--ok);box-shadow:0 0 26px rgba(52,211,153,.2);
@@ -162,8 +168,8 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .hour-foot{margin-top:14px;font-size:14px;font-weight:600;color:var(--ink);line-height:1.4;
   border-top:1px solid rgba(255,255,255,.12);padding-top:13px}
 .btn{display:inline-block;background:linear-gradient(180deg,rgba(52,211,153,.16),rgba(52,211,153,.07));
-  border:1px solid rgba(52,211,153,.5);color:var(--ink);font-family:var(--disp);font-weight:500;
-  font-size:14px;letter-spacing:-.03em;padding:17px 30px;text-decoration:none;border-radius:10px;
+  border:1px solid rgba(52,211,153,.5);color:var(--ink);font-family:var(--mono);font-weight:600;
+  font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;padding:18px 32px;text-decoration:none;border-radius:10px;
   transition:transform .18s ease,box-shadow .28s ease,border-color .22s ease,background .22s ease}
 .btn:hover{transform:translateY(-2px);border-color:var(--ok);
   background:linear-gradient(180deg,rgba(52,211,153,.26),rgba(52,211,153,.12));
@@ -171,7 +177,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .btn-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
 
 /* ── ВЕДОМОСТЬ ── */
-.ldg{margin-top:clamp(52px,7.5vw,90px);overflow:hidden}
+.ldg{overflow:hidden}
 .ldg-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
   padding:22px clamp(18px,3vw,30px);border-bottom:1px solid var(--rule-2)}
 .ldg-top b{font-family:var(--doc);font-size:clamp(17px,2vw,20px);font-weight:600;color:var(--ink);letter-spacing:-.01em}
@@ -261,6 +267,11 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .mini-logo{display:inline-flex;align-items:center;gap:6px;font-family:var(--brand);font-weight:800;
   font-size:.92em;text-transform:uppercase;letter-spacing:.14em;color:#fff;white-space:nowrap;vertical-align:middle}
 .mini-logo i{width:6px;height:6px;border-radius:2px;flex:none;background:var(--ok);box-shadow:0 0 10px rgba(52,211,153,.6);position:relative;top:-1px}
+.logo-mark{display:flex;align-items:center;justify-content:center;gap:.22em;font-family:var(--brand);font-weight:800;
+  font-size:clamp(26px,4vw,44px);text-transform:uppercase;letter-spacing:.06em;color:#fff;
+  margin-top:clamp(10px,1.6vw,16px)}
+.logo-mark i{width:.42em;height:.42em;border-radius:.08em;flex:none;background:var(--ok);
+  box-shadow:0 0 26px rgba(52,211,153,.6);position:relative;top:-.03em}
 .price-roi-tag{margin-top:clamp(20px,3vw,28px)!important}
 @media(max-width:760px){.price-stagger{grid-template-columns:1fr}}
 .route{border-top:1px solid var(--rule)}
@@ -389,10 +400,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 .hero{position:relative;isolation:isolate}
 .hero::before{content:'';position:absolute;z-index:-1;pointer-events:none;
   top:-10%;bottom:-25%;left:50%;width:100vw;transform:translateX(-50%);
-  background:
-    radial-gradient(480px 480px at var(--mx,50%) var(--my,18%),rgba(52,211,153,.10),transparent 60%),
-    radial-gradient(700px 420px at 82% -6%,rgba(52,211,153,.055),transparent 65%);
-  transition:background .5s ease}
+  background:radial-gradient(700px 420px at 82% -6%,rgba(52,211,153,.055),transparent 65%)}
 
 /* тактильнее кнопки */
 .btn:active,.bar-cta:active{transform:translateY(0) scale(.97)}
@@ -635,7 +643,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <a class="bar-lnk" href="/cases/">Кейсы</a>
       <a class="bar-lnk" href="#route">Проект</a>
       <a class="bar-lnk" href="#founder">Основатель</a>
-      <a class="bar-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на разбор</a>
+      <a class="bar-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Найти течь</a>
     
       <button class="bar-burger" id="barBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
@@ -663,8 +671,8 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 
       <p class="hero-callout">В отчётах этого нет — там не бывает строки «недозаработали». <strong>Эти деньги не видно ни с одной должности.</strong></p>
       <div class="hero-cta">
-        <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на разбор</a>
-        <span class="btn-note">120–150 минут, которые изменят выручку следующей недели</span>
+        <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Получить разбор выручки</a>
+        <span class="btn-note">120 минут, которые изменят выручку следующей недели</span>
       </div>
     </div>
 
@@ -708,29 +716,69 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       </div>
     </div>
   </div>
+</section>
 
-  <div class="ldg surface rv">
-    <div class="ldg-top">
-      <b>Ведомость потерь</b>
-      <span>реальный разбор</span>
+<section class="sec">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label"><b>00</b>Коротко, что это</span>
+      <h2 class="rv">Не консалтинг, не агентство и не найм — коммерческий директор на <span class="fig">90</span> дней</h2>
     </div>
-
-    <div class="ldg-cols"><span>Статья</span><span>Потеря за год</span></div>
-    <div class="row"><div class="row-t">Нет работы с базой и повторных продаж<i>клиенты, которые уже покупали, и к которым никто не вернулся</i></div><div class="row-v">−17 880 000 ₽</div></div>
-    <div class="row"><div class="row-t">Лишний ФОТ отдела продаж<i>людей больше, чем нужно системе, оплата не привязана к результату</i></div><div class="row-v">−12 320 000 ₽</div></div>
-    <div class="row"><div class="row-t">Сделки без второго касания<i>одна попытка вместо четырёх — дальше сделка тихо умирает</i></div><div class="row-v">−6 800 000 ₽</div></div>
-    <div class="row"><div class="row-t">Заявки без ответа в первый час<i>обращение уходит к тому, кто ответил раньше</i></div><div class="row-v">−4 100 000 ₽</div></div>
-    <div class="row"><div class="row-t">Решения, которые ждали собственника<i>согласование как узкое место всей коммерции</i></div><div class="row-v">−1 500 000 ₽</div></div>
-    <div class="ldg-dbl"></div>
-    <div class="row total"><div class="row-t">Не заработано за год</div><div class="row-v" id="tot">−42 600 000 ₽</div></div>
-    <div class="ldg-foot">Цифры настоящие. По отдельности ни одна течь не выглядела проблемой — сумма появилась, когда их сложили.</div>
+    <dl class="frag rv">
+      <div><dt>Формат</dt><dd><b>Разбор → проект → передача</b>90 дней с чётким концом, не абонемент. Последний этап — управление переходит вашему РОПу.</dd></div>
+      <div><dt>Кто ведёт</dt><dd><b>Лично, от начала до конца</b>Не команда методологов на удалёнке. Решения принимает тот, кто сам слышал звонки и видел цифры.</dd></div>
+      <div><dt>Что получаете</dt><dd><b>Систему, а не советы</b>Регламенты, скрипты, финмодель и метод остаются в компании — и не уходят вместе с исполнителем.</dd></div>
+    </dl>
   </div>
 </section>
 
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label">Почему это не видно</span>
+      <span class="label"><b>01</b>Почему это касается денег</span>
+      <h2 class="rv">Плюс в EBITDA — ваша заслуга. Недозаработанная маржа — тоже</h2>
+    </div>
+    <div class="bet-claim rv">
+      <p>Позитивная EBITDA — ваша прямая заслуга. Но большинство компаний работают, недозарабатывая сотни процентов доступной маржинальности: те же клиенты, та же команда, тот же бюджет — просто на каждом этапе теряются деньги, которые никто не считает.</p>
+    </div>
+    <dl class="frag rv">
+      <div><dt>Правильная методология</dt><dd><b>Рост в кризис</b>Каждый этап забирает свою долю денег без потерь — система работает на том объёме, который есть, а не ждёт, что рынок принесёт больше.</dd></div>
+      <div><dt>Серость — «как у всех»</dt><dd><b>Падение и закрытие</b>Течи копятся одновременно на всех этапах. В спокойный год их почти не видно. В кризис на них закрываются.</dd></div>
+    </dl>
+    <p class="gap-note rv"><span class="fig">2026</span>-й не прощает серую обычность. Кризис оставляет только тех, кто стал <u>лучшим для клиента</u>.</p>
+  </div>
+</section>
+
+<section class="sec" id="ledger">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label"><b>02</b>Пример на цифрах</span>
+      <h2 class="rv">Так может выглядеть ваша ведомость потерь</h2>
+      <p class="lede rv" style="margin-top:20px">Ниже — пример на реальных цифрах: сколько теряет за год компания похожего масштаба на пяти типовых течах. Это не запугивание, а иллюстрация того, что считает такой разбор. На вашем разборе цифры будут вашими — из вашей CRM и телефонии, а не оценкой на глаз.</p>
+    </div>
+    <div class="ldg surface rv">
+      <div class="ldg-top">
+        <b>Ведомость потерь</b>
+        <span>реальный разбор</span>
+      </div>
+
+      <div class="ldg-cols"><span>Статья</span><span>Потеря за год</span></div>
+      <div class="row"><div class="row-t">Нет работы с базой и повторных продаж<i>клиенты, которые уже покупали, и к которым никто не вернулся</i></div><div class="row-v">−17 880 000 ₽</div></div>
+      <div class="row"><div class="row-t">Лишний ФОТ отдела продаж<i>людей больше, чем нужно системе, оплата не привязана к результату</i></div><div class="row-v">−12 320 000 ₽</div></div>
+      <div class="row"><div class="row-t">Сделки без второго касания<i>одна попытка вместо четырёх — дальше сделка тихо умирает</i></div><div class="row-v">−6 800 000 ₽</div></div>
+      <div class="row"><div class="row-t">Заявки без ответа в первый час<i>обращение уходит к тому, кто ответил раньше</i></div><div class="row-v">−4 100 000 ₽</div></div>
+      <div class="row"><div class="row-t">Решения, которые ждали собственника<i>согласование как узкое место всей коммерции</i></div><div class="row-v">−1 500 000 ₽</div></div>
+      <div class="ldg-dbl"></div>
+      <div class="row total"><div class="row-t">Не заработано за год</div><div class="row-v" id="tot">−42 600 000 ₽</div></div>
+      <div class="ldg-foot">Цифры настоящие. По отдельности ни одна течь не выглядела проблемой — сумма появилась, когда их сложили.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label"><b>03</b>Почему это не видно</span>
       <h2 class="rv">Все показатели зелёные.<br>Денег нет</h2>
     </div>
     <dl class="frag rv">
@@ -746,8 +794,9 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label">Чем подтверждено</span>
-      <h2 class="rv">Компании, которые выросли, пока я отвечал за их коммерцию</h2>
+      <span class="label"><b>04</b>Чем подтверждено</span>
+      <h2 class="rv">Компании, которые выросли под управлением</h2>
+      <div class="logo-mark rv"><i></i>Closery</div>
     </div>
     <div class="rec rv">
       <div class="rec-co">CDEK<i>Коммерческий директор · логистика</i></div>
@@ -756,7 +805,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     </div>
     <div class="rec rv">
       <div class="rec-co">UniBox<i>Коммерческий директор · фулфилмент</i></div>
-      <div class="rec-d">Из активов был только склад. Построен весь коммерческий контур с нуля: упаковка продукта, отдел из восьми человек за 90 дней, холодный лидген и партнёрский канал без рекламного бюджета.</div>
+      <div class="rec-d">Из активов — только склад. Коммерческий контур собран с нуля: упаковка продукта, отдел из восьми человек за 90 дней, холодный лидген и партнёрский канал без рекламного бюджета.</div>
       <div class="rec-n">0 → 12,3 млн<i>месячная выручка за 9 месяцев</i></div>
     </div>
     <div class="rec rv">
@@ -770,7 +819,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label">Что обычно делают с такими цифрами</span>
+      <span class="label"><b>05</b>Что обычно делают с такими цифрами</span>
       <h2 class="rv">Нанимают сильного человека и полгода надеются</h2>
     </div>
     <div class="bet-claim rv">
@@ -788,9 +837,9 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <div class="row total"><div class="row-t">Цена года, в котором ничего не изменилось</div><div class="row-v">−33 250 000 ₽</div></div>
     </div>
     <div class="alt rv">
-      <div><dt>РОП</dt><b>Возьмёт отдел за горло</b><p>Скрипты, звонки до ночи, планёрки на повышенных. Если течь не в продажах, а в маркетинге, найме или управлении — через квартал тот же провал, только команда уже выгорела и часть разбежалась.</p></div>
-      <div><dt>Агентство</dt><b>Пригонит заявки</b><p>В ту же воронку, которая не дожимает то, что в ней уже есть. Лидов больше, оплат столько же, цена лида растёт — деньги утекают в той же дыре, просто быстрее.</p></div>
-      <div><dt>CRM</dt><b>Наконец всё будет видно</b><p>Появятся поля, воронки и дашборды. Только отчёт — это зеркало процесса: если он дырявый, CRM красиво покажет, где именно утекают деньги. Закрывать течи по-прежнему некому.</p></div>
+      <div><dt>РОП</dt><b>Возьмёт отдел за горло</b><p>Скрипты, звонки до ночи, планёрки на повышенных. Если течь не в продажах — через квартал тот же провал, только команда уже выгорела.</p></div>
+      <div><dt>Агентство</dt><b>Пригонит заявки</b><p>В ту же воронку, которая не дожимает то, что в ней уже есть. Лидов больше, оплат столько же — деньги утекают в той же дыре, просто быстрее.</p></div>
+      <div><dt>CRM</dt><b>Наконец всё будет видно</b><p>Появятся поля, воронки и дашборды. Но отчёт — это зеркало процесса: если он дырявый, CRM лишь красиво покажет утечку. Закрывать её по-прежнему некому.</p></div>
     </div>
     <p class="alt-end rv">Каждый по-своему прав — и ни один не решает задачу целиком. А результат, ради которого всё затевалось, <u>не наступит ни у одного из них</u>: он не был их задачей.</p>
   </div>
@@ -799,7 +848,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label">Что меняется</span>
+      <span class="label"><b>06</b>Что меняется</span>
       <h2 class="rv">Деньги остаются в компании. Компания работает без вас</h2>
     </div>
     <ul class="out rv">
@@ -814,9 +863,9 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec" id="route">
   <div class="w">
     <div class="sec-head">
-      <span class="label">Как устроен проект</span>
+      <span class="label"><b>07</b>Как устроен проект</span>
       <h2 class="rv">Этапы — это ваши течи, закрытые по очереди</h2>
-      <p class="lede rv" style="margin-top:20px">Я захожу в компанию как коммерческий директор на срок проекта — и закрываю течи одну за другой, от самой дорогой к самой дешёвой. Без лишних процессов: только то, что возвращает деньги.</p>
+      <p class="lede rv" style="margin-top:20px">Closery заходит в компанию как коммерческий директор на срок проекта и закрывает течи одну за другой — от самой дорогой к самой дешёвой. Без лишних процессов: только то, что возвращает деньги.</p>
     </div>
     <span class="label" style="display:block;margin:clamp(30px,4vw,44px) 0 clamp(18px,2.4vw,22px)">Пример проблем и их решение:</span>
     <div class="route rv">
@@ -824,37 +873,37 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
         <div class="leak-w">Недели 01–02</div>
         <div class="leak-l"><b>Замер по данным</b><span>подтверждаем ведомость</span></div>
         <div class="leak-r"><b>Аудит вместо предположений</b>
-          <p>Выгрузка CRM и телефонии, прослушка звонков, реальные конверсии по этапам, юнит-экономика сделки. Ведомость превращается из оценки в факт, и видно, какая течь самая дорогая.</p></div>
+          <p>Выгрузка CRM и телефонии, прослушка звонков, реальные конверсии по этапам. Ведомость превращается из оценки в факт — видно, какая течь самая дорогая.</p></div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 02–05</div>
         <div class="leak-l"><b>Забытая база</b><span>−17 880 000 ₽</span></div>
         <div class="leak-r"><b>Система повторных продаж</b>
-          <p>Сегментация базы, экономика повторной сделки, поводы возврата, цикл касаний, ответственный и план. Клиент перестаёт быть разовым — у компании появляется выручка, за которую не надо платить рекламой. Поэтому этап идёт первым.</p></div>
+          <p>Сегментация базы, поводы возврата, цикл касаний, ответственный. Клиент перестаёт быть разовым — появляется выручка, за которую не надо платить рекламой. Поэтому этап идёт первым.</p></div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 03–06</div>
         <div class="leak-l"><b>Лишний ФОТ</b><span>−12 320 000 ₽</span></div>
         <div class="leak-r"><b>Экономика отдела</b>
-          <p>Сколько людей нужно системе, кто за что отвечает, за что им платят. Оплата привязывается к результату, а не к присутствию. Обычно выясняется, что нанимать никого не нужно — нужно перестать платить за то, что не приносит.</p></div>
+          <p>Сколько людей нужно системе и за что им платят. Оплата привязывается к результату, а не к присутствию. Чаще всего нанимать никого не нужно — нужно перестать платить за то, что не приносит.</p></div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 05–08</div>
         <div class="leak-l"><b>Сделки без дожима</b><span>−6 800 000 ₽</span></div>
         <div class="leak-r"><b>Технология сделки</b>
-          <p>Как компания ведёт клиента от интереса до денег: этапы, обязательное следующее действие, каскад касаний, работа с ценой и отказом. Результат перестаёт зависеть от того, какой продавец сегодня взял трубку.</p></div>
+          <p>Как компания ведёт клиента от интереса до денег: этапы, обязательный следующий шаг, работа с ценой и отказом. Результат перестаёт зависеть от того, кто сегодня взял трубку.</p></div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 07–09</div>
         <div class="leak-l"><b>Заявки без ответа</b><span>−4 100 000 ₽</span></div>
         <div class="leak-r"><b>Приём входящего потока</b>
-          <p>Куда приходят обращения, кто отвечает, за какое время, что происходит при просрочке. Норматив, распределение и контроль вместо надежды на внимательность менеджера. Ни одно обращение не теряется, и это видно в отчёте, а не со слов РОПа.</p></div>
+          <p>Куда приходят обращения, кто отвечает и за какое время. Норматив и контроль вместо надежды на внимательность менеджера. Ни одно обращение не теряется — это видно в отчёте.</p></div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 09–12</div>
         <div class="leak-l"><b>Решения через собственника</b><span>−1 700 000 ₽</span></div>
         <div class="leak-r"><b>Управление без вас</b>
-          <p>Правила принятия решений и лимиты полномочий, недельный план-факт, опережающие метрики, ритм планёрок. Управление передаётся вашему РОПу, вы получаете один отчёт вместо тридцати чатов.</p></div>
+          <p>Правила принятия решений, лимиты полномочий, недельный план-факт, ритм планёрок. Управление передаётся вашему РОПу — вы получаете один отчёт вместо тридцати чатов.</p></div>
       </div>
     </div>
   </div>
@@ -863,13 +912,13 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label">Сколько стоит</span>
+      <span class="label"><b>08</b>Сколько стоит</span>
       <h2 class="rv">Разбор идёт в зачёт, проект — по вилке</h2>
     </div>
     <div class="price-stagger rv">
       <div class="price-blk">
         <strong>Разбор</strong>
-        <p>120–150 минут. На выходе — ведомость потерь: где утекает, сколько это стоит в год, что закрывать первым.</p>
+        <p>120 минут. На выходе — ведомость потерь: где утекает, сколько это стоит в год, что закрывать первым.</p>
         <p>Документ ваш в любом случае. Работайте сами, отдайте РОПу или другому подрядчику.</p>
         <p>Пойдёте в проект — 50 000 ₽ идут в зачёт. Разбор становится бесплатным.</p>
       </div>
@@ -880,9 +929,8 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       </div>
       <div class="price-blk">
         <strong>Чем это отличается от найма</strong>
-        <p>Коммерческий директор — 1–1,5 млн ₽/мес, первый результат через полгода. Я — 90 дней, и выхожу.</p>
+        <p>Коммерческий директор — 1–1,5 млн ₽/мес, первый результат через полгода. Closery — 90 дней, и выходит.</p>
         <p>Разница не в деньгах. Директора можно потерять вместе со всем, что он знал. Систему — нет: она принадлежит компании.</p>
-        <p>Решения те же. Цифра та же. Разница одна: я обязан уйти.</p>
       </div>
       <div class="price-blk price-blk-roi">
         <strong>Окупаемость</strong>
@@ -898,13 +946,13 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label">Что зафиксировано в договоре</span>
+      <span class="label"><b>09</b>Что зафиксировано в договоре</span>
       <h2 class="rv">Вы платите за принятые этапы</h2>
     </div>
     <div class="gua rv">
       <div><b>0 ₽</b><strong>Этап не принят — не оплачен</strong><p>Критерии приёмки измеримые и зафиксированы до старта: цифры в отчёте, подписанные регламенты, ритм отдела. Не спор о впечатлениях, а сверка с документом.</p></div>
-      <div><b>Всё ваше</b><strong>Система остаётся компании</strong><p>Регламенты, скрипты, финмодель, метрики и доступы — ваши активы с первого дня. Вы не арендуете систему и не зависите от меня после выхода.</p></div>
-      <div><b>90 дней</b><strong>Управление принимает ваш РОП</strong><p>Последний этап принимается только тогда, когда отдел четыре недели держит план и цифры без меня. Выход из операционки — это критерий приёмки, а не обещание.</p></div>
+      <div><b>Всё ваше</b><strong>Система остаётся компании</strong><p>Регламенты, скрипты, финмодель, метрики и доступы — ваши активы с первого дня. Вы не арендуете систему и не зависите от подрядчика после выхода.</p></div>
+      <div><b>90 дней</b><strong>Управление принимает ваш РОП</strong><p>Последний этап принимается только тогда, когда отдел четыре недели держит план и цифры самостоятельно. Выход из операционки — это критерий приёмки, а не обещание.</p></div>
     </div>
   </div>
 </section>
@@ -914,12 +962,12 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     <div class="fo rv">
       <div>
         <div class="sec-head" style="margin-bottom:clamp(26px,3.4vw,38px)">
-          <span class="label">Кто это делает</span>
+          <span class="label"><b>10</b>Кто это делает</span>
           <h2>Николай Клименко</h2>
         </div>
-        <p class="fo-q">Консультант приносит рекомендации. Я приношу <u>цифру, за которую отвечаю</u>.</p>
-        <p class="lede" style="margin-top:28px">Восемь лет я строил коммерцию изнутри компаний, где спрос был с меня, а не с презентации: CDEK, UniBox, MarketGuru. Восемь РОПов и два коммерческих директора выведены на позиции и работают до сих пор.</p>
-        <p class="lede" style="margin-top:16px">Проект веду сам — от замера до передачи управления. Систему нельзя спроектировать по чужому пересказу: решение принимает тот, кто своими глазами видел цифры и слышал звонки. Поэтому в работе не больше трёх проектов одновременно.</p>
+        <p class="fo-q">Консультант отвечает за отчёт. Я отвечаю за <u>цифру в кассе</u>.</p>
+        <p class="lede" style="margin-top:28px">Восемь лет Николай строил коммерцию изнутри компаний — CDEK, UniBox, MarketGuru, — где спрос был с него, а не с презентации. Под его руководством выросли восемь РОПов и два коммерческих директора — и до сих пор держат позиции.</p>
+        <p class="lede" style="margin-top:16px">Каждый проект он ведёт лично — от замера до передачи управления. Систему нельзя выстроить по чужому пересказу: решение принимает тот, кто сам слышал звонки и видел цифры. Поэтому одновременно в работе не больше трёх компаний.</p>
       </div>
       <div class="fo-ph">
         <div class="fo-p">
@@ -936,7 +984,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     <h2 class="rv">Начнём с разбора</h2>
     <p class="lede rv" style="margin-top:28px">Разбор идёт по вашим цифрам: воронка, конверсии, экономика, люди, управление. На выходе вы получаете ведомость — где коммерция теряет деньги, сколько стоит каждая течь в год и что закрывать первым. Отчёт остаётся у вас.</p>
     <div class="hero-cta rv">
-      <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на разбор</a>
+      <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Получить разбор выручки</a>
       <span class="btn-note">50 000 ₽ · идёт в зачёт проекта</span>
     </div>
   </div>
@@ -999,21 +1047,24 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 
 <script>
 (function(){
-  var hero = document.querySelector('.hero');
   var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = window.matchMedia('(pointer: fine)').matches;
-  if(!hero || rm || !fine) return;
-  var raf = null, mx = 0, my = 0;
-  hero.addEventListener('mousemove', function(e){
-    var r = hero.getBoundingClientRect();
+  if(rm || !fine) return;
+  var root = document.documentElement;
+  var raf = null, mx = 50, my = 20;
+  window.addEventListener('mousemove', function(e){
     mx = (e.clientX / window.innerWidth) * 100;
-    my = ((e.clientY - r.top) / r.height) * 100;
+    my = (e.clientY / window.innerHeight) * 100;
     if (raf) return;
     raf = requestAnimationFrame(function(){
-      hero.style.setProperty('--mx', mx + '%');
-      hero.style.setProperty('--my', my + '%');
+      root.style.setProperty('--mx', mx + '%');
+      root.style.setProperty('--my', my + '%');
+      root.style.setProperty('--glow-on', '1');
       raf = null;
     });
+  }, {passive:true});
+  window.addEventListener('mouseleave', function(){
+    root.style.setProperty('--glow-on', '0');
   });
 })();
 </script>
@@ -1074,8 +1125,8 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   }, {passive:true});
   document.addEventListener('touchend', function(){ mouse.active = false; });
 
-  var INFLUENCE = 200; /* радиус локального влияния курсора */
-  var DAMPING = 0.945;
+  var INFLUENCE = 260; /* радиус локального влияния курсора */
+  var DAMPING = 0.94;
   var t = 0;
   var lastTs = 0;
 
@@ -1101,8 +1152,8 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
         var f = (1 - dist/INFLUENCE) * weight;
         var d = dist || 1;
         var tx = -dy/d, ty = dx/d; /* тангенциальная — лёгкое кружение вокруг курсора */
-        p.vx += (tx*0.42 + (mouse.x-p.x)/d*0.05) * f * dt;
-        p.vy += (ty*0.42 + (mouse.y-p.y)/d*0.05) * f * dt;
+        p.vx += (tx*0.85 + (mouse.x-p.x)/d*0.07) * f * dt;
+        p.vy += (ty*0.85 + (mouse.y-p.y)/d*0.07) * f * dt;
       }
 
       var damp = Math.pow(DAMPING, dt);
