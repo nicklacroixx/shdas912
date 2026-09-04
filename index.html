@@ -425,7 +425,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 
 /* ── маршрут: мозаика с раздельными карточками ── */
 .price-stagger{position:relative;display:grid;align-items:start;gap:clamp(14px,1.8vw,18px);
-  grid-template-columns:1.35fr 1fr 1fr;grid-template-rows:auto auto}
+  grid-template-columns:1fr 1fr 1fr}
 .price-blk{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);
   border:1px solid var(--rule-2);border-radius:var(--r);padding:clamp(26px,3.2vw,38px) clamp(24px,3vw,34px);box-shadow:var(--shadow)}
 .price-blk::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;
@@ -448,13 +448,11 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 @media(hover:none){.price-blk::after,.surface::after{display:none}}
 @media(prefers-reduced-motion:reduce){.price-blk:hover::after,.surface:hover::after{animation:none;opacity:.7}}
 .price-blk--wide{grid-column:1/3;grid-row:1}
-.price-blk-roi{grid-column:2/4;grid-row:2;background:linear-gradient(165deg,rgba(52,211,153,.15),var(--paper) 76%);
+.price-blk-roi{background:linear-gradient(165deg,rgba(52,211,153,.15),var(--paper) 76%);
   border-color:rgba(52,211,153,.35)}
 .price-blk-roi::before{background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(52,211,153,.14),transparent 62%)}
 .price-blk-roi::after{content:'';position:absolute;top:-70px;right:-70px;width:180px;height:180px;z-index:-1;
   border-radius:50%;background:radial-gradient(circle,rgba(52,211,153,.2) 0%,transparent 70%);pointer-events:none}
-.price-stagger .price-blk:nth-child(2){grid-column:3;grid-row:1}
-.price-stagger .price-blk:nth-child(3){grid-column:1;grid-row:2}
 .price-blk-head{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:16px}
 .price-blk strong{display:block;font-family:var(--disp);font-weight:800;font-size:clamp(16px,1.7vw,19px);
   letter-spacing:-.015em;text-transform:uppercase;color:var(--ink);line-height:1.22}
@@ -474,14 +472,8 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
   font-size:.92em;text-transform:uppercase;letter-spacing:.14em;color:#fff;white-space:nowrap;vertical-align:middle}
 .mini-logo i{width:6px;height:6px;border-radius:2px;flex:none;background:var(--ok);box-shadow:0 0 10px rgba(52,211,153,.6);position:relative;top:-1px}
 .price-roi-tag{margin-top:clamp(18px,2.6vw,24px)!important}
-@media(max-width:900px){.price-stagger{grid-template-columns:1fr 1fr}
-  .price-blk--wide{grid-column:1/3;grid-row:1}
-  .price-stagger .price-blk:nth-child(2){grid-column:1;grid-row:2}
-  .price-stagger .price-blk:nth-child(3){grid-column:2;grid-row:2}
-  .price-blk-roi{grid-column:1/3;grid-row:3}}
-@media(max-width:620px){.price-stagger{grid-template-columns:1fr}
-  .price-blk--wide,.price-blk-roi,.price-stagger .price-blk:nth-child(2),.price-stagger .price-blk:nth-child(3)
-    {grid-column:1;grid-row:auto}}
+@media(max-width:900px){.price-stagger{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.price-stagger{grid-template-columns:1fr}}
 .route{border-top:1px solid var(--rule)}
 .leak{display:grid;grid-template-columns:1fr;gap:16px;padding:clamp(26px,3.8vw,36px) 0;border-bottom:1px solid var(--rule)}
 @media(min-width:920px){.leak{grid-template-columns:100px 1fr 1.2fr;gap:36px;align-items:start}}
@@ -996,7 +988,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <a class="bar-lnk" href="#route">Проект</a>
       <a class="bar-lnk" href="#faq">Вопросы</a>
       <a class="bar-lnk" href="#founder">Основатель</a>
-      <span class="bar-badge"><i></i><b>2 места</b> на этой неделе</span>
       <a class="bar-cta js-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Найти течь</a>
     
       <button class="bar-burger" id="barBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -1013,7 +1004,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   <div class="hero-split">
     <div class="hero-left">
       <div class="lede hero-lede">
-        <p>Коммерческий МРТ найдёт потери внутри коммерческой системы, посчитает их в рублях и покажет, что выгоднее исправить первым.</p>
+        <p>Коммерческий МРТ переводит потери внутри коммерческой системы в рубли — за 120 минут.</p>
       </div>
 
       <div class="leak-stamps">
@@ -1023,13 +1014,13 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
         <span class="leak-stamp">Решения, зависшие на согласовании</span>
       </div>
 
-      <p class="hero-callout"><strong>Гарантия.</strong> Не найдём, где вы теряете деньги, — вернём деньги за МРТ.</p>
+      <p class="hero-callout"><strong>Риска нет.</strong> Не найдём, где вы теряете деньги, — вернём оплату за МРТ. Найдём — вы окупите нас одной закрытой течью.</p>
 
       <div class="hero-cta">
         <a class="btn js-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Найти мои потери</a>
-        <span class="btn-note">51 вопрос → анализ → ведомость потерь → приоритет действий</span>
+        <span class="btn-note">120 минут · 50 000 ₽ · идёт в зачёт проекта</span>
       </div>
-      <p class="hero-proof">Ведёт Николай Клименко — коммерческий директор CDEK, руководитель продаж MarketGuru.</p>
+      <p class="hero-proof">Ведёт Николай Клименко — экс-коммерческий директор CDEK, руководитель продаж MarketGuru.</p>
     </div>
 
     <div class="hero-right">
@@ -1067,12 +1058,15 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     <div class="sec-head">
       <span class="label"><b>00</b>Коротко, что это</span>
       <h2 class="rv">Не консультация и не аудит ради галочки — платная диагностика, которая находит деньги</h2>
+      <p class="lede rv" style="margin-top:20px">Подходит, если у вас есть отдел продаж, CRM и телефония — и ощущение, что часть денег теряется, но непонятно где именно.</p>
     </div>
     <dl class="frag rv">
-      <div><dt>Формат</dt><dd><b>Вопросы → цифры → приоритет</b>120 минут по вашей CRM и телефонии. На выходе — документ, а не мнение.</dd></div>
-      <div><dt>Кто ведёт</dt><dd><b>Лично, от начала до конца</b>Не команда методологов на удалёнке. Решения принимает тот, кто сам слышал звонки и видел цифры.</dd></div>
-      <div><dt>Что получаете</dt><dd><b>Ведомость потерь в рублях</b>Работайте сами, отдайте РОПу — или закажите устранение найденных течей у нас.</dd></div>
+      <div><dt>Формат</dt><dd><b>51 вопрос → цифры → приоритет</b>120 минут по вашей CRM и телефонии. На выходе — документ, а не мнение.</dd></div>
+      <div><dt>Кто ведёт</dt><dd><b>Ведёт основатель</b>Лично, от начала до конца — не команда методологов на удалёнке. Решения принимает тот, кто сам слышал звонки и видел цифры.</dd></div>
+      <div><dt>Что получаете</dt><dd><b>Карту потерь в рублях</b>Каждая находка отдельно, итог за год и что чинить первым — по деньгам, не по интуиции.</dd></div>
+      <div><dt>Цена</dt><dd><b>50 000 ₽</b>Пойдёте в проект — сумма идёт в зачёт, МРТ становится бесплатным.</dd></div>
     </dl>
+    <p class="gap-note rv">После МРТ вы понимаете не «что у нас плохо». Вы понимаете, <u>где лежат деньги</u>.</p>
   </div>
 </section>
 
@@ -1118,48 +1112,30 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <div class="row total"><div class="row-t">Не заработано за год</div><div class="row-v" id="tot">−42 600 000 ₽</div></div>
       <div class="ldg-foot">Цифры настоящие. По отдельности ни одна течь не выглядела проблемой — сумма появилась, когда их сложили.</div>
     </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="w">
-    <div class="sec-head">
-      <span class="label"><b>03</b>Коммерческий МРТ</span>
-      <h2 class="rv">51 вопрос, чтобы увидеть коммерческую систему целиком</h2>
-      <p class="lede rv" style="margin-top:20px">Данные → 51 диагностический вопрос → узкие места → эффект в ₽ → ведомость потерь → приоритет действий.</p>
+    <div class="price-cta rv">
+      <div><b>Это чужая цифра. Хотите свою?</b><span>Демо-МРТ · заявки, конверсия, чек, маржа, цикл сделки · 2 минуты, без CRM</span></div>
+      <a class="btn" href="/mrt-demo/" target="_blank" rel="noopener">Посчитать бесплатно</a>
     </div>
-    <ul class="out rv">
-      <li><span><b>Карта потерь.</b> Все узкие места на одном экране, а не в ощущениях.</span></li>
-      <li><span><b>Сумма в рублях.</b> Каждая находка отдельно и итог за год.</span></li>
-      <li><span><b>Причины.</b> Почему течёт именно здесь, а не диагноз «менеджеры плохо работают».</span></li>
-      <li><span><b>Приоритет.</b> Что выгоднее чинить первым — по деньгам, не по интуиции.</span></li>
-    </ul>
-    <p class="gap-note rv">После МРТ вы понимаете не «что у нас плохо». Вы понимаете, <u>где лежат деньги</u>.</p>
   </div>
 </section>
 
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>04</b>Сколько стоит</span>
+      <span class="label"><b>03</b>Сколько стоит</span>
       <h2 class="rv">МРТ идёт в зачёт, проект — по вилке</h2>
     </div>
     <div class="price-stagger rv">
-      <div class="price-blk price-blk--wide">
-        <div class="price-blk-head"><strong>МРТ</strong><span class="price-blk-num">01</span></div>
-        <p>120 минут. На выходе — ведомость потерь: где утекает, сколько это стоит в год, что закрывать первым. Документ ваш при любом раскладе.</p>
-        <p>Пойдёте в проект — 50 000 ₽ идут в зачёт. МРТ становится бесплатным.</p>
-      </div>
       <div class="price-blk">
-        <div class="price-blk-head"><strong>Проект</strong><span class="price-blk-num">02</span></div>
+        <div class="price-blk-head"><strong>Проект</strong><span class="price-blk-num">01</span></div>
         <p>Вилка зависит от числа течей и отдела, сумма называется после МРТ. Оплата по этапам — выйти можно на любом.</p>
       </div>
       <div class="price-blk">
-        <div class="price-blk-head"><strong>Чем это отличается от найма</strong><span class="price-blk-num">03</span></div>
+        <div class="price-blk-head"><strong>Чем это отличается от найма</strong><span class="price-blk-num">02</span></div>
         <p>Директора можно потерять вместе со всем, что он знал. Систему — нет: она принадлежит компании.</p>
       </div>
       <div class="price-blk price-blk-roi">
-        <div class="price-blk-head"><strong>Окупаемость</strong><span class="price-blk-num">04</span></div>
+        <div class="price-blk-head"><strong>Окупаемость</strong><span class="price-blk-num">03</span></div>
         <span class="price-roi-stat">Одна закрытая течь — и вы уже прошли <em>точку окупаемости</em></span>
         <p>Первой закрывается самая дорогая течь — обычно этого хватает, чтобы отбить весь проект. Остальное — чистая прибыль на годы вперёд.</p>
       </div>
@@ -1174,7 +1150,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>05</b>Что обычно делают с такими цифрами</span>
+      <span class="label"><b>04</b>Что обычно делают с такими цифрами</span>
       <h2 class="rv">Нанимают сильного человека и полгода надеются</h2>
     </div>
     <div class="bet-claim rv">
@@ -1190,19 +1166,13 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <div class="ldg-dbl"></div>
       <div class="row total"><div class="row-t">Цена года, в котором ничего не изменилось</div><div class="row-v">−33 250 000 ₽</div></div>
     </div>
-    <div class="alt rv">
-      <div><dt>РОП</dt><b>Возьмёт отдел за горло</b><p>Если течь не в продажах — через квартал тот же провал, только команда уже выгорела.</p></div>
-      <div><dt>Агентство</dt><b>Пригонит заявки</b><p>В ту же дырявую воронку: лидов больше, оплат столько же.</p></div>
-      <div><dt>CRM</dt><b>Наконец всё будет видно</b><p>Отчёт — зеркало процесса: дырявый останется дырявым, просто красивее.</p></div>
-    </div>
-    <p class="alt-end rv">Каждый по-своему прав — и ни один не решает задачу целиком: результат <u>не был их задачей</u>.</p>
   </div>
 </section>
 
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>06</b>Что дальше</span>
+      <span class="label"><b>05</b>Что дальше</span>
       <h2 class="rv">МРТ не заканчивается отчётом</h2>
     </div>
     <dl class="frag rv">
@@ -1217,7 +1187,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec" id="route">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>07</b>Как устроен проект</span>
+      <span class="label"><b>06</b>Как устроен проект</span>
       <h2 class="rv">Этапы — это ваши течи, закрытые по очереди</h2>
       <p class="lede rv" style="margin-top:20px">Если течи оказались системными, Closery заходит как коммерческий директор на срок проекта и закрывает их одну за другой — от самой дорогой к самой дешёвой.</p>
     </div>
@@ -1226,38 +1196,32 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <div class="leak">
         <div class="leak-w">Недели 01–02</div>
         <div class="leak-l"><b>Замер по данным</b><span>подтверждаем ведомость</span></div>
-        <div class="leak-r"><b>Аудит вместо предположений</b>
-          <p>Выгрузка CRM и телефонии, прослушка звонков, реальные конверсии по этапам — ведомость становится фактом, а не оценкой.</p></div>
+        <div class="leak-r"><b>Аудит вместо предположений</b></div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 02–05</div>
         <div class="leak-l"><b>Забытая база</b><span>−17 880 000 ₽</span></div>
-        <div class="leak-r"><b>Система повторных продаж</b>
-          <p>Сегментация базы, поводы возврата, цикл касаний — клиент перестаёт быть разовым, появляется выручка без рекламного бюджета.</p></div>
+        <div class="leak-r"><b>Система повторных продаж</b></div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 03–06</div>
         <div class="leak-l"><b>Лишний ФОТ</b><span>−12 320 000 ₽</span></div>
-        <div class="leak-r"><b>Экономика отдела</b>
-          <p>Оплата привязывается к результату, а не к присутствию — чаще всего нанимать никого не нужно.</p></div>
+        <div class="leak-r"><b>Экономика отдела</b></div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 05–08</div>
         <div class="leak-l"><b>Сделки без дожима</b><span>−6 800 000 ₽</span></div>
-        <div class="leak-r"><b>Технология сделки</b>
-          <p>Этапы, обязательный следующий шаг, работа с ценой и отказом — результат больше не зависит от того, кто взял трубку.</p></div>
+        <div class="leak-r"><b>Технология сделки</b></div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 07–09</div>
         <div class="leak-l"><b>Заявки без ответа</b><span>−4 100 000 ₽</span></div>
-        <div class="leak-r"><b>Приём входящего потока</b>
-          <p>Норматив по времени ответа и контроль — вместо надежды на внимательность менеджера.</p></div>
+        <div class="leak-r"><b>Приём входящего потока</b></div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 09–12</div>
         <div class="leak-l"><b>Решения через собственника</b><span>−1 700 000 ₽</span></div>
-        <div class="leak-r"><b>Управление без вас</b>
-          <p>Лимиты полномочий и ритм планёрок — управление уходит РОПу, вам остаётся один отчёт вместо тридцати чатов.</p></div>
+        <div class="leak-r"><b>Управление без вас</b></div>
       </div>
     </div>
 
@@ -1273,7 +1237,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>08</b>Что зафиксировано в договоре</span>
+      <span class="label"><b>07</b>Что зафиксировано в договоре</span>
       <h2 class="rv">Вы платите за принятые этапы</h2>
     </div>
     <div class="gua rv">
@@ -1287,7 +1251,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec" id="faq">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>09</b>Вопросы и ответы</span>
+      <span class="label"><b>08</b>Вопросы и ответы</span>
       <h2 class="rv">Честно о том, что обычно спрашивают</h2>
     </div>
     <div class="faq rv">
@@ -1324,7 +1288,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     <div class="fo rv">
       <div>
         <div class="sec-head" style="margin-bottom:clamp(26px,3.4vw,38px)">
-          <span class="label"><b>10</b>Кто это делает</span>
+          <span class="label"><b>09</b>Кто это делает</span>
           <h2>Николай Клименко</h2>
         </div>
         <p class="fo-q">Я не консультирую со стороны. Я отвечаю за <u>цифру в кассе</u>.</p>
@@ -1395,7 +1359,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="end" id="end">
   <div class="w">
     <h2 class="rv">Вы знаете, сколько денег теряете прямо сейчас?</h2>
-    <p class="lede rv" style="margin-top:28px">Если нет — это можно посчитать. МРТ идёт по вашим цифрам: воронка, конверсии, экономика, люди, управление. На выходе — ведомость, где коммерция теряет деньги, сколько стоит каждая течь в год и что закрывать первым. Документ остаётся у вас.</p>
+    <p class="lede rv" style="margin-top:28px">Если нет — за 120 минут можно узнать точно. Не найдём, где теряете, — вернём оплату за МРТ. Найдём — вы окупите нас одной закрытой течью.</p>
     <div class="hero-cta rv">
       <a class="btn js-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Показать мои потери</a>
       <span class="btn-note">50 000 ₽ · идёт в зачёт проекта</span>
@@ -2170,26 +2134,8 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     openFunnel();
   });
 
-  /* exit-intent: десктоп — уход курсора, мобайл — глубина скролла. Раз за сессию и только без заявки. */
-  var exitBlocked = false;
-  try{ exitBlocked = sessionStorage.getItem('closery_exit')==='1' || !!localStorage.getItem('closery_lead'); }catch(e){}
-  if(exitBlocked){
-    exitModal.style.display = 'none';
-  } else {
-    var hoverNone = window.matchMedia && matchMedia('(hover:none)').matches;
-    if(hoverNone){
-      var scDone = false;
-      window.addEventListener('scroll', function(){
-        if(scDone) return;
-        var h = document.documentElement.scrollHeight - window.innerHeight;
-        if(h > 0 && window.scrollY / h > 0.45 && modal.hidden){ scDone = true; exitModal.hidden = false; }
-      }, {passive:true});
-    } else {
-      document.addEventListener('mouseout', function(e){
-        if(e.clientY <= 0 && !e.relatedTarget && modal.hidden) exitModal.hidden = false;
-      });
-    }
-  }
+  /* exit-intent отключён по просьбе — попап с "осталось 2 места" больше не всплывает */
+  exitModal.style.display = 'none';
 
   /* FAQ-аккордеон */
   $$('.faq-q').forEach(function(q){
