@@ -180,6 +180,7 @@
   --brand:'Plus Jakarta Sans',var(--ui);
   --gut:clamp(20px,5vw,48px);
   --r:14px;
+  --ease:cubic-bezier(.16,1,.3,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -192,17 +193,6 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     radial-gradient(1100px 620px at 98% 0%, rgba(240,85,90,.055), transparent 56%),
     radial-gradient(900px 900px at 50% 118%, rgba(52,211,153,.045), transparent 60%);}
 main,header.bar,footer{position:relative;z-index:1}
-#siteField{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;display:block}
-@media(prefers-reduced-motion:reduce){#siteField{display:none}}
-
-/* ── ambient mesh: медленно дрейфующие размытые сферы света, глубина за контентом ── */
-#ambientMesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.mesh-blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:.4;will-change:transform}
-.mesh-blob--a{width:560px;height:560px;left:-12%;top:-14%;background:radial-gradient(circle,rgba(52,211,153,.22),transparent 70%)}
-.mesh-blob--b{width:640px;height:640px;right:-16%;top:20%;background:radial-gradient(circle,rgba(240,85,90,.14),transparent 70%)}
-.mesh-blob--c{width:520px;height:520px;left:24%;bottom:-18%;background:radial-gradient(circle,rgba(52,211,153,.12),transparent 70%)}
-@media(max-width:700px){.mesh-blob{filter:blur(70px)}}
-@media(prefers-reduced-motion:reduce){#ambientMesh{display:none}}
 .w{max-width:1120px;margin:0 auto;padding:0 var(--gut)}
 .w-wide{max-width:1440px;margin:0 auto;padding:0 var(--gut)}
 a{color:inherit}
@@ -223,7 +213,7 @@ h2{font-family:var(--disp);font-size:clamp(21px,3.1vw,36px);line-height:1.2;font
 .sec-head{margin-bottom:clamp(34px,5vw,58px)}
 
 /* поверхность-«материал» */
-.surface{background:linear-gradient(168deg,var(--paper-2),var(--paper) 62%);
+.surface{position:relative;background:linear-gradient(168deg,var(--paper-2),var(--paper) 62%);
   border:1px solid var(--rule-2);border-radius:var(--r);
   box-shadow:0 40px 90px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.055)}
 
@@ -337,8 +327,12 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .row.total{border-bottom:none;padding-top:24px;padding-bottom:26px;
   background:linear-gradient(180deg,transparent,rgba(240,85,90,.06))}
 .row.total .row-t{font-family:var(--doc);font-size:clamp(17px,2.2vw,21px);font-weight:600}
-.row.total .row-v{font-size:clamp(22px,3.6vw,34px);font-weight:500;letter-spacing:-.02em;
+.row.total .row-v{font-size:clamp(34px,6vw,58px);font-weight:600;letter-spacing:-.03em;
   text-shadow:0 0 30px rgba(240,85,90,.35)}
+@media(max-width:560px){
+  .row.total{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+  .row.total .row-v{font-size:clamp(26px,9.5vw,40px)}
+}
 .ldg-foot{padding:16px clamp(18px,3vw,30px);border-top:1px solid var(--rule-2);background:rgba(255,255,255,.016);
   font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);line-height:1.8}
 
@@ -433,20 +427,8 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
   background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.05),transparent 62%)}
 .price-blk:hover::before{opacity:1}
 
-/* ── бегущая grani-подсветка: световой блик обходит контур карточки по кругу ── */
-@property --edge-a{syntax:'<angle>';inherits:false;initial-value:0deg}
-.price-blk,.surface{position:relative}
-.price-blk::after,.surface::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
-  border-radius:inherit;padding:1px;opacity:0;transition:opacity .55s ease;--edge-a:0deg;
-  background:conic-gradient(from var(--edge-a),
-    transparent 0%,rgba(52,211,153,.95) 5%,rgba(52,211,153,.25) 12%,transparent 22%,
-    transparent 78%,rgba(240,85,90,.35) 88%,transparent 96%);
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude}
-.price-blk:hover::after,.surface:hover::after{opacity:1;animation:edgeChase 3.4s linear infinite}
-@keyframes edgeChase{to{--edge-a:360deg}}
-@media(hover:none){.price-blk::after,.surface::after{display:none}}
-@media(prefers-reduced-motion:reduce){.price-blk:hover::after,.surface:hover::after{animation:none;opacity:.7}}
+.price-blk,.surface{transition:border-color .3s ease}
+.price-blk:hover,.surface:hover{border-color:rgba(52,211,153,.38)}
 .price-blk--wide{grid-column:1/3;grid-row:1}
 .price-blk-roi{background:linear-gradient(165deg,rgba(52,211,153,.15),var(--paper) 76%);
   border-color:rgba(52,211,153,.35)}
@@ -485,6 +467,19 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .leak-r p{font-size:15.5px;color:var(--ink-2);line-height:1.62;max-width:52ch}
 .leak-r em{display:block;font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
   margin-top:13px;letter-spacing:.05em;line-height:1.7}
+
+.leak-ex-btn{display:flex;align-items:baseline;gap:12px;background:none;border:none;padding:0;margin:0;
+  cursor:pointer;text-align:left;font:inherit;width:100%}
+.leak-ex-btn b{margin-bottom:0}
+.leak-ex-btn i{flex:none;font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);border:1px solid var(--rule-2);border-radius:20px;
+  padding:3px 10px;transition:color .2s ease,border-color .2s ease}
+.leak-ex-btn:hover i{color:var(--ok-soft);border-color:rgba(52,211,153,.4)}
+.leak.open .leak-ex-btn i{color:var(--ok-soft);border-color:rgba(52,211,153,.4)}
+.leak-ex{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
+.leak-ex p{font-size:14.5px;color:var(--ink-2);line-height:1.62;max-width:50ch;padding-top:12px}
+.leak-ex-hint{margin-top:20px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-3)}
 
 /* ── договор ── */
 .gua{display:grid;grid-template-columns:1fr;gap:14px}
@@ -567,26 +562,6 @@ body{opacity:1;transition:opacity .18s ease}
 .bar-mobile a:last-child{border-bottom:none}
 .bar-mobile a:hover,.bar-mobile a.on{color:var(--ok)}
 @media(max-width:700px){.bar-burger{display:flex}.bar-cta{display:none}}
-
-/* ── интро с частицами ── */
-:root{--ease:cubic-bezier(.16,1,.3,1)}
-#intro{position:fixed;inset:0;z-index:9999;background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  transition:opacity 1.2s var(--ease);}
-#intro.hide{opacity:0;pointer-events:none}
-#intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.intro-lockup{position:relative;z-index:2;display:flex;align-items:center;
-  gap:clamp(26px,4.2vw,46px);transition:opacity .8s var(--ease),filter .8s var(--ease),transform .8s var(--ease)}
-.intro-lockup.dissolve{opacity:0;filter:blur(14px);transform:scale(1.06)}
-.intro-icon-slot{width:clamp(56px,8vw,96px);height:clamp(56px,8vw,96px);flex:none}
-.intro-word{font-family:var(--brand);font-weight:800;font-size:clamp(26px,7vw,72px);
-  color:#fff;text-transform:uppercase;letter-spacing:0;opacity:0;line-height:1;
-  transform:translateY(6px);white-space:nowrap;
-  transition:opacity 1.3s var(--ease),letter-spacing 1.3s var(--ease),transform 1.3s var(--ease)}
-.intro-word.show{opacity:1;letter-spacing:.2em;transform:none}
-@media(max-width:640px){.intro-lockup{gap:14px}.intro-word{letter-spacing:0}
-  .intro-word.show{letter-spacing:.1em}}
-@media(prefers-reduced-motion:reduce){#intro{display:none!important}}
 
 /* ══ премиальная полировка ══ */
 
@@ -812,7 +787,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 </head>
 <body>
 
-<canvas id="siteField" aria-hidden="true"></canvas>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="sparkFillGrad" x1="0" y1="0" x2="0" y2="1">
@@ -821,163 +795,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     </linearGradient>
   </defs>
 </svg>
-<div id="ambientMesh" aria-hidden="true">
-  <span class="mesh-blob mesh-blob--a"></span>
-  <span class="mesh-blob mesh-blob--b"></span>
-  <span class="mesh-blob mesh-blob--c"></span>
-</div>
-
-<div id="intro" aria-hidden="true">
-  <canvas id="introCanvas"></canvas>
-  <div class="intro-lockup" id="introLockup">
-    <span class="intro-icon-slot" id="introIconSlot"></span>
-    <span class="intro-word" id="introWord">Closery</span>
-  </div>
-</div>
-<script>
-(function(){
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var intro = document.getElementById('intro');
-  if (!intro) return;
-
-  if (reduceMotion) { intro.style.display = 'none'; return; }
-
-  var html = document.documentElement;
-  var prevOverflow = html.style.overflow;
-  html.style.overflow = 'hidden';
-
-  var canvas = document.getElementById('introCanvas');
-  var ctx = canvas.getContext('2d');
-  var lockup = document.getElementById('introLockup');
-  var iconSlot = document.getElementById('introIconSlot');
-  var word = document.getElementById('introWord');
-  var W, H, DPR;
-  var target = { cx: 0, cy: 0, half: 40 };
-
-  var COLOR = { r: 52, g: 211, b: 153 }; // var(--ok) — фирменный акцент сайта
-
-  function measureTarget(){
-    var r = iconSlot.getBoundingClientRect();
-    target.cx = r.left + r.width / 2;
-    target.cy = r.top + r.height / 2;
-    target.half = r.width / 2;
-  }
-
-  function resize(){
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
-    W = window.innerWidth; H = window.innerHeight;
-    canvas.width = W * DPR; canvas.height = H * DPR;
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    measureTarget();
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  var COUNT = Math.min(2200, Math.round((W * H) / 780));
-  var radiusFactor = 0.26;
-
-  function inShape(x, y, half){
-    var radius = half * radiusFactor;
-    var ax = Math.abs(x), ay = Math.abs(y);
-    var inner = half - radius;
-    if (ax <= inner && ay <= half) return true;
-    if (ay <= inner && ax <= half) return true;
-    var dx = ax - inner, dy = ay - inner;
-    return (dx*dx + dy*dy) <= radius*radius;
-  }
-  function samplePoint(half){
-    var x, y, tries = 0;
-    do { x = (Math.random()*2-1)*half; y = (Math.random()*2-1)*half; tries++; }
-    while (!inShape(x, y, half) && tries < 40);
-    return { x: x, y: y };
-  }
-
-  var particles = [];
-  for (var i = 0; i < COUNT; i++){
-    var s = samplePoint(target.half || 44);
-    particles.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      ox: s.x, oy: s.y, // офсет внутри фигуры относительно центра
-      size: .7 + Math.random()*1.3,
-      phase: Math.random()*Math.PI*2
-    });
-  }
-
-  var t0 = performance.now();
-  var MORPH_MS = 1300;
-  var raf;
-
-  function ease(p){ return 1 - Math.pow(1-p, 3); }
-
-  function frame(now){
-    measureTarget();
-
-    var elapsed = now - t0;
-    var progress = Math.min(1, elapsed / MORPH_MS);
-    var eased = ease(progress);
-
-    ctx.clearRect(0,0,W,H);
-
-    var clipping = progress > 0.7;
-    if (clipping) {
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(target.cx - target.half - 10, target.cy - target.half - 10,
-                (target.half + 10) * 2, (target.half + 10) * 2);
-      ctx.clip();
-    }
-
-    ctx.globalCompositeOperation = 'lighter';
-
-    for (var i = 0; i < particles.length; i++){
-      var p = particles[i];
-      var jitter = 0.5;
-      var jx = Math.sin(now*0.0015 + p.phase) * jitter;
-      var jy = Math.cos(now*0.0013 + p.phase) * jitter;
-
-      var tx = target.cx + p.ox;
-      var ty = target.cy + p.oy;
-
-      var px = p.x + (tx - p.x) * eased + jx;
-      var py = p.y + (ty - p.y) * eased + jy;
-
-      ctx.beginPath();
-      ctx.arc(px, py, p.size*1.15, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba('+COLOR.r+','+COLOR.g+','+COLOR.b+',0.09)';
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.arc(px, py, p.size, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba('+COLOR.r+','+COLOR.g+','+COLOR.b+',0.95)';
-      ctx.fill();
-    }
-    ctx.globalCompositeOperation = 'source-over';
-    if (clipping) ctx.restore();
-
-    if (progress < 1 || elapsed < MORPH_MS + 750) {
-      raf = requestAnimationFrame(frame);
-    }
-  }
-  raf = requestAnimationFrame(frame);
-
-  setTimeout(function(){ word.classList.add('show'); }, MORPH_MS - 200);
-
-  var EXIT_DELAY = MORPH_MS + 900;
-  var EXIT_MS = 1200;
-
-  setTimeout(function(){
-    lockup.classList.add('dissolve');
-    intro.classList.add('hide');
-    html.style.overflow = prevOverflow;
-    setTimeout(function(){
-      cancelAnimationFrame(raf);
-      intro.remove();
-      window.removeEventListener('resize', resize);
-    }, EXIT_MS);
-  }, EXIT_DELAY);
-})();
-</script>
 
 <header class="bar">
   <div class="w-wide bar-in">
@@ -1008,10 +825,10 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       </div>
 
       <div class="leak-stamps">
-        <span class="leak-stamp">Заявки без ответа в первый час</span>
-        <span class="leak-stamp">Разговоры без второго касания</span>
-        <span class="leak-stamp">Клиенты без повторных продаж</span>
-        <span class="leak-stamp">Решения, зависшие на согласовании</span>
+        <span class="leak-stamp">Средний продавец вместо лучшего</span>
+        <span class="leak-stamp">Скидки, которые никто не складывает</span>
+        <span class="leak-stamp">Отток, который считают нормальным</span>
+        <span class="leak-stamp">Лиды, которые купили бы и так</span>
       </div>
 
       <p class="hero-callout"><strong>Риска нет.</strong> Не найдём, где вы теряете деньги, — вернём оплату за МРТ. Найдём — вы окупите нас одной закрытой течью.</p>
@@ -1057,8 +874,8 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   <div class="w">
     <div class="sec-head">
       <span class="label"><b>00</b>Коротко, что это</span>
-      <h2 class="rv">Не консультация и не аудит ради галочки — платная диагностика, которая находит деньги</h2>
-      <p class="lede rv" style="margin-top:20px">Подходит, если у вас есть отдел продаж, CRM и телефония — и ощущение, что часть денег теряется, но непонятно где именно.</p>
+      <h2 class="rv">Платная диагностика, которая находит деньги</h2>
+      <p class="lede rv" style="margin-top:20px">Подходит любому бизнесу с продажами — если есть ощущение, что часть денег теряется, но непонятно где именно.</p>
     </div>
     <dl class="frag rv">
       <div><dt>Формат</dt><dd><b>51 вопрос → цифры → приоритет</b>120 минут по вашей CRM и телефонии. На выходе — документ, а не мнение.</dd></div>
@@ -1109,7 +926,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <div class="row"><div class="row-t">Заявки без ответа в первый час<i>обращение уходит к тому, кто ответил раньше</i></div><div class="row-v">−4 100 000 ₽</div></div>
       <div class="row"><div class="row-t">Решения, которые ждали собственника<i>согласование как узкое место всей коммерции</i></div><div class="row-v">−1 500 000 ₽</div></div>
       <div class="ldg-dbl"></div>
-      <div class="row total"><div class="row-t">Не заработано за год</div><div class="row-v" id="tot">−42 600 000 ₽</div></div>
+      <div class="row total"><div class="row-t">Не заработано за год</div><div class="row-v" id="tot" data-count="42600000" data-suffix=" ₽">−42 600 000 ₽</div></div>
       <div class="ldg-foot">Цифры настоящие. По отдельности ни одна течь не выглядела проблемой — сумма появилась, когда их сложили.</div>
     </div>
     <div class="price-cta rv">
@@ -1164,7 +981,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <div class="row"><div class="row-t">Течи, которые всё это время не закрыты<i>те же 42,6 млн ₽/год из ведомости выше — семь месяцев подряд</i></div><div class="row-v">−24 850 000 ₽</div></div>
       <div class="row"><div class="row-t">Что остаётся компании, если он ушёл<i>метод, база и договорённости уходят вместе с ним</i></div><div class="row-v">ничего</div></div>
       <div class="ldg-dbl"></div>
-      <div class="row total"><div class="row-t">Цена года, в котором ничего не изменилось</div><div class="row-v">−33 250 000 ₽</div></div>
+      <div class="row total"><div class="row-t">Цена года, в котором ничего не изменилось</div><div class="row-v" data-count="33250000" data-suffix=" ₽">−33 250 000 ₽</div></div>
     </div>
   </div>
 </section>
@@ -1178,7 +995,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     <dl class="frag rv">
       <div><dt>Шаг 1 · МРТ</dt><dd><b>Найти потери</b>Ведомость в рублях и приоритет.</dd></div>
       <div><dt>Шаг 2 · Точечное исправление</dt><dd><b>Забрать самую дорогую течь</b>Без пересборки всего отдела.</dd></div>
-      <div><dt>Шаг 3 · Closery 90</dt><dd><b>Перестроить систему целиком</b>Чтобы течи не открылись снова.</dd></div>
+      <div><dt>Шаг 3 · Методология CLOSERY</dt><dd><b>Перестроить систему целиком</b>Чтобы течи не открылись снова.</dd></div>
     </dl>
     <p class="gap-note rv">Не каждому нужен третий шаг. Но каждый начинается с первого.</p>
   </div>
@@ -1196,40 +1013,60 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <div class="leak">
         <div class="leak-w">Недели 01–02</div>
         <div class="leak-l"><b>Замер по данным</b><span>подтверждаем ведомость</span></div>
-        <div class="leak-r"><b>Аудит вместо предположений</b></div>
+        <div class="leak-r">
+          <button class="leak-ex-btn" type="button"><b>Аудит вместо предположений</b><i>Пример</i></button>
+          <div class="leak-ex"><p>У отдела 40% звонков есть в записи, 60% — нет. Ведомость строится только на тех, что можно перепроверить, — не на словах менеджеров.</p></div>
+        </div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 02–05</div>
         <div class="leak-l"><b>Забытая база</b><span>−17 880 000 ₽</span></div>
-        <div class="leak-r"><b>Система повторных продаж</b></div>
+        <div class="leak-r">
+          <button class="leak-ex-btn" type="button"><b>Система повторных продаж</b><i>Пример</i></button>
+          <div class="leak-ex"><p>Клиент купил в марте, тишина до сентября. Правило: на 45-й день без покупки уходит персональный повод вернуться — не рассылка всем подряд.</p></div>
+        </div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 03–06</div>
         <div class="leak-l"><b>Лишний ФОТ</b><span>−12 320 000 ₽</span></div>
-        <div class="leak-r"><b>Экономика отдела</b></div>
+        <div class="leak-r">
+          <button class="leak-ex-btn" type="button"><b>Экономика отдела</b><i>Пример</i></button>
+          <div class="leak-ex"><p>Шесть менеджеров закрывают объём, который физически делают трое. Остальные три — не бездельники, это стоимость структуры, которую никто не считал в деньгах.</p></div>
+        </div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 05–08</div>
         <div class="leak-l"><b>Сделки без дожима</b><span>−6 800 000 ₽</span></div>
-        <div class="leak-r"><b>Технология сделки</b></div>
+        <div class="leak-r">
+          <button class="leak-ex-btn" type="button"><b>Технология сделки</b><i>Пример</i></button>
+          <div class="leak-ex"><p>Сделка «зависла» — менеджер просто не написал следующим шагом. Правило: у каждой стадии обязательный дедлайн действия, а не «подумаю ещё».</p></div>
+        </div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 07–09</div>
         <div class="leak-l"><b>Заявки без ответа</b><span>−4 100 000 ₽</span></div>
-        <div class="leak-r"><b>Приём входящего потока</b></div>
+        <div class="leak-r">
+          <button class="leak-ex-btn" type="button"><b>Приём входящего потока</b><i>Пример</i></button>
+          <div class="leak-ex"><p>Заявка в 22:00 получает ответ в 11 утра — клиент уже написал троим конкурентам. Норматив ответа считается в минутах, а не «как получится».</p></div>
+        </div>
       </div>
       <div class="leak">
         <div class="leak-w">Недели 09–12</div>
         <div class="leak-l"><b>Решения через собственника</b><span>−1 700 000 ₽</span></div>
-        <div class="leak-r"><b>Управление без вас</b></div>
+        <div class="leak-r">
+          <button class="leak-ex-btn" type="button"><b>Управление без вас</b><i>Пример</i></button>
+          <div class="leak-ex"><p>Скидку 8% вместо 5% менеджер не может дать сам — ждёт вас из отпуска. Лимиты полномочий снимают эту паузу навсегда.</p></div>
+        </div>
       </div>
     </div>
 
+    <p class="leak-ex-hint rv">Нажмите на решение, чтобы увидеть пример.</p>
+
     <span class="label" style="display:block;margin:clamp(30px,4vw,44px) 0 clamp(18px,2.4vw,22px)">Что меняется:</span>
     <ul class="out rv">
-      <li><span><b>Выручка не зависит от вашего присутствия.</b> Можно уехать на месяц и не проверять чаты.</span></li>
-      <li><span><b>Решения принимаются без вас.</b> По правилам, которые вы утвердили один раз.</span></li>
-      <li><span><b>Уход продавца перестаёт быть событием.</b> База, история и метод остаются в компании.</span></li>
+      <li><span><b>Выжить не за счёт кредита.</b> Деньги, которые раньше утекали, остаются в компании — это и есть запас прочности.</span></li>
+      <li><span><b>Оптимизировать не значит сократить людей.</b> Та же команда и те же издержки приносят больше — потому что перестали течь.</span></li>
+      <li><span><b>Расти без нового бюджета.</b> Рост из денег, которые уже внутри системы, а не из новых расходов на рекламу и найм.</span></li>
     </ul>
   </div>
 </section>
@@ -1243,7 +1080,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     <div class="gua rv">
       <div><b>0 ₽</b><strong>Этап не принят — не оплачен</strong><p>Критерии приёмки измеримые и зафиксированы до старта: цифры в отчёте, подписанные регламенты, ритм отдела. Не спор о впечатлениях, а сверка с документом.</p></div>
       <div><b>Всё ваше</b><strong>Система остаётся компании</strong><p>Регламенты, скрипты, финмодель, метрики и доступы — ваши активы с первого дня. Вы не арендуете систему и не зависите от подрядчика после выхода.</p></div>
-      <div><b>90 дней</b><strong>Управление принимает ваш РОП</strong><p>Последний этап принимается только тогда, когда отдел четыре недели держит план и цифры самостоятельно. Выход из операционки — это критерий приёмки, а не обещание.</p></div>
+      <div><b>90 дней</b><strong>Финал — когда я больше не нужен</strong><p>Последний этап принимаете вы — только когда отдел месяц держит план и цифры без меня. Дальше управление на вашей стороне: сами решаете, оставлять его на РОПе или на себе.</p></div>
     </div>
   </div>
 </section>
@@ -1252,7 +1089,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   <div class="w">
     <div class="sec-head">
       <span class="label"><b>08</b>Вопросы и ответы</span>
-      <h2 class="rv">Честно о том, что обычно спрашивают</h2>
+      <h2 class="rv">Что обычно спрашивают</h2>
     </div>
     <div class="faq rv">
       <div class="faq-item">
@@ -1517,167 +1354,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false');
     });
   });
-})();
-</script>
-<script>
-/* Фоновое поле частиц: на весь сайт. Инерционная физика (импульс+демпфирование),
-   не мгновенная телепортация к курсору — так движение читается как течение, а не дёрганье. */
-(function(){
-  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(rm || !window.requestAnimationFrame) return;
-
-  var canvas = document.getElementById('siteField');
-  if(!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var dpr = Math.min(window.devicePixelRatio || 1, 1.75);
-  var W = 0, H = 0;
-  var particles = [];
-  var mouse = {x:-9999, y:-9999, active:false};
-  var raf = null;
-
-  function resize(){
-    W = window.innerWidth; H = window.innerHeight;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    canvas.style.width = W+'px'; canvas.style.height = H+'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    build();
-  }
-
-  function build(){
-    var area = W*H;
-    var count = Math.max(32, Math.min(64, Math.round(area/29000)));
-    particles = [];
-    for(var i=0;i<count;i++){
-      var front = Math.random() < 0.16; /* передний, более крупный и отзывчивый слой — ощущение глубины */
-      var ang = Math.random()*Math.PI*2;
-      var driftSpeed = 0.0016 + Math.random()*0.0022;
-      particles.push({
-        x: Math.random()*W,
-        y: Math.random()*H,
-        vx: 0, vy: 0,
-        ax: Math.cos(ang)*driftSpeed,
-        ay: Math.sin(ang)*driftSpeed - driftSpeed*0.35, /* лёгкий уклон вверх, как пыль в свете */
-        front: front,
-        size: front ? (3+Math.random()*2.4) : (0.9+Math.random()*1.6),
-        baseAlpha: front ? (0.15+Math.random()*0.13) : (0.05+Math.random()*0.14),
-        rot: Math.random()*Math.PI,
-        rotSpeed: (Math.random()-0.5)*0.003,
-        pulsePhase: Math.random()*Math.PI*2
-      });
-    }
-  }
-
-  window.addEventListener('mousemove', function(e){
-    mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true;
-  }, {passive:true});
-  window.addEventListener('mouseleave', function(){ mouse.active = false; });
-  document.addEventListener('touchmove', function(e){
-    if(e.touches && e.touches[0]){ mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; mouse.active = true; }
-  }, {passive:true});
-  document.addEventListener('touchend', function(){ mouse.active = false; });
-
-  var INFLUENCE = 260; /* радиус локального влияния курсора */
-  var DAMPING = 0.94;
-  var t = 0;
-  var lastTs = 0;
-
-  function frame(ts){
-    var dt = lastTs ? Math.min(2.2, (ts-lastTs)/16.67) : 1;
-    lastTs = ts;
-    t += dt;
-
-    ctx.clearRect(0,0,W,H);
-
-    for(var i=0;i<particles.length;i++){
-      var p = particles[i];
-
-      /* фоновая тяга — почти постоянное, очень медленное течение */
-      p.vx += p.ax*dt; p.vy += p.ay*dt;
-
-      var dx = p.x - mouse.x, dy = p.y - mouse.y;
-      var dist = Math.sqrt(dx*dx+dy*dy);
-      var influenced = mouse.active && dist < INFLUENCE;
-      var weight = p.front ? 1 : 0.45;
-
-      if(influenced){
-        var f = (1 - dist/INFLUENCE) * weight;
-        var d = dist || 1;
-        var tx = -dy/d, ty = dx/d; /* тангенциальная — лёгкое кружение вокруг курсора */
-        p.vx += (tx*0.85 + (mouse.x-p.x)/d*0.07) * f * dt;
-        p.vy += (ty*0.85 + (mouse.y-p.y)/d*0.07) * f * dt;
-      }
-
-      var damp = Math.pow(DAMPING, dt);
-      p.vx *= damp; p.vy *= damp;
-      p.x += p.vx*dt; p.y += p.vy*dt;
-      p.rot += p.rotSpeed*dt;
-
-      if(p.x < -20) p.x = W+20; if(p.x > W+20) p.x = -20;
-      if(p.y < -20) p.y = H+20; if(p.y > H+20) p.y = -20;
-
-      var pulse = 0.85 + Math.sin(t*0.012 + p.pulsePhase) * 0.15;
-      var alpha = p.baseAlpha * pulse * (influenced ? 1.7 : 1);
-      var size = p.size * (influenced ? 1.2 : 1);
-
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rot);
-      ctx.fillStyle = 'rgba(52,211,153,'+alpha.toFixed(3)+')';
-      if(influenced || p.front){ ctx.shadowColor = 'rgba(52,211,153,0.65)'; ctx.shadowBlur = size*1.6; }
-      ctx.fillRect(-size/2, -size/2, size, size);
-      ctx.restore();
-    }
-
-    raf = requestAnimationFrame(frame);
-  }
-
-  var resizeTimer;
-  window.addEventListener('resize', function(){
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(resize, 150);
-  });
-
-  document.addEventListener('visibilitychange', function(){
-    if(!document.hidden && !raf){ lastTs = 0; raf = requestAnimationFrame(frame); }
-    if(document.hidden && raf){ cancelAnimationFrame(raf); raf = null; }
-  });
-
-  resize();
-  raf = requestAnimationFrame(frame);
-})();
-</script>
-
-<script>
-/* Ambient mesh: 2-3 сферы очень медленно дрейфуют от скролла и курсора — глубина без шума */
-(function(){
-  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var mesh = document.getElementById('ambientMesh');
-  if(rm || !mesh || !window.requestAnimationFrame) return;
-  var blobs = mesh.querySelectorAll('.mesh-blob');
-  if(!blobs.length) return;
-  var mx = 0, my = 0, tx = 0, ty = 0, raf = null;
-
-  window.addEventListener('mousemove', function(e){
-    mx = (e.clientX / window.innerWidth) - .5;
-    my = (e.clientY / window.innerHeight) - .5;
-  }, {passive:true});
-
-  function tick(){
-    var sc = window.scrollY * .015;
-    tx += (mx - tx) * .02;
-    ty += (my - ty) * .02;
-    blobs[0].style.transform = 'translate3d('+(tx*32)+'px,'+(ty*32 - sc*.7).toFixed(1)+'px,0)';
-    if(blobs[1]) blobs[1].style.transform = 'translate3d('+(-tx*24)+'px,'+(-ty*24 + sc*.5).toFixed(1)+'px,0)';
-    if(blobs[2]) blobs[2].style.transform = 'translate3d('+(tx*18)+'px,'+(-ty*18 - sc*.4).toFixed(1)+'px,0)';
-    raf = requestAnimationFrame(tick);
-  }
-
-  document.addEventListener('visibilitychange', function(){
-    if(!document.hidden && !raf){ raf = requestAnimationFrame(tick); }
-    if(document.hidden && raf){ cancelAnimationFrame(raf); raf = null; }
-  });
-
-  raf = requestAnimationFrame(tick);
 })();
 </script>
 
@@ -2204,6 +1880,65 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     var digits = input.value.replace(/[^\d]/g,'');
     input.value = digits ? new Intl.NumberFormat('ru-RU').format(digits) : '';
     calc();
+  });
+})();
+</script>
+
+<script>
+/* Счётчик итоговых цифр ведомости: наматывает сумму от нуля при первом появлении в кадре.
+   Не декорация — сама цифра как единственный визуальный акцент момента. */
+(function(){
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(rm || !('IntersectionObserver' in window)) return;
+
+  var els = Array.prototype.slice.call(document.querySelectorAll('.row-v[data-count]'));
+  if(!els.length) return;
+
+  var fmt = new Intl.NumberFormat('ru-RU');
+
+  function animate(el){
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    if(!target){ return; }
+    var start = null;
+    var dur = 1500;
+    function tick(now){
+      if(start === null) start = now;
+      var p = Math.min(1, (now - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var val = Math.round(target * eased);
+      el.textContent = '−' + fmt.format(val).replace(/\u00A0/g, ' ') + suffix;
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        animate(en.target);
+        io.unobserve(en.target);
+      }
+    });
+  }, {threshold:.6});
+
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<script>
+/* Клик по решению в блоке «Как устроен проект» — раскрывает короткий пример механики */
+(function(){
+  var btns = document.querySelectorAll('.leak-ex-btn');
+  if(!btns.length) return;
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var leak = btn.closest('.leak');
+      var ex = btn.nextElementSibling;
+      var wasOpen = leak.classList.contains('open');
+      leak.classList.toggle('open', !wasOpen);
+      ex.style.maxHeight = wasOpen ? '0' : ex.scrollHeight + 'px';
+    });
   });
 })();
 </script>
