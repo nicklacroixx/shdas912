@@ -147,6 +147,13 @@
 @font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
 @font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/onest-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+/* ── недостающий глиф ₽ (U+20BD): его нет ни в одном subset выше — отсюда «чужой» символ рядом с цифрами ── */
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:block;src:url(data:font/woff2;base64,d09GMgABAAAAAAJYAA0AAAAABPQAAAIJAAJOFAAAAAAAAAAAAAAAAAAAAAAAAAAAGyAcKgZgADQRCApceQE2AiQDBgsGAAQgBYQmByAbJAQILgt4w+moi/GYZijLUSqefk76sNUQgiXx8P/7fdvnvDsmEiImUlkTMlQLaRKUgpcmIp38r+ZsU1bVVZ2VBQIHxJfSZS6bh/GZtwaFemHftXmcIPs1DRYkv+wVku5/f4KyCVWVP3kLdCT7ae6/DTeL/PkBEwqom3VpNkzTLKAEIsl2ti3atyQ5kxPLF2g2yknasasxAJsCNQCMM8/FsMx+4yo9wAEfg5JnInXk7RTYHx8Wl0RiC0iaAEAC7NuGCL+TJlX3gnIvQkDO5ztMsiBRoZdRoJfJJFAUweTzGhU+7yCBi+rsDpCgIDENLAFQADnU1BLN4TerljsvX7r54kVzsxbN8uJ13HqlYW2dcUNZq/1vuxKJzwv5+CKmK3rPI7/W09NV0/tyHQjkod6/u3y5g/+2juoPfGl++A++vbt+/3RKvnuolyD4ic8zEDCXz7cAQOQZM04SMh5Z86FeAIBKoME5RlGa8IwMhlGfMLV7AysbPGGxGtOwzokwr95yPLAdp3gnyM4YgiJC/m+gAeYI1RyRCmFL9qBCTdwDhzoE7uJoj6AyDWE4QYVcGEIUqoygoDMZYTQ7AXvcXZBWXmn+dPe42HMUUXOzJUToqJC47NyKbP+Av6P6GcKbGDkSVDKsj/x9RMjJloZwbH0vglxehAWkBMQEJPnFHcTtuAe/ZgRqFwGCAQAA) format('woff2');unicode-range:U+20BD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:block;src:url(data:font/woff2;base64,d09GMgABAAAAAAJEAA0AAAAABNAAAAH1AAJOFAAAAAAAAAAAAAAAAAAAAAAAAAAAGyAcKgZgADQRCApceQE2AiQDBgsGAAQgBYQEByAbAgQRFZSvBD8TsjmldXwjVoJoOzXtdN14a7r/5Hj4//3x7XPe/dBAij/NmgQrwquTbUKakOESAGThtQsPbb+ltT2QyiJilkz72Zvu8NK0JgLg6Ca/PcnRuz3teIHkCa5hktha9oClWcRRYtnOqrhfbJI5M4mZC7QaZIiYPnP+cs0K1DWAI4wxTjbrsmPLgV360ceg5KpIA3k6V2Neflhs1BmTSVoAQALMnToM3B12a9it6u//e8q5uIiAHJNPGKYRiQq9VAK9FMNQFMGwW3WNk19OBQhR17qCBAWJERgPKIDs39IWrYHWqu3M/fsO3rvX2qpNq9p/GIceYMH2S4uOi5YsWrlo1svpts76+v7AWG6ZPpe8Ob75vZ7N4XBiQy9/KiCQC3v9J2y8burqt+au1Se8ar3yBd482Xb5l//35OUCGiUIfmLnagrX69T1LQAQudpagwQyrtrlhEYBACqBJmtVorTgJhWECW5C6uIDVCb5mi0sNFgemDUaF4dNg/D8W2hoOkK5uP8NOOgCZgLHITHcCJae68Em9EzBEEYSdS+MIKkj+lG7UNAM1CXNM88ptIWfrP46qXFfdim4IZ2d0KRNwnK+Uqx1ZuOO53Pv0CkII0PzEP2AqBKJni7vByF5LuWb+Wq+kavxGk1N8BILXS3KigAAAA==) format('woff2');unicode-range:U+20BD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:block;src:url(data:font/woff2;base64,d09GMgABAAAAAAKQAA4AAAAABLgAAAI6AAIAQgAAAAAAAAAAAAAAAAAAAAAAAAAAGyAcMAZgP1NUQVQuADQRCApkfwE2AiQDCAsGAAQgBYMeByAb2ANAvgxvLEN1wBLYoAhE9tjAqXGy/DmVTIhEwtZBPx0P9Wvl655/NHtACgCE5ACXT8WBkAQSSBEYDyijLxGOysdmj9ba7ItHs43vjlXXU99DSodGyIRMJBISpTkBdrv/7bffXuiBfnstCqwtaWGaQIAJps0jjqwGeAiL105Yys+6ZenJXjKBxDdANPU1xoCDCUceCHcuvyhTr27pvXYn8JqcaAQvNY2nATbej5EmlOcv7gR2FFFu06t6hdqUhB4VqI0oQrsHNg8hpEATQKC2osmr+C6+P9oqFA+K6FBU74OSp+KSyDspcHRaE2d0/YNMjVPr/gG8TXyI4NI/5X0ABGRPfsOEsBDaBQYhjPBcOC8SBKlCynhEvgeJCoO8AoN8JoCiCCZeOvC3C4EQTURIUJCYAVYAKIAcqhtRR25Xjbv77jurrjXUvuqfx60fGdLL0+1Qe9Qudf8129LXZd46R9o+ze986bnJM43aXdt/AZsQ0vb9HMd/uar+wK/nDfDr6/fb9v+jzFd/0SpBcMCicZXH7wt/4M3MEfH4zgAhc0vMWX4BACqBdud4RenAY7xcqD12qdtbV9nw6oohn7iF/6JWEfpBgs5YscFgemSTCEQE1tXW1YEdEnGwHTqOw8PsshlkHAaBrXERIoPNgZWJCMLkmGppEUiaoy5aE8OgaXFINCaKytFiuIwrjn/cxxG4VBRbV1NbW8fMrjP7Dsz0c42KOR+sjnHsXHIe4d1t91UnuDuVXohqXgcAAAA=) format('woff2');unicode-range:U+20BD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:block;src:url(data:font/woff2;base64,d09GMgABAAAAAAKUAA4AAAAABMwAAAI/AAIAQgAAAAAAAAAAAAAAAAAAAAAAAAAAGyAcMAZgP1NUQVQqADQRCApkfwE2AiQDCAsGAAQgBYM2ByAb7ANAvgzYxnSs6w3FY1THir5j1a3YUEIrBj2ai/Yrtkfi4f/3+7XPeRd7H7FkEr0RVSOJxqJ7yJIhUzKLRiRLaKN1Jv+ztZx9YCgQOiDYYxCmrGRToatUjSUC4HL3i/4rkmgNjPI5NIFYonRMj9/jYAPOJY4D5BVOhZPABjHSFJYIXb39P1K7NLG07nNnNXrylu61TeDFkUxlPRRQYYCd92OkAY0CCWy4C2wUaCDprojqO7qraRRVoDaiAm1sbRyAT4EmQKA2a4CT8V5qbyscVA63mgAV9j0oeRo/CfmQAfuvM3FmxD/wNDiZ7u3DF3tW1f53ylsIBGRPvmOCXwjtAoMQRjjuLigNQQqIgfgHEhUGOQUGuUwARRFMnJpq4i8QCNGkhJCgIDEDzAJQADlUN6KO6KrG4ydCjp9PTUOt1X+f46/I6el0dXa1dnV5xfwouzLeGs7vrGJ9cO11kJebPpbNfyy5PrPxDlYgpLXLt/462vsvqn7BjwLw4497+2nVX7RKEByvadzOYQe/4MnMGanwVRNC5qqQc24BACqBDpeconTgmZ8JtWeTur2YyqJPUwz5hi30F7SyoN8KOmMWDsRetkoksSloJIqmZsSQEcNqDlCwmm0CTLU0OxQiBnZPU7NMp6GIFKqaLhSNRqKaMWgQieaEdHcG3BPxfahe8yS3OKpBosq6W/GPezCSjnNLMWLAkCHDZu04tWffLH+vP/3MpSaOYEpNK69qu8fua4/hO31uE/aApuM5geZVAAAA) format('woff2');unicode-range:U+20BD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:block;src:url(data:font/woff2;base64,d09GMgABAAAAAAJwAA4AAAAABNAAAAIaAAIAQgAAAAAAAAAAAAAAAAAAAAAAAAAAGyAcMAZgP1NUQVQqADQRCApkfwE2AiQDCAsGAAQgBYM6ByAb8ANArgrMs09ciJPFPItRY6Ui1snTaF7GQ7DW783sYnuIuVarP1Oqpt+gWlSJVO7v5/Y+6nn34zbwCEmqiM6tFkImJUrm6P+B2pEJoimcX8/+veMYK+1/b+lO22wg68BIUjkpoMIAe96NkQY06iUc/hfYKNFbd0VU39FdTaNdBSo9EdDCxaMVJJRQBwhURmoIM86rHLhmykCc3GerQLC3oMy9uVWUvP9SYMWS2K3jDzLV1m5bLOHjhVvVy/9RPo/VQEC2yUb0lRRCc4GOEHoKXTnC2whSQHTKrQCJAh2FBTqK6AuUSkHfF+oV+P1CCISo0wYhQYnEQGAkACUgu1e1qCLKovbgDUzuvn5dVWoqrepdY9x7GzY92ridPQwPwuH8R+fFkwZvmrNu0cupL7u34NPhTxsP+9S8LhtHzl40YfEtAMyFkOb/y1r5mf+aV/yAbw3g26/um/e1IcVfNJUgOF5eOzvHzvyAIzNHquQTEyBkzpNxSFQAgEKghfPComyBBn5+qDT4qbXHfmGst1/q7oub8B9qKqJ9IGgZIyE6KcRUQxpdwCTg8GxYR0tHG7bCY2BTKoZlMDMmjYjxZMP6HDaexmTBSDybTWfpamriCByT46HhSaP0sbWu0N3JLE2aypBS/OMCg+OQ3Zk6Glpa2npm9haWevypekazMFhvMMxMUB7g3U33FVvMnS61xFAIBjSylzBQv/EAAAAA) format('woff2');unicode-range:U+20BD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:700;font-display:block;src:url(data:font/woff2;base64,d09GMgABAAAAAAKMAA4AAAAABMgAAAI4AAIAQgAAAAAAAAAAAAAAAAAAAAAAAAAAGyAcMAZgP1NUQVQqADQRCApkfgE2AiQDCAsGAAQgBYMyByAb5wNAvg03xkDA0p4EGTG5jyl0Jyss1vSm8mjRnRE+F3+ZeHh+7du5d97a/HXFPaomaJA8emjeNyMleKRtxipeNc9fa/u3iEdrNxsxaWbNPJ6I1ULIpETJ8IWAdn6FgUYYB54WJGHnY9gIRiNbPgBctRNWoDLYgPNIkgwmvUFKNIWVaG/nED37S+pfgESAi87/Wpv/vaU7bRM4cSRT6aKACgPseTdGGtAokMDC/wIbBRpIuiui+o7uahrdKlCbRkAH2/oMKQUaAoHaBk1Rxnv5GVoKEJt0NCDY16DktXhrIx+lwInXkbig6wdk6p3txxO86ElV/1HeBkBA9uU7zEsLoVNgGMK0yN0lOAhSQIzlW5CoMCwqMCxmHiiKYP5pVOBPCIRogJCgILECWA9AAeRk3Yo6oq1aj98j5qJGS63VLR19iITund28Dc/7t/0/o3Sst+bc9Lii3cbRYPj5745Qfr7JXXvre1UA7IWQ9pcvuaj+l6pf8KPlAH689Kjps9VvtEsQ3K5uXZ/jdn7Bk5k75OMLmyFk7pNzSVwAgEqgyw1RUbqwmJ8LtUWXej1xlS2erpj0xm38g9pFGPSC7tgAMSYVeyzoDCGLiCdwYF1tXR3YmYCF7WhYtsHsWXQSFs2BzbgcAp3FhpUJHA6Dra+lhSdyYi5KE02n9rF9rjKQFLYWXWVZUfzjEYvnUpAsXU1tbR0Dew9HJwP+ViOzWQhWVyyrEpUXePfQfc0Ne6dPzekUjCjQbBsAAA==) format('woff2');unicode-range:U+20BD}
 @font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:block;src:url(data:font/woff2;base64,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) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
 @font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
@@ -202,8 +209,8 @@ a{color:inherit}
   color:var(--ok);display:block;margin-bottom:18px;opacity:.85}
 .label b{color:var(--ink-3);font-weight:400;margin-right:.7em;letter-spacing:.1em;opacity:.9}
 .fig{font-family:'JetBrains Mono','Plus Jakarta Sans',ui-monospace,'SF Mono',monospace;font-weight:700;letter-spacing:-.01em;color:var(--ok-soft)}
-.display{font-family:var(--disp);font-size:clamp(29px,5.1vw,60px);line-height:1.14;
-  font-weight:600;letter-spacing:-.045em}
+.display{font-family:var(--disp);font-size:clamp(34px,8.4vw,112px);line-height:1.04;
+  font-weight:600;letter-spacing:-.05em}
 .display span{color:var(--loss-soft)}
 h2{font-family:var(--disp);font-size:clamp(21px,3.1vw,36px);line-height:1.2;font-weight:600;letter-spacing:-.04em}
 .lede{font-size:clamp(16.5px,1.9vw,20px);line-height:1.62;color:var(--ink-2);max-width:56ch}
@@ -239,24 +246,11 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .bar-cta:hover{border-color:var(--ok);box-shadow:0 0 26px rgba(52,211,153,.2);
   background:linear-gradient(180deg,rgba(52,211,153,.24),rgba(52,211,153,.1))}
 @media(max-width:700px){.bar-lnk{display:none}}
-.bar-badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10px;
-  letter-spacing:.03em;color:var(--ink-2);white-space:nowrap;padding:7px 15px 7px 11px;
-  border:1px solid var(--rule-2);border-radius:999px;
-  background:linear-gradient(180deg,rgba(52,211,153,.09),rgba(52,211,153,.02));
-  transition:border-color .3s ease,background .3s ease}
-.bar-badge:hover{border-color:rgba(52,211,153,.4);background:linear-gradient(180deg,rgba(52,211,153,.14),rgba(52,211,153,.03))}
-.bar-badge b{color:var(--ok-soft);font-weight:600;letter-spacing:.02em}
-.bar-badge i{position:relative;width:7px;height:7px;border-radius:50%;flex:none;background:var(--ok)}
-.bar-badge i::after{content:'';position:absolute;inset:-5px;border-radius:50%;
-  border:1px solid rgba(52,211,153,.55);animation:badgeRing 2.4s ease-out infinite}
-@keyframes badgeRing{0%{transform:scale(.35);opacity:.9}100%{transform:scale(1.7);opacity:0}}
-@media(max-width:980px){.bar-badge{display:none}}
-@media(prefers-reduced-motion:reduce){.bar-badge i::after{animation:none;display:none}}
 
 .hero{padding:clamp(64px,9.5vw,112px) 0 clamp(56px,7.5vw,86px)}
 .hero .display{max-width:17ch}
 .hero-split{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(28px,4.5vw,56px);align-items:start;
-  margin-top:clamp(28px,4vw,40px)}
+  margin-top:clamp(40px,6.5vw,68px)}
 @media(max-width:900px){.hero-split{grid-template-columns:1fr}.hero-right{position:static!important}}
 .hero-right{position:sticky;top:94px}
 
@@ -310,6 +304,25 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 
 /* ── ВЕДОМОСТЬ ── */
 .ldg{overflow:hidden}
+
+/* ── скан-карточка: буквальная визуализация МРТ — строки проявляются по мере прохода линии ── */
+.scan-card{position:relative}
+.ldg-scan{position:absolute;left:0;right:0;top:0;height:2px;z-index:5;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,transparent,var(--ok) 12%,var(--ok-soft) 50%,var(--ok) 88%,transparent);
+  box-shadow:0 0 24px 3px rgba(52,211,153,.55),0 0 60px 12px rgba(52,211,153,.18)}
+.scan-card.scanning .ldg-scan{animation:ldgScan 2s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes ldgScan{
+  0%{opacity:1;top:0}
+  6%{opacity:1}
+  94%{opacity:1}
+  100%{opacity:0;top:100%}
+}
+.scan-card .row.prescan{opacity:.12;filter:blur(5px);transition:opacity .6s ease,filter .6s ease}
+.scan-card.scanning .row.prescan{opacity:1;filter:blur(0)}
+@media(prefers-reduced-motion:reduce){
+  .scan-card .row.prescan{opacity:1;filter:none}
+  .ldg-scan{display:none}
+}
 .ldg-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
   padding:22px clamp(18px,3vw,30px);border-bottom:1px solid var(--rule-2)}
 .ldg-top b{font-family:var(--doc);font-size:clamp(17px,2vw,20px);font-weight:600;color:var(--ink);letter-spacing:-.01em}
@@ -563,6 +576,25 @@ body{opacity:1;transition:opacity .18s ease}
 .bar-mobile a:hover,.bar-mobile a.on{color:var(--ok)}
 @media(max-width:700px){.bar-burger{display:flex}.bar-cta{display:none}}
 
+/* ── интро с частицами ── */
+#intro{position:fixed;inset:0;z-index:9999;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity 1.2s var(--ease);}
+#intro.hide{opacity:0;pointer-events:none}
+#intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.intro-lockup{position:relative;z-index:2;display:flex;align-items:center;
+  gap:clamp(26px,4.2vw,46px);transition:opacity .8s var(--ease),filter .8s var(--ease),transform .8s var(--ease)}
+.intro-lockup.dissolve{opacity:0;filter:blur(14px);transform:scale(1.06)}
+.intro-icon-slot{width:clamp(56px,8vw,96px);height:clamp(56px,8vw,96px);flex:none}
+.intro-word{font-family:var(--brand);font-weight:800;font-size:clamp(26px,7vw,72px);
+  color:#fff;text-transform:uppercase;letter-spacing:0;opacity:0;line-height:1;
+  transform:translateY(6px);white-space:nowrap;
+  transition:opacity 1.3s var(--ease),letter-spacing 1.3s var(--ease),transform 1.3s var(--ease)}
+.intro-word.show{opacity:1;letter-spacing:.2em;transform:none}
+@media(max-width:640px){.intro-lockup{gap:14px}.intro-word{letter-spacing:0}
+  .intro-word.show{letter-spacing:.1em}}
+@media(prefers-reduced-motion:reduce){#intro{display:none!important}}
+
 /* ══ премиальная полировка ══ */
 
 /* лёгкое зерно поверх всего интерфейса — убирает ощущение "плоского" тёмного фона */
@@ -787,6 +819,158 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 </head>
 <body>
 
+<div id="intro" aria-hidden="true">
+  <canvas id="introCanvas"></canvas>
+  <div class="intro-lockup" id="introLockup">
+    <span class="intro-icon-slot" id="introIconSlot"></span>
+    <span class="intro-word" id="introWord">Closery</span>
+  </div>
+</div>
+<script>
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var intro = document.getElementById('intro');
+  if (!intro) return;
+
+  if (reduceMotion) { intro.style.display = 'none'; return; }
+
+  var html = document.documentElement;
+  var prevOverflow = html.style.overflow;
+  html.style.overflow = 'hidden';
+
+  var canvas = document.getElementById('introCanvas');
+  var ctx = canvas.getContext('2d');
+  var lockup = document.getElementById('introLockup');
+  var iconSlot = document.getElementById('introIconSlot');
+  var word = document.getElementById('introWord');
+  var W, H, DPR;
+  var target = { cx: 0, cy: 0, half: 40 };
+
+  var COLOR = { r: 52, g: 211, b: 153 }; // var(--ok) — фирменный акцент сайта
+
+  function measureTarget(){
+    var r = iconSlot.getBoundingClientRect();
+    target.cx = r.left + r.width / 2;
+    target.cy = r.top + r.height / 2;
+    target.half = r.width / 2;
+  }
+
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    measureTarget();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var COUNT = Math.min(2200, Math.round((W * H) / 780));
+  var radiusFactor = 0.26;
+
+  function inShape(x, y, half){
+    var radius = half * radiusFactor;
+    var ax = Math.abs(x), ay = Math.abs(y);
+    var inner = half - radius;
+    if (ax <= inner && ay <= half) return true;
+    if (ay <= inner && ax <= half) return true;
+    var dx = ax - inner, dy = ay - inner;
+    return (dx*dx + dy*dy) <= radius*radius;
+  }
+  function samplePoint(half){
+    var x, y, tries = 0;
+    do { x = (Math.random()*2-1)*half; y = (Math.random()*2-1)*half; tries++; }
+    while (!inShape(x, y, half) && tries < 40);
+    return { x: x, y: y };
+  }
+
+  var particles = [];
+  for (var i = 0; i < COUNT; i++){
+    var s = samplePoint(target.half || 44);
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      ox: s.x, oy: s.y, // офсет внутри фигуры относительно центра
+      size: .7 + Math.random()*1.3,
+      phase: Math.random()*Math.PI*2
+    });
+  }
+
+  var t0 = performance.now();
+  var MORPH_MS = 1300;
+  var raf;
+
+  function ease(p){ return 1 - Math.pow(1-p, 3); }
+
+  function frame(now){
+    measureTarget();
+
+    var elapsed = now - t0;
+    var progress = Math.min(1, elapsed / MORPH_MS);
+    var eased = ease(progress);
+
+    ctx.clearRect(0,0,W,H);
+
+    var clipping = progress > 0.7;
+    if (clipping) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(target.cx - target.half - 10, target.cy - target.half - 10,
+                (target.half + 10) * 2, (target.half + 10) * 2);
+      ctx.clip();
+    }
+
+    ctx.globalCompositeOperation = 'lighter';
+
+    for (var i = 0; i < particles.length; i++){
+      var p = particles[i];
+      var jitter = 0.5;
+      var jx = Math.sin(now*0.0015 + p.phase) * jitter;
+      var jy = Math.cos(now*0.0013 + p.phase) * jitter;
+
+      var tx = target.cx + p.ox;
+      var ty = target.cy + p.oy;
+
+      var px = p.x + (tx - p.x) * eased + jx;
+      var py = p.y + (ty - p.y) * eased + jy;
+
+      ctx.beginPath();
+      ctx.arc(px, py, p.size*1.15, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba('+COLOR.r+','+COLOR.g+','+COLOR.b+',0.09)';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(px, py, p.size, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba('+COLOR.r+','+COLOR.g+','+COLOR.b+',0.95)';
+      ctx.fill();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    if (clipping) ctx.restore();
+
+    if (progress < 1 || elapsed < MORPH_MS + 750) {
+      raf = requestAnimationFrame(frame);
+    }
+  }
+  raf = requestAnimationFrame(frame);
+
+  setTimeout(function(){ word.classList.add('show'); }, MORPH_MS - 200);
+
+  var EXIT_DELAY = MORPH_MS + 900;
+  var EXIT_MS = 1200;
+
+  setTimeout(function(){
+    lockup.classList.add('dissolve');
+    intro.classList.add('hide');
+    html.style.overflow = prevOverflow;
+    setTimeout(function(){
+      cancelAnimationFrame(raf);
+      intro.remove();
+      window.removeEventListener('resize', resize);
+    }, EXIT_MS);
+  }, EXIT_DELAY);
+})();
+</script>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="sparkFillGrad" x1="0" y1="0" x2="0" y2="1">
@@ -913,18 +1097,19 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <h2 class="rv">Так может выглядеть ваша ведомость потерь</h2>
       <p class="lede rv" style="margin-top:20px">Пример на реальных цифрах: сколько теряет за год компания похожего масштаба на пяти типовых течах. Это не запугивание, а иллюстрация того, что считает Коммерческий МРТ. На вашем — цифры будут вашими, из CRM и телефонии, а не оценкой на глаз.</p>
     </div>
-    <div class="ldg surface rv">
+    <div class="ldg surface rv scan-card">
+      <div class="ldg-scan"></div>
       <div class="ldg-top">
         <b>Ведомость потерь</b>
         <span>реальный МРТ</span>
       </div>
 
       <div class="ldg-cols"><span>Статья</span><span>Потеря за год</span></div>
-      <div class="row"><div class="row-t">Нет работы с базой и повторных продаж<i>клиенты, которые уже покупали, и к которым никто не вернулся</i></div><div class="row-v">−17 880 000 ₽</div></div>
-      <div class="row"><div class="row-t">Лишний ФОТ отдела продаж<i>людей больше, чем нужно системе, оплата не привязана к результату</i></div><div class="row-v">−12 320 000 ₽</div></div>
-      <div class="row"><div class="row-t">Сделки без второго касания<i>одна попытка вместо четырёх — дальше сделка тихо умирает</i></div><div class="row-v">−6 800 000 ₽</div></div>
-      <div class="row"><div class="row-t">Заявки без ответа в первый час<i>обращение уходит к тому, кто ответил раньше</i></div><div class="row-v">−4 100 000 ₽</div></div>
-      <div class="row"><div class="row-t">Решения, которые ждали собственника<i>согласование как узкое место всей коммерции</i></div><div class="row-v">−1 500 000 ₽</div></div>
+      <div class="row"><div class="row-t">Нет работы с базой и повторных продаж<i>клиенты, которые уже покупали, и к которым никто не вернулся</i></div><div class="row-v" data-amount="17880000">−17 880 000 ₽</div></div>
+      <div class="row"><div class="row-t">Лишний ФОТ отдела продаж<i>людей больше, чем нужно системе, оплата не привязана к результату</i></div><div class="row-v" data-amount="12320000">−12 320 000 ₽</div></div>
+      <div class="row"><div class="row-t">Сделки без второго касания<i>одна попытка вместо четырёх — дальше сделка тихо умирает</i></div><div class="row-v" data-amount="6800000">−6 800 000 ₽</div></div>
+      <div class="row"><div class="row-t">Заявки без ответа в первый час<i>обращение уходит к тому, кто ответил раньше</i></div><div class="row-v" data-amount="4100000">−4 100 000 ₽</div></div>
+      <div class="row"><div class="row-t">Решения, которые ждали собственника<i>согласование как узкое место всей коммерции</i></div><div class="row-v" data-amount="1500000">−1 500 000 ₽</div></div>
       <div class="ldg-dbl"></div>
       <div class="row total"><div class="row-t">Не заработано за год</div><div class="row-v" id="tot" data-count="42600000" data-suffix=" ₽">−42 600 000 ₽</div></div>
       <div class="ldg-foot">Цифры настоящие. По отдельности ни одна течь не выглядела проблемой — сумма появилась, когда их сложили.</div>
@@ -973,7 +1158,8 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     <div class="bet-claim rv">
       <p>Это ставка. Её результат вы узнаете тогда, когда деньги уже потрачены.</p>
     </div>
-    <div class="bill surface rv">
+    <div class="bill surface rv scan-card">
+      <div class="ldg-scan"></div>
       <div class="bill-top">Что стоит эта ставка</div>
       <div class="ldg-cols"><span>Статья</span><span>Цена</span></div>
       <div class="row"><div class="row-t">Поиск, отбор, выход человека<i>вакансия, собеседования, оффер, отработка на прежнем месте</i></div><div class="row-v">2–3 мес</div></div>
@@ -1080,7 +1266,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     <div class="gua rv">
       <div><b>0 ₽</b><strong>Этап не принят — не оплачен</strong><p>Критерии приёмки измеримые и зафиксированы до старта: цифры в отчёте, подписанные регламенты, ритм отдела. Не спор о впечатлениях, а сверка с документом.</p></div>
       <div><b>Всё ваше</b><strong>Система остаётся компании</strong><p>Регламенты, скрипты, финмодель, метрики и доступы — ваши активы с первого дня. Вы не арендуете систему и не зависите от подрядчика после выхода.</p></div>
-      <div><b>90 дней</b><strong>Финал — когда я больше не нужен</strong><p>Последний этап принимаете вы — только когда отдел месяц держит план и цифры без меня. Дальше управление на вашей стороне: сами решаете, оставлять его на РОПе или на себе.</p></div>
+      <div><b>90 дней</b><strong>Финал — когда мы больше не нужны</strong><p>Последний этап принимаете вы — только когда отдел месяц держит план и цифры без нас. Дальше управление на вашей стороне: сами решаете, оставлять его на РОПе или на себе.</p></div>
     </div>
   </div>
 </section>
@@ -1128,7 +1314,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
           <span class="label"><b>09</b>Кто это делает</span>
           <h2>Николай Клименко</h2>
         </div>
-        <p class="fo-q">Я не консультирую со стороны. Я отвечаю за <u>цифру в кассе</u>.</p>
+        <p class="fo-q">Closery не консультирует со стороны. Мы отвечаем за <u>цифру в кассе</u>.</p>
         <p class="lede" style="margin-top:28px">Восемь лет Николай строил коммерцию изнутри компаний — CDEK, UniBox, MarketGuru. Под его руководством выросли восемь РОПов и два коммерческих директора — и до сих пор держат позиции.</p>
         <p class="lede" style="margin-top:16px">Каждый МРТ и каждый проект он ведёт лично — от замера до передачи управления. Решение принимает тот, кто сам слышал звонки и видел цифры, поэтому одновременно в работе не больше трёх компаний.</p>
       </div>
@@ -1802,13 +1988,10 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     if(e.key === 'Escape'){ closeFunnel(); closeExit(true); }
   });
 
-  /* все CTA с классом js-cta ведут в воронку */
-  document.addEventListener('click', function(e){
-    var t = e.target.closest ? e.target.closest('.js-cta') : null;
-    if(!t) return;
-    e.preventDefault();
-    openFunnel();
-  });
+  /* Воронка с формой (сбор имени/контакта/компании) отключена: пока нет политики
+     обработки персональных данных — собирать эти данные на сайте нельзя.
+     Кнопки .js-cta работают как обычные ссылки и ведут в Telegram по href.
+     Код формы ниже оставлен нетронутым — включить обратно можно, вернув перехват клика. */
 
   /* exit-intent отключён по просьбе — попап с "осталось 2 места" больше не всплывает */
   exitModal.style.display = 'none';
@@ -1885,44 +2068,59 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 </script>
 
 <script>
-/* Счётчик итоговых цифр ведомости: наматывает сумму от нуля при первом появлении в кадре.
-   Не декорация — сама цифра как единственный визуальный акцент момента. */
+/* Скан-карточки (ведомость + счёт цены бездействия): линия проходит один раз,
+   строки проявляются из размытия по мере прохода, итоговая цифра наматывается
+   ровно в момент, когда линия её достигает — не декорация, а визуализация МРТ.
+   Класс prescan (затемнение) добавляется только когда JS точно запустился —
+   если скрипт не выполнится, строки остаются видны по умолчанию. */
 (function(){
   var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(rm || !('IntersectionObserver' in window)) return;
-
-  var els = Array.prototype.slice.call(document.querySelectorAll('.row-v[data-count]'));
-  if(!els.length) return;
+  var cards = document.querySelectorAll('.scan-card');
+  if(!cards.length) return;
 
   var fmt = new Intl.NumberFormat('ru-RU');
 
-  function animate(el){
+  function animateCount(el){
     var target = parseInt(el.getAttribute('data-count'), 10);
     var suffix = el.getAttribute('data-suffix') || '';
-    if(!target){ return; }
-    var start = null;
-    var dur = 1500;
+    if(!target) return;
+    var start = null, dur = 1100;
     function tick(now){
       if(start === null) start = now;
       var p = Math.min(1, (now - start) / dur);
       var eased = 1 - Math.pow(1 - p, 3);
-      var val = Math.round(target * eased);
-      el.textContent = '−' + fmt.format(val).replace(/\u00A0/g, ' ') + suffix;
+      el.textContent = '−' + fmt.format(Math.round(target * eased)).replace(/\u00A0/g, ' ') + suffix;
       if(p < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
   }
 
+  if(rm || !('IntersectionObserver' in window)){
+    document.querySelectorAll('.row-v[data-count]').forEach(animateCount);
+    return;
+  }
+
+  cards.forEach(function(card){
+    var rows = card.querySelectorAll('.row');
+    rows.forEach(function(row, i){
+      row.classList.add('prescan');
+      var delay = 0.12 + i * 0.2;
+      row.style.transitionDelay = delay + 's';
+      var counter = row.querySelector('.row-v[data-count]');
+      if(counter){ setTimeout(function(){ animateCount(counter); }, delay * 1000); }
+    });
+  });
+
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(en){
       if(en.isIntersecting){
-        animate(en.target);
+        en.target.classList.add('scanning');
         io.unobserve(en.target);
       }
     });
-  }, {threshold:.6});
+  }, {threshold:.35});
 
-  els.forEach(function(el){ io.observe(el); });
+  cards.forEach(function(card){ io.observe(card); });
 })();
 </script>
 
