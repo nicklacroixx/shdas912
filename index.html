@@ -346,6 +346,23 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 /* ── ВЕДОМОСТЬ ── */
 .ldg{overflow:hidden}
 
+/* ── шапка ведомости: индекс + диагноз, в стиле реального интерфейса МРТ (без гейджа) ── */
+.rpt{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid var(--rule-2)}
+@media(max-width:680px){.rpt{grid-template-columns:1fr}}
+.rpt-idx{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:clamp(26px,3.2vw,34px) clamp(22px,2.8vw,28px);border-right:1px solid var(--rule-2);gap:6px}
+@media(max-width:680px){.rpt-idx{border-right:none;border-bottom:1px solid var(--rule-2);flex-direction:row;align-items:baseline;gap:8px}}
+.rpt-idx b{font-family:var(--disp);font-weight:700;font-size:clamp(44px,5.6vw,58px);line-height:1;color:var(--loss-soft);
+  letter-spacing:-.02em;text-shadow:0 0 28px rgba(240,85,90,.3)}
+.rpt-idx i{font-family:var(--mono);font-style:normal;font-size:13px;color:var(--ink-3)}
+.rpt-idx span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+  margin-top:2px;width:100%}
+.rpt-body{padding:clamp(26px,3.2vw,34px)}
+.rpt-tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--loss-soft);border:1px solid rgba(240,85,90,.35);border-radius:20px;padding:6px 14px;margin-bottom:16px}
+.rpt-h{font-family:var(--disp);font-size:clamp(19px,2.4vw,25px);font-weight:600;letter-spacing:-.02em;line-height:1.3;margin-bottom:12px;color:var(--ink)}
+.rpt-p{font-size:15px;color:var(--ink-2);line-height:1.6;max-width:60ch}
+
 /* ── скан-карточка: буквальная визуализация МРТ — строки проявляются по мере прохода линии ── */
 .scan-card{position:relative}
 .ldg-scan{position:absolute;left:0;right:0;top:0;height:2px;z-index:5;pointer-events:none;opacity:0;
@@ -1161,14 +1178,25 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   <div class="w">
     <div class="sec-head">
       <span class="label"><b>02</b>Пример на цифрах</span>
-      <h2 class="rv">Так может выглядеть ваша ведомость потерь</h2>
-      <p class="lede rv" style="margin-top:20px">Пример на реальных цифрах: сколько теряет за год компания похожего масштаба на пяти типовых течах. Это не запугивание, а иллюстрация того, что считает Коммерческий МРТ. На вашем — цифры будут вашими, из CRM и телефонии, а не оценкой на глаз.</p>
+      <h2 class="rv">Как выглядит результат МРТ</h2>
+      <p class="lede rv" style="margin-top:20px">Ниже — обезличенный пример расчёта для компании сопоставимого масштаба: пять типовых течей и итог за год. На вашем МРТ каждая строка считается только по вашим данным — из CRM и телефонии, а не на глаз.</p>
     </div>
     <div class="ldg surface rv scan-card">
       <div class="ldg-scan"></div>
+      <div class="rpt">
+        <div class="rpt-idx">
+          <b>52</b><i>/ 100</i>
+          <span>Индекс зрелости</span>
+        </div>
+        <div class="rpt-body">
+          <span class="rpt-tag">Диагноз · Забытая база</span>
+          <div class="rpt-h">Растёте за счёт новых клиентов, теряя старых</div>
+          <p class="rpt-p">База есть, но повторные продажи не выстроены, а часть решений всё ещё идёт через собственника — вот из чего сложилась сумма ниже.</p>
+        </div>
+      </div>
       <div class="ldg-top">
         <b>Ведомость потерь</b>
-        <span>реальный МРТ</span>
+        <span>пример расчёта</span>
       </div>
 
       <div class="ldg-cols"><span>Статья</span><span>Потеря за год</span></div>
@@ -1179,7 +1207,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <div class="row"><div class="row-t">Решения, которые ждали собственника<i>согласование как узкое место всей коммерции</i></div><div class="row-v" data-amount="1500000">−1 500 000 ₽</div></div>
       <div class="ldg-dbl"></div>
       <div class="row total"><div class="row-t">Не заработано за год</div><div class="row-v" id="tot" data-count="42600000" data-suffix=" ₽">−42 600 000 ₽</div></div>
-      <div class="ldg-foot">Цифры настоящие. По отдельности ни одна течь не выглядела проблемой — сумма появилась, когда их сложили.</div>
+      <div class="ldg-foot">По отдельности ни одна течь не выглядела проблемой — сумма появилась, когда их сложили.</div>
     </div>
     <div class="price-cta rv">
       <div><b>Это чужая цифра. Хотите свою?</b><span>Демо-МРТ · заявки, конверсия, чек, маржа, цикл сделки · 2 минуты, без CRM</span></div>
