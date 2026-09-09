@@ -231,6 +231,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;
   font-family:var(--brand);font-weight:800;font-size:13px;text-transform:uppercase;
   letter-spacing:.2em;color:#fff;transition:letter-spacing .35s ease,color .22s ease;white-space:nowrap}
+.brand{font-family:var(--brand);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
 .logo i{width:9px;height:9px;border-radius:2px;flex:none;background:var(--ok);
   box-shadow:0 0 16px rgba(52,211,153,.65);transition:box-shadow .3s ease}
 .logo:hover{letter-spacing:.3em;color:var(--ok)}
@@ -1045,15 +1046,15 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <a class="bar-lnk" href="/mrt-demo/">Демо-МРТ</a>
       <a class="bar-lnk" href="/cases/">Кейсы</a>
       <a class="bar-lnk" href="#route">Проект</a>
-      <a class="bar-lnk" href="#faq">Вопросы</a>
       <a class="bar-lnk" href="#founder">Основатель</a>
+      <a class="bar-lnk" href="#faq">Вопросы</a>
       <a class="bar-cta js-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Найти течь</a>
     
       <button class="bar-burger" id="barBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </div>
 </header>
-<div class="bar-mobile" id="barMobile"><a href="/mrt-demo/">Демо-МРТ</a><a href="/cases/">Кейсы</a><a href="#route">Проект</a><a href="#faq">Вопросы</a><a href="#founder">Основатель</a></div>
+<div class="bar-mobile" id="barMobile"><a href="/mrt-demo/">Демо-МРТ</a><a href="/cases/">Кейсы</a><a href="#route">Проект</a><a href="#founder">Основатель</a><a href="#faq">Вопросы</a></div>
 
 <main id="top">
 
@@ -1247,30 +1248,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>04</b>Что обычно делают с такими цифрами</span>
-      <h2 class="rv">Нанимают сильного человека и полгода надеются</h2>
-    </div>
-    <div class="bet-claim rv">
-      <p>Это ставка. Её результат вы узнаете тогда, когда деньги уже потрачены.</p>
-    </div>
-    <div class="bill surface rv scan-card">
-      <div class="ldg-scan"></div>
-      <div class="bill-top">Что стоит эта ставка</div>
-      <div class="ldg-cols"><span>Статья</span><span>Цена</span></div>
-      <div class="row"><div class="row-t">Поиск, отбор, выход человека<i>вакансия, собеседования, оффер, отработка на прежнем месте</i></div><div class="row-v">2–3 мес</div></div>
-      <div class="row"><div class="row-t">ФОТ до первого понятного результата<i>сильный коммерческий директор — от 1,2 млн ₽/мес × 7 месяцев</i></div><div class="row-v">−8 400 000 ₽</div></div>
-      <div class="row"><div class="row-t">Течи, которые всё это время не закрыты<i>те же 42,6 млн ₽/год из ведомости выше — семь месяцев подряд</i></div><div class="row-v">−24 850 000 ₽</div></div>
-      <div class="row"><div class="row-t">Что остаётся компании, если он ушёл<i>метод, база и договорённости уходят вместе с ним</i></div><div class="row-v">ничего</div></div>
-      <div class="ldg-dbl"></div>
-      <div class="row total"><div class="row-t">Цена года, в котором ничего не изменилось</div><div class="row-v" data-count="33250000" data-suffix=" ₽">−33 250 000 ₽</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="w">
-    <div class="sec-head">
-      <span class="label"><b>05</b>Что дальше</span>
+      <span class="label"><b>04</b>Что дальше</span>
       <h2 class="rv">МРТ не заканчивается отчётом</h2>
     </div>
     <dl class="frag rv">
@@ -1282,12 +1260,35 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   </div>
 </section>
 
+<section class="sec">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label"><b>05</b>Что обычно делают с такими цифрами</span>
+      <h2 class="rv">Не нанимайте человека, пока не знаете, что он должен исправить</h2>
+    </div>
+    <div class="bet-claim rv">
+      <p>Коммерческий директор может оказаться отличным человеком и всё равно не решить проблему: если не найдено узкое место, он будет улучшать то, что уже работает. Сначала диагностика. Потом человек.</p>
+    </div>
+    <div class="bill surface rv scan-card">
+      <div class="ldg-scan"></div>
+      <div class="bill-top">Что стоит эта ставка</div>
+      <div class="ldg-cols"><span>Статья</span><span>Цена</span></div>
+      <div class="row"><div class="row-t">Поиск, отбор, выход человека<i>вакансия, собеседования, оффер, отработка на прежнем месте</i></div><div class="row-v">2–3 мес</div></div>
+      <div class="row"><div class="row-t">ФОТ до первого понятного результата<i>сильный коммерческий директор — по рынку от 1,2 млн ₽/мес, выход на результат обычно занимает 6–7 месяцев</i></div><div class="row-v">−8 400 000 ₽</div></div>
+      <div class="row"><div class="row-t">Течи, которые всё это время не закрыты<i>те же 42,6 млн ₽/год из ведомости выше — семь месяцев подряд</i></div><div class="row-v">−24 850 000 ₽</div></div>
+      <div class="row"><div class="row-t">Что остаётся компании, если он ушёл<i>метод, база и договорённости уходят вместе с ним</i></div><div class="row-v">ничего</div></div>
+      <div class="ldg-dbl"></div>
+      <div class="row total"><div class="row-t">Цена года, в котором ничего не изменилось</div><div class="row-v" data-count="33250000" data-suffix=" ₽">−33 250 000 ₽</div></div>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="route">
   <div class="w">
     <div class="sec-head">
       <span class="label"><b>06</b>Как устроен проект</span>
       <h2 class="rv">Этапы — это ваши течи, закрытые по очереди</h2>
-      <p class="lede rv" style="margin-top:20px">Если течи оказались системными, Closery заходит как коммерческий директор на срок проекта и закрывает их одну за другой — от самой дорогой к самой дешёвой.</p>
+      <p class="lede rv" style="margin-top:20px">Если течи оказались системными, <span class="brand">Closery</span> заходит как коммерческий директор на срок проекта и закрывает их одну за другой — от самой дорогой к самой дешёвой.</p>
     </div>
     <span class="label" style="display:block;margin:clamp(30px,4vw,44px) 0 clamp(18px,2.4vw,22px)">Пример проблем и их решение:</span>
     <div class="route rv">
@@ -1333,7 +1334,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       </div>
       <div class="leak">
         <div class="leak-w">Недели 09–12</div>
-        <div class="leak-l"><b>Решения через собственника</b><span>−1 700 000 ₽</span></div>
+        <div class="leak-l"><b>Решения через собственника</b><span>−1 500 000 ₽</span></div>
         <div class="leak-r">
           <button class="leak-ex-btn" type="button"><b>Управление без вас</b><i>Пример</i></button>
           <div class="leak-ex"><p>Скидку 8% вместо 5% менеджер не может дать сам — ждёт вас из отпуска. Лимиты полномочий снимают эту паузу навсегда.</p></div>
@@ -1366,50 +1367,15 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   </div>
 </section>
 
-<section class="sec" id="faq">
-  <div class="w">
-    <div class="sec-head">
-      <span class="label"><b>08</b>Вопросы и ответы</span>
-      <h2 class="rv">Что обычно спрашивают</h2>
-    </div>
-    <div class="faq rv">
-      <div class="faq-item">
-        <button class="faq-q" type="button">Почему МРТ платный, а не бесплатная консультация?<i></i></button>
-        <div class="faq-a"><p>За 120 минут вы получаете документ, а не разговор: ведомость потерь в рублях, с которой можно работать самому. Пойдёте в проект — 50 000 ₽ идут в зачёт, и МРТ становится бесплатным.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">Что, если течи не найдутся?<i></i></button>
-        <div class="faq-a"><p>Если за 120 минут не увидим, где теряются деньги, — скажем прямо и вернём оплату полностью. Это редкость: течи есть у всех, кто работает без системы.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">Сколько стоит проект?<i></i></button>
-        <div class="faq-a"><p>Вилка зависит от числа течей и размера отдела, сумма называется после МРТ — после расчёта потерь, а не до. Оплата по этапам, выйти можно на любом.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">Чем это отличается от найма коммерческого директора?<i></i></button>
-        <div class="faq-a"><p>Директор — 1–1,5 млн ₽ в месяц и результат через полгода, а уйдя, уносит метод с собой. Closery — 90 дней, оплата по принятым этапам, система остаётся компании.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">Как гарантируется результат?<i></i></button>
-        <div class="faq-a"><p>Этап не принят — не оплачен: критерии приёмки фиксируются до старта. Последний этап принимается только когда отдел четыре недели держит план сам.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">Что нужно от нас для старта?<i></i></button>
-        <div class="faq-a"><p>Доступ к CRM и телефонии для замера и 2–3 часа собственника в неделю — остальное берём на себя.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="sec" id="founder">
   <div class="w">
     <div class="fo rv">
       <div>
         <div class="sec-head" style="margin-bottom:clamp(26px,3.4vw,38px)">
-          <span class="label"><b>09</b>Кто это делает</span>
+          <span class="label"><b>08</b>Кто это делает</span>
           <h2>Николай Клименко</h2>
         </div>
-        <p class="fo-q">Closery не консультирует со стороны. Мы отвечаем за <u>цифру в кассе</u>.</p>
+        <p class="fo-q"><span class="brand">Closery</span> не консультирует со стороны. Мы отвечаем за <u>цифру в кассе</u>.</p>
         <p class="lede" style="margin-top:28px">Восемь лет Николай строил коммерцию изнутри компаний — CDEK, UniBox, MarketGuru. Под его руководством выросли восемь РОПов и два коммерческих директора — и до сих пор держат позиции.</p>
         <p class="lede" style="margin-top:16px">Каждый МРТ и каждый проект он ведёт лично — от замера до передачи управления. Решение принимает тот, кто сам слышал звонки и видел цифры, поэтому одновременно в работе не больше трёх компаний.</p>
       </div>
@@ -1474,6 +1440,41 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   </div>
 </section>
 
+
+<section class="sec" id="faq">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label"><b>09</b>Вопросы и ответы</span>
+      <h2 class="rv">Что обычно спрашивают</h2>
+    </div>
+    <div class="faq rv">
+      <div class="faq-item">
+        <button class="faq-q" type="button">Почему МРТ платный, а не бесплатная консультация?<i></i></button>
+        <div class="faq-a"><p>За 120 минут вы получаете документ, а не разговор: ведомость потерь в рублях, с которой можно работать самому. Пойдёте в проект — 50 000 ₽ идут в зачёт, и МРТ становится бесплатным.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Что, если течи не найдутся?<i></i></button>
+        <div class="faq-a"><p>Если за 120 минут не увидим, где теряются деньги, — скажем прямо и вернём оплату полностью. Это редкость: течи есть у всех, кто работает без системы.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Сколько стоит проект?<i></i></button>
+        <div class="faq-a"><p>Вилка зависит от числа течей и размера отдела, сумма называется после МРТ — после расчёта потерь, а не до. Оплата по этапам, выйти можно на любом.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Чем это отличается от найма коммерческого директора?<i></i></button>
+        <div class="faq-a"><p>Директор — 1–1,5 млн ₽ в месяц и результат через полгода, а уйдя, уносит метод с собой. <span class="brand">Closery</span> — 90 дней, оплата по принятым этапам, система остаётся компании.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Как гарантируется результат?<i></i></button>
+        <div class="faq-a"><p>Этап не принят — не оплачен: критерии приёмки фиксируются до старта. Последний этап принимается только когда отдел четыре недели держит план сам.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Что нужно от нас для старта?<i></i></button>
+        <div class="faq-a"><p>Доступ к CRM и телефонии для замера и 2–3 часа собственника в неделю — остальное берём на себя.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="end" id="end">
   <div class="w">
     <h2 class="rv">Вы знаете, сколько денег теряете прямо сейчас?</h2>
