@@ -900,6 +900,19 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 .exit-modal .fstep{padding-top:clamp(24px,4vw,34px)}
 .exit-modal .fq button{padding:12px 14px;font-size:14px}
 
+/* пруф: страница настоящего PDF-отчёта */
+.proof{margin-top:clamp(28px,3.6vw,38px)}
+.proof-frame{border-radius:var(--r);overflow:hidden;border:1px solid var(--rule-2);
+  box-shadow:0 34px 76px -26px rgba(0,0,0,.6)}
+.proof-frame img{display:block;width:100%;height:auto}
+.proof-cap{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;
+  margin-top:14px}
+.proof-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ok)}
+.proof-note{font-size:12.5px;color:var(--ink-3)}
+.proof-dl{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+  color:var(--ok-soft);border-bottom:1px solid rgba(127,233,192,.35);padding-bottom:2px;transition:border-color .2s ease}
+.proof-dl:hover{border-color:var(--ok-soft)}
+
 /* цена-CTA под карточками цен */
 .price-cta{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
   margin-top:clamp(26px,3.4vw,34px);padding:clamp(18px,2.6vw,24px) clamp(20px,3vw,28px);
@@ -1301,6 +1314,14 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <div class="ldg-dbl"></div>
       <div class="row total"><div class="row-t">Не заработано за год</div><div class="row-v" id="tot" data-count="42600000" data-suffix=" ₽">−42 600 000 ₽</div></div>
       <div class="ldg-foot">По отдельности ни одна течь не выглядела проблемой — сумма появилась, когда их сложили.</div>
+    </div>
+    <div class="proof rv">
+      <div class="proof-frame"><img src="report-example.jpg" alt="Страница из реального PDF-отчёта Closery — оценка шести систем бизнеса" loading="lazy" width="1400" height="900"></div>
+      <div class="proof-cap">
+        <span class="proof-tag">Реальная страница отчёта · Closery Commercial MRI</span>
+        <span class="proof-note">Клиент обезличен, цифры и вёрстка — без ретуши</span>
+      </div>
+      <a class="proof-dl" href="closery-example-report.pdf" target="_blank" rel="noopener">Смотреть отчёт целиком, все 8 страниц (PDF) →</a>
     </div>
     <div class="price-cta rv">
       <div><b>Это чужая цифра. Хотите свою?</b><span>Демо-МРТ · заявки, конверсия, чек, маржа, цикл сделки · 2 минуты, без CRM</span></div>
