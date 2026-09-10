@@ -369,23 +369,25 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .versus{margin-top:clamp(56px,7vw,88px);padding-top:clamp(48px,6vw,72px);padding-bottom:clamp(48px,6vw,72px);border-top:1px solid var(--rule)}
 .versus-lede{font-family:var(--disp);font-size:clamp(24px,3.4vw,36px);font-weight:600;letter-spacing:-.03em;
   color:var(--ink);margin-bottom:clamp(30px,4vw,44px)}
-.versus-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-2);
-  border:1px solid var(--rule-2);border-radius:var(--r);overflow:hidden}
+.path{border:1px solid var(--rule-2);border-radius:var(--r);overflow:hidden;
+  background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%)}
+.path-row{display:grid;grid-template-columns:1fr 34px 1fr;align-items:center;gap:clamp(14px,2vw,24px);
+  padding:clamp(18px,2.2vw,24px) clamp(22px,2.8vw,30px);border-top:1px solid var(--rule)}
+.path-row:first-child{border-top:none}
+.path-was,.path-now{display:flex;align-items:flex-start;gap:12px;line-height:1.45}
+.path-was{color:var(--ink-3);font-size:14.5px}
+.path-now{color:var(--ink);font-size:15.5px;font-weight:600}
+.path-ico{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.path-ico svg{width:10px;height:10px}
+.path-was .path-ico{background:rgba(240,85,90,.1);border:1px solid rgba(240,85,90,.28);color:var(--loss-soft)}
+.path-now .path-ico{background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.32);color:var(--ok)}
+.path-arrow{display:flex;align-items:center;justify-content:center;color:var(--rule-2)}
+.path-arrow svg{width:16px;height:16px}
 @media(max-width:720px){
-  .versus-grid{grid-template-columns:1fr}
-  .versus-no{order:1}
-  .versus-yes{order:2}
+  .path-row{grid-template-columns:1fr;gap:10px}
+  .path-arrow{display:none}
+  .path-now{padding-top:10px;border-top:1px dashed var(--rule-2)}
 }
-.versus-tag,.versus-cell{background:var(--paper);padding:clamp(14px,1.8vw,18px) clamp(22px,2.8vw,30px)}
-.versus-grid>:nth-last-child(-n+2){padding-bottom:clamp(28px,3.6vw,36px)}
-.versus-yes{background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%)}
-.versus-tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  padding-top:clamp(22px,2.8vw,28px);padding-bottom:clamp(16px,2vw,20px)}
-.versus-tag.versus-no{color:var(--loss-soft)}
-.versus-tag.versus-yes{color:var(--ok)}
-.versus-cell{font-size:15.5px;line-height:1.5;display:flex;align-items:center}
-.versus-cell.versus-no{color:var(--ink-2)}
-.versus-cell.versus-yes{color:var(--ink)}
 .versus-punch{margin-top:clamp(40px,5.5vw,64px);font-family:var(--disp);font-size:clamp(18px,2.2vw,22px);
   font-weight:600;line-height:1.4;letter-spacing:-.015em;color:var(--ink);max-width:44ch}
 
@@ -1791,27 +1793,37 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 
 <section class="w versus">
   <h2 class="versus-lede rv">Два пути на ближайший год</h2>
-  <div class="versus-grid rv">
-    <div class="versus-tag versus-no">Без Closery</div>
-    <div class="versus-tag versus-yes">С Closery</div>
-
-    <div class="versus-cell versus-no">Теряете деньги, но не видите где</div>
-    <div class="versus-cell versus-yes">Видите каждую подтверждённую потерю в рублях</div>
-
-    <div class="versus-cell versus-no">Платите за лиды, которые не становятся деньгами</div>
-    <div class="versus-cell versus-yes">Знаете, сколько денег сгорает между лидом и оплатой</div>
-
-    <div class="versus-cell versus-no">Клиенты уходят, а причина неизвестна</div>
-    <div class="versus-cell versus-yes">Видите конкретный этап, где теряется клиент</div>
-
-    <div class="versus-cell versus-no">Отдел продаж занят, но результат не растёт</div>
-    <div class="versus-cell versus-yes">Знаете, какое узкое место ограничивает выручку</div>
-
-    <div class="versus-cell versus-no">Решения принимаются по ощущениям</div>
-    <div class="versus-cell versus-yes">Приоритеты определяются цифрами: что исправить первым</div>
-
-    <div class="versus-cell versus-no">Рост ищут через новый найм и увеличение бюджета</div>
-    <div class="versus-cell versus-yes">Сначала возвращаете деньги из того, что уже есть</div>
+  <div class="path rv">
+    <div class="path-row">
+      <div class="path-was"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></i>Теряете деньги, но не видите где</div>
+      <div class="path-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="path-now"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Видите каждую подтверждённую потерю в рублях</div>
+    </div>
+    <div class="path-row">
+      <div class="path-was"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></i>Платите за лиды, которые не становятся деньгами</div>
+      <div class="path-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="path-now"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Знаете, сколько денег сгорает между лидом и оплатой</div>
+    </div>
+    <div class="path-row">
+      <div class="path-was"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></i>Клиенты уходят, а причина неизвестна</div>
+      <div class="path-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="path-now"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Видите конкретный этап, где теряется клиент</div>
+    </div>
+    <div class="path-row">
+      <div class="path-was"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></i>Отдел продаж занят, но результат не растёт</div>
+      <div class="path-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="path-now"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Знаете, какое узкое место ограничивает выручку</div>
+    </div>
+    <div class="path-row">
+      <div class="path-was"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></i>Решения принимаются по ощущениям</div>
+      <div class="path-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="path-now"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Приоритеты определяются цифрами: что исправить первым</div>
+    </div>
+    <div class="path-row">
+      <div class="path-was"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></i>Рост ищут через новый найм и увеличение бюджета</div>
+      <div class="path-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="path-now"><i class="path-ico"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Сначала возвращаете деньги из того, что уже есть</div>
+    </div>
   </div>
 </section>
 
