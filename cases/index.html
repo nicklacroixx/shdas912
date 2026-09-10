@@ -71,12 +71,11 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .bar-lnk:hover{color:var(--ok);letter-spacing:.2em}
 .bar-lnk.on{color:var(--ok)}
 @media(max-width:760px){.bar-lnk{display:none}}
-.btn,.bar-cta{font-family:var(--disp);font-weight:500;letter-spacing:-.03em;color:var(--ink);
-  text-decoration:none;border:1px solid rgba(52,211,153,.5);
-  background:linear-gradient(180deg,rgba(52,211,153,.14),rgba(52,211,153,.06));
+.btn,.bar-cta{font-family:var(--disp);font-weight:600;letter-spacing:-.01em;color:var(--bg);
+  text-decoration:none;border:1px solid var(--ink);background:var(--ink);
   transition:border-color .22s,box-shadow .3s,background .22s,transform .18s}
-.btn:hover,.bar-cta:hover{border-color:var(--ok);box-shadow:0 0 28px rgba(52,211,153,.2);
-  background:linear-gradient(180deg,rgba(52,211,153,.24),rgba(52,211,153,.1))}
+.btn:hover,.bar-cta:hover{border-color:var(--ok-soft);background:var(--ok-soft);
+  box-shadow:0 6px 16px rgba(0,0,0,.28)}
 .bar-cta{font-size:12px;border-radius:9px;padding:12px 20px;white-space:nowrap}
 .btn{display:inline-block;font-size:14px;padding:17px 30px;border-radius:10px}
 .btn:hover{transform:translateY(-2px)}
