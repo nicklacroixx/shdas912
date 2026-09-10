@@ -523,6 +523,51 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .scanui-chips span.hi{color:var(--ok-soft);border-color:rgba(52,211,153,.3)}
 .scanui-recover p{font-size:12.5px;color:var(--ink-3);line-height:1.55;margin-top:8px}
 
+.scanui-stack{display:flex;flex-direction:column;gap:clamp(14px,1.8vw,18px)}
+.scanui-quote{margin:0 clamp(22px,2.8vw,28px) clamp(26px,3.2vw,34px);padding:16px clamp(18px,2.4vw,24px);
+  border-left:2px solid var(--ok);background:rgba(52,211,153,.05);border-radius:0 8px 8px 0;
+  font-style:italic;font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.scanui-quote b{font-style:normal;color:var(--ink);font-weight:600}
+.hl-loss-b{color:var(--loss-soft);font-weight:600}
+
+.scanui-plan-sub{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+  margin-bottom:16px}
+.scanui-wave{position:relative;border-left:2px solid var(--ok);border-radius:0 10px 10px 0;
+  background:rgba(255,255,255,.02);padding:18px 20px;overflow:hidden}
+.scanui-wave+.scanui-wave{margin-top:14px}
+.scanui-wave::after{content:attr(data-n);position:absolute;top:0;right:14px;font-family:var(--disp);font-weight:700;
+  font-size:56px;color:rgba(255,255,255,.035);line-height:1;pointer-events:none}
+.scanui-wave-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-bottom:12px;position:relative}
+.scanui-wave-top b{font-size:17px;font-weight:700;color:var(--ink)}
+.scanui-wave-top span{font-size:13px;color:var(--ink-3)}
+.scanui-wave-top em{margin-left:auto;font-style:normal;font-family:var(--mono);font-weight:700;font-size:14px;color:var(--ok)}
+.scanui-wave ul{list-style:none;position:relative}
+.scanui-wave li{font-size:13.5px;color:var(--ink);line-height:1.55;padding-left:16px;position:relative}
+.scanui-wave li+li{margin-top:9px}
+.scanui-wave li::before{content:'';position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--ok)}
+.scanui-wave li i{font-style:normal;color:var(--ink-3)}
+.scanui-extra{margin-top:18px;padding-top:16px;border-top:1px solid var(--rule)}
+.scanui-extra-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;align-items:baseline}
+.scanui-extra-row b{font-size:14.5px;font-weight:600;color:var(--ink)}
+.scanui-extra-row em{font-style:normal;font-family:var(--mono);font-weight:700;color:var(--ok);font-size:14px}
+.scanui-extra p{font-size:12.5px;color:var(--ink-3);margin-top:6px;line-height:1.55}
+
+.scanui-note-box{border:1px solid var(--rule-2);border-radius:10px;padding:18px 20px}
+.scanui-note-box+.scanui-note-box{margin-top:16px}
+.scanui-note-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+  margin-bottom:12px}
+.scanui-note-box>p{font-size:13.5px;color:var(--ink-2);line-height:1.65}
+.scanui-note-box>p b{color:var(--ink);font-weight:600}
+.scanui-log-list{list-style:none;columns:2;column-gap:28px}
+@media(max-width:680px){.scanui-log-list{columns:1}}
+.scanui-log-list li{font-size:12.5px;color:var(--ink-2);line-height:1.55;break-inside:avoid;padding-left:14px;
+  position:relative;margin-top:13px}
+.scanui-log-list li:nth-child(-n+2){margin-top:0}
+.scanui-log-list li::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%}
+.scanui-log-list li.crit::before{background:var(--loss)}
+.scanui-log-list li.warn::before{background:var(--amber)}
+.scanui-log-more{margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+
 /* ── слепое пятно ── */
 .frag{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
 .frag>div{background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);
@@ -1362,6 +1407,20 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
         <span class="scanui-tag">Экран сканера · другой клиент</span>
         <span class="scanui-note">Так выглядит диагностика на экране — обезличено, без ретуши</span>
       </div>
+      <div class="scanui-stack">
+
+      <div class="surface">
+        <div class="rpt">
+          <div class="rpt-idx"><b>48</b><i>/ 100</i><span>Индекс зрелости</span></div>
+          <div class="rpt-body">
+            <span class="rpt-tag">Диагноз · Прайм Медиа</span>
+            <div class="rpt-h">Ручное управление</div>
+            <p class="rpt-p">Бизнес держится на людях и энергии собственника, а не на системе. Главное ограничение роста — <b>собственник</b>. По финансовой модели вы недополучаете порядка <b class="hl-loss-b">31 112 100 ₽ / год</b> валовой прибыли.</p>
+          </div>
+        </div>
+        <p class="scanui-quote">Это не наши слова — это ваши ответы. Ваша цель на год — <b>вырасти в 3+ раза</b>. Ваш собственный прогноз при бездействии — <b>начнёте медленно терять рынок</b>. Разрыв между целью и текущей точкой стоит примерно <b class="hl-loss-b">2 592 675 ₽</b> каждый месяц.</p>
+      </div>
+
       <div class="scanui-card surface">
         <div class="scanui-head">Где теряются деньги</div>
         <div class="scanui-grid">
@@ -1442,6 +1501,69 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
           </div>
 
         </div>
+      </div>
+
+      <div class="scanui-card surface">
+        <div class="scanui-head">План действий</div>
+        <div class="scanui-plan-sub">Что делать: 90 дней по волнам</div>
+
+        <div class="scanui-wave" data-n="01">
+          <div class="scanui-wave-top"><b>0–30 дней</b><span>Остановить утечки</span><em>+2 996 018 ₽/год</em></div>
+          <ul>
+            <li>Норматив первого касания и распределение заявок в CRM с контролем невзятых <i>— РОП, 3 нед.</i></li>
+            <li>Выбрать CRM, перенести воронку, завести все текущие сделки <i>— Собственник, 4 нед.</i></li>
+          </ul>
+        </div>
+        <div class="scanui-wave" data-n="02">
+          <div class="scanui-wave-top"><b>31–60 дней</b><span>Собрать управление</span><em>+8 396 519 ₽/год</em></div>
+          <ul>
+            <li>Сегментация базы и оффер-повод для повторной покупки <i>— Менеджер, 6 нед.</i></li>
+            <li>Прослушка 20 диалогов, карта возражений, скрипт закрытия <i>— РОП, 8 нед. · после того, как закрыт предыдущий блок</i></li>
+            <li>Запустить один управляемый канал с контролем CAC <i>— Маркетолог, 6 нед.</i></li>
+          </ul>
+        </div>
+        <div class="scanui-wave" data-n="03">
+          <div class="scanui-wave-top"><b>61–90 дней</b><span>Закрепить и масштабировать</span><em>+1 179 669 ₽/год</em></div>
+          <ul>
+            <li>Передать регулярные сделки менеджерам, оставить себе стратегические <i>— Собственник, 12 нед. · после того, как закрыт предыдущий блок</i></li>
+            <li>Профиль РОПа и конкурсный отбор с проверкой в бою <i>— Собственник, 10 нед.</i></li>
+          </ul>
+        </div>
+
+        <div class="scanui-extra">
+          <div class="scanui-plan-sub">Сверх возврата потерь</div>
+          <div class="scanui-extra-row"><b>Средний чек +10%</b><em>+6 915 456 ₽/год</em></div>
+          <p>Не требует ни новых лидов, ни новых людей — только пересмотра прайса и аргументации.</p>
+        </div>
+      </div>
+
+      <div class="scanui-card surface">
+        <div class="scanui-head">Детали разбора</div>
+
+        <div class="scanui-note-box">
+          <div class="scanui-note-lbl">Качество данных</div>
+          <p>Расчёт опирается на 6 из 6 ключевых цифр — уверенность <b>высокая</b>. Все ключевые цифры заполнены, допущений в модели нет. Сумма потерь ограничена потолком в 45% годовой валовой прибыли — это сознательное занижение, чтобы цифра оставалась защищаемой.</p>
+        </div>
+        <div class="scanui-note-box">
+          <div class="scanui-note-lbl">Полный лог сканера · 29 находок</div>
+          <ul class="scanui-log-list">
+            <li class="crit">Нет сайта — вы теряете самый дешёвый канал доверия. Даже одностраничник поднимает конверсию холодных касаний.</li>
+            <li class="crit">Диалогов меньше, чем лидов (1207 на 1856). Часть заявок вообще не обрабатывается — это прямые потери.</li>
+            <li class="crit">Конверсия 9% означает: 9 из 10 лидов, за которые вы уже заплатили, уходят к конкурентам или «в никуда».</li>
+            <li class="crit">Повторных продаж 18% — вы каждый месяц покупаете выручку заново по полной цене. Повторная продажа стоит в 5–7 раз дешевле новой.</li>
+            <li class="crit">Нет РОПа (−15 к управлению). Менеджеры без управления работают на 50–60% возможностей, а контролировать их приходится собственнику.</li>
+            <li class="crit">Нет CRM (−12 к управлению). Лиды теряются в мессенджерах и блокнотах. По рынку это 10–25% недозаработанной выручки.</li>
+            <li class="crit">Менеджеры в основном на окладе — вы платите за присутствие, а не за результат.</li>
+            <li class="crit">Продажи держатся на собственнике (−20). Отдел не продаёт — отдел оформляет.</li>
+            <li class="warn">Рентабельность 5,1% — бизнес работает почти в ноль. Любой рост расходов уводит в минус.</li>
+            <li class="warn">Без платного трафика поток лидов не масштабируется управляемо — вы растёте со скоростью сарафана, а не рынка.</li>
+            <li class="warn">Видна только общая конверсия — где именно теряются клиенты, неизвестно. Лечить воронку вслепую дорого: чинится не то место.</li>
+            <li class="warn">Не хватает одной ключевой роли — это ограничитель скорости роста.</li>
+          </ul>
+          <div class="scanui-log-more">+ 17 находок в полном отчёте — от второстепенных до критичных</div>
+        </div>
+      </div>
+
       </div>
     </div>
 
