@@ -352,7 +352,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .guar{margin-top:clamp(40px,5vw,60px)}
 .guar-card{border:1px solid rgba(52,211,153,.35);border-radius:var(--r);
   background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);
-  padding:clamp(30px,4vw,46px) clamp(24px,3.4vw,40px) clamp(46px,6vw,68px)}
+  padding:clamp(30px,4vw,46px) clamp(24px,3.4vw,40px) clamp(64px,8vw,92px)}
 .guar-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ok);border:1px solid rgba(52,211,153,.4);border-radius:20px;padding:8px 16px;margin-bottom:clamp(22px,3vw,30px)}
 .guar-rows{display:grid;grid-template-columns:1fr 1fr;gap:24px}
@@ -365,7 +365,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
   font-family:var(--disp);font-size:clamp(18px,2.2vw,22px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
 
 /* ── два пути: сравнение без/с, отдельный ритм перед финальным CTA ── */
-.versus{margin-top:clamp(56px,7vw,88px);padding-top:clamp(48px,6vw,72px);border-top:1px solid var(--rule)}
+.versus{margin-top:clamp(56px,7vw,88px);padding-top:clamp(48px,6vw,72px);padding-bottom:clamp(48px,6vw,72px);border-top:1px solid var(--rule)}
 .versus-lede{font-family:var(--disp);font-size:clamp(24px,3.4vw,36px);font-weight:600;letter-spacing:-.03em;
   color:var(--ink);margin-bottom:clamp(30px,4vw,44px)}
 .versus-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-2);
@@ -524,6 +524,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
   border:1px solid var(--rule-2);border-radius:5px;padding:3px 7px}
 .scanui-chips span.hi{color:var(--ok-soft);border-color:rgba(52,211,153,.3)}
 .scanui-recover p{font-size:12.5px;color:var(--ink-3);line-height:1.55;margin-top:8px}
+.scanui-recover.locked>*{filter:blur(4.5px);user-select:none}
 
 .scanui-stack{display:flex;flex-direction:column;gap:clamp(14px,1.8vw,18px)}
 .scanui-quote{margin:0 clamp(22px,2.8vw,28px) clamp(26px,3.2vw,34px);padding:16px clamp(18px,2.4vw,24px);
@@ -625,10 +626,10 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 /* ── тумблер До проекта / После 90 дней ── */
 .rec-toggle{display:inline-flex;gap:3px;padding:4px;border:1px solid var(--rule-2);border-radius:999px;
   background:var(--paper);margin-bottom:clamp(22px,3vw,30px)}
-.rec-toggle-btn{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+.rec-toggle-btn{font-family:var(--disp);font-size:13px;letter-spacing:-.01em;
   color:var(--ink-3);background:transparent;border:none;border-radius:999px;padding:9px 18px;cursor:pointer;
-  transition:color .2s ease,background .25s ease}
-.rec-toggle-btn.is-active{color:#04120c;background:var(--ok);font-weight:600}
+  transition:color .2s ease,background .25s ease;font-weight:600}
+.rec-toggle-btn.is-active{color:var(--bg);background:var(--ink)}
 .rec-toggle-btn:not(.is-active):hover{color:var(--ink)}
 
 /* ── ставка ── */
@@ -1252,7 +1253,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 
       <div class="hero-cta">
         <a class="btn js-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Показать, сколько я теряю →</a>
-        <span class="btn-note">50 000 ₽ · 120 минут · деньги в рублях</span>
+        <span class="btn-note">50 000 ₽ · 120 минут</span>
       </div>
       <p class="hero-proof">Лично Николай Клименко — экс-коммерческий директор CDEK, Vagabond, руководитель продаж MarketGuru</p>
     </div>
@@ -1323,10 +1324,10 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <p>Позитивная EBITDA — ваша прямая заслуга<br>Недозаработанная маржа — тоже: те же клиенты, та же команда, тот же бюджет, но на каждом этапе теряются деньги, которые никто не считает</p>
     </div>
     <dl class="frag rv">
-      <div><dt>Продажи</dt><dd><b>План выполнен</b>А сколько сделок умерло на втором касании — такой строки в отчёте нет.</dd></div>
-      <div><dt>Маркетинг</dt><dd><b>Заявки в плане, лид дешёвый</b>Что с ними стало после передачи в отдел — уже не его показатель.</dd></div>
-      <div><dt>Финансы</dt><dd><b>Цифры сошлись</b>P&amp;L показывает результат. ДДС показывает движение денег. Ни один из них не показывает, на каком этапе коммерческой цепочки вы недополучили клиента и маржу.</dd></div>
-      <div><dt>Собственник</dt><dd><b>Все планы выполнены</b>А кэша нет. Прибыль — на бумаге, в отчёте о прибылях; в ДДС её не видно, пока не поздно.</dd></div>
+      <div><dt>Продажи</dt><dd><b>Воронка полная</b>А сколько сделок умерло на втором касании — такой строки в отчёте нет.</dd></div>
+      <div><dt>Маркетинг</dt><dd><b>Лид дешёвый, поток стабильный</b>Что с ним стало после передачи в отдел — уже не его показатель.</dd></div>
+      <div><dt>Финансы</dt><dd><b>Отчёт сошёлся до копейки</b>P&amp;L показывает результат. ДДС показывает движение денег. Ни один из них не показывает, на каком этапе коммерческой цепочки вы недополучили клиента и маржу.</dd></div>
+      <div><dt>Собственник</dt><dd><b>Везде зелёный свет</b>А кэша нет. Прибыль — на бумаге, в отчёте о прибылях; в ДДС её не видно, пока не поздно.</dd></div>
     </dl>
     <p class="gap-note rv">Все отчитались, прибыли нет<br>Она утекла <span class="hl-loss">между</span> отчётами — туда, где ни у кого нет показателя</p>
   </div>
@@ -1379,17 +1380,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     </div>
     <div class="ldg surface rv scan-card">
       <div class="ldg-scan"></div>
-      <div class="rpt">
-        <div class="rpt-idx">
-          <b>52</b><i>/ 100</i>
-          <span>Индекс зрелости</span>
-        </div>
-        <div class="rpt-body">
-          <span class="rpt-tag">Диагноз · Забытая база</span>
-          <div class="rpt-h">Растёте за счёт новых клиентов, теряя старых</div>
-          <p class="rpt-p">База есть, но повторные продажи не выстроены, а часть решений всё ещё идёт через собственника — вот из чего сложилась сумма ниже.</p>
-        </div>
-      </div>
       <div class="ldg-top">
         <b>Ведомость потерь</b>
         <span>пример расчёта</span>
@@ -1435,7 +1425,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
               <div><b>Закрытие 14% при ориентире 20%</b><em>−10 505 411 ₽/год</em>
                 <p>Разговор состоялся, деньги не пришли. Здесь работают скрипт, работа с возражениями и доведение до решения.</p></div>
             </div>
-            <div class="scanui-problem">
+            <div class="scanui-problem locked">
               <span class="scanui-num">2</span>
               <div><b>Повторные 18% при ориентире 60% для вашего типа продукта</b><em>−9 911 592 ₽/год</em>
                 <p>Повторная продажа обходится в 5–7 раз дешевле новой: контакт и доверие уже оплачены.</p></div>
@@ -1455,7 +1445,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
               <div><b>Воронка не прозрачна по этапам</b>
                 <p>Известна только общая конверсия. Где именно теряются клиенты — не видно, лечится «не то место».</p></div>
             </div>
-            <p class="scanui-lock-note">Остальные 3 — находки повторяются у бизнесов той же ниши, показываем только в вашем МРТ</p>
+            <p class="scanui-lock-note">Остальные 4 — находки повторяются у бизнесов той же ниши, показываем только в вашем МРТ</p>
           </div>
 
           <div class="scanui-col">
@@ -1473,7 +1463,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
             <div class="scanui-total">31 112 100 ₽<i> / год</i></div>
             <p class="scanui-permonth">≈ <b>2 592 675 ₽</b> каждый месяц ожидания</p>
             <div class="scanui-break"><span>Закрытие 14% при ориентире 20%</span><b>−10 505 411 ₽</b></div>
-            <div class="scanui-break"><span>Повторные 18% при ориентире 60% для вашего типа продукта</span><b>−9 911 592 ₽</b></div>
+            <div class="scanui-break locked"><span>Повторные 18% при ориентире 60% для вашего типа продукта</span><b>−9 911 592 ₽</b></div>
             <div class="scanui-break locked"><span>Дозвон 65% при ориентире 75%</span><b>−3 617 084 ₽</b></div>
             <div class="scanui-break locked"><span>Продажи завязаны на собственнике</span><b>−2 359 338 ₽</b></div>
             <div class="scanui-blur-note">Остальные строки скрыты — увидите свои в демо</div>
@@ -1487,21 +1477,22 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
               <div class="scanui-chips"><span>3 нед.</span><span>РОП</span><span class="hi">уверенность высокая</span></div>
               <p>Норматив первого касания и распределение заявок в CRM с контролем невзятых</p>
             </div>
-            <div class="scanui-recover">
+            <div class="scanui-recover locked">
               <b>Повторные 18% при ориентире 60% для вашего типа продукта</b><em>+3 964 637 ₽/год</em>
               <div class="scanui-chips"><span>6 нед.</span><span>Менеджер</span><span class="hi">уверенность высокая</span></div>
               <p>Сегментация базы и оффер-повод для повторной покупки</p>
             </div>
-            <div class="scanui-recover">
+            <div class="scanui-recover locked">
               <b>Закрытие 14% при ориентире 20%</b><em>+3 676 894 ₽/год</em>
               <div class="scanui-chips"><span>8 нед.</span><span>РОП</span><span class="hi">уверенность высокая</span></div>
               <p>Прослушка 20 диалогов, карта возражений, скрипт закрытия</p>
             </div>
-            <div class="scanui-recover">
+            <div class="scanui-recover locked">
               <b>Нет CRM: потери лидов и сделок</b><em>+825 768 ₽/год</em>
               <div class="scanui-chips"><span>4 нед.</span><span>Собственник</span><span class="hi">уверенность высокая</span></div>
               <p>Выбрать CRM, перенести воронку, завести все текущие сделки</p>
             </div>
+            <div class="scanui-blur-note">Остальные пункты — в вашем МРТ</div>
           </div>
 
         </div>
