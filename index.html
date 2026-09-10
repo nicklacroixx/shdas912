@@ -178,6 +178,8 @@
   --loss:#F0555A;
   --loss-soft:#E4676B;
   --loss-dim:#8C3E42;
+  --amber:#E8B34D;
+  --amber-soft:#F3CC7E;
   --ok:#34D399;
   --ok-soft:#7FE9C0;
   --disp:'Unbounded','Plus Jakarta Sans','Onest',system-ui,sans-serif;
@@ -467,6 +469,59 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 }
 .ldg-foot{padding:16px clamp(18px,3vw,30px);border-top:1px solid var(--rule-2);background:rgba(255,255,255,.016);
   font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);line-height:1.8}
+
+/* ── экран сканера: живой пример интерфейса диагностики ── */
+.scanui{margin-top:clamp(28px,3.6vw,38px)}
+.scanui-cap{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;margin-bottom:14px}
+.scanui-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ok)}
+.scanui-note{font-size:12.5px;color:var(--ink-3)}
+.scanui-card{border-radius:var(--r);padding:clamp(20px,2.6vw,30px)}
+.scanui-head{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);
+  margin-bottom:clamp(18px,2.4vw,26px)}
+.scanui-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--rule-2);
+  border:1px solid var(--rule-2);border-radius:calc(var(--r) - 4px);overflow:hidden}
+@media(min-width:1080px){.scanui-grid{grid-template-columns:repeat(4,1fr)}}
+.scanui-col{background:var(--paper);padding:20px}
+.scanui-col-h{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+  margin-bottom:16px;line-height:1.6}
+.scanui-col-h i{font-style:normal;color:var(--ink-2)}
+.scanui-problem{display:flex;gap:12px;padding:13px 0;border-top:1px solid var(--rule)}
+.scanui-problem:first-of-type{border-top:none}
+.scanui-num{flex:none;width:22px;height:22px;border-radius:50%;border:1px solid var(--loss-dim);color:var(--loss-soft);
+  font-family:var(--mono);font-size:11px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.scanui-problem b{display:block;font-size:14px;font-weight:600;color:var(--ink);line-height:1.4}
+.scanui-problem em{display:block;font-style:normal;font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--loss-soft);margin-top:3px}
+.scanui-problem p{font-size:12.5px;color:var(--ink-3);line-height:1.55;margin-top:7px}
+.scanui-problem.dim b{color:var(--ink-2)}
+.scanui-bar-row{padding:11px 0;border-top:1px solid var(--rule)}
+.scanui-bar-row:first-of-type{border-top:none}
+.scanui-bar-row>div{display:flex;justify-content:space-between;font-size:13.5px;color:var(--ink);margin-bottom:7px}
+.scanui-bar-row b{font-family:var(--mono);font-weight:600}
+.scanui-bar-track{height:5px;border-radius:3px;background:var(--rule-2);overflow:hidden}
+.scanui-bar-fill{height:100%;border-radius:3px;width:var(--v)}
+.scanui-total{font-family:var(--mono);font-weight:700;font-size:clamp(26px,2.6vw,32px);color:var(--loss-soft);
+  line-height:1.15;letter-spacing:-.02em}
+.scanui-total i{font-style:normal;font-size:15px;color:var(--ink-3);font-weight:500}
+.scanui-permonth{font-size:12.5px;color:var(--ink-3);margin-top:8px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.scanui-permonth b{color:var(--ink-2);font-weight:600}
+.scanui-break{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--rule);
+  font-size:12.5px}
+.scanui-break span{color:var(--ink-2)}
+.scanui-break b{font-family:var(--mono);color:var(--loss-soft);flex:none;filter:blur(4px);transition:filter .25s ease}
+.scanui-card:hover .scanui-break b{filter:blur(0)}
+.scanui-blur-note{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--ink-3);
+  margin-top:12px;display:flex;align-items:center;gap:6px}
+.scanui-lead{font-size:12.5px;color:var(--ink-2);line-height:1.6;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.scanui-lead b{color:var(--ink);font-weight:600}
+.scanui-recover{padding:14px 0;border-top:1px solid var(--rule)}
+.scanui-recover:first-of-type{border-top:none}
+.scanui-recover b{font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.4}
+.scanui-recover em{display:block;font-style:normal;font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ok);margin-top:3px}
+.scanui-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.scanui-chips span{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);
+  border:1px solid var(--rule-2);border-radius:5px;padding:3px 7px}
+.scanui-chips span.hi{color:var(--ok-soft);border-color:rgba(52,211,153,.3)}
+.scanui-recover p{font-size:12.5px;color:var(--ink-3);line-height:1.55;margin-top:8px}
 
 /* ── слепое пятно ── */
 .frag{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
@@ -899,19 +954,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 .exit-modal .fstep{padding-top:clamp(24px,4vw,34px)}
 .exit-modal .fq button{padding:12px 14px;font-size:14px}
 
-/* пруф: страница настоящего PDF-отчёта */
-.proof{margin-top:clamp(28px,3.6vw,38px)}
-.proof-frame{border-radius:var(--r);overflow:hidden;border:1px solid var(--rule-2);
-  box-shadow:0 34px 76px -26px rgba(0,0,0,.6)}
-.proof-frame img{display:block;width:100%;height:auto}
-.proof-cap{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;
-  margin-top:14px}
-.proof-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ok)}
-.proof-note{font-size:12.5px;color:var(--ink-3)}
-.proof-dl{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;
-  color:var(--ok-soft);border-bottom:1px solid rgba(127,233,192,.35);padding-bottom:2px;transition:border-color .2s ease}
-.proof-dl:hover{border-color:var(--ok-soft)}
-
 /* цена-CTA под карточками цен */
 .price-cta{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
   margin-top:clamp(26px,3.4vw,34px);padding:clamp(18px,2.6vw,24px) clamp(20px,3vw,28px);
@@ -1314,14 +1356,95 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
       <div class="row total"><div class="row-t">Не заработано за год</div><div class="row-v" id="tot" data-count="42600000" data-suffix=" ₽">−42 600 000 ₽</div></div>
       <div class="ldg-foot">По отдельности ни одна течь не выглядела проблемой — сумма появилась, когда их сложили.</div>
     </div>
-    <div class="proof rv">
-      <div class="proof-frame"><img src="report-example.jpg" alt="Страница из реального PDF-отчёта Closery — оценка шести систем бизнеса" loading="lazy" width="1400" height="900"></div>
-      <div class="proof-cap">
-        <span class="proof-tag">Реальная страница отчёта · Closery Commercial MRI</span>
-        <span class="proof-note">Клиент обезличен, цифры и вёрстка — без ретуши</span>
+
+    <div class="scanui rv">
+      <div class="scanui-cap">
+        <span class="scanui-tag">Экран сканера · другой клиент</span>
+        <span class="scanui-note">Так выглядит диагностика на экране — обезличено, без ретуши</span>
       </div>
-      <a class="proof-dl" href="closery-example-report.pdf" target="_blank" rel="noopener">Смотреть отчёт целиком, все 8 страниц (PDF) →</a>
+      <div class="scanui-card surface">
+        <div class="scanui-head">Где теряются деньги</div>
+        <div class="scanui-grid">
+
+          <div class="scanui-col">
+            <div class="scanui-col-h">Главные проблемы<i>· 5 из 10</i></div>
+            <div class="scanui-problem">
+              <span class="scanui-num">1</span>
+              <div><b>Закрытие 14% при ориентире 20%</b><em>−10 505 411 ₽/год</em>
+                <p>Разговор состоялся, деньги не пришли. Здесь работают скрипт, работа с возражениями и доведение до решения.</p></div>
+            </div>
+            <div class="scanui-problem">
+              <span class="scanui-num">2</span>
+              <div><b>Повторные 18% при ориентире 60% для вашего типа продукта</b><em>−9 911 592 ₽/год</em>
+                <p>Повторная продажа обходится в 5–7 раз дешевле новой: контакт и доверие уже оплачены.</p></div>
+            </div>
+            <div class="scanui-problem">
+              <span class="scanui-num">3</span>
+              <div><b>Дозвон 65% при ориентире 75%</b><em>−3 617 084 ₽/год</em>
+                <p>185 заявок в месяц, с которыми просто не поговорили. Они уже оплачены маркетингом — это чистый убыток на входе.</p></div>
+            </div>
+            <div class="scanui-problem">
+              <span class="scanui-num">4</span>
+              <div><b>Продажи завязаны на собственнике</b><em>−2 359 338 ₽/год</em>
+                <p>Каждая сделка требует вашего участия — рост упирается в ваш календарь, а не в рынок.</p></div>
+            </div>
+            <div class="scanui-problem dim">
+              <span class="scanui-num">5</span>
+              <div><b>Воронка не прозрачна по этапам</b>
+                <p>Известна только общая конверсия. Где именно теряются клиенты — не видно, лечится «не то место».</p></div>
+            </div>
+          </div>
+
+          <div class="scanui-col">
+            <div class="scanui-col-h">Системы бизнеса</div>
+            <div class="scanui-bar-row"><div><span>Маркетинг</span><b>58</b></div><div class="scanui-bar-track"><div class="scanui-bar-fill" style="--v:58%;background:var(--loss-soft)"></div></div></div>
+            <div class="scanui-bar-row"><div><span>Продажи</span><b>31</b></div><div class="scanui-bar-track"><div class="scanui-bar-fill" style="--v:31%;background:var(--loss-soft)"></div></div></div>
+            <div class="scanui-bar-row"><div><span>Команда</span><b>50</b></div><div class="scanui-bar-track"><div class="scanui-bar-fill" style="--v:50%;background:var(--loss-soft)"></div></div></div>
+            <div class="scanui-bar-row"><div><span>Управление</span><b>33</b></div><div class="scanui-bar-track"><div class="scanui-bar-fill" style="--v:33%;background:var(--loss-soft)"></div></div></div>
+            <div class="scanui-bar-row"><div><span>Экономика</span><b>64</b></div><div class="scanui-bar-track"><div class="scanui-bar-fill" style="--v:64%;background:var(--amber)"></div></div></div>
+            <div class="scanui-bar-row"><div><span>Стратегия</span><b>70</b></div><div class="scanui-bar-track"><div class="scanui-bar-fill" style="--v:70%;background:var(--amber)"></div></div></div>
+          </div>
+
+          <div class="scanui-col">
+            <div class="scanui-col-h">Потенциально теряете</div>
+            <div class="scanui-total">31 112 100 ₽<i> / год</i></div>
+            <p class="scanui-permonth">≈ <b>2 592 675 ₽</b> каждый месяц ожидания</p>
+            <div class="scanui-break"><span>Закрытие 14% при ориентире 20%</span><b>−10 505 411 ₽</b></div>
+            <div class="scanui-break"><span>Повторные 18% при ориентире 60% для вашего типа продукта</span><b>−9 911 592 ₽</b></div>
+            <div class="scanui-break"><span>Дозвон 65% при ориентире 75%</span><b>−3 617 084 ₽</b></div>
+            <div class="scanui-break"><span>Продажи завязаны на собственнике</span><b>−2 359 338 ₽</b></div>
+            <div class="scanui-blur-note">Наведите на карточку, чтобы посмотреть цифры</div>
+          </div>
+
+          <div class="scanui-col">
+            <div class="scanui-col-h">Реально вернуть за 90 дней<i>· 12 572 206 ₽ / год</i></div>
+            <p class="scanui-lead">Это <b>не отдельная сумма сверху</b>, а та часть потерь выше, которую можно вернуть за квартал. Остальное требует больше времени или инвестиций.</p>
+            <div class="scanui-recover">
+              <b>Дозвон 65% при ориентире 75%</b><em>+2 170 250 ₽/год</em>
+              <div class="scanui-chips"><span>3 нед.</span><span>РОП</span><span class="hi">уверенность высокая</span></div>
+              <p>Норматив первого касания и распределение заявок в CRM с контролем невзятых</p>
+            </div>
+            <div class="scanui-recover">
+              <b>Повторные 18% при ориентире 60% для вашего типа продукта</b><em>+3 964 637 ₽/год</em>
+              <div class="scanui-chips"><span>6 нед.</span><span>Менеджер</span><span class="hi">уверенность высокая</span></div>
+              <p>Сегментация базы и оффер-повод для повторной покупки</p>
+            </div>
+            <div class="scanui-recover">
+              <b>Закрытие 14% при ориентире 20%</b><em>+3 676 894 ₽/год</em>
+              <div class="scanui-chips"><span>8 нед.</span><span>РОП</span><span class="hi">уверенность высокая</span></div>
+              <p>Прослушка 20 диалогов, карта возражений, скрипт закрытия</p>
+            </div>
+            <div class="scanui-recover">
+              <b>Нет CRM: потери лидов и сделок</b><em>+825 768 ₽/год</em>
+              <div class="scanui-chips"><span>4 нед.</span><span>Собственник</span><span class="hi">уверенность высокая</span></div>
+              <p>Выбрать CRM, перенести воронку, завести все текущие сделки</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
+
     <div class="price-cta rv">
       <div><b>Это чужая цифра. Хотите свою?</b><span>Демо-МРТ · заявки, конверсия, чек, маржа, цикл сделки · 2 минуты, без CRM</span></div>
       <a class="btn" href="/mrt-demo/" target="_blank" rel="noopener">Посчитать бесплатно</a>
