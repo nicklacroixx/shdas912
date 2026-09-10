@@ -472,9 +472,8 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 
 /* ── экран сканера: живой пример интерфейса диагностики ── */
 .scanui{margin-top:clamp(28px,3.6vw,38px)}
-.scanui-cap{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;margin-bottom:14px}
+.scanui-cap{margin-bottom:14px}
 .scanui-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ok)}
-.scanui-note{font-size:12.5px;color:var(--ink-3)}
 .scanui-card{border-radius:var(--r);padding:clamp(20px,2.6vw,30px)}
 .scanui-head{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);
   margin-bottom:clamp(18px,2.4vw,26px)}
@@ -493,6 +492,9 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .scanui-problem em{display:block;font-style:normal;font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--loss-soft);margin-top:3px}
 .scanui-problem p{font-size:12.5px;color:var(--ink-3);line-height:1.55;margin-top:7px}
 .scanui-problem.dim b{color:var(--ink-2)}
+.scanui-problem.locked>div{filter:blur(4.5px);user-select:none}
+.scanui-lock-note{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--ink-3);
+  margin-top:13px;line-height:1.6}
 .scanui-bar-row{padding:11px 0;border-top:1px solid var(--rule)}
 .scanui-bar-row:first-of-type{border-top:none}
 .scanui-bar-row>div{display:flex;justify-content:space-between;font-size:13.5px;color:var(--ink);margin-bottom:7px}
@@ -507,8 +509,8 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .scanui-break{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--rule);
   font-size:12.5px}
 .scanui-break span{color:var(--ink-2)}
-.scanui-break b{font-family:var(--mono);color:var(--loss-soft);flex:none;filter:blur(4px);transition:filter .25s ease}
-.scanui-card:hover .scanui-break b{filter:blur(0)}
+.scanui-break b{font-family:var(--mono);color:var(--loss-soft);flex:none}
+.scanui-break.locked b,.scanui-break.locked span{filter:blur(4px);user-select:none}
 .scanui-blur-note{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--ink-3);
   margin-top:12px;display:flex;align-items:center;gap:6px}
 .scanui-lead{font-size:12.5px;color:var(--ink-2);line-height:1.6;padding-bottom:14px;border-bottom:1px solid var(--rule)}
@@ -566,6 +568,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .scanui-log-list li::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%}
 .scanui-log-list li.crit::before{background:var(--loss)}
 .scanui-log-list li.warn::before{background:var(--amber)}
+.scanui-log-list li.locked{filter:blur(4px);user-select:none}
 .scanui-log-more{margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
 
 /* ── слепое пятно ── */
@@ -1404,8 +1407,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 
     <div class="scanui rv">
       <div class="scanui-cap">
-        <span class="scanui-tag">Экран сканера · другой клиент</span>
-        <span class="scanui-note">Так выглядит диагностика на экране — обезличено, без ретуши</span>
+        <span class="scanui-tag">Экран сканера · реальный клиент</span>
       </div>
       <div class="scanui-stack">
 
@@ -1437,21 +1439,22 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
               <div><b>Повторные 18% при ориентире 60% для вашего типа продукта</b><em>−9 911 592 ₽/год</em>
                 <p>Повторная продажа обходится в 5–7 раз дешевле новой: контакт и доверие уже оплачены.</p></div>
             </div>
-            <div class="scanui-problem">
+            <div class="scanui-problem locked">
               <span class="scanui-num">3</span>
               <div><b>Дозвон 65% при ориентире 75%</b><em>−3 617 084 ₽/год</em>
                 <p>185 заявок в месяц, с которыми просто не поговорили. Они уже оплачены маркетингом — это чистый убыток на входе.</p></div>
             </div>
-            <div class="scanui-problem">
+            <div class="scanui-problem locked">
               <span class="scanui-num">4</span>
               <div><b>Продажи завязаны на собственнике</b><em>−2 359 338 ₽/год</em>
                 <p>Каждая сделка требует вашего участия — рост упирается в ваш календарь, а не в рынок.</p></div>
             </div>
-            <div class="scanui-problem dim">
+            <div class="scanui-problem locked dim">
               <span class="scanui-num">5</span>
               <div><b>Воронка не прозрачна по этапам</b>
                 <p>Известна только общая конверсия. Где именно теряются клиенты — не видно, лечится «не то место».</p></div>
             </div>
+            <p class="scanui-lock-note">Остальные 3 — находки повторяются у бизнесов той же ниши, показываем только в вашем МРТ</p>
           </div>
 
           <div class="scanui-col">
@@ -1470,9 +1473,9 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
             <p class="scanui-permonth">≈ <b>2 592 675 ₽</b> каждый месяц ожидания</p>
             <div class="scanui-break"><span>Закрытие 14% при ориентире 20%</span><b>−10 505 411 ₽</b></div>
             <div class="scanui-break"><span>Повторные 18% при ориентире 60% для вашего типа продукта</span><b>−9 911 592 ₽</b></div>
-            <div class="scanui-break"><span>Дозвон 65% при ориентире 75%</span><b>−3 617 084 ₽</b></div>
-            <div class="scanui-break"><span>Продажи завязаны на собственнике</span><b>−2 359 338 ₽</b></div>
-            <div class="scanui-blur-note">Наведите на карточку, чтобы посмотреть цифры</div>
+            <div class="scanui-break locked"><span>Дозвон 65% при ориентире 75%</span><b>−3 617 084 ₽</b></div>
+            <div class="scanui-break locked"><span>Продажи завязаны на собственнике</span><b>−2 359 338 ₽</b></div>
+            <div class="scanui-blur-note">Остальные строки скрыты — увидите свои в демо</div>
           </div>
 
           <div class="scanui-col">
@@ -1549,18 +1552,12 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
           <ul class="scanui-log-list">
             <li class="crit">Нет сайта — вы теряете самый дешёвый канал доверия. Даже одностраничник поднимает конверсию холодных касаний.</li>
             <li class="crit">Диалогов меньше, чем лидов (1207 на 1856). Часть заявок вообще не обрабатывается — это прямые потери.</li>
-            <li class="crit">Конверсия 9% означает: 9 из 10 лидов, за которые вы уже заплатили, уходят к конкурентам или «в никуда».</li>
-            <li class="crit">Повторных продаж 18% — вы каждый месяц покупаете выручку заново по полной цене. Повторная продажа стоит в 5–7 раз дешевле новой.</li>
-            <li class="crit">Нет РОПа (−15 к управлению). Менеджеры без управления работают на 50–60% возможностей, а контролировать их приходится собственнику.</li>
-            <li class="crit">Нет CRM (−12 к управлению). Лиды теряются в мессенджерах и блокнотах. По рынку это 10–25% недозаработанной выручки.</li>
-            <li class="crit">Менеджеры в основном на окладе — вы платите за присутствие, а не за результат.</li>
-            <li class="crit">Продажи держатся на собственнике (−20). Отдел не продаёт — отдел оформляет.</li>
             <li class="warn">Рентабельность 5,1% — бизнес работает почти в ноль. Любой рост расходов уводит в минус.</li>
-            <li class="warn">Без платного трафика поток лидов не масштабируется управляемо — вы растёте со скоростью сарафана, а не рынка.</li>
-            <li class="warn">Видна только общая конверсия — где именно теряются клиенты, неизвестно. Лечить воронку вслепую дорого: чинится не то место.</li>
-            <li class="warn">Не хватает одной ключевой роли — это ограничитель скорости роста.</li>
+            <li class="crit locked">Конверсия 9% означает: 9 из 10 лидов, за которые вы уже заплатили, уходят к конкурентам или «в никуда».</li>
+            <li class="crit locked">Нет РОПа. Менеджеры без управления работают на 50–60% возможностей, а контролировать их приходится собственнику.</li>
+            <li class="warn locked">Без платного трафика поток лидов не масштабируется управляемо — вы растёте со скоростью сарафана, а не рынка.</li>
           </ul>
-          <div class="scanui-log-more">+ 17 находок в полном отчёте — от второстепенных до критичных</div>
+          <div class="scanui-log-more">+ 23 находки скрыты — находки во многом повторяются у бизнесов той же ниши, полный лог только в вашем МРТ</div>
         </div>
       </div>
 
