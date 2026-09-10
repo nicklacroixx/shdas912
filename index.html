@@ -565,7 +565,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 @media(max-width:680px){.scanui-log-list{columns:1}}
 .scanui-log-list li{font-size:12.5px;color:var(--ink-2);line-height:1.55;break-inside:avoid;padding-left:14px;
   position:relative;margin-top:13px}
-.scanui-log-list li:nth-child(-n+2){margin-top:0}
+.scanui-log-list li:first-child{margin-top:0}
 .scanui-log-list li::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%}
 .scanui-log-list li.crit::before{background:var(--loss)}
 .scanui-log-list li.warn::before{background:var(--amber)}
