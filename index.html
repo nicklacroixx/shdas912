@@ -548,6 +548,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .scanui-wave li+li{margin-top:9px}
 .scanui-wave li::before{content:'';position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--ok)}
 .scanui-wave li i{font-style:normal;color:var(--ink-3)}
+.scanui-wave li.locked{filter:blur(4px);user-select:none}
 .scanui-extra{margin-top:18px;padding-top:16px;border-top:1px solid var(--rule)}
 .scanui-extra-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;align-items:baseline}
 .scanui-extra-row b{font-size:14.5px;font-weight:600;color:var(--ink)}
@@ -1514,24 +1515,25 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
           <div class="scanui-wave-top"><b>0–30 дней</b><span>Остановить утечки</span><em>+2 996 018 ₽/год</em></div>
           <ul>
             <li>Норматив первого касания и распределение заявок в CRM с контролем невзятых <i>— РОП, 3 нед.</i></li>
-            <li>Выбрать CRM, перенести воронку, завести все текущие сделки <i>— Собственник, 4 нед.</i></li>
+            <li class="locked">Выбрать CRM, перенести воронку, завести все текущие сделки <i>— Собственник, 4 нед.</i></li>
           </ul>
         </div>
         <div class="scanui-wave" data-n="02">
           <div class="scanui-wave-top"><b>31–60 дней</b><span>Собрать управление</span><em>+8 396 519 ₽/год</em></div>
           <ul>
             <li>Сегментация базы и оффер-повод для повторной покупки <i>— Менеджер, 6 нед.</i></li>
-            <li>Прослушка 20 диалогов, карта возражений, скрипт закрытия <i>— РОП, 8 нед. · после того, как закрыт предыдущий блок</i></li>
-            <li>Запустить один управляемый канал с контролем CAC <i>— Маркетолог, 6 нед.</i></li>
+            <li class="locked">Прослушка 20 диалогов, карта возражений, скрипт закрытия <i>— РОП, 8 нед. · после того, как закрыт предыдущий блок</i></li>
+            <li class="locked">Запустить один управляемый канал с контролем CAC <i>— Маркетолог, 6 нед.</i></li>
           </ul>
         </div>
         <div class="scanui-wave" data-n="03">
           <div class="scanui-wave-top"><b>61–90 дней</b><span>Закрепить и масштабировать</span><em>+1 179 669 ₽/год</em></div>
           <ul>
-            <li>Передать регулярные сделки менеджерам, оставить себе стратегические <i>— Собственник, 12 нед. · после того, как закрыт предыдущий блок</i></li>
-            <li>Профиль РОПа и конкурсный отбор с проверкой в бою <i>— Собственник, 10 нед.</i></li>
+            <li class="locked">Передать регулярные сделки менеджерам, оставить себе стратегические <i>— Собственник, 12 нед. · после того, как закрыт предыдущий блок</i></li>
+            <li class="locked">Профиль РОПа и конкурсный отбор с проверкой в бою <i>— Собственник, 10 нед.</i></li>
           </ul>
         </div>
+        <p class="scanui-lock-note">Остальные шаги открываются в вашем МРТ — тактика зависит от ваших цифр</p>
 
         <div class="scanui-extra">
           <div class="scanui-plan-sub">Сверх возврата потерь</div>
