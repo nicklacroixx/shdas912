@@ -352,7 +352,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .guar{margin-top:clamp(40px,5vw,60px)}
 .guar-card{border:1px solid rgba(52,211,153,.35);border-radius:var(--r);
   background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);
-  padding:clamp(30px,4vw,46px) clamp(24px,3.4vw,40px) clamp(64px,8vw,92px)}
+  padding:clamp(30px,4vw,46px)}
 .guar-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ok);border:1px solid rgba(52,211,153,.4);border-radius:20px;padding:8px 16px;margin-bottom:clamp(22px,3vw,30px)}
 .guar-rows{display:grid;grid-template-columns:1fr 1fr;gap:24px}
@@ -493,8 +493,6 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .scanui-problem p{font-size:12.5px;color:var(--ink-3);line-height:1.55;margin-top:7px}
 .scanui-problem.dim b{color:var(--ink-2)}
 .scanui-problem.locked>div{filter:blur(4.5px);user-select:none}
-.scanui-lock-note{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--ink-3);
-  margin-top:13px;line-height:1.6}
 .scanui-bar-row{padding:11px 0;border-top:1px solid var(--rule)}
 .scanui-bar-row:first-of-type{border-top:none}
 .scanui-bar-row>div{display:flex;justify-content:space-between;font-size:13.5px;color:var(--ink);margin-bottom:7px}
@@ -511,8 +509,6 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .scanui-break span{color:var(--ink-2)}
 .scanui-break b{font-family:var(--mono);color:var(--loss-soft);flex:none}
 .scanui-break.locked b,.scanui-break.locked span{filter:blur(4px);user-select:none}
-.scanui-blur-note{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--ink-3);
-  margin-top:12px;display:flex;align-items:center;gap:6px}
 .scanui-lead{font-size:12.5px;color:var(--ink-2);line-height:1.6;padding-bottom:14px;border-bottom:1px solid var(--rule)}
 .scanui-lead b{color:var(--ink);font-weight:600}
 .scanui-recover{padding:14px 0;border-top:1px solid var(--rule)}
@@ -527,10 +523,6 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .scanui-recover.locked>*{filter:blur(4.5px);user-select:none}
 
 .scanui-stack{display:flex;flex-direction:column;gap:clamp(14px,1.8vw,18px)}
-.scanui-quote{margin:0 clamp(22px,2.8vw,28px) clamp(26px,3.2vw,34px);padding:16px clamp(18px,2.4vw,24px);
-  border-left:2px solid var(--ok);background:rgba(52,211,153,.05);border-radius:0 8px 8px 0;
-  font-style:italic;font-size:13.5px;color:var(--ink-2);line-height:1.7}
-.scanui-quote b{font-style:normal;color:var(--ink);font-weight:600}
 .hl-loss-b{color:var(--loss-soft);font-weight:600}
 
 .scanui-plan-sub{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
@@ -571,7 +563,6 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .scanui-log-list li.crit::before{background:var(--loss)}
 .scanui-log-list li.warn::before{background:var(--amber)}
 .scanui-log-list li.locked{filter:blur(4px);user-select:none}
-.scanui-log-more{margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
 
 /* ── слепое пятно ── */
 .frag{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
@@ -1408,10 +1399,9 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
           <div class="rpt-body">
             <span class="rpt-tag">Диагноз · Прайм Медиа</span>
             <div class="rpt-h">Ручное управление</div>
-            <p class="rpt-p">Бизнес держится на людях и энергии собственника, а не на системе. Главное ограничение роста — <b>собственник</b>. По финансовой модели вы недополучаете порядка <b class="hl-loss-b">31 112 100 ₽ / год</b> валовой прибыли.</p>
+            <p class="rpt-p">Бизнес держится на людях и энергии собственника, а не на системе. По финансовой модели вы недополучаете порядка <b class="hl-loss-b">31 112 100 ₽ / год</b> валовой прибыли.</p>
           </div>
         </div>
-        <p class="scanui-quote">Это не наши слова — это ваши ответы. Ваша цель на год — <b>вырасти в 3+ раза</b>. Ваш собственный прогноз при бездействии — <b>начнёте медленно терять рынок</b>. Разрыв между целью и текущей точкой стоит примерно <b class="hl-loss-b">2 592 675 ₽</b> каждый месяц.</p>
       </div>
 
       <div class="scanui-card surface">
@@ -1445,7 +1435,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
               <div><b>Воронка не прозрачна по этапам</b>
                 <p>Известна только общая конверсия. Где именно теряются клиенты — не видно, лечится «не то место».</p></div>
             </div>
-            <p class="scanui-lock-note">Остальные 4 — находки повторяются у бизнесов той же ниши, показываем только в вашем МРТ</p>
           </div>
 
           <div class="scanui-col">
@@ -1466,7 +1455,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
             <div class="scanui-break locked"><span>Повторные 18% при ориентире 60% для вашего типа продукта</span><b>−9 911 592 ₽</b></div>
             <div class="scanui-break locked"><span>Дозвон 65% при ориентире 75%</span><b>−3 617 084 ₽</b></div>
             <div class="scanui-break locked"><span>Продажи завязаны на собственнике</span><b>−2 359 338 ₽</b></div>
-            <div class="scanui-blur-note">Остальные строки скрыты — увидите свои в демо</div>
           </div>
 
           <div class="scanui-col">
@@ -1492,7 +1480,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
               <div class="scanui-chips"><span>4 нед.</span><span>Собственник</span><span class="hi">уверенность высокая</span></div>
               <p>Выбрать CRM, перенести воронку, завести все текущие сделки</p>
             </div>
-            <div class="scanui-blur-note">Остальные пункты — в вашем МРТ</div>
           </div>
 
         </div>
@@ -1524,7 +1511,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
             <li class="locked">Профиль РОПа и конкурсный отбор с проверкой в бою <i>— Собственник, 10 нед.</i></li>
           </ul>
         </div>
-        <p class="scanui-lock-note">Остальные шаги открываются в вашем МРТ — тактика зависит от ваших цифр</p>
 
         <div class="scanui-extra">
           <div class="scanui-plan-sub">Сверх возврата потерь</div>
@@ -1550,7 +1536,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
             <li class="crit locked">Нет РОПа. Менеджеры без управления работают на 50–60% возможностей, а контролировать их приходится собственнику.</li>
             <li class="warn locked">Без платного трафика поток лидов не масштабируется управляемо — вы растёте со скоростью сарафана, а не рынка.</li>
           </ul>
-          <div class="scanui-log-more">+ 23 находки скрыты — находки во многом повторяются у бизнесов той же ниши, полный лог только в вашем МРТ</div>
         </div>
       </div>
 
