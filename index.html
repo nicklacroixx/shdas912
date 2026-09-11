@@ -371,17 +371,17 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
   color:var(--ink);margin-bottom:clamp(30px,4vw,44px)}
 .path{border:1px solid var(--rule-2);border-radius:var(--r);overflow:hidden;
   background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%)}
-.path-row{display:grid;grid-template-columns:1fr 34px 1fr;align-items:start;gap:clamp(14px,2vw,24px);
+.path-row{display:grid;grid-template-columns:1fr 34px 1fr;align-items:center;gap:clamp(14px,2vw,24px);
   padding:clamp(18px,2.2vw,24px) clamp(22px,2.8vw,30px);border-top:1px solid var(--rule)}
 .path-row:first-child{border-top:none}
-.path-was,.path-now{display:flex;align-items:flex-start;gap:12px;line-height:1.45}
+.path-was,.path-now{display:flex;align-items:center;gap:12px;line-height:1.45}
 .path-was{color:var(--ink-3);font-size:14.5px}
 .path-now{color:var(--ink);font-size:15.5px;font-weight:600}
 .path-ico{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px}
 .path-ico svg{width:10px;height:10px}
 .path-was .path-ico{background:rgba(240,85,90,.1);border:1px solid rgba(240,85,90,.28);color:var(--loss-soft)}
 .path-now .path-ico{background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.32);color:var(--ok)}
-.path-arrow{display:flex;align-items:center;justify-content:center;color:var(--rule-2);margin-top:4px}
+.path-arrow{display:flex;align-items:center;justify-content:center;color:var(--rule-2)}
 .path-arrow svg{width:16px;height:16px}
 @media(max-width:720px){
   .path-row{grid-template-columns:1fr;gap:10px}
