@@ -542,7 +542,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-demo b{font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--warn);white-space:nowrap}
 
 /* шапка документа */
-.fx-doc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-bottom:1px solid var(--rule)}
+.fx-doc{display:grid;grid-template-columns:.85fr 1.75fr .85fr .85fr 1.1fr;border-bottom:1px solid var(--rule)}
 .fx-doc>div{padding:18px 20px 18px 0;min-width:0}
 .fx-v{font-size:14px;line-height:1.45;color:var(--ink)}
 .fx-conf{display:flex;align-items:center;gap:8px}
@@ -596,7 +596,8 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-ft u::after{content:attr(data-n);position:absolute;top:-16px;left:50%;transform:translateX(-50%);font:500 10px/1 var(--mono);color:var(--ink-3);white-space:nowrap}
 .fx-fp{font:600 13.5px var(--ui);text-align:right;font-variant-numeric:tabular-nums}
 .fx-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:26px;border-top:1px solid var(--rule-2)}
-.fx-facts>div{padding:18px 16px 0 0;min-width:0}
+.fx-facts>div{padding:18px 18px 0 0;min-width:0}
+.fx-facts .fx-k{min-height:2.9em}
 .fx-fv{font:600 17px/1.3 var(--ui);white-space:nowrap;font-variant-numeric:tabular-nums;margin-top:12px;letter-spacing:-.01em}
 .fx-fs{font-size:12px;line-height:1.5;color:var(--ink-3);margin-top:10px}
 @media(max-width:900px){.fx-facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
@@ -617,6 +618,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-lrow.head{padding:14px 0;font:500 11px/1.45 var(--ui);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
 .fx-lrow.head>div{align-self:end}
 .fx-lrow.head .r{text-align:right}
+.fx-th-note{display:block;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-3);font-size:10.5px;margin-top:5px}
 .fx-lno{font:500 12px var(--mono);color:var(--ink-3);padding-top:3px}
 .fx-lnm{font-weight:600;font-size:15px;color:#fff;line-height:1.35}
 .fx-lc{font-size:14px;color:var(--ink-2);line-height:1.5}
@@ -3877,7 +3879,7 @@ const Final = {
     add('plan', 'План', this.actPlan);
     add('pnl', 'P&L', this.actPnl);
     add('decision', 'Решение', this.actDecision);
-    const date = new Date().toLocaleDateString('ru-RU', {day:'numeric', month:'long', year:'numeric'});
+    const date = new Date().toLocaleDateString('ru-RU', {day:'numeric', month:'long', year:'numeric'}).replace(' г.', '');
     const dqN = ['leads_month','conversion','avg_check','revenue','margin','dialogs'].filter(id => FinModel.num(id) != null).length;
     const dq = dqN >= 6 ? ['', 'высокая'] : dqN >= 4 ? ['mid', 'средняя'] : ['low', 'низкая'];
     el.innerHTML = `<div class="fx">
@@ -3919,11 +3921,11 @@ const Final = {
     let tiles = '';
     if (L){
       const p = L.pnl;
-      tiles += tile('Недополученная прибыль', L.lossMo > 0 ? Fx.M + Fx.money(L.lossMo) : '0 ₽', L.lossMo > 0 ? `в месяц · ${Fx.mln(L.lossMo * 12)} в год` : 'воронка в пределах нормы', 'fx-red');
-      tiles += tile('Возврат за 90 дней', '+' + Fx.money(L.recMo), 'в месяц после приёмки четырёх волн', 'fx-green');
+      tiles += tile('Недополученная прибыль в месяц', L.lossMo > 0 ? Fx.M + Fx.money(L.lossMo) : '0 ₽', L.lossMo > 0 ? `За год это ${Fx.mln(L.lossMo * 12)}` : 'Воронка в пределах нормы', 'fx-red');
+      tiles += tile('Возврат в месяц после 90 дней', '+' + Fx.money(L.recMo), `За год это ${Fx.mln(L.recMo * 12)}`, 'fx-green');
       if (p.pr0 != null && p.pr0 > 0){
         const d = p.pr1 / p.pr0 - 1;
-        tiles += tile('Прибыль компании', (d >= 0 ? '+' : Fx.M) + Fx.money(Math.abs(p.pr1 - p.pr0)), `${Fx.money(p.pr0)} → ${Fx.money(p.pr1)} в месяц, это ${d >= 0 ? '+' : Fx.M}${Fx.pct(Math.abs(d))}${p.cost ? '. Уже за вычетом ' + (L.ropMode === 'senior' ? 'доплаты старшему продавцу' : 'ФОТ нового РОПа') : ''}`, d >= 0 ? 'fx-green' : 'fx-red');
+        tiles += tile('Прибыль компании в месяц', (d >= 0 ? '+' : Fx.M) + Fx.money(Math.abs(p.pr1 - p.pr0)), `С ${Fx.money(p.pr0)} до ${Fx.money(p.pr1)}, это ${d >= 0 ? '+' : Fx.M}${Fx.pct(Math.abs(d))}${p.cost ? '. Уже за вычетом ' + (L.ropMode === 'senior' ? 'доплаты старшему продавцу' : 'ФОТ нового РОПа') : ''}`, d >= 0 ? 'fx-green' : 'fx-red');
       } else if (p.pr0 != null){
         tiles += tile('Прибыль после 90 дней', Fx.money(p.pr1), `сейчас ${p.pr0 < 0 ? Fx.M : ''}${Fx.money(Math.abs(p.pr0))} в месяц`, p.pr1 > 0 ? 'fx-green' : 'fx-red');
       } else tiles += tile('Валовая прибыль', '+' + Fx.pct(L.recMo / L.gp), `${Fx.money(L.gp)} → ${Fx.money(L.gp + L.recMo)} в месяц`, 'fx-green');
@@ -3949,19 +3951,19 @@ const Final = {
       ${row('Валовая прибыль', L.gp, L.m, 'var(--ink-2)', 'маржа ' + (L.marginAssumed ? '30%, принято' : L.margin + '%'))}
       ${L.profit != null ? row('Прибыль', L.profit, Math.max(0, L.profit) / L.rev, L.profit > 0 ? 'var(--ok)' : 'var(--loss)', 'рентабельность ' + Fx.pct(L.profit / L.rev, 1)) : ''}`;
     const steps = [
-      `<div class="fx-fstep"><div class="fx-fn">${L.leads}</div><div class="fx-fl">${Fx.plural(L.leads, 'заявка', 'заявки', 'заявок')}</div></div>`,
-      L.full ? `<div class="fx-fstep"><div class="fx-fn">${L.dialogs}</div><div class="fx-fl">${Fx.plural(L.dialogs, 'разговор', 'разговора', 'разговоров')}<br><em class="${L.reach < L.reachNorm ? 'fx-red' : 'fx-green'}">${Fx.pct(L.reach)}</em> от заявок</div></div>` : '',
-      `<div class="fx-fstep"><div class="fx-fn">${Number.isInteger(Math.round(L.deals * 10) / 10) ? Math.round(L.deals) : Fx.dec(L.deals)}</div><div class="fx-fl">${Fx.qty(L.deals, 'новая сделка', 'новые сделки', 'новых сделок', 'новой сделки').replace(/^[\d,]+\s/, '')}${L.full ? `<br><em class="${L.close < L.closeNorm ? 'fx-red' : 'fx-green'}">${Fx.pct(L.close)}</em> от разговоров` : ''}</div></div>`,
+      `<div class="fx-fstep"><div class="fx-fn">${Fx.nf.format(L.leads)}</div><div class="fx-fl">${Fx.plural(L.leads, 'заявка', 'заявки', 'заявок')}</div></div>`,
+      L.full ? `<div class="fx-fstep"><div class="fx-fn">${Fx.nf.format(L.dialogs)}</div><div class="fx-fl">${Fx.plural(L.dialogs, 'разговор', 'разговора', 'разговоров')}<br><em class="${L.reach < L.reachNorm ? 'fx-red' : 'fx-green'}">${Fx.pct(L.reach)}</em> от заявок</div></div>` : '',
+      `<div class="fx-fstep"><div class="fx-fn">${L.deals >= 100 ? Fx.nf.format(Math.round(L.deals)) : Math.abs(L.deals - Math.round(L.deals)) < .05 ? Math.round(L.deals) : Fx.dec(L.deals)}</div><div class="fx-fl">${Fx.qty(L.deals, 'новая сделка', 'новые сделки', 'новых сделок', 'новой сделки').replace(/^[\d,]+\s/, '')}${L.full ? `<br><em class="${L.close < L.closeNorm ? 'fx-red' : 'fx-green'}">${Fx.pct(L.close)}</em> от разговоров` : ''}</div></div>`,
       `<div class="fx-fstep"><div class="fx-fn">${Fx.dec(L.rev / 1e6)}</div><div class="fx-fl">млн ₽ выручки${L.repeat != null ? `<br>из них ${L.repeat}% повторные` : ''}</div></div>`
     ].join('');
     const bar = (lbl, v, norm, show) => `<div class="fx-fbar"><span>${lbl}</span><span class="fx-ft"><i style="width:${Math.min(100, v * 100)}%"></i>${norm != null ? `<u style="left:${Math.min(100, norm * 100)}%" data-n="норма ${Fx.pct(norm)}"></u>` : ''}</span><span class="fx-fp ${norm != null && v < norm ? 'fx-red' : ''}">${show}</span></div>`;
     const bars = `${bar('Заявки', 1, null, '100%')}${L.full ? bar('Разговоры', L.reach, L.reachNorm, Fx.pct(L.reach)) : ''}${bar('Сделки', L.conv / 100, L.convTarget / 100, L.conv + '%')}`;
     const facts = [
-      L.cpl ? [`Заявка`, Fx.rub(L.cpl), 'стоимость лида'] : null,
-      L.cac ? ['Клиент', Fx.rub(L.cac), 'CAC'] : null,
-      L.ltv ? ['LTV', Fx.rub(L.ltv), 'ценность клиента'] : null,
-      L.ltvCac ? ['LTV / CAC', `<span class="${L.ltvCac >= 3 ? 'fx-green' : 'fx-red'}">${Fx.dec(L.ltvCac, L.ltvCac >= 10 ? 0 : 1)}×</span>`, 'окупаемость клиента'] : null,
-      L.romi ? ['ROMI', L.romi + '%', 'возврат на рекламу'] : null
+      L.cpl ? ['Стоимость заявки', Fx.rub(L.cpl), 'сколько платите за обращение'] : null,
+      L.cac ? ['Стоимость клиента', Fx.rub(L.cac), 'CAC: реклама на одного покупателя'] : null,
+      L.ltv ? ['Ценность клиента', Fx.rub(L.ltv), 'LTV: сколько приносит за всё время'] : null,
+      L.ltvCac ? ['Окупаемость клиента', `<span class="${L.ltvCac >= 3 ? 'fx-green' : 'fx-red'}">${Fx.dec(L.ltvCac, L.ltvCac >= 10 ? 0 : 1)}×</span>`, 'LTV к стоимости клиента'] : null,
+      L.romi ? ['Возврат на рекламу', L.romi + '%', 'ROMI по вашим данным'] : null
     ].filter(Boolean);
     const factsHTML = facts.length ? `<div class="fx-facts">${facts.map(f => `<div><span class="fx-k">${f[0]}</span><div class="fx-fv">${f[1]}</div><div class="fx-fs">${f[2]}</div></div>`).join('')}</div>`
       : `<div class="fx-note fx-warnline">Юнит-экономика не посчитана: CAC, LTV и стоимость заявки не названы. Это тоже диагноз: маркетингом управляют без цены клиента.</div>`;
@@ -4077,7 +4079,7 @@ const Final = {
       `<div class="fx-sub">Валовая прибыль в месяц: сейчас и при построенной системе</div>
       ${this.bridgeSVG(L)}
       <div class="fx-ledger">
-        <div class="fx-lrow head"><div>№</div><div>Этап</div><div>Сейчас</div><div>Потенциал</div><div>Что мешает и сколько это даёт</div><div class="r">Прибыль в месяц</div><div class="r">Доля</div><div class="r">Вернуть за 90 дней</div></div>
+        <div class="fx-lrow head"><div>№</div><div>Этап</div><div>Сейчас</div><div>Потенциал</div><div>Что мешает и сколько это даёт</div><div class="r">Прибыль в месяц<br><span class="fx-th-note">зелёным — что вернём</span></div><div class="r">Доля</div><div class="r">Вернуть за 90 дней</div></div>
         ${this.ledgerRows(x)}
         <div class="fx-lrow total"><div class="fx-lno"></div><div class="fx-lnm">Итого</div><div class="fx-lc" data-k="За год"><b class="fx-red">${Fx.M}${Fx.mln(L.lossMo * 12)}</b></div><div></div><div></div>
           <div data-k="Валовая прибыль в месяц"><div class="fx-lmo fx-red">${Fx.M}${Fx.rub(L.lossMo)}</div></div><div class="fx-lsh" data-k="Доля">100%</div><div class="fx-lrc fx-green" data-k="Вернуть за 90 дней">+${Fx.money(L.recMo)}</div></div>
@@ -4416,7 +4418,7 @@ const Report = {
   // PDF повторяет структуру экрана: те же модули, те же цифры, без суфлёра
   printPDF(){
     const x = Final.ctx(), L = x.L, a = x.a;
-    const date = new Date().toLocaleDateString('ru-RU', {day:'numeric', month:'long', year:'numeric'});
+    const date = new Date().toLocaleDateString('ru-RU', {day:'numeric', month:'long', year:'numeric'}).replace(' г.', '');
     const company = Fx.esc(a.company || 'Ваша компания');
     const niche = Fx.esc(a.niche || '—');
     const audience = {b2b:'B2B', b2c:'B2C', mixed:'B2B + B2C'}[a.audience] || '—';
@@ -4449,8 +4451,8 @@ const Report = {
     if (L){
       const p = L.pnl;
       kpis = `<div class="pr-x-kpis">
-        ${stat('Недополученная прибыль', L.lossMo > 0 ? Fx.M + Fx.money(L.lossMo) : '0 ₽', L.lossMo > 0 ? `в месяц · ${Fx.mln(L.lossMo * 12)} в год` : '', 'bad')}
-        ${stat('Возврат за 90 дней', '+' + Fx.money(L.recMo), 'в месяц после приёмки четырёх волн', 'good')}
+        ${stat('Недополученная прибыль в месяц', L.lossMo > 0 ? Fx.M + Fx.money(L.lossMo) : '0 ₽', L.lossMo > 0 ? `За год это ${Fx.mln(L.lossMo * 12)}` : '', 'bad')}
+        ${stat('Возврат в месяц после 90 дней', '+' + Fx.money(L.recMo), `За год это ${Fx.mln(L.recMo * 12)}`, 'good')}
         ${p.pr0 != null && p.pr0 > 0 ? stat('Прибыль компании', (p.pr1 >= p.pr0 ? '+' : Fx.M) + Fx.pct(Math.abs(p.pr1 / p.pr0 - 1)), `${Fx.money(p.pr0)} → ${Fx.money(p.pr1)} в месяц`, p.pr1 >= p.pr0 ? 'good' : 'bad')
           : stat('Валовая прибыль', '+' + Fx.pct(L.recMo / L.gp), `${Fx.money(L.gp)} → ${Fx.money(L.gp + L.recMo)} в месяц`, 'good')}
         ${stat('Индекс зрелости', `<span style="color:${zc(x.idx)}">${x.idx}</span>`, x.band.toLowerCase())}
