@@ -367,6 +367,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
 .cta-panel h3{font-family:var(--disp);font-weight:600;font-size:clamp(19px,2.4vw,25px);margin-bottom:12px;color:#fff;position:relative}
 .cta-panel p{color:var(--ink-2);max-width:540px;margin:0 auto 26px;position:relative}
 .final-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+.cta-hint{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-3);margin:16px auto 0;max-width:480px;position:relative}
 .sc-good{color:var(--good)!important}.sc-warn{color:var(--warn)!important}.sc-bad{color:var(--bad)!important}
 .bg-good{background:var(--good)!important}.bg-warn{background:var(--warn)!important}.bg-bad{background:var(--bad)!important}
 .find-count{font-family:var(--mono);font-size:9px;color:var(--bad);letter-spacing:.1em}
@@ -2747,6 +2748,21 @@ const FlowUI = {
   esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
                           .replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 };
+// Встроенные браузеры мессенджеров (WhatsApp, Instagram, FB, TikTok) часто не поддерживают
+// window.print() вовсе — кнопка нажимается, а системное окно печати просто не открывается.
+// Отличить их от настоящего Safari/Chrome можно по строке User-Agent.
+const InAppBrowser = {
+  detect(){
+    const ua = navigator.userAgent || '';
+    if (/\bWhatsApp\b/i.test(ua)) return 'WhatsApp';
+    if (/\bInstagram\b/i.test(ua)) return 'Instagram';
+    if (/FBAN|FBAV|FB_IAB/i.test(ua)) return 'Facebook';
+    if (/\bTikTok\b/i.test(ua)) return 'TikTok';
+    if (/MicroMessenger/i.test(ua)) return 'WeChat';
+    return '';
+  }
+};
+
 const Final = {
   // Первичный скрининг: факты об обороте до всякой интерпретации
   kmHTML(){
@@ -2954,16 +2970,32 @@ const Final = {
 
       ${feedAll.length ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Полный лог сканера · ${feedAll.length} наход${plural(feedAll.length,'ка','ки','ок')}</div><div class="find-grid">${feedAll.map(f=>`<div class="find-row"><span class="find-dot ${f.tone}"></span><span>${f.text}</span></div>`).join('')}</div></div>` : ''}
 
-      <div class="cta-panel"><h3>Отчёт готов</h3>
-        <p>Сохраните разбор в PDF — цифры, находки и дорожная карта останутся у вас.</p>
-        <div class="final-actions">
-          <button class="btn-primary" id="btnPDF">Скачать PDF-отчёт →</button>
-        </div>
-      </div>`;
+      ${(() => { const app = InAppBrowser.detect(); return app
+        ? `<div class="cta-panel"><h3>Отчёт готов</h3>
+             <p>Ссылка открыта внутри ${app} — оттуда PDF не сохранить, встроенный браузер это блокирует.
+                Откройте страницу в обычном браузере, и кнопка сработает.</p>
+             <div class="final-actions">
+               <button class="btn-primary" id="btnCopyLink">Скопировать ссылку →</button>
+             </div>
+             <p class="cta-hint">Дальше: значок «⋯» в углу экрана → «Открыть в браузере» — и вставьте ссылку там.</p>
+           </div>`
+        : `<div class="cta-panel"><h3>Отчёт готов</h3>
+             <p>Сохраните разбор в PDF — цифры, находки и дорожная карта останутся у вас.</p>
+             <div class="final-actions">
+               <button class="btn-primary" id="btnPDF">Скачать PDF-отчёт →</button>
+             </div>
+             <p class="cta-hint">Откроется системное окно печати — в нём выберите «Сохранить как PDF».</p>
+           </div>`; })()}`;
 
     el.classList.add('visible');
     window.scrollTo({top:0, behavior:'smooth'});
-    document.getElementById('btnPDF').onclick = ()=>Report.printPDF();
+    const btnPDF = document.getElementById('btnPDF');
+    if (btnPDF) btnPDF.onclick = ()=>Report.printPDF();
+    const btnCopy = document.getElementById('btnCopyLink');
+    if (btnCopy) btnCopy.onclick = async ()=>{
+      try { await navigator.clipboard.writeText(location.href); btnCopy.textContent = 'Скопировано ✓'; }
+      catch { btnCopy.textContent = 'Скопируйте адрес из адресной строки'; }
+    };
   }
 };
 const Report = {
