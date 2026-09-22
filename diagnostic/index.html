@@ -550,6 +550,15 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-conf.mid i{background:var(--warn)} .fx-conf.low i{background:var(--loss)}
 @media(max-width:900px){.fx-doc{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 
+/* обложка документа */
+.fx-cover{padding-top:4px}
+.fx-cv-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:30px;border-bottom:1px solid var(--rule);font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.fx-cv-top b{color:var(--ok);font-weight:500}
+.fx-kicker{font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ok);margin:0 0 18px}
+.fx-cv-h{font-family:var(--ui);font-weight:600;font-size:clamp(32px,4.4vw,58px);line-height:1.08;letter-spacing:-.03em;margin:38px 0 20px;color:#fff;max-width:20ch}
+.fx-cv-sub{font-size:17px;line-height:1.6;color:var(--ink-2);max-width:58ch;margin:0 0 46px}
+@media(max-width:700px){.fx-cv-top{flex-direction:column;align-items:flex-start;gap:6px}.fx-cv-h{margin-top:28px}}
+
 /* акт: метка слева, содержание справа — один левый край на весь отчёт */
 .fx-act{display:grid;grid-template-columns:var(--fx-lab) minmax(0,1fr);gap:var(--fx-gap);padding:76px 0;border-top:1px solid var(--rule);scroll-margin-top:90px}
 .fx-act:first-of-type{border-top:0;padding-top:56px}
@@ -562,6 +571,14 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-title{font-family:var(--ui);font-weight:600;font-size:clamp(23px,2.4vw,31px);line-height:1.25;letter-spacing:-.022em;margin:0 0 16px;max-width:26ch;color:#fff}
 .fx-lead{font-size:16px;line-height:1.65;color:var(--ink-2);max-width:66ch;margin:0 0 34px}
 .fx-hero-sub{font-size:17px;line-height:1.6;color:var(--ink-2);max-width:62ch;margin:0}
+
+/* 01 резюме: выводы и рекомендация */
+.fx-concl{margin-top:48px}
+.fx-concl ol{list-style:none;counter-reset:cn;display:grid;gap:15px;max-width:86ch}
+.fx-concl li{counter-increment:cn;position:relative;padding-left:42px;font-size:16px;line-height:1.6;color:var(--ink)}
+.fx-concl li::before{content:counter(cn,decimal-leading-zero);position:absolute;left:0;top:3px;font:500 12px/1.5 var(--mono);color:var(--ink-3);font-variant-numeric:tabular-nums}
+.fx-reco{margin-top:36px;padding:24px 26px;border:1px solid var(--rule);border-left:2px solid var(--ok);border-radius:10px;background:var(--paper)}
+.fx-reco p{font-size:16px;line-height:1.65;color:var(--ink);max-width:78ch}
 
 /* 01 вердикт */
 .fx-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:44px;border-top:1px solid var(--rule-2)}
@@ -706,6 +723,47 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-ul li::before{font:500 12px/1.6 var(--mono);color:var(--ink-3)}
 .fx-ul.plus li::before{content:'+'}
 .fx-ul.minus li::before{content:'—'}
+.fx-ul.dash li::before{content:'·';font-size:15px;line-height:1.3}
+
+/* сравнение: матрица практик */
+.fx-mx{border-top:1px solid var(--rule-2)}
+.fx-mx-h,.fx-mx-r{display:grid;grid-template-columns:minmax(0,1fr) 128px 74px 160px;align-items:center;gap:12px;border-bottom:1px solid var(--rule);padding:12px 0}
+.fx-mx-h{font:500 11px/1.35 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.fx-mx-h>div:not(:first-child),.fx-mx-r>div:not(:first-child){text-align:center}
+.fx-mx-h>div:last-child b{color:var(--ok)}
+.fx-mx-h b{font-weight:500}
+.fx-smt{display:none}
+.fx-mx-n{font-size:14.5px;line-height:1.5;color:var(--ink);min-width:0}
+.fx-mk{font-size:15px;line-height:1.2}
+.fx-mk.yes{color:var(--ok)}
+.fx-mk.no{color:#41504B}
+.fx-mk.mine{color:var(--loss)}
+.fx-bpos{margin-top:34px}
+.fx-bp-h{display:flex;justify-content:space-between;font:500 11px/1.4 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.fx-bp-t{position:relative;height:6px;border-radius:3px;background:#1A2422;overflow:visible}
+.fx-bp-t i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:linear-gradient(90deg,var(--loss),var(--ok))}
+.fx-bp-t u{position:absolute;top:-5px;width:2px;height:16px;background:#fff;transform:translateX(-1px)}
+.fx-bp-v{font-size:15px;line-height:1.6;color:var(--ink-2);margin-top:16px;max-width:76ch}
+@media(max-width:820px){.fx-mx-h,.fx-mx-r{grid-template-columns:minmax(0,1fr) 38px 38px 38px;gap:8px}.fx-mx-h{font-size:9.5px;letter-spacing:.04em;align-items:end}.fx-lgl{display:none}.fx-smt{display:inline}.fx-mx-n{font-size:13.5px}}
+
+/* риски роста */
+.fx-risks{display:grid;gap:14px}
+.fx-risk{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:26px;padding:22px 24px;border:1px solid var(--rule);border-left:2px solid var(--warn);border-radius:10px;background:var(--paper)}
+.fx-risk.high{border-left-color:var(--loss)}
+.fx-rsev{display:flex;align-items:center;gap:10px;font:500 11px/1 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--warn);margin-bottom:12px}
+.fx-rsev b{font:500 12px/1 var(--mono);color:var(--ink-3);letter-spacing:.04em}
+.fx-risk.high .fx-rsev{color:var(--loss)}
+.fx-risk h5{font:600 17px/1.35 var(--ui);color:#fff;margin:0 0 10px;letter-spacing:-.01em}
+.fx-risk p{font-size:14.5px;line-height:1.6;color:var(--ink-2)}
+.fx-rc{font-size:14px;line-height:1.6;color:var(--ink);padding-left:26px;border-left:1px solid var(--rule);align-self:center}
+@media(max-width:820px){.fx-risk{grid-template-columns:minmax(0,1fr);gap:16px;padding:20px}.fx-rc{padding:16px 0 0;border-left:0;border-top:1px solid var(--rule)}}
+
+/* бездействие */
+.fx-nd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:34px;margin-top:34px;padding-top:30px;border-top:1px solid var(--rule)}
+.fx-nbig{font-family:var(--ui);font-weight:600;font-size:clamp(30px,3.6vw,46px);line-height:1.05;letter-spacing:-.02em;color:var(--loss);font-variant-numeric:tabular-nums}
+.fx-nbig.fx-green{color:var(--ok)}
+@media(max-width:820px){.fx-nd{grid-template-columns:minmax(0,1fr);gap:26px}}
+.fx-lvnote{font-size:13px;line-height:1.55;color:var(--ink-3);margin:-8px 0 20px}
 
 /* 05 цель */
 .fx-paths{display:grid;gap:26px;border-top:1px solid var(--rule-2);padding-top:26px}
@@ -1048,6 +1106,45 @@ body.fx-prompter-on .fx-prompter{display:block}
   .pr-x-tbl td.good{color:var(--pr-accent);font-family:var(--pr-serif);font-weight:600;white-space:nowrap}
   .pr-x-tbl tfoot td{border-bottom:none;border-top:1px solid var(--pr-ink);padding-top:10px}
   .pr-x-how{font-size:8.5px;color:var(--pr-ink-3);margin-top:3px;line-height:1.45}
+  .pr-x-concl{list-style:none;counter-reset:pc;margin:4px 0 0;padding:0}
+  .pr-x-concl li{counter-increment:pc;position:relative;padding-left:26px;margin-bottom:7px;font-size:10.5px;line-height:1.5;color:var(--pr-ink)}
+  .pr-x-concl li::before{content:counter(pc,decimal-leading-zero);position:absolute;left:0;top:1px;font-size:8.5px;color:var(--pr-ink-3);font-weight:700}
+  .pr-x-reco{margin-top:14px;padding:12px 14px;border:1px solid var(--pr-line);border-left:2px solid var(--pr-accent);background:var(--pr-accent-soft)}
+  .pr-x-reco span{display:block;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pr-accent);margin-bottom:6px}
+  .pr-x-reco p{font-size:10.5px;line-height:1.55;color:var(--pr-ink);margin:0}
+  .pr-x-scope{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:8px 0 4px}
+  .pr-x-scope>div>span{display:block;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pr-ink-3);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--pr-line)}
+  .pr-x-scope ul{margin:0;padding:0;list-style:none}
+  .pr-x-scope li{font-size:9.5px;line-height:1.5;color:var(--pr-ink-2);margin-bottom:7px;padding-left:9px;position:relative}
+  .pr-x-scope li::before{content:'·';position:absolute;left:0;color:var(--pr-ink-3)}
+  .pr-x-mx{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:10px}
+  .pr-x-mx th{text-align:left;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pr-ink-3);padding:0 6px 7px 0;border-bottom:1px solid var(--pr-ink)}
+  .pr-x-mx th.c,.pr-x-mx td.c{text-align:center;width:24mm}
+  .pr-x-mx td{padding:6px 6px 6px 0;border-bottom:1px solid var(--pr-line);color:var(--pr-ink)}
+  .pr-x-mx td.y{color:var(--pr-accent);font-weight:700}
+  .pr-x-mx td.n{color:#B7BDB8}
+  .pr-x-mx td.m{color:var(--pr-bad);font-weight:700}
+  .pr-x-bar{height:4px;background:var(--pr-line);position:relative;margin:12px 0 8px}
+  .pr-x-bar i{position:absolute;left:0;top:0;bottom:0;background:var(--pr-accent)}
+  .pr-x-bar u{position:absolute;top:-4px;width:2px;height:12px;background:var(--pr-ink)}
+  .pr-x-bh{display:flex;justify-content:space-between;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pr-ink-3)}
+  .pr-x-risk{border:1px solid var(--pr-line);border-left:2px solid #B8863A;padding:10px 12px;margin-bottom:8px}
+  .pr-x-risk.high{border-left-color:var(--pr-bad)}
+  .pr-x-risk .s{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#B8863A}
+  .pr-x-risk.high .s{color:var(--pr-bad)}
+  .pr-x-risk .t{display:block;font-size:11.5px;font-weight:700;color:var(--pr-ink);margin:4px 0 5px}
+  .pr-x-risk p{font-size:9.5px;line-height:1.5;color:var(--pr-ink-2);margin:0}
+  .pr-x-risk p.c{margin-top:5px;color:var(--pr-ink);border-top:1px solid var(--pr-line);padding-top:5px}
+  .pr-x-nd{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:12px 0 6px}
+  .pr-x-nd .k{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pr-ink-3);margin-bottom:6px}
+  .pr-x-nd .v{font-family:var(--pr-serif);font-size:26px;font-weight:600;line-height:1.1}
+  .pr-x-nd .v.bad{color:var(--pr-bad)}
+  .pr-x-nd .v.good{color:var(--pr-accent)}
+  .pr-x-nd p{font-size:9.5px;line-height:1.5;color:var(--pr-ink-2);margin:6px 0 0}
+  #printReport .fx-chart{width:100%;height:auto;display:block;margin:6px 0 2px}
+  #printReport .fx-legend{display:flex;gap:14px;font-size:8px;color:var(--pr-ink-3);margin-bottom:6px}
+  #printReport .fx-legend i{display:inline-block;width:9px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  #printReport .fx-svg-c{fill:#8B958E}
   .pr-x-chain{display:grid;gap:8px;margin:8px 0 14px}
   .pr-x-node{border:1px solid var(--pr-line);padding:11px 12px;background:#fff}
   .pr-x-node span{display:block;font-size:7.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pr-ink-3);margin-bottom:6px}
@@ -3185,10 +3282,11 @@ const Fx = {
   M: '−',
   rub(v){ return this.nf.format(Math.round(v)) + ' ₽'; },
   // «1,15 млн ₽», «13,8 млн ₽», «1 млн ₽»: хвостовые нули не нужны
-  mln(v, d){ const x = v / 1e6, dd = d ?? (Math.abs(x) >= 10 ? 1 : 2); let t = x.toFixed(dd); if (d == null) t = t.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, ''); return t.replace('.', ',') + ' млн ₽'; },
+  mln(v, d){ const x = v / 1e6, dd = d ?? (Math.abs(x) >= 10 ? 1 : 2); let t = x.toFixed(dd); if (d == null || dd <= 1) t = t.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, ''); return t.replace('.', ',') + ' млн ₽'; },
   money(v){ const a = Math.abs(v); return a >= 999500 ? this.mln(v) : a >= 1e3 ? this.nf.format(Math.round(v / 1e3)) + ' тыс ₽' : this.rub(v); },
   sgn(v){ return (v < 0 ? this.M : '+') + this.money(Math.abs(v)); },
   pct(v, d = 0){ return (v * 100).toFixed(d).replace('.', ',') + '%'; },
+  deals(v){ return v >= 100 ? this.nf.format(Math.round(v)) : Math.abs(v - Math.round(v)) < .05 ? String(Math.round(v)) : this.dec(v); },
   dec(v, d = 1){ return Number(v).toFixed(d).replace('.', ','); },
   plural(n, one, few, many){
     if (!Number.isInteger(n)) return few;
@@ -3586,6 +3684,43 @@ const Story = {
     }
     return null;
   },
+  // Выводы для резюме: то, что собственник унесёт, даже если закроет отчёт
+  conclusions(L, c, perc, goal){
+    const out = [];
+    if (!L) return out;
+    const top = [...L.leaky].sort((p, q) => q.loss - p.loss)[0];
+    if (top) out.push(L.leaky.length > 1
+      ? `Деньги теряются на ${L.leaky.length} этапах воронки из ${L.st.length}. Крупнейший — «${top.name.toLowerCase()}»: ${Fx.money(top.loss)} в месяц, это ${Fx.pct(top.loss / L.lossMo)} всех потерь.`
+      : `Потери сосредоточены на одном этапе — «${top.name.toLowerCase()}»: ${Fx.money(top.loss)} валовой прибыли в месяц.`);
+    const ch = this.chain(L, c);
+    if (ch[0]) out.push(`Причина у этих потерь одна: ${ch[0].h.toLowerCase()}${ch[1] ? '. Дальше по цепочке — ' + ch[1].h.toLowerCase() : ''}. Поэтому чинить нужно систему, а не отдельный этап.`);
+    const bel = perc ? perc.believed.toLowerCase() : '', cn = c ? c.name.toLowerCase() : '';
+    if (perc && perc.kind === 'gap' && !cn.includes(bel) && !bel.includes(cn))
+      out.push(`Ваша версия главной проблемы — «${perc.believed.toLowerCase()}». Данные показывают другое: ${Fx.strip(Fx.noParens(c.why)).replace(/^./, m => m.toLowerCase())}`);
+    if (goal) out.push(goal.sysOk
+      ? `Цель ×${goal.multTxt} закрывается без роста рекламного бюджета: хватает порядка в воронке, цены и повторных продаж.`
+      : `Цель ×${goal.multTxt} не закрывается ни трафиком, ни конверсией по отдельности. Только системой и уже потом трафиком.`);
+    if (L.recMo > 0) out.push(L.pnl.pr0 != null
+      ? `За 90 дней возвращается ${Fx.money(L.recMo)} валовой прибыли в месяц, прибыль растёт с ${Fx.money(L.pnl.pr0)} до ${Fx.money(L.pnl.pr1)}${L.pnl.cost ? ' уже за вычетом новых расходов' : ''}.`
+      : `За 90 дней возвращается ${Fx.money(L.recMo)} валовой прибыли в месяц, за первый год с учётом разгона ${Fx.mln(L.yearGP)}.`);
+    if (L.weekLoss > 0) out.push(`Каждая неделя без решения стоит ${Fx.money(L.weekLoss)}, а старт через три месяца обойдётся в ${Fx.mln(L.delay3)} за первый год.`);
+    return out;
+  },
+  // С чего начинать: одно первое действие, а не список из двадцати
+  recommend(L){
+    if (!L || !L.leaky.length) return 'Воронка держит норму: дальше растут объёмом и ценой, систему перестраивать не нужно.';
+    const top = [...L.leaky].sort((p, q) => q.loss - p.loss)[0];
+    const start = {
+      lead: 'с потока заявок: отдел недозагружен, и работа над продажами упрётся в пустую воронку',
+      contact: 'с процесса первого контакта: норматив ответа, распределение заявок и каскад касаний',
+      close: 'с технологии закрытия: скрипт ключевого этапа, разбор звонков и ежедневное управление отделом',
+      repeat: 'с работы по базе: повторная продажа обходится в разы дешевле новой',
+      price: 'с цены и структуры чека: это не требует ни новых заявок, ни новых людей'
+    }[top.id];
+    const w = top.drivers[0] ? top.drivers[0].wave : 2;
+    const wtxt = ['первая', 'вторая', 'третья', 'четвёртая'][w - 1] || 'вторая';
+    return `Начинать ${start}. В плане внедрения это ${wtxt} волна. Найм и рекламный бюджет — после того, как этап перестанет течь: иначе новые люди и новые заявки повторят ту же историю на большем объёме.`;
+  },
   strengths(L){
     const a = State.answers, out = [];
     if (!L) return out;
@@ -3871,26 +4006,36 @@ const Final = {
       const html = fn.call(this, x, no);
       if (html) acts.push({key, label, no, html});
     };
-    add('verdict', 'Вердикт', this.actVerdict);
-    add('numbers', 'Цифры', this.actNumbers);
+    add('summary', 'Резюме', this.actSummary);
+    add('scope', 'Метод', this.actScope);
+    add('numbers', 'Данные', this.actNumbers);
     add('ledger', 'Потери', this.actLedger);
+    add('bench', 'Сравнение', this.actBench);
     add('diagnosis', 'Диагноз', this.actDiagnosis);
     add('goal', 'Цель', this.actGoal);
+    add('risk', 'Риски роста', this.actRisk);
     add('plan', 'План', this.actPlan);
-    add('pnl', 'P&L', this.actPnl);
+    add('pnl', 'Деньги', this.actPnl);
+    add('nothing', 'Бездействие', this.actNothing);
     add('decision', 'Решение', this.actDecision);
     const date = new Date().toLocaleDateString('ru-RU', {day:'numeric', month:'long', year:'numeric'}).replace(' г.', '');
     const dqN = ['leads_month','conversion','avg_check','revenue','margin','dialogs'].filter(id => FinModel.num(id) != null).length;
     const dq = dqN >= 6 ? ['', 'высокая'] : dqN >= 4 ? ['mid', 'средняя'] : ['low', 'низкая'];
     el.innerHTML = `<div class="fx">
       ${State.demo ? `<div class="fx-demo"><b>Демо-данные</b><span>Анкета заполнена случайными цифрами: это витрина логики отчёта, а не расчёт по реальному бизнесу.</span></div>` : ''}
-      <div class="fx-doc">
-        <div><span class="fx-k">Компания</span><div class="fx-v">${Fx.esc(x.a.company || 'Ваша компания')}</div></div>
-        <div><span class="fx-k">Профиль</span><div class="fx-v">${Profile.explain()}</div></div>
-        <div><span class="fx-k">Дата разбора</span><div class="fx-v">${date}</div></div>
-        <div><span class="fx-k">Отчёт</span><div class="fx-v fx-mono">MRI-${(Session.id || '').slice(-6).toUpperCase() || '000000'}</div></div>
-        <div><span class="fx-k">Точность расчёта</span><div class="fx-v fx-conf ${dq[0]}"><i></i>${dq[1]} · ${dqN} из 6 цифр</div></div>
-      </div>
+      <header class="fx-cover">
+        <div class="fx-cv-top"><b>Closery · Коммерческий МРТ</b><span>Конфиденциально · для собственника и первых лиц компании</span></div>
+        <p class="fx-kicker" style="margin-top:34px">Аудит коммерческого блока</p>
+        <h1 class="fx-cv-h">${Fx.esc(x.a.company || 'Ваша компания')}</h1>
+        <p class="fx-cv-sub">Где бизнес недополучает прибыль, сколько это стоит каждый месяц и что с этим делать за 90 дней. Все расчёты построены на ваших цифрах и показаны вместе с арифметикой.</p>
+        <div class="fx-doc">
+          <div><span class="fx-k">Профиль бизнеса</span><div class="fx-v">${Profile.explain()}</div></div>
+          <div><span class="fx-k">Подготовил</span><div class="fx-v">Николай Клименко, Closery</div></div>
+          <div><span class="fx-k">Дата отчёта</span><div class="fx-v">${date}</div></div>
+          <div><span class="fx-k">Номер</span><div class="fx-v fx-mono">MRI-${(Session.id || '').slice(-6).toUpperCase() || '000000'}</div></div>
+          <div><span class="fx-k">Точность расчёта</span><div class="fx-v fx-conf ${dq[0]}"><i></i>${dq[1]} · ${dqN} из 6 цифр</div></div>
+        </div>
+      </header>
       ${acts.map(s => s.html).join('')}
       ${this.appendix(x)}
     </div>
@@ -3913,8 +4058,8 @@ const Final = {
     return `<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="${r}" fill="none" stroke="#24312D" stroke-width="4"/><circle cx="20" cy="20" r="${r}" fill="none" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${(c * v / 100).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 20 20)"/></svg>`;
   },
 
-  // ── 01 Вердикт ──
-  actVerdict(x, no){
+  // ── 01 Резюме для собственника ──
+  actSummary(x, no){
     const L = x.L, tile = (k, v, s, cls = '') => `<div class="fx-kpi"><span class="fx-k">${k}</span><div class="fx-val ${cls}">${v}</div><div class="fx-s">${s}</div></div>`;
     const color = x.zone === 'good' ? 'var(--ok)' : x.zone === 'warn' ? 'var(--warn)' : 'var(--loss)';
     const zoneTxt = {good:'зелёная зона', warn:'жёлтая зона', bad:'красная зона'}[x.zone];
@@ -3930,16 +4075,49 @@ const Final = {
         tiles += tile('Прибыль после 90 дней', Fx.money(p.pr1), `сейчас ${p.pr0 < 0 ? Fx.M : ''}${Fx.money(Math.abs(p.pr0))} в месяц`, p.pr1 > 0 ? 'fx-green' : 'fx-red');
       } else tiles += tile('Валовая прибыль', '+' + Fx.pct(L.recMo / L.gp), `${Fx.money(L.gp)} → ${Fx.money(L.gp + L.recMo)} в месяц`, 'fx-green');
     }
-    tiles += tile('Индекс зрелости', `${this.ring(x.idx, color)}${x.idx}<small>/100</small>`, `${x.band.toLowerCase()} · ${zoneTxt}`);
+    tiles += tile('Индекс зрелости', `${this.ring(x.idx, color)}${x.idx}<small>/100</small>`, `${x.band}. Сводная оценка по шести системам бизнеса`);
     const lead = L ? x.lead : `${Scoring.verdict(x.idx)[1]} Для ведомости потерь не хватает цифр воронки: заявок, конверсии и среднего чека.`;
-    return `<section class="fx-act" id="fx-verdict" data-key="verdict">
-      <div class="fx-lab"><b>${no}</b>Вердикт</div>
+    const con = Story.conclusions(L, x.c, x.perc, x.goal);
+    return `<section class="fx-act" id="fx-summary" data-key="summary">
+      <div class="fx-lab"><b>${no}</b>Резюме</div>
       <div class="fx-body">
+        <p class="fx-kicker">Главный вывод</p>
         <h1 class="fx-h1">${x.head}</h1>
         <p class="fx-hero-sub">${lead}</p>
         <div class="fx-kpis">${tiles}</div>
+        ${con.length ? `<div class="fx-concl"><div class="fx-sub">Что мы нашли</div><ol>${con.map(t => `<li>${t}</li>`).join('')}</ol></div>` : ''}
+        ${L ? `<div class="fx-reco"><span class="fx-k">С чего начинать</span><p>${Story.recommend(L)}</p></div>` : ''}
       </div>
     </section>`;
+  },
+
+  // ── 02 Что мы смотрели ──
+  actScope(x, no){
+    const L = x.L;
+    const core = ['leads_month','conversion','avg_check','revenue','margin','dialogs'];
+    const dqN = core.filter(id => FinModel.num(id) != null).length;
+    const answered = State.visibleQuestions().filter(q => State.answers[q.id] != null && State.answers[q.id] !== '').length;
+    const check = x.cons ? '<b class="fx-warn">расходятся, разбор в разделе с данными</b>'
+      : L && L.revKnown && Math.abs(L.funnelRev / L.rev - 1) <= .25 ? '<b class="fx-green">сходятся</b>'
+      : L && L.revKnown ? 'расходятся не критично' : 'выручка посчитана по воронке';
+    const col = (t, items) => `<div><div class="fx-sub">${t}</div><ul class="fx-ul dash">${items.filter(Boolean).map(i => `<li><span>${i}</span></li>`).join('')}</ul></div>`;
+    return this.sec('scope', no, 'Метод', 'Что мы смотрели и на каких данных',
+      'Аудит охватывает коммерческий блок: как заявка превращается в деньги и что этим управляет. Ниже граница работы и источник каждой цифры, чтобы было понятно, на какие вопросы отчёт отвечает, а на какие честно не отвечает.',
+      `<div class="fx-three">
+        ${col('Что смотрели', ['Шесть систем: маркетинг, продажи, команда, управление, экономика, стратегия',
+          'Воронку по этапам: заявка, разговор, сделка, повторная покупка',
+          'Юнит-экономику: стоимость заявки и клиента, ценность клиента, окупаемость рекламы',
+          'Управление отделом: регламенты, KPI, разбор звонков, мотивация, найм'])}
+        ${col('На каких данных', [`${answered} ${Fx.plural(answered, 'ответ', 'ответа', 'ответов')} собственника, собранных в этой диагностике`,
+          `${dqN} из 6 ключевых цифр названы: заявки, разговоры, конверсия, чек, выручка, маржа`,
+          `Сверка выручки с воронкой: ${check}`,
+          L && L.marginAssumed ? 'Маржа не названа и принята 30%: это допущение, а не ваш факт' : 'Маржа названа вами и взята как есть'])}
+        ${col('Чего не проверяли', ['Продукт, производство и логистику',
+          'Бухгалтерию, налоги и юридические риски',
+          'Рынок и конкурентов: сравниваем не с рынком, а с потенциалом вашей же команды',
+          'Выгрузку CRM и записи звонков: все цифры приняты с ваших слов'])}
+      </div>
+      <p class="fx-note">Метод расчёта один на весь отчёт. Ваш показатель сравнивается не со средней нормой по рынку, а с тем, что даёт та же команда, когда у неё есть инструменты: норматив ответа, скрипт, разбор звонков, работа по базе. Вклад каждого инструмента в показатель подписан отдельной строкой в ведомости потерь, там же раскрывается арифметика по клику. Если какая-то цифра указана неточно, поправьте её в ответах: отчёт пересчитается целиком.</p>`);
   },
 
   // ── 02 Цифры ──
@@ -3949,12 +4127,12 @@ const Final = {
     const row = (l, v, share, color, sub) => `<div class="fx-mrow"><span class="fx-ml">${l}</span><span class="fx-mbar"><i style="width:${Math.max(2, Math.min(100, share * 100))}%;background:${color}"></i></span><span class="fx-mn">${Fx.money(v)}<small>${sub}</small></span></div>`;
     const money = `${row(L.revKnown ? 'Выручка' : 'Выручка по воронке', L.rev, 1, 'var(--ink-3)', 'в год ' + Fx.mln(L.rev * 12))}
       ${row('Валовая прибыль', L.gp, L.m, 'var(--ink-2)', 'маржа ' + (L.marginAssumed ? '30%, принято' : L.margin + '%'))}
-      ${L.profit != null ? row('Прибыль', L.profit, Math.max(0, L.profit) / L.rev, L.profit > 0 ? 'var(--ok)' : 'var(--loss)', 'рентабельность ' + Fx.pct(L.profit / L.rev, 1)) : ''}`;
+      ${L.profit != null ? row('Прибыль', L.profit, Math.max(0, L.profit) / L.rev, L.profit > 0 ? 'var(--ok)' : 'var(--loss)', 'рентабельность ' + Fx.pct(L.profit / L.rev, 1).replace(',0%', '%')) : ''}`;
     const steps = [
       `<div class="fx-fstep"><div class="fx-fn">${Fx.nf.format(L.leads)}</div><div class="fx-fl">${Fx.plural(L.leads, 'заявка', 'заявки', 'заявок')}</div></div>`,
       L.full ? `<div class="fx-fstep"><div class="fx-fn">${Fx.nf.format(L.dialogs)}</div><div class="fx-fl">${Fx.plural(L.dialogs, 'разговор', 'разговора', 'разговоров')}<br><em class="${L.reach < L.reachNorm ? 'fx-red' : 'fx-green'}">${Fx.pct(L.reach)}</em> от заявок</div></div>` : '',
       `<div class="fx-fstep"><div class="fx-fn">${L.deals >= 100 ? Fx.nf.format(Math.round(L.deals)) : Math.abs(L.deals - Math.round(L.deals)) < .05 ? Math.round(L.deals) : Fx.dec(L.deals)}</div><div class="fx-fl">${Fx.qty(L.deals, 'новая сделка', 'новые сделки', 'новых сделок', 'новой сделки').replace(/^[\d,]+\s/, '')}${L.full ? `<br><em class="${L.close < L.closeNorm ? 'fx-red' : 'fx-green'}">${Fx.pct(L.close)}</em> от разговоров` : ''}</div></div>`,
-      `<div class="fx-fstep"><div class="fx-fn">${Fx.dec(L.rev / 1e6)}</div><div class="fx-fl">млн ₽ выручки${L.repeat != null ? `<br>из них ${L.repeat}% повторные` : ''}</div></div>`
+      `<div class="fx-fstep"><div class="fx-fn">${Fx.dec(L.rev / 1e6).replace(/,0$/, '')}</div><div class="fx-fl">млн ₽ выручки${L.repeat != null ? `<br>из них ${L.repeat}% повторные` : ''}</div></div>`
     ].join('');
     const bar = (lbl, v, norm, show) => `<div class="fx-fbar"><span>${lbl}</span><span class="fx-ft"><i style="width:${Math.min(100, v * 100)}%"></i>${norm != null ? `<u style="left:${Math.min(100, norm * 100)}%" data-n="норма ${Fx.pct(norm)}"></u>` : ''}</span><span class="fx-fp ${norm != null && v < norm ? 'fx-red' : ''}">${show}</span></div>`;
     const bars = `${bar('Заявки', 1, null, '100%')}${L.full ? bar('Разговоры', L.reach, L.reachNorm, Fx.pct(L.reach)) : ''}${bar('Сделки', L.conv / 100, L.convTarget / 100, L.conv + '%')}`;
@@ -3979,7 +4157,7 @@ const Final = {
     else if (L.revKnown && Math.abs(L.funnelRev / L.rev - 1) <= .25)
       check = `<div class="fx-check"><span class="fx-ic">✓</span><span><b>Цифры сходятся.</b> ${L.leads} ${Fx.plural(L.leads, 'заявка', 'заявки', 'заявок')} × ${L.conv}% × ${Fx.rub(L.check)} = ${Fx.mln(L.deals * L.check)} новых продаж.${L.repeat ? ` Вместе с ${L.repeat}% повторных это ${Fx.mln(L.funnelRev)}` : ` Это ${Fx.mln(L.funnelRev)}`} при заявленных ${Fx.mln(L.rev)}.</span></div>`;
     return this.sec('numbers', no, 'Исходные данные', 'Ваш коммерческий блок в цифрах',
-      'Только то, что вы назвали сами, сведённое в одну картину. Каждый вывод дальше опирается на эти цифры и ни на что больше.',
+      'Здесь нет наших оценок: только то, что вы назвали сами, сведённое в одну картину. Деньги за месяц, путь клиента по этапам, юнит-экономика и загрузка отдела. Все выводы дальше опираются на эти цифры и ни на что больше, поэтому пройдите их глазами: если что-то неверно, лучше поправить сейчас.',
       `<div class="fx-snap">
         <div class="fx-card"><div class="fx-sub">Деньги за месяц</div>${money}</div>
         <div class="fx-card"><div class="fx-sub">Путь клиента за месяц</div><div class="fx-fsteps" style="grid-template-columns:repeat(${L.full ? 4 : 3},minmax(0,1fr))">${steps}</div><div class="fx-fbars">${bars}</div></div>
@@ -4035,7 +4213,7 @@ const Final = {
       repeat: L.P.repeat != null ? `<b class="fx-green">${Fx.dec(L.P.repeat, 0)}%</b>` : '—',
       price: `<b class="fx-green">${Fx.rub(L.P.check)}</b>`
     };
-    const unit = d => d.unit === 'pp' ? `+${Fx.dec(d.eff)} п.п.`
+    const unit = d => d.unit === 'pp' ? `+${Fx.dec(d.eff, d.eff < 1 ? 2 : 1)} п.п.`
       : d.unit === 'rel' ? `+${Fx.dec(d.eff * L.closeCalc * 100, d.eff * L.closeCalc * 100 < 1 ? 2 : 1)} п.п.`
       : d.unit === 'pct' ? `+${Fx.rub(L.check * d.eff)}`
       : `+${Math.round(d.eff)} заявок`;
@@ -4075,7 +4253,7 @@ const Final = {
     const quiet = L.quiet.filter(s => s.id !== 'lead' || L.capState !== 'starving');
     const cash = L.cash > 0 ? `<div class="fx-cash"><div class="fx-cash-v">${Fx.M}${Fx.rub(L.cash)}</div><p><b>Отдельно от прибыли: деньги, которые уже списаны со счёта.</b> Столько рекламного бюджета в месяц уходит на заявки, до разговора с которыми дело не доходит. За год это ${Fx.mln(L.cash * 12)} живых денег, а не упущенная выгода.</p></div>` : '';
     return this.sec('ledger', no, 'Ведомость потерь', 'Где именно сгорает прибыль',
-      `Ориентир — не средняя норма по рынку, а потенциал вашей же команды с построенной системой. У каждого шага вверх есть причина и её вклад в показатель. Деньги считаются один раз, на том этапе, где они теряются.`,
+      `Главный раздел отчёта. Мы прошли путь клиента по этапам и на каждом посчитали, сколько валовой прибыли остаётся на столе и из-за чего конкретно. Ориентир — не средняя норма по рынку, а потенциал вашей же команды с построенной системой: у каждого шага вверх подписана практика и её вклад в показатель. Деньги считаются один раз, на том этапе, где они теряются, поэтому итог не раздут. Нажмите на строку — раскроется арифметика.`,
       `<div class="fx-sub">Валовая прибыль в месяц: сейчас и при построенной системе</div>
       ${this.bridgeSVG(L)}
       <div class="fx-ledger">
@@ -4092,7 +4270,170 @@ const Final = {
       </div>`);
   },
 
-  // ── 04 Диагноз ──
+  // ── Данные для сравнения, рисков и бездействия: одни и те же в отчёте и в PDF ──
+  practices(a){
+    return [
+      ['CRM, в которой видна каждая сделка', 'has_crm', a.has_crm === 'yes'],
+      ['Конверсия по каждому этапу воронки на виду', 'funnel_visibility', a.funnel_visibility === 'yes'],
+      ['Ответ на заявку в пределах 15 минут', 'response_time', a.response_time === '15m'],
+      ['Регламент касаний тех, кто не купил сразу', 'followup', a.followup === 'system'],
+      ['Скрипты и регламенты продаж', 'has_regl', a.has_regl === 'yes'],
+      ['Запись и разбор звонков', 'call_records', a.call_records === 'yes'],
+      ['KPI и план по каждому продавцу', 'has_kpi', a.has_kpi === 'yes'],
+      ['План продаж выполняется из месяца в месяц', 'plan_done', a.plan_done === 'stable'],
+      ['Мотивация: оклад и прозрачный процент', 'motivation', a.motivation === 'balanced'],
+      ['Системная работа со старой базой', 'old_base', a.old_base === 'regular'],
+      ['Отделом управляет руководитель', 'has_rop', a.has_rop === 'yes'],
+      ['Продажи не завязаны на собственнике', 'owner_dep', a.owner_dep === 'no']
+    ].filter(p => a[p[1]] != null && a[p[1]] !== '');
+  },
+  risks(x){
+    const a = x.a, L = x.L, g = x.goal, R = [];
+    if (!L) return R;
+    const mult = g ? g.mult : 2, mTxt = String(mult).replace('.', ','), need = g ? g.sysDeals : L.deals * mult;
+    if (L.capacity != null && L.capacity > 0 && need > L.capacity * 1.05){
+      const hires = L.managers > 0 ? Math.max(1, Math.ceil(L.managers * need / L.capacity) - L.managers) : Math.max(1, Math.ceil(need / L.capacity) - 1);
+      const slow = {long:'Людей вы ищете больше трёх месяцев уже сейчас.', gaveup:'По вашему ответу найм почти остановился: подходящих людей не находите.', months:'Поиск идёт 1–3 месяца и пока не закрыт.'}[a.hiring_time] || '';
+      R.push({kind:'people', sev:'high', t:'Мощность отдела',
+        p:`Сегодня отдел закрывает ${Fx.deals(L.deals)} ${Fx.plural(Math.round(L.deals), 'сделку', 'сделки', 'сделок')} в месяц при заявленном потолке ${L.capacity}. Цель ×${mTxt} требует ${Fx.deals(need)} ${Fx.plural(Math.round(need), 'сделки', 'сделок', 'сделок')} в месяц. Разрыв закрывается только людьми: ${hires} ${Fx.plural(hires, 'продавец', 'продавца', 'продавцов')} сверх текущего состава.`,
+        c:`${slow} Конкурсный найм даёт кандидата за 2–3 недели, поштучный поиск — за 2–3 месяца на человека. Это первое, что упирается в календарь.`});
+    }
+    const mgrNow = L.managers || 1, hires = g && g.hires ? g.hires : 0, mgrAfter = mgrNow + hires;
+    const ownTime = a.owner_time ? `, и на это уходит ${({gt25:'больше 25 часов', '10_25':'10–25 часов', lt10:'до 10 часов'})[a.owner_time]} в неделю` : '';
+    if (a.has_rop === 'no' && (mgrAfter >= 3 || mgrNow >= 3))
+      R.push({kind:'people', sev:'high', t:'Управление отделом',
+        p:hires > 0
+          ? `Сейчас отделом из ${mgrNow} ${Fx.plural(mgrNow, 'человека', 'человек', 'человек')} управляет собственник${ownTime}. На ${mgrAfter} ${Fx.plural(mgrAfter, 'продавце', 'продавцах', 'продавцах')} ручное управление рассыпается: руководитель ведёт 6–8 человек с ежедневным планом-фактом и разбором звонков, и это полноценная работа, а не вторая половина дня собственника.`
+          : `Отделом из ${mgrNow} ${Fx.plural(mgrNow, 'человека', 'человек', 'человек')} управляет собственник${ownTime}, отдельного руководителя нет. Рост упирается в это первым: пока вы одновременно продаёте, нанимаете и разбираете звонки, добавлять людей некуда — управлять ими будет некому.`,
+        c:`Без руководителя рост превращает контроль в еженедельную отчётность постфактум. ${a.year_goal === 'system' ? 'И цель выйти из операционки отменяется сама собой: чем больше отдел, тем плотнее вы в нём заняты.' : 'Собственник остаётся в операционке на весь период роста.'}`});
+    const cs = L.st.find(s => s.id === 'contact');
+    if (a.response_time && a.response_time !== '15m' && cs)
+      R.push({kind:'quality', sev:a.response_time === 'hour' ? 'mid' : 'high', t:'Скорость первого контакта',
+        p:`Заявку берут в работу ${FX_RESP[a.response_time]}, до разговора доходит ${Fx.pct(L.reachCalc)} обращений. Очередь заявок при росте не остаётся прежней: она растёт быстрее, чем руки, и доходимость падает, а не сохраняется.`,
+        c:`Сегодня этот этап стоит ${Fx.money(cs.loss)} в месяц. При выручке ×${mTxt} та же дыра стоит около ${Fx.money(cs.loss * mult)} в месяц: потери масштабируются вместе с оборотом.`});
+    if (a.has_crm === 'no' || a.funnel_visibility === 'no')
+      R.push({kind:'quality', sev:'mid', t:'Учёт и управляемость',
+        p:`${a.has_crm === 'no' ? 'Сделки живут вне CRM' : 'Конверсия по этапам воронки не видна'}. Пока сделок ${Fx.deals(L.deals)} в месяц, картину держит голова собственника. На ${Fx.deals(need)} сделках так уже нельзя: ответить, где именно просело, будет нечем.`,
+        c:`Любая ошибка масштабируется вместе с оборотом и всплывает через месяц, когда деньги уже потеряны. Решения в этот момент принимаются по ощущениям, а не по цифрам.`});
+    if (a.turnover === 'half' || (a.turnover === 'few' && mgrNow <= 3))
+      R.push({kind:'people', sev:a.turnover === 'half' ? 'high' : 'mid', t:'Текучка и адаптация',
+        p:`За год ${a.turnover === 'half' ? 'сменилась половина отдела и больше' : 'заменили 1–2 человек'}. Новый продавец без записей звонков, скриптов и понятного плана выходит на выработку месяцами, а при росте новых людей будет больше, чем сейчас.`,
+        c:`Каждый несработавший найм — это оклад, время руководителя и потерянные заявки, которые он вёл. При росте эта статья умножается.`});
+    if (a.growth_ready === 'money' || (L.profit != null && L.profit <= 0))
+      R.push({kind:'money', sev:'high', t:'Оборотный капитал',
+        p:`${a.growth_ready === 'money' ? 'Вы сами назвали деньги первым ограничением роста.' : 'Прибыль сейчас не формирует запас: рост придётся финансировать из оборота.'} Цикл сделки ${Profile.cycleDays()} ${Fx.plural(Profile.cycleDays(), 'день', 'дня', 'дней')}: расходы на привлечение идут вперёд выручки.`,
+        c:`Поэтому порядок важен: сначала конверсия и цена на текущем потоке, только потом рост бюджета. Возврат из ведомости не требует оборотки, в отличие от рекламы.`});
+    if (a.old_base === 'never' && L.repShare < .3)
+      R.push({kind:'quality', sev:'mid', t:'Опора только на новых клиентов',
+        p:`База не работает: повторные продажи дают ${Fx.pct(L.repShare)} выручки, а старые клиенты не касаются. Рост в такой конструкции возможен только новыми клиентами.`,
+        c:`Каждый следующий клиент дороже предыдущего: дешёвая аудитория выбирается первой. Без работы по базе стоимость роста поднимается с каждым месяцем.`});
+    if (a.growth_ready === 'prod')
+      R.push({kind:'prod', sev:'mid', t:'Производство и доставка',
+        p:`Вы назвали первым ограничением производство или доставку. Это за пределами коммерческого аудита, и мы это не проверяли.`,
+        c:`На цель это влияет прямо: продавать больше, чем компания способна отгрузить, нельзя. Порядок работ по коммерции стоит согласовать с этим потолком.`});
+    R.sort((p, q) => (q.sev === 'high') - (p.sev === 'high'));
+    return R;
+  },
+  delayCosts(x){
+    const a = x.a, L = x.L;
+    return [
+      `<b>Течь растёт вместе с оборотом.</b> Сегодня это ${Fx.money(L.lossMo)} в месяц. Любой рост выручки без починки воронки увеличивает и потерю: процент остаётся тем же, база становится больше.`,
+      a.response_time && a.response_time !== '15m'
+        ? `<b>Конкуренты отвечают быстрее.</b> Вы берёте заявку ${FX_RESP[a.response_time]}. Тот, кто перезвонил первым, чаще и продаёт: этот разрыв сам по себе не уменьшается.`
+        : `<b>Рынок не ждёт.</b> Стоимость заявки растёт каждый год, и запас прочности по марже съедается без единого управленческого решения.`,
+      a.turnover === 'half' || a.turnover === 'few'
+        ? `<b>Люди уходят первыми.</b> Продавцы, которые не выполняют план, уходят сами, а остаются те, кого устраивает оклад. Каждый месяц без нормальной мотивации усиливает этот отбор.`
+        : `<b>Найм дорожает.</b> Сильных продавцов забирают те, у кого уже есть система, план и понятный процент.`,
+      a.owner_time ? `<b>Собственник остаётся в операционке.</b> ${({gt25:'Больше 25 часов', '10_25':'10–25 часов', lt10:'До 10 часов'})[a.owner_time]} в неделю на продажи — это год вашего времени, который не купить обратно.` : null
+    ].filter(Boolean);
+  },
+  // Накопленная недополученная прибыль: две кривые на 12 месяцев
+  nothingCurves(L){
+    const cum = []; L.ramp.reduce((s, r, i) => (cum[i] = s + r.gp), 0);
+    const A = Array.from({length:12}, (_, i) => L.lossMo * (i + 1));
+    return {A, B: A.map((v, i) => Math.max(0, v - cum[i]))};
+  },
+
+  // ── 05 Сравнение: где вы между ручным режимом и системой ──
+  actBench(x, no){
+    const L = x.L, P = this.practices(x.a);
+    if (P.length < 6) return '';
+    const have = P.filter(p => p[2]).length, pos = Math.round(have / P.length * 100), gap = P.length - have;
+    const mk = (cls, sym, k) => `<div class="fx-mk ${cls}" data-k="${k}">${sym}</div>`;
+    const rows = P.map(p => `<div class="fx-mx-r"><div class="fx-mx-n">${p[0]}</div>${mk('no', '✕', 'Ручной режим')}${mk(p[2] ? 'yes' : 'mine', p[2] ? '✓' : '✕', 'У вас')}${mk('yes', '✓', 'Система')}</div>`).join('');
+    return this.sec('bench', no, 'Сравнение', 'Где вы между ручным режимом и построенной системой',
+      `Сравнивать вас со средней компанией по рынку бессмысленно: такие цифры публикуются редко и почти всегда по несопоставимой методике. Поэтому сравниваем не по показателям, а по практикам, которые либо работают каждый день, либо их нет. Слева — компании, где продажи держатся на людях и энергии собственника. Справа — то, что мы считаем построенной системой и по чему принимаем волны внедрения. Ваши отметки взяты из ваших же ответов.`,
+      `<div class="fx-mx">
+        <div class="fx-mx-h"><div>Практика</div><div><b class="fx-lgl">Продажи на людях</b><b class="fx-smt">Ручной</b></div><div>У вас</div><div><b class="fx-lgl">Построенная система</b><b class="fx-smt">Система</b></div></div>
+        ${rows}
+      </div>
+      <div class="fx-bpos">
+        <div class="fx-bp-h"><span>Ручной режим</span><span>Построенная система</span></div>
+        <div class="fx-bp-t"><i style="width:${pos}%"></i><u style="left:${pos}%"></u></div>
+        <div class="fx-bp-v"><b>${have} из ${P.length} ${Fx.plural(P.length, 'практики', 'практик', 'практик')}</b> работают у вас сегодня. Индекс зрелости ${x.idx} из 100 — это тот же факт, посчитанный по всем шести системам бизнеса.</div>
+      </div>
+      <p class="fx-note">Середины здесь не бывает: практика либо выполняется каждый день и проверяется, либо её нет, как бы она ни называлась в регламенте. ${gap > 0 ? `Отсутствие этих практик и есть причина потерь из ведомости: ${L && L.lossMo > 0 ? `<b class="fx-red">${Fx.money(L.lossMo)} валовой прибыли в месяц</b>, и вклад каждой практики там посчитан отдельной строкой` : 'роста, который не случается'}.` : 'Практики на месте: дальше растут объёмом, а не перестройкой.'}</p>`);
+  },
+
+  // ── 08 Риски роста ──
+  actRisk(x, no){
+    const a = x.a, R = this.risks(x);
+    if (!R.length) return '';
+    const mTxt = x.goal ? String(x.goal.mult).replace('.', ',') : '2';
+    const own = {people:'Люди — некому обрабатывать', prod:'Производство или доставка не вывезет', money:'Деньги — не хватит оборотки', quality:'Качество — начнём терять клиентов', nothing:'Ничего, справимся'}[a.growth_ready];
+    const match = own ? `<div class="fx-quote"><q>${own}</q><span class="fx-who">Так вы ответили на вопрос, что сломается первым при удвоении потока. ${a.growth_ready === 'nothing' ? `<b>Данные показывают другое: ${R[0].t.toLowerCase()} упирается в потолок раньше всего.</b>` : a.growth_ready === R[0].kind ? '<b>Данные это подтверждают: это и есть риск номер один.</b>' : `<b>Данные ставят на первое место другое: ${R[0].t.toLowerCase()}.</b>`}</span></div>` : '';
+    const cards = R.map((r, i) => `<div class="fx-risk ${r.sev}">
+      <div><span class="fx-rsev"><b>${String(i + 1).padStart(2, '0')}</b>${r.sev === 'high' ? 'критично' : 'требует решения'}</span><h5>${r.t}</h5><p>${r.p}</p></div>
+      <div class="fx-rc">${r.c}</div></div>`).join('');
+    return this.sec('risk', no, 'Риски роста', 'Что сломается первым, если расти на сегодняшней системе',
+      `Рост не чинит проблемы, а умножает их: те же дыры на большем обороте стоят дороже, а ручное управление перестаёт справляться раньше, чем заканчиваются деньги на рекламу. Ниже то, что упрётся в потолок при движении к вашей цели ×${mTxt}, в порядке очереди. Это не прогноз и не запугивание: каждый пункт следует из ваших же ответов и сегодняшних цифр.`,
+      `${match}<div class="fx-risks">${cards}</div>
+      <p class="fx-note">План на 90 дней собран так, чтобы эти узкие места расшивались до роста, а не после него: сначала процесс и управление, потом люди, и только потом объём.</p>`);
+  },
+
+  // ── 11 Если ничего не делать ──
+  nothingSVG(L, pfx = 'fx'){
+    const W = 1000, H = 250, top = 26, bot = 40, left = 16, right = 120;
+    const {A, B} = this.nothingCurves(L);
+    const maxV = A[11] * 1.06, X = i => left + (W - right - left) * i / 11, Y = v => top + (H - top - bot) * (1 - v / maxV);
+    const path = arr => arr.map((v, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+    const area = `${path(A)} ${B.map((v, i) => `L${X(11 - i).toFixed(1)},${Y(B[11 - i]).toFixed(1)}`).join(' ')} Z`;
+    let out = `<path d="${area}" fill="rgba(52,211,153,.10)"/>`;
+    out += `<line x1="0" x2="${W - right}" y1="${H - bot}" y2="${H - bot}" stroke="#2E3D38"/>`;
+    out += `<path d="${path(A)}" fill="none" stroke="#F0555A" stroke-width="2.5"/>`;
+    out += `<path d="${path(B)}" fill="none" stroke="#34D399" stroke-width="2.5"/>`;
+    [2, 5, 11].forEach(i => { out += `<circle cx="${X(i)}" cy="${Y(A[i])}" r="3.5" fill="#F0555A"/><circle cx="${X(i)}" cy="${Y(B[i])}" r="3.5" fill="#34D399"/>`; });
+    for (let i = 0; i < 12; i++) out += `<text x="${X(i)}" y="${H - bot + 20}" text-anchor="middle" class="fx-svg-c" style="font-size:12px">${i + 1}</text>`;
+    out += `<text x="${X(11) + 12}" y="${Y(A[11]) + 4}" class="fx-svg-v" fill="#F0555A">${Fx.mln(A[11])}</text>`;
+    out += `<text x="${X(11) + 12}" y="${Y(B[11]) + 4}" class="fx-svg-v" fill="#34D399">${Fx.mln(B[11])}</text>`;
+    return `<svg class="${pfx}-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Накопленная недополученная прибыль за 12 месяцев в двух сценариях">${out}</svg>
+      <div class="${pfx}-legend"><span><i style="background:#F0555A"></i>ничего не меняем</span><span><i style="background:#34D399"></i>начинаем сейчас</span><span>по горизонтали месяцы с сегодняшнего дня</span></div>`;
+  },
+  actNothing(x, no){
+    const L = x.L, a = x.a;
+    if (!L || L.lossMo <= 0 || L.recMo <= 0) return '';
+    const year = L.lossMo * 12;
+    const own = {same:'Останемся на месте', slowdeath:'Медленно начнём терять рынок', crisis:'Придём к кассовому разрыву или кризису', grow:'Всё равно вырастем'}[a.if_nothing];
+    const react = {
+      same: 'Остаться на месте при сегодняшней воронке не получится нейтрально: это и есть цена ниже. Рынок не стоит, а издержки и зарплаты растут каждый год.',
+      slowdeath: 'Потеря рынка начинается не с падения выручки, а с того, что сильные продавцы уходят туда, где система даёт им заработать. Это уже происходит внутри цифр выше.',
+      crisis: 'Кассовый разрыв при такой воронке приходит не от нехватки заявок, а от того, что оплаченные заявки не конвертируются в деньги. Это лечится быстрее всего.',
+      grow: 'Рост при сегодняшней воронке возможен, но он будет стоить дороже каждого следующего рубля: вы будете покупать заявки, часть которых снова не дойдёт до разговора.'
+    }[a.if_nothing];
+    return this.sec('nothing', no, 'Бездействие', 'Что будет, если не делать ничего',
+      'Отказ от решения — это тоже решение, и у него есть цена. Ниже два сценария на одних и тех же ваших цифрах: первый — всё остаётся как есть, второй — внедрение начинается сейчас. Линии показывают не выручку, а накопленную недополученную прибыль: сколько денег компания не получит к каждому месяцу.',
+      `<div class="fx-sub">Накопленная недополученная прибыль за 12 месяцев</div>
+      ${this.nothingSVG(L)}
+      <div class="fx-nd">
+        <div><span class="fx-k">Двенадцать месяцев без изменений</span><div class="fx-nbig">${Fx.M}${Fx.mln(year)}</div><p class="fx-note" style="margin-top:14px">Недополученная валовая прибыль накопительным итогом. Это не расходы и не убыток в отчётности: деньги, которые компания заработала бы на уже оплаченных заявках.</p></div>
+        <div><span class="fx-k">Те же двенадцать месяцев со стартом сейчас</span><div class="fx-nbig fx-green">+${Fx.mln(L.yearGP)}</div><p class="fx-note" style="margin-top:14px">Столько возвращается за первый год с учётом разгона по волнам${L.pnl.cost ? `, а после новых расходов на управление остаётся ${Fx.sgn(L.yearNet)}` : ''}. Разрыв между линиями на графике — это эта сумма.</p></div>
+      </div>
+      ${own ? `<div class="fx-quote"><q>${own}</q><span class="fx-who">Так вы ответили на вопрос, что будет, если ничего не менять ближайший год. <b>${react}</b></span></div>` : ''}
+      <div class="fx-sub" style="margin-top:38px">Что дорожает, пока решение откладывается</div>
+      <ul class="fx-ul dash">${this.delayCosts(x).map(c => `<li><span>${c}</span></li>`).join('')}</ul>
+      <p class="fx-note">Старт через три месяца стоит ${Fx.mln(L.delay3)} за первый год: волны сдвигаются целиком, а течь всё это время работает в прежнем режиме.</p>`);
+  },
+  // ── Диагноз ──
   actDiagnosis(x, no){
     const L = x.L, a = x.a;
     const nodes = x.chain.map((n, i) => `<div class="fx-node ${n.root ? 'root' : ''} ${n.money ? 'money' : ''}"><div class="fx-step" data-i="${i + 1}">${n.k}</div><h4>${n.h}</h4><p>${n.p}</p></div>`).join('');
@@ -4118,7 +4459,7 @@ const Final = {
       .map(([k, l]) => `<div class="fx-sys-row"><span>${l}</span><span class="fx-sys-t"><i style="width:${x.cats[k].score}%;background:${col(x.cats[k].score)}"></i></span><span class="fx-sys-n" style="color:${col(x.cats[k].score)}">${x.cats[k].score}</span></div>`).join('');
     const list = (arr, cls) => arr.length ? `<ul class="fx-ul ${cls}">${arr.map(t => `<li><span>${t}</span></li>`).join('')}</ul>` : '<p class="fx-note">—</p>';
     return this.sec('diagnosis', no, 'Диагноз', title,
-      'Потери на этапах воронки не складываются из отдельных проблем. Это одна цепочка, и чинить её нужно с начала, а не с конца.',
+      'Потери на разных этапах почти никогда не означают, что проблем несколько. Ниже цепочка от корневой причины до денег: где всё началось, как это работает изо дня в день и чем заканчивается в кассе. Там же ваш ответ о главной проблеме рядом с тем, что показывают цифры, и оценка шести систем бизнеса: видно, что чинить в первую очередь, а что не трогать вовсе.',
       `<div class="fx-chain" style="grid-template-columns:repeat(${x.chain.length},minmax(0,1fr))">${nodes}</div>
       ${quote}${perc}
       <div class="fx-three">
@@ -4145,7 +4486,7 @@ const Final = {
       : `${Fx.cap(sysParts)} дают ${Fx.mln(g.sysRevBase, 1)}. Остальное: +${g.sysLeads - L.leads} ${Fx.plural(g.sysLeads - L.leads, 'заявка', 'заявки', 'заявок')} в месяц${g.sysAd ? `, +${Fx.money(g.sysAd)} рекламы` : ''}, но уже на починенной воронке.${g.hires ? ` Плюс ${g.hires} ${Fx.plural(g.hires, 'продавец', 'продавца', 'продавцов')} к концу года.` : ''}`;
     const formula = `${Fx.mln(g.sysRevBase, 1)} = ${L.leads} заявок × ${Fx.pct(L.P.reach)} дозвон × ${Fx.pct(L.P.close, 1)} закрытие × ${Fx.rub(g.sysCheck)} чек ÷ ${Fx.pct(1 - g.sysRep)} доля новых продаж`;
     return this.sec('goal', no, 'Цель', g.sysOk ? `Цель ×${g.multTxt} закрывается без роста рекламного бюджета` : `Цель ×${g.multTxt} закрывается только системой плюс трафик`,
-      `Ваша цель на год: ${g.label}, до ${Fx.mln(g.target, 1)} выручки в месяц. Проверили три дороги к ней на ваших цифрах.`,
+      `Цель проверяется арифметикой, а не верой. Ваша цель на год — ${g.label}, это ${Fx.mln(g.target, 1)} выручки в месяц. Мы посчитали три дороги к ней на ваших же цифрах: только трафик, только конверсия и система. У каждой дороги видно, что именно для неё потребуется и где она ломается.`,
       `<div class="fx-paths">
         <div class="fx-path"><div class="fx-pl">Только трафик<small class="${g.trafficOk ? 'mid' : 'no'}">${g.trafficOk ? 'Дорого и с потерями' : 'Упрётся в отдел'}</small></div><div>${bar(g.trafficRev, g.trafficOk ? amber : red, true)}<p>${trafficTxt}</p></div></div>
         <div class="fx-path"><div class="fx-pl">Только конверсия<small class="${g.convOk ? 'mid' : 'no'}">${g.convOk ? 'Возможно, но хрупко' : 'Выше потолка профиля'}</small></div><div>${bar(g.convRev, g.convOk ? amber : red)}<p>${convTxt}</p></div></div>
@@ -4171,7 +4512,7 @@ const Final = {
       <div class="fx-wfoot"><div><span class="fx-k">Артефакты у вас</span>${w.art}</div><div><span class="fx-k">От вас</span>${w.you}</div></div>
     </div>`;
     return this.sec('plan', no, 'Внедрение', '90 дней, четыре волны, приёмка по цифрам',
-      'У каждой волны есть контрольные метрики с вашей текущей цифрой и бинарные критерии приёмки. Волна закрыта, только когда выполнен каждый критерий.',
+      'План внедрения на 90 дней. У каждой волны есть задачи, контрольные метрики с вашей сегодняшней цифрой и критерии приёмки без права трактовки: волна закрыта, когда выполнен каждый критерий, а не когда закончились недели. Эффект волн — это те же деньги из ведомости потерь, разложенные по срокам, а не новая сумма сверху.',
       `${gantt}<div class="fx-waves">${W.map(card).join('')}</div>
       ${L && L.recMo > 0 ? `<div class="fx-rule">Эффект волн складывается в <b class="fx-green">+${Fx.money(L.recMo)} валовой прибыли в месяц</b>: ровно та часть потерь из ведомости, которая возвращается за 90 дней. Отдельной суммы сверху нет.</div>` : ''}`);
   },
@@ -4204,7 +4545,11 @@ const Final = {
       tr('Валовая прибыль', Fx.mln(p.gp0, 2), Fx.mln(p.gp1, 2), `<span class="up">+${Fx.mln(p.gp1 - p.gp0, 2)}</span>`),
       p.cost ? tr(`Новые расходы: ${L.ropLabel}`, '—', `<span class="dn">${Fx.M}${Fx.mln(p.cost, 2)}</span>`, `<span class="dim">${L.ropAssumed ? 'допущение' : 'из ваших ответов'}</span>`) : '',
       p.pr0 != null ? tr('Прибыль', Fx.mln(p.pr0, 2), Fx.mln(p.pr1, 2), p.pr0 > 0 ? `<span class="${p.pr1 >= p.pr0 ? 'up' : 'dn'}">${p.pr1 >= p.pr0 ? '+' : Fx.M}${Fx.pct(Math.abs(p.pr1 / p.pr0 - 1))}</span>` : `<span class="up">+${Fx.mln(p.pr1 - p.pr0, 2)}</span>`, 'hl') : '',
-      p.pr0 != null ? tr('Рентабельность', Fx.pct(p.pr0 / p.rev0, 1), Fx.pct(p.pr1 / p.rev1, 1), `<span class="${p.pr1 / p.rev1 >= p.pr0 / p.rev0 ? 'up' : 'dn'}">${p.pr1 / p.rev1 >= p.pr0 / p.rev0 ? '+' : Fx.M}${Fx.dec(Math.abs(p.pr1 / p.rev1 - p.pr0 / p.rev0) * 100)} п.п.</span>`) : ''
+      p.pr0 != null ? tr('Рентабельность', Fx.pct(p.pr0 / p.rev0, 1), Fx.pct(p.pr1 / p.rev1, 1), (() => {
+        const dp = (p.pr1 / p.rev1 - p.pr0 / p.rev0) * 100;
+        return Math.abs(dp) < .05 ? '<span class="dim">без изменений</span>'
+          : `<span class="${dp > 0 ? 'up' : 'dn'}">${dp > 0 ? '+' : Fx.M}${Fx.dec(Math.abs(dp))} п.п.</span>`;
+      })()) : ''
     ].join('');
     const ropNote = p.cost ? (L.ropMode === 'senior'
       ? ` Возврат пока не покрывает зарплату отдельного РОПа ${Fx.rub(L.ropFull)}: на первом этапе отдел ведёт старший продавец с доплатой ${Fx.rub(p.cost)}, РОП появляется вместе с ростом.`
@@ -4220,7 +4565,7 @@ const Final = {
     ].join('');
     const planTxt = `дозвон ${Fx.pct(T.reach)}, закрытие ${Fx.pct(T.close)}`;
     return this.sec('pnl', no, 'Деньги', 'Что изменится в прибыли',
-      'Постоянные расходы не растут: вы начинаете зарабатывать на заявках, за которые уже платите. Поэтому возвращённая валовая прибыль почти целиком доходит до EBITDA.',
+      'Здесь ведомость превращается в P&L: что станет с выручкой, валовой прибылью и рентабельностью через 90 дней и за первый год с учётом разгона. Новые расходы вычтены явно, а не спрятаны в допущениях. Постоянные расходы при этом не растут: вы начинаете зарабатывать на заявках, за которые уже платите, поэтому возвращённая валовая прибыль почти целиком доходит до EBITDA. Справа калькулятор: поставьте свои цифры и проверьте расчёт сами.',
       `<div class="fx-pnl-grid">
         <div>
           <div class="fx-pnl-wrap"><table class="fx-pnl"><thead><tr><th>В месяц</th><th>Сейчас</th><th>После 90 дней</th><th>Изменение</th></tr></thead><tbody>${rows}</tbody></table></div>
@@ -4229,7 +4574,8 @@ const Final = {
           ${this.rampSVG(L)}
         </div>
         <div class="fx-levers" id="fxLevers">
-          <div class="fx-sub">Проверьте сами: поставьте цифры, в которые верите</div>
+          <div class="fx-sub">Калькулятор сценариев</div>
+          <p class="fx-lvnote">Поставьте цифры, в которые верите сами: прибыль пересчитается при вас.</p>
           ${levers}
           <div class="fx-lev-out"><div><span class="fx-k">Валовая прибыль</span><div class="fx-lvv fx-green" id="fxLvGP">+0 ₽</div></div><div><span class="fx-k">${p.pr0 != null ? 'Прибыль в месяц' : 'Валовая в месяц'}</span><div class="fx-lvv" id="fxLvPR"></div></div></div>
           <div class="fx-lev-btns"><button type="button" id="fxLvNow">Как сейчас</button><button type="button" id="fxLvPlan">Цели плана: ${planTxt}</button></div>
@@ -4245,7 +4591,7 @@ const Final = {
       a.call_records === 'yes' ? '5 записей звонков' : null, 'текущую схему мотивации продавцов'].filter(Boolean);
     const title = L && L.lossMo > 0 ? `Каждый месяц ожидания стоит ${Fx.money(L.lossMo)}. Первый шаг — один созвон` : 'Следующий шаг — один созвон';
     return this.sec('decision', no, 'Решение', title,
-      'Цена внедрения зависит от сложности течей, поэтому её нет в этом отчёте. На созвоне разбираем течи по приоритету и ресурс вашей команды, после него вы получаете КП: состав волн под вашу воронку, сроки, критерии приёмки и цену.',
+      'Отчёт заканчивается решением, а не предложением подумать. Цена внедрения зависит от сложности течей, поэтому в отчёте её нет: состав работ и цену определяет разбор на созвоне. Ниже три шага до старта, условия работы и то, что стоит взять с собой на созвон, чтобы КП было точным с первого раза.',
       `<div class="fx-steps">
         <div class="fx-stp"><span class="fx-sn">Шаг 1</span><h5>Созвон</h5><p>Разбираем течи из ведомости: что закрываем в первую волну, что во вторую, сколько времени это займёт у вашей команды.</p></div>
         <div class="fx-stp"><span class="fx-sn">Шаг 2</span><h5>КП</h5><p>Состав волн под вашу воронку, сроки, критерии приёмки и цена. Цена считается от сложности течей, а не по прайсу.</p></div>
@@ -4290,8 +4636,17 @@ const Final = {
       L && L.needRop ? `${L.ropMode === 'senior' ? 'Доплата старшему продавцу' : L.ropMode === 'hire' ? 'ФОТ РОПа' : 'Новых расходов на управление нет: на вашем масштабе руководитель пока не окупается'} ${L.ropCost ? Fx.rub(L.ropCost) + ' в месяц' : ''}${L.ropAssumed && L.ropCost ? ', допущение' : ''}.` : null,
       L && L.marginAssumed ? 'Маржа не указана и принята 30%.' : null
     ].filter(Boolean);
+    const lim = [
+      'Все исходные цифры приняты со слов собственника. Выгрузка CRM, записи звонков и управленческая отчётность не проверялись: при расхождении с фактом отчёт пересчитывается за минуту, логика выводов не меняется.',
+      'За рамками работы остались продукт и производство, логистика, бухгалтерия и налоги, юридические риски. Отчёт отвечает только за коммерческий блок.',
+      'Сравнение идёт не с рынком и не с конкурентами, а с потенциалом вашей же команды при построенной системе. Это сознательный выбор: отраслевые средние по нишам публикуются редко и почти всегда по несопоставимой методике.',
+      'Расчёт статичен: сезонность, изменения спроса и действия конкурентов в модель не заложены. Все суммы даны в сегодняшних ценах и без дисконтирования.',
+      'Сроки волн предполагают, что собственник выделяет на внедрение оговорённое время и решения принимаются в течение недели. Сдвиг решений сдвигает и деньги.',
+      'Отчёт не является инвестиционной, юридической или налоговой консультацией и не содержит гарантии дохода: это расчёт потенциала по вашим данным.'
+    ];
     return `<section class="fx-appx"><div class="fx-sub">Приложение</div>
       <details class="fx-ap"><summary>Методика и допущения</summary><div class="fx-in"><ol>${meth.map(t => `<li>${t}</li>`).join('')}</ol></div></details>
+      <details class="fx-ap"><summary>Ограничения работы и что осталось за рамками</summary><div class="fx-in"><ol>${lim.map(t => `<li>${t}</li>`).join('')}</ol></div></details>
       ${feed.length ? `<details class="fx-ap"><summary>Лог сканера · ${feed.length} ${Fx.plural(feed.length, 'находка', 'находки', 'находок')}</summary><div class="fx-in"><div class="fx-log">${feed.map(f => `<div class="${f.tone}">${Fx.noParens(f.text)}</div>`).join('')}</div></div></details>` : ''}
     </section>`;
   },
@@ -4300,11 +4655,16 @@ const Final = {
   notes(x, acts){
     const L = x.L, a = x.a, g = x.goal, has = k => acts.some(s => s.key === k);
     const N = {};
-    N.verdict = {t:'Вердикт',
-      say:'«Начну с главного: одна фраза, дальше покажу, откуда каждая цифра». Прочитайте заголовок вслух и выдержите паузу три секунды.',
+    N.summary = {t:'Резюме',
+      say:'«Начну с главного вывода, дальше покажу, откуда каждая цифра». Прочитайте заголовок вслух и выдержите паузу три секунды. Потом пройдите по пунктам «что мы нашли»: это костяк всей встречи, остальные разделы их доказывают.',
       ask:L && L.lossMo > 0 ? `«${Fx.money(L.lossMo)} в месяц — похоже на правду или кажется завышенным?»` : '«Это совпадает с тем, что вы видите сами?»',
-      obj:'«Завышено» — «Проверим. Следующий блок — только ваши цифры, без нашей оценки».',
-      next:'К исходным цифрам.'};
+      obj:'«Завышено» — «Проверим. Следующие два блока — граница работы и только ваши цифры, без нашей оценки».',
+      next:'«Сначала скажу, что именно мы смотрели и чего не смотрели».'};
+    N.scope = {t:'Метод',
+      say:'«Тридцать секунд про границу работы: смотрели коммерческий блок, продукт и бухгалтерию не трогали. Все цифры с ваших слов». Раздел снимает вопрос «откуда вы это взяли» до того, как он прозвучит.',
+      ask:'«Что здесь важно добавить в периметр, чтобы картина была полной?»',
+      obj:'«Вы не видели нашу CRM» — «Верно, так и написано. Если выгрузка разойдётся с вашими словами, отчёт пересчитается за минуту, а логика не изменится».',
+      next:'«Теперь ваши цифры в одной картине».'};
     if (has('numbers')) N.numbers = {t:'Цифры',
       say:'«Это не наши данные. Это то, что вы назвали сами, сведённое в одну картину».',
       ask:`Пройдите цифры по очереди: ${L.leads} заявок${L.full ? `, ${L.dialogs} разговоров` : ''}, ${Fx.dec(L.deals)} сделки, ${Fx.mln(L.rev)} выручки. На каждую получите «да, верно».`,
@@ -4315,6 +4675,11 @@ const Final = {
       ask:'До таблицы: «Как думаете, на каком этапе теряется больше всего?» Дайте ответить и не поправляйте.',
       obj:'«Норма не для нашей ниши» — «Поставьте свою цифру, вот поле. Отчёт пересчитается при вас». Почти всегда клиент ставит цифру выше своей текущей.',
       next:L.cash > 0 ? `Задержитесь на красной плашке: ${Fx.money(L.cash)} в месяц — уже списанные деньги, а не упущенная выгода.` : 'Откройте расчёт по клику: каждую строку можно пересчитать на калькуляторе.'};
+    if (has('bench')) N.bench = {t:'Сравнение',
+      say:'«Сравнивать вас со средними по рынку смысла нет: таких цифр либо нет, либо они посчитаны иначе. Сравним по практикам: они либо работают каждый день, либо их нет». Пройдите строки с крестиком вслух, без комментариев.',
+      ask:'«С какой строкой вы не согласны?» Если клиент защищает практику — спросите, как именно она проверяется.',
+      obj:'«У нас это есть, просто не формализовано» — «Как вы вчера узнали, что это выполнено?» Если ответа нет, практики нет.',
+      next:'«Теперь почему так вышло и что из этого следует».'};
     const root = x.chain[0] ? x.chain[0].h.toLowerCase() : '';
     N.diagnosis = {t:'Диагноз',
       say:L && L.leaky.length > 1 ? `«Потери на ${L.leaky.length} этапах — не ${L.leaky.length} проблемы, а одна причина: ${root}». Проведите по цепочке слева направо.` : `«Корень один: ${root}». Проведите по цепочке слева направо.`,
@@ -4326,6 +4691,11 @@ const Final = {
       ask:`«Цель ×${g.multTxt} — это твёрдое решение или красивая цифра?» Если твёрдое: «Тогда дорога одна, третья».`,
       obj:'«А если просто нанять продавцов?» — «Без управления и регламентов они повторят ту же воронку на новых заявках».',
       next:'«Вот как эта дорога выглядит по неделям».'};
+    if (has('risk')) N.risk = {t:'Риски роста',
+      say:'«Рост не чинит проблемы, он их умножает». Прочитайте первый риск целиком: он самый дорогой и обычно самый неприятный.',
+      ask:a.growth_ready ? '«Вы назвали одно, данные ставят на первое место другое. Что из этого ближе к правде?»' : '«Что сломается первым, если завтра заявок станет вдвое больше?»',
+      obj:'«Мы справимся» — «За счёт чего именно? Покажите в этих цифрах запас, который справится».',
+      next:'«Вот порядок, в котором это расшивается, и он не случайный».'};
     N.plan = {t:'План',
       say:'«Четыре волны. У каждой критерии приёмки в цифрах: волна не закрыта, пока цифра не достигнута».',
       ask:'«Какую из волн вы бы убрали?» Обычно ответ: никакую. Это согласие с планом, зафиксируйте его вслух.',
@@ -4336,6 +4706,11 @@ const Final = {
       ask:L.full ? '«Какой дозвон вы готовы защищать перед своей командой?» Запишите ответ: это его план, не наш.' : '«Какую конверсию вы готовы защищать перед командой?» Запишите ответ.',
       obj:'«Не верю в такой рост» — нажмите «Как сейчас» и двигайте только один рычаг. Одного обычно хватает.',
       next:'Задержитесь на цене старта через 3 месяца.'};
+    if (has('nothing')) N.nothing = {t:'Бездействие',
+      say:'«Отказ от решения — тоже решение, и у него есть цена». Ведите пальцем по расходящимся линиям, не торопитесь.',
+      ask:'«Какой из двух сценариев вы считаете своим на ближайший год?»',
+      obj:`«Подождём до следующего квартала» — «Подождать можно. Три месяца стоят ${Fx.mln(L ? L.delay3 : 0)} за первый год, и эта цифра от ожидания не уменьшится».`,
+      next:'«Тогда финальный вопрос: с чего начинаем».'};
     N.decision = {t:'Решение',
       say:'«Предлагаю так: созвон по КП в ближайшие два дня. Разберём течи по приоритету, после созвона получите КП с ценой под их сложность».',
       ask:'«Когда удобнее: завтра или послезавтра?» Вопрос с выбором, а не «интересно ли вам».',
@@ -4433,9 +4808,9 @@ const Report = {
 
     // ── Обложка ──
     const cover = `<div class="pr-page pr-cover"><div class="pr-cover-in">
-      <div class="pr-cover-top"><div class="pr-cover-logo">CLOSERY<span>COMMERCIAL MRI</span></div><div class="pr-cover-meta">${date}<br>Стратегический разбор</div></div>
+      <div class="pr-cover-top"><div class="pr-cover-logo">CLOSERY<span>COMMERCIAL MRI</span></div><div class="pr-cover-meta">${date}<br>Николай Клименко, Closery</div></div>
       <div class="pr-cover-mid">
-        <div class="pr-cover-kicker">Коммерческий МРТ · диагноз</div>
+        <div class="pr-cover-kicker">Аудит коммерческого блока</div>
         <div class="pr-cover-title">${x.head}</div>
         <div class="pr-cover-company">${company}</div>
         <div class="pr-cover-sub">ниша: ${niche} · аудитория: ${audience}${L && L.lossMo > 0 ? ` · течь ${Fx.M}${Fx.money(L.lossMo)} в месяц` : ''}</div>
@@ -4461,7 +4836,7 @@ const Report = {
       facts = `<div class="pr-h2" style="margin-top:22px">Ваши цифры <i>·</i></div><div class="pr-km">
         ${cell('Выручка', Fx.mln(L.rev) + '/мес', L.repeat != null ? `повторные ${L.repeat}%` : '')}
         ${cell('Валовая прибыль', Fx.mln(L.gp) + '/мес', 'маржа ' + (L.marginAssumed ? '30%, принято' : L.margin + '%'))}
-        ${L.profit != null ? cell('Прибыль', Fx.mln(L.profit) + '/мес', 'рентабельность ' + Fx.pct(L.profit / L.rev, 1)) : ''}
+        ${L.profit != null ? cell('Прибыль', Fx.mln(L.profit) + '/мес', 'рентабельность ' + Fx.pct(L.profit / L.rev, 1).replace(',0%', '%')) : ''}
         ${cell('Заявки', L.leads + '/мес', L.full ? `разговоров ${L.dialogs}` : '')}
         ${cell('Сделки', Fx.dec(L.deals) + '/мес', L.full ? `дозвон ${Fx.pct(L.reach)} × закрытие ${Fx.pct(L.close)}` : `конверсия ${L.conv}%`)}
         ${cell('Средний чек', Fx.rub(L.check), '')}
@@ -4469,16 +4844,48 @@ const Report = {
         ${L.ltvCac ? cell('LTV / CAC', Fx.dec(L.ltvCac, L.ltvCac >= 10 ? 0 : 1) + '×', 'окупаемость клиента') : ''}
       </div>`;
     }
-    page('ВЕРДИКТ', `${demoMark}
-      <div class="pr-tag">Итог диагностики</div>
+    const con = Story.conclusions(L, x.c, x.perc, x.goal);
+    page('РЕЗЮМЕ', `${demoMark}
+      <div class="pr-tag">Главный вывод</div>
       <div class="pr-title">${x.head}</div>
       <div class="pr-lede">${Fx.strip(L ? x.lead : Scoring.verdict(x.idx)[1])}</div>
-      ${kpis}${facts}`);
+      ${kpis}
+      ${con.length ? `<div class="pr-h2" style="margin-top:20px">Что мы нашли <i>·</i></div><ol class="pr-x-concl">${con.map(t => `<li>${Fx.strip(t)}</li>`).join('')}</ol>` : ''}
+      ${L ? `<div class="pr-x-reco"><span>С чего начинать</span><p>${Story.recommend(L)}</p></div>` : ''}`);
+
+    // ── 02 Метод и данные ──
+    const coreIds = ['leads_month','conversion','avg_check','revenue','margin','dialogs'];
+    const dqN = coreIds.filter(id => FinModel.num(id) != null).length;
+    const answered = State.visibleQuestions().filter(q => State.answers[q.id] != null && State.answers[q.id] !== '').length;
+    const checkTxt = x.cons ? 'расходятся, разбор ниже'
+      : L && L.revKnown && Math.abs(L.funnelRev / L.rev - 1) <= .25 ? 'сходятся'
+      : L && L.revKnown ? 'расходятся не критично' : 'выручка посчитана по воронке';
+    const scopeCol = (t, items) => `<div><span>${t}</span><ul>${items.filter(Boolean).map(i => `<li>${i}</li>`).join('')}</ul></div>`;
+    page('МЕТОД И ДАННЫЕ', `
+      <div class="pr-tag">Периметр работы</div>
+      <div class="pr-title" style="font-size:23px">Что мы смотрели и на каких данных</div>
+      <div class="pr-lede">Аудит охватывает коммерческий блок: как заявка превращается в деньги и что этим управляет. Ниже граница работы и источник каждой цифры, чтобы было понятно, на какие вопросы отчёт отвечает, а на какие честно не отвечает.</div>
+      <div class="pr-x-scope">
+        ${scopeCol('Что смотрели', ['Шесть систем: маркетинг, продажи, команда, управление, экономика, стратегия',
+          'Воронку по этапам: заявка, разговор, сделка, повторная покупка',
+          'Юнит-экономику: стоимость заявки и клиента, ценность клиента, окупаемость рекламы',
+          'Управление отделом: регламенты, KPI, разбор звонков, мотивация, найм'])}
+        ${scopeCol('На каких данных', [`${answered} ${Fx.plural(answered, 'ответ', 'ответа', 'ответов')} собственника, собранных в диагностике`,
+          `${dqN} из 6 ключевых цифр названы: заявки, разговоры, конверсия, чек, выручка, маржа`,
+          `Сверка выручки с воронкой: ${checkTxt}`,
+          L && L.marginAssumed ? 'Маржа не названа и принята 30%: это допущение' : 'Маржа названа собственником и взята как есть'])}
+        ${scopeCol('Чего не проверяли', ['Продукт, производство и логистику',
+          'Бухгалтерию, налоги и юридические риски',
+          'Рынок и конкурентов: сравниваем с потенциалом вашей же команды',
+          'Выгрузку CRM и записи звонков: цифры приняты со слов собственника'])}
+      </div>
+      <div class="pr-callout">Метод расчёта один на весь отчёт: ваш показатель сравнивается не со средней нормой по рынку, а с тем, что даёт та же команда, когда у неё есть инструменты. Вклад каждого инструмента подписан отдельной строкой в ведомости потерь.</div>
+      ${facts}`);
 
     // ── 02 Ведомость потерь ──
     if (L && L.lossMo > 0){
       const mg = L.marginAssumed ? '30%' : L.margin + '%';
-      const unit = d => d.unit === 'pp' ? `+${Fx.dec(d.eff)} п.п.` : d.unit === 'rel' ? `+${Fx.dec(d.eff * L.closeCalc * 100, d.eff * L.closeCalc * 100 < 1 ? 2 : 1)} п.п.` : d.unit === 'pct' ? `+${Fx.rub(L.check * d.eff)}` : `+${Math.round(d.eff)} заявок`;
+      const unit = d => d.unit === 'pp' ? `+${Fx.dec(d.eff, d.eff < 1 ? 2 : 1)} п.п.` : d.unit === 'rel' ? `+${Fx.dec(d.eff * L.closeCalc * 100, d.eff * L.closeCalc * 100 < 1 ? 2 : 1)} п.п.` : d.unit === 'pct' ? `+${Fx.rub(L.check * d.eff)}` : `+${Math.round(d.eff)} заявок`;
       const now = {lead:`${L.leads} заявок`, contact:`дозвон ${Fx.pct(L.reachCalc)}`, close:`закрытие ${Fx.pct(L.closeCalc)}`,
         repeat:`${L.repeat}% выручки`, price:Fx.rub(L.check)};
       const pot = {lead:L.P.leads ? `${Math.round(L.P.leads)} заявок` : '—', contact:Fx.pct(L.P.reach), close:Fx.pct(L.P.close),
@@ -4497,6 +4904,21 @@ const Report = {
         ${L.capHit ? `<div class="pr-callout warn">Сумма ограничена потолком ${Fx.pct(Ledger.GP_CAP)} валовой прибыли в год: это сознательное занижение, чтобы цифру можно было защитить.</div>` : ''}
         ${L.capCut < 1 ? `<div class="pr-callout warn">Возврат через воронку ограничен мощностью отдела: больше сделок нынешний состав физически не обслужит.</div>` : ''}
         ${L.cash > 0 ? `<div class="pr-callout bad"><b>Отдельно от прибыли: ${Fx.rub(L.cash)} в месяц уже списаны со счёта.</b> Рекламный бюджет уходит на заявки, до разговора с которыми дело не доходит. За год это ${Fx.mln(L.cash * 12)} живых денег.</div>` : ''}`);
+    }
+
+    // ── Сравнение с построенной системой ──
+    const PR = Final.practices(a);
+    if (PR.length >= 6){
+      const have = PR.filter(p => p[2]).length, pos = Math.round(have / PR.length * 100);
+      const mrows = PR.map(p => `<tr><td>${p[0]}</td><td class="c n">✕</td><td class="c ${p[2] ? 'y' : 'm'}">${p[2] ? '✓' : '✕'}</td><td class="c y">✓</td></tr>`).join('');
+      page('СРАВНЕНИЕ', `
+        <div class="pr-tag">Позиция</div>
+        <div class="pr-title" style="font-size:23px">Где вы между ручным режимом и построенной системой</div>
+        <div class="pr-lede">Сравнивать со средней компанией по рынку бессмысленно: такие цифры публикуются редко и по несопоставимой методике. Поэтому сравниваем по практикам: они либо работают каждый день, либо их нет. Отметки взяты из ответов собственника.</div>
+        <table class="pr-x-mx"><thead><tr><th>Практика</th><th class="c">Продажи на людях</th><th class="c">У вас</th><th class="c">Построенная система</th></tr></thead><tbody>${mrows}</tbody></table>
+        <div class="pr-x-bh"><span>Ручной режим</span><span>Построенная система</span></div>
+        <div class="pr-x-bar"><i style="width:${pos}%"></i><u style="left:${pos}%"></u></div>
+        <div class="pr-callout"><b>${have} из ${PR.length} ${Fx.plural(PR.length, 'практики', 'практик', 'практик')}</b> работают сегодня. Индекс зрелости ${x.idx} из 100 — тот же факт по всем шести системам бизнеса.${L && L.lossMo > 0 ? ` Отсутствие остальных и есть причина потерь из ведомости: ${Fx.money(L.lossMo)} валовой прибыли в месяц.` : ''}</div>`);
     }
 
     // ── 03 Диагноз ──
@@ -4539,6 +4961,25 @@ const Report = {
         <div class="pr-callout">Первый год с учётом разгона: <b>+${Fx.mln(L.yearGP)}</b> валовой прибыли${p.cost ? `, <b>${Fx.sgn(L.yearNet)}</b> после новых расходов` : ''}. Старт через 3 месяца обойдётся в <b>${Fx.M}${Fx.mln(L.delay3)}</b> за первый год.</div>` : ''}`);
     }
 
+    // ── Риски роста ──
+    const RK = Final.risks(x);
+    if (RK.length){
+      const mTxt = g ? String(g.mult).replace('.', ',') : '2';
+      const ownTxt = {people:'Люди — некому обрабатывать', prod:'Производство или доставка не вывезет', money:'Деньги — не хватит оборотки', quality:'Качество — начнём терять клиентов', nothing:'Ничего, справимся'}[a.growth_ready];
+      const riskCard = (r, i) => `<div class="pr-x-risk ${r.sev}"><span class="s">${String(i + 1).padStart(2, '0')} · ${r.sev === 'high' ? 'критично' : 'требует решения'}</span><span class="t">${r.t}</span><p>${r.p}</p><p class="c">${r.c}</p></div>`;
+      const rChunks = [RK.slice(0, 3), RK.slice(3, 8)].filter(c => c.length);
+      rChunks.forEach((chunk, ci) => {
+        const last = ci === rChunks.length - 1;
+        page(rChunks.length > 1 ? `РИСКИ РОСТА · ${ci + 1}/${rChunks.length}` : 'РИСКИ РОСТА', `
+          ${ci === 0 ? `<div class="pr-tag">Что сломается первым</div>
+          <div class="pr-title" style="font-size:23px">Узкие места при движении к цели ×${mTxt}</div>
+          <div class="pr-lede">Рост не чинит проблемы, а умножает их: те же дыры на большем обороте стоят дороже, а ручное управление перестаёт справляться раньше, чем заканчиваются деньги на рекламу. Порядок — по очерёдности, в которой это упрётся в потолок.</div>
+          ${ownTxt ? `<div class="pr-quote">«${ownTxt}» — так вы ответили на вопрос, что сломается первым при удвоении потока.${a.growth_ready === RK[0].kind ? ' Данные это подтверждают.' : ` Данные ставят на первое место другое: ${RK[0].t.toLowerCase()}.`}</div>` : ''}` : ''}
+          ${chunk.map((r, i) => riskCard(r, ci * 3 + i)).join('')}
+          ${last ? `<div class="pr-callout">План на 90 дней собран так, чтобы эти узкие места расшивались до роста, а не после него: сначала процесс и управление, потом люди, и только потом объём.</div>` : ''}`);
+      });
+    }
+
     // ── 05–06 План: две волны на страницу ──
     const wave = w => `<div class="pr-x-wave">
       <div class="pr-x-wh"><b>Волна ${w.n} · недели ${w.wk[0]}–${w.wk[1]}</b><em>${w.eff > 0 ? '+' + Fx.money(w.eff) + ' в месяц' : 'эффект: ' + w.effNote}</em></div>
@@ -4556,6 +4997,25 @@ const Report = {
       <div class="pr-lede">Волна закрыта, только когда выполнен каждый критерий приёмки. Эффект волн складывается в возврат из ведомости, отдельной суммы сверху нет.</div>
       ${x.waves.slice(0, 2).map(wave).join('')}`);
     page('ПЛАН 90 ДНЕЙ · 3–4', x.waves.slice(2).map(wave).join(''));
+
+    // ── Если ничего не делать ──
+    if (L && L.lossMo > 0 && L.recMo > 0){
+      const yr = L.lossMo * 12;
+      const ownN = {same:'Останемся на месте', slowdeath:'Медленно начнём терять рынок', crisis:'Придём к кассовому разрыву или кризису', grow:'Всё равно вырастем'}[a.if_nothing];
+      page('ЕСЛИ НИЧЕГО НЕ ДЕЛАТЬ', `
+        <div class="pr-tag">Цена ожидания</div>
+        <div class="pr-title" style="font-size:23px">Два сценария на одних и тех же цифрах</div>
+        <div class="pr-lede">Отказ от решения — тоже решение, и у него есть цена. Линии показывают не выручку, а накопленную недополученную прибыль: сколько компания не получит к каждому месяцу, если всё остаётся как есть и если внедрение начинается сейчас.</div>
+        ${Final.nothingSVG(L)}
+        <div class="pr-x-nd">
+          <div><div class="k">Двенадцать месяцев без изменений</div><div class="v bad">${Fx.M}${Fx.mln(yr)}</div><p>Недополученная валовая прибыль накопительным итогом: деньги, которые компания заработала бы на уже оплаченных заявках.</p></div>
+          <div><div class="k">Те же месяцы со стартом сейчас</div><div class="v good">+${Fx.mln(L.yearGP)}</div><p>Столько возвращается за первый год с учётом разгона по волнам${L.pnl.cost ? `, после новых расходов на управление остаётся ${Fx.sgn(L.yearNet)}` : ''}.</p></div>
+        </div>
+        ${ownN ? `<div class="pr-quote">«${ownN}» — так вы ответили на вопрос, что будет, если ничего не менять ближайший год.</div>` : ''}
+        <div class="pr-h2" style="margin-top:16px">Что дорожает, пока решение откладывается <i>·</i></div>
+        <ul class="pr-list">${Final.delayCosts(x).map(c => `<li><span>${Fx.strip(c.replace(/<\/b>/g, '</b> '))}</span></li>`).join('')}</ul>
+        <div class="pr-callout warn">Старт через три месяца стоит ${Fx.mln(L.delay3)} за первый год: волны сдвигаются целиком, а течь всё это время работает в прежнем режиме.</div>`);
+    }
 
     // ── 07 Следующий шаг ──
     page('СЛЕДУЮЩИЙ ШАГ', `
@@ -4585,7 +5045,26 @@ const Report = {
       <div class="pr-tag">Приложение</div>
       <div class="pr-title" style="font-size:19px">Методика и допущения</div>
       <div class="pr-lede">Ориентир каждого этапа — потенциал вашей команды с построенной системой, а не средняя норма по рынку: вклад каждой практики указан в ведомости. Ориентир конверсии для профиля ${Profile.build().convTarget}% — расчёт модели, а не отраслевая статистика. Потолки: дозвон не выше ${Fx.pct(Ledger.REACH_CEIL)}, закрытие растёт не больше чем в ${Fx.dec(1 + Ledger.CLOSE_REL_CAP, 1)} раза, вся сумма не больше ${Fx.pct(Ledger.GP_CAP)} валовой прибыли в год, возврат ограничен мощностью отдела.${L && L.needRop && L.ropCost ? ` ${L.ropMode === 'senior' ? 'Доплата старшему продавцу' : 'ФОТ РОПа'} ${Fx.rub(L.ropCost)} в месяц${L.ropAssumed ? ', допущение' : ''}.` : ''}</div>
-      ${feedAll.length ? `<div class="pr-card"><div class="pr-h2">Лог сканера · ${feedAll.length} ${Fx.plural(feedAll.length, 'находка', 'находки', 'находок')} <i>·</i></div><div class="pr-log">${feedAll.map(f => `<div class="${f.tone}">${Fx.noParens(f.text)}</div>`).join('')}</div></div>` : ''}`);
+      <div class="pr-h2" style="margin-top:18px">Ограничения работы <i>·</i></div>
+      <ul class="pr-list"><li><span>Все исходные цифры приняты со слов собственника: выгрузка CRM, записи звонков и управленческая отчётность не проверялись.</span></li>
+        <li><span>За рамками работы остались продукт и производство, логистика, бухгалтерия, налоги и юридические риски.</span></li>
+        <li><span>Сравнение идёт не с рынком, а с потенциалом вашей же команды при построенной системе: отраслевые средние публикуются редко и по несопоставимой методике.</span></li>
+        <li><span>Расчёт статичен: сезонность, изменения спроса и действия конкурентов в модель не заложены, суммы даны в сегодняшних ценах без дисконтирования.</span></li>
+        <li><span>Сроки волн предполагают, что собственник выделяет оговорённое время, а решения принимаются в течение недели.</span></li>
+        <li><span>Отчёт не является инвестиционной, юридической или налоговой консультацией и не содержит гарантии дохода.</span></li></ul>
+      `);
+
+    // Лог сканера отдельными страницами: он длинный и не должен ломать методику
+    const LOG_PER_PAGE = 26;
+    for (let i = 0; i < feedAll.length; i += LOG_PER_PAGE){
+      const part = feedAll.slice(i, i + LOG_PER_PAGE), n = Math.floor(i / LOG_PER_PAGE) + 1;
+      const total = Math.ceil(feedAll.length / LOG_PER_PAGE);
+      page(total > 1 ? `ЛОГ СКАНЕРА · ${n}/${total}` : 'ЛОГ СКАНЕРА', `
+        ${i === 0 ? `<div class="pr-tag">Приложение</div>
+        <div class="pr-title" style="font-size:19px">Лог сканера · ${feedAll.length} ${Fx.plural(feedAll.length, 'находка', 'находки', 'находок')}</div>
+        <div class="pr-lede">Каждая строка — ответ, который модель отметила как отклонение или как сильную сторону. Порядок: сначала то, что стоит денег.</div>` : ''}
+        <div class="pr-log">${part.map(f => `<div class="${f.tone}">${Fx.noParens(f.text)}</div>`).join('')}</div>`);
+    }
 
     // ── Задняя обложка ──
     const back = `<div class="pr-page pr-back"><div class="pr-cover-in">
