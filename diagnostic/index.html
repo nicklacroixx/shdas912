@@ -525,21 +525,21 @@ body:not(.cl-unlocked) .gate{display:grid}
    Всё остальное нейтральное. */
 #flow{min-width:0}
 .fx{--fx-lab:190px;--fx-gap:34px;max-width:1180px;margin:0 auto;color:var(--ink);font-size:15px;line-height:1.6}
-.fx p{margin:0}
+.fx :where(p,ul,ol,h1,h2,h3,h4,h5){margin:0}
 .fx b,.fx strong{font-weight:600;color:var(--ink)}
 .fx .fx-red,.fx b.fx-red{color:var(--loss)}
 .fx .fx-green,.fx b.fx-green{color:var(--ok)}
 .fx .fx-warn{color:var(--warn)}
 .fx-mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.fx-k{display:block;font:500 10px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
-.fx-sub{font:500 10px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 16px;display:flex;align-items:center;gap:14px}
+.fx-k{display:block;font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:0 0 12px}
+.fx-sub{font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:0 0 20px;display:flex;align-items:center;gap:16px}
 .fx-sub::after{content:'';flex:1;height:1px;background:var(--rule)}
 .fx-note{font-size:14px;line-height:1.6;color:var(--ink-2);margin:20px 0 0;max-width:72ch}
 .fx-card{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:24px}
 
 /* режим демонстрации */
 .fx-demo{display:flex;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px solid var(--rule);font-size:13px;color:var(--ink-3)}
-.fx-demo b{font:500 10px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--warn);white-space:nowrap}
+.fx-demo b{font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--warn);white-space:nowrap}
 
 /* шапка документа */
 .fx-doc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-bottom:1px solid var(--rule)}
@@ -553,13 +553,13 @@ body:not(.cl-unlocked) .gate{display:grid}
 /* акт: метка слева, содержание справа — один левый край на весь отчёт */
 .fx-act{display:grid;grid-template-columns:var(--fx-lab) minmax(0,1fr);gap:var(--fx-gap);padding:76px 0;border-top:1px solid var(--rule);scroll-margin-top:90px}
 .fx-act:first-of-type{border-top:0;padding-top:56px}
-.fx-lab{position:sticky;top:90px;align-self:start;font:500 10px/1.5 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-.fx-lab b{display:block;font:500 12px/1 var(--mono);color:var(--ok);margin-bottom:10px;letter-spacing:.06em}
+.fx-lab{position:sticky;top:90px;align-self:start;font:500 11px/1.5 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.fx-lab b{display:block;font:500 12px/1 var(--mono);color:var(--ok);margin-bottom:12px;letter-spacing:.04em}
 .fx-body{min-width:0}
 @media(max-width:1000px){.fx-act{grid-template-columns:minmax(0,1fr);gap:16px;padding:52px 0}.fx-lab{position:static}}
 
-.fx-h1{font-family:var(--doc);font-weight:600;font-size:clamp(28px,3.2vw,41px);line-height:1.15;letter-spacing:-.01em;margin:0 0 22px;max-width:23ch;color:#fff}
-.fx-title{font-family:var(--doc);font-weight:600;font-size:clamp(23px,2.5vw,32px);line-height:1.2;letter-spacing:-.01em;margin:0 0 14px;max-width:24ch;color:#fff}
+.fx-h1{font-family:var(--ui);font-weight:600;font-size:clamp(29px,3.3vw,43px);line-height:1.16;letter-spacing:-.025em;margin:0 0 26px;max-width:22ch;color:#fff}
+.fx-title{font-family:var(--ui);font-weight:600;font-size:clamp(23px,2.4vw,31px);line-height:1.25;letter-spacing:-.022em;margin:0 0 16px;max-width:26ch;color:#fff}
 .fx-lead{font-size:16px;line-height:1.65;color:var(--ink-2);max-width:66ch;margin:0 0 34px}
 .fx-hero-sub{font-size:17px;line-height:1.6;color:var(--ink-2);max-width:62ch;margin:0}
 
@@ -567,10 +567,10 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:44px;border-top:1px solid var(--rule-2)}
 .fx-kpi{padding:20px 20px 4px;border-left:1px solid var(--rule);min-width:0}
 .fx-kpi:first-child{padding-left:0;border-left:0}
-.fx-val{font-family:var(--doc);font-weight:600;font-size:clamp(23px,2.4vw,31px);line-height:1.1;letter-spacing:-.01em;white-space:nowrap;display:flex;align-items:center;gap:10px}
+.fx-val{font-family:var(--ui);font-weight:600;font-size:clamp(23px,2.4vw,31px);line-height:1.1;letter-spacing:-.01em;white-space:nowrap;display:flex;align-items:center;gap:10px}
 .fx-val small{font-size:.5em;color:var(--ink-3);font-weight:600}
 .fx-val svg{flex:none}
-.fx-s{font-size:13px;line-height:1.5;color:var(--ink-2);margin-top:10px}
+.fx-s{font-size:13px;line-height:1.55;color:var(--ink-2);margin-top:16px;max-width:30ch}
 @media(max-width:900px){.fx-kpis{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.fx-kpi:nth-child(3){padding-left:0;border-left:0}.fx-kpi:nth-child(n+3){border-top:1px solid var(--rule);margin-top:8px;padding-top:20px}}
 
 /* 02 цифры */
@@ -581,12 +581,12 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-ml{font-size:14px;color:var(--ink-2)}
 .fx-mbar{height:6px;background:var(--rule);border-radius:3px;overflow:hidden}
 .fx-mbar i{display:block;height:100%;border-radius:3px}
-.fx-mn{font:500 15px/1.3 var(--mono);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.fx-mn{font:600 15px/1.3 var(--ui);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .fx-mn small{display:block;font-size:11px;color:var(--ink-3);margin-top:4px}
 .fx-fsteps{display:grid;gap:18px}
 .fx-fstep{min-width:0;padding-right:14px}
-.fx-fn{font-family:var(--doc);font-weight:600;font-size:clamp(22px,2.2vw,28px);line-height:1;letter-spacing:-.01em}
-.fx-fl{font-size:13px;line-height:1.45;color:var(--ink-2);margin-top:8px}
+.fx-fn{font-family:var(--ui);font-weight:600;font-size:clamp(22px,2.2vw,28px);line-height:1;letter-spacing:-.01em}
+.fx-fl{font-size:13px;line-height:1.5;color:var(--ink-2);margin-top:12px}
 .fx-fl em{font-style:normal;color:var(--ink)}
 .fx-fbars{margin-top:26px;display:grid;gap:16px}
 .fx-fbar{display:grid;grid-template-columns:96px minmax(0,1fr) 54px;gap:14px;align-items:center;font-size:13px;color:var(--ink-2)}
@@ -594,11 +594,11 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-ft i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--ink-3)}
 .fx-ft u{position:absolute;top:-4px;bottom:-4px;width:1px;background:var(--ink-2);text-decoration:none}
 .fx-ft u::after{content:attr(data-n);position:absolute;top:-16px;left:50%;transform:translateX(-50%);font:500 10px/1 var(--mono);color:var(--ink-3);white-space:nowrap}
-.fx-fp{font:500 13px var(--mono);text-align:right;font-variant-numeric:tabular-nums}
-.fx-facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:26px;border-top:1px solid var(--rule-2)}
+.fx-fp{font:600 13.5px var(--ui);text-align:right;font-variant-numeric:tabular-nums}
+.fx-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:26px;border-top:1px solid var(--rule-2)}
 .fx-facts>div{padding:18px 16px 0 0;min-width:0}
-.fx-fv{font:500 17px/1.3 var(--mono);white-space:nowrap;font-variant-numeric:tabular-nums}
-.fx-fs{font-size:12px;color:var(--ink-3);margin-top:6px}
+.fx-fv{font:600 17px/1.3 var(--ui);white-space:nowrap;font-variant-numeric:tabular-nums;margin-top:12px;letter-spacing:-.01em}
+.fx-fs{font-size:12px;line-height:1.5;color:var(--ink-3);margin-top:10px}
 @media(max-width:900px){.fx-facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 .fx-team{margin-top:22px;font-size:14px;line-height:1.7;color:var(--ink-2);max-width:78ch}
 .fx-check{margin-top:20px;display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.6;color:var(--ink-2);padding:14px 16px;border:1px solid var(--rule);border-radius:8px;max-width:80ch}
@@ -607,32 +607,32 @@ body:not(.cl-unlocked) .gate{display:grid}
 
 /* 03 ведомость */
 .fx-chart{width:100%;height:auto;display:block}
-.fx-svg-v{font:600 13px var(--mono)}
-.fx-svg-c{font:400 12px var(--ui);fill:var(--ink-3)}
+.fx-svg-v{font:600 16px var(--ui);letter-spacing:-.01em}
+.fx-svg-c{font:400 15px var(--ui);fill:var(--ink-2)}
 .fx-legend{display:flex;gap:24px;flex-wrap:wrap;font-size:12px;color:var(--ink-3);margin:14px 0 0}
 .fx-legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:8px;vertical-align:-1px}
 .fx-legend i.fx-dash{border:1px dashed var(--ok)}
 .fx-ledger{margin-top:36px;border-top:1px solid var(--rule-2)}
-.fx-lrow{display:grid;grid-template-columns:30px minmax(104px,.8fr) minmax(0,.85fr) 92px minmax(0,1.45fr) 128px 46px 104px;gap:16px;align-items:start;padding:18px 0;border-bottom:1px solid var(--rule)}
-.fx-lrow.head{padding:14px 0;font:500 9.5px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.fx-lrow{display:grid;grid-template-columns:28px minmax(96px,.72fr) minmax(0,.78fr) 78px minmax(0,1.9fr) 124px 44px 100px;gap:14px;align-items:start;padding:20px 0;border-bottom:1px solid var(--rule)}
+.fx-lrow.head{padding:14px 0;font:500 11px/1.45 var(--ui);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
 .fx-lrow.head>div{align-self:end}
 .fx-lrow.head .r{text-align:right}
 .fx-lno{font:500 12px var(--mono);color:var(--ink-3);padding-top:3px}
 .fx-lnm{font-weight:600;font-size:15px;color:#fff;line-height:1.35}
 .fx-lc{font-size:14px;color:var(--ink-2);line-height:1.5}
-.fx-lmo,.fx-lsh,.fx-lrc{font:500 14px/1.4 var(--mono);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
-.fx-lmo{font-size:15px}
+.fx-lmo,.fx-lsh,.fx-lrc{font:600 15px/1.4 var(--ui);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.fx-lmo{font-size:16px}
 .fx-ibar{height:4px;background:var(--rule);border-radius:2px;margin-top:10px;position:relative;overflow:hidden}
 .fx-ibar i{position:absolute;top:0;bottom:0;left:0;background:var(--loss);border-radius:2px}
 .fx-ibar em{position:absolute;top:0;bottom:0;left:0;background:var(--ok);border-radius:2px}
 .fx-lrow.total{border-bottom:0;border-top:1px solid var(--rule-2);padding-top:20px}
-.fx-lrow.total .fx-lnm{font-family:var(--doc);font-weight:600;font-size:16px}
+.fx-lrow.total .fx-lnm{font-family:var(--ui);font-weight:600;font-size:16px}
 .fx-drvs{display:grid;gap:8px}
-.fx-drv{display:flex;justify-content:space-between;gap:12px;line-height:1.45;font-size:13.5px}
-.fx-drv i{font-style:normal;font-family:var(--mono);font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+.fx-drv{display:grid;grid-template-columns:minmax(0,1fr) 74px;gap:14px;line-height:1.5;font-size:13.5px}
+.fx-drv i{font-style:normal;font-size:13px;font-weight:500;color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
 .fx-drv.more{color:var(--ink-3)}
-.fx-tog{grid-column:2 / -1;margin-top:2px;background:none;border:0;padding:0;color:var(--ink-3);font:500 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;text-align:left;width:max-content}
-.fx-tog::before{content:'Как посчитано'}
+.fx-tog{grid-column:2 / -1;margin-top:6px;background:none;border:0;padding:0;color:var(--ink-3);font:500 11px var(--ui);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;text-align:left;width:max-content}
+.fx-tog::before{content:'Как посчитано →'}
 .fx-lrow.open .fx-tog::before{content:'Свернуть расчёт'}
 .fx-tog:hover{color:var(--ink)}
 .fx-how{grid-column:2 / -1;display:none;font:400 13px/1.7 var(--mono);color:var(--ink-2);border:1px solid var(--rule);border-radius:8px;padding:16px 18px;margin-top:6px}
@@ -648,13 +648,17 @@ body:not(.cl-unlocked) .gate{display:grid}
   .fx-lrow{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 18px}
   .fx-lrow.head,.fx-lno{display:none}
   .fx-lnm{grid-column:1 / -1}
-  .fx-lrow>[data-k]::before{content:attr(data-k);display:block;font:500 9.5px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
-  .fx-lmo,.fx-lsh,.fx-lrc{text-align:left}
+  .fx-lrow>[data-k]::before{content:attr(data-k);display:block;font:500 10.5px/1.45 var(--ui);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+  .fx-lmo,.fx-lrc{text-align:left}
+  .fx-lnm{margin-bottom:6px}
+  .fx-lrow{padding:22px 0}
+  .fx-lsh{display:none}
+  .fx-lrow>[data-k]{padding-top:2px}
   .fx-how,.fx-tog{grid-column:1 / -1}
   .fx-how-r{grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
 }
 .fx-cash{margin-top:26px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:baseline;padding:20px 22px;border:1px solid var(--rule);border-left:2px solid var(--loss);border-radius:0 8px 8px 0}
-.fx-cash-v{font-family:var(--doc);font-weight:600;font-size:clamp(22px,2.3vw,28px);line-height:1.2;color:var(--loss);white-space:nowrap}
+.fx-cash-v{font-family:var(--ui);font-weight:600;font-size:clamp(22px,2.3vw,28px);line-height:1.2;color:var(--loss);white-space:nowrap}
 .fx-cash p{font-size:14px;line-height:1.6;color:var(--ink-2)}
 @media(max-width:700px){.fx-cash{grid-template-columns:minmax(0,1fr);gap:10px}}
 .fx-method{margin-top:26px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;font-size:13.5px;line-height:1.65;color:var(--ink-3)}
@@ -669,9 +673,9 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-chain{display:grid;gap:0;border-top:1px solid var(--rule-2)}
 .fx-node{padding:22px 24px 22px 0;position:relative;min-width:0}
 .fx-node+.fx-node{padding-left:24px;border-left:1px solid var(--rule)}
-.fx-step{font:500 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:9px}
+.fx-step{font:500 11px/1 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:9px}
 .fx-step::before{content:attr(data-i);width:18px;height:18px;border-radius:50%;border:1px solid var(--rule-2);display:grid;place-items:center;font-size:9.5px;color:var(--ink-3);letter-spacing:0}
-.fx-node h4{font-family:var(--doc);font-weight:600;font-size:17px;line-height:1.3;margin:14px 0 8px;color:#fff}
+.fx-node h4{font-family:var(--ui);font-weight:600;font-size:17px;line-height:1.3;margin:14px 0 8px;color:#fff}
 .fx-node.money h4{color:var(--loss)}
 .fx-node p{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
 @media(max-width:900px){.fx-chain{grid-template-columns:minmax(0,1fr)!important}.fx-node+.fx-node{padding-left:0;border-left:0;border-top:1px solid var(--rule)}}
@@ -683,7 +687,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-perc.two{grid-template-columns:repeat(2,minmax(0,1fr))}
 .fx-perc>div{padding:20px 22px 0 0;min-width:0}
 .fx-perc>div+div{border-left:1px solid var(--rule);padding-left:22px}
-.fx-perc h5{font-family:var(--doc);font-weight:600;font-size:18px;line-height:1.3;margin:0 0 10px;color:#fff}
+.fx-perc h5{font-family:var(--ui);font-weight:600;font-size:18px;line-height:1.3;margin:0 0 10px;color:#fff}
 .fx-perc p{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
 .fx-pyou h5{color:var(--ink-3);text-decoration:line-through;text-decoration-thickness:1px}
 .fx-perr h5{color:var(--loss)}
@@ -694,7 +698,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-sys-row{display:grid;grid-template-columns:104px minmax(0,1fr) 30px;gap:12px;align-items:center;font-size:13px;color:var(--ink-2)}
 .fx-sys-t{height:4px;background:var(--rule);border-radius:2px;overflow:hidden}
 .fx-sys-t i{display:block;height:100%;border-radius:2px}
-.fx-sys-n{font:500 13px var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.fx-sys-n{font:600 13px var(--ui);text-align:right;font-variant-numeric:tabular-nums}
 .fx-ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
 .fx-ul li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:10px;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 .fx-ul li::before{font:500 12px/1.6 var(--mono);color:var(--ink-3)}
@@ -704,11 +708,11 @@ body:not(.cl-unlocked) .gate{display:grid}
 /* 05 цель */
 .fx-paths{display:grid;gap:26px;border-top:1px solid var(--rule-2);padding-top:26px}
 .fx-path{display:grid;grid-template-columns:190px minmax(0,1fr);gap:24px;align-items:start}
-.fx-pl{font-family:var(--doc);font-weight:600;font-size:16px;line-height:1.3;color:#fff}
-.fx-pl small{display:block;margin-top:8px;font:500 10px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.fx-pl{font-family:var(--ui);font-weight:600;font-size:16px;line-height:1.3;color:#fff}
+.fx-pl small{display:block;margin-top:10px;font:500 11px/1.4 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .fx-pl small.yes{color:var(--ok)}
 .fx-ptrack{height:30px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;position:relative}
-.fx-ptrack i{position:absolute;left:0;top:0;bottom:0;border-radius:3px 0 0 3px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font:500 12.5px var(--mono);color:var(--ink);white-space:nowrap;font-style:normal}
+.fx-ptrack i{position:absolute;left:0;top:0;bottom:0;border-radius:3px 0 0 3px;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font:600 13px var(--ui);color:var(--ink);white-space:nowrap;font-style:normal;font-variant-numeric:tabular-nums}
 .fx-tl{position:absolute;top:-7px;bottom:-7px;width:1px;background:var(--ink-2)}
 .fx-tl[data-n]::after{content:attr(data-n);position:absolute;top:-19px;left:50%;transform:translateX(-50%);font:500 10px/1 var(--mono);letter-spacing:.06em;white-space:nowrap;color:var(--ink-3)}
 .fx-path p{margin-top:10px;font-size:13.5px;line-height:1.6;color:var(--ink-2);max-width:72ch}
@@ -717,7 +721,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 
 /* 06 план */
 .fx-gantt{display:grid;grid-template-columns:178px repeat(12,minmax(0,1fr));border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule)}
-.fx-wk{font:500 10px/1 var(--mono);color:var(--ink-3);text-align:center;padding:12px 0}
+.fx-wk{font:500 11px/1 var(--ui);color:var(--ink-3);text-align:center;padding:14px 0}
 .fx-wk.first{text-align:left}
 .fx-wl{font-size:13px;line-height:1.4;color:var(--ink-2);padding:14px 14px 14px 0;border-top:1px solid var(--rule);display:flex;align-items:center;gap:10px}
 .fx-wl b{font:500 11px var(--mono);color:var(--ink-3)}
@@ -732,12 +736,12 @@ body:not(.cl-unlocked) .gate{display:grid}
 @media(max-width:900px){.fx-waves{grid-template-columns:minmax(0,1fr)}}
 .fx-wave{border:1px solid var(--rule);border-radius:10px;padding:24px;display:flex;flex-direction:column;min-width:0;background:var(--paper)}
 .fx-wtop{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
-.fx-wno{font:500 10px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.fx-wno{font:500 11px/1.45 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .fx-weff{display:flex;align-items:baseline;gap:8px;white-space:nowrap}
-.fx-weff b{font-family:var(--doc);font-weight:600;font-size:18px;color:var(--ok)}
+.fx-weff b{font-family:var(--ui);font-weight:600;font-size:18px;color:var(--ok)}
 .fx-weff b.zero{color:var(--ink-3);font-size:14px}
-.fx-weff span{font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-.fx-wave h4{font-family:var(--doc);font-weight:600;font-size:19px;line-height:1.25;margin:16px 0 8px;color:#fff}
+.fx-weff span{font:500 11px var(--ui);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.fx-wave h4{font-family:var(--ui);font-weight:600;font-size:19px;line-height:1.25;margin:16px 0 8px;color:#fff}
 .fx-wgoal{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
 .fx-effnote{margin-top:10px;font-size:13px;line-height:1.6;color:var(--ink-3)}
 .fx-effnote b{color:var(--ok);font-weight:500}
@@ -749,7 +753,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-acc li::before{content:'';width:12px;height:12px;border:1px solid var(--ok);border-radius:2px;margin-top:4px}
 .fx-metrics{display:grid;gap:8px}
 .fx-metric{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:11px 13px;border:1px solid var(--rule);border-radius:6px;font-size:13.5px;color:var(--ink-2)}
-.fx-mv{font:500 13px var(--mono);white-space:nowrap;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+.fx-mv{font:600 13.5px var(--ui);white-space:nowrap;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
 .fx-mv s{color:var(--ink-3);text-decoration:none}
 .fx-mv em{font-style:normal;color:var(--ok)}
 .fx-guar{margin-top:14px;font-size:13px;color:var(--ink-2)}
@@ -763,9 +767,9 @@ body:not(.cl-unlocked) .gate{display:grid}
 @media(max-width:980px){.fx-pnl-grid{grid-template-columns:minmax(0,1fr)}}
 .fx-pnl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .fx-pnl{width:100%;border-collapse:collapse}
-.fx-pnl th{font:500 9.5px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);text-align:right;padding:0 0 14px 14px;border-bottom:1px solid var(--rule-2);font-weight:500}
+.fx-pnl th{font:500 11px/1.45 var(--ui);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);text-align:right;padding:0 0 14px 14px;border-bottom:1px solid var(--rule-2);font-weight:500}
 .fx-pnl th:first-child{text-align:left;padding-left:0}
-.fx-pnl td{padding:14px 0 14px 14px;border-bottom:1px solid var(--rule);font:500 15px var(--mono);text-align:right;white-space:nowrap;color:var(--ink);font-variant-numeric:tabular-nums}
+.fx-pnl td{padding:16px 0 16px 14px;border-bottom:1px solid var(--rule);font:600 15px var(--ui);text-align:right;white-space:nowrap;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .fx-pnl td:first-child{font:400 14px var(--ui);color:var(--ink-2);text-align:left;padding-left:0;white-space:normal}
 .fx-pnl tr.hl td{border-bottom:1px solid var(--rule-2)}
 .fx-pnl tr.hl td:first-child{color:var(--ink);font-weight:600}
@@ -775,25 +779,25 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-lev{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:center;padding:14px 0;border-top:1px solid var(--rule)}
 .fx-lev:first-of-type{border-top:0;padding-top:0}
 .fx-lev label{font-size:13.5px;color:var(--ink-2)}
-.fx-lv{font:500 13px var(--mono);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.fx-lv{font:600 13.5px var(--ui);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .fx-lv s{color:var(--ink-3);text-decoration:none}
 .fx-lev input[type=range]{grid-column:1 / -1;width:100%;accent-color:var(--ok);height:16px;margin:4px 0 0}
 .fx-lev-out{margin-top:18px;padding-top:18px;border-top:1px solid var(--rule-2);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
-.fx-lvv{font-family:var(--doc);font-weight:600;font-size:23px;line-height:1.2;white-space:nowrap}
+.fx-lvv{font-family:var(--ui);font-weight:600;font-size:23px;line-height:1.2;white-space:nowrap}
 .fx-lvv small{font-size:13px;font-weight:600}
 .fx-lev-btns{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
 .fx-lev-btns button{background:transparent;border:1px solid var(--rule-2);color:var(--ink-2);border-radius:6px;padding:9px 12px;font:400 12.5px var(--ui);cursor:pointer;text-transform:none;letter-spacing:0}
 .fx-lev-btns button:hover{color:var(--ink);border-color:var(--ink-3)}
 .fx-delay{margin-top:26px;display:flex;gap:18px;align-items:baseline;padding:18px 20px;border:1px solid var(--rule);border-left:2px solid var(--loss);border-radius:0 8px 8px 0;font-size:14px;line-height:1.6;color:var(--ink-2);max-width:82ch}
-.fx-delay b{font-family:var(--doc);font-weight:600;font-size:20px;color:var(--loss);white-space:nowrap}
+.fx-delay b{font-family:var(--ui);font-weight:600;font-size:20px;color:var(--loss);white-space:nowrap}
 @media(max-width:640px){.fx-delay{flex-direction:column;gap:8px}}
 
 /* 08 решение */
 .fx-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule)}
 .fx-stp{padding:24px 24px 24px 0;min-width:0}
 .fx-stp+.fx-stp{padding-left:24px;border-left:1px solid var(--rule)}
-.fx-sn{display:block;font:500 10px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
-.fx-stp h5{font-family:var(--doc);font-weight:600;font-size:18px;margin:12px 0 8px;color:#fff}
+.fx-sn{display:block;font:500 11px/1.45 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.fx-stp h5{font-family:var(--ui);font-weight:600;font-size:18px;margin:12px 0 8px;color:#fff}
 .fx-stp p{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
 @media(max-width:900px){.fx-steps{grid-template-columns:minmax(0,1fr)}.fx-stp+.fx-stp{padding-left:0;border-left:0;border-top:1px solid var(--rule)}}
 .fx-offer{margin-top:32px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:32px}
@@ -802,15 +806,15 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-econ>div{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:16px 0;border-top:1px solid var(--rule)}
 .fx-econ>div:first-child{border-top:0}
 .fx-econ span{font-size:13.5px;color:var(--ink-2)}
-.fx-econ b{font:500 15px var(--mono);white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.fx-econ b{font:600 15px var(--ui);white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
 @media(max-width:560px){.fx-econ>div{flex-direction:column;gap:4px}.fx-econ b{text-align:left}}
 .fx-cases{margin-top:36px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--rule-2)}
 .fx-case{padding:22px 22px 0 0;min-width:0}
 .fx-case+.fx-case{border-left:1px solid var(--rule);padding-left:22px}
-.fx-cv{font-family:var(--doc);font-weight:600;font-size:clamp(20px,2vw,25px);line-height:1.2;margin:10px 0;color:var(--ok)}
+.fx-cv{font-family:var(--ui);font-weight:600;font-size:clamp(20px,2vw,25px);line-height:1.2;margin:10px 0;color:var(--ok)}
 .fx-case p{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
 @media(max-width:900px){.fx-cases{grid-template-columns:minmax(0,1fr)}.fx-case+.fx-case{padding:22px 0 0;border-left:0;border-top:1px solid var(--rule)}}
-.fx-sign{margin-top:28px;font-family:var(--doc);font-size:16px;line-height:1.6;color:var(--ink-2);max-width:74ch}
+.fx-sign{margin-top:28px;font-family:var(--doc);font-size:17px;line-height:1.6;color:var(--ink-2);max-width:74ch}
 .fx-sign b{display:block;margin-top:8px;font-family:var(--ui);font-size:13px;color:var(--ink)}
 .fx-cta{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .fx-cta .btn-primary,.fx-cta .btn-ghost{text-decoration:none}
@@ -834,7 +838,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 
 /* навигация по блокам */
 .fx-rail{position:fixed;left:24px;top:50%;transform:translateY(-50%);z-index:30;display:none;flex-direction:column;gap:3px}
-.fx-rail a{display:flex;align-items:center;gap:10px;padding:4px 0;color:var(--ink-3);text-decoration:none;font:500 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.fx-rail a{display:flex;align-items:center;gap:10px;padding:5px 0;color:var(--ink-3);text-decoration:none;font:500 10.5px/1 var(--ui);letter-spacing:.08em;text-transform:uppercase}
 .fx-rail a i{width:12px;height:1px;background:var(--rule-2);transition:width .2s,background .2s}
 .fx-rail a.on{color:var(--ink-2)} .fx-rail a.on i{width:22px;background:var(--ok)}
 @media(min-width:1500px){.fx-rail{display:flex}}
@@ -850,7 +854,7 @@ body.fx-prompter-on .fx-prompter{display:block}
 .fx-pr-win{width:100%;margin:0 0 6px;padding:11px}
 .fx-pr-x:hover,.fx-pr-win:hover{color:var(--ink);border-color:var(--ink-3)}
 .fx-pr-warn{margin:14px 0 16px;font-size:12px;line-height:1.6;color:var(--ink-3)}
-.fx-pr-act{font-family:var(--doc);font-weight:600;font-size:20px;line-height:1.3;margin:18px 0 14px;color:#fff}
+.fx-pr-act{font-family:var(--ui);font-weight:600;font-size:20px;line-height:1.3;margin:18px 0 14px;color:#fff}
 .fx-pr-blk{padding:14px 0;border-top:1px solid var(--rule)}
 .fx-pr-blk p{margin:0;font-size:13.5px;line-height:1.6;color:var(--ink)}
 .fx-pr-blk.ask p{color:var(--ok)}
@@ -3256,7 +3260,7 @@ const Ledger = {
     L.repOrders = repeat != null ? rev * repShare / check : 0;
 
     const D = [];
-    const add = (o) => { if (o.eff > 0) D.push(o); };
+    const add = (o) => { if (o.eff > 0 && (o.gain == null || o.gain > 500)) D.push(o); };
     const rank = FX_RANK[a.response_time] ?? -1, rnorm = FX_RANK[p.respNorm];
 
     // ── Первый контакт: вклад в процентных пунктах дозвона ──
@@ -3264,40 +3268,40 @@ const Ledger = {
     const cPP = [];
     const pushC = (id, eff, label, why, wave, rec) => { if (eff > 0) cPP.push({id, stage:'contact', unit:'pp', eff, label, why, wave, rec}); };
     pushC('resp', rank - rnorm >= 2 ? 4 : rank > rnorm ? 3 : 0, `Норматив первого ответа: ${FX_RESP[p.respNorm]}`, `сейчас отвечаете ${FX_RESP[a.response_time] || 'без норматива'}`, 2, .9);
-    pushC('crm', a.has_crm === 'no' ? 4 : 0, 'CRM: ни одна заявка не теряется', 'заявки живут в мессенджерах и блокнотах', 2, .5);
+    pushC('crm', a.has_crm === 'no' ? 4 : 0, 'CRM: заявки не теряются', 'заявки живут в мессенджерах и блокнотах', 2, .5);
     pushC('watch', a.has_crm === 'yes' && a.funnel_visibility === 'no' ? 1.5 : 0, 'Контроль невзятых заявок', 'этапы воронки не оцифрованы', 2, .6);
     pushC('follow', ({nothing:4, couple:2.5, manager:1.5})[a.followup] || 0, 'Каскад касаний до разговора', ({nothing:'заявку без ответа бросают', couple:'пара звонков и всё', manager:'дожим на усмотрение менеджера'})[a.followup], 2, .7);
     pushC('load', L.loadRatio != null && L.loadRatio > 1.3 ? 3 : 0, 'Разгрузка продавцов', `${Math.round(L.load || 0)} заявок на человека при норме ${p.loadNorm}`, 3, .4);
     pushC('admin', ({admin:2, half:1.5})[a.sales_time] || 0, 'Снять документы с продавцов', 'время продавцов уходит на бумаги', 3, .5);
-    const cSum = cPP.reduce((t, d) => t + d.eff, 0) / 100;
-    const cNormGap = Math.max(0, L.reachNorm - L.reachCalc - cSum);
+    // Сначала реальные практики, и только остаток места добирает разрыв с ориентиром:
+    // иначе добор съедал всё, и вклад практик схлопывался в «+0,0 п.п.»
+    let cReal = cPP.reduce((t, d) => t + d.eff, 0) / 100;
+    if (cReal > ppRoom && cReal > 0){ const k = ppRoom / cReal; cPP.forEach(d => d.eff *= k); cReal = ppRoom; }
+    const cNormGap = Math.min(Math.max(0, ppRoom - cReal), Math.max(0, L.reachNorm - L.reachCalc - cReal));
     if (cNormGap > .005) cPP.push({id:'creg', stage:'contact', unit:'pp', eff: cNormGap * 100, label:'Регламент первого касания', why:`дозвон ниже ориентира профиля ${Fx.pct(L.reachNorm)}`, wave:2, rec:.6});
-    // ужимаем в потолок дозвона
-    const cTotal = cPP.reduce((t, d) => t + d.eff, 0) / 100;
-    const cScale = cTotal > ppRoom ? ppRoom / cTotal : 1;
-    cPP.forEach(d => { d.eff *= cScale; d.gain = d.eff / 100 * L.leads * L.closeCalc * check * m; add(d); });
+    cPP.forEach(d => { d.gain = d.eff / 100 * L.leads * L.closeCalc * check * m; add(d); });
 
     // ── Закрытие: вклад в процентах к текущей конверсии разговора в оплату ──
     const zREL = [];
     const pushZ = (id, eff, label, why, wave, rec) => { if (eff > 0) zREL.push({id, stage:'close', unit:'rel', eff, label, why, wave, rec}); };
-    pushZ('script', a.has_regl === 'no' ? .08 : 0, 'Скрипт ключевого этапа и карта возражений', 'каждый продаёт как умеет', 2, .6);
+    pushZ('script', a.has_regl === 'no' ? .08 : 0, 'Скрипт и карта возражений', 'каждый продаёт как умеет', 2, .6);
     pushZ('calls', a.call_records === 'no' ? .06 : 0, 'Разбор звонков каждую неделю', 'диалоги никто не слушает', 4, .7);
     pushZ('rop', a.has_rop === 'no' ? .07 : 0, 'Ежедневное управление отделом', 'нет РОПа', 3, .4);
     pushZ('motiv', ({salary:.05, chaos:.03})[a.motivation] || 0, 'Мотивация от результата', ({salary:'продавцы на окладе', chaos:'у каждого своя схема'})[a.motivation], 1, .8);
     pushZ('owner', a.owner_dep === 'yes' || ['all','most'].includes(a.owner_share) ? .05 : 0, 'Сделки не ждут собственника', 'ключевые сделки идут через вас', 4, .3);
     pushZ('cascade', ['timing','ghost'].includes(a.lost_reason) && a.followup !== 'system' ? .06 : 0, 'Дожим после встречи', `главный отказ: ${({timing:'«не сейчас»', ghost:'клиенты пропадают молча'})[a.lost_reason]}`, 2, .7);
     pushZ('qual', a.lost_reason === 'wrong' ? .05 : 0, 'Квалификация на входе', 'приходят не те клиенты', 2, .6);
-    pushZ('trust', a.lost_reason === 'trust' ? .04 : 0, 'Доказательства: кейсы, гарантии, отзывы', 'отказы из-за недоверия', 2, .6);
+    pushZ('trust', a.lost_reason === 'trust' ? .04 : 0, 'Кейсы, гарантии и отзывы в работе', 'отказы из-за недоверия', 2, .6);
     pushZ('price_obj', a.lost_reason === 'price' ? .04 : 0, 'Аргументация цены вместо скидок', 'главный отказ: «дорого»', 2, .6);
     pushZ('plan', ({rare:.03, half:.02})[a.plan_done] || 0, 'План-факт каждую неделю', 'план выполняется через раз', 4, .6);
-    pushZ('visib', a.funnel_visibility === 'no' ? .02 : 0, 'Конверсия видна по каждому этапу', 'видна только общая конверсия', 2, .6);
-    let zSum = Math.min(this.CLOSE_REL_CAP, zREL.reduce((t, d) => t + d.eff, 0));
-    const closeNormRel = L.closeNorm ? Math.max(0, L.closeNorm / L.closeCalc - 1) : 0;
-    if (closeNormRel > zSum + .01) zREL.push({id:'zreg', stage:'close', unit:'rel', eff: closeNormRel - zSum, label:'Технология закрытия до ориентира профиля', why:`закрытие ниже ориентира ${Fx.pct(L.closeNorm || 0)}`, wave:4, rec:.5});
-    const zTotalRaw = zREL.reduce((t, d) => t + d.eff, 0);
+    pushZ('visib', a.funnel_visibility === 'no' ? .02 : 0, 'Воронка по этапам в CRM', 'видна только общая конверсия', 2, .6);
     const ceilRel = Math.max(0, Math.min(this.CLOSE_ABS_CEIL / L.closeCalc - 1, this.CLOSE_REL_CAP, (L.closeNorm ? L.closeNorm * 1.6 : this.CLOSE_ABS_CEIL) / L.closeCalc - 1));
-    const zScale = zTotalRaw > ceilRel && zTotalRaw > 0 ? ceilRel / zTotalRaw : 1;
-    zREL.forEach(d => { d.eff *= zScale; d.gain = d.eff * L.closeCalc * L.dialogsCalc * check * m; add(d); });
+    let zReal = zREL.reduce((t, d) => t + d.eff, 0);
+    if (zReal > ceilRel && zReal > 0){ const k = ceilRel / zReal; zREL.forEach(d => d.eff *= k); zReal = ceilRel; }
+    const closeNormRel = L.closeNorm ? Math.max(0, L.closeNorm / L.closeCalc - 1) : 0;
+    const zGap = Math.min(Math.max(0, ceilRel - zReal), Math.max(0, closeNormRel - zReal));
+    if (zGap > .01) zREL.push({id:'zreg', stage:'close', unit:'rel', eff: zGap, label:'Технология закрытия до ориентира', why:`закрытие ниже ориентира ${Fx.pct(L.closeNorm || 0)}`, wave:4, rec:.5});
+    zREL.forEach(d => { d.gain = d.eff * L.closeCalc * L.dialogsCalc * check * m; add(d); });
 
     // ── Повторные продажи: вклад в процентных пунктах доли повторной выручки ──
     if (repeat != null && a.repeat_nature !== 'oneoff'){
@@ -3305,21 +3309,20 @@ const Ledger = {
       const pushR = (id, eff, label, why, wave, rec) => { if (eff > 0) rPP.push({id, stage:'repeat', unit:'pp', eff, label, why, wave, rec}); };
       pushR('base', ({never:5, sometimes:3})[a.old_base] || 0, 'Системная работа с базой', ({never:'база лежит мёртвым грузом', sometimes:'база отрабатывается вручную'})[a.old_base], 2, .4);
       pushR('who', ({nobody:4, unknown:2})[a.repeat_block] || 0, 'Ответственный за повторные продажи', ({nobody:'базой некому заниматься', unknown:'причина возвратов неизвестна'})[a.repeat_block], 2, .4);
-      pushR('reason', a.repeat_block === 'noreason' ? 3 : 0, 'Повод вернуться: линейка и допродажи', 'нет повода для второй покупки', 4, .3);
+      pushR('reason', a.repeat_block === 'noreason' ? 3 : 0, 'Повод вернуться и допродажи', 'нет повода для второй покупки', 4, .3);
       pushR('crm', a.has_crm === 'no' ? 1.5 : 0, 'История клиента в CRM', 'клиентскую базу негде вести', 2, .4);
-      const rSum = rPP.reduce((t, d) => t + d.eff, 0);
       const rRoom = Math.max(0, Math.min(this.REPEAT_PP_CAP, Math.max(L.repeatTarget - repeat, 4)));
-      const rNormGap = Math.max(0, L.repeatTarget - repeat - rSum);
-      if (rNormGap > .5) rPP.push({id:'rreg', stage:'repeat', unit:'pp', eff: rNormGap, label:'Реактивация до нормы вашего продукта', why:`повторные ниже ориентира ${L.repeatTarget}%`, wave:2, rec:.3});
-      const rTotal = rPP.reduce((t, d) => t + d.eff, 0);
-      const rScale = rTotal > rRoom && rTotal > 0 ? rRoom / rTotal : 1;
-      rPP.forEach(d => { d.eff *= rScale; d.gain = d.eff / 100 * deals * check * m; add(d); });
+      let rReal = rPP.reduce((t, d) => t + d.eff, 0);
+      if (rReal > rRoom && rReal > 0){ const k = rRoom / rReal; rPP.forEach(d => d.eff *= k); rReal = rRoom; }
+      const rGap = Math.min(Math.max(0, rRoom - rReal), Math.max(0, L.repeatTarget - repeat - rReal));
+      if (rGap > .5) rPP.push({id:'rreg', stage:'repeat', unit:'pp', eff: rGap, label:'Реактивация базы до нормы продукта', why:`повторные ниже ориентира ${L.repeatTarget}%`, wave:2, rec:.3});
+      rPP.forEach(d => { d.gain = d.eff / 100 * deals * check * m; add(d); });
     }
 
     // ── Цена: самый быстрый рычаг, если рынок её держит ──
     const priceEff = ({raised:.05, can:.04, value:.03})[a.check_flex] || 0;
     if (priceEff > 0) add({id:'price', stage:'price', unit:'pct', eff: priceEff,
-      label: a.check_flex === 'value' ? 'Цена через пакетирование и гарантию' : 'Пересмотр прайса и аргументация цены',
+      label: a.check_flex === 'value' ? 'Цена через пакеты и гарантию' : 'Пересмотр прайса',
       why: ({raised:'цену уже поднимали, рынок принял', can:'поднять можно, но не пробовали', value:'цену держит упаковка продукта'})[a.check_flex],
       wave: a.check_flex === 'value' ? 4 : 1, rec: a.check_flex === 'value' ? .3 : .8,
       gain: (deals + L.repOrders) * check * priceEff * this.PRICE_FLOW});
@@ -3655,6 +3658,7 @@ const Waves = {
     const owner = a.owner_dep === 'yes' || ['all','most'].includes(a.owner_share);
     const senior = L && L.ropMode === 'senior', self = L && L.ropMode === 'self';
     const boss = senior ? 'старший продавец' : self ? 'собственник по регламенту' : 'РОП';
+    const sameTxt = m => String(m[1]).trim() === String(m[2]).trim();
     const tasks = (n, extra) => {
       const list = dr(n).map(d => d.label);
       (extra || []).forEach(t => { if (t && !list.includes(t)) list.push(t); });
@@ -3673,8 +3677,7 @@ const Waves = {
                             : 'Сбор сделок за 3 месяца из таблиц и мессенджеров: воронка по этапам на фактических данных',
         'Архитектура отдела: роли, ФОТ, план на каждого',
         'P&L-модель на 12 месяцев помесячно']),
-      metrics: L && L.P.check > L.check && dr(1).some(d => d.stage === 'price')
-        ? [['Средний чек', Fx.rub(L.check), Fx.rub(L.T.check)]] : [],
+      metrics: (L && L.P.check > L.check && dr(1).some(d => d.stage === 'price') ? [['Средний чек', Fx.rub(L.check), Fx.rub(L.T.check)]] : []).filter(m => !sameTxt(m)),
       acc:['Документ архитектуры подписан: структура, ФОТ, мотивация, планы',
         'P&L-модель сходится с фактом последних 3 месяцев в пределах 5%',
         'У каждого этапа воронки есть владелец и норматив'],
@@ -3689,7 +3692,7 @@ const Waves = {
     W.push({n:2, wk:[3,6], title:'Фундамент: CRM, регламенты, скрипты', goal:'Перестать терять оплаченные заявки.',
       tasks: tasks(2, [a.has_crm === 'no' ? null : 'Автораспределение заявок и контроль невзятых в CRM',
         a.has_regl === 'no' ? 'Прослушка 20 звонков и карта возражений под ваш продукт' : null]),
-      metrics: m2,
+      metrics: m2.filter(m => !sameTxt(m)),
       acc:['Отдел неделю работает строго по регламентам: проверка по 20 записям звонков',
         ['couple','nothing','manager'].includes(a.followup) ? 'Каждая незакрытая сделка получает 5 касаний и больше: проверка 20 случайных сделок' : null,
         '100% заявок и сделок в CRM: сверка с оплатами без расхождений'].filter(Boolean),
@@ -3712,7 +3715,7 @@ const Waves = {
     if (['months','long','gaveup'].includes(a.hiring_time)) m3.push(['Поиск кандидата', ({months:'1–3 месяца', long:'больше 3 месяцев', gaveup:'почти отчаялись'})[a.hiring_time], 'закрыт за 4 недели']);
     W.push({n:3, wk:[5,8], title: hiring ? 'Люди через конкурс' : 'Команда: аттестация и резерв',
       goal: owner ? 'Снять продажи с собственника и разгрузить отдел.' : hiring ? 'Закрыть роли, без которых рост некому везти.' : 'Убедиться, что каждый в отделе тянет свой план.',
-      tasks: t3, metrics: m3,
+      tasks: t3, metrics: m3.filter(m => !sameTxt(m)),
       acc:[a.has_rop === 'no' && !senior && !self ? 'РОП вышел, план ввода на 30, 60 и 90 дней подписан' : null,
         senior ? 'Старший продавец ведёт ежедневную планёрку по регламенту' : null,
         self ? 'Планёрка по чек-листу проходит каждый день две недели подряд' : null,
@@ -3732,7 +3735,7 @@ const Waves = {
       tasks: tasks(4, [a.has_kpi === 'no' ? 'План на каждого менеджера и еженедельный план-факт' : null,
         owner ? 'Передача регулярных сделок менеджерам: за вами остаются стратегические клиенты' : null,
         'Еженедельный план-факт как постоянный ритм отдела']),
-      metrics: m4,
+      metrics: m4.filter(m => !sameTxt(m)),
       acc:[a.has_rop === 'no' ? `4 недели план-факт и планёрки ведёт ${boss} без консультанта` : '4 недели отдел держит план без участия консультанта',
         owner ? 'Матрица передачи клиентов выполнена: собственник не забирает сделки обратно' : null].filter(Boolean),
       eff: money(4), effNote: effNote(4),
@@ -3920,7 +3923,7 @@ const Final = {
       tiles += tile('Возврат за 90 дней', '+' + Fx.money(L.recMo), 'в месяц после приёмки четырёх волн', 'fx-green');
       if (p.pr0 != null && p.pr0 > 0){
         const d = p.pr1 / p.pr0 - 1;
-        tiles += tile('Прибыль компании', (d >= 0 ? '+' : Fx.M) + Fx.pct(Math.abs(d)), `${Fx.money(p.pr0)} → ${Fx.money(p.pr1)} в месяц${p.cost ? ', уже за вычетом ' + (L.ropMode === 'senior' ? 'доплаты старшему продавцу' : 'ФОТ нового РОПа') : ''}`, d >= 0 ? 'fx-green' : 'fx-red');
+        tiles += tile('Прибыль компании', (d >= 0 ? '+' : Fx.M) + Fx.money(Math.abs(p.pr1 - p.pr0)), `${Fx.money(p.pr0)} → ${Fx.money(p.pr1)} в месяц, это ${d >= 0 ? '+' : Fx.M}${Fx.pct(Math.abs(d))}${p.cost ? '. Уже за вычетом ' + (L.ropMode === 'senior' ? 'доплаты старшему продавцу' : 'ФОТ нового РОПа') : ''}`, d >= 0 ? 'fx-green' : 'fx-red');
       } else if (p.pr0 != null){
         tiles += tile('Прибыль после 90 дней', Fx.money(p.pr1), `сейчас ${p.pr0 < 0 ? Fx.M : ''}${Fx.money(Math.abs(p.pr0))} в месяц`, p.pr1 > 0 ? 'fx-green' : 'fx-red');
       } else tiles += tile('Валовая прибыль', '+' + Fx.pct(L.recMo / L.gp), `${Fx.money(L.gp)} → ${Fx.money(L.gp + L.recMo)} в месяц`, 'fx-green');
@@ -3947,9 +3950,9 @@ const Final = {
       ${L.profit != null ? row('Прибыль', L.profit, Math.max(0, L.profit) / L.rev, L.profit > 0 ? 'var(--ok)' : 'var(--loss)', 'рентабельность ' + Fx.pct(L.profit / L.rev, 1)) : ''}`;
     const steps = [
       `<div class="fx-fstep"><div class="fx-fn">${L.leads}</div><div class="fx-fl">${Fx.plural(L.leads, 'заявка', 'заявки', 'заявок')}</div></div>`,
-      L.full ? `<div class="fx-fstep"><div class="fx-fn">${L.dialogs}</div><div class="fx-fl">${Fx.plural(L.dialogs, 'разговор', 'разговора', 'разговоров')} · <em class="${L.reach < L.reachNorm ? 'fx-red' : 'fx-green'}">${Fx.pct(L.reach)}</em> заявок</div></div>` : '',
-      `<div class="fx-fstep"><div class="fx-fn">${Number.isInteger(Math.round(L.deals * 10) / 10) ? Math.round(L.deals) : Fx.dec(L.deals)}</div><div class="fx-fl">${Fx.qty(L.deals, 'новая сделка', 'новые сделки', 'новых сделок', 'новой сделки').replace(/^[\d,]+\s/, '')}${L.full ? ` · <em class="${L.close < L.closeNorm ? 'fx-red' : 'fx-green'}">${Fx.pct(L.close)}</em> разговоров` : ''}</div></div>`,
-      `<div class="fx-fstep"><div class="fx-fn">${Fx.dec(L.rev / 1e6)}</div><div class="fx-fl">млн ₽ выручки${L.repeat != null ? `, из них ${L.repeat}% повторные` : ''}</div></div>`
+      L.full ? `<div class="fx-fstep"><div class="fx-fn">${L.dialogs}</div><div class="fx-fl">${Fx.plural(L.dialogs, 'разговор', 'разговора', 'разговоров')}<br><em class="${L.reach < L.reachNorm ? 'fx-red' : 'fx-green'}">${Fx.pct(L.reach)}</em> от заявок</div></div>` : '',
+      `<div class="fx-fstep"><div class="fx-fn">${Number.isInteger(Math.round(L.deals * 10) / 10) ? Math.round(L.deals) : Fx.dec(L.deals)}</div><div class="fx-fl">${Fx.qty(L.deals, 'новая сделка', 'новые сделки', 'новых сделок', 'новой сделки').replace(/^[\d,]+\s/, '')}${L.full ? `<br><em class="${L.close < L.closeNorm ? 'fx-red' : 'fx-green'}">${Fx.pct(L.close)}</em> от разговоров` : ''}</div></div>`,
+      `<div class="fx-fstep"><div class="fx-fn">${Fx.dec(L.rev / 1e6)}</div><div class="fx-fl">млн ₽ выручки${L.repeat != null ? `<br>из них ${L.repeat}% повторные` : ''}</div></div>`
     ].join('');
     const bar = (lbl, v, norm, show) => `<div class="fx-fbar"><span>${lbl}</span><span class="fx-ft"><i style="width:${Math.min(100, v * 100)}%"></i>${norm != null ? `<u style="left:${Math.min(100, norm * 100)}%" data-n="норма ${Fx.pct(norm)}"></u>` : ''}</span><span class="fx-fp ${norm != null && v < norm ? 'fx-red' : ''}">${show}</span></div>`;
     const bars = `${bar('Заявки', 1, null, '100%')}${L.full ? bar('Разговоры', L.reach, L.reachNorm, Fx.pct(L.reach)) : ''}${bar('Сделки', L.conv / 100, L.convTarget / 100, L.conv + '%')}`;
@@ -4031,7 +4034,7 @@ const Final = {
       price: `<b class="fx-green">${Fx.rub(L.P.check)}</b>`
     };
     const unit = d => d.unit === 'pp' ? `+${Fx.dec(d.eff)} п.п.`
-      : d.unit === 'rel' ? `+${Fx.dec(d.eff * L.closeCalc * 100)} п.п.`
+      : d.unit === 'rel' ? `+${Fx.dec(d.eff * L.closeCalc * 100, d.eff * L.closeCalc * 100 < 1 ? 2 : 1)} п.п.`
       : d.unit === 'pct' ? `+${Fx.rub(L.check * d.eff)}`
       : `+${Math.round(d.eff)} заявок`;
     const how = s => {
@@ -4048,7 +4051,7 @@ const Final = {
         `<div class="fx-how-h">За 90 дней забираем ${Fx.rub(s.rec)} в месяц: остальное требует больше времени${L.capCut < 1 ? ' и упирается в мощность отдела' : ''}.</div>`;
     };
     return L.leaky.sort((p, q) => q.loss - p.loss).map((s, i) => {
-      const drv = s.drivers.slice(0, 3).map(d => `<div class="fx-drv"><span>${d.label}</span><i>${unit(d)}</i></div>`).join('')
+      const drv = s.drivers.slice(0, 3).map(d => `<div class="fx-drv"><span>${d.label}</span><i>${Fx.money(d.gain)}</i></div>`).join('')
         + (s.drivers.length > 3 ? `<div class="fx-drv more">и ещё ${s.drivers.length - 3}</div>` : '');
       return `<div class="fx-lrow">
         <div class="fx-lno">${String(i + 1).padStart(2, '0')}</div>
@@ -4076,7 +4079,7 @@ const Final = {
       <div class="fx-ledger">
         <div class="fx-lrow head"><div>№</div><div>Этап</div><div>Сейчас</div><div>Потенциал</div><div>Что мешает и сколько это даёт</div><div class="r">Прибыль в месяц</div><div class="r">Доля</div><div class="r">Вернуть за 90 дней</div></div>
         ${this.ledgerRows(x)}
-        <div class="fx-lrow total"><div class="fx-lno"></div><div class="fx-lnm">Итого</div><div class="fx-lc" data-k="В год"><b class="fx-red">${Fx.M}${Fx.mln(L.lossMo * 12)}</b> в год</div><div></div><div></div>
+        <div class="fx-lrow total"><div class="fx-lno"></div><div class="fx-lnm">Итого</div><div class="fx-lc" data-k="За год"><b class="fx-red">${Fx.M}${Fx.mln(L.lossMo * 12)}</b></div><div></div><div></div>
           <div data-k="Валовая прибыль в месяц"><div class="fx-lmo fx-red">${Fx.M}${Fx.rub(L.lossMo)}</div></div><div class="fx-lsh" data-k="Доля">100%</div><div class="fx-lrc fx-green" data-k="Вернуть за 90 дней">+${Fx.money(L.recMo)}</div></div>
       </div>
       ${quiet.length ? `<p class="fx-note">Без потенциала: ${quiet.map(s => s.name.toLowerCase()).join(', ')}. Здесь система уже работает, в ближайшие 90 дней не трогаем.</p>` : ''}
@@ -4473,13 +4476,13 @@ const Report = {
     // ── 02 Ведомость потерь ──
     if (L && L.lossMo > 0){
       const mg = L.marginAssumed ? '30%' : L.margin + '%';
-      const unit = d => d.unit === 'pp' ? `+${Fx.dec(d.eff)} п.п.` : d.unit === 'rel' ? `+${Fx.dec(d.eff * L.closeCalc * 100)} п.п.` : d.unit === 'pct' ? `+${Fx.rub(L.check * d.eff)}` : `+${Math.round(d.eff)} заявок`;
+      const unit = d => d.unit === 'pp' ? `+${Fx.dec(d.eff)} п.п.` : d.unit === 'rel' ? `+${Fx.dec(d.eff * L.closeCalc * 100, d.eff * L.closeCalc * 100 < 1 ? 2 : 1)} п.п.` : d.unit === 'pct' ? `+${Fx.rub(L.check * d.eff)}` : `+${Math.round(d.eff)} заявок`;
       const now = {lead:`${L.leads} заявок`, contact:`дозвон ${Fx.pct(L.reachCalc)}`, close:`закрытие ${Fx.pct(L.closeCalc)}`,
         repeat:`${L.repeat}% выручки`, price:Fx.rub(L.check)};
       const pot = {lead:L.P.leads ? `${Math.round(L.P.leads)} заявок` : '—', contact:Fx.pct(L.P.reach), close:Fx.pct(L.P.close),
         repeat:L.P.repeat != null ? `${Fx.dec(L.P.repeat, 0)}%` : '—', price:Fx.rub(L.P.check)};
       const rows = [...L.leaky].sort((x, y) => y.loss - x.loss).map(st => `<tr>
-        <td><b>${st.name}</b><div class="pr-x-how">${st.drivers.map(d => `${d.label} ${unit(d)}`).join(' · ')}</div></td>
+        <td><b>${st.name}</b><div class="pr-x-how">${st.drivers.map(d => `${d.label} ${unit(d)}, ${Fx.money(d.gain)}`).join(' · ')}</div></td>
         <td>${now[st.id]}</td><td class="good">${pot[st.id]}</td>
         <td class="bad">${Fx.M}${Fx.rub(st.loss)}</td><td>${Fx.pct(st.loss / L.lossMo)}</td><td class="good">+${Fx.money(st.rec)}</td></tr>`).join('');
       page('ВЕДОМОСТЬ ПОТЕРЬ', `
