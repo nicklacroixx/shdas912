@@ -362,13 +362,12 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
 .cta-panel{
   padding:44px 36px;text-align:center;border:1px solid rgba(52,211,153,.3);border-radius:var(--r);
   background:rgba(52,211,153,.05);margin-bottom:22px;position:relative;overflow:hidden;
+  overflow:clip;   /* hidden оставляет карточку прокручиваемой: свечение вылезает вниз, и фокус на кнопке уводил заголовок вверх */
 }
 .cta-panel::before{content:'';position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(52,211,153,.1) 0%,transparent 70%);top:-160px;right:-120px;pointer-events:none;animation:glow-breathe 7s ease-in-out infinite}
 .cta-panel h3{font-family:var(--disp);font-weight:600;font-size:clamp(19px,2.4vw,25px);margin-bottom:12px;color:#fff;position:relative}
 .cta-panel p{color:var(--ink-2);max-width:540px;margin:0 auto 26px;position:relative}
 .final-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
-.cta-hint{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-3);margin:22px auto 0;max-width:480px;position:relative}
-.cta-panel .cta-status{font-size:13px;color:var(--good);margin:22px auto 0;position:relative}
 .sc-good{color:var(--good)!important}.sc-warn{color:var(--warn)!important}.sc-bad{color:var(--bad)!important}
 .bg-good{background:var(--good)!important}.bg-warn{background:var(--warn)!important}.bg-bad{background:var(--bad)!important}
 .find-count{font-family:var(--mono);font-size:9px;color:var(--bad);letter-spacing:.1em}
@@ -534,14 +533,17 @@ body:not(.cl-unlocked) .gate{display:grid}
   .print-report{display:block;font-family:var(--font-body);color:var(--pr-ink)}
 
   /* ── Страница и общая структура ── */
-  .pr-page{page-break-after:always;background:var(--pr-paper);padding:16mm 16mm 14mm;min-height:277mm;box-sizing:border-box;position:relative}
+  /* @page без полей — значит лист целиком 297 мм; мм запаса, чтобы округление не рождало пустых листов */
+  .pr-page{page-break-after:always;background:var(--pr-paper);padding:16mm 16mm 14mm;min-height:296mm;box-sizing:border-box;position:relative;
+    display:flex;flex-direction:column}
+  .pr-page > .pr-body{flex:1}
   .pr-page:last-child{page-break-after:auto}
   .pr-body{}
   .pr-eyebrow{font-family:var(--font-body);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pr-accent)}
 
   /* ── Обложка (страница 1) ── */
   .pr-cover{padding:0;background:linear-gradient(155deg,#0C120F,#161D19 55%,#0C120F)}
-  .pr-cover .pr-cover-in{height:277mm;box-sizing:border-box;color:#fff;position:relative}
+  .pr-cover .pr-cover-in{height:296mm;box-sizing:border-box;color:#fff;position:relative}
   .pr-cover-top{position:absolute;top:22mm;left:18mm;right:18mm;display:flex;justify-content:space-between;align-items:flex-start}
   .pr-cover-logo{font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:.05em}
   .pr-cover-logo span{display:block;font-size:8.5px;font-weight:500;letter-spacing:.26em;color:#7FD9A8;margin-top:6px}
@@ -2749,9 +2751,11 @@ const FlowUI = {
   esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
                           .replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 };
-// Встроенные браузеры мессенджеров (WhatsApp, Instagram, FB, TikTok) часто не поддерживают
-// window.print() вовсе — кнопка нажимается, а системное окно печати просто не открывается.
-// Отличить их от настоящего Safari/Chrome можно по строке User-Agent.
+// PDF отчёта собирает сервер кабинета (см. Report.deliver)
+const PDF_API = 'https://cabinet.closery.ru/api/mri/pdf';
+
+// Встроенные браузеры мессенджеров (WhatsApp, Instagram, FB, TikTok) скачивание файла часто
+// глотают — там PDF открываем в просмотре, откуда его можно сохранить или переслать.
 const InAppBrowser = {
   detect(){
     const ua = navigator.userAgent || '';
@@ -2971,35 +2975,17 @@ const Final = {
 
       ${feedAll.length ? `<div class="panel" style="margin-bottom:22px"><div class="panel-h">Полный лог сканера · ${feedAll.length} наход${plural(feedAll.length,'ка','ки','ок')}</div><div class="find-grid">${feedAll.map(f=>`<div class="find-row"><span class="find-dot ${f.tone}"></span><span>${f.text}</span></div>`).join('')}</div></div>` : ''}
 
-      ${InAppBrowser.detect()
-        ? `<div class="cta-panel"><h3>Отчёт готов</h3>
-             <p>Откройте эту страницу в обычном браузере (Safari или Chrome) — там кнопка сохранит PDF.
-                Значок «⋯» → «Открыть в браузере».</p>
-             <div class="final-actions">
-               <button class="btn-primary" id="btnCopyLink">Скопировать ссылку →</button>
-             </div>
-             <p class="cta-status" id="copyStatus" hidden></p>
-           </div>`
-        : `<div class="cta-panel"><h3>Отчёт готов</h3>
-             <p>Сохраните разбор в PDF — цифры, находки и дорожная карта останутся у вас.</p>
-             <div class="final-actions">
-               <button class="btn-primary" id="btnPDF">Скачать PDF-отчёт →</button>
-             </div>
-             <p class="cta-hint">Откроется окно печати — выберите «Сохранить как PDF».</p>
-           </div>`}`;
+      <div class="cta-panel"><h3>Отчёт готов</h3>
+        <p>Сохраните разбор в PDF — цифры, находки и дорожная карта останутся у вас.</p>
+        <div class="final-actions">
+          <button class="btn-primary" id="btnPDF">Скачать PDF-отчёт →</button>
+        </div>
+      </div>`;
 
     el.classList.add('visible');
     window.scrollTo({top:0, behavior:'smooth'});
     const btnPDF = document.getElementById('btnPDF');
     if (btnPDF) btnPDF.onclick = ()=>Report.printPDF();
-    const btnCopy = document.getElementById('btnCopyLink');
-    const copyStatus = document.getElementById('copyStatus');
-    if (btnCopy) btnCopy.onclick = async ()=>{
-      // статус — отдельной строкой под кнопкой, а не в самой кнопке: её ширина не должна прыгать
-      try { await navigator.clipboard.writeText(location.href); copyStatus.textContent = 'Ссылка скопирована ✓'; }
-      catch { copyStatus.textContent = 'Не скопировалось — скопируйте адрес вручную из адресной строки'; }
-      copyStatus.hidden = false;
-    };
   }
 };
 const Report = {
@@ -3220,7 +3206,28 @@ const Report = {
     ).join('');
 
     document.getElementById('printReport').innerHTML = cover + body + back;
-    window.print();
+    this.deliver();
+  },
+  // window.print() на телефоне во встроенных браузерах WhatsApp/Telegram молчит.
+  // Поэтому отчёт с той же вёрсткой печати собирает в файл сервер, а человек получает PDF.
+  async deliver(){
+    const btn = document.getElementById('btnPDF');
+    const label = btn ? btn.textContent : '';
+    if (btn){ btn.disabled = true; btn.textContent = 'Готовим PDF…'; }
+    try {
+      const css = document.querySelector('style').textContent;
+      const html = `<!doctype html><html lang="ru" class="fonts-ready"><head><meta charset="utf-8"><base href="https://closery.ru/diagnostic/"><style>${css}</style></head><body>${document.getElementById('printReport').outerHTML}</body></html>`;
+      const r = await fetch(PDF_API, {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({html, name: State.answers.company || ''})});
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const {url} = await r.json();
+      // в обычном браузере файл скачивается, во встроенном открывается просмотр — оттуда его можно сохранить
+      location.href = InAppBrowser.detect() ? url : url + '?dl=1';
+    } catch (e) {
+      window.print();   // сервер недоступен — остаётся печать, на компьютере она работает
+    } finally {
+      if (btn){ btn.disabled = false; btn.textContent = label; }
+    }
   }
 };
 // Каждая диагностика получает свой ID в URL (?id=…) с первого ответа —
