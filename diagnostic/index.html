@@ -648,9 +648,6 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-lmo,.fx-lsh,.fx-lrc{font:600 17px/1.35 var(--ui);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.015em}
 .fx-lsub{font:400 12.5px/1.45 var(--ui);color:var(--ink-3);text-align:right;margin-top:10px;font-variant-numeric:tabular-nums}
 .fx-tblnote{margin-top:30px;padding:16px 20px;border:1px solid var(--rule);border-radius:8px;font-size:13.5px;line-height:1.65;color:var(--ink-2);max-width:none}
-.fx-ibar{height:4px;background:var(--rule);border-radius:2px;margin-top:11px;position:relative;overflow:hidden}
-.fx-ibar i{position:absolute;top:0;bottom:0;left:0;background:var(--loss);border-radius:2px}
-.fx-ibar em{position:absolute;top:0;bottom:0;left:0;background:var(--ok);border-radius:2px}
 .fx-lrow.total{border-bottom:0;border-top:1px solid var(--rule-2);padding-top:20px}
 .fx-lrow.total .fx-lnm{font-family:var(--ui);font-weight:600;font-size:16px}
 .fx-drvs{display:grid;gap:8px}
@@ -764,9 +761,9 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-tn.top{border-color:rgba(52,211,153,.4)}
 .fx-tn b{display:block;font:600 22px/1.15 var(--ui);letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums;margin-top:2px}
 .fx-tn i{display:block;font-style:normal;font-size:12.5px;line-height:1.5;color:var(--ink-3);margin-top:7px;flex:1}
-.fx-tsens{margin-top:16px;padding-top:13px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-.fx-tsens span{font-size:12px;color:var(--ink-3)}
-.fx-tsens em{font-style:normal;font:600 14px/1.2 var(--ui);color:var(--ok);white-space:nowrap;font-variant-numeric:tabular-nums}
+.fx-tsens{margin-top:16px;padding-top:13px;border-top:1px solid var(--rule)}
+.fx-tsens span{display:block;font-size:12px;line-height:1.35;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fx-tsens em{display:block;margin-top:6px;font-style:normal;font:600 15px/1.2 var(--ui);color:var(--ok);white-space:nowrap;font-variant-numeric:tabular-nums}
 .fx-top-op{flex:0 0 26px;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:14px}
 @media(max-width:900px){.fx-tree{flex-direction:column}.fx-top-op{flex:none;height:22px}}
 
@@ -790,7 +787,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 /* разбор ошибок */
 .fx-fixes{display:grid;gap:18px}
 .fx-fix{border:1px solid var(--rule);border-radius:10px;background:var(--paper);overflow:hidden}
-.fx-fix-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:start;padding:24px 26px 20px;border-bottom:1px solid var(--rule)}
+.fx-fix-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:center;padding:24px 26px 20px;border-bottom:1px solid var(--rule)}
 .fx-fix-n{display:block;font:500 11px/1.4 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
 .fx-fix h4{font:600 19px/1.32 var(--ui);letter-spacing:-.015em;color:#fff;margin:0}
 .fx-fix-now{font-size:14px;line-height:1.6;color:var(--ink-2);margin-top:10px;max-width:70ch}
@@ -1193,7 +1190,7 @@ body.fx-prompter-on .fx-prompter{display:block}
   .pr-x-scope li::before{content:'·';position:absolute;left:0;color:var(--pr-ink-3)}
   .pr-x-mx{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:10px}
   .pr-x-mx th{text-align:left;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pr-ink-3);padding:0 6px 7px 0;border-bottom:1px solid var(--pr-ink)}
-  .pr-x-mx th.c,.pr-x-mx td.c{text-align:center;width:24mm}
+  .pr-x-mx th.c,.pr-x-mx td.c{text-align:center;width:28mm}
   .pr-x-mx td{padding:6px 6px 6px 0;border-bottom:1px solid var(--pr-line);color:var(--pr-ink)}
   .pr-x-mx td.y{color:var(--pr-accent);font-weight:700}
   .pr-x-mx td.n{color:#B7BDB8}
@@ -5410,17 +5407,17 @@ const Report = {
     const PR = Final.practices(a), PRk = PR.filter(p => p.s !== null);
     if (PRk.length >= 6){
       const have = PRk.filter(p => p.s).length, pos = Math.round(have / PRk.length * 100);
-      const mrow = p => `<tr><td><b>${p.t}</b><div class="pr-x-how">${p.d}</div></td><td class="c n">✕</td><td class="c ${p.s === null ? 'n' : p.s ? 'y' : 'm'}">${p.s === null ? '—' : p.s ? '✓' : '✕'}</td><td class="c y">✓</td></tr>`;
+      const mrow = p => `<tr><td><b>${p.t}</b><div class="pr-x-how">${p.d}</div></td><td class="c ${p.s === null ? 'n' : p.s ? 'y' : 'm'}">${p.s === null ? '—' : p.s ? '✓' : '✕'}</td><td class="c y">✓</td></tr>`;
       const SIZE = 7;
       for (let i = 0; i < PR.length; i += SIZE){
         const part = PR.slice(i, i + SIZE), n = Math.floor(i / SIZE) + 1, tot = Math.ceil(PR.length / SIZE);
         let mg = '', body = '';
-        part.forEach(p => { if (p.g !== mg){ mg = p.g; body += `<tr class="g"><td colspan="4">${p.g}</td></tr>`; } body += mrow(p); });
+        part.forEach(p => { if (p.g !== mg){ mg = p.g; body += `<tr class="g"><td colspan="3">${p.g}</td></tr>`; } body += mrow(p); });
         page(tot > 1 ? `СРАВНЕНИЕ · ${n}/${tot}` : 'СРАВНЕНИЕ', `
           ${i === 0 ? `<div class="pr-tag">Позиция</div>
-          <div class="pr-title" style="font-size:23px">Где вы между ручным режимом и построенной системой</div>
+          <div class="pr-title" style="font-size:23px">Где вы между ручным режимом и системой Closery</div>
           <div class="pr-lede">Сравнивать со средней компанией по рынку бессмысленно: такие цифры публикуются редко и по несопоставимой методике. Поэтому сравниваем по управленческим контурам — тому, что определяет потолок компании независимо от ниши. Отметки взяты из ответов собственника.</div>` : ''}
-          <table class="pr-x-mx"><thead><tr><th>Контур управления</th><th class="c">Продажи на людях</th><th class="c">У вас</th><th class="c">Построенная система</th></tr></thead><tbody>${body}</tbody></table>
+          <table class="pr-x-mx"><thead><tr><th>Контур управления</th><th class="c">У вас</th><th class="c">Система Closery</th></tr></thead><tbody>${body}</tbody></table>
           ${i + SIZE >= PR.length ? `<div class="pr-x-bh"><span>Ручной режим</span><span>Система Closery</span></div>
           <div class="pr-x-bar"><i style="width:${pos}%"></i><u style="left:${pos}%"></u></div>
           <div class="pr-callout"><b>${have} из ${PRk.length} ${Fx.plural(PRk.length, 'контура', 'контуров', 'контуров')}</b> работают сегодня. Ни один из них не закрывается одним наймом: руководитель без оцифрованной воронки управляет по ощущениям, контроль качества без скрипта слушает звонки без эталона.${L && L.lossMo > 0 ? ` В деньгах разрыв между колонками — ${Fx.money(L.lossMo)} валовой прибыли в месяц.` : ''}</div>` : ''}`);
@@ -5861,7 +5858,15 @@ const App = {
     FlowUI.init();
 
     if (new URLSearchParams(location.search).get('test') === '1'){
-      TestFill.run();
+      // Ссылка с ?id= открывает тот же отчёт, а не новый случайный набор цифр
+      const tid = Session.fromUrl(), tsaved = tid ? Storage.load(tid) : null;
+      if (tsaved && tsaved.answers && Object.keys(tsaved.answers).length){
+        Session.id = tid;
+        State.answers = tsaved.answers;
+        State.started = true; State.finished = true; State.demo = !!tsaved.demo;
+        document.getElementById('introScreen').style.display = 'none';
+        Final.show();
+      } else TestFill.run();
       return;
     }
 
