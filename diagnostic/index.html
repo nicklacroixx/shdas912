@@ -551,8 +551,8 @@ body:not(.cl-unlocked) .gate{display:grid}
 @media(max-width:900px){.fx-doc{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 
 /* обложка документа */
-.fx-cover{padding-top:4px}
-.fx-cv-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:30px;border-bottom:1px solid var(--rule);font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.fx-cover{padding-top:0}
+.fx-cv-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--rule);font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
 .fx-cv-top b{color:var(--ok);font-weight:500}
 .fx-kicker{font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ok);margin:0 0 18px}
 .fx-cv-h{font-family:var(--ui);font-weight:600;font-size:clamp(32px,4.4vw,58px);line-height:1.08;letter-spacing:-.03em;margin:38px 0 20px;color:#fff;max-width:20ch}
@@ -612,9 +612,10 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-ft u{position:absolute;top:-4px;bottom:-4px;width:1px;background:var(--ink-2);text-decoration:none}
 .fx-ft u::after{content:attr(data-n);position:absolute;top:-16px;left:50%;transform:translateX(-50%);font:500 10px/1 var(--mono);color:var(--ink-3);white-space:nowrap}
 .fx-fp{font:600 13.5px var(--ui);text-align:right;font-variant-numeric:tabular-nums}
-.fx-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:26px;border-top:1px solid var(--rule-2)}
-.fx-facts>div{padding:18px 18px 0 0;min-width:0}
-.fx-facts .fx-k{min-height:2.9em}
+.fx-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));grid-auto-rows:auto;margin-top:26px;border-top:1px solid var(--rule-2)}
+.fx-facts>div{display:grid;grid-template-rows:subgrid;grid-row:span 3;align-content:start;padding:20px 20px 6px 0;min-width:0}
+.fx-facts .fx-k{margin:0 0 14px;align-self:start}
+@supports not (grid-template-rows:subgrid){.fx-facts>div{display:block}.fx-facts .fx-k{min-height:2.9em}}
 .fx-fv{font:600 17px/1.3 var(--ui);white-space:nowrap;font-variant-numeric:tabular-nums;margin-top:12px;letter-spacing:-.01em}
 .fx-fs{font-size:12px;line-height:1.5;color:var(--ink-3);margin-top:10px}
 @media(max-width:900px){.fx-facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
@@ -631,7 +632,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:8px;vertical-align:-1px}
 .fx-legend i.fx-dash{border:1px dashed var(--ok)}
 .fx-ledger{margin-top:36px;border-top:1px solid var(--rule-2)}
-.fx-lrow{display:grid;grid-template-columns:28px minmax(96px,.72fr) minmax(0,.78fr) 78px minmax(0,1.9fr) 124px 44px 100px;gap:14px;align-items:start;padding:20px 0;border-bottom:1px solid var(--rule)}
+.fx-lrow{display:grid;grid-template-columns:26px minmax(104px,.82fr) minmax(0,1fr) 92px minmax(0,1.8fr) 150px 136px;gap:16px;align-items:start;padding:22px 0;border-bottom:1px solid var(--rule)}
 .fx-lrow.head{padding:14px 0;font:500 11px/1.45 var(--ui);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
 .fx-lrow.head>div{align-self:end}
 .fx-lrow.head .r{text-align:right}
@@ -639,15 +640,15 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-lno{font:500 12px var(--mono);color:var(--ink-3);padding-top:3px}
 .fx-lnm{font-weight:600;font-size:15px;color:#fff;line-height:1.35}
 .fx-lc{font-size:14px;color:var(--ink-2);line-height:1.5}
-.fx-lmo,.fx-lsh,.fx-lrc{font:600 15px/1.4 var(--ui);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-.fx-lmo{font-size:16px}
-.fx-ibar{height:4px;background:var(--rule);border-radius:2px;margin-top:10px;position:relative;overflow:hidden}
+.fx-lmo,.fx-lsh,.fx-lrc{font:600 17px/1.35 var(--ui);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.015em}
+.fx-lsub{font:400 12.5px/1.45 var(--ui);color:var(--ink-3);text-align:right;margin-top:10px;font-variant-numeric:tabular-nums}
+.fx-ibar{height:4px;background:var(--rule);border-radius:2px;margin-top:11px;position:relative;overflow:hidden}
 .fx-ibar i{position:absolute;top:0;bottom:0;left:0;background:var(--loss);border-radius:2px}
 .fx-ibar em{position:absolute;top:0;bottom:0;left:0;background:var(--ok);border-radius:2px}
 .fx-lrow.total{border-bottom:0;border-top:1px solid var(--rule-2);padding-top:20px}
 .fx-lrow.total .fx-lnm{font-family:var(--ui);font-weight:600;font-size:16px}
 .fx-drvs{display:grid;gap:8px}
-.fx-drv{display:grid;grid-template-columns:minmax(0,1fr) 74px;gap:14px;line-height:1.5;font-size:13.5px}
+.fx-drv{display:grid;grid-template-columns:minmax(0,1fr) 78px;gap:16px;line-height:1.5;font-size:13.5px;align-items:baseline}
 .fx-drv i{font-style:normal;font-size:13px;font-weight:500;color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
 .fx-drv.more{color:var(--ink-3)}
 .fx-tog{grid-column:2 / -1;margin-top:6px;background:none;border:0;padding:0;color:var(--ink-3);font:500 11px var(--ui);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;text-align:left;width:max-content}
@@ -668,7 +669,7 @@ body:not(.cl-unlocked) .gate{display:grid}
   .fx-lrow.head,.fx-lno{display:none}
   .fx-lnm{grid-column:1 / -1}
   .fx-lrow>[data-k]::before{content:attr(data-k);display:block;font:500 10.5px/1.45 var(--ui);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
-  .fx-lmo,.fx-lrc{text-align:left}
+  .fx-lmo,.fx-lrc,.fx-lsub{text-align:left}
   .fx-lnm{margin-bottom:6px}
   .fx-lrow{padding:22px 0}
   .fx-lsh{display:none}
@@ -676,7 +677,7 @@ body:not(.cl-unlocked) .gate{display:grid}
   .fx-how,.fx-tog{grid-column:1 / -1}
   .fx-how-r{grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
 }
-.fx-cash{margin-top:26px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:baseline;padding:20px 22px;border:1px solid var(--rule);border-left:2px solid var(--loss);border-radius:0 8px 8px 0}
+.fx-cash{margin-top:26px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;padding:24px 26px;border:1px solid var(--rule);border-left:2px solid var(--loss);border-radius:0 8px 8px 0}
 .fx-cash-v{font-family:var(--ui);font-weight:600;font-size:clamp(22px,2.3vw,28px);line-height:1.2;color:var(--loss);white-space:nowrap}
 .fx-cash p{font-size:14px;line-height:1.6;color:var(--ink-2)}
 @media(max-width:700px){.fx-cash{grid-template-columns:minmax(0,1fr);gap:10px}}
@@ -727,13 +728,18 @@ body:not(.cl-unlocked) .gate{display:grid}
 
 /* сравнение: матрица практик */
 .fx-mx{border-top:1px solid var(--rule-2)}
-.fx-mx-h,.fx-mx-r{display:grid;grid-template-columns:minmax(0,1fr) 128px 74px 160px;align-items:center;gap:12px;border-bottom:1px solid var(--rule);padding:12px 0}
+.fx-mx-h,.fx-mx-r{display:grid;grid-template-columns:minmax(0,1fr) 128px 74px 160px;align-items:start;gap:14px;border-bottom:1px solid var(--rule);padding:16px 0}
+.fx-mx-h{align-items:end}
+.fx-mx-g{font:500 11px/1.4 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ok);padding:22px 0 10px}
+.fx-mx-n b{display:block;font-weight:600;font-size:15px;line-height:1.4;color:#fff}
+.fx-mx-n span{display:block;font-size:13px;line-height:1.55;color:var(--ink-3);margin-top:6px;max-width:62ch}
+.fx-mk.unk{color:#41504B}
 .fx-mx-h{font:500 11px/1.35 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
 .fx-mx-h>div:not(:first-child),.fx-mx-r>div:not(:first-child){text-align:center}
 .fx-mx-h>div:last-child b{color:var(--ok)}
 .fx-mx-h b{font-weight:500}
 .fx-smt{display:none}
-.fx-mx-n{font-size:14.5px;line-height:1.5;color:var(--ink);min-width:0}
+.fx-mx-n{min-width:0}
 .fx-mk{font-size:15px;line-height:1.2}
 .fx-mk.yes{color:var(--ok)}
 .fx-mk.no{color:#41504B}
@@ -744,7 +750,40 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-bp-t i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:linear-gradient(90deg,var(--loss),var(--ok))}
 .fx-bp-t u{position:absolute;top:-5px;width:2px;height:16px;background:#fff;transform:translateX(-1px)}
 .fx-bp-v{font-size:15px;line-height:1.6;color:var(--ink-2);margin-top:16px;max-width:76ch}
-@media(max-width:820px){.fx-mx-h,.fx-mx-r{grid-template-columns:minmax(0,1fr) 38px 38px 38px;gap:8px}.fx-mx-h{font-size:9.5px;letter-spacing:.04em;align-items:end}.fx-lgl{display:none}.fx-smt{display:inline}.fx-mx-n{font-size:13.5px}}
+@media(max-width:820px){.fx-mx-h,.fx-mx-r{grid-template-columns:minmax(0,1fr) 34px 34px 34px;gap:8px}.fx-mx-h{font-size:9.5px;letter-spacing:.04em;align-items:end}.fx-lgl{display:none}.fx-smt{display:inline}.fx-mx-n b{font-size:14px}.fx-mx-n span{font-size:12.5px}}
+
+/* разбор ошибок */
+.fx-fixes{display:grid;gap:18px}
+.fx-fix{border:1px solid var(--rule);border-radius:10px;background:var(--paper);overflow:hidden}
+.fx-fix-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:start;padding:24px 26px 20px;border-bottom:1px solid var(--rule)}
+.fx-fix-n{display:block;font:500 11px/1.4 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.fx-fix h4{font:600 19px/1.32 var(--ui);letter-spacing:-.015em;color:#fff;margin:0}
+.fx-fix-now{font-size:14px;line-height:1.6;color:var(--ink-2);margin-top:10px;max-width:70ch}
+.fx-fix-m{text-align:right;white-space:nowrap}
+.fx-fix-m b{display:block;font:600 24px/1.1 var(--ui);letter-spacing:-.02em;color:var(--loss);font-variant-numeric:tabular-nums}
+.fx-fix-m span{display:block;font-size:12px;color:var(--ink-3);margin-top:6px}
+.fx-fix-m i{display:block;font-style:normal;font-size:12.5px;color:var(--ink-3);margin-top:4px;font-variant-numeric:tabular-nums}
+.fx-fix-b{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr);gap:30px;padding:24px 26px 26px}
+.fx-stepsn{list-style:none;counter-reset:fs;margin:0;padding:0;display:grid;gap:13px}
+.fx-stepsn li{counter-increment:fs;position:relative;padding-left:32px;font-size:14.5px;line-height:1.6;color:var(--ink)}
+.fx-stepsn li::before{content:counter(fs);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;border:1px solid var(--rule-2);color:var(--ink-3);font:500 11px/19px var(--mono);text-align:center}
+.fx-fix-side{display:grid;gap:20px;align-content:start;padding-left:30px;border-left:1px solid var(--rule)}
+.fx-fix-side p{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+.fx-fix-side .fx-k{margin-bottom:8px}
+.fx-fix-eff{padding-top:16px;border-top:1px solid var(--rule)}
+.fx-fix-eff span{display:block;font:500 11px/1.4 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.fx-fix-eff b{font:600 16px/1.35 var(--ui);color:var(--ok)}
+@media(max-width:900px){.fx-fix-h{grid-template-columns:minmax(0,1fr);gap:14px;padding:20px}.fx-fix-m{text-align:left}.fx-fix-b{grid-template-columns:minmax(0,1fr);gap:22px;padding:20px}.fx-fix-side{padding-left:0;border-left:0;border-top:1px solid var(--rule);padding-top:20px}}
+
+/* рынок */
+.fx-msc{margin-top:38px}
+.fx-msc-t{position:relative;height:22px;border-radius:4px;background:#161F1C;overflow:hidden}
+.fx-msc-t i{position:absolute;top:0;bottom:0;border-radius:3px}
+.fx-msc-t i.you{left:0;background:var(--ok)}
+.fx-msc-t i.lead{background:#5B6D66}
+.fx-msc-l{display:flex;gap:24px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--ink-3)}
+.fx-msc-l b{font-weight:400;margin-right:6px}
+.fx-msc-l b.fx-dim{color:#5B6D66}
 
 /* риски роста */
 .fx-risks{display:grid;gap:14px}
@@ -1124,6 +1163,7 @@ body.fx-prompter-on .fx-prompter{display:block}
   .pr-x-mx td.y{color:var(--pr-accent);font-weight:700}
   .pr-x-mx td.n{color:#B7BDB8}
   .pr-x-mx td.m{color:var(--pr-bad);font-weight:700}
+  .pr-x-mx tr.g td{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pr-accent);padding:12px 0 4px;border-bottom:0}
   .pr-x-bar{height:4px;background:var(--pr-line);position:relative;margin:12px 0 8px}
   .pr-x-bar i{position:absolute;left:0;top:0;bottom:0;background:var(--pr-accent)}
   .pr-x-bar u{position:absolute;top:-4px;width:2px;height:12px;background:var(--pr-ink)}
@@ -1135,6 +1175,21 @@ body.fx-prompter-on .fx-prompter{display:block}
   .pr-x-risk .t{display:block;font-size:11.5px;font-weight:700;color:var(--pr-ink);margin:4px 0 5px}
   .pr-x-risk p{font-size:9.5px;line-height:1.5;color:var(--pr-ink-2);margin:0}
   .pr-x-risk p.c{margin-top:5px;color:var(--pr-ink);border-top:1px solid var(--pr-line);padding-top:5px}
+  .pr-x-fix{border:1px solid var(--pr-line);border-left:2px solid var(--pr-bad);margin-bottom:10px}
+  .pr-x-fh{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:10px 12px;border-bottom:1px solid var(--pr-line)}
+  .pr-x-fh .s{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pr-ink-3)}
+  .pr-x-fh .t{display:block;font-size:12.5px;font-weight:700;color:var(--pr-ink);margin:4px 0 0}
+  .pr-x-fh .n{font-size:9.5px;line-height:1.5;color:var(--pr-ink-2);margin:4px 0 0}
+  .pr-x-fh .m{text-align:right;white-space:nowrap}
+  .pr-x-fh .m b{font-family:var(--pr-serif);font-size:16px;font-weight:600;color:var(--pr-bad)}
+  .pr-x-fh .m span{display:block;font-size:8.5px;color:var(--pr-ink-3);margin-top:3px}
+  .pr-x-fb{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;padding:10px 12px}
+  .pr-x-fb .k{display:block;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pr-ink-3);margin:0 0 5px}
+  .pr-x-fb .k+p{margin:0 0 8px}
+  .pr-x-fb ol{margin:0;padding-left:14px}
+  .pr-x-fb li{font-size:9.5px;line-height:1.5;color:var(--pr-ink);margin-bottom:5px}
+  .pr-x-fb p{font-size:9.5px;line-height:1.5;color:var(--pr-ink-2)}
+  .pr-x-fb p.e{margin-top:6px;padding-top:6px;border-top:1px solid var(--pr-line);color:var(--pr-accent);font-weight:700}
   .pr-x-nd{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:12px 0 6px}
   .pr-x-nd .k{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pr-ink-3);margin-bottom:6px}
   .pr-x-nd .v{font-family:var(--pr-serif);font-size:26px;font-weight:600;line-height:1.1}
@@ -1854,6 +1909,27 @@ const QUESTIONS = [
     sub:'Агентства, консультанты, найм, курсы — суммарно. Если не пробовали — оставьте пусто.',
     score:v => (v && Number(v) > 0) ? [{cat:'strategy', delta:-4}] : [],
     insight:v => (v && Number(v) > 0) ? {tone:'bad', text:`<b>Уже потрачено ${Fmt.money(Number(v))}</b> без результата. Это не аргумент «подождать ещё» — это аргумент сменить подход, а не пробовать шестой раз то же самое.`} : null },
+  { id:'market_size', section:'strategy', type:'money', optional:true, unit:'₽',
+    title:'Какой объём рынка в вашем сегменте и географии за год?',
+    sub:'Ваша оценка, точности не требуется. Нужна, чтобы посчитать вашу долю и цену одного процентного пункта рынка. Не знаете — пропустите.',
+    insight:v => {
+      const m = Number(v), rev = FinModel.num('revenue');
+      if (!(m > 0) || !(rev > 0)) return null;
+      const share = rev * 12 / m;
+      if (share >= .25) return {tone:'good', text:`<b>Ваша доля около ${Fx.pct(share)}</b>. На таком уровне рост идёт не за счёт доли, а за счёт цены, повторных продаж и соседних сегментов.`};
+      if (share < .01) return {tone:'warn', text:`<b>Ваша доля меньше 1%</b>. Рынок не ограничивает вас вообще: потолок стоит внутри компании, а не снаружи.`};
+      return {tone:'warn', text:`<b>Ваша доля около ${Fx.pct(share)}</b>. Один процентный пункт рынка — это ${Fx.money(m / 100 / 12)} выручки в месяц.`};
+    } },
+  { id:'market_leader', section:'strategy', type:'money', optional:true, unit:'₽',
+    title:'Какая выручка у лидера вашего сегмента в месяц?',
+    sub:'Оценка по самому сильному конкуренту, которого вы знаете. Нужна, чтобы показать разрыв и то, чем он закрывается. Не знаете — пропустите.',
+    insight:v => {
+      const l = Number(v), rev = FinModel.num('revenue');
+      if (!(l > 0) || !(rev > 0)) return null;
+      const k = l / rev;
+      if (k < 1.2) return {tone:'good', text:'<b>Вы на уровне лидера сегмента.</b> Дальше выигрывает тот, у кого система даёт предсказуемость, а не разовые всплески.'};
+      return {tone:'warn', text:`<b>Разрыв с лидером ×${Fx.dec(k, k >= 10 ? 0 : 1)}.</b> Разрыв такого размера не закрывается усилием команды: он закрывается другой конструкцией коммерческого блока.`};
+    } },
   { id:'if_nothing', section:'strategy', type:'select',
     title:'Что будет, если ничего не менять ближайший год?',
     options:[
@@ -3282,10 +3358,18 @@ const Fx = {
   M: '−',
   rub(v){ return this.nf.format(Math.round(v)) + ' ₽'; },
   // «1,15 млн ₽», «13,8 млн ₽», «1 млн ₽»: хвостовые нули не нужны
-  mln(v, d){ const x = v / 1e6, dd = d ?? (Math.abs(x) >= 10 ? 1 : 2); let t = x.toFixed(dd); if (d == null || dd <= 1) t = t.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, ''); return t.replace('.', ',') + ' млн ₽'; },
+  mln(v, d){
+    const a = Math.abs(v), unit = a >= 999.5e6 ? ' млрд ₽' : ' млн ₽', x = v / (a >= 999.5e6 ? 1e9 : 1e6);
+    const dd = d ?? (Math.abs(x) >= 10 ? 1 : 2);
+    let t = x.toFixed(dd);
+    if (d == null || dd <= 1) t = t.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
+    return t.replace('.', ',') + unit;
+  },
   money(v){ const a = Math.abs(v); return a >= 999500 ? this.mln(v) : a >= 1e3 ? this.nf.format(Math.round(v / 1e3)) + ' тыс ₽' : this.rub(v); },
   sgn(v){ return (v < 0 ? this.M : '+') + this.money(Math.abs(v)); },
   pct(v, d = 0){ return (v * 100).toFixed(d).replace('.', ',') + '%'; },
+  mult(v){ return this.dec(v, v >= 10 ? 0 : 1).replace(/,0$/, ''); },
+  ppv(v){ return this.dec(v, Math.abs(v) < 1 ? 2 : 1).replace(/,0+$/, ''); },
   deals(v){ return v >= 100 ? this.nf.format(Math.round(v)) : Math.abs(v - Math.round(v)) < .05 ? String(Math.round(v)) : this.dec(v); },
   dec(v, d = 1){ return Number(v).toFixed(d).replace('.', ','); },
   plural(n, one, few, many){
@@ -3317,13 +3401,13 @@ const FX_RANK = {'15m':0, hour:1, same_day:2, next_day:3};
 // сверху долей валовой прибыли, снизу её держат сами драйверы: компания
 // без управления не может показать «потерь нет».
 const Ledger = {
-  GP_CAP: .45,        // потолок суммы: больше система не обещает даже теоретически
+  GP_CAP: .70,        // потолок суммы: больше система не обещает даже теоретически
   REACH_CEIL: .92,    // выше дозвон не поднимается ни у кого
-  REACH_REL_CAP: .20, // и не больше чем на пятую часть от текущего уровня
-  CLOSE_REL_CAP: .25, // закрытие растёт максимум на четверть
-  CLOSE_ABS_CEIL: .55,
-  REPEAT_PP_CAP: 10,  // доля повторных за год растёт не больше чем на 10 п.п.
-  PRICE_FLOW: .7,     // часть повышения цены съедают отток и комиссии
+  REACH_REL_CAP: .35, // и не больше чем на треть от текущего уровня
+  CLOSE_REL_CAP: .45, // закрытие растёт максимум в полтора раза
+  CLOSE_ABS_CEIL: .60,
+  REPEAT_PP_CAP: 16,  // доля повторных за год растёт не больше чем на 16 п.п.
+  PRICE_FLOW: .75,    // часть повышения цены съедают отток и комиссии
   ROP_DEFAULT: 200000,
   NAMES: {lead:'Привлечение', contact:'Первый контакт', close:'Переговоры и закрытие', repeat:'Повторные продажи', price:'Цена'},
   // wave — в какой волне драйвер внедряется, rec — сколько его эффекта успеваем забрать за 90 дней
@@ -3367,12 +3451,12 @@ const Ledger = {
     let ppRoom = Math.max(0, Math.min(this.REACH_CEIL - L.reachCalc, L.reachCalc * this.REACH_REL_CAP));
     const cPP = [];
     const pushC = (id, eff, label, why, wave, rec) => { if (eff > 0) cPP.push({id, stage:'contact', unit:'pp', eff, label, why, wave, rec}); };
-    pushC('resp', rank - rnorm >= 2 ? 4 : rank > rnorm ? 3 : 0, `Норматив первого ответа: ${FX_RESP[p.respNorm]}`, `сейчас отвечаете ${FX_RESP[a.response_time] || 'без норматива'}`, 2, .9);
-    pushC('crm', a.has_crm === 'no' ? 4 : 0, 'CRM: заявки не теряются', 'заявки живут в мессенджерах и блокнотах', 2, .5);
-    pushC('watch', a.has_crm === 'yes' && a.funnel_visibility === 'no' ? 1.5 : 0, 'Контроль невзятых заявок', 'этапы воронки не оцифрованы', 2, .6);
-    pushC('follow', ({nothing:4, couple:2.5, manager:1.5})[a.followup] || 0, 'Каскад касаний до разговора', ({nothing:'заявку без ответа бросают', couple:'пара звонков и всё', manager:'дожим на усмотрение менеджера'})[a.followup], 2, .7);
-    pushC('load', L.loadRatio != null && L.loadRatio > 1.3 ? 3 : 0, 'Разгрузка продавцов', `${Math.round(L.load || 0)} заявок на человека при норме ${p.loadNorm}`, 3, .4);
-    pushC('admin', ({admin:2, half:1.5})[a.sales_time] || 0, 'Снять документы с продавцов', 'время продавцов уходит на бумаги', 3, .5);
+    pushC('resp', rank - rnorm >= 2 ? 9 : rank > rnorm ? 6 : 0, `Норматив первого ответа: ${FX_RESP[p.respNorm]}`, `сейчас отвечаете ${FX_RESP[a.response_time] || 'без норматива'}`, 2, .9);
+    pushC('crm', a.has_crm === 'no' ? 7 : 0, 'CRM: заявки не теряются', 'заявки живут в мессенджерах и блокнотах', 2, .7);
+    pushC('watch', a.has_crm === 'yes' && a.funnel_visibility === 'no' ? 3 : 0, 'Контроль невзятых заявок', 'этапы воронки не оцифрованы', 2, .7);
+    pushC('follow', ({nothing:9, couple:6, manager:4})[a.followup] || 0, 'Каскад касаний до разговора', ({nothing:'заявку без ответа бросают', couple:'пара звонков и всё', manager:'дожим на усмотрение менеджера'})[a.followup], 2, .75);
+    pushC('load', L.loadRatio != null && L.loadRatio > 1.3 ? 5 : 0, 'Разгрузка продавцов', `${Math.round(L.load || 0)} заявок на человека при норме ${p.loadNorm}`, 3, .5);
+    pushC('admin', ({admin:4, half:3})[a.sales_time] || 0, 'Снять документы с продавцов', 'время продавцов уходит на бумаги', 3, .6);
     // Сначала реальные практики, и только остаток места добирает разрыв с ориентиром:
     // иначе добор съедал всё, и вклад практик схлопывался в «+0,0 п.п.»
     let cReal = cPP.reduce((t, d) => t + d.eff, 0) / 100;
@@ -3384,18 +3468,18 @@ const Ledger = {
     // ── Закрытие: вклад в процентах к текущей конверсии разговора в оплату ──
     const zREL = [];
     const pushZ = (id, eff, label, why, wave, rec) => { if (eff > 0) zREL.push({id, stage:'close', unit:'rel', eff, label, why, wave, rec}); };
-    pushZ('script', a.has_regl === 'no' ? .08 : 0, 'Скрипт и карта возражений', 'каждый продаёт как умеет', 2, .6);
-    pushZ('calls', a.call_records === 'no' ? .06 : 0, 'Разбор звонков каждую неделю', 'диалоги никто не слушает', 4, .7);
-    pushZ('rop', a.has_rop === 'no' ? .07 : 0, 'Ежедневное управление отделом', 'нет РОПа', 3, .4);
-    pushZ('motiv', ({salary:.05, chaos:.03})[a.motivation] || 0, 'Мотивация от результата', ({salary:'продавцы на окладе', chaos:'у каждого своя схема'})[a.motivation], 1, .8);
-    pushZ('owner', a.owner_dep === 'yes' || ['all','most'].includes(a.owner_share) ? .05 : 0, 'Сделки не ждут собственника', 'ключевые сделки идут через вас', 4, .3);
-    pushZ('cascade', ['timing','ghost'].includes(a.lost_reason) && a.followup !== 'system' ? .06 : 0, 'Дожим после встречи', `главный отказ: ${({timing:'«не сейчас»', ghost:'клиенты пропадают молча'})[a.lost_reason]}`, 2, .7);
-    pushZ('qual', a.lost_reason === 'wrong' ? .05 : 0, 'Квалификация на входе', 'приходят не те клиенты', 2, .6);
-    pushZ('trust', a.lost_reason === 'trust' ? .04 : 0, 'Кейсы, гарантии и отзывы в работе', 'отказы из-за недоверия', 2, .6);
-    pushZ('price_obj', a.lost_reason === 'price' ? .04 : 0, 'Аргументация цены вместо скидок', 'главный отказ: «дорого»', 2, .6);
-    pushZ('plan', ({rare:.03, half:.02})[a.plan_done] || 0, 'План-факт каждую неделю', 'план выполняется через раз', 4, .6);
-    pushZ('visib', a.funnel_visibility === 'no' ? .02 : 0, 'Воронка по этапам в CRM', 'видна только общая конверсия', 2, .6);
-    const ceilRel = Math.max(0, Math.min(this.CLOSE_ABS_CEIL / L.closeCalc - 1, this.CLOSE_REL_CAP, (L.closeNorm ? L.closeNorm * 1.6 : this.CLOSE_ABS_CEIL) / L.closeCalc - 1));
+    pushZ('script', a.has_regl === 'no' ? .18 : 0, 'Скрипт и карта возражений', 'каждый продаёт как умеет', 2, .7);
+    pushZ('calls', a.call_records === 'no' ? .12 : 0, 'Разбор звонков каждую неделю', 'диалоги никто не слушает', 4, .7);
+    pushZ('rop', a.has_rop === 'no' ? .15 : 0, 'Ежедневное управление отделом', 'нет РОПа', 3, .55);
+    pushZ('motiv', ({salary:.12, chaos:.08})[a.motivation] || 0, 'Мотивация от результата', ({salary:'продавцы на окладе', chaos:'у каждого своя схема'})[a.motivation], 1, .8);
+    pushZ('owner', a.owner_dep === 'yes' || ['all','most'].includes(a.owner_share) ? .10 : 0, 'Сделки не ждут собственника', 'ключевые сделки идут через вас', 4, .4);
+    pushZ('cascade', ['timing','ghost'].includes(a.lost_reason) && a.followup !== 'system' ? .14 : 0, 'Дожим после встречи', `главный отказ: ${({timing:'«не сейчас»', ghost:'клиенты пропадают молча'})[a.lost_reason]}`, 2, .7);
+    pushZ('qual', a.lost_reason === 'wrong' ? .11 : 0, 'Квалификация на входе', 'приходят не те клиенты', 2, .65);
+    pushZ('trust', a.lost_reason === 'trust' ? .09 : 0, 'Кейсы, гарантии и отзывы в работе', 'отказы из-за недоверия', 2, .65);
+    pushZ('price_obj', a.lost_reason === 'price' ? .09 : 0, 'Аргументация цены вместо скидок', 'главный отказ: «дорого»', 2, .65);
+    pushZ('plan', ({rare:.08, half:.05})[a.plan_done] || 0, 'План-факт каждую неделю', 'план выполняется через раз', 4, .6);
+    pushZ('visib', a.funnel_visibility === 'no' ? .05 : 0, 'Воронка по этапам в CRM', 'видна только общая конверсия', 2, .6);
+    const ceilRel = Math.max(0, Math.min(this.CLOSE_ABS_CEIL / L.closeCalc - 1, this.CLOSE_REL_CAP));
     let zReal = zREL.reduce((t, d) => t + d.eff, 0);
     if (zReal > ceilRel && zReal > 0){ const k = ceilRel / zReal; zREL.forEach(d => d.eff *= k); zReal = ceilRel; }
     const closeNormRel = L.closeNorm ? Math.max(0, L.closeNorm / L.closeCalc - 1) : 0;
@@ -3407,11 +3491,11 @@ const Ledger = {
     if (repeat != null && a.repeat_nature !== 'oneoff'){
       const rPP = [];
       const pushR = (id, eff, label, why, wave, rec) => { if (eff > 0) rPP.push({id, stage:'repeat', unit:'pp', eff, label, why, wave, rec}); };
-      pushR('base', ({never:5, sometimes:3})[a.old_base] || 0, 'Системная работа с базой', ({never:'база лежит мёртвым грузом', sometimes:'база отрабатывается вручную'})[a.old_base], 2, .4);
-      pushR('who', ({nobody:4, unknown:2})[a.repeat_block] || 0, 'Ответственный за повторные продажи', ({nobody:'базой некому заниматься', unknown:'причина возвратов неизвестна'})[a.repeat_block], 2, .4);
-      pushR('reason', a.repeat_block === 'noreason' ? 3 : 0, 'Повод вернуться и допродажи', 'нет повода для второй покупки', 4, .3);
-      pushR('crm', a.has_crm === 'no' ? 1.5 : 0, 'История клиента в CRM', 'клиентскую базу негде вести', 2, .4);
-      const rRoom = Math.max(0, Math.min(this.REPEAT_PP_CAP, Math.max(L.repeatTarget - repeat, 4)));
+      pushR('base', ({never:9, sometimes:6})[a.old_base] || 0, 'Системная работа с базой', ({never:'база лежит мёртвым грузом', sometimes:'база отрабатывается вручную'})[a.old_base], 2, .55);
+      pushR('who', ({nobody:8, unknown:5})[a.repeat_block] || 0, 'Ответственный за повторные продажи', ({nobody:'базой некому заниматься', unknown:'причина возвратов неизвестна'})[a.repeat_block], 2, .55);
+      pushR('reason', a.repeat_block === 'noreason' ? 6 : 0, 'Повод вернуться и допродажи', 'нет повода для второй покупки', 4, .4);
+      pushR('crm', a.has_crm === 'no' ? 3 : 0, 'История клиента в CRM', 'клиентскую базу негде вести', 2, .5);
+      const rRoom = Math.max(0, Math.min(this.REPEAT_PP_CAP, Math.max(L.repeatTarget - repeat, 6)));
       let rReal = rPP.reduce((t, d) => t + d.eff, 0);
       if (rReal > rRoom && rReal > 0){ const k = rRoom / rReal; rPP.forEach(d => d.eff *= k); rReal = rRoom; }
       const rGap = Math.min(Math.max(0, rRoom - rReal), Math.max(0, L.repeatTarget - repeat - rReal));
@@ -3420,7 +3504,7 @@ const Ledger = {
     }
 
     // ── Цена: самый быстрый рычаг, если рынок её держит ──
-    const priceEff = ({raised:.05, can:.04, value:.03})[a.check_flex] || 0;
+    const priceEff = ({raised:.10, can:.08, value:.06})[a.check_flex] || 0;
     if (priceEff > 0) add({id:'price', stage:'price', unit:'pct', eff: priceEff,
       label: a.check_flex === 'value' ? 'Цена через пакеты и гарантию' : 'Пересмотр прайса',
       why: ({raised:'цену уже поднимали, рынок принял', can:'поднять можно, но не пробовали', value:'цену держит упаковка продукта'})[a.check_flex],
@@ -3441,7 +3525,12 @@ const Ledger = {
     D.sort((x, y) => y.gain - x.gain);
     const lim = L.gp * this.GP_CAP;
     let acc = 0; const keep = [], drop = [];
-    D.forEach((d, i) => {
+    // Сначала крупнейший рычаг каждого этапа, иначе потолок вырезает целые этапы
+    // и «потенциал» этапа схлопывается в текущий показатель.
+    const head = new Set(), order = [];
+    ['contact','close','repeat','price','lead'].forEach(st => { const d = D.find(x => x.stage === st); if (d){ order.push(d); head.add(d); } });
+    D.forEach(d => { if (!head.has(d)) order.push(d); });
+    order.forEach((d, i) => {
       if (acc + d.gain <= lim){ keep.push(d); acc += d.gain; }
       else if (!keep.length){ const kk = lim / d.gain; d.eff *= kk; d.gain = lim; d.capped = true; keep.push(d); acc = lim; }   // один рычаг крупнее потолка: режем вместе с его вкладом в показатель
       else drop.push(d);
@@ -3525,6 +3614,193 @@ const Ledger = {
     L.weekLoss = L.lossMo * 12 / 52;
     return L;
   }
+};
+
+// ═══ РЫНОК: доля, цена процентного пункта и разрыв с лидером ═══
+// Считается только на оценке собственника: своих данных по нишам у нас нет,
+// и выдумывать отраслевую статистику мы не будем.
+const Market = {
+  build(L){
+    if (!L) return null;
+    const M = FinModel.num('market_size'), lead = FinModel.num('market_leader');
+    if (!(M > 0) && !(lead > 0)) return null;
+    const o = {M: M > 0 ? M : null, lead: lead > 0 ? lead : null, rev: L.rev};
+    if (o.M){
+      o.share = L.rev * 12 / o.M;
+      o.ppMo = o.M / 100 / 12;                    // один процентный пункт доли в месяц
+      o.ppRatio = o.ppMo / L.rev;                 // во сколько раз это больше текущей выручки
+      o.recPP = L.recMo / L.m / o.ppMo;           // возврат за 90 дней в пунктах доли
+      o.lossPP = L.lossMo / L.m / o.ppMo;
+      o.headroom = Math.max(0, 1 - o.share);
+      o.x2PP = o.share * 100;                     // сколько пунктов нужно, чтобы удвоиться
+    }
+    if (o.lead){
+      o.gap = o.lead / L.rev;
+      o.leadShare = o.M ? o.lead * 12 / o.M : null;
+      o.toLead = Math.max(0, o.lead - L.rev);
+      o.toLeadPart = o.toLead > 0 ? (L.recMo / L.m) / o.toLead : null;   // какую часть разрыва закрывает возврат
+    }
+    return o;
+  }
+};
+
+// ═══ РАЗБОР ОШИБОК: что именно сделано не так и что с этим делать ═══
+// Каждый рычаг из ведомости раскрывается до уровня инструкции: шаги, норматив,
+// проверка и типичная ошибка при внедрении. Это то, за что платят за диагностику.
+const Playbook = {
+  P: {
+    resp: {err:'Заявка остывает до первого контакта',
+      do:['Поставить норматив: первый контакт в течение 15 минут в рабочее время, автоответ с именем менеджера и временем звонка — в течение минуты.',
+        'Назначить дежурного по заявкам на каждый час рабочего дня и вывести очередь новых заявок на общий экран.',
+        'Включить уведомление руководителю по заявке, не взятой за 15 минут: не отчёт в конце дня, а сигнал в момент нарушения.'],
+      chk:'Доля заявок с первым контактом до 15 минут — не ниже 90% в недельном отчёте.',
+      trap:'Норматив без дежурства и без сигнала руководителю держится две недели, потом возвращается к «как получится».'},
+    crm: {err:'Заявки живут вне единой системы',
+      do:['Свести все источники заявок в одну CRM: сайт, почта, мессенджеры, телефония. Ручной ввод запрещён как класс.',
+        'Закрыть возможность вести сделку в личной переписке: нет карточки — нет сделки и нет премии.',
+        'Настроить обязательные поля на переходе между этапами, чтобы воронка считалась сама.'],
+      chk:'100% сделок месяца заведены в CRM в день обращения, расхождение с выручкой не больше 5%.',
+      trap:'CRM, куда менеджеры заносят сделки в конце недели, — это отчётность, а не управление.'},
+    watch: {err:'Невзятые заявки никто не видит',
+      do:['Сделать отдельный отчёт по заявкам без первого контакта и без следующего шага.',
+        'Разбирать этот список на ежедневной планёрке первым пунктом, до обсуждения выручки.',
+        'Назначить ответственного за возврат зависших заявок в работу в течение суток.'],
+      chk:'Заявок без назначенного следующего шага на конец дня — ноль.',
+      trap:'Отчёт, который смотрят раз в неделю, показывает уже потерянные деньги.'},
+    follow: {err:'Клиент, не купивший сразу, выпадает из работы',
+      do:['Собрать каскад касаний: 6–8 контактов за 14 дней по чередующимся каналам — звонок, мессенджер, письмо с пользой.',
+        'Прописать содержание каждого касания: не «напомнить о себе», а конкретный повод и следующий шаг.',
+        'Автоматизировать постановку задач по каскаду в CRM, чтобы он не зависел от памяти менеджера.'],
+      chk:'Доля заявок, прошедших полный каскад, — не ниже 80%; конверсия отложенных в сделку считается отдельно.',
+      trap:'Три звонка подряд в один день — это не каскад, а способ попасть в чёрный список.'},
+    load: {err:'Продавцы физически не успевают обработать поток',
+      do:['Пересчитать норму заявок на человека с поправкой на время, которое уходит не на продажи.',
+        'Развести входящий поток и работу по базе между разными людьми или разными часами дня.',
+        'Довести численность до нормы или срезать поток до мощности, но осознанно, а не по факту потерь.'],
+      chk:'Нагрузка на продавца в пределах нормы профиля, доля необработанных заявок — ноль.',
+      trap:'Догружать перегруженный отдел новыми заявками — это способ увеличить потери, а не выручку.'},
+    admin: {err:'Время продавцов уходит на документы',
+      do:['Замерить неделю: сколько часов уходит на счета, договоры, отгрузки и согласования.',
+        'Вынести всё, что не требует продавца, на ассистента или автоматизацию шаблонов.',
+        'Закрепить долю времени на продажи в KPI руководителя, а не в пожеланиях.'],
+      chk:'Не меньше 70% рабочего времени продавца — в разговорах с клиентами.',
+      trap:'Без замера возвращается за месяц: бумаги всегда кажутся срочнее звонка.'},
+    creg: {err:'Первое касание не описано как процесс',
+      do:['Прописать регламент: кто берёт заявку, за какое время, что говорит и куда ведёт.',
+        'Сделать чек-лист первого контакта с обязательным следующим шагом и датой.',
+        'Разобрать десять последних первых контактов и привести их к регламенту.'],
+      chk:'Доля заявок с зафиксированным следующим шагом после первого контакта — не ниже 90%.',
+      trap:'Регламент, который не проверяют выборочно каждую неделю, существует только в документе.'},
+    script: {err:'Каждый продавец продаёт по-своему',
+      do:['Снять разговоры двух сильных продавцов и собрать из них структуру ключевого этапа.',
+        'Собрать карту возражений по реальным отказам месяца с готовыми ответами и доказательствами.',
+        'Провести аттестацию по скрипту с ролевой отработкой и допуском к заявкам.'],
+      chk:'Разброс конверсии между продавцами — не больше полутора раз вместо трёх-четырёх.',
+      trap:'Скрипт, написанный без реальных звонков, звучит как шаблон и режет конверсию.'},
+    calls: {err:'Разговоры никто не слушает',
+      do:['Включить запись всех разговоров и хранение не меньше трёх месяцев.',
+        'Ввести правило: два звонка на продавца в неделю разбираются с чек-листом по тем же критериям.',
+        'Вести список типовых ошибок и закрывать их на общей планёрке, а не в личных беседах.'],
+      chk:'Разбор проведён по каждому продавцу еженедельно, повторные ошибки уходят из списка за месяц.',
+      trap:'Прослушка ради контроля даёт страх и саботаж. Разбор работает, когда из него растёт скрипт.'},
+    rop: {err:'Отдел работает без ежедневного управления',
+      do:['Ввести ежедневный ритм: утренняя планёрка на 15 минут по плану дня и вечерний срез по факту.',
+        'Закрепить недельный разбор сделок и месячный разбор плана с решениями, а не с обсуждением.',
+        'Определить, кто управляет отделом каждый день: руководитель, старший продавец или собственник по регламенту.'],
+      chk:'План-факт по каждому продавцу собирается ежедневно без напоминаний.',
+      trap:'Управление через общий чат и отчёт в пятницу — это наблюдение за результатом, а не влияние на него.'},
+    motiv: {err:'Мотивация не связана с результатом',
+      do:['Собрать схему из оклада, процента от выполнения плана и бонуса за ключевое действие.',
+        'Заложить пороги: ниже 80% плана процент падает, выше 100% растёт. Разрыв должен быть ощутимым.',
+        'Показать каждому продавцу расчёт его дохода на трёх сценариях выполнения.'],
+      chk:'Разница в доходе между выполнившим и невыполнившим план — не меньше полутора раз.',
+      trap:'Менять схему без переходного месяца — верный способ потерять сильных до того, как она заработает.'},
+    owner: {err:'Ключевые сделки замкнуты на собственнике',
+      do:['Разметить, какие решения реально требуют собственника: скидка сверх нормы, нестандартные условия, крупная сделка.',
+        'Выдать продавцам полномочия в рамках матрицы скидок, чтобы сделка не ждала вас.',
+        'Передавать по одному типу сделок в месяц с разбором первых пяти случаев.'],
+      chk:'Доля сделок, прошедших без участия собственника, растёт на 20 п.п. за квартал.',
+      trap:'Передача без матрицы полномочий возвращается к вам через неделю в виде вопросов в личку.'},
+    cascade: {err:'После встречи сделка зависает',
+      do:['Ввести правило: с каждой встречи уходит дата следующего шага, зафиксированная при клиенте.',
+        'Прописать сценарий дожима: что отправляем, когда звоним, какой повод используем.',
+        'Разобрать все сделки в статусе «думает» старше двух недель и закрыть их в да или нет.'],
+      chk:'Сделок без следующего шага в воронке — ноль; средний цикл сделки сокращается.',
+      trap:'«Я им написал, жду ответа» — это не дожим, а ожидание. Следующий шаг назначает продавец.'},
+    qual: {err:'Отдел тратит время не на тех клиентов',
+      do:['Описать портрет целевого клиента по данным выигранных сделок, а не по представлению.',
+        'Ввести квалификацию на входе: бюджет, срок, полномочия, задача. Четыре вопроса до презентации.',
+        'Развести нецелевых в отдельный сценарий: короткий ответ и выход, без потери часа.'],
+      chk:'Доля квалифицированных заявок в работе — не ниже 70%, конверсия в сделку растёт без роста потока.',
+      trap:'Жёсткая квалификация без корректировки маркетинга просто уменьшит поток. Правки идут парой.'},
+    trust: {err:'Клиент не верит на слово',
+      do:['Собрать доказательную базу: кейсы с цифрами, отзывы с контактами, гарантии в договоре.',
+        'Встроить доказательства в конкретные места разговора, где возникает сомнение.',
+        'Дать продавцам короткие истории клиентов из той же ниши на каждое типовое возражение.'],
+      chk:'Доля отказов с причиной «не уверены» падает вдвое за квартал.',
+      trap:'Отзывы без имён и цифр не работают. Работает контакт, которому можно позвонить.'},
+    price_obj: {err:'Скидка заменяет аргументацию',
+      do:['Ввести матрицу скидок: кто, за что и в каком размере может уступить, всё остальное — через руководителя.',
+        'Собрать аргументацию цены через стоимость решения задачи клиента и цену бездействия.',
+        'Считать маржу каждой сделки со скидкой и показывать её продавцу в его же деньгах.'],
+      chk:'Средняя скидка падает, средний чек растёт, доля сделок с максимальной скидкой не больше 10%.',
+      trap:'Запрет скидок без аргументации роняет конверсию. Сначала аргументы, потом рамка.'},
+    plan: {err:'План — цифра на бумаге',
+      do:['Разложить месячный план до недели и до ключевого действия каждого продавца.',
+        'Ввести правило второй недели: отклонение больше 15% разбирается и отрабатывается сразу.',
+        'Планировать от воронки, а не от желания: заявки, конверсия, чек, цикл сделки.'],
+      chk:'План выполняется три месяца подряд с отклонением не больше 10%.',
+      trap:'План, который никогда не выполнялся, перестаёт быть ориентиром для команды за два месяца.'},
+    visib: {err:'Видна только общая конверсия',
+      do:['Разметить воронку по этапам с понятными критериями перехода.',
+        'Вывести конверсию каждого этапа на дашборд, доступный руководителю ежедневно.',
+        'Ввести разбор просадки этапа в течение суток, а не по итогам месяца.'],
+      chk:'Конверсия каждого этапа считается автоматически, просадка обнаруживается за день.',
+      trap:'Этапы, которые ставят по ощущению, дают красивую воронку и бесполезные цифры.'},
+    zreg: {err:'Технология закрытия не собрана',
+      do:['Определить ключевой этап, на котором решается сделка, и описать его пошагово.',
+        'Собрать нормативы: сколько касаний, какие материалы, какой следующий шаг после каждого.',
+        'Прогнать команду через аттестацию и закрепить разбор сделок еженедельно.'],
+      chk:'Конверсия ключевого этапа растёт и держится три месяца без участия собственника.',
+      trap:'Технология без ежедневного управления распадается на личные привычки за месяц.'},
+    base: {err:'База клиентов лежит мёртвым грузом',
+      do:['Сегментировать базу: кто покупал, когда, на что и почему перестал.',
+        'Собрать кампанию реактивации с конкретным поводом для каждого сегмента, а не общей рассылкой.',
+        'Поставить план по выручке с базы отдельной строкой и закрепить за конкретным человеком.'],
+      chk:'Выручка с повторных продаж отдельной строкой в отчёте растёт каждый месяц квартала.',
+      trap:'Разовая рассылка по всей базе даёт всплеск и выжигает контакты. Нужен ритм и сегменты.'},
+    who: {err:'За повторные продажи никто не отвечает',
+      do:['Назначить ответственного за выручку с существующих клиентов с отдельным планом.',
+        'Разделить роли: новые продажи и работа с базой требуют разного ритма и разных навыков.',
+        'Ввести регулярный контакт с ключевыми клиентами по календарю, а не по настроению.'],
+      chk:'Доля повторной выручки растёт, отток ключевых клиентов считается и снижается.',
+      trap:'Отдать базу тем же продавцам без отдельного плана — значит не отдать никому.'},
+    reason: {err:'Клиенту незачем возвращаться',
+      do:['Собрать линейку допродаж и следующего шага после первой покупки.',
+        'Прописать календарь поводов: срок обслуживания, обновление, сезон, новая задача.',
+        'Проверить, знает ли клиент обо всём, что вы продаёте: чаще всего нет.'],
+      chk:'Средний чек второй покупки не ниже первой, доля клиентов с двумя и более покупками растёт.',
+      trap:'Повод, придуманный внутри компании, не работает. Он берётся из разговоров с клиентами.'},
+    rreg: {err:'Повторные продажи ниже нормы для такого продукта',
+      do:['Сравнить свой процент повторных с природой продукта: подписка, регулярный, проектный.',
+        'Найти точку отвала: после первой покупки, после первого обслуживания, после смены менеджера.',
+        'Закрыть эту точку процессом: контакт в срок, ответственный, план.'],
+      chk:'Доля повторной выручки выходит на ориентир продукта за квартал.',
+      trap:'Скидки за повторную покупку роняют маржу и приучают ждать акции.'},
+    price: {err:'Цена не пересматривалась',
+      do:['Посчитать эластичность на своей базе: что было при прошлом повышении и у кого.',
+        'Поднять цену в одном сегменте и замерить конверсию две недели, а не поднимать всё сразу.',
+        'Собрать пакеты: базовый, основной, расширенный, чтобы клиент выбирал из ваших вариантов.'],
+      chk:'Средний чек растёт, конверсия падает меньше чем на четверть от роста цены.',
+      trap:'Поднять цену без пересборки аргументации — значит переложить разницу на продавцов.'},
+    traffic: {err:'Отдел недозагружен',
+      do:['Посчитать, сколько заявок отдел обработает без потери качества, и планировать поток от этой цифры.',
+        'Развести каналы по стоимости сделки, а не по стоимости заявки, и усилить сильный.',
+        'Наращивать бюджет ступенями с замером конверсии на каждой ступени.'],
+      chk:'Нагрузка на продавца выходит на норму профиля, стоимость сделки не растёт.',
+      trap:'Наращивать трафик до починки воронки — это оплачивать те же потери в большем объёме.'}
+  },
+  get(id){ return this.P[id] || null; }
 };
 
 // ═══ ДИАГНОЗ СЛОВАМИ ═══
@@ -3995,7 +4271,8 @@ const Final = {
     return {a, L, c, idx, zone: Scoring.zone(idx), band: Scoring.verdict(idx)[0],
       goal: GoalPath.build(L), waves: Waves.build(L), perc, cost: perc ? Story.errorCost(L, perc.believed) : null,
       head: Story.headline(L, c), lead: Story.lead(L), chain: Story.chain(L, c), quotes: Story.quotes(),
-      strengths: Story.strengths(L), dont: Story.dont(L, c), cons: FinModel.consistency(), cats: Scoring.categories()};
+      strengths: Story.strengths(L), dont: Story.dont(L, c), cons: FinModel.consistency(), cats: Scoring.categories(),
+      market: Market.build(L)};
   },
 
   render(){
@@ -4012,8 +4289,10 @@ const Final = {
     add('ledger', 'Потери', this.actLedger);
     add('bench', 'Сравнение', this.actBench);
     add('diagnosis', 'Диагноз', this.actDiagnosis);
+    add('market', 'Рынок', this.actMarket);
     add('goal', 'Цель', this.actGoal);
     add('risk', 'Риски роста', this.actRisk);
+    add('fix', 'Что делать', this.actFix);
     add('plan', 'План', this.actPlan);
     add('pnl', 'Деньги', this.actPnl);
     add('nothing', 'Бездействие', this.actNothing);
@@ -4025,7 +4304,7 @@ const Final = {
       ${State.demo ? `<div class="fx-demo"><b>Демо-данные</b><span>Анкета заполнена случайными цифрами: это витрина логики отчёта, а не расчёт по реальному бизнесу.</span></div>` : ''}
       <header class="fx-cover">
         <div class="fx-cv-top"><b>Closery · Коммерческий МРТ</b><span>Конфиденциально · для собственника и первых лиц компании</span></div>
-        <p class="fx-kicker" style="margin-top:34px">Аудит коммерческого блока</p>
+        <p class="fx-kicker" style="margin-top:44px">Аудит коммерческого блока</p>
         <h1 class="fx-cv-h">${Fx.esc(x.a.company || 'Ваша компания')}</h1>
         <p class="fx-cv-sub">Где бизнес недополучает прибыль, сколько это стоит каждый месяц и что с этим делать за 90 дней. Все расчёты построены на ваших цифрах и показаны вместе с арифметикой.</p>
         <div class="fx-doc">
@@ -4213,8 +4492,8 @@ const Final = {
       repeat: L.P.repeat != null ? `<b class="fx-green">${Fx.dec(L.P.repeat, 0)}%</b>` : '—',
       price: `<b class="fx-green">${Fx.rub(L.P.check)}</b>`
     };
-    const unit = d => d.unit === 'pp' ? `+${Fx.dec(d.eff, d.eff < 1 ? 2 : 1)} п.п.`
-      : d.unit === 'rel' ? `+${Fx.dec(d.eff * L.closeCalc * 100, d.eff * L.closeCalc * 100 < 1 ? 2 : 1)} п.п.`
+    const unit = d => d.unit === 'pp' ? `+${Fx.ppv(d.eff)} п.п.`
+      : d.unit === 'rel' ? `+${Fx.ppv(d.eff * L.closeCalc * 100)} п.п.`
       : d.unit === 'pct' ? `+${Fx.rub(L.check * d.eff)}`
       : `+${Math.round(d.eff)} заявок`;
     const how = s => {
@@ -4239,9 +4518,8 @@ const Final = {
         <div class="fx-lc" data-k="Сейчас">${now[s.id]}</div>
         <div class="fx-lc" data-k="Потенциал системы">${pot[s.id]}</div>
         <div class="fx-lc fx-drvs" data-k="Что мешает">${drv}</div>
-        <div data-k="Валовая прибыль в месяц"><div class="fx-lmo fx-red">${Fx.M}${Fx.rub(s.loss)}</div><div class="fx-ibar"><i style="width:${s.loss / max * 100}%"></i><em style="width:${s.rec / max * 100}%"></em></div></div>
-        <div class="fx-lsh" data-k="Доля">${Fx.pct(s.loss / L.lossMo)}</div>
-        <div class="fx-lrc fx-green" data-k="Вернуть за 90 дней">+${Fx.money(s.rec)}</div>
+        <div data-k="Недополученная прибыль"><div class="fx-lmo fx-red">${Fx.M}${Fx.money(s.loss)}</div><div class="fx-ibar"><i style="width:${s.loss / max * 100}%"></i><em style="width:${s.rec / max * 100}%"></em></div><div class="fx-lsub">${Fx.mln(s.loss * 12)} за год<br>${Fx.pct(s.loss / L.lossMo)} всех потерь</div></div>
+        <div data-k="Вернём за 90 дней"><div class="fx-lrc fx-green">+${Fx.money(s.rec)}</div><div class="fx-lsub">${Fx.mln(s.rec * 12)} за год</div></div>
         <button class="fx-tog" type="button"></button><div class="fx-how">${how(s)}</div>
       </div>`;
     }).join('');
@@ -4257,10 +4535,11 @@ const Final = {
       `<div class="fx-sub">Валовая прибыль в месяц: сейчас и при построенной системе</div>
       ${this.bridgeSVG(L)}
       <div class="fx-ledger">
-        <div class="fx-lrow head"><div>№</div><div>Этап</div><div>Сейчас</div><div>Потенциал</div><div>Что мешает и сколько это даёт</div><div class="r">Прибыль в месяц<br><span class="fx-th-note">зелёным — что вернём</span></div><div class="r">Доля</div><div class="r">Вернуть за 90 дней</div></div>
+        <div class="fx-lrow head"><div>№</div><div>Этап</div><div>Сейчас</div><div>Потенциал</div><div>Что мешает и сколько это даёт</div><div class="r">Теряется в месяц<br><span class="fx-th-note">зелёным — что вернём</span></div><div class="r">Вернём за 90 дней<br><span class="fx-th-note">в месяц</span></div></div>
         ${this.ledgerRows(x)}
-        <div class="fx-lrow total"><div class="fx-lno"></div><div class="fx-lnm">Итого</div><div class="fx-lc" data-k="За год"><b class="fx-red">${Fx.M}${Fx.mln(L.lossMo * 12)}</b></div><div></div><div></div>
-          <div data-k="Валовая прибыль в месяц"><div class="fx-lmo fx-red">${Fx.M}${Fx.rub(L.lossMo)}</div></div><div class="fx-lsh" data-k="Доля">100%</div><div class="fx-lrc fx-green" data-k="Вернуть за 90 дней">+${Fx.money(L.recMo)}</div></div>
+        <div class="fx-lrow total"><div class="fx-lno"></div><div class="fx-lnm">Итого</div><div></div><div></div><div></div>
+          <div data-k="Недополученная прибыль"><div class="fx-lmo fx-red">${Fx.M}${Fx.money(L.lossMo)}</div><div class="fx-lsub">${Fx.mln(L.lossMo * 12)} за год<br>100% потерь</div></div>
+          <div data-k="Вернём за 90 дней"><div class="fx-lrc fx-green">+${Fx.money(L.recMo)}</div><div class="fx-lsub">${Fx.mln(L.recMo * 12)} за год</div></div></div>
       </div>
       ${quiet.length ? `<p class="fx-note">Без потенциала: ${quiet.map(s => s.name.toLowerCase()).join(', ')}. Здесь система уже работает, в ближайшие 90 дней не трогаем.</p>` : ''}
       ${cash}
@@ -4271,21 +4550,54 @@ const Final = {
   },
 
   // ── Данные для сравнения, рисков и бездействия: одни и те же в отчёте и в PDF ──
+  // Контуры управления, а не список задач: каждый закрывается системой, а не одним наймом
   practices(a){
+    const n = id => FinModel.num(id), src = Array.isArray(a.lead_sources) ? a.lead_sources.length : null;
+    const st = (cond, known) => known === false ? null : !!cond;
     return [
-      ['CRM, в которой видна каждая сделка', 'has_crm', a.has_crm === 'yes'],
-      ['Конверсия по каждому этапу воронки на виду', 'funnel_visibility', a.funnel_visibility === 'yes'],
-      ['Ответ на заявку в пределах 15 минут', 'response_time', a.response_time === '15m'],
-      ['Регламент касаний тех, кто не купил сразу', 'followup', a.followup === 'system'],
-      ['Скрипты и регламенты продаж', 'has_regl', a.has_regl === 'yes'],
-      ['Запись и разбор звонков', 'call_records', a.call_records === 'yes'],
-      ['KPI и план по каждому продавцу', 'has_kpi', a.has_kpi === 'yes'],
-      ['План продаж выполняется из месяца в месяц', 'plan_done', a.plan_done === 'stable'],
-      ['Мотивация: оклад и прозрачный процент', 'motivation', a.motivation === 'balanced'],
-      ['Системная работа со старой базой', 'old_base', a.old_base === 'regular'],
-      ['Отделом управляет руководитель', 'has_rop', a.has_rop === 'yes'],
-      ['Продажи не завязаны на собственнике', 'owner_dep', a.owner_dep === 'no']
-    ].filter(p => a[p[1]] != null && a[p[1]] !== '');
+      {g:'Экономика', t:'Юнит-экономика посчитана',
+        d:'Известны стоимость клиента, его пожизненная ценность и окупаемость привлечения. Бюджет двигают по цифрам, а не по ощущению, что «реклама вроде работает».',
+        s:st(n('cac') > 0 && n('ltv') > 0 && n('cost_per_lead') > 0)},
+      {g:'Экономика', t:'Управление прибылью, а не выручкой',
+        d:'Прибыль и рентабельность считают помесячно и по направлениям. Решения о найме, скидках и бюджете принимают, видя маржу, а не оборот.',
+        s:st(n('profit') != null && !FinModel.base().marginAssumed)},
+      {g:'Экономика', t:'Цена — управляемый рычаг',
+        d:'Прайс пересматривают планово, рынок это принимает. Цена растёт вместе с ценностью, а не держится годами из страха потерять клиента.',
+        s:st(a.check_flex === 'raised', a.check_flex != null)},
+      {g:'Маркетинг', t:'Портфель каналов вместо одной трубы',
+        d:'Заявки идут минимум из трёх источников, и выпадение одного не обнуляет месяц. Каналы сравнивают между собой по стоимости сделки.',
+        s:st(src >= 3, src != null)},
+      {g:'Маркетинг', t:'Атрибуция доведена до денег',
+        d:'Видно, какой канал приносит оплаты, а не клики и заявки. Бюджет перекладывают в сильный канал в течение недели, а не квартала.',
+        s:st(n('cost_per_lead') > 0 && a.funnel_visibility === 'yes' && a.has_crm === 'yes')},
+      {g:'Продажи', t:'Воронка оцифрована по этапам',
+        d:'Конверсия считается на каждом шаге, а не одной цифрой на входе и выходе. Просадку видно в тот же день, а не в конце месяца по выручке.',
+        s:st(a.funnel_visibility === 'yes' && a.has_crm === 'yes')},
+      {g:'Продажи', t:'Скорость и касания заданы нормативом',
+        d:'Время первого ответа и число касаний закреплены регламентом и проверяются по отчёту. Это не зависит от загруженности и настроения менеджера.',
+        s:st(a.response_time === '15m' && a.followup === 'system')},
+      {g:'Продажи', t:'Технология продажи воспроизводима',
+        d:'Есть скрипт ключевого этапа, карта возражений и разбор сделок. Новый продавец выходит на результат по инструкции, а не за счёт таланта.',
+        s:st(a.has_regl === 'yes' && a.call_records === 'yes')},
+      {g:'Продажи', t:'База клиентов — отдельный поток выручки',
+        d:'У повторных продаж есть ответственный, план и повод для второй покупки. Это не «вспомнили о старых клиентах», когда провалился месяц.',
+        s:st(a.old_base === 'regular', a.old_base != null)},
+      {g:'Управление', t:'Отделом управляет руководитель',
+        d:'Есть человек, для которого план-факт и разбор сделок — основная работа. Собственник не заменяет его собой в конце месяца.',
+        s:st(a.has_rop === 'yes' && a.owner_dep === 'no')},
+      {g:'Управление', t:'План выполняется из месяца в месяц',
+        d:'План — рабочий инструмент, а не цифра в начале месяца. Отклонение видят на второй неделе и успевают отработать, а не констатируют в конце.',
+        s:st(a.plan_done === 'stable', a.plan_done != null)},
+      {g:'Управление', t:'Мотивация собрана под план',
+        d:'Оклад и процент связаны с выполнением плана и ключевыми действиями. Продавцу выгодно то же, что и компании, без ручных договорённостей.',
+        s:st(a.motivation === 'balanced', a.motivation != null)},
+      {g:'Масштаб', t:'Есть запас мощности под рост',
+        d:'Компания знает, какой поток выдержит без потери качества, и что именно упрётся первым. Рост планируют заранее, а не разбирают по факту.',
+        s:st(a.growth_ready === 'nothing', a.growth_ready != null)},
+      {g:'Масштаб', t:'Команда воспроизводится',
+        d:'Найм и адаптация работают как конвейер: замена не останавливает выручку. Уход сильного продавца — не событие месяца.',
+        s:st(a.turnover === 'none' && !['long','gaveup'].includes(a.hiring_time), a.turnover != null)}
+    ];
   },
   risks(x){
     const a = x.a, L = x.L, g = x.goal, R = [];
@@ -4354,25 +4666,110 @@ const Final = {
     return {A, B: A.map((v, i) => Math.max(0, v - cum[i]))};
   },
 
+  // Единица измерения рычага: та же формулировка в ведомости, в разборе и в PDF
+  driverUnit(L, d){
+    return d.unit === 'pp' ? `+${Fx.ppv(d.eff)} п.п. к дозвону`
+      : d.unit === 'rel' ? `+${Fx.ppv(d.eff * L.closeCalc * 100)} п.п. к закрытию`
+      : d.unit === 'pct' ? `+${Fx.rub(L.check * d.eff)} к среднему чеку`
+      : `+${Math.round(d.eff)} заявок в месяц`;
+  },
+  mistakes(x){
+    const L = x.L;
+    if (!L) return [];
+    return [...L.D].sort((p, q) => q.gain - p.gain)
+      .map(d => { const pb = Playbook.get(d.id); return pb ? {d, pb} : null; })
+      .filter(Boolean);
+  },
+
+  // ── Разбор ошибок: что именно сделано не так и что с этим делать ──
+  actFix(x, no){
+    const L = x.L, all = this.mistakes(x), M = all.slice(0, 6);
+    if (!M.length) return '';
+    const rest = all.length - M.length;
+    const cards = M.map((m, i) => {
+      const st = Ledger.NAMES[m.d.stage] || '';
+      const eff = m.d.unit === 'pp' && m.d.stage === 'repeat' ? `+${Fx.ppv(m.d.eff)} п.п. к доле повторных` : this.driverUnit(L, m.d);
+      return `<div class="fx-fix">
+        <div class="fx-fix-h">
+          <div class="fx-fix-t"><span class="fx-fix-n">Ошибка ${String(i + 1).padStart(2, '0')} · ${st.toLowerCase()}</span><h4>${m.pb.err}</h4>${m.d.why ? `<p class="fx-fix-now">Из ваших ответов: ${m.d.why}.</p>` : ''}</div>
+          <div class="fx-fix-m"><b>${Fx.M}${Fx.money(m.d.gain)}</b><span>в месяц</span><i>${Fx.mln(m.d.gain * 12)} за год</i></div>
+        </div>
+        <div class="fx-fix-b">
+          <div><span class="fx-k">Что сделать</span><ol class="fx-stepsn">${m.pb.do.map(t => `<li>${t}</li>`).join('')}</ol></div>
+          <div class="fx-fix-side">
+            <div><span class="fx-k">Как проверить, что сработало</span><p>${m.pb.chk}</p></div>
+            <div><span class="fx-k">Где обычно ломается</span><p>${m.pb.trap}</p></div>
+            <div class="fx-fix-eff"><span>Эффект на показателе</span><b>${eff}</b></div>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+    return this.sec('fix', no, 'Что делать', 'Разбор ошибок: что именно сделано не так и как это чинится',
+      `Это рабочая часть отчёта. Каждая ошибка ниже найдена в ваших ответах, оценена в деньгах и разобрана до уровня инструкции: что сделать, как проверить результат и где такие изменения обычно разваливаются. Порядок — по деньгам, а не по простоте. Всё это можно делать самостоятельно: мы за то, чтобы вы понимали механику, а не покупали чёрный ящик.`,
+      `<div class="fx-fixes">${cards}</div>
+      ${rest > 0 ? `<p class="fx-note">Разобрали ${M.length} ошибок из ${all.length} найденных: показываем те, что стоят больше всего. Остальные ${rest} ${Fx.plural(rest, 'ошибка закрывается', 'ошибки закрываются', 'ошибок закрываются')} в волнах плана ниже.</p>` : ''}
+      <p class="fx-note">Порядок важнее скорости. Эти изменения держатся только вместе с ежедневным управлением: без разбора сделок и плана-факта любая инструкция живёт две недели, а потом отдел возвращается к привычке.</p>`);
+  },
+
+  // ── Рынок: доля, цена пункта, разрыв с лидером ──
+  actMarket(x, no){
+    const L = x.L, m = x.market;
+    if (!L || !m) return '';
+    const tile = (k, v, s, cls = '') => `<div class="fx-kpi"><span class="fx-k">${k}</span><div class="fx-val ${cls}">${v}</div><div class="fx-s">${s}</div></div>`;
+    let tiles = '', bar = '', txt = '';
+    if (m.M){
+      const you = Math.max(.6, m.share * 100), lead = m.leadShare ? Math.max(.6, m.leadShare * 100) : 0;
+      tiles += tile('Ваша доля рынка', Fx.pct(m.share, m.share < .1 ? 1 : 0), `Выручка ${Fx.mln(L.rev * 12)} в год при рынке ${Fx.mln(m.M)}`);
+      const ppTxt = m.ppRatio >= 1
+        ? `В месяц. Это ${Fx.dec(m.ppRatio, m.ppRatio >= 10 ? 0 : 1)} ваших сегодняшних выручек`
+        : `В месяц. Это ${Fx.pct(m.ppRatio)} вашей сегодняшней выручки`;
+      tiles += tile('Один процентный пункт рынка', Fx.money(m.ppMo), ppTxt, m.ppRatio >= 1 ? 'fx-green' : '');
+      tiles += tile('Возврат за 90 дней в долях рынка', '+' + Fx.ppv(m.recPP) + ' п.п.', `Столько доли добавляет наведённый порядок без единого нового рубля в рекламу`, 'fx-green');
+      bar = `<div class="fx-msc">
+        <div class="fx-msc-t"><i class="you" style="width:${Math.min(60, you)}%"></i>${lead ? `<i class="lead" style="left:${Math.min(60, you)}%;width:${Math.min(35, lead)}%"></i>` : ''}</div>
+        <div class="fx-msc-l"><span><b class="fx-green">▉</b> вы, ${Fx.pct(m.share, m.share < .1 ? 1 : 0)}</span>${lead ? `<span><b class="fx-dim">▉</b> лидер, ${Fx.pct(m.leadShare, m.leadShare < .1 ? 1 : 0)}</span>` : ''}<span>остальной рынок</span></div>
+      </div>`;
+      txt += `Ваша доля ${Fx.pct(m.share, m.share < .1 ? 1 : 0)}, свободного рынка ${Fx.pct(m.headroom)}. Чтобы удвоить выручку, нужно добрать ${Fx.ppv(m.x2PP)} п.п. доли — и это не абстракция: возврат из ведомости даёт ${Fx.ppv(m.recPP)} п.п. из них уже за 90 дней, без роста рекламного бюджета. `;
+      txt += m.lossPP >= m.x2PP * .5
+        ? `Сегодняшняя течь по размеру сопоставима с половиной пути до удвоения: вы уже платите за этот рост, просто не получаете его.`
+        : `Вы теряете ${Fx.ppv(m.lossPP)} п.п. доли ежемесячно — их забирают те, кто отвечает быстрее и доводит сделку до конца.`;
+    }
+    if (m.lead){
+      tiles += tile('Разрыв с лидером', '×' + Fx.mult(m.gap), `Лидер делает ${Fx.mln(m.lead)} в месяц, вы ${Fx.mln(L.rev)}`, m.gap > 1.2 ? 'fx-red' : 'fx-green');
+      txt += ` Разрыв с лидером ×${Fx.mult(m.gap)}${m.toLeadPart ? `, и возврат за 90 дней закрывает ${Fx.pct(Math.min(1, m.toLeadPart))} этого разрыва` : ''}. Разрыв такого масштаба не закрывается усилием команды: у лидера другая конструкция коммерческого блока, а не более старательные продавцы.`;
+    }
+    return this.sec('market', no, 'Рынок', m.M ? 'Ваша доля рынка и цена одного процентного пункта' : 'Разрыв с лидером сегмента',
+      `Компанию ограничивает либо рынок, либо она сама. Ниже проверка, что именно: ваша доля, сколько стоит один процентный пункт этой доли и как далеко ушёл лидер. Оценки объёма рынка и выручки лидера взяты с ваших слов и подписаны как оценка: своей статистики по нишам у нас нет, и придумывать её мы не будем.`,
+      `${tiles ? `<div class="fx-kpis">${tiles}</div>` : ''}
+      ${bar}
+      <p class="fx-lead" style="margin:30px 0 0">${txt}</p>
+      <p class="fx-note">Вывод простой: ${m.M && m.share < .1 ? 'рынок вас не ограничивает. Потолок стоит внутри компании, и он разобран в ведомости и в плане.' : m.M ? 'на вашей доле рост дешевле брать ценой, повторными продажами и соседними сегментами, чем лобовой борьбой за долю.' : 'разрыв с лидером закрывается конструкцией коммерческого блока, а не темпом работы команды.'}</p>`);
+  },
+
   // ── 05 Сравнение: где вы между ручным режимом и системой ──
   actBench(x, no){
     const L = x.L, P = this.practices(x.a);
-    if (P.length < 6) return '';
-    const have = P.filter(p => p[2]).length, pos = Math.round(have / P.length * 100), gap = P.length - have;
+    const known = P.filter(p => p.s !== null);
+    if (known.length < 6) return '';
+    const have = known.filter(p => p.s).length, pos = Math.round(have / known.length * 100);
     const mk = (cls, sym, k) => `<div class="fx-mk ${cls}" data-k="${k}">${sym}</div>`;
-    const rows = P.map(p => `<div class="fx-mx-r"><div class="fx-mx-n">${p[0]}</div>${mk('no', '✕', 'Ручной режим')}${mk(p[2] ? 'yes' : 'mine', p[2] ? '✓' : '✕', 'У вас')}${mk('yes', '✓', 'Система')}</div>`).join('');
+    let rows = '', g = '';
+    P.forEach(p => {
+      if (p.g !== g){ g = p.g; rows += `<div class="fx-mx-g">${g}</div>`; }
+      rows += `<div class="fx-mx-r"><div class="fx-mx-n"><b>${p.t}</b><span>${p.d}</span></div>${mk('no', '✕', 'Ручной режим')}${mk(p.s === null ? 'unk' : p.s ? 'yes' : 'mine', p.s === null ? '—' : p.s ? '✓' : '✕', 'У вас')}${mk('yes', '✓', 'Система')}</div>`;
+    });
     return this.sec('bench', no, 'Сравнение', 'Где вы между ручным режимом и построенной системой',
-      `Сравнивать вас со средней компанией по рынку бессмысленно: такие цифры публикуются редко и почти всегда по несопоставимой методике. Поэтому сравниваем не по показателям, а по практикам, которые либо работают каждый день, либо их нет. Слева — компании, где продажи держатся на людях и энергии собственника. Справа — то, что мы считаем построенной системой и по чему принимаем волны внедрения. Ваши отметки взяты из ваших же ответов.`,
+      `Сравнивать вас со средней компанией по рынку бессмысленно: такие цифры публикуются редко и почти всегда по несопоставимой методике. Поэтому сравниваем по управленческим контурам — тому, что определяет потолок компании независимо от ниши. Слева колонка компаний, где всё держится на людях и энергии собственника. Справа то, что мы считаем построенной системой и по чему принимаем волны внедрения. Ваши отметки собраны из ваших же ответов.`,
       `<div class="fx-mx">
-        <div class="fx-mx-h"><div>Практика</div><div><b class="fx-lgl">Продажи на людях</b><b class="fx-smt">Ручной</b></div><div>У вас</div><div><b class="fx-lgl">Построенная система</b><b class="fx-smt">Система</b></div></div>
+        <div class="fx-mx-h"><div>Контур управления</div><div><b class="fx-lgl">Продажи на людях</b><b class="fx-smt">Ручной</b></div><div>У вас</div><div><b class="fx-lgl">Построенная система</b><b class="fx-smt">Система</b></div></div>
         ${rows}
       </div>
       <div class="fx-bpos">
         <div class="fx-bp-h"><span>Ручной режим</span><span>Построенная система</span></div>
         <div class="fx-bp-t"><i style="width:${pos}%"></i><u style="left:${pos}%"></u></div>
-        <div class="fx-bp-v"><b>${have} из ${P.length} ${Fx.plural(P.length, 'практики', 'практик', 'практик')}</b> работают у вас сегодня. Индекс зрелости ${x.idx} из 100 — это тот же факт, посчитанный по всем шести системам бизнеса.</div>
+        <div class="fx-bp-v"><b>${have} из ${known.length} ${Fx.plural(known.length, 'контура', 'контуров', 'контуров')}</b> работают у вас сегодня. Индекс зрелости ${x.idx} из 100 — это тот же факт, посчитанный по всем шести системам бизнеса.${P.length > known.length ? ` Ещё ${P.length - known.length} оценить не смогли: не хватило ответов.` : ''}</div>
       </div>
-      <p class="fx-note">Середины здесь не бывает: практика либо выполняется каждый день и проверяется, либо её нет, как бы она ни называлась в регламенте. ${gap > 0 ? `Отсутствие этих практик и есть причина потерь из ведомости: ${L && L.lossMo > 0 ? `<b class="fx-red">${Fx.money(L.lossMo)} валовой прибыли в месяц</b>, и вклад каждой практики там посчитан отдельной строкой` : 'роста, который не случается'}.` : 'Практики на месте: дальше растут объёмом, а не перестройкой.'}</p>`);
+      <p class="fx-note">Ни один из этих контуров не закрывается одним наймом. Руководитель отдела без оцифрованной воронки управляет по ощущениям, контроль качества без скрипта слушает звонки без эталона, а маркетолог без юнит-экономики оптимизирует стоимость клика вместо стоимости клиента. Поэтому и порядок работ идёт от контура, а не от вакансии.${L && L.lossMo > 0 ? ` В деньгах разрыв между колонками — это ${Fx.money(L.lossMo)} валовой прибыли в месяц и ${Fx.mln(L.lossMo * 12)} за год, с разбивкой по этапам в ведомости выше.` : ''}</p>`);
   },
 
   // ── 08 Риски роста ──
@@ -4548,7 +4945,7 @@ const Final = {
       p.pr0 != null ? tr('Рентабельность', Fx.pct(p.pr0 / p.rev0, 1), Fx.pct(p.pr1 / p.rev1, 1), (() => {
         const dp = (p.pr1 / p.rev1 - p.pr0 / p.rev0) * 100;
         return Math.abs(dp) < .05 ? '<span class="dim">без изменений</span>'
-          : `<span class="${dp > 0 ? 'up' : 'dn'}">${dp > 0 ? '+' : Fx.M}${Fx.dec(Math.abs(dp))} п.п.</span>`;
+          : `<span class="${dp > 0 ? 'up' : 'dn'}">${dp > 0 ? '+' : Fx.M}${Fx.ppv(Math.abs(dp))} п.п.</span>`;
       })()) : ''
     ].join('');
     const ropNote = p.cost ? (L.ropMode === 'senior'
@@ -4696,6 +5093,16 @@ const Final = {
       ask:a.growth_ready ? '«Вы назвали одно, данные ставят на первое место другое. Что из этого ближе к правде?»' : '«Что сломается первым, если завтра заявок станет вдвое больше?»',
       obj:'«Мы справимся» — «За счёт чего именно? Покажите в этих цифрах запас, который справится».',
       next:'«Вот порядок, в котором это расшивается, и он не случайный».'};
+    if (has('market')) N.market = {t:'Рынок',
+      say:`«Проверим, кто вас ограничивает: рынок или вы сами». ${x.market && x.market.M ? 'Покажите цену одного процентного пункта доли: обычно это ломает картину мира.' : 'Покажите разрыв с лидером.'}`,
+      ask:'«Откуда вы взяли эту оценку рынка?» Ответ даёт понять, насколько человек управляет цифрами или живёт ощущениями.',
+      obj:'«Это же наша оценка, она неточная» — «Верно, так и подписано. Порядок величин не изменится, а вывод от точности не зависит».',
+      next:'«Теперь про вашу цель на год».'};
+    if (has('fix')) N.fix = {t:'Что делать',
+      say:'«Это рабочая часть. Здесь каждая ошибка разобрана до инструкции: что сделать, как проверить и где обычно ломается. Это можно делать самому». Не бойтесь отдавать содержание: продаётся скорость и приёмка, а не секрет.',
+      ask:'«Какую из этих ошибок вы попробуете закрыть на следующей неделе?» Ответ покажет, будет ли человек делать сам или искать подрядчика.',
+      obj:'«Мы это знаем» — «Знать и делать каждый день — разное. Покажите, как вчера проверялся норматив ответа».',
+      next:'«Теперь порядок: что за чем и как принимаем».'};
     N.plan = {t:'План',
       say:'«Четыре волны. У каждой критерии приёмки в цифрах: волна не закрыта, пока цифра не достигнута».',
       ask:'«Какую из волн вы бы убрали?» Обычно ответ: никакую. Это согласие с планом, зафиксируйте его вслух.',
@@ -4885,7 +5292,7 @@ const Report = {
     // ── 02 Ведомость потерь ──
     if (L && L.lossMo > 0){
       const mg = L.marginAssumed ? '30%' : L.margin + '%';
-      const unit = d => d.unit === 'pp' ? `+${Fx.dec(d.eff, d.eff < 1 ? 2 : 1)} п.п.` : d.unit === 'rel' ? `+${Fx.dec(d.eff * L.closeCalc * 100, d.eff * L.closeCalc * 100 < 1 ? 2 : 1)} п.п.` : d.unit === 'pct' ? `+${Fx.rub(L.check * d.eff)}` : `+${Math.round(d.eff)} заявок`;
+      const unit = d => d.unit === 'pp' ? `+${Fx.ppv(d.eff)} п.п.` : d.unit === 'rel' ? `+${Fx.ppv(d.eff * L.closeCalc * 100)} п.п.` : d.unit === 'pct' ? `+${Fx.rub(L.check * d.eff)}` : `+${Math.round(d.eff)} заявок`;
       const now = {lead:`${L.leads} заявок`, contact:`дозвон ${Fx.pct(L.reachCalc)}`, close:`закрытие ${Fx.pct(L.closeCalc)}`,
         repeat:`${L.repeat}% выручки`, price:Fx.rub(L.check)};
       const pot = {lead:L.P.leads ? `${Math.round(L.P.leads)} заявок` : '—', contact:Fx.pct(L.P.reach), close:Fx.pct(L.P.close),
@@ -4907,18 +5314,24 @@ const Report = {
     }
 
     // ── Сравнение с построенной системой ──
-    const PR = Final.practices(a);
-    if (PR.length >= 6){
-      const have = PR.filter(p => p[2]).length, pos = Math.round(have / PR.length * 100);
-      const mrows = PR.map(p => `<tr><td>${p[0]}</td><td class="c n">✕</td><td class="c ${p[2] ? 'y' : 'm'}">${p[2] ? '✓' : '✕'}</td><td class="c y">✓</td></tr>`).join('');
-      page('СРАВНЕНИЕ', `
-        <div class="pr-tag">Позиция</div>
-        <div class="pr-title" style="font-size:23px">Где вы между ручным режимом и построенной системой</div>
-        <div class="pr-lede">Сравнивать со средней компанией по рынку бессмысленно: такие цифры публикуются редко и по несопоставимой методике. Поэтому сравниваем по практикам: они либо работают каждый день, либо их нет. Отметки взяты из ответов собственника.</div>
-        <table class="pr-x-mx"><thead><tr><th>Практика</th><th class="c">Продажи на людях</th><th class="c">У вас</th><th class="c">Построенная система</th></tr></thead><tbody>${mrows}</tbody></table>
-        <div class="pr-x-bh"><span>Ручной режим</span><span>Построенная система</span></div>
-        <div class="pr-x-bar"><i style="width:${pos}%"></i><u style="left:${pos}%"></u></div>
-        <div class="pr-callout"><b>${have} из ${PR.length} ${Fx.plural(PR.length, 'практики', 'практик', 'практик')}</b> работают сегодня. Индекс зрелости ${x.idx} из 100 — тот же факт по всем шести системам бизнеса.${L && L.lossMo > 0 ? ` Отсутствие остальных и есть причина потерь из ведомости: ${Fx.money(L.lossMo)} валовой прибыли в месяц.` : ''}</div>`);
+    const PR = Final.practices(a), PRk = PR.filter(p => p.s !== null);
+    if (PRk.length >= 6){
+      const have = PRk.filter(p => p.s).length, pos = Math.round(have / PRk.length * 100);
+      const mrow = p => `<tr><td><b>${p.t}</b><div class="pr-x-how">${p.d}</div></td><td class="c n">✕</td><td class="c ${p.s === null ? 'n' : p.s ? 'y' : 'm'}">${p.s === null ? '—' : p.s ? '✓' : '✕'}</td><td class="c y">✓</td></tr>`;
+      const SIZE = 7;
+      for (let i = 0; i < PR.length; i += SIZE){
+        const part = PR.slice(i, i + SIZE), n = Math.floor(i / SIZE) + 1, tot = Math.ceil(PR.length / SIZE);
+        let mg = '', body = '';
+        part.forEach(p => { if (p.g !== mg){ mg = p.g; body += `<tr class="g"><td colspan="4">${p.g}</td></tr>`; } body += mrow(p); });
+        page(tot > 1 ? `СРАВНЕНИЕ · ${n}/${tot}` : 'СРАВНЕНИЕ', `
+          ${i === 0 ? `<div class="pr-tag">Позиция</div>
+          <div class="pr-title" style="font-size:23px">Где вы между ручным режимом и построенной системой</div>
+          <div class="pr-lede">Сравнивать со средней компанией по рынку бессмысленно: такие цифры публикуются редко и по несопоставимой методике. Поэтому сравниваем по управленческим контурам — тому, что определяет потолок компании независимо от ниши. Отметки взяты из ответов собственника.</div>` : ''}
+          <table class="pr-x-mx"><thead><tr><th>Контур управления</th><th class="c">Продажи на людях</th><th class="c">У вас</th><th class="c">Построенная система</th></tr></thead><tbody>${body}</tbody></table>
+          ${i + SIZE >= PR.length ? `<div class="pr-x-bh"><span>Ручной режим</span><span>Построенная система</span></div>
+          <div class="pr-x-bar"><i style="width:${pos}%"></i><u style="left:${pos}%"></u></div>
+          <div class="pr-callout"><b>${have} из ${PRk.length} ${Fx.plural(PRk.length, 'контура', 'контуров', 'контуров')}</b> работают сегодня. Ни один из них не закрывается одним наймом: руководитель без оцифрованной воронки управляет по ощущениям, контроль качества без скрипта слушает звонки без эталона.${L && L.lossMo > 0 ? ` В деньгах разрыв между колонками — ${Fx.money(L.lossMo)} валовой прибыли в месяц.` : ''}</div>` : ''}`);
+      }
     }
 
     // ── 03 Диагноз ──
@@ -4937,6 +5350,27 @@ const Report = {
         <div class="pr-card"><div class="pr-h2">Что работает <i>·</i></div><ul class="pr-list">${x.strengths.map(t => `<li><span>${t}</span></li>`).join('') || '<li>—</li>'}</ul></div>
         <div class="pr-card"><div class="pr-h2">Чего не делать 90 дней <i>·</i></div><ul class="pr-list pr-red">${x.dont.map(t => `<li><span>${t}</span></li>`).join('') || '<li>—</li>'}</ul></div>
       </div>`);
+
+    // ── Рынок ──
+    const mk = x.market;
+    if (mk){
+      const mtile = (k, v, d, cls = '') => stat(k, v, d, cls);
+      let mt = '';
+      if (mk.M){
+        mt += mtile('Ваша доля рынка', Fx.pct(mk.share, mk.share < .1 ? 1 : 0), `${Fx.mln(L.rev * 12)} в год при рынке ${Fx.mln(mk.M)}`);
+        mt += mtile('Один пункт доли', Fx.money(mk.ppMo), mk.ppRatio >= 1 ? `в месяц, это ${Fx.dec(mk.ppRatio, 1)} ваших выручек` : `в месяц, это ${Fx.pct(mk.ppRatio)} вашей выручки`);
+        mt += mtile('Возврат в долях рынка', '+' + Fx.ppv(mk.recPP) + ' п.п.', 'за 90 дней без роста бюджета', 'good');
+      }
+      if (mk.lead) mt += mtile('Разрыв с лидером', '×' + Fx.mult(mk.gap), `лидер ${Fx.mln(mk.lead)} в месяц`, mk.gap > 1.2 ? 'bad' : 'good');
+      page('РЫНОК', `
+        <div class="pr-tag">Кто ограничивает компанию</div>
+        <div class="pr-title" style="font-size:23px">${mk.M ? 'Ваша доля рынка и цена одного процентного пункта' : 'Разрыв с лидером сегмента'}</div>
+        <div class="pr-lede">Компанию ограничивает либо рынок, либо она сама. Оценки объёма рынка и выручки лидера взяты со слов собственника и подписаны как оценка: своей статистики по нишам у нас нет.</div>
+        <div class="pr-x-kpis" style="grid-template-columns:repeat(${mk.M && mk.lead ? 4 : mk.M ? 3 : 1},1fr)">${mt}</div>
+        ${mk.M ? `<div class="pr-callout">Свободного рынка ${Fx.pct(mk.headroom)}. Чтобы удвоить выручку, нужно добрать ${Fx.ppv(mk.x2PP)} п.п. доли. Возврат из ведомости даёт ${Fx.ppv(mk.recPP)} п.п. из них уже за 90 дней, без роста рекламного бюджета.</div>` : ''}
+        ${mk.lead ? `<div class="pr-callout">Разрыв с лидером ×${Fx.mult(mk.gap)}${mk.toLeadPart ? `, возврат за 90 дней закрывает ${Fx.pct(Math.min(1, mk.toLeadPart))} этого разрыва` : ''}. Разрыв такого масштаба не закрывается усилием команды: у лидера другая конструкция коммерческого блока.</div>` : ''}
+        <div class="pr-callout warn">${mk.M && mk.share < .1 ? 'Рынок вас не ограничивает: потолок стоит внутри компании и разобран в ведомости и в плане.' : mk.M ? 'На вашей доле рост дешевле брать ценой, повторными продажами и соседними сегментами, чем лобовой борьбой за долю.' : 'Разрыв закрывается конструкцией коммерческого блока, а не темпом работы команды.'}</div>`);
+    }
 
     // ── 04 Цель и деньги ──
     const g = x.goal;
@@ -4978,6 +5412,29 @@ const Report = {
           ${chunk.map((r, i) => riskCard(r, ci * 3 + i)).join('')}
           ${last ? `<div class="pr-callout">План на 90 дней собран так, чтобы эти узкие места расшивались до роста, а не после него: сначала процесс и управление, потом люди, и только потом объём.</div>` : ''}`);
       });
+    }
+
+    // ── Разбор ошибок: по две на страницу ──
+    const MS = Final.mistakes(x).slice(0, 6);
+    if (MS.length){
+      const fixCard = (m, i) => {
+        const stn = Ledger.NAMES[m.d.stage] || '';
+        const eff = m.d.unit === 'pp' && m.d.stage === 'repeat' ? `+${Fx.ppv(m.d.eff)} п.п. к доле повторных` : Final.driverUnit(L, m.d);
+        return `<div class="pr-x-fix">
+          <div class="pr-x-fh"><div><span class="s">Ошибка ${String(i + 1).padStart(2, '0')} · ${stn.toLowerCase()}</span><b class="t">${m.pb.err}</b>${m.d.why ? `<p class="n">Из ваших ответов: ${m.d.why}.</p>` : ''}</div>
+            <div class="m"><b>${Fx.M}${Fx.money(m.d.gain)}</b><span>в месяц · ${Fx.mln(m.d.gain * 12)} за год</span></div></div>
+          <div class="pr-x-fb"><div><span class="k">Что сделать</span><ol>${m.pb.do.map(t => `<li>${t}</li>`).join('')}</ol></div>
+            <div><span class="k">Как проверить</span><p>${m.pb.chk}</p><span class="k">Где обычно ломается</span><p>${m.pb.trap}</p><p class="e">Эффект: ${eff}</p></div></div>
+        </div>`;
+      };
+      for (let i = 0; i < MS.length; i += 2){
+        const part = MS.slice(i, i + 2), n = Math.floor(i / 2) + 1, tot = Math.ceil(MS.length / 2);
+        page(tot > 1 ? `ЧТО ДЕЛАТЬ · ${n}/${tot}` : 'ЧТО ДЕЛАТЬ', `
+          ${i === 0 ? `<div class="pr-tag">Рабочая часть</div>
+          <div class="pr-title" style="font-size:23px">Разбор ошибок: что сделано не так и как это чинится</div>
+          <div class="pr-lede">Каждая ошибка найдена в ваших ответах, оценена в деньгах и разобрана до инструкции: что сделать, как проверить результат и где такие изменения обычно разваливаются. Порядок — по деньгам, а не по простоте.</div>` : ''}
+          ${part.map((m, k) => fixCard(m, i + k)).join('')}`);
+      }
     }
 
     // ── 05–06 План: две волны на страницу ──
@@ -5219,7 +5676,9 @@ const TestFill = {
           break;
         case 'money':
           // ltv / cac / cost_per_lead / prior_spend — производные от чека
-          if (q.id === 'ltv') a[q.id] = Math.round(K.check * (1.2 + Math.random()*2));
+          if (q.id === 'market_size') a[q.id] = Math.round(K.revenue * 12 * (6 + Math.random()*60));
+          else if (q.id === 'market_leader') a[q.id] = Math.round(K.revenue * (1 + Math.random()*7));
+          else if (q.id === 'ltv') a[q.id] = Math.round(K.check * (1.2 + Math.random()*2));
           else if (q.id === 'rop_cost') a[q.id] = this.int(15, 30) * 10000;
           else if (q.id === 'cac' || q.id === 'cost_per_lead') a[q.id] = Math.round(K.check * (0.03 + Math.random()*0.12));
           else if (Math.random() > 0.4) a[q.id] = Math.round(K.check * (0.5 + Math.random()*4));
