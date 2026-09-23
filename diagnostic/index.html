@@ -581,13 +581,16 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-reco p{font-size:16px;line-height:1.65;color:var(--ink);max-width:78ch}
 
 /* 01 вердикт */
-.fx-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:44px;border-top:1px solid var(--rule-2)}
-.fx-kpi{padding:20px 20px 4px;border-left:1px solid var(--rule);min-width:0}
+.fx-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:auto;margin-top:44px;border-top:1px solid var(--rule-2)}
+.fx-kpi{display:grid;grid-template-rows:subgrid;grid-row:span 3;align-content:start;padding:22px 22px 6px;border-left:1px solid var(--rule);min-width:0}
 .fx-kpi:first-child{padding-left:0;border-left:0}
+@supports not (grid-template-rows:subgrid){.fx-kpi{display:block}.fx-kpi .fx-k{min-height:2.9em}}
 .fx-val{font-family:var(--ui);font-weight:600;font-size:clamp(23px,2.4vw,31px);line-height:1.1;letter-spacing:-.01em;white-space:nowrap;display:flex;align-items:center;gap:10px}
 .fx-val small{font-size:.5em;color:var(--ink-3);font-weight:600}
 .fx-val svg{flex:none}
-.fx-s{font-size:13px;line-height:1.55;color:var(--ink-2);margin-top:16px;max-width:30ch}
+.fx-s{font-size:13px;line-height:1.55;color:var(--ink-2);margin-top:16px;max-width:30ch;align-self:start}
+.fx-kpi .fx-k{margin-bottom:14px;align-self:start}
+.fx-kpi .fx-val{align-self:start}
 @media(max-width:900px){.fx-kpis{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.fx-kpi:nth-child(3){padding-left:0;border-left:0}.fx-kpi:nth-child(n+3){border-top:1px solid var(--rule);margin-top:8px;padding-top:20px}}
 
 /* 02 цифры */
@@ -632,9 +635,11 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:8px;vertical-align:-1px}
 .fx-legend i.fx-dash{border:1px dashed var(--ok)}
 .fx-ledger{margin-top:36px;border-top:1px solid var(--rule-2)}
-.fx-lrow{display:grid;grid-template-columns:26px minmax(104px,.82fr) minmax(0,1fr) 92px minmax(0,1.8fr) 150px 136px;gap:16px;align-items:start;padding:22px 0;border-bottom:1px solid var(--rule)}
+.fx-lrow{display:grid;grid-template-columns:26px minmax(104px,.82fr) minmax(0,1fr) 96px minmax(0,1.8fr) 152px 150px;gap:18px;align-items:center;padding:24px 0;border-bottom:1px solid var(--rule)}
 .fx-lrow.head{padding:14px 0;font:500 11px/1.45 var(--ui);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+.fx-lrow.head{align-items:end}
 .fx-lrow.head>div{align-self:end}
+.fx-lrow .fx-lnm,.fx-lrow .fx-lc,.fx-lrow .fx-lno{align-self:center}
 .fx-lrow.head .r{text-align:right}
 .fx-th-note{display:block;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-3);font-size:10.5px;margin-top:5px}
 .fx-lno{font:500 12px var(--mono);color:var(--ink-3);padding-top:3px}
@@ -642,6 +647,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-lc{font-size:14px;color:var(--ink-2);line-height:1.5}
 .fx-lmo,.fx-lsh,.fx-lrc{font:600 17px/1.35 var(--ui);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.015em}
 .fx-lsub{font:400 12.5px/1.45 var(--ui);color:var(--ink-3);text-align:right;margin-top:10px;font-variant-numeric:tabular-nums}
+.fx-tblnote{margin-top:30px;padding:16px 20px;border:1px solid var(--rule);border-radius:8px;font-size:13.5px;line-height:1.65;color:var(--ink-2);max-width:none}
 .fx-ibar{height:4px;background:var(--rule);border-radius:2px;margin-top:11px;position:relative;overflow:hidden}
 .fx-ibar i{position:absolute;top:0;bottom:0;left:0;background:var(--loss);border-radius:2px}
 .fx-ibar em{position:absolute;top:0;bottom:0;left:0;background:var(--ok);border-radius:2px}
@@ -728,8 +734,8 @@ body:not(.cl-unlocked) .gate{display:grid}
 
 /* сравнение: матрица практик */
 .fx-mx{border-top:1px solid var(--rule-2)}
-.fx-mx-h,.fx-mx-r{display:grid;grid-template-columns:minmax(0,1fr) 128px 74px 160px;align-items:start;gap:14px;border-bottom:1px solid var(--rule);padding:16px 0}
-.fx-mx-h{align-items:end}
+.fx-mx-h,.fx-mx-r{display:grid;grid-template-columns:minmax(0,1fr) 92px 152px;align-items:start;gap:16px;border-bottom:1px solid var(--rule);padding:16px 0}
+.fx-mx-h{align-items:end;position:sticky;top:64px;z-index:3;background:var(--bg);padding:14px 0 12px;box-shadow:0 1px 0 var(--rule)}
 .fx-mx-g{font:500 11px/1.4 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ok);padding:22px 0 10px}
 .fx-mx-n b{display:block;font-weight:600;font-size:15px;line-height:1.4;color:#fff}
 .fx-mx-n span{display:block;font-size:13px;line-height:1.55;color:var(--ink-3);margin-top:6px;max-width:62ch}
@@ -750,7 +756,36 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-bp-t i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:linear-gradient(90deg,var(--loss),var(--ok))}
 .fx-bp-t u{position:absolute;top:-5px;width:2px;height:16px;background:#fff;transform:translateX(-1px)}
 .fx-bp-v{font-size:15px;line-height:1.6;color:var(--ink-2);margin-top:16px;max-width:76ch}
-@media(max-width:820px){.fx-mx-h,.fx-mx-r{grid-template-columns:minmax(0,1fr) 34px 34px 34px;gap:8px}.fx-mx-h{font-size:9.5px;letter-spacing:.04em;align-items:end}.fx-lgl{display:none}.fx-smt{display:inline}.fx-mx-n b{font-size:14px}.fx-mx-n span{font-size:12.5px}}
+@media(max-width:820px){.fx-mx-h,.fx-mx-r{grid-template-columns:minmax(0,1fr) 40px 40px;gap:10px}.fx-mx-h{top:56px}.fx-mx-h{font-size:9.5px;letter-spacing:.04em;align-items:end}.fx-lgl{display:none}.fx-smt{display:inline}.fx-mx-n b{font-size:14px}.fx-mx-n span{font-size:12.5px}}
+
+/* дерево ценности */
+.fx-tree{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.fx-tn{flex:1 1 150px;min-width:0;padding:20px 20px 18px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);display:flex;flex-direction:column}
+.fx-tn.top{border-color:rgba(52,211,153,.4)}
+.fx-tn b{display:block;font:600 22px/1.15 var(--ui);letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums;margin-top:2px}
+.fx-tn i{display:block;font-style:normal;font-size:12.5px;line-height:1.5;color:var(--ink-3);margin-top:7px;flex:1}
+.fx-tsens{margin-top:16px;padding-top:13px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.fx-tsens span{font-size:12px;color:var(--ink-3)}
+.fx-tsens em{font-style:normal;font:600 14px/1.2 var(--ui);color:var(--ok);white-space:nowrap;font-variant-numeric:tabular-nums}
+.fx-top-op{flex:0 0 26px;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:14px}
+@media(max-width:900px){.fx-tree{flex-direction:column}.fx-top-op{flex:none;height:22px}}
+
+/* матрица приоритетов */
+.fx-prio{display:grid;grid-template-columns:22px minmax(0,1fr);grid-template-rows:auto 22px;gap:12px}
+.fx-prio-y{grid-row:1;writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;font:500 10.5px/1 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.fx-prio-x{grid-column:2;text-align:center;font:500 10.5px/1 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.fx-prio-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.fx-pq{border:1px solid var(--rule);border-radius:10px;padding:18px 20px;background:var(--paper);min-height:132px}
+.fx-pq.q1{border-color:rgba(52,211,153,.42)}
+.fx-pq.q2{border-color:rgba(251,191,36,.34)}
+.fx-pq-h{margin-bottom:14px}
+.fx-pq-h b{display:block;font:600 15px/1.3 var(--ui);color:#fff}
+.fx-pq-h span{display:block;font-size:12px;line-height:1.5;color:var(--ink-3);margin-top:5px}
+.fx-pq ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.fx-pq li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:baseline;font-size:13.5px;line-height:1.5;color:var(--ink)}
+.fx-pq li b{font-weight:500;color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+.fx-pq-none{font-size:13px;color:var(--ink-3)}
+@media(max-width:820px){.fx-prio{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto}.fx-prio-y{display:none}.fx-prio-x{grid-column:1}.fx-prio-g{grid-template-columns:minmax(0,1fr)}}
 
 /* разбор ошибок */
 .fx-fixes{display:grid;gap:18px}
@@ -4419,7 +4454,7 @@ const Final = {
       L.cpl ? ['Стоимость заявки', Fx.rub(L.cpl), 'сколько платите за обращение'] : null,
       L.cac ? ['Стоимость клиента', Fx.rub(L.cac), 'CAC: реклама на одного покупателя'] : null,
       L.ltv ? ['Ценность клиента', Fx.rub(L.ltv), 'LTV: сколько приносит за всё время'] : null,
-      L.ltvCac ? ['Окупаемость клиента', `<span class="${L.ltvCac >= 3 ? 'fx-green' : 'fx-red'}">${Fx.dec(L.ltvCac, L.ltvCac >= 10 ? 0 : 1)}×</span>`, 'LTV к стоимости клиента'] : null,
+      L.ltvCac ? ['Окупаемость клиента', `<span class="${L.ltvCac >= 3 ? 'fx-green' : 'fx-red'}">${Fx.mult(L.ltvCac)}×</span>`, 'LTV к стоимости клиента'] : null,
       L.romi ? ['Возврат на рекламу', L.romi + '%', 'ROMI по вашим данным'] : null
     ].filter(Boolean);
     const factsHTML = facts.length ? `<div class="fx-facts">${facts.map(f => `<div><span class="fx-k">${f[0]}</span><div class="fx-fv">${f[1]}</div><div class="fx-fs">${f[2]}</div></div>`).join('')}</div>`
@@ -4443,7 +4478,32 @@ const Final = {
       </div>
       ${factsHTML}
       <div class="fx-team">${team}</div>
-      ${check}`);
+      ${check}
+      ${this.valueTree(L)}`);
+  },
+
+  // Дерево ценности: из чего собирается выручка и сколько стоит один пункт каждого рычага
+  valueTree(L){
+    const m = L.m, N = [];
+    N.push({k:'Заявки', v: Fx.nf.format(L.leads), u:'в месяц', s:'+1% заявок',
+      g: L.leads * .01 * L.conv / 100 * L.check * m});
+    if (L.full) N.push({k:'Дозвон', v: Fx.pct(L.reachCalc), u:'доходят до разговора', s:'+1 п.п. дозвона',
+      g: L.leads * .01 * L.closeCalc * L.check * m, op:'×'});
+    N.push({k:'Закрытие', v: Fx.pct(L.closeCalc), u: L.full ? 'из разговора в сделку' : 'заявка в сделку', s:'+1 п.п. закрытия',
+      g: L.dialogsCalc * .01 * L.check * m, op:'×'});
+    N.push({k:'Средний чек', v: Fx.rub(L.check), u:'на сделку', s:'+1% к цене',
+      g: (L.deals + L.repOrders) * L.check * .01 * m, op:'×'});
+    if (L.repeat != null) N.push({k:'Повторные', v: L.repeat + '%', u:'доля в выручке', s:'+1 п.п. повторных',
+      g: L.deals * .01 * L.check * m, op:'÷'});
+    const top = N.reduce((a, b) => b.g > a.g ? b : a, N[0]);
+    const lead = N[0];
+    const cards = N.map((n, i) => `${i ? `<div class="fx-top-op">${n.op || '×'}</div>` : ''}<div class="fx-tn${n === top ? ' top' : ''}">
+      <span class="fx-k">${n.k}</span><b>${n.v}</b><i>${n.u}</i>
+      <div class="fx-tsens"><span>${n.s}</span><em>+${Fx.money(n.g)}</em></div></div>`).join('');
+    const ratio = top !== lead && lead.g > 0 ? top.g / lead.g : null;
+    return `<div class="fx-sub" style="margin-top:38px">Дерево ценности: из чего складывается выручка и сколько стоит каждый пункт</div>
+      <div class="fx-tree">${cards}</div>
+      <p class="fx-note">Валовая прибыль в месяц при марже ${L.marginAssumed ? '30%, принято' : L.margin + '%'}. Сильнее всего на деньги влияет <b>${top.k.toLowerCase()}</b>: ${top.s.toLowerCase()} даёт <b class="fx-green">+${Fx.money(top.g)}</b> валовой прибыли в месяц${ratio ? ` — столько же, сколько даёт рост рекламного бюджета на ${Fx.mult(ratio)}% при сегодняшней воронке` : ''}. Отсюда и порядок работ: сначала то, где один пункт стоит дороже всего, потом объём.</p>`;
   },
 
   // ── 03 Ведомость потерь ──
@@ -4518,8 +4578,8 @@ const Final = {
         <div class="fx-lc" data-k="Сейчас">${now[s.id]}</div>
         <div class="fx-lc" data-k="Потенциал системы">${pot[s.id]}</div>
         <div class="fx-lc fx-drvs" data-k="Что мешает">${drv}</div>
-        <div data-k="Недополученная прибыль"><div class="fx-lmo fx-red">${Fx.M}${Fx.money(s.loss)}</div><div class="fx-ibar"><i style="width:${s.loss / max * 100}%"></i><em style="width:${s.rec / max * 100}%"></em></div><div class="fx-lsub">${Fx.mln(s.loss * 12)} за год<br>${Fx.pct(s.loss / L.lossMo)} всех потерь</div></div>
-        <div data-k="Вернём за 90 дней"><div class="fx-lrc fx-green">+${Fx.money(s.rec)}</div><div class="fx-lsub">${Fx.mln(s.rec * 12)} за год</div></div>
+        <div data-k="Теряем в месяц"><div class="fx-lmo fx-red">${Fx.M}${Fx.money(s.loss)}</div><div class="fx-lsub">${Fx.mln(s.loss * 12)} за год<br>${Fx.pct(s.loss / L.lossMo)} всех потерь</div></div>
+        <div data-k="Вернём за 90 дней"><div class="fx-lrc fx-green">+${Fx.money(s.rec)}</div><div class="fx-lsub">${Fx.mln(s.rec * 12)} за год<br>${Fx.pct(s.rec / s.loss)} потерь этапа</div></div>
         <button class="fx-tog" type="button"></button><div class="fx-how">${how(s)}</div>
       </div>`;
     }).join('');
@@ -4534,12 +4594,13 @@ const Final = {
       `Главный раздел отчёта. Мы прошли путь клиента по этапам и на каждом посчитали, сколько валовой прибыли остаётся на столе и из-за чего конкретно. Ориентир — не средняя норма по рынку, а потенциал вашей же команды с построенной системой: у каждого шага вверх подписана практика и её вклад в показатель. Деньги считаются один раз, на том этапе, где они теряются, поэтому итог не раздут. Нажмите на строку — раскроется арифметика.`,
       `<div class="fx-sub">Валовая прибыль в месяц: сейчас и при построенной системе</div>
       ${this.bridgeSVG(L)}
+      <div class="fx-tblnote"><b>Как читать таблицу.</b> Красным — валовая прибыль, которую этап недобирает каждый месяц при сегодняшних показателях. Зелёным — та её часть, которую система возвращает за первые 90 дней. Остальное требует больше времени${L.capCut < 1 ? ' и упирается в мощность отдела' : ''}. Колонка «потенциал» — показатель той же команды с построенной системой, а не средняя норма по рынку.</div>
       <div class="fx-ledger">
-        <div class="fx-lrow head"><div>№</div><div>Этап</div><div>Сейчас</div><div>Потенциал</div><div>Что мешает и сколько это даёт</div><div class="r">Теряется в месяц<br><span class="fx-th-note">зелёным — что вернём</span></div><div class="r">Вернём за 90 дней<br><span class="fx-th-note">в месяц</span></div></div>
+        <div class="fx-lrow head"><div>№</div><div>Этап воронки</div><div>Как сейчас</div><div>Потенциал</div><div>Что мешает и сколько это даёт</div><div class="r">Теряем в месяц<br><span class="fx-th-note">валовой прибыли</span></div><div class="r">Вернём за 90 дней<br><span class="fx-th-note">из этих потерь</span></div></div>
         ${this.ledgerRows(x)}
         <div class="fx-lrow total"><div class="fx-lno"></div><div class="fx-lnm">Итого</div><div></div><div></div><div></div>
-          <div data-k="Недополученная прибыль"><div class="fx-lmo fx-red">${Fx.M}${Fx.money(L.lossMo)}</div><div class="fx-lsub">${Fx.mln(L.lossMo * 12)} за год<br>100% потерь</div></div>
-          <div data-k="Вернём за 90 дней"><div class="fx-lrc fx-green">+${Fx.money(L.recMo)}</div><div class="fx-lsub">${Fx.mln(L.recMo * 12)} за год</div></div></div>
+          <div data-k="Теряем в месяц"><div class="fx-lmo fx-red">${Fx.M}${Fx.money(L.lossMo)}</div><div class="fx-lsub">${Fx.mln(L.lossMo * 12)} за год<br>100% потерь</div></div>
+          <div data-k="Вернём за 90 дней"><div class="fx-lrc fx-green">+${Fx.money(L.recMo)}</div><div class="fx-lsub">${Fx.mln(L.recMo * 12)} за год<br>${Fx.pct(L.recMo / L.lossMo)} потерь</div></div></div>
       </div>
       ${quiet.length ? `<p class="fx-note">Без потенциала: ${quiet.map(s => s.name.toLowerCase()).join(', ')}. Здесь система уже работает, в ближайшие 90 дней не трогаем.</p>` : ''}
       ${cash}
@@ -4681,6 +4742,35 @@ const Final = {
       .filter(Boolean);
   },
 
+  // Матрица приоритетов: усилие против эффекта, чтобы было видно, с чего начать сегодня
+  priorityGrid(x){
+    const M = this.mistakes(x);
+    if (M.length < 3) return '';
+    const max = Math.max(...M.map(m => m.d.gain));
+    const cell = {q1:[], q2:[], q3:[], q4:[]};
+    M.forEach(m => {
+      const hard = m.d.wave >= 3, big = m.d.gain >= max * .35;
+      const key = big && !hard ? 'q1' : big && hard ? 'q2' : !big && !hard ? 'q3' : 'q4';
+      cell[key].push(m);
+    });
+    const chips = arr => arr.length
+      ? `<ul>${arr.map(m => `<li><span>${m.pb.err}</span><b>${Fx.money(m.d.gain)}</b></li>`).join('')}</ul>`
+      : '<p class="fx-pq-none">пусто</p>';
+    const box = (key, title, note) => `<div class="fx-pq ${key}"><div class="fx-pq-h"><b>${title}</b><span>${note}</span></div>${chips(cell[key])}</div>`;
+    return `<div class="fx-sub" style="margin-top:44px">Приоритеты: усилие против эффекта</div>
+      <div class="fx-prio">
+        <div class="fx-prio-y">Эффект в деньгах</div>
+        <div class="fx-prio-g">
+          ${box('q1', 'Быстрые победы', 'делать первыми: недели 1–6')}
+          ${box('q2', 'Крупные проекты', 'дают больше всех, но требуют управления')}
+          ${box('q3', 'Гигиена', 'дешёво и быстро, закрывается попутно')}
+          ${box('q4', 'Потом', 'не трогаем первые 90 дней')}
+        </div>
+        <div class="fx-prio-x">Усилие и срок внедрения</div>
+      </div>
+      <p class="fx-note">Сетка собрана из тех же ошибок: по вертикали деньги из ведомости, по горизонтали срок и сложность внедрения. Если делать самостоятельно, порядок именно такой: левый верхний угол, потом правый верхний. Нижний ряд в первые 90 дней не трогают — он не меняет выручку, а время съедает.</p>`;
+  },
+
   // ── Разбор ошибок: что именно сделано не так и что с этим делать ──
   actFix(x, no){
     const L = x.L, all = this.mistakes(x), M = all.slice(0, 6);
@@ -4706,7 +4796,8 @@ const Final = {
     }).join('');
     return this.sec('fix', no, 'Что делать', 'Разбор ошибок: что именно сделано не так и как это чинится',
       `Это рабочая часть отчёта. Каждая ошибка ниже найдена в ваших ответах, оценена в деньгах и разобрана до уровня инструкции: что сделать, как проверить результат и где такие изменения обычно разваливаются. Порядок — по деньгам, а не по простоте. Всё это можно делать самостоятельно: мы за то, чтобы вы понимали механику, а не покупали чёрный ящик.`,
-      `<div class="fx-fixes">${cards}</div>
+      `${this.priorityGrid(x)}
+      <div class="fx-fixes">${cards}</div>
       ${rest > 0 ? `<p class="fx-note">Разобрали ${M.length} ошибок из ${all.length} найденных: показываем те, что стоят больше всего. Остальные ${rest} ${Fx.plural(rest, 'ошибка закрывается', 'ошибки закрываются', 'ошибок закрываются')} в волнах плана ниже.</p>` : ''}
       <p class="fx-note">Порядок важнее скорости. Эти изменения держатся только вместе с ежедневным управлением: без разбора сделок и плана-факта любая инструкция живёт две недели, а потом отдел возвращается к привычке.</p>`);
   },
@@ -4756,16 +4847,16 @@ const Final = {
     let rows = '', g = '';
     P.forEach(p => {
       if (p.g !== g){ g = p.g; rows += `<div class="fx-mx-g">${g}</div>`; }
-      rows += `<div class="fx-mx-r"><div class="fx-mx-n"><b>${p.t}</b><span>${p.d}</span></div>${mk('no', '✕', 'Ручной режим')}${mk(p.s === null ? 'unk' : p.s ? 'yes' : 'mine', p.s === null ? '—' : p.s ? '✓' : '✕', 'У вас')}${mk('yes', '✓', 'Система')}</div>`;
+      rows += `<div class="fx-mx-r"><div class="fx-mx-n"><b>${p.t}</b><span>${p.d}</span></div>${mk(p.s === null ? 'unk' : p.s ? 'yes' : 'mine', p.s === null ? '—' : p.s ? '✓' : '✕', 'У вас')}${mk('yes', '✓', 'Система Closery')}</div>`;
     });
     return this.sec('bench', no, 'Сравнение', 'Где вы между ручным режимом и построенной системой',
       `Сравнивать вас со средней компанией по рынку бессмысленно: такие цифры публикуются редко и почти всегда по несопоставимой методике. Поэтому сравниваем по управленческим контурам — тому, что определяет потолок компании независимо от ниши. Слева колонка компаний, где всё держится на людях и энергии собственника. Справа то, что мы считаем построенной системой и по чему принимаем волны внедрения. Ваши отметки собраны из ваших же ответов.`,
       `<div class="fx-mx">
-        <div class="fx-mx-h"><div>Контур управления</div><div><b class="fx-lgl">Продажи на людях</b><b class="fx-smt">Ручной</b></div><div>У вас</div><div><b class="fx-lgl">Построенная система</b><b class="fx-smt">Система</b></div></div>
+        <div class="fx-mx-h"><div>Контур управления</div><div>У вас</div><div><b class="fx-lgl">Система Closery</b><b class="fx-smt">Closery</b></div></div>
         ${rows}
       </div>
       <div class="fx-bpos">
-        <div class="fx-bp-h"><span>Ручной режим</span><span>Построенная система</span></div>
+        <div class="fx-bp-h"><span>Ручной режим</span><span>Система Closery</span></div>
         <div class="fx-bp-t"><i style="width:${pos}%"></i><u style="left:${pos}%"></u></div>
         <div class="fx-bp-v"><b>${have} из ${known.length} ${Fx.plural(known.length, 'контура', 'контуров', 'контуров')}</b> работают у вас сегодня. Индекс зрелости ${x.idx} из 100 — это тот же факт, посчитанный по всем шести системам бизнеса.${P.length > known.length ? ` Ещё ${P.length - known.length} оценить не смогли: не хватило ответов.` : ''}</div>
       </div>
@@ -5018,8 +5109,8 @@ const Final = {
         <div class="fx-case"><span class="fx-k">MarketGuru · SaaS</span><div class="fx-cv">34% в оплату</div><p>Конверсия Zoom-аудита в оплату. 6 месяцев подряд рекордов выручки, 3 выращенных РОПа, методология работает без автора.</p></div>
       </div>
       <p class="fx-sign">«Строю системы в условиях дефицита ресурсов через конверсию на ключевых этапах. Каждую цифру подтверждаю контактами основателей.»<b>Николай Клименко, основатель Closery</b></p>
-      <div class="fx-cta"><a class="btn-primary" href="${C.BOOKING_URL}" target="_blank" rel="noopener">Записаться на созвон по КП →</a><button class="btn-ghost" id="btnPDF" type="button">Скачать PDF-разбор</button></div>
-      <p class="fx-small">Запись через Telegram Николая Клименко. PDF с этим разбором останется у вас и у ваших партнёров.</p>`);
+      <div class="fx-cta"><a class="btn-primary" href="${C.BOOKING_URL}" target="_blank" rel="noopener">Записаться на созвон по КП →</a><button class="btn-ghost" id="btnPDF" type="button">Скачать PDF-разбор</button><button class="btn-ghost" id="btnLink" type="button">Скопировать ссылку на отчёт</button></div>
+      <p class="fx-small">Запись через Telegram Николая Клименко. PDF остаётся у вас и у ваших партнёров. Ссылка на отчёт постоянная: она открывается на любом устройстве и в любом браузере, отчёт пересобирается из неё целиком.</p>`);
   },
 
   appendix(x){
@@ -5153,6 +5244,8 @@ const Final = {
     if (rst) rst.onclick = () => { Profile.setOverride(null); this.rerender(); };
     const pdf = document.getElementById('btnPDF');
     if (pdf) pdf.onclick = () => Report.printPDF();
+    const lnk = document.getElementById('btnLink');
+    if (lnk) lnk.onclick = () => Share.copy(lnk);
     if (L && L.recMo > 0) this.bindLevers(L);
   },
   bindLevers(L){
@@ -5248,7 +5341,7 @@ const Report = {
         ${cell('Сделки', Fx.dec(L.deals) + '/мес', L.full ? `дозвон ${Fx.pct(L.reach)} × закрытие ${Fx.pct(L.close)}` : `конверсия ${L.conv}%`)}
         ${cell('Средний чек', Fx.rub(L.check), '')}
         ${L.cpl ? cell('Заявка', Fx.rub(L.cpl), 'стоимость лида') : ''}
-        ${L.ltvCac ? cell('LTV / CAC', Fx.dec(L.ltvCac, L.ltvCac >= 10 ? 0 : 1) + '×', 'окупаемость клиента') : ''}
+        ${L.ltvCac ? cell('LTV / CAC', Fx.mult(L.ltvCac) + '×', 'окупаемость клиента') : ''}
       </div>`;
     }
     const con = Story.conclusions(L, x.c, x.perc, x.goal);
@@ -5328,7 +5421,7 @@ const Report = {
           <div class="pr-title" style="font-size:23px">Где вы между ручным режимом и построенной системой</div>
           <div class="pr-lede">Сравнивать со средней компанией по рынку бессмысленно: такие цифры публикуются редко и по несопоставимой методике. Поэтому сравниваем по управленческим контурам — тому, что определяет потолок компании независимо от ниши. Отметки взяты из ответов собственника.</div>` : ''}
           <table class="pr-x-mx"><thead><tr><th>Контур управления</th><th class="c">Продажи на людях</th><th class="c">У вас</th><th class="c">Построенная система</th></tr></thead><tbody>${body}</tbody></table>
-          ${i + SIZE >= PR.length ? `<div class="pr-x-bh"><span>Ручной режим</span><span>Построенная система</span></div>
+          ${i + SIZE >= PR.length ? `<div class="pr-x-bh"><span>Ручной режим</span><span>Система Closery</span></div>
           <div class="pr-x-bar"><i style="width:${pos}%"></i><u style="left:${pos}%"></u></div>
           <div class="pr-callout"><b>${have} из ${PRk.length} ${Fx.plural(PRk.length, 'контура', 'контуров', 'контуров')}</b> работают сегодня. Ни один из них не закрывается одним наймом: руководитель без оцифрованной воронки управляет по ощущениям, контроль качества без скрипта слушает звонки без эталона.${L && L.lossMo > 0 ? ` В деньгах разрыв между колонками — ${Fx.money(L.lossMo)} валовой прибыли в месяц.` : ''}</div>` : ''}`);
       }
@@ -5573,6 +5666,66 @@ const Report = {
 // анкету: та же ссылка восстанавливает ровно то место, где остановились.
 // Плюс можно параллельно вести несколько клиентов в разных вкладках,
 // не затирая прогресс друг друга.
+// ═══ ПОСТОЯННАЯ ССЫЛКА НА ОТЧЁТ ═══
+// ?id= восстанавливает разбор только в том же браузере: ответы лежат в localStorage.
+// ?r= несёт ответы внутри себя, поэтому открывается у кого угодно и когда угодно.
+const Share = {
+  b64e(bytes){
+    let s = '';
+    for (const b of bytes) s += String.fromCharCode(b);
+    return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  },
+  b64d(str){
+    const s = atob(str.replace(/-/g, '+').replace(/_/g, '/'));
+    const out = new Uint8Array(s.length);
+    for (let i = 0; i < s.length; i++) out[i] = s.charCodeAt(i);
+    return out;
+  },
+  async pack(answers){
+    const raw = new TextEncoder().encode(JSON.stringify(answers));
+    if (window.CompressionStream){
+      try{
+        const st = new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate-raw'));
+        return 'z' + this.b64e(new Uint8Array(await new Response(st).arrayBuffer()));
+      }catch(e){}
+    }
+    return 'p' + this.b64e(raw);
+  },
+  async unpack(code){
+    const kind = code[0], body = code.slice(1);
+    let bytes = this.b64d(body);
+    if (kind === 'z'){
+      const st = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+      bytes = new Uint8Array(await new Response(st).arrayBuffer());
+    } else if (kind !== 'p') return null;
+    return JSON.parse(new TextDecoder().decode(bytes));
+  },
+  async url(){
+    const code = await this.pack(State.answers);
+    const u = new URL(location.href);
+    u.search = '';
+    u.searchParams.set('r', code);
+    return u.toString();
+  },
+  async copy(btn){
+    const label = btn ? btn.textContent : '';
+    try{
+      const link = await this.url();
+      if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(link);
+      else {
+        const ta = document.createElement('textarea');
+        ta.value = link; ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      }
+      if (btn){ btn.textContent = 'Ссылка скопирована'; btn.disabled = true;
+        setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 2600); }
+    }catch(e){
+      if (btn) btn.textContent = 'Не удалось скопировать';
+      setTimeout(() => { if (btn) btn.textContent = label; }, 2600);
+    }
+  }
+};
+
 const Session = {
   id: null,
   ensure(){
@@ -5712,6 +5865,21 @@ const App = {
       return;
     }
 
+    // Постоянная ссылка: ответы лежат в самой ссылке, браузер и устройство не важны
+    const code = new URLSearchParams(location.search).get('r');
+    if (code){
+      Share.unpack(code).then(ans => {
+        if (!ans || !Object.keys(ans).length) return;
+        State.answers = ans;
+        State.started = true;
+        State.finished = true;
+        State.demo = false;
+        document.getElementById('introScreen').style.display = 'none';
+        Final.show();
+      }).catch(() => {});
+      return;
+    }
+
     const urlId = Session.fromUrl();
     if (urlId){
       const saved = Storage.load(urlId);
@@ -5741,7 +5909,7 @@ document.addEventListener('DOMContentLoaded', ()=>App.init());
 // Наружу отдаём модули модели — для проверки расчётов и отладки в консоли
 return { State, Scoring, FinModel, Profile, Funnel, Capacity, KeyMetrics,
          Constraint, Problems, Perception, GoalGap, DataQuality, Roadmap, Final, Report, TestFill,
-         Fx, Ledger, Story, GoalPath, Waves, Prompter };
+         Fx, Ledger, Story, GoalPath, Waves, Prompter, Playbook, Market, Share, Session, Storage };
 })();
 </script>
 </body>
