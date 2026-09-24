@@ -98,6 +98,23 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .bar-progress{display:flex;align-items:center;gap:8px}
 #progressLabel{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--ink-3);
   white-space:nowrap;font-variant-numeric:tabular-nums}
+/* оглавление отчёта: текущий раздел в панели, список по клику */
+.fx-nav{position:relative;display:none}
+body.fx-reading .fx-nav{display:block}
+.fx-nav-btn{display:flex;align-items:center;gap:10px;max-width:min(46vw,300px);background:none;border:1px solid var(--rule-2);border-radius:8px;padding:8px 12px;color:var(--ink-2);font:500 11px/1 var(--ui);letter-spacing:.09em;text-transform:uppercase;cursor:pointer;transition:color .2s,border-color .2s}
+.fx-nav-btn b{font:500 11px/1 var(--mono);color:var(--ok);letter-spacing:.04em;flex:none}
+.fx-nav-btn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fx-nav-btn i{flex:none;width:0;height:0;border:4px solid transparent;border-top-color:var(--ink-3);margin-top:3px;transition:transform .2s}
+.fx-nav-btn:hover{color:var(--ink);border-color:var(--ink-3)}
+.fx-nav-btn[aria-expanded="true"] i{transform:rotate(180deg);margin-top:-3px}
+.fx-nav-menu{position:absolute;right:0;top:calc(100% + 12px);width:284px;max-height:min(70vh,560px);overflow:auto;background:#0B1210;border:1px solid var(--rule-2);border-radius:10px;padding:8px;box-shadow:0 26px 64px rgba(0,0,0,.62)}
+.fx-nav-menu a{display:flex;gap:12px;align-items:baseline;padding:9px 12px;border-radius:7px;text-decoration:none;color:var(--ink-2);font:500 12.5px/1.35 var(--ui)}
+.fx-nav-menu a b{font:500 11px/1 var(--mono);color:var(--ink-3);min-width:18px;flex:none}
+.fx-nav-menu a:hover{background:rgba(255,255,255,.05);color:var(--ink)}
+.fx-nav-menu a.on,.fx-nav-menu a.on b{color:var(--ok)}
+@media(max-width:560px){.fx-nav-menu{position:fixed;left:12px;right:12px;top:80px;width:auto}.fx-nav-btn{padding:7px 10px;gap:8px}}
+body.fx-reading #progressFill{transition:none}
+
 #navProgressTrack{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--rule)}
 #progressFill{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--teal-deep),var(--ok));
   box-shadow:0 0 8px rgba(52,211,153,.55);transition:width .5s var(--ease)}
@@ -978,7 +995,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-small{margin-top:14px;font-size:12.5px;color:var(--ink-3)}
 
 /* приложение */
-.fx-appx{padding:44px 0 40px;border-top:1px solid var(--rule)}
+.fx-appx{scroll-margin-top:90px;padding:44px 0 40px;border-top:1px solid var(--rule)}
 .fx-ap{border-top:1px solid var(--rule)}
 .fx-ap:first-of-type{border-top:0}
 .fx-ap summary{list-style:none;cursor:pointer;padding:18px 0;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--ink-2)}
@@ -1444,6 +1461,12 @@ body{opacity:1;transition:opacity .18s ease}
   <div class="w-wide bar-in">
     <a class="logo" href="/"><i></i>Closery</a>
     <nav class="bar-nav">
+      <div class="fx-nav" id="fxNav">
+        <button class="fx-nav-btn" id="fxNavBtn" type="button" aria-expanded="false" aria-controls="fxNavMenu" aria-label="Разделы отчёта">
+          <b id="fxNavNo">01</b><span id="fxNavName">Основание</span><i></i>
+        </button>
+        <div class="fx-nav-menu" id="fxNavMenu" role="menu" hidden></div>
+      </div>
       <span class="bar-progress" style="display:none"><span id="progressLabel">0%</span></span>
     </nav>
   </div>
@@ -4421,6 +4444,7 @@ const Final = {
     <nav class="fx-rail" aria-label="Разделы разбора">${acts.map(s => `<a href="#fx-${s.key}" data-key="${s.key}"><i></i>${s.no} ${s.label}</a>`).join('')}</nav>
 `;
     this.bind(x);
+    this.nav(acts);
     if (!State.shared) Prompter.set(this.notes(x, acts), this.dossier(x));
     this.spy();
   },
@@ -5261,7 +5285,7 @@ const Final = {
       'Сроки волн предполагают, что собственник выделяет на внедрение оговорённое время и решения принимаются в течение недели. Сдвиг решений сдвигает и деньги.',
       'Отчёт не является инвестиционной, юридической или налоговой консультацией и не содержит гарантии дохода: это расчёт потенциала по вашим данным.'
     ];
-    return `<section class="fx-appx"><div class="fx-sub">Приложение</div>
+    return `<section class="fx-appx" id="fx-appx"><div class="fx-sub">Приложение</div>
       <details class="fx-ap"><summary>Методика и допущения</summary><div class="fx-in"><ol>${meth.map(t => `<li>${t}</li>`).join('')}</ol></div></details>
       <details class="fx-ap"><summary>Ограничения работы и что осталось за рамками</summary><div class="fx-in"><ol>${lim.map(t => `<li>${t}</li>`).join('')}</ol></div></details>
       ${feed.length ? `<details class="fx-ap"><summary>Лог сканера · ${feed.length} ${Fx.plural(feed.length, 'находка', 'находки', 'находок')}</summary><div class="fx-in"><div class="fx-log">${feed.map(f => `<div class="${f.tone}">${Fx.noParens(f.text)}</div>`).join('')}</div></div></details>` : ''}
@@ -5410,6 +5434,38 @@ const Final = {
     upd();
   },
   // Какой блок сейчас на экране: подсветка навигации, заметки суфлёра, липкая кнопка
+  // Оглавление в панели: 15 разделов и полсотни экранов нельзя отдавать
+  // одной лентой без понимания, где ты находишься и как прыгнуть к нужному.
+  nav(acts){
+    const wrap = document.getElementById('fxNav'), menu = document.getElementById('fxNavMenu'), btn = document.getElementById('fxNavBtn');
+    if (!wrap || !menu || !btn) return;
+    menu.innerHTML = acts.map(a => `<a href="#fx-${a.key}" data-key="${a.key}" role="menuitem"><b>${a.no}</b>${a.label}</a>`).join('')
+      + `<a href="#fx-appx" data-key="appx" role="menuitem"><b>··</b>Приложение</a>`;
+    this._navMap = {};
+    acts.forEach(a => { this._navMap[a.key] = a; });
+    document.body.classList.add('fx-reading');
+    const close = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+    close();
+    if (this._navBound) return;
+    this._navBound = true;
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const open = menu.hidden;
+      menu.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    menu.addEventListener('click', e => { if (e.target.closest('a')) close(); });
+    document.addEventListener('click', e => { if (!wrap.contains(e.target)) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  },
+  navSet(key){
+    const a = (this._navMap || {})[key];
+    if (!a) return;
+    const n = document.getElementById('fxNavNo'), nm = document.getElementById('fxNavName');
+    if (n) n.textContent = a.no;
+    if (nm) nm.textContent = a.label;
+    document.querySelectorAll('#fxNavMenu a').forEach(x => x.classList.toggle('on', x.dataset.key === key));
+  },
   spy(){
     if (this._io) this._io.disconnect();
     const secs = [...document.querySelectorAll('#finalScreen .fx-act')];
@@ -5417,9 +5473,23 @@ const Final = {
       if (!e.isIntersecting) return;
       const k = e.target.dataset.key;
       document.querySelectorAll('.fx-rail a').forEach(a => a.classList.toggle('on', a.dataset.key === k));
+      this.navSet(k);
       Prompter.show(k);
     }), {rootMargin:'-45% 0px -50% 0px'});
     secs.forEach(s => this._io.observe(s));
+
+    // Полоса прочитанного: та же дорожка, что показывает прогресс анкеты
+    if (this._sc) window.removeEventListener('scroll', this._sc);
+    const fill = document.getElementById('progressFill'), host = FlowUI.els.finalScreen;
+    this._sc = () => {
+      const r = host.getBoundingClientRect();
+      const vh = Math.max(1, window.innerHeight || document.documentElement.clientHeight || 1);
+      const total = Math.max(1, r.height - vh);
+      const p = Math.max(0, Math.min(1, (71 - r.top) / total));
+      if (fill) fill.style.width = (p * 100).toFixed(1) + '%';
+    };
+    window.addEventListener('scroll', this._sc, {passive:true});
+    this._sc();
   }
 };
 
