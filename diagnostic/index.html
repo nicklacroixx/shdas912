@@ -5721,7 +5721,8 @@ const Report = {
       const mTxt = g ? String(g.mult).replace('.', ',') : '2';
       const ownTxt = {people:'Люди — некому обрабатывать', prod:'Производство или доставка не вывезет', money:'Деньги — не хватит оборотки', quality:'Качество — начнём терять клиентов', nothing:'Ничего, справимся'}[a.growth_ready];
       const riskCard = (r, i) => `<div class="pr-x-risk ${r.sev}"><span class="s">${String(i + 1).padStart(2, '0')} · ${r.sev === 'high' ? 'критично' : 'требует решения'}</span><span class="t">${r.t}</span><p>${r.p}</p><p class="c">${r.c}</p></div>`;
-      const rChunks = [RK.slice(0, 3), RK.slice(3, 8)].filter(c => c.length);
+      // Четыре риска раскладываем 2 и 2, иначе на второй странице остаётся один
+      const rChunks = (RK.length <= 3 ? [RK] : RK.length === 4 ? [RK.slice(0, 2), RK.slice(2)] : [RK.slice(0, 3), RK.slice(3, 8)]).filter(c => c.length);
       rChunks.forEach((chunk, ci) => {
         const last = ci === rChunks.length - 1;
         page(rChunks.length > 1 ? `РИСКИ РОСТА · ${ci + 1}/${rChunks.length}` : 'РИСКИ РОСТА', `
@@ -5832,10 +5833,13 @@ const Report = {
       `);
 
     // Лог сканера отдельными страницами: он длинный и не должен ломать методику
-    const LOG_PER_PAGE = 26;
+    // Делим лог поровну между страницами: при 28 находках фиксированные 26
+    // давали вторую страницу с двумя строками и листом пустоты.
+    const LOG_PAGES = Math.max(1, Math.ceil(feedAll.length / 26));
+    const LOG_PER_PAGE = Math.ceil(feedAll.length / LOG_PAGES);
     for (let i = 0; i < feedAll.length; i += LOG_PER_PAGE){
       const part = feedAll.slice(i, i + LOG_PER_PAGE), n = Math.floor(i / LOG_PER_PAGE) + 1;
-      const total = Math.ceil(feedAll.length / LOG_PER_PAGE);
+      const total = LOG_PAGES;
       page(total > 1 ? `ЛОГ СКАНЕРА · ${n}/${total}` : 'ЛОГ СКАНЕРА', `
         ${i === 0 ? `<div class="pr-tag">Приложение</div>
         <div class="pr-title" style="font-size:19px">Лог сканера · ${feedAll.length} ${Fx.plural(feedAll.length, 'находка', 'находки', 'находок')}</div>
