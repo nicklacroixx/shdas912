@@ -3558,7 +3558,7 @@ const Ledger = {
     pushC('crm', a.has_crm === 'no' ? 7 : 0, 'CRM: заявки не теряются', 'заявки живут в мессенджерах и блокнотах', 2, .7);
     pushC('watch', a.has_crm === 'yes' && a.funnel_visibility === 'no' ? 3 : 0, 'Контроль невзятых заявок', 'этапы воронки не оцифрованы', 2, .7);
     pushC('follow', ({nothing:9, couple:6, manager:4})[a.followup] || 0, 'Каскад касаний до разговора', ({nothing:'заявку без ответа бросают', couple:'пара звонков и всё', manager:'дожим на усмотрение менеджера'})[a.followup], 2, .75);
-    pushC('load', L.loadRatio != null && L.loadRatio > 1.3 ? 5 : 0, 'Разгрузка продавцов', `${Math.round(L.load || 0)} заявок на человека при норме ${p.loadNorm}`, 3, .5);
+    pushC('load', L.loadRatio != null && L.loadRatio > 1.3 ? 5 : 0, 'Разгрузка продавцов', `${Math.round(L.load || 0)} заявок на человека при ориентире профиля ${p.loadNorm}`, 3, .5);
     pushC('admin', ({admin:4, half:3})[a.sales_time] || 0, 'Снять документы с продавцов', 'время продавцов уходит на бумаги', 3, .6);
     // Сначала реальные практики, и только остаток места добирает разрыв с ориентиром:
     // иначе добор съедал всё, и вклад практик схлопывался в «+0,0 п.п.»
@@ -3617,7 +3617,7 @@ const Ledger = {
     // ── Привлечение: только если отдел простаивает ──
     if (capState === 'starving' && cap && cap.effective > 0){
       const missLeads = Math.max(0, p.loadNorm * .75 * cap.effective - leads);
-      add({id:'traffic', stage:'lead', unit:'leads', eff: missLeads, label:'Управляемый канал заявок', why:`${Math.round(L.load || 0)} заявок на продавца при норме ${p.loadNorm}`,
+      add({id:'traffic', stage:'lead', unit:'leads', eff: missLeads, label:'Управляемый канал заявок', why:`${Math.round(L.load || 0)} заявок на продавца при ориентире профиля ${p.loadNorm}`,
         wave:4, rec:.3, gain: missLeads * conv / 100 * check * m});
     }
 
@@ -3931,7 +3931,7 @@ const Story = {
         close:   `из разговоров закрывается ${Fx.pct(L.closeCalc)} вместо ${Fx.pct(L.P.close)} со скриптом, разбором звонков и ежедневным управлением`,
         repeat:  `повторные продажи дают ${L.repeat}% выручки вместо ${Fx.dec(L.P.repeat, 0)}% при системной работе с базой`,
         price:   `цена не пересматривалась: рынок принимает ещё ${Fx.pct(L.P.check / L.check - 1)}`,
-        lead:    `на продавца приходится ${Math.round(L.load || 0)} заявок при норме ${L.loadNorm}: отдел работает вполсилы`
+        lead:    `на продавца приходится ${Math.round(L.load || 0)} заявок при ориентире профиля ${L.loadNorm}: отдел работает вполсилы`
       }[top.id];
       out.push(`Главная течь — ${top.name.toLowerCase()}: ${what}. Только она стоит <b class="fx-red">${Fx.money(top.loss)}</b> валовой прибыли в месяц.`);
     }
@@ -3995,8 +3995,8 @@ const Story = {
 
     const sym = [];
     if (L){
-      if (L.loadRatio != null && L.loadRatio > 1.3) sym.push(`${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')} на продавца при норме ${L.loadNorm}`);
-      if (L.loadRatio != null && L.loadRatio < .5) sym.push(`всего ${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')} на продавца при норме ${L.loadNorm}`);
+      if (L.loadRatio != null && L.loadRatio > 1.3) sym.push(`${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')} на продавца при ориентире профиля ${L.loadNorm}`);
+      if (L.loadRatio != null && L.loadRatio < .5) sym.push(`всего ${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')} на продавца при ориентире профиля ${L.loadNorm}`);
       if (L.respSlow) sym.push(`первый ответ ${FX_RESP[a.response_time]}`);
       if (L.S('contact').loss > 0) sym.push(`дозвон ${Fx.pct(L.reachCalc)} против ${Fx.pct(L.P.reach)} потенциала`);
       if (L.S('close').loss > 0) sym.push(`закрытие ${Fx.pct(L.closeCalc)} против ${Fx.pct(L.P.close)} потенциала`);
@@ -4090,7 +4090,7 @@ const Story = {
     if (L.full && L.S('contact').loss <= 0) out.push(`<b>Первый контакт.</b> До разговора доходит ${Fx.pct(L.reachCalc)} заявок: процесс контакта работает.`);
     if (L.S('close').loss <= 0) out.push(`<b>Закрытие.</b> ${Fx.pct(L.closeCalc)} разговоров заканчиваются оплатой: технология закрытия на месте.`);
     if (L.margin != null && L.margin >= 25) out.push(`<b>Экономика.</b> Маржа ${L.margin}% даёт запас на мотивацию и найм.`);
-    if (L.repeat != null && L.repeat >= L.repeatTarget) out.push(`<b>Повторные продажи.</b> ${L.repeat}% выручки при норме ${L.repeatTarget}%.`);
+    if (L.repeat != null && L.repeat >= L.repeatTarget) out.push(`<b>Повторные продажи.</b> ${L.repeat}% выручки при ориентире профиля ${L.repeatTarget}%.`);
     if (a.usp && String(a.usp).trim().length > 15) out.push(`<b>Предложение.</b> ${Fx.esc(String(a.usp).trim().replace(/[.\s]+$/, ''))}.`);
     if (a.turnover === 'none') out.push('<b>Команда.</b> За год никто не ушёл: есть на чём строить.');
     if (a.has_crm === 'yes') out.push('<b>CRM.</b> Система учёта уже есть: волна 2 начнётся с настройки, а не с внедрения.');
@@ -4204,7 +4204,7 @@ const Waves = {
       a.has_rop === 'no' && !senior && !self ? 'Профиль РОПа и конкурсный день: 10–15 кандидатов продают ваш продукт вживую' : null,
       senior ? 'Старший продавец с доплатой за управление: отдельный РОП на вашем масштабе пока не окупается' : null,
       self ? 'Регламент управления для собственника: планёрка 30 минут в день по чек-листу' : null,
-      needSellers ? `+${needSellers} ${Fx.plural(needSellers, 'продавец', 'продавца', 'продавцов')} под нагрузку: сейчас ${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')} на человека при норме ${L.loadNorm}` : null,
+      needSellers ? `+${needSellers} ${Fx.plural(needSellers, 'продавец', 'продавца', 'продавцов')} под нагрузку: сейчас ${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')} на человека при ориентире профиля ${L.loadNorm}` : null,
       hireFlow ? 'Воронка найма: профиль, источники, конкурсный отбор вместо откликов' : null,
       hiring ? 'Адаптация 30 дней: чек-лист ввода и план первых сделок' : 'Аттестация продавцов по скрипту и цифрам']);
     const m3 = [];
@@ -4567,7 +4567,7 @@ const Final = {
       'Прежде чем смотреть цифры — откуда они берутся и почему им можно верить.',
       `<div class="fx-why">
         ${blk('01', 'На чём основана технология', `
-          <p>Методика собрана из практики, где результат проверялся выручкой, а не презентацией. СДЭК: возврат с тридцатого места в топ-5 сети за 4,5 месяца и выручка ×2 за 10 месяцев. UniBox: коммерческий блок с нуля и рост с 1,5 до 12,3 млн ₽ в месяц за 9 месяцев. MarketGuru: конверсия аудита в оплату 34% и шесть месяцев рекордов подряд. Каждая цифра подтверждается контактами основателей.</p>
+          <p>Методика собрана из практики, где результат проверялся выручкой, а не презентацией. СДЭК: возврат с тридцатого места в топ-5 сети за 4,5 месяца и выручка ×2 за 10 месяцев. UniBox: коммерческий блок с нуля и рост с 1,5 до 12,3 млн ₽ в месяц за 9 месяцев. MarketGuru: конверсия аудита в оплату 34% и шесть месяцев рекордов подряд. Все три кейса с цифрами выложены на closery.ru, каждая цифра подтверждается контактами основателей.</p>
           <p>Из этой практики собран перечень управленческих контуров, которые реально двигают показатели, и для каждого известно, на что именно он влияет. Диагностика задаёт ${qn} ${Fx.plural(qn, 'вопрос', 'вопроса', 'вопросов')} по шести системам бизнеса и сопоставляет ваши ответы с этим перечнем${dn ? `: в вашем случае сработало ${dn} ${Fx.plural(dn, 'рычаг', 'рычага', 'рычагов')}` : ''}.</p>`)}
         ${blk('02', 'Почему цифрам можно верить', `
           <p>Мы не используем отраслевые бенчмарки: достоверной статистики по нишам почти не существует, и ссылаться на неё было бы подлогом. Ориентир один — потенциал вашей же команды, когда у неё появляются инструменты.</p>
@@ -4686,7 +4686,7 @@ const Final = {
     let team = L.managers > 0 ? `Отдел: <b>${L.managers} ${Fx.plural(L.managers, 'продавец', 'продавца', 'продавцов')}</b>${hrs ? ` и собственник <b>${hrs}</b>` : ''}.` : `Продаёт собственник${hrs ? `: <b>${hrs}</b>` : ''}.`;
     if (L.load != null){
       const bad = L.loadRatio > 1.3 || L.loadRatio < .5;
-      team += ` Нагрузка <b class="${bad ? 'fx-red' : ''}">${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')} на продавца</b> при норме ${L.loadNorm}`;
+      team += ` Нагрузка <b class="${bad ? 'fx-red' : ''}">${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')} на продавца</b> при ориентире профиля ${L.loadNorm}`;
       team += L.timeAdj < 1 ? `: считаем с поправкой, ${a.sales_time === 'admin' ? 'больше половины' : 'половину'} времени продавцы заняты документами.` : '.';
     }
     let check = '';
@@ -4755,8 +4755,8 @@ const Final = {
     out += `<line x1="${px + bw}" x2="${x0}" y1="${Y(acc)}" y2="${Y(acc)}" stroke="#5B6863" stroke-dasharray="3 4"/>`;
     out += `<rect x="${x0 + 1}" y="${Y(end)}" width="${bw - 2}" height="${Hh(end) - 1}" rx="3" fill="rgba(52,211,153,.08)" stroke="#34D399" stroke-dasharray="5 4"/>`;
     out += lbl(x0, Y(end), Fx.money(end), '#34D399') + cat(x0, ['При норме','профиля']);
-    return `<svg class="fx-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Валовая прибыль в месяц: сейчас и при норме профиля">${out}</svg>
-      <div class="fx-legend"><span><i style="background:#F0555A"></i>теряется на этапе</span><span><i style="background:#34D399"></i>из них возвращаем за 90 дней</span><span><i class="fx-dash"></i>при норме вашего профиля</span></div>`;
+    return `<svg class="fx-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Валовая прибыль в месяц: сейчас и при ориентире профиля">${out}</svg>
+      <div class="fx-legend"><span><i style="background:#F0555A"></i>теряется на этапе</span><span><i style="background:#34D399"></i>из них возвращаем за 90 дней</span><span><i class="fx-dash"></i>при ориентире вашего профиля</span></div>`;
   },
   ledgerRows(x){
     const L = x.L, a = x.a, max = Math.max(1, ...L.st.map(s => s.loss));
@@ -5318,9 +5318,9 @@ const Final = {
         </div>` : ''}
       </div>
       <div class="fx-cases">
-        <div class="fx-case"><span class="fx-k">СДЭК · сеть франчайзи</span><div class="fx-cv">Топ-5 за 4,5 месяца</div><p>С 30-го места среди ~1000 франчайзи. Выручка ×2 за 10 месяцев, найм перестроен в конвейер на 100+ человек в год.</p></div>
-        <div class="fx-case"><span class="fx-k">UniBox · e-com</span><div class="fx-cv">×8 за 9 месяцев</div><p>Коммерческий блок с нуля: 1,5 → 12,3 млн ₽ выручки в месяц. Отдел из 8 человек меньше чем за 90 дней, ответ на заявку со 150 минут до 3.</p></div>
-        <div class="fx-case"><span class="fx-k">MarketGuru · SaaS</span><div class="fx-cv">34% в оплату</div><p>Конверсия Zoom-аудита в оплату. 6 месяцев подряд рекордов выручки, 3 выращенных РОПа, методология работает без автора.</p></div>
+        <div class="fx-case"><span class="fx-k">СДЭК · сеть франчайзи</span><div class="fx-cv">Топ-5 за 4,5 месяца</div><p>С 30-го места среди ~1000 франчайзи. Выручка ×2 за 10 месяцев, коммуникация между отделами с eNPS 71% до 97%.</p></div>
+        <div class="fx-case"><span class="fx-k">UniBox · e-com</span><div class="fx-cv">×8 за 9 месяцев</div><p>Коммерческий блок с нуля: 1,5 → 12,3 млн ₽ выручки в месяц. Отдел из 8 человек собран меньше чем за 90 дней, без платного трафика на старте.</p></div>
+        <div class="fx-case"><span class="fx-k">MarketGuru · SaaS</span><div class="fx-cv">34% в оплату</div><p>Конверсия Zoom-аудита в оплату, сильнейший показатель ниши. 6 месяцев подряд рекордов выручки, методология работает без автора.</p></div>
       </div>
       <p class="fx-sign">«Строю системы в условиях дефицита ресурсов через конверсию на ключевых этапах. Каждую цифру подтверждаю контактами основателей.»<b>Николай Клименко, основатель Closery</b></p>
       <div class="fx-cta"><a class="btn-primary" href="${C.BOOKING_URL}" target="_blank" rel="noopener">Записаться на созвон по КП →</a><button class="btn-ghost" id="btnPDF" type="button">Скачать PDF-разбор</button><button class="btn-ghost" id="btnLink" type="button">Скопировать ссылку на отчёт</button></div>
@@ -5850,9 +5850,9 @@ const Report = {
       </ul>
       <div class="pr-h2" style="margin-top:22px">Методология проверена в бою <i>·</i></div>
       <div class="pr-cases">
-        <div class="pr-case"><b>Топ-5 за 4,5 мес</b><span>СДЭК: с 30-го места среди ~1000 франчайзи. Выручка ×2 за 10 месяцев.</span><small>Сеть франчайзи</small></div>
+        <div class="pr-case"><b>Топ-5 за 4,5 мес</b><span>СДЭК: с 30-го места среди ~1000 франчайзи, выручка ×2 за 10 месяцев.</span><small>Сеть франчайзи</small></div>
         <div class="pr-case"><b>×8 за 9 мес</b><span>UniBox: коммерческий блок с нуля, 1,5 → 12,3 млн ₽ выручки в месяц.</span><small>E-com</small></div>
-        <div class="pr-case"><b>34% в оплату</b><span>MarketGuru: конверсия Zoom-аудита в оплату, 6 месяцев рекордов подряд.</span><small>SaaS</small></div>
+        <div class="pr-case"><b>34% в оплату</b><span>MarketGuru: конверсия Zoom-аудита в оплату, 6 месяцев рекордов подряд. Кейсы с цифрами на closery.ru.</span><small>SaaS</small></div>
       </div>`);
 
     // ── Приложение ──
