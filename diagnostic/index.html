@@ -101,6 +101,10 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 /* оглавление отчёта: текущий раздел в панели, список по клику */
 .fx-nav{position:relative;display:none}
 body.fx-reading .fx-nav{display:block}
+.fx-edit-btn{display:none;align-items:center;background:none;border:1px solid var(--rule-2);border-radius:8px;padding:8px 12px;color:var(--ink-2);font:500 11px/1 var(--ui);letter-spacing:.09em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:color .2s,border-color .2s}
+.fx-edit-btn:hover{color:var(--ok);border-color:var(--ok)}
+body.fx-reading:not(.fx-shared) .fx-edit-btn{display:inline-flex}
+@media(max-width:900px){.fx-edit-btn{font-size:0;padding:8px 10px}.fx-edit-btn::before{content:'✎';font-size:14px;line-height:1}}
 .fx-nav-btn{display:flex;align-items:center;gap:10px;max-width:min(46vw,300px);background:none;border:1px solid var(--rule-2);border-radius:8px;padding:8px 12px;color:var(--ink-2);font:500 11px/1 var(--ui);letter-spacing:.09em;text-transform:uppercase;cursor:pointer;transition:color .2s,border-color .2s}
 .fx-nav-btn b{font:500 11px/1 var(--mono);color:var(--ok);letter-spacing:.04em;flex:none}
 .fx-nav-btn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -1019,6 +1023,32 @@ body:not(.cl-unlocked) .gate{display:grid}
 body.fx-prompter-on .fx-rail{display:none}
 
 /* суфлёр ведущего */
+.fx-edit{position:fixed;top:70px;right:0;bottom:0;width:420px;max-width:100%;background:#0B1210;border-left:1px solid var(--rule-2);z-index:60;overflow:auto;padding:22px 22px 44px;display:none}
+body.fx-edit-on .fx-edit{display:block}
+@media(min-width:1280px){body.fx-edit-on .shell{padding-right:calc(420px + var(--gut))}}
+.fx-ed-h{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.fx-ed-h .fx-k{margin:0;color:var(--ok)}
+.fx-ed-note{font-size:12.5px;line-height:1.55;color:var(--ink-3);margin:12px 0 16px}
+.fx-ed-tools{display:flex;gap:8px;margin-bottom:14px;position:sticky;top:-22px;background:#0B1210;padding:6px 0;z-index:2}
+#fxEdSearch{flex:1;min-width:0;background:#0F1715;border:1px solid var(--rule-2);border-radius:8px;padding:9px 11px;color:var(--ink);font:400 13px var(--ui)}
+#fxEdSearch:focus{outline:none;border-color:var(--ok)}
+.fx-ed-only{flex:none;background:none;border:1px solid var(--rule-2);border-radius:8px;padding:0 11px;color:var(--ink-3);font:500 10.5px var(--ui);letter-spacing:.07em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.fx-ed-only.on{color:var(--ok);border-color:var(--ok)}
+.fx-ed-sec{font:500 10.5px/1.4 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:20px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+.fx-ed-row{display:grid;gap:7px;padding:11px 0;border-bottom:1px solid var(--rule)}
+.fx-ed-row.empty .fx-ed-q{color:var(--ink-3)}
+.fx-ed-q{font-size:13px;line-height:1.5;color:var(--ink-2)}
+.fx-ed-in{display:flex;align-items:center;gap:8px;background:#0F1715;border:1px solid var(--rule-2);border-radius:8px;padding:0 11px}
+.fx-ed-in i{font-style:normal;font-size:12px;color:var(--ink-3);flex:none}
+.fx-ed-in.num input{font-variant-numeric:tabular-nums}
+.fx-edit input[data-qid],.fx-edit textarea[data-qid],.fx-edit select[data-qid]{width:100%;min-width:0;background:none;border:0;color:var(--ink);font:400 13.5px var(--ui);padding:10px 0}
+.fx-edit textarea[data-qid],.fx-edit select[data-qid]{background:#0F1715;border:1px solid var(--rule-2);border-radius:8px;padding:10px 11px}
+.fx-edit input[data-qid]:focus,.fx-edit textarea[data-qid]:focus,.fx-edit select[data-qid]:focus{outline:none}
+.fx-ed-in:focus-within,.fx-edit textarea[data-qid]:focus,.fx-edit select[data-qid]:focus{border-color:var(--ok)}
+.fx-ed-chips{display:flex;flex-wrap:wrap;gap:6px}
+.fx-ed-chips button{background:#0F1715;border:1px solid var(--rule-2);border-radius:7px;padding:7px 10px;color:var(--ink-3);font:400 12px var(--ui);cursor:pointer}
+.fx-ed-chips button.on{color:var(--ok);border-color:var(--ok)}
+.fx-ed-empty{font-size:13px;color:var(--ink-3);padding:16px 0}
 .fx-prompter{position:fixed;top:70px;right:0;bottom:0;width:380px;max-width:100%;background:#0B1210;border-left:1px solid var(--rule-2);z-index:60;overflow:auto;padding:24px 24px 44px;display:none}
 body.fx-prompter-on .fx-prompter{display:block}
 @media(min-width:1280px){body.fx-prompter-on .shell{padding-right:calc(380px + var(--gut))}}
@@ -1208,7 +1238,7 @@ body.fx-prompter-on .fx-prompter{display:block}
   .pr-back-contact div .v{font-size:12px;color:#fff}
 
   /* ─── Финальный разбор 2.0 в печати ─── */
-  .fx-prompter,.fx-stick,.fx-rail{display:none!important}
+  .fx-prompter,.fx-edit,.fx-stick,.fx-rail,.fx-nav,.fx-edit-btn{display:none!important}
   .pr-x-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:6px 0 4px}
   .pr-x-kpis .pr-stat{padding:12px 13px}
   .pr-x-kpis .pr-stat .v{font-size:19px}
@@ -1467,6 +1497,7 @@ body{opacity:1;transition:opacity .18s ease}
         </button>
         <div class="fx-nav-menu" id="fxNavMenu" role="menu" hidden></div>
       </div>
+      <button class="fx-edit-btn" id="fxEditBtn" type="button">Поправить ответы</button>
       <span class="bar-progress" style="display:none"><span id="progressLabel">0%</span></span>
     </nav>
   </div>
@@ -4355,6 +4386,115 @@ const Prompter = {
     .fx-pr-dos .fx-k{color:#FBBF24}.fx-pr-dos ul{margin:8px 0 0;padding-left:16px}.fx-pr-dos li{font-size:13.5px;color:#C5D0CB;margin-bottom:6px}`
 };
 
+// ═══ ПРАВКА ОТВЕТОВ ПОСЛЕ ФИНИША ═══
+// На созвоне собственник поправляет цифру вслух: «не сорок продавцов, а двенадцать».
+// Без этого ящика пришлось бы проходить анкету заново. Правим на месте, отчёт
+// пересобирается сразу — ведомость, план и P&L считаются от новых ответов.
+const Editor = {
+  open: false, numOnly: false, query: '',
+  NUM: ['number', 'percent', 'money'],
+  mount(){
+    if (document.getElementById('fxEdit')) return;
+    const el = document.createElement('aside');
+    el.id = 'fxEdit'; el.className = 'fx-edit'; el.setAttribute('aria-label', 'Правка ответов');
+    document.body.appendChild(el);
+    el.addEventListener('click', e => {
+      const b = e.target.closest('[data-ed]'); if (!b) return;
+      if (b.dataset.ed === 'close') this.toggle(false);
+      else if (b.dataset.ed === 'num'){ this.numOnly = !this.numOnly; this.paint(); }
+      else if (b.dataset.ed === 'chip') this.chip(b.dataset.q, b.dataset.v);
+    });
+    el.addEventListener('input', e => {
+      if (e.target.id === 'fxEdSearch'){ this.query = e.target.value.trim().toLowerCase(); this.paint('search'); }
+    });
+    el.addEventListener('change', e => {
+      const f = e.target.closest('[data-qid]');
+      if (f) this.set(f.dataset.qid, f.value);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && this.open) this.toggle(false);
+    });
+  },
+  toggle(on){
+    this.mount();
+    this.open = on ?? !this.open;
+    document.body.classList.toggle('fx-edit-on', this.open);
+    if (this.open){ Prompter.toggle(false); this.paint(); }
+  },
+  set(id, raw){
+    const q = QUESTIONS.find(x => x.id === id); if (!q) return;
+    let v = raw;
+    if (this.NUM.includes(q.type)){
+      v = String(raw).replace(/[\s ]/g, '').replace(',', '.');
+      if (v !== ''){
+        const n = Number(v);
+        if (!isFinite(n) || n < 0) return;
+        v = q.type === 'percent' ? Math.min(n, 100) : n;
+      }
+    }
+    State.answers[id] = v;
+    Storage.save();
+    Final.rerender();
+    this.paint(id);
+  },
+  chip(id, v){
+    const cur = Array.isArray(State.answers[id]) ? [...State.answers[id]] : [];
+    const i = cur.indexOf(v);
+    if (i >= 0) cur.splice(i, 1); else cur.push(v);
+    State.answers[id] = cur;
+    Storage.save();
+    Final.rerender();
+    this.paint(id);
+  },
+  field(q){
+    const raw = State.answers[q.id], s = raw == null ? '' : raw;
+    if (q.type === 'select' || q.type === 'yesno'){
+      const opts = q.type === 'yesno' ? [{v:'yes', t:'Да'}, {v:'no', t:'Нет'}] : q.options;
+      return `<select data-qid="${q.id}">${s === '' ? '<option value="">не указано</option>' : ''}${opts.map(o => `<option value="${o.v}"${o.v === s ? ' selected' : ''}>${Fx.esc(o.t)}</option>`).join('')}</select>`;
+    }
+    if (q.type === 'chips'){
+      const arr = Array.isArray(raw) ? raw : [];
+      return `<div class="fx-ed-chips">${q.options.map(o => `<button type="button" data-ed="chip" data-q="${q.id}" data-v="${o.v}" class="${arr.includes(o.v) ? 'on' : ''}">${Fx.esc(o.t)}</button>`).join('')}</div>`;
+    }
+    if (q.type === 'textarea') return `<textarea data-qid="${q.id}" rows="2">${Fx.esc(s)}</textarea>`;
+    const num = this.NUM.includes(q.type);
+    return `<span class="fx-ed-in${num ? ' num' : ''}"><input data-qid="${q.id}" type="text"${num ? ' inputmode="decimal"' : ''} value="${Fx.esc(s)}" autocomplete="off">${q.unit ? `<i>${q.unit}</i>` : ''}</span>`;
+  },
+  paint(focus){
+    const el = document.getElementById('fxEdit'); if (!el || !this.open) return;
+    // Каркас строится один раз: поле поиска нельзя пересоздавать на каждый
+    // символ, иначе ломается каретка, выделение и экранная клавиатура.
+    if (!el.querySelector('.fx-ed-list')){
+      el.innerHTML = `<div class="fx-ed-h"><span class="fx-k">Правка ответов</span><button class="fx-pr-x" data-ed="close" type="button">Esc</button></div>
+        <p class="fx-ed-note">Правьте прямо здесь: отчёт пересобирается сразу, ведомость, план и P&amp;L считаются от новых ответов. Номер и дата документа не меняются. После правки ссылку на отчёт нужно скопировать заново.</p>
+        <div class="fx-ed-tools"><input id="fxEdSearch" type="search" placeholder="Найти вопрос" autocomplete="off"><button class="fx-ed-only" data-ed="num" type="button">Только цифры</button></div>
+        <div class="fx-ed-list"></div>`;
+      el.querySelector('#fxEdSearch').value = this.query;
+    }
+    const only = el.querySelector('.fx-ed-only');
+    if (only) only.classList.toggle('on', this.numOnly);
+    const list = State.visibleQuestions().filter(q => {
+      if (this.numOnly && !this.NUM.includes(q.type)) return false;
+      if (!this.query) return true;
+      return (q.title || '').toLowerCase().includes(this.query) || (SECTION_LABELS[q.section] || '').toLowerCase().includes(this.query);
+    });
+    let body = '', sec = '';
+    list.forEach(q => {
+      if (q.section !== sec){ sec = q.section; body += `<div class="fx-ed-sec">${SECTION_LABELS[sec]}</div>`; }
+      const v = State.answers[q.id];
+      const empty = v == null || v === '' || (Array.isArray(v) && !v.length);
+      body += `<div class="fx-ed-row${empty ? ' empty' : ''}"><span class="fx-ed-q">${Fx.esc(q.title)}</span>${this.field(q)}</div>`;
+    });
+    const box = el.querySelector('.fx-ed-list'), top = el.scrollTop;
+    box.innerHTML = body || '<p class="fx-ed-empty">Ничего не нашлось. Снимите фильтр или измените запрос.</p>';
+    el.scrollTop = top;
+    if (focus && focus !== 'search'){
+      const f = el.querySelector(`[data-qid="${focus}"]`);
+      if (f && f !== document.activeElement) f.focus();
+    }
+  }
+};
+
 // ═══ ФИНАЛЬНЫЙ ЭКРАН ═══
 // Восемь блоков в порядке вопросов, которые собственник задаёт про себя:
 // насколько всё плохо → вы меня поняли → где конкретно → почему → реально ли
@@ -5444,6 +5584,9 @@ const Final = {
     this._navMap = {};
     acts.forEach(a => { this._navMap[a.key] = a; });
     document.body.classList.add('fx-reading');
+    document.body.classList.toggle('fx-shared', !!State.shared);
+    const eb = document.getElementById('fxEditBtn');
+    if (eb && !eb._bound){ eb._bound = true; eb.addEventListener('click', () => Editor.toggle()); }
     const close = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
     close();
     if (this._navBound) return;
@@ -6149,7 +6292,7 @@ document.addEventListener('DOMContentLoaded', ()=>App.init());
 // Наружу отдаём модули модели — для проверки расчётов и отладки в консоли
 return { State, Scoring, FinModel, Profile, Funnel, Capacity, KeyMetrics,
          Constraint, Problems, Perception, GoalGap, DataQuality, Roadmap, Final, Report, TestFill,
-         Fx, Ledger, Story, GoalPath, Waves, Prompter, Playbook, Market, Share, Session, Storage };
+         Fx, Ledger, Story, GoalPath, Waves, Prompter, Playbook, Market, Share, Session, Storage, Editor };
 })();
 </script>
 </body>
