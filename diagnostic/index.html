@@ -4114,7 +4114,7 @@ const Story = {
     if (ch[0]) out.push(`Причина у этих потерь одна: ${ch[0].h.toLowerCase()}${ch[1] ? '. Дальше по цепочке — ' + ch[1].h.toLowerCase() : ''}. Поэтому чинить нужно систему, а не отдельный этап.`);
     const bel = perc ? perc.believed.toLowerCase() : '', cn = c ? c.name.toLowerCase() : '';
     if (perc && perc.kind === 'gap' && !cn.includes(bel) && !bel.includes(cn))
-      out.push(`Ваша версия главной проблемы — «${perc.believed.toLowerCase()}». Данные показывают другое: ${Fx.strip(Fx.noParens(c.why)).replace(/^./, m => m.toLowerCase())}`);
+      out.push(`Ваша версия главной проблемы — «${perc.believed.toLowerCase()}». Данные показывают другое: ${c.name.toLowerCase()}. Разбор с цифрами в разделе «Диагноз».`);
     if (goal) out.push(goal.sysOk
       ? `Цель ×${goal.multTxt} закрывается без роста рекламного бюджета: хватает порядка в воронке, цены и повторных продаж.`
       : `Цель ×${goal.multTxt} не закрывается ни трафиком, ни конверсией по отдельности. Только системой и уже потом трафиком.`);
@@ -5018,9 +5018,19 @@ const Final = {
   mistakes(x){
     const L = x.L;
     if (!L) return [];
-    return [...L.D].sort((p, q) => q.gain - p.gain)
-      .map(d => { const pb = Playbook.get(d.id); return pb ? {d, pb} : null; })
-      .filter(Boolean);
+    // Один рычаг может стоять на двух этапах сразу: CRM чинит и первый контакт,
+    // и работу с базой. В разборе это одна ошибка с общими деньгами, иначе
+    // карточка с теми же шагами печаталась дважды подряд.
+    const by = new Map();
+    [...L.D].forEach(d => {
+      const pb = Playbook.get(d.id); if (!pb) return;
+      const cur = by.get(d.id);
+      if (!cur){ by.set(d.id, {d: {...d}, pb, stages: [d.stage]}); return; }
+      const lead = d.gain > cur.d.gain ? d : cur.d;
+      cur.d = {...lead, gain: cur.d.gain + d.gain, rec90: (cur.d.rec90 || 0) + (d.rec90 || 0), wave: Math.min(cur.d.wave, d.wave)};
+      if (!cur.stages.includes(d.stage)) cur.stages.push(d.stage);
+    });
+    return [...by.values()].sort((p, q) => q.d.gain - p.d.gain);
   },
 
   // Матрица приоритетов: усилие против эффекта, чтобы было видно, с чего начать сегодня
@@ -5069,7 +5079,7 @@ const Final = {
     if (!M.length) return '';
     const rest = all.length - M.length;
     const cards = M.map((m, i) => {
-      const st = Ledger.NAMES[m.d.stage] || '';
+      const st = (m.stages || [m.d.stage]).map(k => Ledger.NAMES[k] || '').filter(Boolean).join(' и ');
       const eff = m.d.unit === 'pp' && m.d.stage === 'repeat' ? `+${Fx.ppv(m.d.eff)} п.п. к доле повторных` : this.driverUnit(L, m.d);
       return `<div class="fx-fix">
         <div class="fx-fix-h">
@@ -5882,7 +5892,7 @@ const Report = {
     const MS = Final.mistakes(x).slice(0, 6);
     if (MS.length){
       const fixCard = (m, i) => {
-        const stn = Ledger.NAMES[m.d.stage] || '';
+        const stn = (m.stages || [m.d.stage]).map(k => Ledger.NAMES[k] || '').filter(Boolean).join(' и ');
         const eff = m.d.unit === 'pp' && m.d.stage === 'repeat' ? `+${Fx.ppv(m.d.eff)} п.п. к доле повторных` : Final.driverUnit(L, m.d);
         return `<div class="pr-x-fix">
           <div class="pr-x-fh"><div><span class="s">Ошибка ${String(i + 1).padStart(2, '0')} · ${stn.toLowerCase()}</span><b class="t">${m.pb.err}</b>${m.d.why ? `<p class="n">Из ваших ответов: ${m.d.why}.</p>` : ''}</div>
