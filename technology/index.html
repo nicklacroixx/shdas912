@@ -92,10 +92,10 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 .btn:hover svg{transform:translateX(3px)}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--rule-2)}
 .btn-ghost:hover{background:transparent;border-color:var(--ink-3)}
-.sec{padding:clamp(110px,12vw,190px) 0 0}
+.sec{padding:clamp(88px,9vw,150px) 0 0}
 
 /* ── первый экран ── */
-.hero{padding-top:clamp(72px,9vw,150px)}
+.hero{padding-top:clamp(48px,6vw,96px)}
 .hero-top{display:block}
 .hero-side{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(28px,5vw,96px);align-items:end;margin-top:clamp(36px,4vw,64px);padding-top:28px;border-top:1px solid var(--rule)}
 .hero-side .hero-cta{margin-top:0}
@@ -104,7 +104,7 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 @media(max-width:980px){.hero-side{grid-template-columns:minmax(0,1fr)}}
 
 /* ведомость, которую проходит скан */
-.snap{margin-top:clamp(80px,9vw,140px)}
+.snap{margin-top:clamp(64px,7vw,110px)}
 .snap-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding-bottom:18px}
 .snap-top h4{font-weight:500;font-size:15px}
 .snap-top p{font-size:13.5px;color:var(--ink-3);margin-top:4px}
@@ -139,7 +139,7 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 }
 
 /* ── сцена: шаги слева, экран справа закреплён ── */
-.how-head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(32px,5vw,96px);align-items:end;margin-bottom:clamp(40px,5vw,80px)}
+.how-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,5vw,96px);align-items:end;margin-bottom:clamp(24px,3vw,48px)}
 @media(max-width:980px){.how-head{grid-template-columns:minmax(0,1fr)}}
 .stage{display:grid;grid-template-columns:minmax(0,1fr)}
 .step{padding:40px 0 28px}
@@ -158,12 +158,12 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 .scr.on .pin:nth-of-type(2){transition-delay:.12s}.scr.on .pin:nth-of-type(3){transition-delay:.24s}
 @media(min-width:1081px){
   .stage{grid-template-columns:minmax(0,4.1fr) minmax(0,7.9fr);column-gap:clamp(48px,5vw,100px)}
-  .step{grid-column:1;min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:0;opacity:.28;transition:opacity .6s var(--ease)}
+  .step{grid-column:1;min-height:74vh;display:flex;flex-direction:column;justify-content:center;padding:0;opacity:.28;transition:opacity .6s var(--ease)}
   .step.on{opacity:1}
   .step.r1{grid-row:1}.step.r2{grid-row:2}.step.r3{grid-row:3}.step.r4{grid-row:4}
-  .scr{grid-column:2;grid-row:1/5;position:sticky;top:calc(50vh - 280px);align-self:start;opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .8s var(--ease);pointer-events:none}
+  .scr{grid-column:2;grid-row:1/5;position:sticky;top:calc(50vh - 250px);align-self:start;opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .8s var(--ease);pointer-events:none}
   .scr.on{opacity:1;transform:none;pointer-events:auto}
-  .frame{height:560px}
+  .frame{height:500px}
   .frame::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(0deg,var(--paper),transparent);pointer-events:none}
 }
 @media(max-width:1080px){.pin{display:none}.notes li i{display:none}.notes li{grid-template-columns:1fr}.scr{margin:10px 0 30px}.step{padding-top:60px}}
@@ -181,7 +181,7 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 .crumbs b{color:var(--ink);font-weight:500}
 .crumbs .tag{white-space:nowrap;flex:none;margin-left:12px;font-size:11px;color:var(--amber);border:1px solid rgba(224,178,90,.3);border-radius:5px;padding:3px 7px}
 .pane{padding:22px}
-@media(max-width:800px){.app{grid-template-columns:minmax(0,1fr)}.side{display:none}}
+@media(max-width:1360px){.app{grid-template-columns:minmax(0,1fr)}.side{display:none}}
 
 /* МРТ */
 .rep-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:6px}
@@ -278,7 +278,7 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 /* 44% */
 .big{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(24px,5vw,90px);align-items:end}
 .big-n{font-family:var(--num);font-weight:600;font-size:clamp(130px,20vw,320px);line-height:.76;letter-spacing:-.05em;color:var(--loss);font-feature-settings:"lnum" 1}
-.big p{font-size:clamp(18px,1.6vw,23px);line-height:1.5;color:var(--ink-2);max-width:40ch;padding-bottom:6px}
+.big p{font-size:clamp(18px,1.6vw,23px);line-height:1.5;color:var(--ink-2);max-width:44ch;padding-bottom:6px}
 .big p strong{color:var(--ink);font-weight:500}
 .big small{display:block;margin-top:20px;font-size:13px;color:var(--ink-3)}
 @media(max-width:800px){.big{grid-template-columns:minmax(0,1fr)}}
@@ -291,7 +291,7 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 @media(max-width:860px){.src{grid-template-columns:minmax(0,1fr)}}
 
 /* основатель */
-.who{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(36px,6vw,120px);align-items:end}
+.who{display:grid;grid-template-columns:minmax(0,4.5fr) minmax(0,7.5fr);gap:clamp(36px,6vw,110px);align-items:center}
 .who-ph{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:var(--paper)}
 .who-ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.05) brightness(.9);transform:scale(1.04);transition:transform 1.6s var(--ease)}
 .who-ph.in img{transform:none}
@@ -326,7 +326,7 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 .steps p{font-size:15.5px;line-height:1.6;color:var(--ink-2)}
 @media(max-width:860px){.steps{grid-template-columns:minmax(0,1fr)}}
 
-.end{padding-top:clamp(130px,14vw,220px);padding-bottom:clamp(100px,11vw,170px)}
+.end{padding-top:clamp(110px,11vw,180px);padding-bottom:clamp(90px,9vw,140px)}
 .end h2{max-width:14ch;font-size:clamp(38px,5.6vw,92px)}
 .end .hero-cta{margin-top:40px}
 .end-alt{margin-top:22px;font-size:14px;color:var(--ink-3)}
@@ -400,7 +400,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
       <h1 class="rv">Деньги ищем<br>инструментами</h1>
     </div>
     <div class="hero-side rv">
-      <p class="lede">Консультант приходит с опытом и презентацией. Closery приходит с четырьмя системами: они считают потери компании в рублях, объясняют, как их вернуть, находят покупателей и не дают сделке потеряться между касаниями.</p>
+      <p class="lede">Консультант приходит с опытом и презентацией. Closery — с четырьмя системами. Они считают, сколько компания теряет в рублях, показывают, как это вернуть, находят покупателей и следят, чтобы ни одна сделка не потерялась.</p>
       <div class="hero-cta">
         <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
         <a class="btn btn-ghost" href="/mrt-demo/">Демо за 2 минуты</a>
@@ -431,7 +431,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
   <div class="w">
     <div class="how-head">
       <div><p class="kick rv">Как это устроено</p><h2 class="rv">Четыре системы, одна задача</h2></div>
-      <p class="lede rv">Вернуть деньги, которые компания уже заработала, но не забрала. Каждая система закрывает свой участок: где теряем, как чиним, у кого берём новые сделки, как их не упустить.</p>
+      <p class="lede rv">Вернуть деньги, которые компания уже заработала, но не довела до кассы. Каждая система отвечает на свой вопрос: где уходят деньги, как их вернуть, где взять новые сделки и как их не упустить.</p>
     </div>
 
     <div class="stage" id="stage">
@@ -439,7 +439,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
       <article class="step r1" data-i="0">
         <div class="step-n">01</div>
         <h3>Коммерческий МРТ</h3>
-        <p>За 120 минут собственник отвечает на 60 вопросов о своих цифрах. Модель собирает воронку компании и сравнивает каждый этап с потенциалом этой же команды при построенной системе. Разницу переводит в валовую прибыль один раз, на том этапе, где она возникла.</p>
+        <p>За 120 минут вместе с Николаем собственник проходит 60 вопросов о своих цифрах. Модель собирает из ответов воронку компании и сравнивает каждый этап с тем, что даёт эта же команда при выстроенной системе. Разница переводится в валовую прибыль — один раз, на том этапе, где возникла.</p>
         <ol class="notes">
           <li><i>1</i>Серым — как этап работает сейчас, зелёным — сколько добавляет практика</li>
           <li><i>2</i>Сумма в рублях в месяц, без двойного счёта между этапами</li>
@@ -474,7 +474,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
       <article class="step r2" data-i="1">
         <div class="step-n">02</div>
         <h3>Разбор ошибок</h3>
-        <p>Каждая найденная ошибка разобрана до инструкции: шаги, ответственный, срок, норматив проверки и место, где внедрение обычно ломается. Порядок задаёт матрица — эффект в рублях против реального усилия. Отчёт можно внедрять своей командой.</p>
+        <p>Каждая найденная ошибка разобрана до инструкции: что сделать, кто отвечает, за какой срок, как проверить результат и где внедрение обычно ломается. Очерёдность задаёт матрица: сколько денег вернёт исправление и сколько сил оно потребует. По отчёту можно работать своей командой.</p>
         <ol class="notes">
           <li><i>1</i>Сначала то, что внедрить дёшево, а стоит дорого</li>
           <li><i>2</i>Шаги внедрения с ответственным и сроком</li>
@@ -520,7 +520,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
       <article class="step r3" data-i="2">
         <div class="step-n">03</div>
         <h3>Радар</h3>
-        <p>Компании сами сообщают рынку о своих задачах: открывают вакансии, теряют выручку, меняют директора. Радар собирает эти сигналы из открытых источников, сверяет выручку с отчётностью в ФНС за пять лет и ставит компании в очередь по вероятности сделки. Профиль клиента настраивается под вас.</p>
+        <p>Компании сами сообщают рынку о своих задачах: открывают вакансии, теряют выручку, меняют директора. Радар собирает эти сигналы из открытых источников, сверяет выручку с отчётностью в ФНС за пять лет и выстраивает очередь: первыми идут те, с кем сделка вероятнее. Профиль клиента настраивается под ваш рынок.</p>
         <ol class="notes">
           <li><i>1</i>Одна оценка 0–100: финансы, боль, срочность, доступ к тому, кто решает</li>
           <li><i>2</i>Выручка по годам из бухгалтерской отчётности</li>
@@ -568,7 +568,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
       <article class="step r4" data-i="3">
         <div class="step-n">04</div>
         <h3>Кабинет</h3>
-        <p>Сделки чаще умирают не на отказе, а после первого касания, когда никто не написал второй раз. Кабинет собирает касания в план дня, ведёт компанию одной карточкой со всей историей и сам подтягивает ответы из почты.</p>
+        <p>Сделка чаще теряется не на отказе, а после первого касания: второго письма никто не написал, ответ клиента утонул в почте. Кабинет собирает касания в план дня, ведёт каждую компанию одной карточкой со всей историей и сам подтягивает ответы.</p>
         <ol class="notes">
           <li><i>1</i>План дня: кому, каким каналом и в каком порядке</li>
           <li><i>2</i>Задача со сроком подсвечивается до того, как сгорит</li>
@@ -645,7 +645,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
     <div>
       <p class="kick rv">Кто стоит за технологией</p>
       <blockquote class="rv">Подтверждаю каждую цифру контактами основателей. Если коротко: приношу прибыль.</blockquote>
-      <p class="lede rv">Инструменты Closery выросли из того, что Николай годами собирал руками внутри компаний: ведомость потерь вместо ощущений, конкурсный найм вместо случайного, план дня вместо «напомни мне». Каждый МРТ он ведёт лично.</p>
+      <p class="lede rv">Инструменты Closery выросли из того, что Николай годами делал руками внутри компаний: считал потери по этапам, а не по ощущениям, нанимал через конкурс, а не по знакомству, вёл отдел по плану дня. Каждый МРТ он проводит лично.</p>
       <div class="roles rv">
         <div><b>CDEK</b><span>Коммерческий директор франчайзи-сети, топ-5 из ~1000 за 4,5 месяца</span></div>
         <div><b>Vagabond</b><span>Отдел продаж с нуля, 2,5 млн ₽ первых двух сделок</span></div>
@@ -677,7 +677,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
   <div class="w">
     <div class="how-head" style="margin-bottom:0">
       <div><p class="kick rv">Цена</p><h2 class="rv">Считается от размера течи</h2></div>
-      <p class="lede rv">Сначала МРТ показывает, сколько денег уходит и где. Объём работ и цена считаются от этой суммы: маленькую течь незачем закрывать дорогим проектом.</p>
+      <p class="lede rv">Сначала МРТ показывает, сколько денег уходит и где. От этой суммы считаются объём работ и цена: небольшую течь незачем закрывать дорогим проектом.</p>
     </div>
     <div class="steps rv">
       <div><span class="n">§ 1</span><b>МРТ за 50&nbsp;000&nbsp;₽</b><p>Ведомость потерь в рублях и приоритет. Если потерь, которые можно посчитать, нет, возвращаем оплату.</p></div>
