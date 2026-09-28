@@ -206,7 +206,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     radial-gradient(1100px 620px at 98% 0%, rgba(240,85,90,.055), transparent 56%),
     radial-gradient(900px 900px at 50% 118%, rgba(52,211,153,.045), transparent 60%);}
 main,header.bar,footer{position:relative;z-index:1}
-.w{max-width:1120px;margin:0 auto;padding:0 var(--gut)}
+.w{max-width:1440px;margin:0 auto;padding:0 var(--gut)}
 .w-wide{max-width:1440px;margin:0 auto;padding:0 var(--gut)}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--ok);outline-offset:3px}
@@ -258,7 +258,7 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
 .hero .display{max-width:17ch}
 .hero-split{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(28px,4.5vw,56px);align-items:start;
   margin-top:clamp(26px,3.6vw,40px)}
-@media(max-width:900px){.hero-split{grid-template-columns:1fr}.hero-right{position:static!important}}
+@media(max-width:900px){.hero-split{grid-template-columns:minmax(0,1fr)}.hero-right{position:static!important}}
 .hero-right{position:sticky;top:94px}
 
 .hour-calc{position:relative;overflow:hidden;border-radius:var(--r);border:1px solid var(--rule-2);
@@ -1107,6 +1107,29 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 }
 .cmp-foot{margin-top:18px;font-size:15px;color:var(--ink-2);max-width:62ch;line-height:1.6}
 .cmp-foot b{color:var(--ink);font-weight:600}
+
+/* ── язык «Скан + Досье» на первом экране ── */
+.hx-frame{position:relative;padding:14px;--c:rgba(127,233,192,.75);--L:22px;
+  background:
+   linear-gradient(var(--c),var(--c)) 0 0/var(--L) 1px no-repeat,linear-gradient(var(--c),var(--c)) 0 0/1px var(--L) no-repeat,
+   linear-gradient(var(--c),var(--c)) 100% 0/var(--L) 1px no-repeat,linear-gradient(var(--c),var(--c)) 100% 0/1px var(--L) no-repeat,
+   linear-gradient(var(--c),var(--c)) 0 100%/var(--L) 1px no-repeat,linear-gradient(var(--c),var(--c)) 0 100%/1px var(--L) no-repeat,
+   linear-gradient(var(--c),var(--c)) 100% 100%/var(--L) 1px no-repeat,linear-gradient(var(--c),var(--c)) 100% 100%/1px var(--L) no-repeat}
+.hx-cap{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);padding:0 4px 10px}
+.hx-cap b{color:var(--ok);font-weight:500}
+.hx-cap i{font-style:normal;color:var(--ink-2)}
+.hx-frame .hour-calc{overflow:hidden}
+.hx-beam{position:absolute;left:0;right:0;top:0;height:2px;z-index:6;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--ok) 20%,var(--ok-soft) 50%,var(--ok) 80%,transparent);box-shadow:0 0 22px 3px rgba(52,211,153,.4);
+  animation:hxsweep 7s linear infinite}
+.hx-beam::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:60px;background:linear-gradient(0deg,rgba(52,211,153,.10),transparent)}
+@keyframes hxsweep{0%{top:0;opacity:0}4%{opacity:1}88%{top:100%;opacity:1}90%,100%{top:100%;opacity:0}}
+.hx-slice{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);margin-bottom:26px}
+.hx-slice b{color:var(--ok);font-weight:500}
+.hx-slice::after{content:"";flex:1;max-width:340px;height:1px;background:linear-gradient(90deg,var(--rule-2),transparent)}
+.hero-proof.hx-doc{font-family:'Source Serif 4',Georgia,serif;font-weight:600;font-size:15px;color:var(--ink-2);letter-spacing:0;padding-left:14px;border-left:1px solid var(--rule-2);margin-top:22px}
+@media(prefers-reduced-motion:reduce){.hx-beam{display:none}}
+@media(max-width:600px){.hx-cap i{display:none}.hx-cap span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.hx-slice span+span{display:none}}
 </style>
 <script>
 (function(){
@@ -1334,6 +1357,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <main id="top">
 
 <section class="w hero">
+  <div class="hx-slice"><span>Срез <b>00</b></span><span>Коммерческий МРТ · снимок компании</span></div>
   <h1 class="display">Вы уже теряете деньги<br>Вопрос — <span>сколько</span></h1>
 
   <div class="hero-split">
@@ -1355,11 +1379,13 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
         <a class="btn js-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Показать, сколько я теряю →</a>
         <span class="btn-note">50 000 ₽ · 120 минут</span>
       </div>
-      <p class="hero-proof">Лично Николай Клименко — коммерческий директор франчайзи-сети CDEK и Vagabond, руководитель продаж MarketGuru</p>
+      <p class="hero-proof hx-doc">Лично Николай Клименко — коммерческий директор франчайзи-сети CDEK и Vagabond, руководитель продаж MarketGuru</p>
     </div>
 
     <div class="hero-right">
-      <div class="hour-calc surface">
+      <div class="hx-frame">
+      <div class="hx-cap"><span><b>Срез 01</b> · цена часа собственника</span><i>живой расчёт</i></div>
+      <div class="hour-calc surface"><i class="hx-beam" aria-hidden="true"></i>
         <div class="hour-scenes" aria-hidden="true">
           <div class="hour-scene active" data-scene="0"><video class="hour-video" src="scene1.mp4" poster="scene1_poster.jpg" muted loop playsinline preload="auto"></video></div>
           <div class="hour-scene" data-scene="1"><video class="hour-video" src="scene2.mp4" poster="scene2_poster.jpg" muted loop playsinline preload="none"></video></div>
@@ -1383,6 +1409,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
           </div>
           <div class="hour-foot">Он стоит дороже, чем вы думаете.</div>
         </div>
+      </div>
       </div>
     </div>
   </div>
