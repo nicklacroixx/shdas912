@@ -1023,6 +1023,85 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
 .faq-a p{color:var(--ink-2);font-size:14.5px;line-height:1.65;padding:0 22px 20px}
 
+
+/* ── самопроверка ── */
+.chk{padding:0;overflow:hidden}
+.chk-q{display:grid;grid-template-columns:34px 1fr auto;gap:14px 16px;align-items:center;
+  padding:18px clamp(18px,3vw,28px);border-top:1px solid var(--rule)}
+.chk-q:first-child{border-top:none}
+.chk-n{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.1em}
+.chk-t{font-size:15.5px;line-height:1.5;color:var(--ink)}
+.chk-yn{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--rule-2);border-radius:999px}
+.chk-yn button{font-family:var(--disp);font-size:12.5px;padding:7px 15px;border:none;border-radius:999px;
+  background:none;color:var(--ink-2);cursor:pointer;transition:background .2s,color .2s}
+.chk-yn button:hover{color:var(--ink)}
+.chk-yn button[aria-pressed="true"][data-v="1"]{background:var(--ok);color:var(--bg)}
+.chk-yn button[aria-pressed="true"][data-v="0"]{background:var(--loss-soft);color:var(--bg)}
+@media(max-width:620px){.chk-q{grid-template-columns:26px 1fr}.chk-yn{grid-column:2;justify-self:start}}
+.chk-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:16px clamp(18px,3vw,28px);border-top:1px solid var(--rule-2);background:rgba(255,255,255,.015)}
+.chk-cnt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.chk-res{display:none;padding:clamp(22px,3vw,30px) clamp(18px,3vw,28px);border-top:1px solid var(--rule-2)}
+.chk-res.on{display:block}
+.chk-res h3{font-family:var(--disp);font-size:clamp(18px,2.3vw,23px);font-weight:600;letter-spacing:-.02em;line-height:1.3}
+.chk-res>p{color:var(--ink-2);font-size:15.5px;line-height:1.6;margin-top:10px;max-width:62ch}
+.chk-leaks{margin-top:16px;border-top:1px solid var(--rule)}
+.chk-leaks li{list-style:none;display:flex;justify-content:space-between;gap:16px;padding:12px 0;
+  border-bottom:1px solid var(--rule);font-size:15px}
+.chk-leaks li b{font-weight:600}
+.chk-leaks li span{font-family:var(--mono);font-size:12px;color:var(--loss-soft);white-space:nowrap}
+@media(max-width:620px){.chk-leaks li{flex-direction:column;gap:4px}}
+.chk-note{font-size:13px!important;color:var(--ink-3)!important}
+.chk-cta{display:flex;gap:14px 22px;align-items:center;flex-wrap:wrap;margin-top:22px}
+.chk-cta .lnk{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ok);text-decoration:none}
+.chk-cta .lnk:hover{color:var(--ok-soft)}
+
+/* ── кому подойдёт ── */
+.fit{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:880px){.fit{grid-template-columns:1.1fr 1fr 1.1fr}}
+.fit>div{background:linear-gradient(168deg,var(--paper-2),var(--paper) 70%);border:1px solid var(--rule-2);
+  border-radius:var(--r);padding:clamp(22px,2.6vw,28px)}
+.fit>div.fit-must{border-color:rgba(52,211,153,.45)}
+.fit>div.fit-no{border-color:rgba(228,103,107,.4)}
+.fit-k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.fit h3{font-family:var(--disp);font-size:19px;font-weight:600;letter-spacing:-.02em;margin:8px 0 16px}
+.fit-must h3{color:var(--ok)} .fit-no h3{color:var(--loss-soft)}
+.fit li{list-style:none;display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:14.5px;line-height:1.55;
+  color:var(--ink-2);padding:8px 0;border-top:1px solid var(--rule)}
+.fit li:first-child{border-top:none}
+.fit li::before{font-family:var(--mono);font-size:13px}
+.fit-must li::before{content:"✓";color:var(--ok)}
+.fit-plus li::before{content:"+";color:var(--amber)}
+.fit-no li::before{content:"—";color:var(--loss-soft)}
+
+/* ── сравнение с альтернативами ── */
+.cmp-pick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.cmp-pick button{font-family:var(--disp);font-size:13px;padding:10px 16px;border:1px solid var(--rule-2);border-radius:999px;
+  background:none;color:var(--ink-2);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.cmp-pick button:hover{color:var(--ink);border-color:var(--ink-3)}
+.cmp-pick button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cmp{padding:0;overflow:hidden}
+.cmp-row{display:grid;grid-template-columns:170px repeat(4,1fr);border-top:1px solid var(--rule)}
+.cmp-row:first-child{border-top:none}
+.cmp-row>div{padding:15px 16px;font-size:14px;line-height:1.5;color:var(--ink-2);transition:opacity .25s,color .25s,background .25s}
+.cmp-row>.cmp-h{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.cmp-head>div{font-family:var(--disp);font-size:14px;color:var(--ink);font-weight:600;letter-spacing:-.01em}
+.cmp-row>[data-c="cl"]{background:rgba(52,211,153,.07);color:var(--ink)}
+.cmp-head>[data-c="cl"]{color:var(--ok)}
+.cmp-row>[data-c]{opacity:.38}
+.cmp-row>[data-c="cl"]{opacity:1}
+.cmp[data-sel="dir"] .cmp-row>[data-c="dir"],.cmp[data-sel="con"] .cmp-row>[data-c="con"],
+.cmp[data-sel="own"] .cmp-row>[data-c="own"]{opacity:1;color:var(--ink);background:rgba(255,255,255,.035)}
+@media(max-width:820px){
+  .cmp-row{grid-template-columns:1fr 1fr}
+  .cmp-row>.cmp-h{grid-column:1/-1;padding-bottom:0}
+  .cmp-head>.cmp-h{display:none}
+  .cmp .cmp-row>[data-c]:not([data-c="cl"]){display:none}
+  .cmp[data-sel="dir"] .cmp-row>[data-c="dir"],.cmp[data-sel="con"] .cmp-row>[data-c="con"],
+  .cmp[data-sel="own"] .cmp-row>[data-c="own"]{display:block;opacity:1}
+}
+.cmp-foot{margin-top:18px;font-size:15px;color:var(--ink-2);max-width:62ch;line-height:1.6}
+.cmp-foot b{color:var(--ink);font-weight:600}
 </style>
 <script>
 (function(){
@@ -1327,10 +1406,33 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   </div>
 </section>
 
+<section class="sec" id="selfcheck">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label"><b>01</b>Проверка за минуту</span>
+      <h2 class="rv">Шесть вопросов о вашей коммерции</h2>
+      <p class="lede rv" style="margin-top:20px">Каждый вопрос соответствует одной строке из ведомости потерь. Отвечайте как есть: результат видите только вы, страница ничего не отправляет и не сохраняет.</p>
+    </div>
+    <div class="chk surface rv" id="chk">
+      <div class="chk-list">
+        <div class="chk-q" data-leak="Заявки без ответа в первый час" data-amt="4,1 млн ₽"><span class="chk-n">01</span><span class="chk-t">Вы знаете, через сколько минут в среднем отвечают на новую заявку, включая вечер и выходные?</span><span class="chk-yn"><button type="button" data-v="1" aria-pressed="false">Да</button><button type="button" data-v="0" aria-pressed="false">Нет</button></span></div>
+        <div class="chk-q" data-leak="Сделки без второго касания" data-amt="6,8 млн ₽"><span class="chk-n">02</span><span class="chk-t">У каждой открытой сделки в CRM стоит следующий шаг с датой?</span><span class="chk-yn"><button type="button" data-v="1" aria-pressed="false">Да</button><button type="button" data-v="0" aria-pressed="false">Нет</button></span></div>
+        <div class="chk-q" data-leak="Нет работы с базой и повторных продаж" data-amt="17,9 млн ₽"><span class="chk-n">03</span><span class="chk-t">Клиентам, которые купили полгода назад, кто-то звонил или писал с новым поводом?</span><span class="chk-yn"><button type="button" data-v="1" aria-pressed="false">Да</button><button type="button" data-v="0" aria-pressed="false">Нет</button></span></div>
+        <div class="chk-q" data-leak="Воронка не прозрачна по этапам" data-amt=""><span class="chk-n">04</span><span class="chk-t">Вы видите конверсию на каждом этапе воронки, а не одну общую?</span><span class="chk-yn"><button type="button" data-v="1" aria-pressed="false">Да</button><button type="button" data-v="0" aria-pressed="false">Нет</button></span></div>
+        <div class="chk-q" data-leak="Решения, которые ждут собственника" data-amt="1,5 млн ₽"><span class="chk-n">05</span><span class="chk-t">Менеджер может согласовать скидку или нестандартное условие, не дожидаясь вас?</span><span class="chk-yn"><button type="button" data-v="1" aria-pressed="false">Да</button><button type="button" data-v="0" aria-pressed="false">Нет</button></span></div>
+        <div class="chk-q" data-leak="Лишний ФОТ отдела продаж" data-amt="12,3 млн ₽"><span class="chk-n">06</span><span class="chk-t">Вы знаете, сколько выручки приносит каждый рубль зарплаты отдела продаж?</span><span class="chk-yn"><button type="button" data-v="1" aria-pressed="false">Да</button><button type="button" data-v="0" aria-pressed="false">Нет</button></span></div>
+      </div>
+      <div class="chk-bar"><span class="chk-cnt" id="chkCnt">Отвечено 0 из 6</span><button class="btn" id="chkGo" type="button" disabled>Показать результат</button></div>
+      <div class="chk-res" id="chkRes" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>01</b>Коротко, что это</span>
+      <span class="label"><b>02</b>Коротко, что это</span>
       <h2 class="rv">Платная диагностика, которая находит деньги</h2>
       <p class="lede rv" style="margin-top:20px">Для собственников компаний, где уже есть отдел продаж, поток заявок и CRM — но рост выручки начал упираться в коммерческую систему.</p>
     </div>
@@ -1343,6 +1445,54 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     <p class="gap-note rv">После МРТ у пропавшей прибыли есть сумма и <u>точный адрес</u></p>
   </div>
 </section>
+
+<section class="sec" id="fit">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label"><b>03</b>Кому подходит</span>
+      <h2 class="rv">Кому МРТ пока <span class="hl-loss">рано</span></h2>
+      <p class="lede rv" style="margin-top:20px">МРТ считает потери по данным. Если данных нет или продаж ещё нет, считать нечего, и 50 000 ₽ лучше оставить в компании.</p>
+    </div>
+    <div class="fit rv">
+      <div class="fit-must">
+        <span class="fit-k">Без этого не получится</span>
+        <h3>Нужно для МРТ</h3>
+        <ul>
+          <li>Продаёт команда, а не только собственник</li>
+          <li>Есть поток заявок или клиентская база, по которой можно считать</li>
+          <li>Сделки видны в CRM, звонки или переписка сохраняются</li>
+          <li>Собственник сам участвует в 120 минутах и готов открыть цифры</li>
+        </ul>
+      </div>
+      <div class="fit-plus">
+        <span class="fit-k">Сделает расчёт точнее</span>
+        <h3>Будет плюсом</h3>
+        <ul>
+          <li>История сделок хотя бы за полгода</li>
+          <li>Известна маржа по основным продуктам</li>
+          <li>Клиенты покупают повторно или могли бы</li>
+          <li>На встрече будет РОП, если он есть</li>
+        </ul>
+      </div>
+      <div class="fit-no">
+        <span class="fit-k">Честно: пока не стоит</span>
+        <h3>Не подойдёт</h3>
+        <ul>
+          <li>Продукт ещё ищет рынок, регулярных продаж нет</li>
+          <li>Продаёте только вы, команды пока нет</li>
+          <li>Нужен готовый скрипт без разбора цифр</li>
+          <li>Не готовы показывать CRM и выручку человеку со стороны</li>
+          <li>Решение о проекте примет тот, кого на МРТ не будет</li>
+        </ul>
+      </div>
+    </div>
+    <div class="price-cta rv">
+      <div><b>Не уверены, в какой вы колонке?</b><span>Напишите до оплаты · если МРТ вам рано, так и скажем</span></div>
+      <a class="btn js-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Спросить в Telegram</a>
+    </div>
+  </div>
+</section>
+
 
 <section class="w need3">
   <p class="need3-lede rv">Вам не нужен ещё один совет<br>Вам нужно знать три вещи:</p>
@@ -1368,7 +1518,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec" id="ledger">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>02</b>Пример на цифрах</span>
+      <span class="label"><b>04</b>Пример на цифрах</span>
       <h2 class="rv">Как выглядит результат МРТ</h2>
       <p class="lede rv" style="margin-top:20px">Ниже — обезличенный пример расчёта для компании сопоставимого масштаба: пять типовых течей и итог за год. На вашем МРТ каждая строка считается только по вашим данным — из CRM и телефонии, а не на глаз.</p>
     </div>
@@ -1555,7 +1705,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>03</b>Сколько стоит</span>
+      <span class="label"><b>05</b>Сколько стоит</span>
       <h2 class="rv">МРТ идёт в зачёт, проект — по вилке</h2>
     </div>
     <div class="price-stagger rv">
@@ -1583,7 +1733,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>04</b>Что дальше</span>
+      <span class="label"><b>06</b>Что дальше</span>
       <h2 class="rv">МРТ не заканчивается отчётом</h2>
     </div>
     <dl class="frag rv">
@@ -1598,7 +1748,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>05</b>Что обычно делают с такими цифрами</span>
+      <span class="label"><b>07</b>Что обычно делают с такими цифрами</span>
       <h2 class="rv">Не нанимайте человека, пока не знаете, что он должен исправить</h2>
     </div>
     <div class="bet-claim rv">
@@ -1618,10 +1768,35 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   </div>
 </section>
 
+<section class="sec" id="compare">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label"><b>08</b>Сравнение</span>
+      <h2 class="rv">Сравните с тем, что вы рассматриваете</h2>
+      <p class="lede rv" style="margin-top:20px">Выберите вариант, который обдумываете сейчас. Он встанет рядом с Closery, и сравнение будет читаться по строкам.</p>
+    </div>
+    <div class="cmp-pick rv" id="cmpPick" role="group" aria-label="Выберите вариант для сравнения">
+      <button type="button" data-c="dir" aria-pressed="true">Нанять коммерческого директора</button>
+      <button type="button" data-c="con" aria-pressed="false">Позвать консультанта</button>
+      <button type="button" data-c="own" aria-pressed="false">Разбираться самому</button>
+    </div>
+    <div class="cmp surface rv" id="cmp" data-sel="dir">
+      <div class="cmp-row cmp-head"><div class="cmp-h"></div><div data-c="dir">Коммерческий директор</div><div data-c="con">Консультант</div><div data-c="own">Сами</div><div data-c="cl">Closery</div></div>
+      <div class="cmp-row"><div class="cmp-h">Когда появятся цифры</div><div data-c="dir">2–3 месяца на поиск и ещё полгода до понятного результата</div><div data-c="con">После серии интервью и отчёта</div><div data-c="own">Когда найдётся время между текущими задачами</div><div data-c="cl">Через 120 минут: ведомость потерь в рублях</div></div>
+      <div class="cmp-row"><div class="cmp-h">Цена ошибки</div><div data-c="dir">От 1,2 млн ₽ ФОТ в месяц, пока он выходит на результат</div><div data-c="con">Оплаченный отчёт, внедрять всё равно вам</div><div data-c="own">Ваше время, самое дорогое в компании</div><div data-c="cl">50 000 ₽, которые вернём, если потерь не нашли</div></div>
+      <div class="cmp-row"><div class="cmp-h">Кто отвечает за цифру</div><div data-c="dir">Он, пока работает у вас</div><div data-c="con">Никто: консультант сдаёт рекомендации</div><div data-c="own">Вы</div><div data-c="cl">Closery: этап не принят, значит не оплачен</div></div>
+      <div class="cmp-row"><div class="cmp-h">Откуда метод</div><div data-c="dir">Приносит с прошлого места работы</div><div data-c="con">Общая методика консультанта</div><div data-c="own">Статьи, курсы, советы знакомых</div><div data-c="cl">Восемь лет в CDEK, Vagabond и MarketGuru, под ваши данные</div></div>
+      <div class="cmp-row"><div class="cmp-h">Что остаётся после</div><div data-c="dir">Метод уходит вместе с ним</div><div data-c="con">Отчёт</div><div data-c="own">То, что успели записать</div><div data-c="cl">Регламенты, скрипты, финмодель и доступы остаются компании</div></div>
+    </div>
+    <p class="cmp-foot rv">Нанимать директора после МРТ разумно: <b>вы будете знать, что именно он должен исправить</b>, и сможете проверить его по ведомости.</p>
+  </div>
+</section>
+
+
 <section class="sec" id="route">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>06</b>Как устроен проект</span>
+      <span class="label"><b>09</b>Как устроен проект</span>
       <h2 class="rv">Этапы — это ваши течи, закрытые по очереди</h2>
       <p class="lede rv" style="margin-top:20px">Если течи оказались системными, <span class="brand">Closery</span> заходит как коммерческий директор на срок проекта и закрывает их одну за другой — от самой дорогой к самой дешёвой.</p>
     </div>
@@ -1691,7 +1866,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>07</b>Что зафиксировано в договоре</span>
+      <span class="label"><b>10</b>Что зафиксировано в договоре</span>
       <h2 class="rv">Вы платите за принятые этапы</h2>
     </div>
     <div class="terms surface rv">
@@ -1722,7 +1897,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
     <div class="fo rv">
       <div>
         <div class="sec-head" style="margin-bottom:clamp(26px,3.4vw,38px)">
-          <span class="label"><b>08</b>Кто это делает</span>
+          <span class="label"><b>11</b>Кто это делает</span>
           <h2>Николай Клименко</h2>
         </div>
         <p class="fo-q"><span class="brand">Closery</span> не консультирует со стороны. Мы отвечаем за <u>цифру в кассе</u>.</p>
@@ -1830,7 +2005,7 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 <section class="sec" id="faq">
   <div class="w">
     <div class="sec-head">
-      <span class="label"><b>09</b>Вопросы и ответы</span>
+      <span class="label"><b>12</b>Вопросы и ответы</span>
       <h2 class="rv">Что обычно спрашивают</h2>
     </div>
     <div class="faq rv">
@@ -2640,5 +2815,61 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 })();
 </script>
 
+
+<script>
+/* Самопроверка и сравнение: всё на странице, ничего не отправляется */
+(function(){
+  var chk=document.getElementById('chk');
+  if(chk){
+    var qs=[].slice.call(chk.querySelectorAll('.chk-q')), cnt=document.getElementById('chkCnt'),
+        go=document.getElementById('chkGo'), res=document.getElementById('chkRes');
+    function answered(){return qs.filter(function(q){return q.querySelector('[aria-pressed="true"]');});}
+    qs.forEach(function(q){
+      q.querySelectorAll('button').forEach(function(b){
+        b.addEventListener('click',function(){
+          q.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false');});
+          b.setAttribute('aria-pressed','true');
+          var n=answered().length; cnt.textContent='Отвечено '+n+' из 6'; go.disabled=n<6;
+          if(res.classList.contains('on')) render();
+        });
+      });
+    });
+    function esc(t){return t.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+    function render(){
+      var no=qs.filter(function(q){var b=q.querySelector('[aria-pressed="true"]');return b&&b.dataset.v==='0';});
+      var h, p;
+      if(!no.length){
+        h='Базовые контуры у вас на месте';
+        p='Судя по ответам, процессы есть. Тогда потери обычно прячутся в цифрах этапов: процесс есть, а конверсия ниже, чем может дать та же команда. Это видно только по данным CRM.';
+      }else if(no.length<=2){
+        h=no.length===1?'Одна точка, где стоит искать':'Две точки, где стоит искать';
+        p=(no.every(function(q){return q.dataset.amt;})?'В примере ведомости ниже на каждую такую точку приходились миллионы в год. ':'')+'Сколько именно у вас, зависит от потока заявок, чека и маржи.';
+      }else{
+        h=no.length+(no.length<5?' точки':' точек')+' из 6, где деньги уходят незаметно';
+        p='Когда таких точек несколько, по отдельности каждая выглядит мелочью, а сумму никто не видел. Именно так в примере ведомости набралось 42,6 млн ₽ за год.';
+      }
+      var list=no.map(function(q){
+        var a=q.dataset.amt;
+        return '<li><b>'+esc(q.dataset.leak)+'</b>'+(a?'<span>в примере −'+esc(a)+' / год</span>':'<span>видно только по данным</span>')+'</li>';
+      }).join('');
+      res.innerHTML='<h3>'+h+'</h3><p>'+p+'</p>'+(list?'<ul class="chk-leaks">'+list+'</ul>':'')+
+        '<p class="chk-note">Это не диагноз. Ответ «нет» показывает, где искать. Сумму в рублях даёт только расчёт по вашим цифрам.</p>'+
+        '<div class="chk-cta"><a class="btn" href="/mrt-demo/" target="_blank" rel="noopener">Посчитать в рублях бесплатно</a>'+
+        '<a class="lnk js-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Или сразу записаться на МРТ →</a></div>';
+      res.classList.add('on');
+    }
+    go.addEventListener('click',function(){render();res.scrollIntoView({behavior:'smooth',block:'nearest'});});
+  }
+  var pick=document.getElementById('cmpPick'), cmp=document.getElementById('cmp');
+  if(pick&&cmp){
+    pick.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        pick.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false');});
+        b.setAttribute('aria-pressed','true'); cmp.dataset.sel=b.dataset.c;
+      });
+    });
+  }
+})();
+</script>
 </body>
 </html>
