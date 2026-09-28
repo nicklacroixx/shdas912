@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Технология · Closery</title>
+<meta name="description" content="Четыре собственных инструмента Closery: Коммерческий МРТ считает потери в рублях, Разбор превращает их в инструкции, Радар находит покупателей по открытым данным, Кабинет не даёт сделке потеряться между касаниями.">
+<link rel="canonical" href="https://closery.ru/technology/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Closery">
+<meta property="og:title" content="Технология · Closery">
+<meta property="og:description" content="Деньги ищем инструментами, а не на глаз. МРТ, Разбор, Радар и Кабинет — как они работают и что остаётся у компании.">
+<meta property="og:url" content="https://closery.ru/technology/">
+<meta property="og:image" content="https://closery.ru/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+@font-face{font-family:'Unbounded';font-weight:500;font-display:swap;src:url(/fonts/unbounded-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-weight:500;font-display:swap;src:url(/fonts/unbounded-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212}
+@font-face{font-family:'Unbounded';font-weight:600;font-display:swap;src:url(/fonts/unbounded-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-weight:600;font-display:swap;src:url(/fonts/unbounded-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212}
+@font-face{font-family:'Onest';font-weight:400;font-display:swap;src:url(/fonts/onest-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-weight:400;font-display:swap;src:url(/fonts/onest-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+20BD,U+2122,U+2212}
+@font-face{font-family:'Onest';font-weight:500;font-display:swap;src:url(/fonts/onest-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-weight:500;font-display:swap;src:url(/fonts/onest-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+20BD,U+2122,U+2212}
+@font-face{font-family:'Onest';font-weight:600;font-display:swap;src:url(/fonts/onest-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-weight:600;font-display:swap;src:url(/fonts/onest-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+20BD,U+2122,U+2212}
+@font-face{font-family:'JetBrains Mono';font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212}
+@font-face{font-family:'JetBrains Mono';font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212}
+@font-face{font-family:'Plus Jakarta Sans';font-weight:800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-800-normal.woff2) format('woff2')}
+
+:root{
+  --bg:#090D0C;--bg-2:#0C1211;--paper:#121A18;--paper-2:#16201D;
+  --rule:#1F2B27;--rule-2:#2E3D38;
+  --ink:#F1F6F3;--ink-2:#9AA8A2;--ink-3:#5B6863;
+  --loss:#F0555A;--loss-soft:#E4676B;--amber:#E8B34D;--ok:#34D399;--ok-soft:#7FE9C0;
+  --disp:'Unbounded','Plus Jakarta Sans','Onest',system-ui,sans-serif;
+  --ui:'Onest',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',monospace;
+  --brand:'Plus Jakarta Sans',var(--ui);
+  --gut:clamp(20px,5vw,48px);--r:14px;--ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);line-height:1.55;
+  font-feature-settings:"tnum" 1;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(1300px 700px at 6% -14%,rgba(52,211,153,.10),transparent 58%),
+    radial-gradient(1100px 620px at 98% 0%,rgba(240,85,90,.05),transparent 56%)}
+main,header.bar,footer{position:relative;z-index:1}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ok);outline-offset:3px}
+.w{max-width:1120px;margin:0 auto;padding:0 var(--gut)}
+.w-wide{max-width:1440px;margin:0 auto;padding:0 var(--gut)}
+
+/* шапка — как на главной */
+header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--rule)}
+.bar-in{display:flex;justify-content:space-between;align-items:center;height:70px;gap:20px}
+.logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);font-weight:800;
+  font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:#fff;transition:letter-spacing .35s ease,color .22s ease}
+.logo i{width:9px;height:9px;border-radius:2px;background:var(--ok);box-shadow:0 0 16px rgba(52,211,153,.65)}
+.logo:hover{letter-spacing:.3em;color:var(--ok)}
+.bar-nav{display:flex;align-items:center;gap:clamp(14px,2.4vw,30px)}
+.bar-lnk{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;
+  color:var(--ink-2);transition:color .2s ease;white-space:nowrap}
+.bar-lnk:hover,.bar-lnk.on{color:var(--ok)}
+.bar-cta{font-family:var(--disp);font-weight:600;font-size:13px;text-decoration:none;color:var(--bg);
+  border:1px solid var(--ink);border-radius:9px;padding:11px 20px;background:var(--ink);white-space:nowrap;
+  transition:background .22s,border-color .22s}
+.bar-cta:hover{background:var(--ok-soft);border-color:var(--ok-soft)}
+.bar-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:30px;height:30px;cursor:pointer;
+  background:none;border:none;padding:4px}
+.bar-burger span{display:block;height:2px;background:#fff;border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+.bar-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.bar-burger.open span:nth-child(2){opacity:0}
+.bar-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.bar-mobile{display:none;flex-direction:column;position:fixed;top:70px;left:0;right:0;z-index:100;
+  background:rgba(9,13,12,.97);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--rule)}
+.bar-mobile.open{display:flex}
+.bar-mobile a{padding:16px var(--gut);color:var(--ink-2);text-decoration:none;font-family:var(--mono);font-size:12px;
+  letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--rule)}
+.bar-mobile a.on{color:var(--ok)}
+@media(max-width:860px){.bar-lnk{display:none}}
+@media(max-width:700px){.bar-burger{display:flex}.bar-cta{display:none}}
+
+/* типографика */
+.label{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ok);
+  display:block;margin-bottom:18px;opacity:.85}
+.label b{color:var(--ink-3);font-weight:400;margin-right:.7em;letter-spacing:.1em}
+.display{font-family:var(--disp);font-size:clamp(32px,5.4vw,72px);line-height:1.06;font-weight:600;letter-spacing:-.04em;max-width:16ch}
+.display span{color:var(--ok-soft)}
+h2{font-family:var(--disp);font-size:clamp(22px,3.1vw,36px);line-height:1.2;font-weight:600;letter-spacing:-.04em;max-width:24ch}
+h3{font-family:var(--disp);font-size:clamp(19px,2.2vw,26px);line-height:1.22;font-weight:600;letter-spacing:-.03em}
+.lede{font-size:clamp(16.5px,1.9vw,20px);line-height:1.62;color:var(--ink-2);max-width:58ch}
+.lede strong{color:var(--ink);font-weight:600}
+.sec{padding:clamp(76px,10vw,140px) 0;border-top:1px solid var(--rule)}
+.sec-head{margin-bottom:clamp(34px,5vw,58px)}
+.sec-head .lede{margin-top:22px}
+.btn{display:inline-block;background:var(--ink);border:1px solid var(--ink);color:var(--bg);font-family:var(--disp);
+  font-weight:600;font-size:15px;letter-spacing:-.01em;padding:17px 32px;text-decoration:none;border-radius:10px;
+  transition:transform .18s ease,background .22s ease,border-color .22s ease}
+.btn:hover{transform:translateY(-2px);background:var(--ok-soft);border-color:var(--ok-soft)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--rule-2)}
+.btn-ghost:hover{background:transparent;color:var(--ok-soft);border-color:var(--ok-soft)}
+.btn-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.surface{position:relative;background:linear-gradient(168deg,var(--paper-2),var(--paper) 62%);border:1px solid var(--rule-2);
+  border-radius:var(--r);box-shadow:0 40px 90px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.055)}
+
+/* hero */
+.hero{padding-top:clamp(56px,8vw,110px);padding-bottom:clamp(56px,7vw,96px)}
+.hero .lede{margin-top:30px}
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:40px}
+
+/* контур: четыре модуля в линию */
+.loop{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:clamp(48px,6vw,72px);
+  border:1px solid var(--rule-2);border-radius:var(--r);overflow:hidden;background:var(--bg-2)}
+.loop a{display:block;padding:26px 24px 24px;text-decoration:none;border-right:1px solid var(--rule);position:relative;
+  transition:background .25s ease}
+.loop a:last-child{border-right:none}
+.loop a:hover{background:var(--paper)}
+.loop a:not(:last-child)::after{content:"→";position:absolute;right:-9px;top:26px;width:18px;height:18px;
+  font-family:var(--mono);font-size:12px;line-height:18px;text-align:center;color:var(--ok);background:var(--bg-2);z-index:1}
+.loop .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--ink-3)}
+.loop b{display:block;font-family:var(--disp);font-weight:600;font-size:19px;letter-spacing:-.03em;margin:14px 0 8px}
+.loop span{display:block;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.loop i{display:block;font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ok-soft);margin-top:14px}
+@media(max-width:860px){.loop{grid-template-columns:1fr 1fr}.loop a:nth-child(2){border-right:none}
+  .loop a:nth-child(-n+2){border-bottom:1px solid var(--rule)}.loop a:nth-child(2)::after{display:none}}
+@media(max-width:520px){.loop{grid-template-columns:1fr}.loop a{border-right:none;border-bottom:1px solid var(--rule)}
+  .loop a:last-child{border-bottom:none}.loop a::after{display:none}}
+
+/* модуль */
+.mod{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:start}
+.mod-txt .lede{margin-top:20px;font-size:17px}
+.mod-facts{list-style:none;margin-top:30px;border-top:1px solid var(--rule)}
+.mod-facts li{display:grid;grid-template-columns:118px 1fr;gap:16px;padding:15px 0;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.5;color:var(--ink-2)}
+.mod-facts li b{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;color:var(--ink);padding-top:2px}
+.mod-money{margin-top:26px;padding:18px 20px;border-left:2px solid var(--ok);background:rgba(52,211,153,.05);font-size:15.5px;line-height:1.55;color:var(--ink)}
+.mod-money em{font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ok);display:block;margin-bottom:6px}
+@media(max-width:900px){.mod{grid-template-columns:1fr}}
+
+/* окно интерфейса */
+.ui{overflow:hidden;position:sticky;top:96px}
+@media(max-width:900px){.ui{position:relative;top:0}}
+.ui-top{display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid var(--rule-2);background:rgba(0,0,0,.18)}
+.ui-top i{width:9px;height:9px;border-radius:50%;background:var(--rule-2)}
+.ui-top span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.ui-top em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--amber);border:1px solid rgba(232,179,77,.35);border-radius:5px;padding:3px 7px;white-space:nowrap;flex:none}
+.ui-body{padding:clamp(16px,2.4vw,24px)}
+.cap{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+.mono{font-family:var(--mono)}
+
+/* МРТ: этапы воронки */
+.st{display:grid;grid-template-columns:1fr auto;gap:4px 14px;padding:13px 0;border-bottom:1px solid var(--rule)}
+.st:last-of-type{border-bottom:none}
+.st b{font-weight:500;font-size:14.5px}
+.st em{font-style:normal;font-family:var(--mono);font-size:13px;color:var(--loss-soft);text-align:right;white-space:nowrap}
+.st .bar{grid-column:1/-1;height:6px;border-radius:3px;background:var(--rule);position:relative;overflow:hidden;margin-top:6px}
+.st .bar s{position:absolute;left:0;top:0;bottom:0;background:var(--ink-3);border-radius:3px}
+.st .bar u{position:absolute;top:0;bottom:0;background:var(--ok);opacity:.55;border-radius:0 3px 3px 0}
+.st small{grid-column:1/-1;font-size:12.5px;color:var(--ink-3);line-height:1.45}
+.st small b{font-size:12.5px;color:var(--ink-2);font-weight:500}
+.tot{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:16px;padding-top:16px;border-top:1px solid var(--rule-2)}
+.tot span{font-size:13.5px;color:var(--ink-2)}
+.tot b{font-family:var(--mono);font-weight:500;font-size:clamp(18px,2.4vw,24px);color:var(--ink);white-space:nowrap}
+.tot b i{font-style:normal;color:var(--ink-3);font-size:.6em;margin-left:4px}
+
+/* Разбор: матрица и карточка ошибки */
+.mx{display:grid;grid-template-columns:22px 1fr 1fr;grid-template-rows:1fr 1fr 22px;gap:6px;height:250px}
+.mx-y,.mx-x{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;justify-content:center}
+.mx-y{grid-row:1/3;writing-mode:vertical-rl;transform:rotate(180deg)}
+.mx-x{grid-column:2/4}
+.q{border:1px solid var(--rule);border-radius:9px;padding:10px 11px;position:relative;background:rgba(0,0,0,.14)}
+.q h4{font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.q.best{border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.06)}
+.q.best h4{color:var(--ok)}
+.dot{position:absolute;display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-2);white-space:nowrap}
+.dot::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--ok);flex:none}
+.dot.m::before{background:var(--amber)}
+.dot.l::before{background:var(--ink-3)}
+.card-err{margin-top:18px;border:1px solid var(--rule-2);border-radius:10px;padding:16px 16px 12px}
+.card-err-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.card-err-h b{font-weight:600;font-size:15px}
+.card-err-h em{font-style:normal;font-family:var(--mono);font-size:12.5px;color:var(--ok-soft);white-space:nowrap}
+.card-err ol{margin:12px 0 0 18px;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.card-err ol li{margin-bottom:5px}
+.card-err dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin-top:12px;padding-top:12px;border-top:1px solid var(--rule);font-size:13px;line-height:1.45}
+.card-err dt{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
+.card-err dd{color:var(--ink-2)}
+
+/* Радар: карточка компании */
+.lead-h{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.lead-h b{display:block;font-family:var(--disp);font-weight:600;font-size:18px;letter-spacing:-.02em}
+.lead-h span{display:block;font-size:13px;color:var(--ink-3);margin-top:4px}
+.ws{text-align:right;flex:none}
+.ws b{font-family:var(--mono);font-weight:500;font-size:30px;color:var(--ok-soft);letter-spacing:-.02em}
+.ws span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase}
+.rev{margin-top:20px;display:grid;grid-template-columns:repeat(5,1fr);align-items:end;gap:8px;height:96px;padding-bottom:22px;position:relative}
+.rev div{background:var(--rule-2);border-radius:4px 4px 0 0;position:relative}
+.rev div.dn{background:var(--loss-soft);opacity:.75}
+.rev div::after{content:attr(data-y);position:absolute;bottom:-20px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:10px;color:var(--ink-3)}
+.rev div::before{content:attr(data-v);position:absolute;top:-17px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:10px;color:var(--ink-2)}
+.sig{margin-top:22px;display:grid;gap:8px}
+.sig div{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.45;color:var(--ink-2);padding:10px 12px;border:1px solid var(--rule);border-radius:9px}
+.sig div i{font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:var(--ok-soft);
+  border-radius:4px;padding:3px 6px;flex:none;margin-top:1px}
+.sig div i.w{background:var(--amber)}
+.sig div i.r{background:var(--loss-soft)}
+.src{margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+
+/* Кабинет: план дня */
+.fun{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:20px}
+.fun div{padding:10px 8px;background:rgba(0,0,0,.18);border:1px solid var(--rule);border-radius:7px;text-align:center}
+.fun b{display:block;font-family:var(--mono);font-weight:500;font-size:17px}
+.fun span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:3px}
+.task{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--rule)}
+.task:last-child{border-bottom:none}
+.task .ch{width:18px;height:18px;border-radius:5px;border:1px solid var(--rule-2)}
+.task .ch.on{background:var(--ok);border-color:var(--ok);position:relative}
+.task .ch.on::after{content:"";position:absolute;left:5px;top:2px;width:5px;height:9px;border:solid var(--bg);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.task b{display:block;font-weight:500;font-size:14px}
+.task.done b{color:var(--ink-3);text-decoration:line-through}
+.task span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.task em{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);
+  border:1px solid var(--rule-2);border-radius:5px;padding:4px 7px;white-space:nowrap}
+.task em.hot{color:var(--loss-soft);border-color:rgba(228,103,107,.4)}
+
+/* откуда цифры */
+.src-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
+.src-grid div{background:var(--bg-2);padding:26px 24px}
+.src-grid b{display:block;font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ok);margin-bottom:12px}
+.src-grid p{font-size:15px;line-height:1.55;color:var(--ink-2)}
+.src-grid p strong{color:var(--ink);font-weight:600}
+@media(max-width:860px){.src-grid{grid-template-columns:1fr}}
+
+/* доказательство цифрой */
+.proof{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,5vw,64px);align-items:center;padding:clamp(28px,4vw,44px)}
+.proof-n{font-family:var(--mono);font-weight:500;font-size:clamp(56px,9vw,112px);line-height:.9;letter-spacing:-.04em;color:var(--loss-soft)}
+.proof-n small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-top:14px;line-height:1.5}
+.proof p{font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:var(--ink-2)}
+.proof p strong{color:var(--ink);font-weight:600}
+@media(max-width:700px){.proof{grid-template-columns:1fr}}
+
+/* сейчас / с closery */
+.vs{border:1px solid var(--rule-2);border-radius:var(--r);overflow:hidden}
+.vs-row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule)}
+.vs-row:last-child{border-bottom:none}
+.vs-row div{padding:18px 22px;font-size:15.5px;line-height:1.5}
+.vs-row div:first-child{color:var(--ink-3);border-right:1px solid var(--rule)}
+.vs-row div:last-child{color:var(--ink)}
+.vs-row.h div{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:14px 22px;background:var(--bg-2)}
+.vs-row.h div:last-child{color:var(--ok)}
+@media(max-width:600px){.vs-row{grid-template-columns:1fr}.vs-row div:first-child{border-right:none;padding-bottom:4px}
+  .vs-row div:last-child{padding-top:4px}.vs-row.h{display:none}
+  .vs-row div:first-child::before{content:"Сейчас · ";font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+  .vs-row div:last-child::before{content:"С Closery · ";font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ok)}}
+
+/* цена */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.steps .surface{padding:26px 24px}
+.steps .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--ok)}
+.steps b{display:block;font-family:var(--disp);font-weight:600;font-size:19px;letter-spacing:-.03em;margin:14px 0 10px}
+.steps p{font-size:15px;line-height:1.55;color:var(--ink-2)}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+
+.end{padding:clamp(80px,10vw,140px) 0;border-top:1px solid var(--rule)}
+.end .lede{margin-top:24px}
+.end-alt{margin-top:22px;font-size:14px;line-height:1.55;color:var(--ink-3)}
+.end-alt a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+
+footer{border-top:1px solid var(--rule);padding:40px 0 48px}
+.ft{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.ft-tag{margin-top:14px;font-size:13px;color:var(--ink-3);line-height:1.5}
+.ft-links{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:flex-end}
+.ft-links a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);text-decoration:none}
+.ft-links a:hover{color:var(--ok)}
+.ft-legal{margin-top:16px;font-size:12px;color:var(--ink-3);text-align:right;line-height:1.6}
+@media(max-width:700px){.ft-links{justify-content:flex-start}.ft-legal{text-align:left}}
+
+.rv{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .rv{opacity:0;transform:translateY(18px)}
+.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<header class="bar">
+  <div class="w-wide bar-in">
+    <a class="logo" href="/"><i></i>Closery</a>
+    <nav class="bar-nav">
+      <a class="bar-lnk" href="/mrt-demo/">Демо-МРТ</a>
+      <a class="bar-lnk on" href="/technology/">Технология</a>
+      <a class="bar-lnk" href="/cases/">Кейсы</a>
+      <a class="bar-lnk" href="/#founder">Основатель</a>
+      <a class="bar-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Найти течь</a>
+      <button class="bar-burger" id="barBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+<div class="bar-mobile" id="barMobile"><a href="/mrt-demo/">Демо-МРТ</a><a class="on" href="/technology/">Технология</a><a href="/cases/">Кейсы</a><a href="/#founder">Основатель</a><a href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на МРТ</a></div>
+
+<main id="top">
+
+<section class="w hero">
+  <span class="label rv"><b>00</b>Технология</span>
+  <h1 class="display rv">Деньги ищем инструментами, <span>а не на&nbsp;глаз</span></h1>
+  <p class="lede rv">Консультант приходит с опытом и презентацией. Мы приходим с четырьмя собственными инструментами. Они считают, где компания теряет деньги, объясняют, как их вернуть, находят новых покупателей и не дают сделке потеряться между касаниями.</p>
+  <div class="hero-cta rv">
+    <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Посчитать мои потери</a>
+    <a class="btn btn-ghost" href="/mrt-demo/">Демо за 2 минуты</a>
+  </div>
+
+  <nav class="loop rv" aria-label="Модули">
+    <a href="#mri"><span class="n">01</span><b>МРТ</b><span>Где и сколько компания теряет, в рублях по этапам</span><i>→ сумма и адрес потерь</i></a>
+    <a href="#fix"><span class="n">02</span><b>Разбор</b><span>Каждая ошибка разобрана до инструкции и норматива</span><i>→ что чинить первым</i></a>
+    <a href="#radar"><span class="n">03</span><b>Радар</b><span>Покупатели по открытым данным и сигналам спроса</span><i>→ новые деньги</i></a>
+    <a href="#cabinet"><span class="n">04</span><b>Кабинет</b><span>У каждой сделки следующий шаг и дата</span><i>→ деньги не утекают</i></a>
+  </nav>
+</section>
+
+<!-- 01 МРТ -->
+<section class="sec" id="mri">
+  <div class="w mod">
+    <div class="mod-txt">
+      <span class="label rv"><b>01</b>Коммерческий МРТ</span>
+      <h2 class="rv">Потери в рублях, разложенные по этапам</h2>
+      <p class="lede rv">Собственник отвечает на 60 вопросов о своих цифрах. Модель собирает из них воронку компании и сравнивает каждый этап с тем, что даёт эта же команда при построенной системе. Разница переводится в валовую прибыль один раз, на своём этапе, без двойного счёта.</p>
+      <ul class="mod-facts rv">
+        <li><b>60 вопросов</b>Заявки, дозвон, закрытие, чек, маржа, повторные, команда и управление</li>
+        <li><b>14 разделов</b>От основания расчёта до решения, плюс методика и ограничения работы</li>
+        <li><b>Формулы</b>Каждая цифра отчёта пересчитывается на калькуляторе, константы берутся из модели</li>
+        <li><b>Потолок</b>Сумма потерь ограничена 70% валовой прибыли, чтобы цифру можно было защитить перед финансистом</li>
+      </ul>
+      <div class="mod-money rv"><em>Что это даёт в деньгах</em>Вы узнаёте не «продажи плохие», а какой этап стоит дороже всего и сколько он забирает каждый месяц.</div>
+    </div>
+
+    <div class="ui surface rv" aria-label="Интерфейс отчёта МРТ, демо-данные">
+      <div class="ui-top"><i></i><i></i><i></i><span>Ведомость потерь</span><em>демо-данные</em></div>
+      <div class="ui-body">
+        <div class="cap">Этап · сейчас → потенциал системы</div>
+        <div class="st"><b>Первый контакт</b><em>−412 000 ₽/мес</em>
+          <div class="bar"><s style="width:63%"></s><u style="left:63%;width:14%"></u></div>
+          <small>Дозвон 63% → 77% · <b>норматив ответа за 15 минут</b>, распределение заявок</small></div>
+        <div class="st"><b>Закрытие</b><em>−538 000 ₽/мес</em>
+          <div class="bar"><s style="width:14%"></s><u style="left:14%;width:7%"></u></div>
+          <small>14% → 21% · <b>скрипт закрытия</b>, карта возражений, разбор 20 диалогов</small></div>
+        <div class="st"><b>Работа с базой</b><em>−327 000 ₽/мес</em>
+          <div class="bar"><s style="width:18%"></s><u style="left:18%;width:7%"></u></div>
+          <small>Повторные 18% → 25% · <b>повод на 45-й день</b>, сегменты базы</small></div>
+        <div class="st"><b>Средний чек</b><em>−96 000 ₽/мес</em>
+          <div class="bar"><s style="width:60%"></s><u style="left:60%;width:5%"></u></div>
+          <small>Пересмотр прайса · <b>к приросту цены маржа не применяется</b></small></div>
+        <div class="tot"><span>Недополученная валовая прибыль</span><b>1 373 000<i>₽/мес</i></b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 Разбор -->
+<section class="sec" id="fix">
+  <div class="w mod">
+    <div class="mod-txt">
+      <span class="label rv"><b>02</b>Разбор ошибок</span>
+      <h2 class="rv">Каждая найденная ошибка разобрана до инструкции</h2>
+      <p class="lede rv">Найти течь мало, её нужно закрыть. Для каждой ошибки в базе Closery есть шаги внедрения, норматив, по которому видно, что стало лучше, и типичная ошибка, на которой внедрение ломается. Порядок задаёт матрица: эффект в деньгах против реального усилия.</p>
+      <ul class="mod-facts rv">
+        <li><b>Инструкция</b>Шаги, ответственный и срок для каждой найденной ошибки</li>
+        <li><b>Приёмка</b>Метрика «было → цель», по которой работа принимается, а не обсуждается</li>
+        <li><b>Приоритет</b>Сначала дешёвое и дорогое по эффекту, дальше по убыванию денег</li>
+      </ul>
+      <div class="mod-money rv"><em>Что это даёт в деньгах</em>Первой закрывается течь, которая быстрее всего возвращает деньги. Отчёт можно внедрять своей командой, без нас.</div>
+    </div>
+
+    <div class="ui surface rv" aria-label="Интерфейс разбора ошибок, демо-данные">
+      <div class="ui-top"><i></i><i></i><i></i><span>Матрица приоритетов</span><em>демо-данные</em></div>
+      <div class="ui-body">
+        <div class="mx">
+          <div class="mx-y">Эффект, ₽</div>
+          <div class="q best"><h4>Делать первым</h4><span class="dot" style="left:12px;top:40px">Норматив ответа</span><span class="dot" style="left:12px;top:66px">Повод для базы</span></div>
+          <div class="q"><h4>Большой проект</h4><span class="dot m" style="left:12px;top:40px">Скрипт закрытия</span><span class="dot m" style="left:12px;top:66px">РОП</span></div>
+          <div class="q"><h4>Попутно</h4><span class="dot l" style="left:12px;top:40px">Прайс</span></div>
+          <div class="q"><h4>Отложить</h4><span class="dot l" style="left:12px;top:40px">Новый канал</span></div>
+          <div class="mx-x">Усилие →</div>
+        </div>
+        <div class="card-err">
+          <div class="card-err-h"><b>Заявка ждёт ответа часами</b><em>+212 000 ₽/мес</em></div>
+          <ol>
+            <li>Все заявки падают в CRM, ответственный назначается автоматически</li>
+            <li>Невзятая за 15 минут заявка уходит следующему</li>
+            <li>РОП каждое утро смотрит отчёт по невзятым</li>
+          </ol>
+          <dl><dt>Норматив</dt><dd>90% заявок с ответом за 15 минут, включая вечер</dd>
+            <dt>Где ломается</dt><dd>Норматив есть, отчёта по нему нет, через месяц всё как было</dd></dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 Радар -->
+<section class="sec" id="radar">
+  <div class="w mod">
+    <div class="mod-txt">
+      <span class="label rv"><b>03</b>Радар</span>
+      <h2 class="rv">Покупатели, которые уже заявили о своей задаче</h2>
+      <p class="lede rv">Компании каждый день сами сообщают рынку, что им нужно: открывают вакансии, растут или теряют выручку, меняют руководство. Радар собирает эти сигналы из открытых источников, сверяет компанию с отчётностью в ФНС, находит того, кто принимает решение, и ставит всё в очередь по вероятности сделки.</p>
+      <ul class="mod-facts rv">
+        <li><b>Сигнал</b>Открытая вакансия, её возраст и сколько раз её поднимали</li>
+        <li><b>Деньги</b>Выручка за пять лет по бухгалтерской отчётности ФНС</li>
+        <li><b>ЛПР</b>Директор и учредители по ЕГРЮЛ, контакты с сайта и из карт</li>
+        <li><b>Приоритет</b>Одна оценка 0–100 из финансов, боли, срочности и доступа к ЛПР</li>
+      </ul>
+      <div class="mod-money rv"><em>Что это даёт в деньгах</em>Отдел звонит тем, у кого есть задача и деньги на неё, а не по списку из базы. Настраивается под ваш профиль клиента: отрасль, выручка, регион.</div>
+    </div>
+
+    <div class="ui surface rv" aria-label="Интерфейс Радара, демо-данные">
+      <div class="ui-top"><i></i><i></i><i></i><span>Радар · карточка компании</span><em>демо-данные</em></div>
+      <div class="ui-body">
+        <div class="lead-h">
+          <div><b>ООО «Северный опт»</b><span>Оптовая торговля · Екатеринбург · ЛПР: генеральный директор</span></div>
+          <div class="ws"><b>82</b><span>из 100 · T1</span></div>
+        </div>
+        <div class="rev" aria-label="Выручка по годам, млн ₽">
+          <div data-y="2021" data-v="412" style="height:62%"></div>
+          <div data-y="2022" data-v="468" style="height:71%"></div>
+          <div data-y="2023" data-v="530" style="height:80%"></div>
+          <div data-y="2024" data-v="611" style="height:92%"></div>
+          <div class="dn" data-y="2025" data-v="547" style="height:82%"></div>
+        </div>
+        <div class="sig">
+          <div><i class="r">Боль</i>Выручка −10,5% за год после четырёх лет роста</div>
+          <div><i class="w">Срочно</i>Ищут руководителя продаж 23 дня, вакансию поднимали 4 раза</div>
+          <div><i>Доступ</i>Директор найден в ЕГРЮЛ, на сайте есть прямой мессенджер</div>
+        </div>
+        <div class="src">Источники: ФНС · ЕГРЮЛ · открытые вакансии</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 Кабинет -->
+<section class="sec" id="cabinet">
+  <div class="w mod">
+    <div class="mod-txt">
+      <span class="label rv"><b>04</b>Кабинет</span>
+      <h2 class="rv">Ни одна сделка не остаётся без следующего шага</h2>
+      <p class="lede rv">Деньги чаще теряются не на отказе, а в тишине: менеджер не написал второй раз, ответ клиента утонул в почте. Кабинет собирает касания в план дня, ведёт каждую компанию одной карточкой со всей историей и сам подтягивает ответы из почты.</p>
+      <ul class="mod-facts rv">
+        <li><b>План дня</b>Сколько касаний, кому и каким каналом, по приоритету</li>
+        <li><b>Карточка</b>Одна компания, вся история, следующий шаг с датой</li>
+        <li><b>Воронка</b>Конверсия каждого этапа видна отдельно, а не одной цифрой</li>
+      </ul>
+      <div class="mod-money rv"><em>Что это даёт в деньгах</em>Сделки, которые раньше тихо умирали после первого касания, доходят до решения. Эту течь МРТ находит почти у всех.</div>
+    </div>
+
+    <div class="ui surface rv" aria-label="Интерфейс Кабинета, демо-данные">
+      <div class="ui-top"><i></i><i></i><i></i><span>Кабинет · план дня</span><em>демо-данные</em></div>
+      <div class="ui-body">
+        <div class="fun">
+          <div><b>73</b><span>Компании</span></div>
+          <div><b>41</b><span>Касание</span></div>
+          <div><b>9</b><span>Ответ</span></div>
+          <div><b>4</b><span>Встреча</span></div>
+          <div><b>1</b><span>Оплата</span></div>
+        </div>
+        <div class="cap">Сегодня · 25 касаний · сделано 3</div>
+        <div class="task done"><span class="ch on"></span><div><b>«Северный опт» · письмо с разбором</b><span>Шаг 2 из 6 · ответ получен вчера</span></div><em>почта</em></div>
+        <div class="task done"><span class="ch on"></span><div><b>«ТехноСнаб» · голосовое директору</b><span>Шаг 1 из 6</span></div><em>мессенджер</em></div>
+        <div class="task done"><span class="ch on"></span><div><b>«Волга Пласт» · напоминание</b><span>Шаг 3 из 6</span></div><em>почта</em></div>
+        <div class="task"><span class="ch"></span><div><b>«Уралмет» · подтвердить встречу</b><span>Встреча завтра в 11:00</span></div><em class="hot">до 14:00</em></div>
+        <div class="task"><span class="ch"></span><div><b>«Нордпак» · второе касание</b><span>Первое письмо открыто, ответа нет 4 дня</span></div><em>почта</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Откуда цифры -->
+<section class="sec">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label rv"><b>05</b>Откуда цифры</span>
+      <h2 class="rv">Мы не рисуем цифры. Мы их берём</h2>
+      <p class="lede rv">Премиальный интерфейс ничего не стоит, если за ним догадки. Поэтому у каждого инструмента три правила: источник называется, формула пересчитывается вручную, а там, где мы не уверены, это написано прямо.</p>
+    </div>
+    <div class="src-grid rv">
+      <div><b>Ваши данные</b><p>МРТ считает только по цифрам компании: заявки, конверсии, чек, маржа. <strong>Ориентир этапа — потенциал вашей же команды</strong>, а не средняя по рынку.</p></div>
+      <div><b>Открытые реестры</b><p>Выручка из бухгалтерской отчётности ФНС, руководители и учредители из ЕГРЮЛ, спрос из открытых вакансий. <strong>Всё можно проверить самому.</strong></p></div>
+      <div><b>Проверка текстов</b><p>Любой текст, который пишет система, проходит фильтр: <strong>цифры, которых нет в данных, и обещания, которых мы не даём, отсекаются</strong> до отправки.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Доказательство -->
+<section class="sec">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label rv"><b>06</b>Радар в работе</span>
+      <h2 class="rv">Что видно, когда данные собраны в одном месте</h2>
+    </div>
+    <div class="proof surface rv">
+      <div class="proof-n">44%<small>1272 компании<br>сентябрь 2026</small></div>
+      <p>Радар собрал <strong>1272 компании</strong>, которые ищут руководителя продаж или коммерческого директора, и сверил их с отчётностью в ФНС. <strong>У 35% выручка упала</strong>, с учётом инфляции — у 44%. Собственник нанимает человека, когда цифры уже падают, и ищет его месяцами. Эти месяцы и есть цена, которую считает МРТ.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Сейчас / с Closery -->
+<section class="sec">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label rv"><b>07</b>Разница</span>
+      <h2 class="rv">Что меняется, когда решения опираются на инструменты</h2>
+    </div>
+    <div class="vs rv">
+      <div class="vs-row h"><div>Сейчас</div><div>С Closery</div></div>
+      <div class="vs-row"><div>«Продажи просели», причина неизвестна</div><div>Этап, сумма в рублях и практика, которая её возвращает</div></div>
+      <div class="vs-row"><div>Нанимают директора и ждут полгода</div><div>Сначала знают, что он должен исправить, и проверяют его по ведомости</div></div>
+      <div class="vs-row"><div>Звонят по базе и холодным спискам</div><div>Говорят с теми, кто сам заявил о задаче и может за неё заплатить</div></div>
+      <div class="vs-row"><div>Сделка тихо умирает после первого письма</div><div>У каждой сделки следующий шаг с датой, ответ не теряется</div></div>
+      <div class="vs-row"><div>Работа принимается по впечатлению</div><div>Работа принимается по метрике «было → цель»</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Цена -->
+<section class="sec">
+  <div class="w">
+    <div class="sec-head">
+      <span class="label rv"><b>08</b>Как считается цена</span>
+      <h2 class="rv">Цена зависит от размера течи, а не от прайса</h2>
+      <p class="lede rv">Мы не продаём пакет на фиксированный срок. Сначала МРТ показывает, сколько денег утекает и где. Объём работ и цена считаются от этой суммы: маленькую течь незачем закрывать дорогим проектом.</p>
+    </div>
+    <div class="steps">
+      <div class="surface rv"><span class="n">ШАГ 01</span><b>МРТ за 50&nbsp;000&nbsp;₽</b><p>Ведомость потерь в рублях и приоритет. Если потерь, которые можно посчитать, нет, возвращаем оплату.</p></div>
+      <div class="surface rv"><span class="n">ШАГ 02</span><b>Предложение из ведомости</b><p>Какие течи закрываем, какими инструментами и в каком порядке. Цена — от суммы, которую возвращаем.</p></div>
+      <div class="surface rv"><span class="n">ШАГ 03</span><b>Оплата за принятые этапы</b><p>Этап принимается по метрике. Не принят — не оплачен. МРТ идёт в зачёт.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="end" id="end">
+  <div class="w">
+    <h2 class="rv">Посмотрите на свою компанию через эти инструменты</h2>
+    <p class="lede rv">120 минут, ваши цифры, ведомость потерь в рублях. Дальше решаете сами: внедрять своей командой или с нами.</p>
+    <div class="hero-cta rv">
+      <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на МРТ</a>
+      <span class="btn-note">50&nbsp;000&nbsp;₽ · идёт в зачёт</span>
+    </div>
+    <p class="end-alt rv">Telegram не открывается — напишите на почту <a href="mailto:klimenko@closery.ru?subject=%D0%97%D0%B0%D0%BF%D0%B8%D1%81%D1%8C%20%D0%BD%D0%B0%20%D0%9C%D0%A0%D0%A2">klimenko@closery.ru</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="w ft">
+    <div>
+      <a class="logo" href="/"><i></i>Closery</a>
+      <div class="ft-tag">Система, которая<br>не держится на собственнике</div>
+    </div>
+    <div>
+      <div class="ft-links">
+        <a href="mailto:klimenko@closery.ru">klimenko@closery.ru</a>
+        <a href="https://t.me/klimenko_prod">Telegram</a>
+        <a href="/policy/">Политика&nbsp;конфиденциальности</a>
+        <a href="https://cabinet.closery.ru/" rel="nofollow">Личный&nbsp;кабинет</a>
+      </div>
+      <div class="ft-legal">© 2026 Closery · ИП Клименко Николай Витальевич<br>ИНН 632200739609 · ОГРНИП 326632700116702</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('barBurger'),menu=document.getElementById('barMobile');
+  if(btn&&menu){
+    btn.addEventListener('click',function(){var o=menu.classList.toggle('open');btn.classList.toggle('open',o);btn.setAttribute('aria-expanded',String(o));});
+    menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');btn.classList.remove('open');});});
+  }
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+  setTimeout(function(){els.forEach(function(e){e.classList.add('in')})},2500);
+})();
+</script>
+</body>
+</html>

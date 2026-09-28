@@ -11,6 +11,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://closery.ru/technology/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://closery.ru/cases/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
