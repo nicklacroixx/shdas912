@@ -699,7 +699,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     /* Цели: клик в Telegram и на почту — главные действия сайта */
     document.addEventListener('click', function(ev){
         var a = ev.target.closest && ev.target.closest('a[href]'); if(!a) return;
-        if(a.href.indexOf('t.me/klimenko_prod') > -1) ym(113130091, 'reachGoal', 'tg_click');
+        if(a.href.indexOf('t.me/klimenko_prod') > -1 && (!window.closeryLead || /telegram/i.test(a.textContent) || a.closest('footer') || a.closest('.lf'))) ym(113130091, 'reachGoal', 'tg_click');
         else if(a.href.indexOf('mailto:klimenko@') === 0) ym(113130091, 'reachGoal', 'mail_click');
     }, true);
 </script>
@@ -1262,5 +1262,6 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   resetScan();onScroll();
 })();
 </script>
+<script src="/lead.js" defer></script>
 </body>
 </html>
