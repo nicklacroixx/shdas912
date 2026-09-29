@@ -605,6 +605,72 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 @media(min-width:901px) and (max-width:1000px){.after{grid-template-columns:repeat(2,50%)!important}.after>div:nth-child(3){border-left:none;border-top:1px solid var(--rule)}.after>div:nth-child(4){border-top:1px solid var(--rule)}}
 
 .who>.who-ph{padding-right:0!important;margin-right:var(--cg);max-width:none!important}
+
+/* мелкий текст без засечек: засечки только у крупных цифр и цитат */
+.chk-n,.three b,.prob i,.prob em,.sys p b,.leak-w,.leak-l span,.terms .n,.steps .n,.step-n,.q-table .sc,.fun p b,.errc h5 em,.bars .m,.rev div::before,.errc ol li::before,.did small,.how small,.case-n,.idx small,.card-err-h em{font-family:var(--ui)!important;font-weight:500!important;font-feature-settings:"tnum" 1,"lnum" 1}
+.c4{font-size:14px!important;line-height:1.5;color:var(--ink-3)}
+.c4 b{display:inline!important;font-size:inherit!important;font-weight:500!important;color:var(--ok-soft)!important;margin:0!important}
+.c4 b::after{content:" · "}
+
+/* 8. итоги по центру строки, а не по нижней линии */
+.led-tot,.bill .t{align-items:center!important}
+/* 9. карточка 1% */
+.hour-res b{font-size:clamp(40px,4vw,60px)!important}
+/* 10. логотипы */
+.logos{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-top:clamp(56px,6vw,96px);padding-top:26px;border-top:1px solid var(--rule)}
+.logos p{font-size:14px;color:var(--ink-3);line-height:1.5;padding-right:var(--cg)}
+.logos p b{color:var(--ok-soft);font-weight:500}
+.logos ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px 32px}
+.logos li{font-family:var(--disp);font-weight:600;font-size:clamp(16px,1.5vw,21px);letter-spacing:-.03em;color:var(--ink-2);opacity:.8;transition:opacity .3s,color .3s;white-space:nowrap}
+.logos li:hover{opacity:1;color:var(--ink)}
+@media(min-width:1001px){.logos{grid-template-columns:25% 75%;gap:0;align-items:center}}
+/* 7. сравнение */
+.cmp-head [data-c]{text-align:center}
+.cmp-logo{display:inline-flex;align-items:center;gap:9px;font-family:var(--brand);font-weight:800;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink)}
+.cmp-logo i{width:8px;height:8px;border-radius:2px;background:var(--ok);box-shadow:0 0 12px rgba(52,211,153,.7)}
+/* 6. этапы: вся строка — кнопка */
+.leak{cursor:pointer;transition:background .25s}
+.leak:hover{background:rgba(20,37,31,.5)}
+.leak:focus-visible{outline:2px solid var(--ok);outline-offset:-2px}
+.leak-btn{display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:16px;color:var(--ink);margin:0}
+.leak-l span{font-size:14px!important}
+/* 5. шаги после МРТ — одинаковые ячейки */
+.after>div,.after>div:first-child{background:var(--paper)!important}
+.after>div:last-child small{color:var(--ok-soft)}
+/* 3. основатель */
+.who-ph{aspect-ratio:722/686!important}
+.who-ph img{filter:none!important;transform:none!important}
+.who-ph::after{background:linear-gradient(180deg,transparent 70%,rgba(7,16,13,.35))!important}
+.sign{margin-top:18px;font-size:14px;color:var(--ink-3)}
+/* 2. что меняется */
+.shift{display:grid;grid-template-columns:minmax(0,1fr);border-top:1px solid var(--rule-2)}
+@media(min-width:981px){.shift{grid-template-columns:50% 50%}.shift .sh:nth-child(odd){padding-right:var(--cg)}}
+.sh{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px 0;padding:30px 0 32px;border-bottom:1px solid var(--rule)}
+.sh i{grid-row:1/3;font-style:normal;font-size:13px;font-weight:500;color:var(--ok-soft);padding-top:3px}
+.sh s{text-decoration:none;font-size:14.5px;color:var(--ink-3);position:relative;justify-self:start}
+.sh s::after{content:"";position:absolute;left:0;right:0;top:55%;height:1px;background:var(--loss);transform-origin:0 50%;transform:scaleX(0);transition:transform .9s var(--ease) .25s}
+.sh.in s::after{transform:scaleX(1)}
+.sh b{font-family:var(--disp);font-weight:600;font-size:clamp(20px,1.9vw,28px);line-height:1.18;letter-spacing:-.03em;color:var(--ink)}
+.sh::before{content:"";position:absolute;left:0;top:-1px;height:1px;width:0;background:var(--ok);transition:width .5s var(--ease)}
+.sh:hover::before{width:52px}
+/* 12. полоса цены года */
+.cost-bar{display:flex;height:44px;margin-top:22px;border-radius:8px;overflow:hidden;gap:3px}
+.cost-bar i{position:relative;flex:0 0 var(--w);display:flex;align-items:center;padding:0 14px;font-style:normal;transform-origin:0 50%;transform:scaleX(0);transition:transform 1.2s var(--ease)}
+.bill.in .cost-bar i{transform:scaleX(1)}
+.bill.in .cost-bar i.b{transition-delay:.25s}
+.cost-bar i.a{background:rgba(224,178,90,.28)}
+.cost-bar i.b{background:rgba(238,90,94,.32)}
+.cost-bar em{font-style:normal;font-size:12.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* доводка */
+@media(min-width:1001px){.logos ul{display:grid;grid-template-columns:repeat(3,33.3333%);row-gap:22px}.logos li{padding-right:var(--cg)}}
+@media(max-width:1000px){.logos ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px}}
+.sh s::after{content:none!important}
+.sh s{text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:transparent;transition:text-decoration-color .8s ease .2s}
+.sh.in s{text-decoration-color:var(--loss)}
+@media(max-width:800px){.led-tot{align-items:flex-start!important}.bill .t{align-items:baseline!important}
+  .cost-bar{flex-direction:column;height:auto;gap:4px}.cost-bar i{flex:none;width:100%;height:34px}}
+.sh{align-content:start}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -666,7 +732,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
         <a class="btn btn-ghost" href="/mrt-demo/">Демо за 2 минуты</a>
       </div>
     </div>
-    <div class="hour rv" aria-label="Калькулятор стоимости часа собственника">
+    <div class="hour rv" aria-label="Сколько стоит один процент течи">
       <div class="hour-scenes" aria-hidden="true">
         <div class="hour-scene active"><video src="scene1.mp4" poster="scene1_poster.jpg" muted loop playsinline preload="auto"></video></div>
         <div class="hour-scene"><video src="scene2.mp4" poster="scene2_poster.jpg" muted loop playsinline preload="none"></video></div>
@@ -677,18 +743,18 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       </div>
       <div class="hour-body">
         <p class="hour-k">Прежде чем читать дальше</p>
-        <h3>Сколько стоит ваш час?</h3>
-        <label class="hour-row"><span>Доход</span><input type="text" id="hourIncome" class="ym-disable-keys" value="500 000" inputmode="numeric" autocomplete="off" aria-label="Доход в месяц, рублей"><span>₽ в месяц</span></label>
-        <div class="hour-res"><b id="hourRate">—</b><span>в час</span></div>
-        <p class="hour-foot">Он стоит дороже, чем вы думаете. Каждая неделя, пока течи не найдены, оплачена этими часами.</p>
+        <h3>Сколько стоит 1% течи?</h3>
+        <label class="hour-row"><span>Выручка</span><input type="text" id="hourIncome" class="ym-disable-keys" value="30 000 000" inputmode="numeric" autocomplete="off" aria-label="Выручка в месяц, рублей"><span>₽ в месяц</span></label>
+        <div class="hour-res"><b id="hourRate">—</b><span>в год</span></div>
+        <p class="hour-foot">Один недозвон из ста заявок или одна лишняя скидка. В ведомости ниже таких строк пять.</p>
       </div>
     </div>
   </div>
-  <div class="roles rv">
-    <p><strong>10 лет мы сами отвечали за эту цифру изнутри.</strong> Это не аудит от консультанта, который видел продажи в презентациях.</p>
-    <div><b>CDEK</b><span>Коммерческий директор франчайзи-сети</span></div>
-    <div><b>Vagabond</b><span>Коммерческий директор</span></div>
-    <div><b>MarketGuru</b><span>Руководитель продаж</span></div>
+  <div class="logos rv">
+    <p><b>10 лет</b> строили коммерцию изнутри компаний</p>
+    <ul>
+      <li>CDEK</li><li>MarketGuru</li><li>Vagabond</li><li>UniBox</li><li>Экспресс Дизайн</li><li>Империя Сервиса</li>
+    </ul>
   </div>
 </section>
 
@@ -861,6 +927,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       <div class="r"><div><b>Течи, которые всё это время не закрыты</b><small>Те же 42,6 млн ₽ в год из первого примера ведомости, семь месяцев подряд</small></div><span class="neg">−24 850 000 ₽</span></div>
       <div class="r"><div><b>Что остаётся компании, если он ушёл</b><small>Метод, база и договорённости уходят вместе с ним</small></div><span>ничего</span></div>
       <div class="r t"><div><b>Цена года, в котором ничего не изменилось</b></div><span>−33 250 000 ₽</span></div>
+      <div class="cost-bar" aria-hidden="true"><i class="a" style="--w:25.3%"><em>ФОТ директора · 8,4 млн</em></i><i class="b" style="--w:74.7%"><em>Течи, которые не закрыты · 24,85 млн</em></i></div>
     </div>
   </div>
 </section>
@@ -878,7 +945,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       <button type="button" data-c="own" aria-pressed="false">Разбираться самому</button>
     </div>
     <div class="cmp rv" id="cmp" data-sel="dir">
-      <div class="cmp-row cmp-head"><div></div><div data-c="dir">Коммерческий директор</div><div data-c="con">Консультант</div><div data-c="own">Сами</div><div data-c="cl">Closery</div></div>
+      <div class="cmp-row cmp-head"><div></div><div data-c="dir">Коммерческий директор</div><div data-c="con">Консультант</div><div data-c="own">Сами</div><div data-c="cl"><span class="cmp-logo"><i></i>Closery</span></div></div>
       <div class="cmp-row"><div>Когда появятся цифры</div><div data-c="dir">2–3 месяца на поиск и ещё полгода до понятного результата</div><div data-c="con">После серии интервью и отчёта</div><div data-c="own">Когда найдётся время между текущими задачами</div><div data-c="cl">Через 120 минут: ведомость потерь в рублях</div></div>
       <div class="cmp-row"><div>Цена ошибки</div><div data-c="dir">От 1,2 млн ₽ ФОТ в месяц, пока он выходит на результат</div><div data-c="con">Оплаченный отчёт, внедрять всё равно вам</div><div data-c="own">Ваше время, самое дорогое в компании</div><div data-c="cl">50 000 ₽, которые вернём, если потерь не нашли</div></div>
       <div class="cmp-row"><div>Кто отвечает за цифру</div><div data-c="dir">Он, пока работает у вас</div><div data-c="con">Никто: консультант сдаёт рекомендации</div><div data-c="own">Вы</div><div data-c="cl">Closery: этап не принят, значит не оплачен</div></div>
@@ -894,15 +961,15 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   <div class="w">
     <div class="head">
       <div><p class="kick rv">Как устроен проект</p><h2 class="rv">Этапы — это ваши течи, закрытые по очереди</h2></div>
-      <p class="lede rv">Если течи системные, Closery заходит как коммерческий директор на срок проекта и закрывает их одну за другой, от самой дорогой к самой дешёвой. Нажмите на решение, чтобы увидеть пример.</p>
+      <p class="lede rv">Если течи системные, Closery заходит как коммерческий директор на срок проекта и закрывает их одну за другой, от самой дорогой к самой дешёвой. Нажмите на этап, чтобы увидеть пример.</p>
     </div>
     <div class="route rv">
-      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 01–02</small><b>Замер по данным</b><span class="m">подтверждаем ведомость</span></div><div><button class="leak-btn" type="button">Аудит вместо предположений<i>Пример</i></button><div class="leak-ex"><p>У отдела 40% звонков есть в записи, 60% нет. Ведомость строится только на тех, что можно перепроверить, а не на словах менеджеров.</p></div></div></div>
-      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 02–05</small><b>Забытая база</b><span>−17 880 000 ₽</span></div><div><button class="leak-btn" type="button">Система повторных продаж<i>Пример</i></button><div class="leak-ex"><p>Клиент купил в марте, тишина до сентября. Правило: на 45-й день без покупки уходит персональный повод вернуться, а не рассылка всем подряд.</p></div></div></div>
-      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 03–06</small><b>Лишний ФОТ</b><span>−12 320 000 ₽</span></div><div><button class="leak-btn" type="button">Экономика отдела<i>Пример</i></button><div class="leak-ex"><p>Шесть менеджеров закрывают объём, который физически делают трое. Остальные трое не бездельники — это стоимость структуры, которую никто не считал в деньгах.</p></div></div></div>
-      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 05–08</small><b>Сделки без дожима</b><span>−6 800 000 ₽</span></div><div><button class="leak-btn" type="button">Технология сделки<i>Пример</i></button><div class="leak-ex"><p>Сделка «зависла»: менеджер просто не написал следующий шаг. Правило: у каждой стадии обязательный срок действия, а не «подумаю ещё».</p></div></div></div>
-      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 07–09</small><b>Заявки без ответа</b><span>−4 100 000 ₽</span></div><div><button class="leak-btn" type="button">Приём входящего потока<i>Пример</i></button><div class="leak-ex"><p>Заявка в 22:00 получает ответ в 11 утра, клиент уже написал троим конкурентам. Норматив ответа считается в минутах, а не «как получится».</p></div></div></div>
-      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 09–12</small><b>Решения через собственника</b><span>−1 500 000 ₽</span></div><div><button class="leak-btn" type="button">Управление без вас<i>Пример</i></button><div class="leak-ex"><p>Скидку 8% вместо 5% менеджер не может дать сам и ждёт вас из отпуска. Лимиты полномочий снимают эту паузу навсегда.</p></div></div></div>
+      <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 01–02</small><b>Замер по данным</b><span class="m">подтверждаем ведомость</span></div><div><p class="leak-btn">Аудит вместо предположений<i>Пример</i></p><div class="leak-ex"><p>У отдела 40% звонков есть в записи, 60% нет. Ведомость строится только на тех, что можно перепроверить, а не на словах менеджеров.</p></div></div></div>
+      <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 02–05</small><b>Забытая база</b><span>−17 880 000 ₽</span></div><div><p class="leak-btn">Система повторных продаж<i>Пример</i></p><div class="leak-ex"><p>Клиент купил в марте, тишина до сентября. Правило: на 45-й день без покупки уходит персональный повод вернуться, а не рассылка всем подряд.</p></div></div></div>
+      <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 03–06</small><b>Лишний ФОТ</b><span>−12 320 000 ₽</span></div><div><p class="leak-btn">Экономика отдела<i>Пример</i></p><div class="leak-ex"><p>Шесть менеджеров закрывают объём, который физически делают трое. Остальные трое не бездельники — это стоимость структуры, которую никто не считал в деньгах.</p></div></div></div>
+      <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 05–08</small><b>Сделки без дожима</b><span>−6 800 000 ₽</span></div><div><p class="leak-btn">Технология сделки<i>Пример</i></p><div class="leak-ex"><p>Сделка «зависла»: менеджер просто не написал следующий шаг. Правило: у каждой стадии обязательный срок действия, а не «подумаю ещё».</p></div></div></div>
+      <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 07–09</small><b>Заявки без ответа</b><span>−4 100 000 ₽</span></div><div><p class="leak-btn">Приём входящего потока<i>Пример</i></p><div class="leak-ex"><p>Заявка в 22:00 получает ответ в 11 утра, клиент уже написал троим конкурентам. Норматив ответа считается в минутах, а не «как получится».</p></div></div></div>
+      <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 09–12</small><b>Решения через собственника</b><span>−1 500 000 ₽</span></div><div><p class="leak-btn">Управление без вас<i>Пример</i></p><div class="leak-ex"><p>Скидку 8% вместо 5% менеджер не может дать сам и ждёт вас из отпуска. Лимиты полномочий снимают эту паузу навсегда.</p></div></div></div>
     </div>
     <div class="changes g4 rv"><div class="c4"><b>Что меняется</b>для компании после проекта</div>
       <div><b>Выжить не за счёт кредита</b><p>Деньги, которые раньше утекали, остаются в компании. Это и есть запас прочности.</p></div>
@@ -923,12 +990,12 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       <div><small>Шаг 1 · МРТ</small><b>Найти потери</b><p>Ведомость в рублях и приоритет, что чинить первым.</p></div>
       <div><small>Шаг 2 · Точечное исправление</small><b>Забрать самую дорогую течь</b><p>Без пересборки всего отдела. Обычно этого хватает, чтобы окупить весь проект.</p></div>
       <div><small>Шаг 3 · Методология Closery</small><b>Перестроить систему целиком</b><p>Чтобы течи не открылись снова. Систему, в отличие от директора, нельзя потерять: она принадлежит компании.</p></div>
-      <div class="after-note"><p>Не каждому нужен третий шаг. <span>Но каждый начинается с первого.</span></p></div>
+      <div><small>Главное</small><b>Каждый начинается с первого</b><p>Не каждому нужен третий шаг. МРТ покажет, нужен ли он вам и сколько он стоит.</p></div>
     </div>
     <div class="terms g4 rv"><div class="c4"><b>Договор</b>Три пункта, которые фиксируем до старта</div>
-      <div><span class="n">§ 1</span><span class="v">0 ₽</span><b>Этап не принят — не оплачен</b><p>Критерии приёмки измеримые и зафиксированы до старта: цифры в отчёте, подписанные регламенты, ритм отдела. Не спор о впечатлениях, а сверка с документом.</p></div>
-      <div><span class="n">§ 2</span><span class="v">Всё ваше</span><b>Система остаётся компании</b><p>Регламенты, скрипты, финмодель, метрики и доступы — ваши активы с первого дня. Вы не арендуете систему и не зависите от подрядчика после выхода.</p></div>
-      <div><span class="n">§ 3</span><span class="v">90 дней</span><b>Финал — когда мы больше не нужны</b><p>Последний этап принимаете вы, и только когда отдел месяц держит план и цифры без нас. Дальше решаете сами, оставлять управление на РОПе или на себе.</p></div>
+      <div><span class="n">01</span><span class="v">0 ₽</span><b>Этап не принят — не оплачен</b><p>Критерии приёмки измеримые и зафиксированы до старта: цифры в отчёте, подписанные регламенты, ритм отдела. Не спор о впечатлениях, а сверка с документом.</p></div>
+      <div><span class="n">02</span><span class="v">Всё ваше</span><b>Система остаётся компании</b><p>Регламенты, скрипты, финмодель, метрики и доступы — ваши активы с первого дня. Вы не арендуете систему и не зависите от подрядчика после выхода.</p></div>
+      <div><span class="n">03</span><span class="v">90 дней</span><b>Финал — когда мы больше не нужны</b><p>Последний этап принимаете вы, и только когда отдел месяц держит план и цифры без нас. Дальше решаете сами, оставлять управление на РОПе или на себе.</p></div>
     </div>
   </div>
 </section>
@@ -937,10 +1004,11 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 <section class="sec" id="founder">
   <div class="w">
     <div class="who">
-      <figure class="who-ph rv"><img src="/founder.webp" alt="Николай Клименко, основатель Closery" loading="lazy" width="785" height="940"><figcaption>Николай Клименко, основатель Closery</figcaption></figure>
+      <figure class="who-ph rv"><img src="/founder-portrait.webp" alt="Николай Клименко, основатель Closery" loading="lazy" width="722" height="686"></figure>
       <div>
         <p class="kick rv">Кто это делает</p>
-        <blockquote class="rv">Closery не консультирует со стороны. <span>Мы отвечаем за цифру в кассе.</span></blockquote>
+        <blockquote class="rv">Каждый МРТ я провожу сам. <span>В отчёт попадают только цифры, которые я готов защитить перед вашим финансистом.</span></blockquote>
+        <p class="sign rv">Николай Клименко, основатель Closery</p>
         <p class="lede rv">10 лет Николай строил коммерцию изнутри компаний — CDEK, Vagabond, MarketGuru. В MarketGuru трое его менеджеров выросли до РОПов и остались в проекте, когда он ушёл.</p>
         <p class="lede rv" style="margin-top:16px">Каждый МРТ и каждый проект он ведёт лично, от замера до передачи управления. Поэтому одновременно в работе не больше трёх компаний.</p>
       </div>
@@ -960,15 +1028,15 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 <!-- результат -->
 <section class="sec">
   <div class="w">
-    <div class="head" style="margin-bottom:clamp(28px,3vw,48px)"><div><p class="kick rv">Что в результате</p><h2 class="rv">До и после МРТ</h2></div></div>
-    <div class="vs">
-      <div class="vs-row h"><div>Сейчас</div><div>После МРТ</div></div>
-      <div class="vs-row"><div class="was"><span>Теряете деньги, но не видите где</span></div><div class="now">Видите каждую подтверждённую потерю в рублях</div></div>
-      <div class="vs-row"><div class="was"><span>Платите за лиды, которые не становятся деньгами</span></div><div class="now">Знаете, сколько денег сгорает между лидом и оплатой</div></div>
-      <div class="vs-row"><div class="was"><span>Клиенты уходят, а причина неизвестна</span></div><div class="now">Видите конкретный этап, где теряется клиент</div></div>
-      <div class="vs-row"><div class="was"><span>Отдел продаж занят, но результат не растёт</span></div><div class="now">Знаете, какое узкое место ограничивает выручку</div></div>
-      <div class="vs-row"><div class="was"><span>Решения принимаются по ощущениям</span></div><div class="now">Приоритеты задают цифры: что исправить первым</div></div>
-      <div class="vs-row"><div class="was"><span>Рост ищут через новый найм и бюджет</span></div><div class="now">Сначала возвращаете деньги из того, что уже есть</div></div>
+    <div class="head"><div><p class="kick rv">Что в результате</p><h2 class="rv">Что меняется после МРТ</h2></div>
+      <p class="lede rv">Шесть вещей, которые собственник видит на следующий день после отчёта. Не обещания проекта, а то, что даёт сам документ.</p></div>
+    <div class="shift">
+      <div class="sh rv"><i>01</i><s>Теряете деньги, но не видите где</s><b>Видите каждую подтверждённую потерю в рублях</b></div>
+      <div class="sh rv"><i>02</i><s>Платите за лиды, которые не становятся деньгами</s><b>Знаете, сколько сгорает между заявкой и оплатой</b></div>
+      <div class="sh rv"><i>03</i><s>Клиенты уходят, причина неизвестна</s><b>Видите этап, на котором теряется клиент</b></div>
+      <div class="sh rv"><i>04</i><s>Отдел занят, а выручка стоит</s><b>Знаете узкое место, которое держит выручку</b></div>
+      <div class="sh rv"><i>05</i><s>Решения принимаются по ощущениям</s><b>Первым чините то, что дороже всего стоит</b></div>
+      <div class="sh rv"><i>06</i><s>Рост ищут через найм и новый бюджет</s><b>Сначала возвращаете деньги, которые уже есть</b></div>
     </div>
   </div>
 </section>
@@ -996,7 +1064,6 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Показать мои потери <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
     <span class="note">50&nbsp;000&nbsp;₽, идёт в зачёт проекта</span>
   </div>
-  <p class="end-alt rv">Telegram не открывается — напишите на <a href="mailto:klimenko@closery.ru?subject=%D0%97%D0%B0%D0%BF%D0%B8%D1%81%D1%8C%20%D0%BD%D0%B0%20%D0%9C%D0%A0%D0%A2">klimenko@closery.ru</a>, ответим в течение рабочего дня.</p>
 </section>
 
 </main>
@@ -1057,7 +1124,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     var input=document.getElementById('hourIncome'),out=document.getElementById('hourRate');
     if(!input||!out)return;
     var nf=new Intl.NumberFormat('ru-RU',{maximumFractionDigits:0});
-    function calc(){var raw=input.value.replace(/[^\d]/g,'');out.textContent=raw?nf.format(parseInt(raw,10)/126)+' ₽':'—';}
+    function calc(){var raw=input.value.replace(/[^\d]/g,'');if(!raw){out.textContent='—';return;}var y=parseInt(raw,10)*12*0.01;out.textContent=y>=1e6?(Math.round(y/1e5)/10).toLocaleString('ru-RU')+' млн ₽':nf.format(y)+' ₽';}
     input.addEventListener('input',function(){var d=input.value.replace(/[^\d]/g,'');input.value=d?new Intl.NumberFormat('ru-RU').format(d):'';calc();});
     calc();
   })();
@@ -1129,7 +1196,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   if(pick&&cmp){$$('button',pick).forEach(function(b){b.addEventListener('click',function(){$$('button',pick).forEach(function(x){x.setAttribute('aria-pressed','false');});b.setAttribute('aria-pressed','true');cmp.dataset.sel=b.dataset.c;});});}
 
   /* примеры в этапах проекта и вопросы */
-  $$('.leak-btn').forEach(function(b){b.addEventListener('click',function(){var l=b.closest('.leak'),ex=b.nextElementSibling,o=l.classList.toggle('open');ex.style.maxHeight=o?ex.scrollHeight+'px':'0';});});
+  $$('.leak').forEach(function(l){function t(){var ex=l.querySelector('.leak-ex'),o=l.classList.toggle('open');l.setAttribute('aria-expanded',String(o));ex.style.maxHeight=o?ex.scrollHeight+'px':'0';}l.addEventListener('click',t);l.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();t();}});});
   $$('.faq-q').forEach(function(q){q.addEventListener('click',function(){
     var it=q.parentElement,a=it.querySelector('.faq-a'),was=it.classList.contains('open');
     $$('.faq-item.open').forEach(function(x){x.classList.remove('open');x.querySelector('.faq-a').style.maxHeight='0';});

@@ -88,6 +88,12 @@
 @media(min-width:981px){.head,.how-head{align-items:start!important}.head>:last-child,.how-head>:last-child{padding-top:48px}}
 
 @media(min-width:1001px){.did>div:nth-child(5){grid-column:2}}
+
+/* мелкий текст без засечек: засечки только у крупных цифр и цитат */
+.chk-n,.three b,.prob i,.prob em,.sys p b,.leak-w,.leak-l span,.terms .n,.steps .n,.step-n,.q-table .sc,.fun p b,.errc h5 em,.bars .m,.rev div::before,.errc ol li::before,.did small,.how small,.case-n,.idx small,.card-err-h em{font-family:var(--ui)!important;font-weight:500!important;font-feature-settings:"tnum" 1,"lnum" 1}
+.c4{font-size:14px!important;line-height:1.5;color:var(--ink-3)}
+.c4 b{display:inline!important;font-size:inherit!important;font-weight:500!important;color:var(--ok-soft)!important;margin:0!important}
+.c4 b::after{content:" · "}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -257,7 +263,6 @@
     <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Записаться на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
     <span class="note">120 минут · 50&nbsp;000&nbsp;₽ · идёт в зачёт проекта</span>
   </div>
-  <p class="end-alt rv">Telegram не открывается — напишите на <a href="mailto:klimenko@closery.ru?subject=%D0%97%D0%B0%D0%BF%D0%B8%D1%81%D1%8C%20%D0%BD%D0%B0%20%D0%9C%D0%A0%D0%A2">klimenko@closery.ru</a></p>
 </section>
 
 </main>
