@@ -55,7 +55,9 @@ a:hover{text-decoration-color:var(--ok)}
 .nav a:hover,.nav a[aria-current]{color:var(--ink)}
 .nav .cta{font-family:var(--ui);font-weight:600;font-size:13px;letter-spacing:0;text-transform:none;color:var(--bg);background:var(--ink);border-radius:9px;padding:9px 16px}
 .nav .cta:hover{color:var(--bg);background:#fff}
-@media(max-width:720px){.nav a:not(.cta){display:none}}
+.nav a{white-space:nowrap}
+@media(max-width:1000px){.nav a.opt{display:none}}
+@media(max-width:860px){.nav a:not(.cta){display:none}}
 .crumbs{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);padding-top:28px}
 .crumbs a{color:var(--ink-3);text-decoration:none}.crumbs a:hover{color:var(--ink-2)}
 .hero{padding:28px 0 8px}
@@ -175,7 +177,7 @@ h2{font-size:clamp(24px,2.8vw,38px);letter-spacing:-.04em}
 <header class="bar"><div class="bar-in">
   <a class="logo" href="/"><i></i>Closery</a>
   <nav class="nav" aria-label="Разделы">
-    <a href="/mrt-demo/">Демо-МРТ</a>
+    <a href="/mrt-demo/" class="opt">Демо-МРТ</a>
     <a href="/technology/">Технология</a>
     <a href="/cases/">Кейсы</a>
     <a href="/research/" aria-current="page">Исследования</a>
