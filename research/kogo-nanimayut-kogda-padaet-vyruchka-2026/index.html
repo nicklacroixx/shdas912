@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кого нанимают собственники, когда падает выручка — исследование Closery, 2026</title>
+<meta name="description" content="1 272 компании, которые в июле–сентябре 2026 года искали руководителя продаж или коммерческого директора, и их отчётность в ФНС: у 35% выручка за 2025 год упала, с учётом инфляции — у 44%. Оклад и должность при этом не зависят от того, растёт компания или падает.">
+<link rel="canonical" href="https://closery.ru/research/kogo-nanimayut-kogda-padaet-vyruchka-2026/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Николай Клименко">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Closery">
+<meta property="og:title" content="Кого нанимают собственники, когда падает выручка — исследование Closery, 2026">
+<meta property="og:description" content="1 272 компании, которые в июле–сентябре 2026 года искали руководителя продаж или коммерческого директора, и их отчётность в ФНС: у 35% выручка за 2025 год упала, с учётом инфляции — у 44%. Оклад и должность при этом не зависят от того, растёт компания или падает.">
+<meta property="og:url" content="https://closery.ru/research/kogo-nanimayut-kogda-padaet-vyruchka-2026/">
+<meta property="article:published_time" content="2026-10-01">
+<meta name="theme-color" content="#07100D">
+<meta property="og:image" content="https://closery.ru/og.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD,U+20BD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD,U+20BD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD,U+20BD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD,U+20BD}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD,U+20BD}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-800-normal.woff2) format('woff2')}
+
+:root{
+  --bg:#07100D;--bg-2:#0B1714;--paper:#0F1D19;--paper-2:#14251F;--rule:#1B2B26;--rule-2:#2A3F38;
+  --ink:#F4F8F6;--ink-2:#CBD6D0;--ink-3:#8FA099;--num:'Source Serif 4',Georgia,serif;
+  --loss:#F0555A;--loss-2:#B84A4E;--loss-3:#8C3E42;--mid:#5B6863;
+  --ok:#34D399;--ok-2:#29A677;--ok-3:#1F7A5C;--amber:#E8B34D;
+  --disp:'Unbounded','Onest',system-ui,sans-serif;--ui:'Onest',system-ui,-apple-system,sans-serif;
+  --mono:'Onest',system-ui,sans-serif;--brand:'Plus Jakarta Sans','Onest',sans-serif;
+  --gut:clamp(16px,5vw,48px);--r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ink);text-decoration-color:var(--rule-2);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--ok)}
+.w{max-width:1100px;margin:0 auto;padding:0 var(--gut)}
+.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.86);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border-bottom:1px solid var(--rule)}
+.bar-in{display:flex;justify-content:space-between;align-items:center;height:64px;gap:16px;max-width:1440px;margin:0 auto;padding:0 var(--gut)}
+.logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:#fff}
+.logo i{width:9px;height:9px;border-radius:2px;background:var(--ok);box-shadow:0 0 16px rgba(52,211,153,.65)}
+.nav{display:flex;align-items:center;gap:22px}
+.nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--ink-2)}
+.nav a:hover,.nav a[aria-current]{color:var(--ink)}
+.nav .cta{font-family:var(--ui);font-weight:600;font-size:13px;letter-spacing:0;text-transform:none;color:var(--bg);background:var(--ink);border-radius:9px;padding:9px 16px}
+.nav .cta:hover{color:var(--bg);background:#fff}
+@media(max-width:720px){.nav a:not(.cta){display:none}}
+.crumbs{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);padding-top:28px}
+.crumbs a{color:var(--ink-3);text-decoration:none}.crumbs a:hover{color:var(--ink-2)}
+.hero{padding:28px 0 8px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ok)}
+h1{font-family:var(--disp);font-weight:600;font-size:clamp(28px,4.6vw,54px);line-height:1.08;letter-spacing:-.035em;margin:16px 0 20px;max-width:22ch}
+h2{font-family:var(--disp);font-weight:600;font-size:clamp(20px,2.6vw,30px);line-height:1.2;letter-spacing:-.03em;margin:0 0 14px}
+h3{font-family:var(--ui);font-weight:600;font-size:17px;line-height:1.35;margin:0 0 6px}
+.lede{font-size:clamp(16.5px,1.9vw,20px);line-height:1.6;color:var(--ink-2);max-width:62ch}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+section{padding:56px 0 0}
+p{max-width:68ch}
+p+p{margin-top:12px}
+.muted{color:var(--ink-2)}
+.small{font-size:14px;color:var(--ink-2)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:36px}
+.kpi{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);padding:20px 20px 18px}
+.kpi b{display:block;font-family:var(--ui);font-weight:600;font-size:clamp(34px,4vw,44px);line-height:1;letter-spacing:-.02em}
+.kpi span{display:block;margin-top:10px;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.kpi.loss b{color:var(--ink)}
+.kpi.loss{box-shadow:inset 3px 0 0 var(--loss)}
+.kpi.ok{box-shadow:inset 3px 0 0 var(--ok)}
+.kpi.mid{box-shadow:inset 3px 0 0 var(--mid)}
+.find{list-style:none;counter-reset:f;display:grid;gap:14px;max-width:74ch}
+.find li{counter-increment:f;position:relative;padding-left:44px;font-size:17px;line-height:1.55}
+.find li::before{content:counter(f,decimal-leading-zero);position:absolute;left:0;top:2px;font-family:var(--mono);font-size:12px;color:var(--ok)}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);padding:clamp(18px,3vw,28px);margin-top:18px}
+.card h3{margin-bottom:4px}
+.card .sub{font-size:14px;color:var(--ink-2);margin-bottom:18px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 14px;font-size:13px;color:var(--ink-2)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+.hbars{display:grid;gap:8px}
+.hrow{display:grid;grid-template-columns:minmax(120px,210px) 1fr;gap:12px;align-items:center}
+.hlab{font-size:14px;line-height:1.3;color:var(--ink)}
+.hlab small{display:block;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.htrack{display:flex;align-items:center;gap:8px;min-height:24px;padding-right:96px;min-width:0}
+.hbar{display:flex;flex:none;height:20px;gap:2px}
+.seg{height:100%;min-width:2px;outline:none;cursor:default;transition:filter .15s}
+.seg:last-child{border-radius:0 4px 4px 0}
+.seg:hover,.seg:focus-visible{filter:brightness(1.25)}
+.seg:focus-visible{box-shadow:0 0 0 2px var(--ink)}
+.hval{font-family:var(--mono);font-size:12.5px;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.hval small{color:var(--ink-3)}
+@media(max-width:560px){.hrow{grid-template-columns:1fr;gap:4px}}
+.axisnote{margin-top:12px;font-size:12.5px;color:var(--ink-3)}
+details.tbl{margin-top:16px;border-top:1px solid var(--rule);padding-top:12px}
+details.tbl summary{cursor:pointer;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--ink-2)}
+table{border-collapse:collapse;width:100%;margin-top:12px;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:600;color:var(--ink-2);font-size:12.5px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tscroll{overflow-x:auto}
+.note{border-left:3px solid var(--amber);background:var(--paper);border-radius:0 var(--r) var(--r) 0;padding:18px 20px;margin-top:18px;max-width:74ch}
+.checks{list-style:none;display:grid;gap:10px;margin-top:14px;max-width:70ch}
+.checks li{padding-left:28px;position:relative}
+.checks li::before{content:"";position:absolute;left:0;top:8px;width:12px;height:12px;border:2px solid var(--ok);border-radius:3px}
+.cta-box{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;background:var(--paper-2);border:1px solid var(--rule-2);border-radius:var(--r);padding:22px 24px;margin-top:22px}
+.cta-box p{margin:0;max-width:52ch}
+.btn{display:inline-block;font-weight:600;font-size:15px;text-decoration:none;color:var(--bg);background:var(--ok);border-radius:10px;padding:12px 20px;white-space:nowrap}
+.btn:hover{background:#5ee3b0}
+.method dl{display:grid;grid-template-columns:minmax(140px,200px) 1fr;gap:10px 20px;margin-top:10px;max-width:880px}
+.method dt{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink-3);padding-top:3px}
+.method dd{font-size:15px}
+@media(max-width:600px){.method dl{grid-template-columns:1fr;gap:2px}.method dd{margin-bottom:12px}}
+.cite{font-family:var(--mono);font-size:13px;line-height:1.6;background:var(--bg-2);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;margin-top:12px;color:var(--ink);max-width:880px;word-break:break-word}
+.row-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.ghost{font-family:var(--mono);font-size:12px;color:var(--ink);background:transparent;border:1px solid var(--rule-2);border-radius:8px;padding:9px 14px;cursor:pointer;text-decoration:none}
+.ghost:hover{border-color:var(--ink-2)}
+.author{display:flex;gap:16px;align-items:flex-start;margin-top:14px}
+.author .av{flex:none;width:48px;height:48px;border-radius:12px;background:var(--paper-2);border:1px solid var(--rule-2);display:grid;place-items:center;font-family:var(--disp);font-size:16px}
+.faq{display:grid;gap:10px;margin-top:10px;max-width:880px}
+.faq details{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600}
+.faq details p{margin-top:10px;color:var(--ink-2)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:22px}
+.scard{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);padding:22px;text-decoration:none}
+.scard:hover{border-color:var(--rule-2)}
+.scard .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ok)}
+.scard .k.soon{color:var(--amber)}
+.scard b{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.25;letter-spacing:-.02em;color:var(--ink)}
+.scard span{font-size:14.5px;color:var(--ink-2)}
+footer{margin-top:88px;border-top:1px solid var(--rule);padding:36px 0 48px}
+.ft{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px}
+.ft-links{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px}
+.ft-links a{color:var(--ink-2);text-decoration:none}.ft-links a:hover{color:var(--ink)}
+.ft-legal{margin-top:12px;font-family:var(--mono);font-size:11px;color:var(--ink-3);line-height:1.7}
+#tip{position:fixed;z-index:100;pointer-events:none;background:var(--ink);color:var(--bg);border-radius:8px;padding:8px 11px;font-size:13px;line-height:1.35;max-width:260px;opacity:0;transition:opacity .12s;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+#tip b{display:block;font-size:15px}
+
+/* язык сайта Closery: фон с изумрудным свечением, заголовки Unbounded, крупные цифры с засечками, подписи без капса */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(1100px 620px at 12% -8%,rgba(52,211,153,.13),transparent 62%)}
+.eyebrow{font-size:14px;letter-spacing:0;text-transform:none;color:var(--ok);display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--ok)}
+h1{font-size:clamp(32px,5vw,64px);letter-spacing:-.045em;line-height:1.02}
+h2{font-size:clamp(24px,2.8vw,38px);letter-spacing:-.04em}
+.kpi b{font-family:var(--num);font-size:clamp(32px,3.2vw,48px);white-space:nowrap}
+.kpi{background:var(--paper)}
+.meta,.crumbs{font-size:13px;letter-spacing:0}
+.nav a{font-family:var(--ui);font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink-3)}
+.nav .cta{background:var(--ink);color:var(--bg)}
+.nav .cta:hover{background:#7FE9C0}
+.btn{background:var(--ink);color:var(--bg);font-weight:500}
+.btn:hover{background:#7FE9C0}
+.logo i{box-shadow:0 0 14px rgba(52,211,153,.7)}
+.find li::before{font-family:var(--ui);font-weight:500;font-size:13px}
+.scard .k,.method dt,details.tbl summary,.ghost{letter-spacing:0;text-transform:none}
+.cite{font-family:var(--ui)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{.bar,.cta-box,footer,.row-btns{display:none}body{background:#fff;color:#000}}
+
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Кого нанимают собственники, когда падает выручка", "description": "1 272 компании, которые в июле–сентябре 2026 года искали руководителя продаж или коммерческого директора, и их отчётность в ФНС: у 35% выручка за 2025 год упала, с учётом инфляции — у 44%. Оклад и должность при этом не зависят от того, растёт компания или падает.", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "inLanguage": "ru", "author": {"@type": "Person", "name": "Николай Клименко", "jobTitle": "Основатель Closery", "description": "Руководил продажами у франчайзи CDEK и в MarketGuru.", "url": "https://closery.ru/#founder"}, "publisher": {"@type": "Organization", "name": "Closery", "url": "https://closery.ru/", "description": "Closery помогает собственникам находить деньги, которые компания недополучает, и считать их в рублях.", "founder": {"@type": "Person", "name": "Николай Клименко"}}, "mainEntityOfPage": "https://closery.ru/research/kogo-nanimayut-kogda-padaet-vyruchka-2026/", "about": ["найм руководителя продаж", "выручка компаний", "малый и средний бизнес"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Dataset", "name": "Найм руководителей продаж и выручка компаний, Россия, 2026", "description": "1 272 компании, которые в июле–сентябре 2026 года искали руководителя продаж или коммерческого директора, и их отчётность в ФНС: у 35% выручка за 2025 год упала, с учётом инфляции — у 44%. Оклад и должность при этом не зависят от того, растёт компания или падает.", "creator": {"@type": "Organization", "name": "Closery", "url": "https://closery.ru/", "description": "Closery помогает собственникам находить деньги, которые компания недополучает, и считать их в рублях.", "founder": {"@type": "Person", "name": "Николай Клименко"}}, "license": "https://creativecommons.org/licenses/by/4.0/", "isAccessibleForFree": true, "temporalCoverage": "2026-07-13/2026-09-22", "spatialCoverage": "Россия", "variableMeasured": ["изменение выручки 2025 к 2024", "доля компаний с падением выручки", "оклад в вакансии", "должность", "отрасль", "регион"], "distribution": [{"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://closery.ru/research/data/closery-naim-i-vyruchka-2026.csv"}], "url": "https://closery.ru/research/kogo-nanimayut-kogda-padaet-vyruchka-2026/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Сколько компаний, которые ищут руководителя продаж, теряют выручку?", "acceptedAnswer": {"@type": "Answer", "text": "По данным исследования Closery, у 35% компаний, которые в июле–сентябре 2026 года искали руководителя отдела продаж или коммерческого директора, выручка за 2025 год оказалась ниже, чем за 2024-й. С учётом инфляции 5,59% реальное падение у 44%. Выборка — 757 компаний с опубликованной отчётностью."}}, {"@type": "Question", "name": "Какую зарплату предлагают руководителю отдела продаж в 2026 году?", "acceptedAnswer": {"@type": "Answer", "text": "Медиана нижней границы оклада в вакансиях — 200 000 ₽ в месяц: 240 000 ₽ в Москве и области, 204 000 ₽ в Петербурге и области, 180 000 ₽ в других регионах. Коммерческому директору предлагают от 250 000 ₽. Данные по вакансиям июля–сентября 2026 года с указанной зарплатой."}}, {"@type": "Question", "name": "В каких отраслях чаще падает выручка у компаний, которые нанимают руководителя продаж?", "acceptedAnswer": {"@type": "Answer", "text": "В продаже и ремонте автомобилей выручка за 2025 год упала у 62% таких компаний, в строительстве — у 57%, в оптовой торговле — у 37%."}}, {"@type": "Question", "name": "Что проверить перед наймом руководителя продаж?", "acceptedAnswer": {"@type": "Answer", "text": "Сколько денег компания недополучает и на каком участке: заявки без ответа, клиенты без второй покупки, лишние скидки. Что новый человек должен исправить за первые 90 дней в рублях. По какой цифре через три месяца будет видно, что найм сработал."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Closery", "item": "https://closery.ru/"}, {"@type": "ListItem", "position": 2, "name": "Исследования", "item": "https://closery.ru/research/"}, {"@type": "ListItem", "position": 3, "name": "Кого нанимают собственники, когда падает выручка", "item": "https://closery.ru/research/kogo-nanimayut-kogda-padaet-vyruchka-2026/"}]}</script>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <a class="logo" href="/"><i></i>Closery</a>
+  <nav class="nav" aria-label="Разделы">
+    <a href="/mrt-demo/">Демо-МРТ</a>
+    <a href="/technology/">Технология</a>
+    <a href="/cases/">Кейсы</a>
+    <a href="/research/" aria-current="page">Исследования</a>
+    <a href="https://t.me/klimenko_prod" class="cta">Записаться на МРТ</a>
+  </nav>
+</div></header>
+<main>
+<nav class="crumbs w" aria-label="Навигация"><a href="/">Closery</a> / <a href="/research/">Исследования</a> / <span>Найм и выручка</span></nav>
+<div class="w">
+<section class="hero">
+  <div class="eyebrow">Исследование Closery · октябрь 2026</div>
+  <h1>Кого нанимают собственники, когда падает выручка</h1>
+  <p class="lede">Мы взяли 1 272 компании, которые в июле–сентябре 2026 года искали руководителя продаж или
+  коммерческого директора, и сверили их с отчётностью в ФНС. У каждой третьей выручка в 2025 году упала.
+  При этом падающие и растущие компании ищут одного и того же человека за одни и те же деньги.</p>
+  <div class="meta"><span>Николай Клименко</span><span>Опубликовано 1 октября 2026</span>
+  <span>1 272 компании · 757 с отчётностью</span></div>
+  <div class="kpis">
+    <div class="kpi loss"><b>35%</b><span>компаний, которые ищут руководителя продаж, заработали в 2025 году меньше, чем в 2024-м</span></div>
+    <div class="kpi loss"><b>44%</b><span>с поправкой на инфляцию: выручка упала или выросла меньше цен</span></div>
+    <div class="kpi loss"><b>18%</b><span>потеряли больше пятой части выручки</span></div>
+    <div class="kpi mid"><b>150 000 ₽</b><span>медианный оклад руководителя отдела продаж — одинаковый при падении и при росте</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Главное</h2>
+  <ol class="find"><li>У каждой третьей компании (35%), которая ищет руководителя продаж или коммерческого директора, выручка за 2025 год оказалась ниже, чем за 2024-й. С поправкой на инфляцию таких 44%.</li><li>Нанимают компании на двух полюсах: 18% потеряли больше пятой части выручки, 21% выросли больше чем в полтора раза.</li><li>Состав вакансий от этого не меняется. Руководителя отдела продаж ищут 76% падающих и 74% растущих компаний, а оклад у тех и у других одинаковый: от 150 000 ₽ в месяц (медиана).</li><li>Чаще всего выручка падала у тех, кто нанимает в продаже и ремонте автомобилей (62%) и в строительстве (57%). Среди компаний с выручкой 0,8–2 млрд ₽ выручка упала у 44%, с учётом инфляции — у 58%.</li><li>Для большинства падение свежее: выручка снижается второй год подряд только у 8% компаний.</li></ol>
+</section>
+
+<section>
+  <h2>Как изменилась выручка у компаний, которые ищут руководителя продаж</h2>
+  <p class="muted">Руководителя продаж ищут и те, у кого выручка резко упала, и те, у кого она резко выросла.
+  Медианный рост — 9,5%, но среднее значение здесь мало что говорит: выборка распадается на два полюса.</p>
+  <div class="card">
+<h3>Изменение выручки за 2025 год у компаний, которые ищут руководителя продаж</h3>
+<p class="sub">757 компаний с отчётностью за 2024 и 2025 годы. Инфляция за 2025 год — 5,59%.</p>
+<div class="legend"><span><i style="background:var(--loss)"></i>выручка упала</span><span><i style="background:var(--mid)"></i>выросла меньше инфляции</span><span><i style="background:var(--ok)"></i>выросла больше инфляции</span></div>
+<div class="hbars">
+<div class="hrow"><div class="hlab">Минус 20% и больше<small>134 компании</small></div><div class="htrack"><div class="hbar" style="width:81.83%"><span class="seg" tabindex="0" style="width:100.00%;background:var(--loss)" data-v="18%" data-l="Минус 20% и больше" aria-label="Минус 20% и больше: 18%"></span></div><span class="hval">18%</span></div></div>
+<div class="hrow"><div class="hlab">От −20% до −10%<small>53 компании</small></div><div class="htrack"><div class="hbar" style="width:32.36%"><span class="seg" tabindex="0" style="width:100.00%;background:var(--loss-2)" data-v="7,0%" data-l="От −20% до −10%" aria-label="От −20% до −10%: 7%"></span></div><span class="hval">7%</span></div></div>
+<div class="hrow"><div class="hlab">От −10% до 0<small>76 компаний</small></div><div class="htrack"><div class="hbar" style="width:46.23%"><span class="seg" tabindex="0" style="width:100.00%;background:var(--loss-3)" data-v="10%" data-l="От −10% до 0" aria-label="От −10% до 0: 10%"></span></div><span class="hval">10%</span></div></div>
+<div class="hrow"><div class="hlab">0–5,6%: ниже инфляции<small>71 компания</small></div><div class="htrack"><div class="hbar" style="width:43.46%"><span class="seg" tabindex="0" style="width:100.00%;background:var(--mid)" data-v="9,4%" data-l="0–5,6%: ниже инфляции" aria-label="0–5,6%: ниже инфляции: 9%"></span></div><span class="hval">9%</span></div></div>
+<div class="hrow"><div class="hlab">5,6–20%<small>142 компании</small></div><div class="htrack"><div class="hbar" style="width:86.92%"><span class="seg" tabindex="0" style="width:100.00%;background:var(--ok-3)" data-v="19%" data-l="5,6–20%" aria-label="5,6–20%: 19%"></span></div><span class="hval">19%</span></div></div>
+<div class="hrow"><div class="hlab">20–50%<small>125 компаний</small></div><div class="htrack"><div class="hbar" style="width:76.28%"><span class="seg" tabindex="0" style="width:100.00%;background:var(--ok-2)" data-v="16%" data-l="20–50%" aria-label="20–50%: 16%"></span></div><span class="hval">16%</span></div></div>
+<div class="hrow"><div class="hlab">50% и больше<small>156 компаний</small></div><div class="htrack"><div class="hbar" style="width:95.24%"><span class="seg" tabindex="0" style="width:100.00%;background:var(--ok)" data-v="21%" data-l="50% и больше" aria-label="50% и больше: 21%"></span></div><span class="hval">21%</span></div></div>
+</div>
+<details class="tbl"><summary>Таблица</summary><div class="tscroll"><table><thead><tr><th>Изменение выручки 2025 к 2024</th><th class=n>Компаний</th><th class=n>Доля</th></tr></thead><tbody><tr><td>Минус 20% и больше</td><td class=n>134</td><td class=n>17,7%</td></tr><tr><td>От −20% до −10%</td><td class=n>53</td><td class=n>7,0%</td></tr><tr><td>От −10% до 0</td><td class=n>76</td><td class=n>10,0%</td></tr><tr><td>0–5,6%: ниже инфляции</td><td class=n>71</td><td class=n>9,4%</td></tr><tr><td>5,6–20%</td><td class=n>142</td><td class=n>18,8%</td></tr><tr><td>20–50%</td><td class=n>125</td><td class=n>16,5%</td></tr><tr><td>50% и больше</td><td class=n>156</td><td class=n>20,6%</td></tr></tbody></table></div></details>
+</div>
+</section>
+
+<section>
+  <h2>Где падение чаще: размер компании и отрасль</h2>
+  <div class="card">
+<h3>По размеру компании</h3>
+<p class="sub">Выручка за 2025 год. Малый бизнес — до 800 млн ₽, средний — до 2 млрд ₽.</p>
+<div class="legend"><span><i style="background:var(--loss)"></i>выручка упала</span><span><i style="background:var(--mid)"></i>выросла меньше инфляции</span></div>
+<div class="hbars">
+<div class="hrow"><div class="hlab">до 120 млн ₽<small>239 компаний</small></div><div class="htrack"><div class="hbar" style="width:65.45%"><span class="seg" tabindex="0" style="width:87.80%;background:var(--loss)" data-v="36%" data-l="выручка упала" aria-label="выручка упала: 36%"></span><span class="seg" tabindex="0" style="width:12.20%;background:var(--mid)" data-v="5,0%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 5%"></span></div><span class="hval">41%</span></div></div>
+<div class="hrow"><div class="hlab">120–800 млн ₽<small>269 компаний</small></div><div class="htrack"><div class="hbar" style="width:68.65%"><span class="seg" tabindex="0" style="width:79.07%;background:var(--loss)" data-v="34%" data-l="выручка упала" aria-label="выручка упала: 34%"></span><span class="seg" tabindex="0" style="width:20.93%;background:var(--mid)" data-v="9,0%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 9%"></span></div><span class="hval">43%</span></div></div>
+<div class="hrow"><div class="hlab">0,8–2 млрд ₽<small>118 компаний</small></div><div class="htrack"><div class="hbar" style="width:92.59%"><span class="seg" tabindex="0" style="width:75.86%;background:var(--loss)" data-v="44%" data-l="выручка упала" aria-label="выручка упала: 44%"></span><span class="seg" tabindex="0" style="width:24.14%;background:var(--mid)" data-v="14%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 14%"></span></div><span class="hval">58%</span></div></div>
+<div class="hrow"><div class="hlab">2–10 млрд ₽<small>102 компании</small></div><div class="htrack"><div class="hbar" style="width:65.45%"><span class="seg" tabindex="0" style="width:63.41%;background:var(--loss)" data-v="26%" data-l="выручка упала" aria-label="выручка упала: 26%"></span><span class="seg" tabindex="0" style="width:36.59%;background:var(--mid)" data-v="15%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 15%"></span></div><span class="hval">41%</span></div></div>
+<div class="hrow"><div class="hlab">от 10 млрд ₽<small>29 компаний</small></div><div class="htrack"><div class="hbar" style="width:55.87%"><span class="seg" tabindex="0" style="width:60.00%;background:var(--loss)" data-v="21%" data-l="выручка упала" aria-label="выручка упала: 21%"></span><span class="seg" tabindex="0" style="width:40.00%;background:var(--mid)" data-v="14%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 14%"></span></div><span class="hval">35%</span></div></div>
+</div>
+<p class="axisnote">Число у полосы — доля компаний, у которых выручка упала или выросла меньше инфляции.</p>
+<details class="tbl"><summary>Таблица</summary><div class="tscroll"><table><thead><tr><th>Группа</th><th class=n>Компаний</th><th class=n>Выручка упала</th><th class=n>Рост ниже инфляции</th><th class=n>Всего</th></tr></thead><tbody><tr><td>до 120 млн ₽</td><td class=n>239</td><td class=n>36%</td><td class=n>5%</td><td class=n>41%</td></tr><tr><td>120–800 млн ₽</td><td class=n>269</td><td class=n>34%</td><td class=n>9%</td><td class=n>43%</td></tr><tr><td>0,8–2 млрд ₽</td><td class=n>118</td><td class=n>44%</td><td class=n>14%</td><td class=n>58%</td></tr><tr><td>2–10 млрд ₽</td><td class=n>102</td><td class=n>26%</td><td class=n>15%</td><td class=n>41%</td></tr><tr><td>от 10 млрд ₽</td><td class=n>29</td><td class=n>21%</td><td class=n>14%</td><td class=n>35%</td></tr></tbody></table></div></details>
+</div>
+  <div class="card">
+<h3>По отраслям</h3>
+<p class="sub">Отрасли, где в выборке не меньше 20 компаний. Отрасль — по основному ОКВЭД.</p>
+<div class="legend"><span><i style="background:var(--loss)"></i>выручка упала</span><span><i style="background:var(--mid)"></i>выросла меньше инфляции</span></div>
+<div class="hbars">
+<div class="hrow"><div class="hlab">Продажа и ремонт автомобилей<small>37 компаний</small></div><div class="htrack"><div class="hbar" style="width:92.59%"><span class="seg" tabindex="0" style="width:81.58%;background:var(--loss)" data-v="62%" data-l="выручка упала" aria-label="выручка упала: 62%"></span><span class="seg" tabindex="0" style="width:18.42%;background:var(--mid)" data-v="14%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 14%"></span></div><span class="hval">76%</span></div></div>
+<div class="hrow"><div class="hlab">Строительство<small>30 компаний</small></div><div class="htrack"><div class="hbar" style="width:73.10%"><span class="seg" tabindex="0" style="width:95.00%;background:var(--loss)" data-v="57%" data-l="выручка упала" aria-label="выручка упала: 57%"></span><span class="seg" tabindex="0" style="width:5.00%;background:var(--mid)" data-v="3,0%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 3%"></span></div><span class="hval">60%</span></div></div>
+<div class="hrow"><div class="hlab">Оптовая торговля<small>200 компаний</small></div><div class="htrack"><div class="hbar" style="width:58.48%"><span class="seg" tabindex="0" style="width:77.08%;background:var(--loss)" data-v="37%" data-l="выручка упала" aria-label="выручка упала: 37%"></span><span class="seg" tabindex="0" style="width:22.92%;background:var(--mid)" data-v="11%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 11%"></span></div><span class="hval">48%</span></div></div>
+<div class="hrow"><div class="hlab">Недвижимость<small>44 компании</small></div><div class="htrack"><div class="hbar" style="width:54.82%"><span class="seg" tabindex="0" style="width:80.00%;background:var(--loss)" data-v="36%" data-l="выручка упала" aria-label="выручка упала: 36%"></span><span class="seg" tabindex="0" style="width:20.00%;background:var(--mid)" data-v="9,0%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 9%"></span></div><span class="hval">45%</span></div></div>
+<div class="hrow"><div class="hlab">Другие отрасли<small>161 компания</small></div><div class="htrack"><div class="hbar" style="width:49.95%"><span class="seg" tabindex="0" style="width:78.05%;background:var(--loss)" data-v="32%" data-l="выручка упала" aria-label="выручка упала: 32%"></span><span class="seg" tabindex="0" style="width:21.95%;background:var(--mid)" data-v="9,0%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 9%"></span></div><span class="hval">41%</span></div></div>
+<div class="hrow"><div class="hlab">Другое производство<small>121 компания</small></div><div class="htrack"><div class="hbar" style="width:48.73%"><span class="seg" tabindex="0" style="width:82.50%;background:var(--loss)" data-v="33%" data-l="выручка упала" aria-label="выручка упала: 33%"></span><span class="seg" tabindex="0" style="width:17.50%;background:var(--mid)" data-v="7,0%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 7%"></span></div><span class="hval">40%</span></div></div>
+<div class="hrow"><div class="hlab">Розничная торговля<small>33 компании</small></div><div class="htrack"><div class="hbar" style="width:47.51%"><span class="seg" tabindex="0" style="width:92.31%;background:var(--loss)" data-v="36%" data-l="выручка упала" aria-label="выручка упала: 36%"></span><span class="seg" tabindex="0" style="width:7.69%;background:var(--mid)" data-v="3,0%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 3%"></span></div><span class="hval">39%</span></div></div>
+<div class="hrow"><div class="hlab">Транспорт и логистика<small>23 компании</small></div><div class="htrack"><div class="hbar" style="width:47.51%"><span class="seg" tabindex="0" style="width:43.59%;background:var(--loss)" data-v="17%" data-l="выручка упала" aria-label="выручка упала: 17%"></span><span class="seg" tabindex="0" style="width:56.41%;background:var(--mid)" data-v="22%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 22%"></span></div><span class="hval">39%</span></div></div>
+<div class="hrow"><div class="hlab">Пищевое производство<small>37 компаний</small></div><div class="htrack"><div class="hbar" style="width:46.30%"><span class="seg" tabindex="0" style="width:50.00%;background:var(--loss)" data-v="19%" data-l="выручка упала" aria-label="выручка упала: 19%"></span><span class="seg" tabindex="0" style="width:50.00%;background:var(--mid)" data-v="19%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 19%"></span></div><span class="hval">38%</span></div></div>
+<div class="hrow"><div class="hlab">IT и разработка<small>44 компании</small></div><div class="htrack"><div class="hbar" style="width:45.08%"><span class="seg" tabindex="0" style="width:86.49%;background:var(--loss)" data-v="32%" data-l="выручка упала" aria-label="выручка упала: 32%"></span><span class="seg" tabindex="0" style="width:13.51%;background:var(--mid)" data-v="5,0%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 5%"></span></div><span class="hval">37%</span></div></div>
+<div class="hrow"><div class="hlab">Консалтинг и управление<small>27 компаний</small></div><div class="htrack"><div class="hbar" style="width:28.02%"><span class="seg" tabindex="0" style="width:82.61%;background:var(--loss)" data-v="19%" data-l="выручка упала" aria-label="выручка упала: 19%"></span><span class="seg" tabindex="0" style="width:17.39%;background:var(--mid)" data-v="4,0%" data-l="рост ниже инфляции" aria-label="рост ниже инфляции: 4%"></span></div><span class="hval">23%</span></div></div>
+</div>
+<p class="axisnote">Число у полосы — доля компаний, у которых выручка упала или выросла меньше инфляции.</p>
+<details class="tbl"><summary>Таблица</summary><div class="tscroll"><table><thead><tr><th>Группа</th><th class=n>Компаний</th><th class=n>Выручка упала</th><th class=n>Рост ниже инфляции</th><th class=n>Всего</th></tr></thead><tbody><tr><td>Продажа и ремонт автомобилей</td><td class=n>37</td><td class=n>62%</td><td class=n>14%</td><td class=n>76%</td></tr><tr><td>Строительство</td><td class=n>30</td><td class=n>57%</td><td class=n>3%</td><td class=n>60%</td></tr><tr><td>Оптовая торговля</td><td class=n>200</td><td class=n>37%</td><td class=n>11%</td><td class=n>48%</td></tr><tr><td>Недвижимость</td><td class=n>44</td><td class=n>36%</td><td class=n>9%</td><td class=n>45%</td></tr><tr><td>Другие отрасли</td><td class=n>161</td><td class=n>32%</td><td class=n>9%</td><td class=n>41%</td></tr><tr><td>Другое производство</td><td class=n>121</td><td class=n>33%</td><td class=n>7%</td><td class=n>40%</td></tr><tr><td>Розничная торговля</td><td class=n>33</td><td class=n>36%</td><td class=n>3%</td><td class=n>39%</td></tr><tr><td>Транспорт и логистика</td><td class=n>23</td><td class=n>17%</td><td class=n>22%</td><td class=n>39%</td></tr><tr><td>Пищевое производство</td><td class=n>37</td><td class=n>19%</td><td class=n>19%</td><td class=n>38%</td></tr><tr><td>IT и разработка</td><td class=n>44</td><td class=n>32%</td><td class=n>5%</td><td class=n>37%</td></tr><tr><td>Консалтинг и управление</td><td class=n>27</td><td class=n>19%</td><td class=n>4%</td><td class=n>23%</td></tr></tbody></table></div></details>
+</div>
+</section>
+
+<section>
+  <h2>Сколько предлагают новому руководителю</h2>
+  <p class="muted">Зарплату указали в 69% вакансий. Медиана нижней границы оклада у руководителя
+  отдела продаж — 200 000 ₽ в месяц, у коммерческого директора — 250 000 ₽. Если сравнить компании
+  по динамике выручки, оклад руководителя отдела продаж совпадает до рубля.</p>
+  <div class="card">
+<h3>Оклад в вакансии и динамика выручки</h3>
+<p class="sub">Медиана нижней границы оклада («от …») в компаниях с отчётностью за 2024–2025 годы. В скобках — число вакансий.</p>
+<div class="tscroll"><table><thead><tr><th>Выручка за 2025 год</th><th class=n>Руководитель отдела продаж</th><th class=n>Коммерческий директор</th></tr></thead><tbody><tr><td>Выручка упала</td><td class=n>150 000 ₽ (140)</td><td class=n>200 000 ₽ (22)</td></tr><tr><td>Рост ниже инфляции</td><td class=n>150 000 ₽ (37)</td><td class=n>200 000 ₽ (8)</td></tr><tr><td>Рост выше инфляции</td><td class=n>150 000 ₽ (187)</td><td class=n>160 000 ₽ (30)</td></tr></tbody></table></div>
+<p class="axisnote">По коммерческим директорам вакансий с зарплатой мало, поэтому эти цифры ориентировочные.</p>
+</div>
+<div class="card">
+<h3>Руководитель отдела продаж: оклад по регионам</h3>
+<p class="sub">Все вакансии выборки с указанной зарплатой, 721 шт.</p>
+<div class="tscroll"><table><thead><tr><th>Где</th><th class=n>Медиана оклада «от»</th><th class=n>Вакансий</th></tr></thead><tbody><tr><td>Москва и область</td><td class=n>240 000 ₽</td><td class=n>204</td></tr><tr><td>Петербург и область</td><td class=n>204 000 ₽</td><td class=n>85</td></tr><tr><td>Другие регионы</td><td class=n>180 000 ₽</td><td class=n>432</td></tr></tbody></table></div>
+</div>
+</section>
+
+<section>
+  <h2>Что это значит для собственника</h2>
+  <p>Падение и резкий рост — разные задачи. Когда выручка падает, нужно найти, где компания теряет деньги,
+  например на заявках без ответа или на клиентах, которые так и не вернулись. Когда выручка растёт
+  рывком, нужно удержать систему, которая перестала справляться. А вакансия и оклад в обоих случаях одни и те же.</p>
+  <p>Похоже, что решение о найме часто принимают раньше, чем ставят диагноз. Новый человек приходит и сам выясняет,
+  что чинить. Только его оклад — от 2 400 000 ₽ в год, а первые месяцы уходят на то, чтобы разобраться.</p>
+  <div class="note">
+    <h3>Перед тем как открывать вакансию, стоит ответить на три вопроса</h3>
+    <ul class="checks">
+      <li>Сколько денег компания недополучает и на каком участке: заявки без ответа, клиенты без второй покупки, лишние скидки.</li>
+      <li>Что новый человек должен исправить за первые 90 дней, в рублях, а не «выстроить отдел».</li>
+      <li>По какой цифре через три месяца будет видно, что найм сработал.</li>
+    </ul>
+  </div>
+  <div class="cta-box">
+    <p>Прикинуть, сколько недополучает ваша компания, можно за 10 минут в бесплатном демо-расчёте. Он считает три самые частые потери в рублях.</p>
+    <a class="btn" href="/mrt-demo/">Посчитать свои потери</a>
+  </div>
+</section>
+
+<section class="method">
+  <h2>Как мы считали</h2>
+  <dl>
+    <dt>Вакансии</dt><dd>Вакансии руководителя отдела продаж, коммерческого директора, директора по продажам и их заместителей
+    на hh.ru (1 235) и «Работа России» (37), опубликованные
+    с 13 июля по 22 сентября 2026 года; 92% — в сентябре. Одна компания — одна запись.</dd>
+    <dt>Кого исключили</dt><dd>Индивидуальных предпринимателей, банки, страховые и микрофинансовые компании, госсектор,
+    кадровые агентства, недействующие компании и публичные компании. Итог — 1 272 компании.</dd>
+    <dt>Выручка</dt><dd>Бухгалтерская отчётность из ГИР БО ФНС за 2023–2025 годы. Изменение выручки считали для
+    757 компаний, у которых есть отчётность и за 2024, и за 2025 год.</dd>
+    <dt>Инфляция</dt><dd>5,59% за 2025 год (Росстат, декабрь к декабрю). «Рост ниже инфляции» — выручка выросла
+    меньше чем на 5,59%.</dd>
+    <dt>Оклад</dt><dd>Нижняя граница зарплаты из текста вакансии («от …»), до вычета налогов. Медиана по вакансиям,
+    где зарплата указана.</dd>
+    <dt>Ограничения</dt><dd>Это не случайная выборка всех российских компаний, а компании, которые нанимают руководителя
+    продаж и разместили вакансию на этих площадках. Список собран поиском по названиям должностей, поэтому часть вакансий
+    могла не попасть. Компании без опубликованной отчётности в расчёт выручки не вошли. Отрасль определена по основному ОКВЭД
+    и может не совпадать с тем, чем компания занимается на деле.</dd>
+  </dl>
+</section>
+
+<section>
+  <h2>Частые вопросы</h2>
+  <div class="faq"><details><summary>Сколько компаний, которые ищут руководителя продаж, теряют выручку?</summary><p>По данным исследования Closery, у 35% компаний, которые в июле–сентябре 2026 года искали руководителя отдела продаж или коммерческого директора, выручка за 2025 год оказалась ниже, чем за 2024-й. С учётом инфляции 5,59% реальное падение у 44%. Выборка — 757 компаний с опубликованной отчётностью.</p></details><details><summary>Какую зарплату предлагают руководителю отдела продаж в 2026 году?</summary><p>Медиана нижней границы оклада в вакансиях — 200 000 ₽ в месяц: 240 000 ₽ в Москве и области, 204 000 ₽ в Петербурге и области, 180 000 ₽ в других регионах. Коммерческому директору предлагают от 250 000 ₽. Данные по вакансиям июля–сентября 2026 года с указанной зарплатой.</p></details><details><summary>В каких отраслях чаще падает выручка у компаний, которые нанимают руководителя продаж?</summary><p>В продаже и ремонте автомобилей выручка за 2025 год упала у 62% таких компаний, в строительстве — у 57%, в оптовой торговле — у 37%.</p></details><details><summary>Что проверить перед наймом руководителя продаж?</summary><p>Сколько денег компания недополучает и на каком участке: заявки без ответа, клиенты без второй покупки, лишние скидки. Что новый человек должен исправить за первые 90 дней в рублях. По какой цифре через три месяца будет видно, что найм сработал.</p></details></div>
+</section>
+
+<section>
+  <h2>Как цитировать</h2>
+  <p class="muted">Данные можно использовать свободно со ссылкой на Closery и эту страницу (лицензия CC BY 4.0).
+  Названия компаний мы не публикуем.</p>
+  <div class="cite" id="cite">Closery. «Кого нанимают собственники, когда падает выручка». Исследование, октябрь 2026. 1 272 вакансии hh.ru и «Работа России» за июль–сентябрь 2026 года, отчётность ФНС. https://closery.ru/research/kogo-nanimayut-kogda-padaet-vyruchka-2026/</div>
+  <div class="row-btns">
+    <button class="ghost" type="button" data-copy="cite">Скопировать ссылку для цитаты</button>
+    <a class="ghost" href="/research/data/closery-naim-i-vyruchka-2026.csv" download>Скачать данные (CSV)</a>
+  </div>
+  <div class="author">
+    <div class="av" aria-hidden="true">НК</div>
+    <div><h3>Николай Клименко</h3><p class="small">Основатель Closery. Руководил продажами у франчайзи CDEK и в MarketGuru.
+    По вопросам об исследовании: <a href="mailto:klimenko@closery.ru">klimenko@closery.ru</a></p></div>
+  </div>
+</section>
+</div>
+</main>
+<footer><div class="w ft">
+  <div>
+    <a class="logo" href="/"><i></i>Closery</a>
+    <p class="small" style="margin-top:12px;max-width:44ch">Closery помогает собственникам находить деньги, которые компания недополучает, и считать их в рублях.</p>
+  </div>
+  <div>
+    <div class="ft-links">
+      <a href="/research/">Исследования</a>
+      <a href="/mrt-demo/">Демо-расчёт потерь</a>
+      <a href="mailto:klimenko@closery.ru">klimenko@closery.ru</a>
+      <a href="https://t.me/klimenko_prod">Telegram</a>
+      <a href="/policy/">Политика конфиденциальности</a>
+    </div>
+    <div class="ft-legal">© 2026 Closery · ИП Клименко Николай Витальевич<br>ИНН 632200739609 · ОГРНИП 326632700116702</div>
+  </div>
+</div></footer>
+<script>
+(function(){
+  var tip=document.createElement('div');tip.id='tip';tip.setAttribute('role','status');document.body.appendChild(tip);
+  function show(el,x,y){
+    tip.textContent='';var b=document.createElement('b');b.textContent=el.getAttribute('data-v');
+    var s=document.createElement('span');s.textContent=el.getAttribute('data-l');tip.appendChild(b);tip.appendChild(s);
+    tip.style.opacity=1;var r=tip.getBoundingClientRect();
+    var nx=Math.min(x+14,window.innerWidth-r.width-8),ny=y-r.height-12;if(ny<8)ny=y+18;
+    tip.style.left=nx+'px';tip.style.top=ny+'px';
+  }
+  function hide(){tip.style.opacity=0}
+  document.querySelectorAll('.seg[data-v]').forEach(function(el){
+    el.addEventListener('pointermove',function(e){show(el,e.clientX,e.clientY)});
+    el.addEventListener('pointerleave',hide);
+    el.addEventListener('focus',function(){var r=el.getBoundingClientRect();show(el,r.left+r.width/2,r.top)});
+    el.addEventListener('blur',hide);
+  });
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var t=document.getElementById(btn.getAttribute('data-copy')).textContent.trim();
+      if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){btn.textContent='Скопировано'})}
+    });
+  });
+})();
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.webvisor.org/metrika/tag_ww.js?id=113130091', 'ym');
+
+    ym(113130091, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+
+    /* Цели: клик в Telegram и на почту — главные действия сайта */
+    document.addEventListener('click', function(ev){
+        var a = ev.target.closest && ev.target.closest('a[href]'); if(!a) return;
+        if(a.href.indexOf('t.me/klimenko_prod') > -1) ym(113130091, 'reachGoal', 'tg_click');
+        else if(a.href.indexOf('mailto:klimenko@') === 0) ym(113130091, 'reachGoal', 'mail_click');
+    }, true);
+</script>
+<!-- /Yandex.Metrika counter -->
+<script src="/lead.js" defer></script>
+</body>
+</html>

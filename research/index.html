@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Исследования Closery: где российские компании теряют выручку</title>
+<meta name="description" content="Открытые данные Closery о том, где российские компании недополучают деньги: найм, заявки, скорость ответа. Цифры можно цитировать со ссылкой.">
+<link rel="canonical" href="https://closery.ru/research/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Николай Клименко">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Closery">
+<meta property="og:title" content="Исследования Closery: где российские компании теряют выручку">
+<meta property="og:description" content="Открытые данные Closery о том, где российские компании недополучают деньги: найм, заявки, скорость ответа. Цифры можно цитировать со ссылкой.">
+<meta property="og:url" content="https://closery.ru/research/">
+
+<meta name="theme-color" content="#07100D">
+<meta property="og:image" content="https://closery.ru/og.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/unbounded-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD,U+20BD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/onest-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD,U+20BD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/onest-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD,U+20BD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/onest-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD,U+20BD}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-serif-4-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD,U+20BD}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-800-normal.woff2) format('woff2')}
+
+:root{
+  --bg:#07100D;--bg-2:#0B1714;--paper:#0F1D19;--paper-2:#14251F;--rule:#1B2B26;--rule-2:#2A3F38;
+  --ink:#F4F8F6;--ink-2:#CBD6D0;--ink-3:#8FA099;--num:'Source Serif 4',Georgia,serif;
+  --loss:#F0555A;--loss-2:#B84A4E;--loss-3:#8C3E42;--mid:#5B6863;
+  --ok:#34D399;--ok-2:#29A677;--ok-3:#1F7A5C;--amber:#E8B34D;
+  --disp:'Unbounded','Onest',system-ui,sans-serif;--ui:'Onest',system-ui,-apple-system,sans-serif;
+  --mono:'Onest',system-ui,sans-serif;--brand:'Plus Jakarta Sans','Onest',sans-serif;
+  --gut:clamp(16px,5vw,48px);--r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ink);text-decoration-color:var(--rule-2);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--ok)}
+.w{max-width:1100px;margin:0 auto;padding:0 var(--gut)}
+.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.86);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border-bottom:1px solid var(--rule)}
+.bar-in{display:flex;justify-content:space-between;align-items:center;height:64px;gap:16px;max-width:1440px;margin:0 auto;padding:0 var(--gut)}
+.logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:#fff}
+.logo i{width:9px;height:9px;border-radius:2px;background:var(--ok);box-shadow:0 0 16px rgba(52,211,153,.65)}
+.nav{display:flex;align-items:center;gap:22px}
+.nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--ink-2)}
+.nav a:hover,.nav a[aria-current]{color:var(--ink)}
+.nav .cta{font-family:var(--ui);font-weight:600;font-size:13px;letter-spacing:0;text-transform:none;color:var(--bg);background:var(--ink);border-radius:9px;padding:9px 16px}
+.nav .cta:hover{color:var(--bg);background:#fff}
+@media(max-width:720px){.nav a:not(.cta){display:none}}
+.crumbs{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);padding-top:28px}
+.crumbs a{color:var(--ink-3);text-decoration:none}.crumbs a:hover{color:var(--ink-2)}
+.hero{padding:28px 0 8px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ok)}
+h1{font-family:var(--disp);font-weight:600;font-size:clamp(28px,4.6vw,54px);line-height:1.08;letter-spacing:-.035em;margin:16px 0 20px;max-width:22ch}
+h2{font-family:var(--disp);font-weight:600;font-size:clamp(20px,2.6vw,30px);line-height:1.2;letter-spacing:-.03em;margin:0 0 14px}
+h3{font-family:var(--ui);font-weight:600;font-size:17px;line-height:1.35;margin:0 0 6px}
+.lede{font-size:clamp(16.5px,1.9vw,20px);line-height:1.6;color:var(--ink-2);max-width:62ch}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+section{padding:56px 0 0}
+p{max-width:68ch}
+p+p{margin-top:12px}
+.muted{color:var(--ink-2)}
+.small{font-size:14px;color:var(--ink-2)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:36px}
+.kpi{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);padding:20px 20px 18px}
+.kpi b{display:block;font-family:var(--ui);font-weight:600;font-size:clamp(34px,4vw,44px);line-height:1;letter-spacing:-.02em}
+.kpi span{display:block;margin-top:10px;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.kpi.loss b{color:var(--ink)}
+.kpi.loss{box-shadow:inset 3px 0 0 var(--loss)}
+.kpi.ok{box-shadow:inset 3px 0 0 var(--ok)}
+.kpi.mid{box-shadow:inset 3px 0 0 var(--mid)}
+.find{list-style:none;counter-reset:f;display:grid;gap:14px;max-width:74ch}
+.find li{counter-increment:f;position:relative;padding-left:44px;font-size:17px;line-height:1.55}
+.find li::before{content:counter(f,decimal-leading-zero);position:absolute;left:0;top:2px;font-family:var(--mono);font-size:12px;color:var(--ok)}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);padding:clamp(18px,3vw,28px);margin-top:18px}
+.card h3{margin-bottom:4px}
+.card .sub{font-size:14px;color:var(--ink-2);margin-bottom:18px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 14px;font-size:13px;color:var(--ink-2)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+.hbars{display:grid;gap:8px}
+.hrow{display:grid;grid-template-columns:minmax(120px,210px) 1fr;gap:12px;align-items:center}
+.hlab{font-size:14px;line-height:1.3;color:var(--ink)}
+.hlab small{display:block;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.htrack{display:flex;align-items:center;gap:8px;min-height:24px;padding-right:96px;min-width:0}
+.hbar{display:flex;flex:none;height:20px;gap:2px}
+.seg{height:100%;min-width:2px;outline:none;cursor:default;transition:filter .15s}
+.seg:last-child{border-radius:0 4px 4px 0}
+.seg:hover,.seg:focus-visible{filter:brightness(1.25)}
+.seg:focus-visible{box-shadow:0 0 0 2px var(--ink)}
+.hval{font-family:var(--mono);font-size:12.5px;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.hval small{color:var(--ink-3)}
+@media(max-width:560px){.hrow{grid-template-columns:1fr;gap:4px}}
+.axisnote{margin-top:12px;font-size:12.5px;color:var(--ink-3)}
+details.tbl{margin-top:16px;border-top:1px solid var(--rule);padding-top:12px}
+details.tbl summary{cursor:pointer;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--ink-2)}
+table{border-collapse:collapse;width:100%;margin-top:12px;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:600;color:var(--ink-2);font-size:12.5px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tscroll{overflow-x:auto}
+.note{border-left:3px solid var(--amber);background:var(--paper);border-radius:0 var(--r) var(--r) 0;padding:18px 20px;margin-top:18px;max-width:74ch}
+.checks{list-style:none;display:grid;gap:10px;margin-top:14px;max-width:70ch}
+.checks li{padding-left:28px;position:relative}
+.checks li::before{content:"";position:absolute;left:0;top:8px;width:12px;height:12px;border:2px solid var(--ok);border-radius:3px}
+.cta-box{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;background:var(--paper-2);border:1px solid var(--rule-2);border-radius:var(--r);padding:22px 24px;margin-top:22px}
+.cta-box p{margin:0;max-width:52ch}
+.btn{display:inline-block;font-weight:600;font-size:15px;text-decoration:none;color:var(--bg);background:var(--ok);border-radius:10px;padding:12px 20px;white-space:nowrap}
+.btn:hover{background:#5ee3b0}
+.method dl{display:grid;grid-template-columns:minmax(140px,200px) 1fr;gap:10px 20px;margin-top:10px;max-width:880px}
+.method dt{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink-3);padding-top:3px}
+.method dd{font-size:15px}
+@media(max-width:600px){.method dl{grid-template-columns:1fr;gap:2px}.method dd{margin-bottom:12px}}
+.cite{font-family:var(--mono);font-size:13px;line-height:1.6;background:var(--bg-2);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;margin-top:12px;color:var(--ink);max-width:880px;word-break:break-word}
+.row-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.ghost{font-family:var(--mono);font-size:12px;color:var(--ink);background:transparent;border:1px solid var(--rule-2);border-radius:8px;padding:9px 14px;cursor:pointer;text-decoration:none}
+.ghost:hover{border-color:var(--ink-2)}
+.author{display:flex;gap:16px;align-items:flex-start;margin-top:14px}
+.author .av{flex:none;width:48px;height:48px;border-radius:12px;background:var(--paper-2);border:1px solid var(--rule-2);display:grid;place-items:center;font-family:var(--disp);font-size:16px}
+.faq{display:grid;gap:10px;margin-top:10px;max-width:880px}
+.faq details{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600}
+.faq details p{margin-top:10px;color:var(--ink-2)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:22px}
+.scard{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);padding:22px;text-decoration:none}
+.scard:hover{border-color:var(--rule-2)}
+.scard .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ok)}
+.scard .k.soon{color:var(--amber)}
+.scard b{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.25;letter-spacing:-.02em;color:var(--ink)}
+.scard span{font-size:14.5px;color:var(--ink-2)}
+footer{margin-top:88px;border-top:1px solid var(--rule);padding:36px 0 48px}
+.ft{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px}
+.ft-links{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px}
+.ft-links a{color:var(--ink-2);text-decoration:none}.ft-links a:hover{color:var(--ink)}
+.ft-legal{margin-top:12px;font-family:var(--mono);font-size:11px;color:var(--ink-3);line-height:1.7}
+#tip{position:fixed;z-index:100;pointer-events:none;background:var(--ink);color:var(--bg);border-radius:8px;padding:8px 11px;font-size:13px;line-height:1.35;max-width:260px;opacity:0;transition:opacity .12s;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+#tip b{display:block;font-size:15px}
+
+/* язык сайта Closery: фон с изумрудным свечением, заголовки Unbounded, крупные цифры с засечками, подписи без капса */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(1100px 620px at 12% -8%,rgba(52,211,153,.13),transparent 62%)}
+.eyebrow{font-size:14px;letter-spacing:0;text-transform:none;color:var(--ok);display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--ok)}
+h1{font-size:clamp(32px,5vw,64px);letter-spacing:-.045em;line-height:1.02}
+h2{font-size:clamp(24px,2.8vw,38px);letter-spacing:-.04em}
+.kpi b{font-family:var(--num);font-size:clamp(32px,3.2vw,48px);white-space:nowrap}
+.kpi{background:var(--paper)}
+.meta,.crumbs{font-size:13px;letter-spacing:0}
+.nav a{font-family:var(--ui);font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink-3)}
+.nav .cta{background:var(--ink);color:var(--bg)}
+.nav .cta:hover{background:#7FE9C0}
+.btn{background:var(--ink);color:var(--bg);font-weight:500}
+.btn:hover{background:#7FE9C0}
+.logo i{box-shadow:0 0 14px rgba(52,211,153,.7)}
+.find li::before{font-family:var(--ui);font-weight:500;font-size:13px}
+.scard .k,.method dt,details.tbl summary,.ghost{letter-spacing:0;text-transform:none}
+.cite{font-family:var(--ui)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{.bar,.cta-box,footer,.row-btns{display:none}body{background:#fff;color:#000}}
+
+</style>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Closery", "item": "https://closery.ru/"}, {"@type": "ListItem", "position": 2, "name": "Исследования", "item": "https://closery.ru/research/"}]}</script>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <a class="logo" href="/"><i></i>Closery</a>
+  <nav class="nav" aria-label="Разделы">
+    <a href="/mrt-demo/">Демо-МРТ</a>
+    <a href="/technology/">Технология</a>
+    <a href="/cases/">Кейсы</a>
+    <a href="/research/" aria-current="page">Исследования</a>
+    <a href="https://t.me/klimenko_prod" class="cta">Записаться на МРТ</a>
+  </nav>
+</div></header>
+<main>
+<nav class="crumbs w" aria-label="Навигация"><a href="/">Closery</a> / <span>Исследования</span></nav>
+<div class="w">
+<section class="hero">
+  <div class="eyebrow">Исследования Closery</div>
+  <h1>Где российские компании теряют выручку</h1>
+  <p class="lede">Мы собираем открытые данные о том, где бизнес недополучает деньги: кого нанимают, когда падает
+  выручка, куда клиенту написать, как быстро ему ответят. Каждое исследование — с методикой и таблицей данных.</p>
+</section>
+<section>
+  <h2>Исследования</h2>
+  <div class="cards"><div class="scard"><span class="k soon">Выйдет 7 октября 2026</span><b>Куда клиенту написать: сайты компаний после блокировки Telegram и WhatsApp</b><span>Мы проверили сайты 933 компании, которые ищут руководителя продаж. 56% ведут клиента в Telegram или WhatsApp, у 23% это единственный способ быстро написать. MAX есть на 27% сайтов, цену показывает 34%.</span></div><a class="scard" href="/research/kogo-nanimayut-kogda-padaet-vyruchka-2026/"><span class="k">1 октября 2026</span><b>Кого нанимают собственники, когда падает выручка</b><span>1 272 компании, которые в июле–сентябре 2026 года искали руководителя продаж или коммерческого директора, и их отчётность в ФНС: у 35% выручка за 2025 год упала, с учётом инфляции — у 44%. Оклад и должность при этом не зависят от того, растёт компания или падает.</span></a><div class="scard"><span class="k soon">Вторая половина октября</span><b>Как быстро компании отвечают на заявку</b><span>Тайный покупатель: 100 компаний, три канала, 14 дней наблюдения.</span></div></div>
+</section>
+<section>
+  <h2>Как пользоваться данными</h2>
+  <p>Цифры можно использовать в статьях, презентациях и отчётах со ссылкой на Closery и страницу исследования
+  (лицензия CC BY 4.0). У каждого исследования есть таблица данных в CSV и готовая строка для цитаты.
+  Названия компаний мы не публикуем: результаты конкретной компании получает только её собственник.</p>
+  <p class="small" style="margin-top:14px">Журналистам и авторам: <a href="mailto:klimenko@closery.ru">klimenko@closery.ru</a>.
+  Пришлём дополнительные разрезы и прокомментируем цифры.</p>
+</section>
+</div>
+</main>
+<footer><div class="w ft">
+  <div>
+    <a class="logo" href="/"><i></i>Closery</a>
+    <p class="small" style="margin-top:12px;max-width:44ch">Closery помогает собственникам находить деньги, которые компания недополучает, и считать их в рублях.</p>
+  </div>
+  <div>
+    <div class="ft-links">
+      <a href="/research/">Исследования</a>
+      <a href="/mrt-demo/">Демо-расчёт потерь</a>
+      <a href="mailto:klimenko@closery.ru">klimenko@closery.ru</a>
+      <a href="https://t.me/klimenko_prod">Telegram</a>
+      <a href="/policy/">Политика конфиденциальности</a>
+    </div>
+    <div class="ft-legal">© 2026 Closery · ИП Клименко Николай Витальевич<br>ИНН 632200739609 · ОГРНИП 326632700116702</div>
+  </div>
+</div></footer>
+<script>
+(function(){
+  var tip=document.createElement('div');tip.id='tip';tip.setAttribute('role','status');document.body.appendChild(tip);
+  function show(el,x,y){
+    tip.textContent='';var b=document.createElement('b');b.textContent=el.getAttribute('data-v');
+    var s=document.createElement('span');s.textContent=el.getAttribute('data-l');tip.appendChild(b);tip.appendChild(s);
+    tip.style.opacity=1;var r=tip.getBoundingClientRect();
+    var nx=Math.min(x+14,window.innerWidth-r.width-8),ny=y-r.height-12;if(ny<8)ny=y+18;
+    tip.style.left=nx+'px';tip.style.top=ny+'px';
+  }
+  function hide(){tip.style.opacity=0}
+  document.querySelectorAll('.seg[data-v]').forEach(function(el){
+    el.addEventListener('pointermove',function(e){show(el,e.clientX,e.clientY)});
+    el.addEventListener('pointerleave',hide);
+    el.addEventListener('focus',function(){var r=el.getBoundingClientRect();show(el,r.left+r.width/2,r.top)});
+    el.addEventListener('blur',hide);
+  });
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var t=document.getElementById(btn.getAttribute('data-copy')).textContent.trim();
+      if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){btn.textContent='Скопировано'})}
+    });
+  });
+})();
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.webvisor.org/metrika/tag_ww.js?id=113130091', 'ym');
+
+    ym(113130091, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+
+    /* Цели: клик в Telegram и на почту — главные действия сайта */
+    document.addEventListener('click', function(ev){
+        var a = ev.target.closest && ev.target.closest('a[href]'); if(!a) return;
+        if(a.href.indexOf('t.me/klimenko_prod') > -1) ym(113130091, 'reachGoal', 'tg_click');
+        else if(a.href.indexOf('mailto:klimenko@') === 0) ym(113130091, 'reachGoal', 'mail_click');
+    }, true);
+</script>
+<!-- /Yandex.Metrika counter -->
+<script src="/lead.js" defer></script>
+</body>
+</html>
