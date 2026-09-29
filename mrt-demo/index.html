@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/theme.js"></script>
 <title>Демо-МРТ · Closery</title>
 <meta name="description" content="Восемь вопросов из шестидесяти. Показывает, как Коммерческое МРТ считает потери — на вашей воронке.">
 <meta property="og:type" content="website">
@@ -45,11 +46,11 @@
 @media(max-width:560px){.q{grid-template-columns:minmax(0,1fr)}}
 .res{position:relative;min-height:520px}
 @media(min-width:981px){.res-wrap{position:sticky;top:96px}}
-.lock{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;background:rgba(15,29,25,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:opacity .4s}
+.lock{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;background:color-mix(in srgb,var(--paper) 82%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:opacity .4s}
 .res:not(.locked) .lock{opacity:0;pointer-events:none}
 .lock b{display:block;font-family:var(--disp);font-weight:600;font-size:22px;letter-spacing:-.02em;margin-bottom:10px}
 .lock span{display:block;font-size:15px;color:var(--ink-2);max-width:34ch;margin:0 auto}
-.lock i{display:inline-block;margin-top:18px;font-style:normal;font-size:13px;color:var(--ok-soft);border:1px solid rgba(127,233,192,.35);border-radius:20px;padding:5px 12px}
+.lock i{display:inline-block;margin-top:18px;font-style:normal;font-size:13px;color:var(--ok-soft);border:1px solid color-mix(in srgb,var(--ok-soft) 35%,transparent);border-radius:20px;padding:5px 12px}
 .res-body{padding-bottom:10px}
 .norm{padding:20px 24px;border-bottom:1px solid var(--rule)}
 .norm b{display:block;font-weight:500;font-size:16px;margin-bottom:6px}

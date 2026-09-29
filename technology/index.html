@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/theme.js"></script>
 <title>Технология · Closery</title>
 <meta name="description" content="Четыре собственных инструмента Closery: Коммерческий МРТ считает потери в рублях, Разбор превращает их в инструкции, Радар находит покупателей по открытым данным, Кабинет не даёт сделке потеряться между касаниями.">
 <link rel="canonical" href="https://closery.ru/technology/">
@@ -55,9 +56,9 @@ a{color:inherit}
 .w{max-width:1440px;margin:0 auto;padding:0 var(--gut)}
 
 /* шапка */
-header.bar{position:sticky;top:0;z-index:50;background:rgba(8,11,10,.78);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--rule)}
+header.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--rule)}
 .bar-in{display:flex;justify-content:space-between;align-items:center;height:68px;gap:20px}
-.logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:#fff}
+.logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:var(--ink)}
 .logo i{width:9px;height:9px;border-radius:2px;background:var(--ok)}
 .bar-nav{display:flex;align-items:center;gap:clamp(16px,2.4vw,32px)}
 .bar-lnk{font-size:14px;text-decoration:none;color:var(--ink-3);transition:color .2s}
@@ -65,11 +66,11 @@ header.bar{position:sticky;top:0;z-index:50;background:rgba(8,11,10,.78);-webkit
 .bar-cta{font-weight:500;font-size:14px;text-decoration:none;color:var(--bg);border-radius:8px;padding:10px 18px;background:var(--ink);white-space:nowrap;transition:background .2s}
 .bar-cta:hover{background:var(--ok-soft)}
 .bar-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:30px;height:30px;cursor:pointer;background:none;border:none;padding:4px}
-.bar-burger span{display:block;height:2px;background:#fff;border-radius:2px;transition:transform .25s,opacity .2s}
+.bar-burger span{display:block;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s}
 .bar-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .bar-burger.open span:nth-child(2){opacity:0}
 .bar-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.bar-mobile{display:none;flex-direction:column;position:fixed;top:68px;left:0;right:0;z-index:100;background:rgba(8,11,10,.97);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--rule)}
+.bar-mobile{display:none;flex-direction:column;position:fixed;top:68px;left:0;right:0;z-index:100;background:color-mix(in srgb,var(--bg) 96%,transparent);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--rule)}
 .bar-mobile.open{display:flex}
 .bar-mobile a{padding:16px var(--gut);color:var(--ink-2);text-decoration:none;font-size:16px;border-bottom:1px solid var(--rule)}
 .bar-mobile a.on{color:var(--ink)}
@@ -127,8 +128,8 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 .led-tot b{font-family:var(--num);font-weight:600;font-size:clamp(40px,5.6vw,88px);letter-spacing:-.025em;line-height:1;color:var(--ink-4);transition:color .6s;font-feature-settings:"tnum" 1,"lnum" 1}
 .led-tot b i{font-style:normal;font-family:var(--ui);font-weight:400;font-size:15px;color:var(--ink-3);margin-left:10px;letter-spacing:0}
 .snap.done .led-tot b{color:var(--loss)}
-.scanline{position:absolute;left:0;right:0;top:0;height:1px;background:var(--ok-soft);opacity:0;pointer-events:none;box-shadow:0 0 24px 1px rgba(127,233,192,.3)}
-.scanline::before{content:"";position:absolute;left:0;right:0;bottom:1px;height:90px;background:linear-gradient(0deg,rgba(127,233,192,.06),transparent)}
+.scanline{position:absolute;left:0;right:0;top:0;height:1px;background:var(--ok-soft);opacity:0;pointer-events:none;box-shadow:0 0 24px 1px color-mix(in srgb,var(--ok-soft) 30%,transparent)}
+.scanline::before{content:"";position:absolute;left:0;right:0;bottom:1px;height:90px;background:linear-gradient(0deg,color-mix(in srgb,var(--ok-soft) 6%,transparent),transparent)}
 .snap-note{margin-top:22px;font-size:13.5px;color:var(--ink-3);max-width:74ch}
 @media(max-width:900px){
   .led-row{grid-template-columns:max-content minmax(0,1fr) auto;grid-template-areas:"st st loss" "from to to" "pr pr pr";gap:6px 10px;padding:18px 0}
@@ -151,9 +152,9 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 .notes li{display:grid;grid-template-columns:26px 1fr;gap:12px;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
 .notes li i{font-style:normal;width:22px;height:22px;border-radius:50%;border:1px solid var(--ink-3);color:var(--ink);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px}
 .scr{position:relative}
-.frame{position:relative;border-radius:14px;border:1px solid var(--rule-2);background:var(--paper);overflow:hidden;box-shadow:0 70px 140px -40px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.02) inset}
+.frame{position:relative;border-radius:14px;border:1px solid var(--rule-2);background:var(--paper);overflow:hidden;box-shadow:0 70px 140px -40px var(--shadow)}
 .pin{position:absolute;z-index:5;left:0;top:0;margin:-12px 0 0 -12px;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:11.5px;font-weight:600;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 0 0 5px rgba(8,11,10,.85),0 0 0 6px rgba(242,245,243,.25);transform:scale(0);transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+  box-shadow:0 0 0 5px color-mix(in srgb,var(--bg) 85%,transparent),0 0 0 6px color-mix(in srgb,var(--ink) 25%,transparent);transform:scale(0);transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
 .scr.on .pin{transform:scale(1)}
 .scr.on .pin:nth-of-type(2){transition-delay:.12s}.scr.on .pin:nth-of-type(3){transition-delay:.24s}
 @media(min-width:1081px){
@@ -179,7 +180,7 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 .side a em{font-style:normal;color:var(--ink-3);font-size:12px}
 .crumbs{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-bottom:1px solid var(--rule);font-size:13px;color:var(--ink-3)}
 .crumbs b{color:var(--ink);font-weight:500}
-.crumbs .tag{white-space:nowrap;flex:none;margin-left:12px;font-size:11px;color:var(--amber);border:1px solid rgba(224,178,90,.3);border-radius:5px;padding:3px 7px}
+.crumbs .tag{white-space:nowrap;flex:none;margin-left:12px;font-size:11px;color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 30%,transparent);border-radius:5px;padding:3px 7px}
 .pane{padding:22px}
 @media(max-width:1360px){.app{grid-template-columns:minmax(0,1fr)}.side{display:none}}
 
@@ -225,7 +226,7 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 .q-table th{text-align:left;font-weight:400;font-size:11.5px;color:var(--ink-3);padding:0 10px 10px 0;border-bottom:1px solid var(--rule)}
 .q-table td{padding:11px 10px 11px 0;border-bottom:1px solid var(--rule);color:var(--ink-2);white-space:nowrap}
 .q-table td:first-child{color:var(--ink);font-weight:500}
-.q-table tr.sel td{background:rgba(242,245,243,.035)}
+.q-table tr.sel td{background:color-mix(in srgb,var(--ink) 4%,transparent)}
 .q-table tr.sel td:first-child{box-shadow:inset 2px 0 0 var(--ink);padding-left:10px}
 .q-table .sc{font-family:var(--num);font-weight:600;font-size:15px;color:var(--ink)}
 .q-table .dn{color:var(--loss)}.q-table .up{color:var(--ok-soft)}
@@ -353,13 +354,13 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
 
 /* живость: изумрудный оттенок фона, свечение сверху, зелёные акценты */
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(1100px 620px at 12% -8%,rgba(52,211,153,.13),transparent 62%),radial-gradient(900px 520px at 100% 30%,rgba(52,211,153,.05),transparent 60%)}
+  background:radial-gradient(1100px 620px at 12% -8%,color-mix(in srgb,var(--ok) 13%,transparent),transparent 62%),radial-gradient(900px 520px at 100% 30%,color-mix(in srgb,var(--ok) 5%,transparent),transparent 60%)}
 .kick{color:var(--ok-soft)}
 .kick::before{background:var(--ok)}
-.progress{background:var(--ok)!important;box-shadow:0 0 10px rgba(52,211,153,.6)}
+.progress{background:var(--ok)!important;box-shadow:0 0 10px color-mix(in srgb,var(--ok) 55%,transparent)}
 .lnk{border-bottom-color:var(--ok)!important}
-.logo i{box-shadow:0 0 14px rgba(52,211,153,.7)}
-.band{padding-bottom:clamp(90px,9vw,150px);background:linear-gradient(180deg,transparent,rgba(20,37,31,.55) 12%,rgba(20,37,31,.55) 88%,transparent)}
+.logo i{box-shadow:0 0 14px color-mix(in srgb,var(--ok) 60%,transparent)}
+.band{padding-bottom:clamp(90px,9vw,150px);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--paper-2) 55%,transparent) 12%,color-mix(in srgb,var(--paper-2) 55%,transparent) 88%,transparent)}
 
 /* ── единая сетка, как на главной ── */
 :root{--cg:clamp(24px,3vw,56px)}
@@ -700,7 +701,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 <!-- основатель -->
 <section class="sec" id="who">
   <div class="w who">
-    <figure class="who-ph rv"><img src="/founder.webp" alt="Николай Клименко, основатель Closery" loading="lazy" width="785" height="940"><figcaption>Николай Клименко, основатель Closery</figcaption></figure>
+    <figure class="who-ph rv ti-dark"><img src="/founder.webp" alt="Николай Клименко, основатель Closery" loading="lazy" width="785" height="940"><figcaption>Николай Клименко, основатель Closery</figcaption></figure>
     <div>
       <p class="kick rv">Кто стоит за технологией</p>
       <blockquote class="rv">Подтверждаю каждую цифру контактами основателей. Если коротко: приношу прибыль.</blockquote>
