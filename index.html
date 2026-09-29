@@ -150,9 +150,9 @@
 @font-face{font-family:'Plus Jakarta Sans';font-weight:800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-800-normal.woff2) format('woff2')}
 
 :root{
-  --bg:#080B0A;--bg-2:#0C1110;--paper:#101715;--paper-2:#141C1A;
-  --rule:#1A2421;--rule-2:#26332F;
-  --ink:#F2F5F3;--ink-2:#A5B1AB;--ink-3:#6A7771;--ink-4:#404B47;
+  --bg:#07100D;--bg-2:#0B1714;--paper:#0F1D19;--paper-2:#14251F;
+  --rule:#1B2B26;--rule-2:#2A3F38;
+  --ink:#F4F8F6;--ink-2:#CBD6D0;--ink-3:#8FA099;--ink-4:#5A6B64;
   --loss:#EE5A5E;--ok:#34D399;--ok-soft:#7FE9C0;--amber:#E0B25A;
   --disp:'Unbounded','Plus Jakarta Sans','Onest',system-ui,sans-serif;
   --ui:'Onest',system-ui,-apple-system,sans-serif;
@@ -163,7 +163,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--ui);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.07;mix-blend-mode:overlay;
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.035;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 main,header.bar,footer{position:relative;z-index:1}
 main{overflow-x:clip}
@@ -543,6 +543,16 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
   *,*::before,*::after{transition:none!important;animation:none!important}
   .js .rv{opacity:1;transform:none}.sys p i::after{width:var(--v)}.scanline{display:none}
 }
+
+/* живость: изумрудный оттенок фона, свечение сверху, зелёные акценты */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(1100px 620px at 12% -8%,rgba(52,211,153,.13),transparent 62%),radial-gradient(900px 520px at 100% 30%,rgba(52,211,153,.05),transparent 60%)}
+.kick{color:var(--ok-soft)}
+.kick::before{background:var(--ok)}
+.progress{background:var(--ok)!important;box-shadow:0 0 10px rgba(52,211,153,.6)}
+.lnk{border-bottom-color:var(--ok)!important}
+.logo i{box-shadow:0 0 14px rgba(52,211,153,.7)}
+.band{padding-bottom:clamp(90px,9vw,150px);background:linear-gradient(180deg,transparent,rgba(20,37,31,.55) 12%,rgba(20,37,31,.55) 88%,transparent)}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -679,7 +689,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
 </section>
 
 <!-- самопроверка -->
-<section class="sec" id="selfcheck">
+<section class="sec band" id="selfcheck">
   <div class="w chk-wrap">
     <div>
       <p class="kick rv">Проверка за минуту</p>
@@ -726,7 +736,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
 </section>
 
 <!-- фрагмент отчёта -->
-<section class="sec" id="report">
+<section class="sec band" id="report">
   <div class="w">
     <div class="head">
       <div><p class="kick rv">Как выглядит отчёт</p><h2 class="rv">Не презентация, а&nbsp;ведомость</h2></div>
@@ -804,7 +814,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
 </section>
 
 <!-- сравнение -->
-<section class="sec" id="compare">
+<section class="sec band" id="compare">
   <div class="w">
     <div class="head">
       <div><p class="kick rv">Сравнение</p><h2 class="rv">Сравните с тем, что вы рассматриваете</h2></div>
