@@ -79,14 +79,15 @@
   function send(e){
     e.preventDefault();
     var f=e.target,msg=f.querySelector('.lf-msg'),go=f.querySelector('.lf-go'),ok=true;
+    function v(n){return f.querySelector('[name="'+n+'"]');}
     function bad(k,c){var el=f.querySelector('[data-f="'+k+'"]');if(el)el.classList.toggle('err',c);if(c)ok=false;}
-    bad('name',f.name.value.trim().length<2);
-    bad('contact',f.contact.value.trim().length<5);
-    f.querySelector('.lf-c').classList.toggle('err',!f.consent.checked);if(!f.consent.checked)ok=false;
+    bad('name',v('name').value.trim().length<2);
+    bad('contact',v('contact').value.trim().length<5);
+    f.querySelector('.lf-c').classList.toggle('err',!v('consent').checked);if(!v('consent').checked)ok=false;
     if(!ok){msg.textContent='Заполните имя, контакт и отметьте согласие.';return;}
     msg.textContent='';go.disabled=true;go.textContent='Отправляем…';
-    var data={name:f.name.value,contact:f.contact.value,company:f.company.value,revenue:rev,pain:f.pain.value,
-      website:f.website.value,consent:true,page:location.pathname,utm:utm};
+    var data={name:v('name').value,contact:v('contact').value,company:v('company').value,revenue:rev,pain:v('pain').value,
+      website:v('website').value,consent:true,page:location.pathname,utm:utm};
     fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
       .then(function(x){
