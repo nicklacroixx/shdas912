@@ -553,6 +553,33 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 .lnk{border-bottom-color:var(--ok)!important}
 .logo i{box-shadow:0 0 14px rgba(52,211,153,.7)}
 .band{padding-bottom:clamp(90px,9vw,150px);background:linear-gradient(180deg,transparent,rgba(20,37,31,.55) 12%,rgba(20,37,31,.55) 88%,transparent)}
+
+/* ── единая сетка: вторые колонки с 50%, четверти и трети без зазора, отступ даёт правое поле ── */
+:root{--cg:clamp(24px,3vw,56px)}
+@media(min-width:981px){
+  .head,.hero-row,.claim-sub,.chk-wrap,.faq-wrap,.who,.vs-row{grid-template-columns:50% 50%;column-gap:0}
+  .head>:first-child,.hero-row>:first-child,.claim-sub>:first-child,.chk-wrap>:first-child,.faq-wrap>:first-child,.who>:first-child,.vs-row>:first-child{padding-right:var(--cg)}
+  .who-ph{max-width:540px}
+  .led-row{grid-template-columns:50% minmax(0,1fr) auto;column-gap:0}
+  .led-row>:not(:last-child){padding-right:var(--cg)}
+  .cmp-row{grid-template-columns:25% 25% 50%;column-gap:0}
+  .cmp-row>:not(:last-child){padding-right:var(--cg)}
+  .leak{grid-template-columns:12.5% 37.5% 50%;column-gap:0}
+  .leak>:not(:last-child){padding-right:var(--cg)}
+}
+@media(min-width:1001px){
+  .roles,.grid4,.spec{grid-template-columns:repeat(4,25%);column-gap:0}
+  .rec{grid-template-columns:25% 50% 25%;column-gap:0}
+  .roles>*,.grid4>*,.spec>*,.rec>:not(:last-child){padding-right:var(--cg)}
+}
+@media(min-width:901px){
+  .three,.fit,.changes,.terms,.guar,.after{grid-template-columns:repeat(3,33.3333%);column-gap:0}
+  .three>*,.fit>*,.changes>*,.terms>*{padding-right:var(--cg)}
+}
+
+.snap-top{flex-wrap:wrap}
+.leak-w{white-space:nowrap}
+@media(min-width:981px) and (max-width:1240px){.leak{grid-template-columns:18% 32% 50%}}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -649,8 +676,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     </div>
     <figure class="snap rv" id="snap" aria-label="Ведомость потерь, пример">
       <div class="snap-top">
-        <div><h4>Ведомость потерь</h4><p>Пример расчёта, данные обезличены</p></div>
-        <button type="button" id="rescan"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v3h-3" stroke="currentColor" stroke-width="1.5"/></svg>Снять заново</button>
+        <div><h4>Ведомость потерь</h4><p id="snapCo">Оптовая торговля, выручка около 480 млн ₽ в год. Пример, данные обезличены</p></div>
+        <button type="button" id="rescan"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v3h-3" stroke="currentColor" stroke-width="1.5"/></svg>Другая компания</button>
       </div>
       <div class="led" id="led">
         <div class="led-row h"><div>Статья</div><div>Что происходит</div><div class="lv">Потеря за год</div></div>
@@ -806,7 +833,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     <div class="bill rv">
       <div class="r"><div><b>Поиск, отбор, выход человека</b><small>Вакансия, собеседования, оффер, отработка на прежнем месте</small></div><span>2–3 мес</span></div>
       <div class="r"><div><b>ФОТ до первого понятного результата</b><small>Расчёт при ставке 1,2 млн ₽ в месяц с налогами и выходе на результат за 7 месяцев. Подставьте свои цифры</small></div><span class="neg">−8 400 000 ₽</span></div>
-      <div class="r"><div><b>Течи, которые всё это время не закрыты</b><small>Те же 42,6 млн ₽ в год из ведомости выше, семь месяцев подряд</small></div><span class="neg">−24 850 000 ₽</span></div>
+      <div class="r"><div><b>Течи, которые всё это время не закрыты</b><small>Те же 42,6 млн ₽ в год из первого примера ведомости, семь месяцев подряд</small></div><span class="neg">−24 850 000 ₽</span></div>
       <div class="r"><div><b>Что остаётся компании, если он ушёл</b><small>Метод, база и договорённости уходят вместе с ним</small></div><span>ничего</span></div>
       <div class="r t"><div><b>Цена года, в котором ничего не изменилось</b></div><span>−33 250 000 ₽</span></div>
     </div>
@@ -1027,7 +1054,20 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       if(k>=1){clearInterval(iv);line.style.opacity=0;snap.classList.add('done');count(tot,900);scanning=false;}
     },16);
   }
-  document.getElementById('rescan').addEventListener('click',scan);
+  /* «Другая компания»: снимок проходит по новой компании из другой отрасли */
+  var cos=[
+    {t:'Оптовая торговля, выручка около 480 млн ₽ в год',v:[17880000,12320000,6800000,4100000,1500000]},
+    {t:'Производство, выручка около 1,1 млрд ₽ в год',v:[24300000,9600000,11200000,3200000,2700000]},
+    {t:'B2B-услуги, выручка около 260 млн ₽ в год',v:[6100000,7400000,3900000,5200000,900000]},
+    {t:'Розница с доставкой, выручка около 720 млн ₽ в год',v:[19500000,5800000,4700000,8900000,1100000]}
+  ],co=0,coEl=document.getElementById('snapCo');
+  document.getElementById('rescan').addEventListener('click',function(){
+    if(scanning)return;
+    co=(co+1)%cos.length;var c=cos[co],sum=0;
+    rows.forEach(function(r,i){r.querySelector('.lv').setAttribute('data-n',c.v[i]);sum+=c.v[i];});
+    tot.setAttribute('data-n',sum);coEl.textContent=c.t+'. Пример, данные обезличены';
+    scan();
+  });
 
   /* самопроверка: всё считается на странице */
   var chk=document.getElementById('chk');

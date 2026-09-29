@@ -360,6 +360,28 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 .lnk{border-bottom-color:var(--ok)!important}
 .logo i{box-shadow:0 0 14px rgba(52,211,153,.7)}
 .band{padding-bottom:clamp(90px,9vw,150px);background:linear-gradient(180deg,transparent,rgba(20,37,31,.55) 12%,rgba(20,37,31,.55) 88%,transparent)}
+
+/* ── единая сетка, как на главной ── */
+:root{--cg:clamp(24px,3vw,56px)}
+@media(min-width:981px){
+  .how-head,.hero-side,.who,.vs-row{grid-template-columns:50% 50%;column-gap:0}
+  .how-head>:first-child,.hero-side>:first-child,.who>:first-child,.vs-row>:first-child{padding-right:var(--cg)}
+  .who-ph{max-width:540px}
+}
+@media(min-width:901px){
+  .led-row{grid-template-columns:25% 12.5% 12.5% minmax(0,1fr) auto;column-gap:0}
+  .led-row>:not(:last-child){padding-right:var(--cg)}
+  .src,.steps{grid-template-columns:repeat(3,33.3333%);column-gap:0}
+  .src>*,.steps>*{padding-right:var(--cg)}
+}
+@media(min-width:1081px){
+  .stage{grid-template-columns:50% 50%;column-gap:0}
+  .step{padding-right:var(--cg)}
+  .stage .app{grid-template-columns:minmax(0,1fr)}.stage .side{display:none}
+}
+
+@media(max-width:600px){h1{font-size:clamp(30px,9.4vw,46px)}}
+.snap-top{flex-wrap:wrap}.snap-top button{white-space:nowrap}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -420,8 +442,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 
   <figure class="snap rv" id="snap" aria-label="Снимок коммерции демо-компании">
     <div class="snap-top">
-      <div><h4>Снимок демо-компании</h4><p>Оптовая торговля, выручка 480 млн ₽ в год. Цифры условные, структура настоящая.</p></div>
-      <button type="button" id="rescan"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v3h-3" stroke="currentColor" stroke-width="1.5"/></svg>Снять заново</button>
+      <div><h4>Снимок демо-компании</h4><p id="snapCo">Оптовая торговля, выручка 480 млн ₽ в год. Цифры условные, структура настоящая.</p></div>
+      <button type="button" id="rescan"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v3h-3" stroke="currentColor" stroke-width="1.5"/></svg>Другая компания</button>
     </div>
     <div class="led" id="led">
       <div class="led-row h"><div>Этап</div><div>Сейчас</div><div>Потенциал</div><div>Что даёт разницу</div><div class="loss">Уходит в месяц</div></div>
@@ -763,7 +785,20 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       if(k>=1){clearInterval(iv);line.style.opacity=0;snap.classList.add('done');count(tot,900);scanning=false;}
     },16);
   }
-  document.getElementById('rescan').addEventListener('click',scan);
+  /* «Другая компания»: новая отрасль, свои конверсии и потери */
+  var cos=[
+    {t:'Оптовая торговля, выручка 480 млн ₽ в год',r:[['63%','77%',412000],['14%','21%',538000],['18%','25%',327000],['85 тыс.','89 тыс.',96000]]},
+    {t:'Производство, выручка 1,1 млрд ₽ в год',r:[['71%','82%',356000],['9%','14%',884000],['22%','30%',405000],['1,2 млн','1,26 млн',212000]]},
+    {t:'B2B-услуги, выручка 260 млн ₽ в год',r:[['48%','70%',298000],['19%','26%',244000],['12%','20%',163000],['140 тыс.','148 тыс.',58000]]},
+    {t:'Розница с доставкой, выручка 720 млн ₽ в год',r:[['58%','74%',521000],['24%','29%',367000],['31%','39%',612000],['6,4 тыс.','6,8 тыс.',143000]]}
+  ],co=0,coEl=document.getElementById('snapCo');
+  document.getElementById('rescan').addEventListener('click',function(){
+    if(scanning)return;
+    co=(co+1)%cos.length;var c=cos[co],sum=0;
+    rows.forEach(function(r,i){var d=c.r[i];r.querySelector('.from').textContent=d[0];r.querySelector('.to').textContent=d[1];r.querySelector('.loss').setAttribute('data-n',d[2]);sum+=d[2];});
+    tot.setAttribute('data-n',sum);coEl.textContent=c.t+'. Цифры условные, структура настоящая.';
+    scan();
+  });
 
   /* кабинет: задачи отмечаются по одной */
   function tick(root){
