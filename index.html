@@ -620,9 +620,6 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 .logos{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-top:clamp(56px,6vw,96px);padding-top:26px;border-top:1px solid var(--rule)}
 .logos p{font-size:14px;color:var(--ink-3);line-height:1.5;padding-right:var(--cg)}
 .logos p b{color:var(--ok-soft);font-weight:500}
-.logos ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px 32px}
-.logos li{font-family:var(--disp);font-weight:600;font-size:clamp(16px,1.5vw,21px);letter-spacing:-.03em;color:var(--ink-2);opacity:.8;transition:opacity .3s,color .3s;white-space:nowrap}
-.logos li:hover{opacity:1;color:var(--ink)}
 @media(min-width:1001px){.logos{grid-template-columns:25% 75%;gap:0;align-items:center}}
 /* 7. сравнение */
 .cmp-head [data-c]{text-align:center}
@@ -663,14 +660,30 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 .cost-bar em{font-style:normal;font-size:12.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* доводка */
-@media(min-width:1001px){.logos ul{display:grid;grid-template-columns:repeat(3,33.3333%);row-gap:22px}.logos li{padding-right:var(--cg)}}
-@media(max-width:1000px){.logos ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px}}
 .sh s::after{content:none!important}
 .sh s{text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:transparent;transition:text-decoration-color .8s ease .2s}
 .sh.in s{text-decoration-color:var(--loss)}
 @media(max-width:800px){.led-tot{align-items:flex-start!important}.bill .t{align-items:baseline!important}
   .cost-bar{flex-direction:column;height:auto;gap:4px}.cost-bar i{flex:none;width:100%;height:34px}}
 .sh{align-content:start}
+
+/* логотипы: бегущая строка */
+.marq{position:relative;display:flex;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.marq-t{list-style:none;display:flex!important;align-items:center;flex:none;gap:0!important;margin:0;padding:0;animation:marq 38s linear infinite}
+.marq:hover .marq-t{animation-play-state:paused}
+@keyframes marq{to{transform:translateX(-100%)}}
+.marq-t li{flex:none;display:flex;align-items:center;justify-content:center;height:56px;padding:0 clamp(28px,3.4vw,56px)!important;opacity:.62;transition:opacity .3s}
+.marq-t li:hover{opacity:1}
+.marq img{display:block;width:auto;filter:brightness(0) invert(1)}
+.lg-cdek{height:24px}
+.lg-mg{height:40px}
+.lg-ex{height:30px}
+.wm{color:#fff;white-space:nowrap;line-height:1}
+.wm-vag{font-family:var(--ui);font-weight:500;font-size:25px;letter-spacing:-.03em}
+.wm-uni{font-family:var(--ui);font-weight:700;font-size:21px;letter-spacing:.14em}
+.wm-emp{font-family:var(--ui);font-weight:400;font-size:15px;letter-spacing:.22em;text-transform:uppercase}
+@media(prefers-reduced-motion:reduce){.marq-t{animation:none}.marq-t[aria-hidden]{display:none!important}.marq{-webkit-mask-image:none;mask-image:none}.marq-t{flex-wrap:wrap}}
+@media(max-width:1000px){.lg-cdek{height:20px}.lg-mg{height:34px}.lg-ex{height:26px}.wm-vag{font-size:21px}.wm-uni{font-size:18px}.wm-emp{font-size:13px}}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -752,9 +765,24 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   </div>
   <div class="logos rv">
     <p><b>10 лет</b> строили коммерцию изнутри компаний</p>
-    <ul>
-      <li>CDEK</li><li>MarketGuru</li><li>Vagabond</li><li>UniBox</li><li>Экспресс Дизайн</li><li>Империя Сервиса</li>
-    </ul>
+    <div class="marq" aria-label="Компании: CDEK, MarketGuru, Vagabond, Экспресс Дизайн, UniBox, Империя сервиса">
+      <ul class="marq-t">
+        <li><img src="/logos/cdek.svg" alt="CDEK" class="lg-cdek"></li>
+        <li><img src="/logos/marketguru.svg" alt="MarketGuru" class="lg-mg"></li>
+        <li><span class="wm wm-vag">vagabond</span></li>
+        <li><img src="/logos/exdz.svg" alt="Экспресс Дизайн" class="lg-ex"></li>
+        <li><span class="wm wm-uni">UNIBOX</span></li>
+        <li><span class="wm wm-emp">Империя сервиса</span></li>
+      </ul>
+      <ul class="marq-t" aria-hidden="true">
+        <li><img src="/logos/cdek.svg" alt="" data-alt="CDEK" class="lg-cdek"></li>
+        <li><img src="/logos/marketguru.svg" alt="" data-alt="MarketGuru" class="lg-mg"></li>
+        <li><span class="wm wm-vag">vagabond</span></li>
+        <li><img src="/logos/exdz.svg" alt="" data-alt="Экспресс Дизайн" class="lg-ex"></li>
+        <li><span class="wm wm-uni">UNIBOX</span></li>
+        <li><span class="wm wm-emp">Империя сервиса</span></li>
+      </ul>
+    </div>
   </div>
 </section>
 
