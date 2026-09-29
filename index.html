@@ -580,6 +580,31 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 .snap-top{flex-wrap:wrap}
 .leak-w{white-space:nowrap}
 @media(min-width:981px) and (max-width:1240px){.leak{grid-template-columns:18% 32% 50%}}
+
+/* ── сетка из четырёх колонок: линии 25 / 50 / 75%. Тройные блоки получают подпись в первой четверти ── */
+.c4{font-size:14px;line-height:1.5;color:var(--ink-3);padding-right:var(--cg)}
+.c4 b{display:block;font-weight:500;font-size:15px;color:var(--ok-soft);margin-bottom:6px}
+@media(min-width:1001px){
+  .g4{display:grid!important;grid-template-columns:repeat(4,25%)!important;column-gap:0!important;row-gap:28px}
+  .g4>*{padding-right:var(--cg)}
+  .g4>.c4{padding-top:22px}
+}
+@media(max-width:1000px){.g4{display:grid!important;grid-template-columns:minmax(0,1fr)!important}.c4{padding:0 0 4px}}
+@media(min-width:981px){.head,.how-head{align-items:start!important}.head>:last-child,.how-head>:last-child{padding-top:48px}}
+
+.leak-w{display:block;font-family:var(--num);font-weight:600;font-size:14px;color:var(--ink-3);margin-bottom:6px;white-space:nowrap}
+@media(min-width:981px){.leak{grid-template-columns:50% 50%!important}.leak>:first-child{padding-right:var(--cg)}}
+.after-note{display:flex;align-items:center;background:var(--bg-2)}
+.after-note p{margin:0;font-family:var(--num);font-weight:600;font-size:clamp(20px,1.7vw,26px);line-height:1.25;color:var(--ink-2)}
+.after-note p span{color:var(--ink)}
+@media(min-width:1001px){
+  .after{grid-template-columns:repeat(4,25%)!important}
+  .guar{grid-template-columns:25% 25% 50%!important}
+  .rep{grid-template-columns:50% 25% 25%!important}
+}
+@media(min-width:901px) and (max-width:1000px){.after{grid-template-columns:repeat(2,50%)!important}.after>div:nth-child(3){border-left:none;border-top:1px solid var(--rule)}.after>div:nth-child(4){border-top:1px solid var(--rule)}}
+
+.who>.who-ph{padding-right:0!important;margin-right:var(--cg);max-width:none!important}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -743,7 +768,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       <div><p class="kick rv">Коротко, что это</p><h2 class="rv">Платная диагностика, которая находит деньги</h2></div>
       <p class="lede rv">Для собственников компаний, где уже есть отдел продаж, поток заявок и CRM, но рост выручки упёрся в коммерческую систему. Вам не нужен ещё один совет. Вам нужно знать три вещи.</p>
     </div>
-    <div class="three rv">
+    <div class="three g4 rv"><div class="c4"><b>Три вопроса</b>на которые отвечает МРТ</div>
       <div><b>01</b><p>Сколько денег вы теряете сейчас</p></div>
       <div><b>02</b><p>Где именно они уходят</p></div>
       <div><b>03</b><p>Как именно это исправить</p></div>
@@ -811,7 +836,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       <div><p class="kick rv">Кому подходит</p><h2 class="rv">Кому МРТ пока <em>рано</em></h2></div>
       <p class="lede rv">МРТ считает потери по данным. Если данных нет или продаж ещё нет, считать нечего, и 50 000 ₽ лучше оставить в компании.</p>
     </div>
-    <div class="fit rv">
+    <div class="fit g4 rv"><div class="c4"><b>Честный фильтр</b>Если вы в правой колонке, 50&nbsp;000&nbsp;₽ лучше оставить в компании</div>
       <div class="must"><small>Без этого не получится</small><h3>Нужно для МРТ</h3><ul><li>Продаёт команда, а не только собственник</li><li>Есть поток заявок или клиентская база, по которой можно считать</li><li>Сделки видны в CRM, звонки или переписка сохраняются</li><li>Собственник сам участвует в 120 минутах и готов открыть цифры</li></ul></div>
       <div><small>Сделает расчёт точнее</small><h3>Будет плюсом</h3><ul><li>История сделок хотя бы за полгода</li><li>Известна маржа по основным продуктам</li><li>Клиенты покупают повторно или могли бы</li><li>На встрече будет РОП, если он есть</li></ul></div>
       <div class="no"><small>Честно: пока не стоит</small><h3>Не подойдёт</h3><ul><li>Продукт ещё ищет рынок, регулярных продаж нет</li><li>Продаёте только вы, команды пока нет</li><li>Нужен готовый скрипт без разбора цифр</li><li>Не готовы показывать CRM и выручку человеку со стороны</li><li>Решение о проекте примет тот, кого на МРТ не будет</li></ul></div>
@@ -872,14 +897,14 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       <p class="lede rv">Если течи системные, Closery заходит как коммерческий директор на срок проекта и закрывает их одну за другой, от самой дорогой к самой дешёвой. Нажмите на решение, чтобы увидеть пример.</p>
     </div>
     <div class="route rv">
-      <div class="leak"><div class="leak-w">Недели 01–02</div><div class="leak-l"><b>Замер по данным</b><span class="m">подтверждаем ведомость</span></div><div><button class="leak-btn" type="button">Аудит вместо предположений<i>Пример</i></button><div class="leak-ex"><p>У отдела 40% звонков есть в записи, 60% нет. Ведомость строится только на тех, что можно перепроверить, а не на словах менеджеров.</p></div></div></div>
-      <div class="leak"><div class="leak-w">Недели 02–05</div><div class="leak-l"><b>Забытая база</b><span>−17 880 000 ₽</span></div><div><button class="leak-btn" type="button">Система повторных продаж<i>Пример</i></button><div class="leak-ex"><p>Клиент купил в марте, тишина до сентября. Правило: на 45-й день без покупки уходит персональный повод вернуться, а не рассылка всем подряд.</p></div></div></div>
-      <div class="leak"><div class="leak-w">Недели 03–06</div><div class="leak-l"><b>Лишний ФОТ</b><span>−12 320 000 ₽</span></div><div><button class="leak-btn" type="button">Экономика отдела<i>Пример</i></button><div class="leak-ex"><p>Шесть менеджеров закрывают объём, который физически делают трое. Остальные трое не бездельники — это стоимость структуры, которую никто не считал в деньгах.</p></div></div></div>
-      <div class="leak"><div class="leak-w">Недели 05–08</div><div class="leak-l"><b>Сделки без дожима</b><span>−6 800 000 ₽</span></div><div><button class="leak-btn" type="button">Технология сделки<i>Пример</i></button><div class="leak-ex"><p>Сделка «зависла»: менеджер просто не написал следующий шаг. Правило: у каждой стадии обязательный срок действия, а не «подумаю ещё».</p></div></div></div>
-      <div class="leak"><div class="leak-w">Недели 07–09</div><div class="leak-l"><b>Заявки без ответа</b><span>−4 100 000 ₽</span></div><div><button class="leak-btn" type="button">Приём входящего потока<i>Пример</i></button><div class="leak-ex"><p>Заявка в 22:00 получает ответ в 11 утра, клиент уже написал троим конкурентам. Норматив ответа считается в минутах, а не «как получится».</p></div></div></div>
-      <div class="leak"><div class="leak-w">Недели 09–12</div><div class="leak-l"><b>Решения через собственника</b><span>−1 500 000 ₽</span></div><div><button class="leak-btn" type="button">Управление без вас<i>Пример</i></button><div class="leak-ex"><p>Скидку 8% вместо 5% менеджер не может дать сам и ждёт вас из отпуска. Лимиты полномочий снимают эту паузу навсегда.</p></div></div></div>
+      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 01–02</small><b>Замер по данным</b><span class="m">подтверждаем ведомость</span></div><div><button class="leak-btn" type="button">Аудит вместо предположений<i>Пример</i></button><div class="leak-ex"><p>У отдела 40% звонков есть в записи, 60% нет. Ведомость строится только на тех, что можно перепроверить, а не на словах менеджеров.</p></div></div></div>
+      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 02–05</small><b>Забытая база</b><span>−17 880 000 ₽</span></div><div><button class="leak-btn" type="button">Система повторных продаж<i>Пример</i></button><div class="leak-ex"><p>Клиент купил в марте, тишина до сентября. Правило: на 45-й день без покупки уходит персональный повод вернуться, а не рассылка всем подряд.</p></div></div></div>
+      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 03–06</small><b>Лишний ФОТ</b><span>−12 320 000 ₽</span></div><div><button class="leak-btn" type="button">Экономика отдела<i>Пример</i></button><div class="leak-ex"><p>Шесть менеджеров закрывают объём, который физически делают трое. Остальные трое не бездельники — это стоимость структуры, которую никто не считал в деньгах.</p></div></div></div>
+      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 05–08</small><b>Сделки без дожима</b><span>−6 800 000 ₽</span></div><div><button class="leak-btn" type="button">Технология сделки<i>Пример</i></button><div class="leak-ex"><p>Сделка «зависла»: менеджер просто не написал следующий шаг. Правило: у каждой стадии обязательный срок действия, а не «подумаю ещё».</p></div></div></div>
+      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 07–09</small><b>Заявки без ответа</b><span>−4 100 000 ₽</span></div><div><button class="leak-btn" type="button">Приём входящего потока<i>Пример</i></button><div class="leak-ex"><p>Заявка в 22:00 получает ответ в 11 утра, клиент уже написал троим конкурентам. Норматив ответа считается в минутах, а не «как получится».</p></div></div></div>
+      <div class="leak"><div class="leak-l"><small class="leak-w">Недели 09–12</small><b>Решения через собственника</b><span>−1 500 000 ₽</span></div><div><button class="leak-btn" type="button">Управление без вас<i>Пример</i></button><div class="leak-ex"><p>Скидку 8% вместо 5% менеджер не может дать сам и ждёт вас из отпуска. Лимиты полномочий снимают эту паузу навсегда.</p></div></div></div>
     </div>
-    <div class="changes rv">
+    <div class="changes g4 rv"><div class="c4"><b>Что меняется</b>для компании после проекта</div>
       <div><b>Выжить не за счёт кредита</b><p>Деньги, которые раньше утекали, остаются в компании. Это и есть запас прочности.</p></div>
       <div><b>Оптимизировать не значит сократить людей</b><p>Та же команда и те же издержки приносят больше, потому что перестали течь.</p></div>
       <div><b>Расти без нового бюджета</b><p>Рост из денег, которые уже внутри системы, а не из новых расходов на рекламу и найм.</p></div>
@@ -898,9 +923,9 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       <div><small>Шаг 1 · МРТ</small><b>Найти потери</b><p>Ведомость в рублях и приоритет, что чинить первым.</p></div>
       <div><small>Шаг 2 · Точечное исправление</small><b>Забрать самую дорогую течь</b><p>Без пересборки всего отдела. Обычно этого хватает, чтобы окупить весь проект.</p></div>
       <div><small>Шаг 3 · Методология Closery</small><b>Перестроить систему целиком</b><p>Чтобы течи не открылись снова. Систему, в отличие от директора, нельзя потерять: она принадлежит компании.</p></div>
+      <div class="after-note"><p>Не каждому нужен третий шаг. <span>Но каждый начинается с первого.</span></p></div>
     </div>
-    <p class="after-note rv">Не каждому нужен третий шаг. <span>Но каждый начинается с первого.</span></p>
-    <div class="terms rv">
+    <div class="terms g4 rv"><div class="c4"><b>Договор</b>Три пункта, которые фиксируем до старта</div>
       <div><span class="n">§ 1</span><span class="v">0 ₽</span><b>Этап не принят — не оплачен</b><p>Критерии приёмки измеримые и зафиксированы до старта: цифры в отчёте, подписанные регламенты, ритм отдела. Не спор о впечатлениях, а сверка с документом.</p></div>
       <div><span class="n">§ 2</span><span class="v">Всё ваше</span><b>Система остаётся компании</b><p>Регламенты, скрипты, финмодель, метрики и доступы — ваши активы с первого дня. Вы не арендуете систему и не зависите от подрядчика после выхода.</p></div>
       <div><span class="n">§ 3</span><span class="v">90 дней</span><b>Финал — когда мы больше не нужны</b><p>Последний этап принимаете вы, и только когда отдел месяц держит план и цифры без нас. Дальше решаете сами, оставлять управление на РОПе или на себе.</p></div>

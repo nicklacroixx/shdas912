@@ -382,6 +382,24 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 
 @media(max-width:600px){h1{font-size:clamp(30px,9.4vw,46px)}}
 .snap-top{flex-wrap:wrap}.snap-top button{white-space:nowrap}
+
+/* ── сетка из четырёх колонок: линии 25 / 50 / 75%. Тройные блоки получают подпись в первой четверти ── */
+.c4{font-size:14px;line-height:1.5;color:var(--ink-3);padding-right:var(--cg)}
+.c4 b{display:block;font-weight:500;font-size:15px;color:var(--ok-soft);margin-bottom:6px}
+@media(min-width:1001px){
+  .g4{display:grid!important;grid-template-columns:repeat(4,25%)!important;column-gap:0!important;row-gap:28px}
+  .g4>*{padding-right:var(--cg)}
+  .g4>.c4{padding-top:22px}
+}
+@media(max-width:1000px){.g4{display:grid!important;grid-template-columns:minmax(0,1fr)!important}.c4{padding:0 0 4px}}
+@media(min-width:981px){.head,.how-head{align-items:start!important}.head>:last-child,.how-head>:last-child{padding-top:48px}}
+
+.vv{display:flex;align-items:baseline;gap:12px;white-space:nowrap}
+.vv .arr{color:var(--ink-4);font-size:18px}
+@media(min-width:901px){.led-row{grid-template-columns:25% 25% minmax(0,1fr) auto!important}}
+@media(max-width:900px){.led-row{grid-template-areas:"st loss" "vv vv" "pr pr"!important;grid-template-columns:minmax(0,1fr) auto!important}.vv{grid-area:vv}.led-row .v.from::after{content:none!important}}
+@media(min-width:981px){.big{grid-template-columns:50% 50%!important;gap:0!important}.big>:first-child{padding-right:var(--cg)}}
+.who>.who-ph{padding-right:0!important;margin-right:var(--cg);max-width:none!important}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -446,11 +464,11 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       <button type="button" id="rescan"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v3h-3" stroke="currentColor" stroke-width="1.5"/></svg>Другая компания</button>
     </div>
     <div class="led" id="led">
-      <div class="led-row h"><div>Этап</div><div>Сейчас</div><div>Потенциал</div><div>Что даёт разницу</div><div class="loss">Уходит в месяц</div></div>
-      <div class="led-row"><div class="st">Заявка → разговор</div><div class="v from">63%</div><div class="v to">77%</div><div class="pr">Ответ за 15 минут, невзятая заявка уходит следующему менеджеру</div><div class="loss" data-n="412000">412 000<i>₽</i></div></div>
-      <div class="led-row"><div class="st">Разговор → сделка</div><div class="v from">14%</div><div class="v to">21%</div><div class="pr">Скрипт закрытия и карта возражений по 20 разобранным диалогам</div><div class="loss" data-n="538000">538 000<i>₽</i></div></div>
-      <div class="led-row"><div class="st">Повторные покупки</div><div class="v from">18%</div><div class="v to">25%</div><div class="pr">Повод вернуться на 45-й день после покупки</div><div class="loss" data-n="327000">327 000<i>₽</i></div></div>
-      <div class="led-row"><div class="st">Средний чек</div><div class="v from">85 тыс.</div><div class="v to">89 тыс.</div><div class="pr">Пересмотр прайса, к приросту цены маржа не применяется</div><div class="loss" data-n="96000">96 000<i>₽</i></div></div>
+      <div class="led-row h"><div>Этап</div><div>Сейчас → потенциал системы</div><div>Что даёт разницу</div><div class="loss">Уходит в месяц</div></div>
+      <div class="led-row"><div class="st">Заявка → разговор</div><div class="vv"><span class="v from">63%</span><span class="arr">→</span><span class="v to">77%</span></div><div class="pr">Ответ за 15 минут, невзятая заявка уходит следующему менеджеру</div><div class="loss" data-n="412000">412 000<i>₽</i></div></div>
+      <div class="led-row"><div class="st">Разговор → сделка</div><div class="vv"><span class="v from">14%</span><span class="arr">→</span><span class="v to">21%</span></div><div class="pr">Скрипт закрытия и карта возражений по 20 разобранным диалогам</div><div class="loss" data-n="538000">538 000<i>₽</i></div></div>
+      <div class="led-row"><div class="st">Повторные покупки</div><div class="vv"><span class="v from">18%</span><span class="arr">→</span><span class="v to">25%</span></div><div class="pr">Повод вернуться на 45-й день после покупки</div><div class="loss" data-n="327000">327 000<i>₽</i></div></div>
+      <div class="led-row"><div class="st">Средний чек</div><div class="vv"><span class="v from">85 тыс.</span><span class="arr">→</span><span class="v to">89 тыс.</span></div><div class="pr">Пересмотр прайса, к приросту цены маржа не применяется</div><div class="loss" data-n="96000">96 000<i>₽</i></div></div>
       <i class="scanline" id="scanline"></i>
     </div>
     <div class="led-tot"><span>Недополученная валовая прибыль</span><b><span data-n="1373000" id="ledTot">1 373 000</span><i>₽ в месяц</i></b></div>
@@ -662,7 +680,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       <div><p class="kick rv">Откуда цифры</p><h2 class="rv">Каждую цифру можно проверить</h2></div>
       <p class="lede rv">У всех четырёх систем одни правила: источник называется, формула пересчитывается вручную, а где мы не уверены, это написано прямо.</p>
     </div>
-    <div class="src rv">
+    <div class="src g4 rv"><div class="c4"><b>Три правила</b>одни для всех четырёх систем</div>
       <div><b>Данные компании</b><p>МРТ считает только по цифрам, которые дал собственник. Ориентир этапа — потенциал этой же команды, средние по рынку не используются.</p></div>
       <div><b>Открытые реестры</b><p>Выручка из бухгалтерской отчётности ФНС, руководители и учредители из ЕГРЮЛ, спрос из открытых вакансий.</p></div>
       <div><b>Проверка текстов</b><p>Всё, что пишет система, проходит фильтр: цифры, которых нет в данных, и обещания, которых мы не даём, отсекаются до отправки.</p></div>
@@ -711,7 +729,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       <div><p class="kick rv">Цена</p><h2 class="rv">Считается от размера течи</h2></div>
       <p class="lede rv">Сначала МРТ показывает, сколько денег уходит и где. От этой суммы считаются объём работ и цена: небольшую течь незачем закрывать дорогим проектом.</p>
     </div>
-    <div class="steps rv">
+    <div class="steps g4 rv"><div class="c4"><b>Три шага</b>от МРТ до оплаты за результат</div>
       <div><span class="n">§ 1</span><b>МРТ за 50&nbsp;000&nbsp;₽</b><p>Ведомость потерь в рублях и приоритет. Если потерь, которые можно посчитать, нет, возвращаем оплату.</p></div>
       <div><span class="n">§ 2</span><b>Предложение из ведомости</b><p>Какие течи закрываем, какими инструментами и в каком порядке. Цена — от суммы, которую возвращаем.</p></div>
       <div><span class="n">§ 3</span><b>Оплата за принятые этапы</b><p>Этап принимается по метрике. Не принят — не оплачен. МРТ идёт в зачёт.</p></div>
