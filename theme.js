@@ -1,8 +1,8 @@
 /* Тема Closery: дневная и ночная. Подключается в <head> без defer, чтобы страница не мигала тёмным.
    Пока посетитель не выбрал сам, по умолчанию тёмная — фирменный вид. Выбор хранится в localStorage.
-   Кнопка встаёт в шапку сама: тихая иконка в ряд со ссылками, переключение одним кликом. */
+   Кнопка встаёт в шапку сама: круг, наполовину залитый, в ряд со ссылками. Клик поворачивает его на пол-оборота и меняет тему. */
 (function(){
-  var KEY='closery-theme',root=document.documentElement;
+  var KEY='closery-theme-v2',root=document.documentElement;
   function pref(){try{var v=localStorage.getItem(KEY);return v==='light'?'light':'dark';}catch(e){return 'dark';}}
   function paint(t){
     root.setAttribute('data-theme',t);root.style.colorScheme=t;
@@ -22,11 +22,10 @@
   L+' .logo i,'+L+' .cmp-logo i,'+L+' .progress,'+L+' .scanline{box-shadow:none!important}'+
   L+' .band{background:none}'+
   /* днём акцент золотой: подписи разделов, номера, подчёркивания, полоса прочитанного. Зелёный остаётся за деньгами, красный за потерями */
-  L+' body::before{display:block;background:radial-gradient(1200px 640px at 10% -12%,color-mix(in srgb,var(--gold-2) 16%,transparent),transparent 65%)}'+
-  L+' .kick{color:var(--gold)}'+L+' .kick::before{background:var(--gold-2)}'+
+  L+' .kick{color:var(--gold)}'+L+' .kick::before{color:var(--gold-2)}'+
   L+' .progress{background:var(--gold-2)!important}'+
   L+' .lnk{border-bottom-color:var(--gold-2)!important}'+L+' a:hover{text-decoration-color:var(--gold-2)}'+
-  L+' .c4 b,'+L+' .sh i,'+L+' .logos p b{color:var(--gold)!important}'+
+  L+' .sh i{color:var(--gold-2)}'+
   L+' ::selection{background:var(--gold-3)}'+
   /* островки со светлым текстом в любой теме: подпись поверх фото */
   L+' .ti-dark{--ink:#F4F8F6;--ink-2:#CBD6D0;--ink-3:#8FA099;color:var(--ink)}'+
@@ -36,22 +35,16 @@
   /* кнопка: как ссылка меню, без рамки */
   '.ti-btn{flex:none;width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;margin:0 -6px;padding:0;border:0;border-radius:8px;background:none;color:var(--ink-3);cursor:pointer;transition:color .2s}'+
   '.ti-btn:hover{color:var(--ink)}'+
-  '.ti-btn svg{width:17px;height:17px;overflow:visible}'+
-  '.ti-btn .sun-c{transition:r .5s cubic-bezier(.16,1,.3,1)}'+
-  '.ti-btn .moon-m{transition:cx .5s cubic-bezier(.16,1,.3,1),cy .5s cubic-bezier(.16,1,.3,1)}'+
-  '.ti-btn .rays{transform-origin:12px 12px;transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .25s}'+
-  /* ночью показываем месяц, днём солнце */
-  '.ti-btn .sun-c{r:8px}.ti-btn .moon-m{cx:17px;cy:7px}.ti-btn .rays{transform:rotate(-45deg) scale(.4);opacity:0}'+
-  L+' .ti-btn .sun-c{r:4.4px}'+L+' .ti-btn .moon-m{cx:30px;cy:-6px}'+L+' .ti-btn .rays{transform:none;opacity:1}'+
+  '.ti-btn svg{width:16px;height:16px;display:block}'+
+  '.ti-btn svg{transition:transform .7s cubic-bezier(.65,0,.35,1)}'+
+  L+' .ti-btn svg{transform:rotate(180deg)}'+
   '@media(prefers-reduced-motion:reduce){.ti-btn *{transition:none!important}}';
 
   var st=document.createElement('style');st.id='ti-css';st.textContent=css;
   (document.head||root).appendChild(st);
   paint(pref());
 
-  var ICON='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><mask id="tiMoon"><rect width="24" height="24" fill="#fff"/><circle class="moon-m" cx="30" cy="-6" r="7" fill="#000"/></mask>'+
-    '<circle class="sun-c" cx="12" cy="12" r="4.4" fill="currentColor" mask="url(#tiMoon)"/>'+
-    '<g class="rays" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></g></svg>';
+  var ICON='<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.75" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.25a6.75 6.75 0 0 1 0 13.5z" fill="currentColor"/></svg>';
 
   var btns=[];
   function sync(){

@@ -50,7 +50,7 @@ a:hover{text-decoration-color:var(--ok)}
 .bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 84%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border-bottom:1px solid var(--rule)}
 .bar-in{display:flex;justify-content:space-between;align-items:center;height:64px;gap:16px;max-width:1440px;margin:0 auto;padding:0 var(--gut)}
 .logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:var(--ink)}
-.logo i{width:9px;height:9px;border-radius:2px;background:var(--ok);box-shadow:0 0 16px color-mix(in srgb,var(--ok) 60%,transparent)}
+.logo i{width:9px;height:9px;border-radius:2px;background:var(--ok)}
 .nav{display:flex;align-items:center;gap:22px}
 .nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--ink-2)}
 .nav a:hover,.nav a[aria-current]{color:var(--ink)}
@@ -148,7 +148,6 @@ footer{margin-top:88px;border-top:1px solid var(--rule);padding:36px 0 48px}
 #tip b{display:block;font-size:15px}
 
 /* язык сайта Closery: фон с изумрудным свечением, заголовки Unbounded, крупные цифры с засечками, подписи без капса */
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(1100px 620px at 12% -8%,color-mix(in srgb,var(--ok) 13%,transparent),transparent 62%)}
 .eyebrow{font-size:14px;letter-spacing:0;text-transform:none;color:var(--ok);display:inline-flex;align-items:center;gap:12px}
 .eyebrow::before{content:"";width:28px;height:1px;background:var(--ok)}
 h1{font-size:clamp(32px,5vw,64px);letter-spacing:-.045em;line-height:1.02}
@@ -161,7 +160,6 @@ h2{font-size:clamp(24px,2.8vw,38px);letter-spacing:-.04em}
 .nav .cta:hover{background:var(--ok-soft)}
 .btn{background:var(--ink);color:var(--bg);font-weight:500}
 .btn:hover{background:var(--ok-soft)}
-.logo i{box-shadow:0 0 14px color-mix(in srgb,var(--ok) 60%,transparent)}
 .find li::before{font-family:var(--ui);font-weight:500;font-size:13px}
 .scard .k,.method dt,details.tbl summary,.ghost{letter-spacing:0;text-transform:none}
 .cite{font-family:var(--ui)}
