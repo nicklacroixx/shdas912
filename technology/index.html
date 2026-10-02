@@ -864,7 +864,10 @@ main{counter-reset:sec}
     var lim=innerHeight*.88;
     pending=pending.filter(function(el){if(el.getBoundingClientRect().top<lim){reveal(el);return false;}return true;});
   }
-  if('IntersectionObserver' in window){
+  /* вход на страницу — как в site.js: первый экран по очереди после первой отрисовки, дальше по прокрутке */
+  function intro(){var lim=innerHeight*.88,k=0;pending=pending.filter(function(el){if(el.getBoundingClientRect().top<lim){setTimeout(reveal,90*k++,el);return false;}return true;});}
+  function observe(){
+    if(!('IntersectionObserver' in window))return;
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}});},{rootMargin:'0px 0px -12% 0px'});
     pending.forEach(function(el){io.observe(el);});
   }
@@ -873,7 +876,8 @@ main{counter-reset:sec}
   addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(function(){onScroll();tk=false;});}},{passive:true});
   addEventListener('resize',function(){scrs.forEach(placePins);onScroll();});
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){scrs.forEach(placePins);});
-  resetScan();onScroll();
+  resetScan();
+  setTimeout(function(){intro();observe();onScroll();},60);   // таймер: rAF не идёт в скрытой вкладке
 })();
 </script>
 <script src="/lead.js" defer></script>
