@@ -1,4 +1,4 @@
-/* Форма заявки на МРТ для всех страниц Closery.
+/* Форма записи на вводную встречу для всех страниц Closery.
    Кнопки записи открывают окно с формой вместо перехода в Telegram. Заявка уходит в кабинет
    (cabinet.closery.ru/api/mri/lead), оттуда сразу в Telegram Николаю. Telegram остаётся ссылкой
    внутри окна — для тех, кому так удобнее. */
@@ -36,6 +36,7 @@
 .lf-go[disabled]{opacity:.5;cursor:wait}
 .lf-alt{margin-top:16px;font-size:14px;color:var(--ink-3);text-align:center}
 .lf-alt a{color:var(--ink)}
+.lf-note{margin:8px 0 0;font-size:13px;line-height:1.5;color:var(--ink-3)}
 .lf-msg{margin-top:12px;font-size:14px;color:var(--loss);min-height:0}
 .lf-ok{text-align:left}
 .lf-ok b{display:block;font-family:'Source Serif 4',Georgia,serif;font-weight:600;font-size:64px;line-height:1;color:var(--ok-soft);margin-bottom:16px}
@@ -47,19 +48,22 @@
   var bg=document.createElement('div');bg.className='lf-bg';bg.setAttribute('role','dialog');bg.setAttribute('aria-modal','true');bg.setAttribute('aria-labelledby','lfT');
   bg.innerHTML='<div class="lf"><button class="lf-x" type="button" aria-label="Закрыть">×</button><div class="lf-body"></div></div>';
   document.body.appendChild(bg);
-  var body=bg.querySelector('.lf-body'),last=null,rev='';
+  var body=bg.querySelector('.lf-body'),last=null,rev='',role='';
 
   function form(){
-    rev='';
+    rev='';role='';
     body.innerHTML=''+
-      '<p class="lf-k">Коммерческий МРТ · 50&nbsp;000&nbsp;₽</p>'+
-      '<h3 id="lfT">Запись на МРТ</h3>'+
-      '<p class="lf-sub">Николай ответит в течение рабочего дня и предложит время для 120 минут по вашим цифрам.</p>'+
+      '<p class="lf-k">Вводная встреча · 45 минут без оплаты</p>'+
+      '<h3 id="lfT">Запись на встречу</h3>'+
+      '<p class="lf-sub">Николай ответит в течение рабочего дня и предложит время. На встрече нужен собственник и цифры воронки за последние месяцы: заявки, конверсия, чек, маржа.</p>'+
       '<form novalidate>'+
       '<div class="lf-row"><label class="lf-f" data-f="name"><span>Имя</span><input name="name" autocomplete="name" class="ym-disable-keys"></label>'+
       '<label class="lf-f" data-f="contact"><span>Телефон, Telegram или почта</span><input name="contact" autocomplete="tel" class="ym-disable-keys"></label></div>'+
       '<label class="lf-f"><span>Компания</span><input name="company" autocomplete="organization" class="ym-disable-keys"></label>'+
-      '<div class="lf-f"><span>Выручка в месяц</span><div class="lf-seg">'+
+      '<div class="lf-f"><span>Кто вы в компании</span><div class="lf-seg" data-seg="role">'+
+        ['Собственник','Гендиректор-партнёр','Другая роль'].map(function(t){return '<button type="button" aria-pressed="false">'+t+'</button>';}).join('')+
+      '</div><p class="lf-note" hidden>Встречу проводим с собственником. Оставьте заявку, а на встречу позовите его.</p></div>'+
+      '<div class="lf-f"><span>Выручка в месяц</span><div class="lf-seg" data-seg="rev">'+
         ['до 10 млн','10–50 млн','50–200 млн','больше 200 млн'].map(function(t){return '<button type="button" aria-pressed="false">'+t+'</button>';}).join('')+
       '</div></div>'+
       '<label class="lf-f"><span>Что сейчас беспокоит больше всего? Необязательно</span><textarea name="pain" class="ym-disable-keys" placeholder="Например: заявок много, а продаж не прибавляется"></textarea></label>'+
@@ -71,8 +75,11 @@
       '<p class="lf-alt">Удобнее в мессенджере? <a href="'+TG+'" target="_blank" rel="noopener">Написать в Telegram</a></p>';
     var f=body.querySelector('form');
     body.querySelectorAll('.lf-seg button').forEach(function(b){b.addEventListener('click',function(){
-      body.querySelectorAll('.lf-seg button').forEach(function(x){x.setAttribute('aria-pressed','false');});
-      b.setAttribute('aria-pressed','true');rev=b.textContent;});});
+      var seg=b.parentNode;
+      seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true');
+      if(seg.getAttribute('data-seg')==='role'){role=b.textContent;body.querySelector('.lf-note').hidden=role!=='Другая роль';}
+      else rev=b.textContent;});});
     f.addEventListener('submit',send);
   }
 
@@ -86,7 +93,7 @@
     f.querySelector('.lf-c').classList.toggle('err',!v('consent').checked);if(!v('consent').checked)ok=false;
     if(!ok){msg.textContent='Заполните имя, контакт и отметьте согласие.';return;}
     msg.textContent='';go.disabled=true;go.textContent='Отправляем…';
-    var data={name:v('name').value,contact:v('contact').value,company:v('company').value,revenue:rev,pain:v('pain').value,
+    var data={name:v('name').value,contact:v('contact').value,company:v('company').value,revenue:rev,pain:(role?'Роль: '+role+'\n':'')+v('pain').value,
       website:v('website').value,consent:true,page:location.pathname,utm:utm};
     fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
@@ -117,4 +124,6 @@
     e.preventDefault();open();
   });
   window.closeryLead=open;
+  /* ссылка с ?lead=1 или #zapis сразу открывает форму: так ведут кнопка в отчёте МРТ и ссылки из писем */
+  try{if(/[?&]lead=1/.test(location.search)||location.hash==='#zapis')setTimeout(open,400);}catch(e){}
 })();

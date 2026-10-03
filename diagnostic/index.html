@@ -1509,7 +1509,7 @@ const ClsMRI = (() => {
 'use strict';
 const C = {
   STORAGE_KEY : 'closery_mri_v1',
-  BOOKING_URL : 'https://t.me/klimenko_prod',
+  BOOKING_URL : 'https://closery.ru/?lead=1',
   MONTHS      : 12,
   DIAG_PRICE  : 50000,
   SANITY_RATIO_UP  : 20,
@@ -5903,7 +5903,7 @@ const Report = {
         <div class="pr-back-text">Один созвон: разбираем течи по приоритету и ресурс вашей команды. После него вы получаете КП с составом волн, сроками, критериями приёмки и ценой под сложность течей. Оплата по этапам: не устроил результат — выходите без штрафов.</div>
       </div>
       <div class="pr-cover-bottom pr-back-contact" style="border-top:1px solid rgba(255,255,255,.14)">
-        <div><div class="k">Записаться</div><div class="v">${C.BOOKING_URL.replace('https://','')}</div></div>
+        <div><div class="k">Записаться</div><div class="v">${C.BOOKING_URL.replace('https://','').replace(/\/\?.*$/,'')}</div></div>
         <div><div class="k">Сайт</div><div class="v">closery.ru</div></div>
         <div><div class="k">Основатель</div><div class="v">Николай Клименко</div></div>
       </div>
