@@ -187,7 +187,6 @@
       <div class="fld"><input id="conv" type="text" inputmode="decimal" autocomplete="off"><span class="u">%</span></div></div>
     <div class="q"><label for="repeat"><b>Покупают повторно за год</b><i>доля клиентов, которые вернулись</i></label>
       <div class="fld"><input id="repeat" type="text" inputmode="numeric" autocomplete="off"><span class="u">%</span></div></div>
-    <p class="inp-note">Стрелки ↑ ↓ в поле меняют значение, с Shift — шагом в десять раз крупнее.</p>
   </div>
 
   <div class="led" id="led">
@@ -222,9 +221,9 @@
   <h2 class="rv">Демо считает три статьи. МРТ — весь отдел продаж</h2>
   <div class="g4 rv">
     <div><b>60 вопросов</b><p>Шесть систем отдела продаж: поток, команда, CRM, управление, деньги, база.</p></div>
-    <div><b>5 статей потерь</b><p>Плюс ФОТ отдела и решения, которые держатся на собственнике.</p></div>
+    <div><b>5 статей потерь</b><p>Плюс мощность отдела и решения, которые держатся на собственнике.</p></div>
     <div><b>4 волны на 90 дней</b><p>Задачи, метрика «было → цель» и критерии приёмки по каждой.</p></div>
-    <div><b>NDA до данных</b><p>Отчёт с методикой и ограничениями. Потерь в рублях не нашли — возвращаем оплату.</p></div>
+    <div><b>NDA и возврат</b><p>NDA — до доступа к данным. Не нашёл потерь, которые считаются в рублях, — возвращаю оплату.</p></div>
   </div>
   <div class="full-cta rv">
     <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
@@ -358,13 +357,13 @@
 
     track('s-reach',reachRate,REACH_NORM,'у вас <b>'+pct(reachRate)+'</b>','ориентир '+pct(REACH_NORM));
     stage('s-reach',vReach, missed>0
-      ? 'До разговора доходит '+pct(reachRate)+' заявок. Каждый месяц '+dec(missed)+' '+plural(missed,'заявка','заявки','заявок')+', уже оплаченных маркетингом, остаются без разговора. Считаем по вашей же конверсии закрытия.'
+      ? 'До разговора доходит '+pct(reachRate)+' заявок. Каждый месяц '+dec(missed)+' '+plural(missed,'заявка','заявки','заявок')+', уже оплаченных маркетингом, остаются без разговора. Считаю по вашей же конверсии закрытия.'
       : 'До разговора доходит '+pct(reachRate)+' заявок — не ниже ориентира. На входе деньги не теряются.',
       missed>0 ? dec(missed)+' заявки × '+dec(closeP)+'% закрытия × '+rub(check)+' × 12 мес × '+dec(margin)+'% маржи = '+mln(vReach) : '');
 
     track('s-close',closeRate,closeTarget,'у вас <b>'+pct(closeRate)+'</b>','цель '+pct(closeTarget));
     stage('s-close',vClose, stepP>0
-      ? 'Из разговоров оплачивают '+pct(closeRate)+'. Модель берёт рост на '+dec(stepP)+' п.п.: не больше 8 п.п. за раз и не выше ориентира профиля.'
+      ? 'Из разговоров оплачивают '+pct(closeRate)+'. Беру осторожный рост: +'+dec(stepP)+' п.п. — не больше 8 за раз и не выше ориентира профиля.'
       : 'Из разговоров оплачивают '+pct(closeRate)+' — этап уже на ориентире профиля.',
       stepP>0 ? dec(dial)+' разговоров × '+dec(stepP)+' п.п. × '+rub(check)+' × 12 мес × '+dec(margin)+'% маржи = '+mln(vClose) : '');
 
