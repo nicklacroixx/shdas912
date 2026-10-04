@@ -1030,7 +1030,7 @@ main{counter-reset:sec}
       var list=no.map(function(q){var a=q.dataset.amt;return '<li>'+esc(q.dataset.leak)+(a?'<span>в примере −'+esc(a)+' в год</span>':'<span style="color:var(--ink-3);font-family:var(--ui);font-weight:400">видно только по данным</span>')+'</li>';}).join('');
       res.innerHTML='<h3>'+h+'</h3><p>'+p+'</p>'+(list?'<ul class="chk-leaks">'+list+'</ul>':'')+
         '<p class="chk-note">Это не диагноз. Ответ «нет» показывает, где искать. Сумму в рублях даёт только расчёт по вашим цифрам.</p>'+
-        '<div class="chk-cta"><a class="btn" href="/mrt-demo/">Посчитать в рублях бесплатно</a><a class="lnk" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Или сразу записаться на встречу →</a></div>';
+        '<div class="chk-cta"><a class="btn" href="/mrt-demo/">Посчитать в рублях</a><a class="lnk" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Или сразу записаться на встречу →</a></div>';
       res.classList.add('on');
     }
     qs.forEach(function(q){
