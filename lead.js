@@ -1,4 +1,4 @@
-/* Форма записи на вводную встречу для всех страниц Closery.
+/* Форма записи на МРТ для всех страниц Closery.
    Кнопки записи открывают окно с формой вместо перехода в Telegram. Заявка уходит в кабинет
    (cabinet.closery.ru/api/mri/lead), оттуда сразу в Telegram Николаю. Telegram остаётся ссылкой
    внутри окна — для тех, кому так удобнее. */
@@ -53,16 +53,16 @@
   function form(){
     rev='';role='';
     body.innerHTML=''+
-      '<p class="lf-k">Вводная встреча · 45 минут без оплаты</p>'+
-      '<h3 id="lfT">Запись на встречу</h3>'+
-      '<p class="lf-sub">Николай ответит в течение рабочего дня и предложит время. На встрече нужен собственник и цифры воронки за последние месяцы: заявки, конверсия, чек, маржа.</p>'+
+      '<p class="lf-k">Коммерческий МРТ · 79&nbsp;990&nbsp;₽</p>'+
+      '<h3 id="lfT">Запись на МРТ</h3>'+
+      '<p class="lf-sub">Две встречи в неделю проводим без оплаты, по времени заявки. Николай ответит в течение рабочего дня и предложит время. На встрече нужен собственник.</p>'+
       '<form novalidate>'+
       '<div class="lf-row"><label class="lf-f" data-f="name"><span>Имя</span><input name="name" autocomplete="name" class="ym-disable-keys"></label>'+
       '<label class="lf-f" data-f="contact"><span>Телефон, Telegram или почта</span><input name="contact" autocomplete="tel" class="ym-disable-keys"></label></div>'+
       '<label class="lf-f"><span>Компания</span><input name="company" autocomplete="organization" class="ym-disable-keys"></label>'+
       '<div class="lf-f"><span>Кто вы в компании</span><div class="lf-seg" data-seg="role">'+
         ['Собственник','Гендиректор-партнёр','Другая роль'].map(function(t){return '<button type="button" aria-pressed="false">'+t+'</button>';}).join('')+
-      '</div><p class="lf-note" hidden>Встречу проводим с собственником. Оставьте заявку, а на встречу позовите его.</p></div>'+
+      '</div><p class="lf-note" hidden>МРТ проводим с собственником. Оставьте заявку, а на встречу позовите его.</p></div>'+
       '<div class="lf-f"><span>Выручка в месяц</span><div class="lf-seg" data-seg="rev">'+
         ['до 10 млн','10–50 млн','50–200 млн','больше 200 млн'].map(function(t){return '<button type="button" aria-pressed="false">'+t+'</button>';}).join('')+
       '</div></div>'+
@@ -124,6 +124,19 @@
     e.preventDefault();open();
   });
   window.closeryLead=open;
+
+  /* Рабочая неделя для предложения «две встречи в неделю без оплаты»: [data-week] получает даты
+     понедельник–пятница текущей недели по Москве, в выходные — следующей. Дата настоящая, не счётчик. */
+  try{
+    var M=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+    var d=new Date(Date.now()+3*3600e3), wd=d.getUTCDay();
+    var shift=(wd===0)?1:(wd===6)?2:(1-wd);
+    var mon=new Date(d.getTime()+shift*864e5), fri=new Date(mon.getTime()+4*864e5);
+    var txt=mon.getUTCMonth()===fri.getUTCMonth()
+      ? 'Неделя '+mon.getUTCDate()+'–'+fri.getUTCDate()+' '+M[fri.getUTCMonth()]
+      : 'Неделя '+mon.getUTCDate()+' '+M[mon.getUTCMonth()]+' – '+fri.getUTCDate()+' '+M[fri.getUTCMonth()];
+    document.querySelectorAll('[data-week]').forEach(function(e){e.textContent=txt;});
+  }catch(e){}
   /* ссылка с ?lead=1 или #zapis сразу открывает форму: так ведут кнопка в отчёте МРТ и ссылки из писем */
   try{if(/[?&]lead=1/.test(location.search)||location.hash==='#zapis')setTimeout(open,400);}catch(e){}
 })();
