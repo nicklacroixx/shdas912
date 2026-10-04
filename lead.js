@@ -48,22 +48,28 @@
   var bg=document.createElement('div');bg.className='lf-bg';bg.setAttribute('role','dialog');bg.setAttribute('aria-modal','true');bg.setAttribute('aria-labelledby','lfT');
   bg.innerHTML='<div class="lf"><button class="lf-x" type="button" aria-label="Закрыть">×</button><div class="lf-body"></div></div>';
   document.body.appendChild(bg);
-  var body=bg.querySelector('.lf-body'),last=null,rev='',role='';
+  var body=bg.querySelector('.lf-body'),last=null,rev='',role='',extra={};
 
   function form(){
-    rev='';role='';
+    rev='';role='';extra={};
     var fromReport=/[?&]from=report/.test(location.search);  /* кнопка «Обсудить план и старт» из отчёта МРТ */
     body.innerHTML=''+
       (fromReport
         ? '<p class="lf-k">После МРТ</p><h3 id="lfT">Обсудить план и старт</h3><p class="lf-sub">Николай свяжется в течение рабочего дня: самая дорогая течь, план на месяц, метрика приёмки и дата старта.</p>'
-        : '<p class="lf-k">Коммерческий МРТ · 79&nbsp;990&nbsp;₽</p><h3 id="lfT">Запись на МРТ</h3><p class="lf-sub">Две встречи в неделю проводим без оплаты, по времени заявки. Николай ответит в течение рабочего дня и предложит время. На встрече нужен собственник.</p>')+
+        : '<p class="lf-k">Коммерческий МРТ · 79&nbsp;990&nbsp;₽</p><h3 id="lfT">Заявка на МРТ</h3><p class="lf-sub">Две компании в неделю проходят МРТ за счёт Closery — по итогам отбора. Решение и время — в течение рабочего дня. NDA подписываем до доступа к данным.</p>')+
       '<form novalidate>'+
       '<div class="lf-row"><label class="lf-f" data-f="name"><span>Имя</span><input name="name" autocomplete="name" class="ym-disable-keys"></label>'+
       '<label class="lf-f" data-f="contact"><span>Телефон, Telegram или почта</span><input name="contact" autocomplete="tel" class="ym-disable-keys"></label></div>'+
       '<label class="lf-f"><span>Компания</span><input name="company" autocomplete="organization" class="ym-disable-keys"></label>'+
       '<div class="lf-f"><span>Кто вы в компании</span><div class="lf-seg" data-seg="role">'+
         ['Собственник','Гендиректор-партнёр','Другая роль'].map(function(t){return '<button type="button" aria-pressed="false">'+t+'</button>';}).join('')+
-      '</div><p class="lf-note" hidden>МРТ проводим с собственником. Оставьте заявку, а на встречу позовите его.</p></div>'+
+      '</div><p class="lf-note" hidden>МРТ проводим с собственником. Оставьте заявку, а на МРТ позовите его.</p></div>'+
+      '<div class="lf-f"><span>Отдел продаж</span><div class="lf-seg" data-seg="team">'+
+        ['1–2 человека','3–10','больше 10'].map(function(t){return '<button type="button" aria-pressed="false">'+t+'</button>';}).join('')+
+      '</div></div>'+
+      '<div class="lf-f"><span>CRM</span><div class="lf-seg" data-seg="crm">'+
+        ['Есть','Нет'].map(function(t){return '<button type="button" aria-pressed="false">'+t+'</button>';}).join('')+
+      '</div></div>'+
       '<div class="lf-f"><span>Выручка в месяц</span><div class="lf-seg" data-seg="rev">'+
         ['до 10 млн','10–50 млн','50–200 млн','больше 200 млн'].map(function(t){return '<button type="button" aria-pressed="false">'+t+'</button>';}).join('')+
       '</div></div>'+
@@ -79,8 +85,10 @@
       var seg=b.parentNode;
       seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false');});
       b.setAttribute('aria-pressed','true');
-      if(seg.getAttribute('data-seg')==='role'){role=b.textContent;body.querySelector('.lf-note').hidden=role!=='Другая роль';}
-      else rev=b.textContent;});});
+      var k=seg.getAttribute('data-seg');
+      if(k==='role'){role=b.textContent;body.querySelector('.lf-note').hidden=role!=='Другая роль';}
+      else if(k==='rev') rev=b.textContent;
+      else extra[k]=b.textContent;});});
     f.addEventListener('submit',send);
   }
 
@@ -94,7 +102,7 @@
     f.querySelector('.lf-c').classList.toggle('err',!v('consent').checked);if(!v('consent').checked)ok=false;
     if(!ok){msg.textContent='Заполните имя, контакт и отметьте согласие.';return;}
     msg.textContent='';go.disabled=true;go.textContent='Отправляем…';
-    var data={name:v('name').value,contact:v('contact').value,company:v('company').value,revenue:rev,pain:(role?'Роль: '+role+'\n':'')+v('pain').value,
+    var data={name:v('name').value,contact:v('contact').value,company:v('company').value,revenue:rev,pain:(role?'Роль: '+role+'\n':'')+(extra.team?'Отдел продаж: '+extra.team+'\n':'')+(extra.crm?'CRM: '+extra.crm+'\n':'')+v('pain').value,
       website:v('website').value,consent:true,page:location.pathname,utm:utm};
     fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
