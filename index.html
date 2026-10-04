@@ -197,7 +197,11 @@ html[data-theme="light"] .hour::after{background:linear-gradient(180deg,color-mi
 .hour-res{display:flex;align-items:baseline;gap:10px;margin-top:18px}
 .hour-res b{font-family:var(--num);font-weight:600;font-size:clamp(44px,4.4vw,64px);line-height:1;color:var(--loss);letter-spacing:-.02em;font-feature-settings:"tnum" 1,"lnum" 1}
 .hour-res span{font-size:14px;color:var(--ink-2)}
-.hour-foot{margin-top:12px;font-size:13.5px;color:var(--ink-2)}
+.hour-foot{margin-top:12px;font-size:13.5px;line-height:1.5;color:var(--ink-2);max-width:46ch}
+.hour-body{container-type:inline-size}
+.hour-in{display:grid;grid-template-columns:minmax(0,1fr);gap:14px 24px}
+.hour-row span:last-child{white-space:nowrap}
+@container (min-width:560px){.hour-in{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}}
 
 /* строка ролей */
 .roles{display:grid;grid-template-columns:minmax(0,1.2fr) repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);margin-top:clamp(56px,6vw,96px);padding-top:26px;border-top:1px solid var(--rule)}
@@ -690,7 +694,7 @@ main{counter-reset:sec}
         <a class="btn btn-ghost" href="/mrt-demo/">Демо за 2 минуты</a>
       </div>
     </div>
-    <div class="hour rv" aria-label="Сколько стоит один процент выручки">
+    <div class="hour rv" aria-label="Сколько стоит один пункт конверсии">
       <div class="hour-scenes" aria-hidden="true">
         <div class="hour-scene active"><video src="scene1.mp4" poster="scene1_poster.jpg" muted loop playsinline preload="auto"></video></div>
         <div class="hour-scene"><video src="scene2.mp4" poster="scene2_poster.jpg" muted loop playsinline preload="none"></video></div>
@@ -700,11 +704,14 @@ main{counter-reset:sec}
         <div class="hour-scene"><video src="scene6.mp4" poster="scene6_poster.jpg" muted loop playsinline preload="none"></video></div>
       </div>
       <div class="hour-body">
-        <p class="hour-k">Прежде чем читать дальше</p>
-        <h3>Сколько стоит один процент?</h3>
-        <label class="hour-row"><span>Выручка</span><input type="text" id="hourIncome" class="ym-disable-keys" value="30 000 000" inputmode="numeric" autocomplete="off" aria-label="Выручка в месяц, рублей"><span>₽ в месяц</span></label>
-        <div class="hour-res"><b id="hourRate">—</b><span>в год</span></div>
-        <p class="hour-foot">Столько в год стоит одна сорванная сделка из ста.</p>
+        <p class="hour-k">Посчитайте на своих цифрах</p>
+        <h3>Сколько стоит один пункт конверсии?</h3>
+        <div class="hour-in">
+          <label class="hour-row"><span>Выручка</span><input type="text" id="hourIncome" class="ym-disable-keys" value="30 000 000" inputmode="numeric" autocomplete="off" aria-label="Выручка в месяц, рублей"><span>₽ в месяц</span></label>
+          <label class="hour-row"><span>Конверсия</span><input type="text" id="hourConv" class="ym-disable-keys" value="20" inputmode="decimal" autocomplete="off" aria-label="Конверсия из заявки в оплату, процентов"><span>% в оплату</span></label>
+        </div>
+        <div class="hour-res"><b id="hourRate">—</b><span>выручки в год</span></div>
+        <p class="hour-foot" id="hourFoot">&nbsp;</p>
       </div>
     </div>
   </div>
@@ -736,7 +743,7 @@ main{counter-reset:sec}
   <div class="w">
     <div class="head">
       <div><p class="kick rv">Результат МРТ</p><h2 class="rv">Каждая потеря — отдельной строкой, в рублях за год</h2></div>
-      <p class="lede rv">Это ведомость реального клиента. На вашем МРТ каждая строка считается только по вашим данным: CRM, телефония, управленческая отчётность.</p>
+      <p class="lede rv">Первая — ведомость реального клиента, «Другая компания» показывает расчёт для других отраслей. На вашем МРТ каждая строка считается только по вашим данным: CRM, телефония, управленческая отчётность.</p>
     </div>
     <figure class="snap rv" id="snap" aria-label="Ведомость потерь, пример">
       <div class="snap-top">
@@ -976,11 +983,19 @@ main{counter-reset:sec}
         var pv=vid(prev);if(pv)setTimeout(function(){pv.pause();},1700);
       },4200);
     }
-    var input=document.getElementById('hourIncome'),out=document.getElementById('hourRate');
-    if(!input||!out)return;
-    var nf=new Intl.NumberFormat('ru-RU',{maximumFractionDigits:0});
-    function calc(){var raw=input.value.replace(/[^\d]/g,'');if(!raw){out.textContent='—';return;}var y=parseInt(raw,10)*12*0.01;out.textContent=y>=1e6?(Math.round(y/1e5)/10).toLocaleString('ru-RU')+' млн ₽':nf.format(y)+' ₽';}
+    /* цена одного пункта конверсии: те же заявки, сделок больше в (c+1)/c раза — выручка растёт на 1/c */
+    var input=document.getElementById('hourIncome'),conv=document.getElementById('hourConv'),out=document.getElementById('hourRate'),foot=document.getElementById('hourFoot');
+    if(!input||!conv||!out)return;
+    var nf=new Intl.NumberFormat('ru-RU',{maximumFractionDigits:0}),n1=new Intl.NumberFormat('ru-RU',{maximumFractionDigits:1});
+    function calc(){
+      var r=parseInt(input.value.replace(/[^\d]/g,''),10),c=parseFloat(conv.value.replace(',','.').replace(/[^\d.]/g,''));
+      if(!(r>0)||!(c>=0.5&&c<100)){out.textContent='—';foot.innerHTML='&nbsp;';return;}
+      var y=r*12/c;
+      out.textContent=y>=1e6?n1.format(Math.round(y/1e5)/10)+' млн ₽':nf.format(y)+' ₽';
+      foot.textContent='При конверсии '+n1.format(c)+'% один пункт — это '+n1.format(100/c)+'% выручки: те же заявки и тот же бюджет. Где этот пункт теряется, показывает ведомость МРТ.';
+    }
     input.addEventListener('input',function(){var d=input.value.replace(/[^\d]/g,'');input.value=d?new Intl.NumberFormat('ru-RU').format(d):'';calc();});
+    conv.addEventListener('input',function(){conv.value=conv.value.replace(/[^\d.,]/g,'').slice(0,4);calc();});
     calc();
   })();
 
@@ -1002,16 +1017,37 @@ main{counter-reset:sec}
     },16);
   }
   /* «Другая компания»: снимок проходит по новой компании из другой отрасли */
+  /* у каждой отрасли свои статьи: потери оптовика, завода и розницы разные, одинаковыми бывают только суммы */
   var cos=[
-    {t:'Клиент: оптовая торговля, выручка около 480 млн ₽ в год. Название скрыто по NDA',v:[17880000,12320000,6800000,4100000,1500000]},
-    {t:'Пример расчёта: производство, выручка около 1,1 млрд ₽ в год',v:[24300000,9600000,11200000,3200000,2700000]},
-    {t:'Пример расчёта: B2B-услуги, выручка около 260 млн ₽ в год',v:[6100000,7400000,3900000,5200000,900000]},
-    {t:'Пример расчёта: розница с доставкой, выручка около 720 млн ₽ в год',v:[19500000,5800000,4700000,8900000,1100000]}
+    {t:'Клиент: оптовая торговля, выручка около 480 млн ₽ в год. Название скрыто по NDA',r:[
+      ['Нет работы с базой','Клиенты уже покупали, и к ним никто не вернулся',17880000],
+      ['Команда работает вполсилы','Та же команда может вести вдвое больше сделок, мощность простаивает',12320000],
+      ['Сделки без второго касания','Одна попытка вместо четырёх, дальше сделка тихо умирает',6800000],
+      ['Заявки без ответа в первый час','Обращение уходит к тому, кто ответил раньше',4100000],
+      ['Решения ждут собственника','Скидку и отсрочку согласуете вы, и сделка ждёт вас',1500000]]},
+    {t:'Пример расчёта: производство, выручка около 1,1 млрд ₽ в год',r:[
+      ['Дилеры без плана закупок','Дилер заказывает, когда вспомнит, и никто не ведёт его объём',24300000],
+      ['Тендеры без разбора проигрышей','Проиграли по цене и не узнали, на сколько',11200000],
+      ['Коммерческое предложение за неделю','Расчёт идёт через техотдел, клиент берёт у того, кто ответил за день',9600000],
+      ['Скидки без лимитов','Маржу отдают, чтобы закрыть план к концу месяца',3200000],
+      ['Отсрочка ждёт подписи','Нестандартные условия согласует только собственник',2700000]]},
+    {t:'Пример расчёта: B2B-услуги, выручка около 260 млн ₽ в год',r:[
+      ['Продления на самотёке','Договор закончился, разговор о продлении начался после',7400000],
+      ['Встречи без квалификации','Время экспертов уходит на тех, кто не купит',6100000],
+      ['Нет допродаж клиентам','Клиент берёт одну услугу из пяти и не знает о других',5200000],
+      ['Пилот без следующего шага','Тестовый проект закончился, предложения по итогам нет',3900000],
+      ['Смета ждёт собственника','Каждую нестандартную цену утверждаете вы',900000]]},
+    {t:'Пример расчёта: розница с доставкой, выручка около 720 млн ₽ в год',r:[
+      ['Покупатель не возвращается','После первой доставки — ни одного касания',19500000],
+      ['Брошенные корзины','Оформление прервалось, а звонка или сообщения нет',8900000],
+      ['Звонки без ответа в пик','Колл-центр не берёт трубку вечером и в выходные',5800000],
+      ['Отказы на доставке','Заказ не подтвердили накануне, курьер съездил впустую',4700000],
+      ['Акции без расчёта маржи','Скидку запустили, сколько она стоила, не посчитали',1100000]]}
   ],co=0,coEl=document.getElementById('snapCo');
   document.getElementById('rescan').addEventListener('click',function(){
     if(scanning)return;
     co=(co+1)%cos.length;var c=cos[co],sum=0;
-    rows.forEach(function(r,i){r.querySelector('.lv').setAttribute('data-n',c.v[i]);sum+=c.v[i];});
+    rows.forEach(function(r,i){var x=c.r[i];r.querySelector('.st').textContent=x[0];r.querySelector('.pr').textContent=x[1];r.querySelector('.lv').setAttribute('data-n',x[2]);sum+=x[2];});
     tot.setAttribute('data-n',sum);coEl.textContent=c.t;
     scan();
   });
