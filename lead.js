@@ -111,7 +111,7 @@
         '<label class="lf-f" data-f="contact"><span>Телефон, Telegram или почта</span><input name="contact" autocomplete="tel" class="ym-disable-keys"></label></div>'+
         '<label class="lf-f"><span>Компания</span><input name="company" autocomplete="organization" class="ym-disable-keys"></label>'+
         seg('role','Кто вы в компании',['Собственник','Гендиректор-партнёр','Другая роль'])+
-        '<div class="lf-row">'+seg('team','Отдел продаж',['1–2 человека','3–10','больше 10'])+seg('crm','CRM',['Есть','Нет'])+'</div>'+
+        '<div class="lf-row">'+seg('team','Команда продаж',['1–2 человека','3–10','больше 10'])+seg('crm','CRM',['Есть','Нет'])+'</div>'+
         seg('rev','Выручка в месяц',['до 10 млн','10–50 млн','50–200 млн','больше 200 млн'])+
         '<label class="lf-f"><span>Что беспокоит больше всего <em>· необязательно</em></span><textarea name="pain" rows="1" class="ym-disable-keys" placeholder="Например: заявок много, а продаж не прибавляется"></textarea></label>'+
         (window.closeryLeadNote&&!fromReport?'<p class="lf-note lf-demo">Цифры из демо-МРТ и итог ведомости приложим к заявке — на МРТ Николай придёт уже с ними.</p>':'')+
@@ -144,7 +144,7 @@
     f.querySelector('.lf-c').classList.toggle('err',!v('consent').checked);if(!v('consent').checked)ok=false;
     if(!ok){msg.textContent='Заполните имя, контакт и отметьте согласие.';return;}
     msg.textContent='';go.disabled=true;
-    var data={name:v('name').value,contact:v('contact').value,company:v('company').value,revenue:rev,pain:(role?'Роль: '+role+'\n':'')+(extra.team?'Отдел продаж: '+extra.team+'\n':'')+(extra.crm?'CRM: '+extra.crm+'\n':'')+(window.closeryLeadNote&&!/[?&]from=report/.test(location.search)?window.closeryLeadNote+'\n':'')+v('pain').value,  /* в кабинете поле до 600 знаков: цифры демо — раньше свободного текста */
+    var data={name:v('name').value,contact:v('contact').value,company:v('company').value,revenue:rev,pain:(role?'Роль: '+role+'\n':'')+(extra.team?'Команда продаж: '+extra.team+'\n':'')+(extra.crm?'CRM: '+extra.crm+'\n':'')+(window.closeryLeadNote&&!/[?&]from=report/.test(location.search)?window.closeryLeadNote+'\n':'')+v('pain').value,  /* в кабинете поле до 600 знаков: цифры демо — раньше свободного текста */
       website:v('website').value,consent:true,page:location.pathname,utm:utm};
     fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
