@@ -4516,7 +4516,7 @@ const Final = {
     const dqN = ['leads_month','conversion','avg_check','revenue','margin','dialogs'].filter(id => FinModel.num(id) != null).length;
     const dq = dqN >= 6 ? ['', 'высокая'] : dqN >= 4 ? ['mid', 'средняя'] : ['low', 'низкая'];
     el.innerHTML = `<div class="fx">
-      ${State.demo ? `<div class="fx-demo"><b>Демо-данные</b><span>Анкета заполнена случайными цифрами: это витрина логики отчёта, а не расчёт по реальному бизнесу.</span></div>` : ''}
+      ${State.demo ? `<div class="fx-demo"><b>Демо-данные</b><span>${State.answers._sample ? 'Пример отчёта: компания выдуманная, цифры собраны для показа. Ваш отчёт считается только по вашим данным.' : 'Анкета заполнена случайными цифрами: это витрина логики отчёта, а не расчёт по реальному бизнесу.'}</span></div>` : ''}
       <header class="fx-cover">
         <div class="fx-cv-top"><b>Closery · Коммерческий МРТ</b><span>Конфиденциально · для собственника и первых лиц компании</span></div>
         <p class="fx-kicker" style="margin-top:44px">Аудит коммерческого блока</p>
@@ -5333,8 +5333,8 @@ const Final = {
         <div class="fx-case"><span class="fx-k">MarketGuru · SaaS</span><div class="fx-cv">34% в оплату</div><p>Конверсия Zoom-аудита в оплату, сильнейший показатель ниши. 6 месяцев подряд рекордов выручки, методология работает без автора.</p></div>
       </div>
       <p class="fx-sign">«Строю системы в условиях дефицита ресурсов через конверсию на ключевых этапах. Каждую цифру подтверждаю контактами основателей.»<b>Николай Клименко, основатель Closery</b></p>
-      <div class="fx-cta"><a class="btn-primary" href="${C.BOOKING_URL}" target="_blank" rel="noopener">Обсудить план и старт →</a><button class="btn-ghost" id="btnPDF" type="button">Скачать PDF-разбор</button><button class="btn-ghost" id="btnLink" type="button">Скопировать ссылку на отчёт</button></div>
-      <p class="fx-small">Запись через Telegram Николая Клименко. PDF остаётся у вас и у ваших партнёров. Ссылка на отчёт постоянная: она открывается на любом устройстве и в любом браузере, отчёт пересобирается из неё целиком.</p>`);
+      <div class="fx-cta"><a class="btn-primary" href="${State.answers._sample ? 'https://closery.ru/?lead=1' : C.BOOKING_URL}" target="_blank" rel="noopener">${State.answers._sample ? 'Заявка на МРТ →' : 'Обсудить план и старт →'}</a><button class="btn-ghost" id="btnPDF" type="button">Скачать PDF-разбор</button><button class="btn-ghost" id="btnLink" type="button">Скопировать ссылку на отчёт</button></div>
+      <p class="fx-small">${State.answers._sample ? 'Это пример на демо-данных. На вашем МРТ каждая строка считается по вашим цифрам.' : 'Ответ в течение рабочего дня.'} PDF остаётся у вас и у ваших партнёров. Ссылка на отчёт постоянная: она открывается на любом устройстве и в любом браузере, отчёт пересобирается из неё целиком.</p>`);
   },
 
   appendix(x){
@@ -5573,7 +5573,7 @@ const Report = {
     const audience = {b2b:'B2B', b2c:'B2C', mixed:'B2B + B2C'}[a.audience] || '—';
     const zc = v => v >= 80 ? 'var(--pr-accent)' : v >= 60 ? '#B8863A' : 'var(--pr-bad)';
     const feedAll = Feedback.collect().sort((p, q) => (p.tone === 'bad' ? 0 : 1) - (q.tone === 'bad' ? 0 : 1));
-    const demoMark = State.demo ? `<div class="pr-demo"><b>Демо-данные</b>Отчёт построен на случайно сгенерированных ответах и показывает логику разбора, а не расчёт по реальному бизнесу.</div>` : '';
+    const demoMark = State.demo ? `<div class="pr-demo"><b>Демо-данные</b>${State.answers._sample ? 'Пример отчёта: компания выдуманная, цифры собраны для показа. Ваш отчёт считается только по вашим данным.' : 'Отчёт построен на случайно сгенерированных ответах и показывает логику разбора, а не расчёт по реальному бизнесу.'}</div>` : '';
     const pages = [];
     const pageHead = (n, label) => `<div class="pr-h"><div class="pr-h-l"><b>CLOSERY</b><span>COMMERCIAL MRI · ${company}</span></div><div class="pr-h-r">${String(n).padStart(2,'0')} / ${label}</div></div>`;
     const pageFoot = (n, total) => `<div class="pr-f"><span>Диагностика подготовлена ${date}</span><span>Страница ${n} из ${total}</span></div>`;
@@ -6157,7 +6157,7 @@ const App = {
         State.answers = ans;
         State.started = true;
         State.finished = true;
-        State.demo = false;
+        State.demo = !!ans._sample;   // пример с главной сайта: плашка «демо-данные» на экране и в PDF
         State.shared = true;   // отчёт открыт по клиентской ссылке: суфлёра здесь быть не должно
         document.getElementById('introScreen').style.display = 'none';
         Final.show();

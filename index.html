@@ -57,7 +57,7 @@
     {"@type": "Question", "name": "Сколько стоит МРТ?", "acceptedAnswer": {"@type": "Answer", "text": "79 990 ₽. NDA — до доступа к данным. Если потерь, которые можно посчитать в рублях, не нашлось, оплата возвращается. Двум компаниям в неделю МРТ проводится за счёт Closery — по итогам отбора."}},
     {"@type": "Question", "name": "Как пройти отбор?", "acceptedAnswer": {"@type": "Answer", "text": "Оставить заявку. Отбор проходят компании с выручкой от 10 млн ₽ в месяц, командой продаж от трёх человек и CRM. На МРТ нужен собственник. Ответ — в тот же рабочий день."}},
     {"@type": "Question", "name": "Сколько стоит внедрение?", "acceptedAnswer": {"@type": "Answer", "text": "Зависит от потерь и масштаба бизнеса. Цену и метрику приёмки основатель называет в конце МРТ, до старта. Оплата помесячно; метрика не дошла до цели — оплата месяца возвращается."}},
-    {"@type": "Question", "name": "Чем Closery отличается от найма коммерческого директора?", "acceptedAnswer": {"@type": "Answer", "text": "Директор обходится примерно в 325 000 ₽ в месяц с взносами, выходит на результат за полгода и, уходя, уносит метод с собой. Closery начинает с ведомости потерь, работа каждого месяца принимается по метрике, система остаётся компании."}}
+    {"@type": "Question", "name": "Чем Closery отличается от найма коммерческого директора?", "acceptedAnswer": {"@type": "Answer", "text": "Директор обходится примерно в 325 000 ₽ в месяц со взносами, выходит на результат за полгода и, уходя, уносит метод с собой. Closery начинает с ведомости потерь, работа каждого месяца принимается по метрике, система остаётся компании."}}
   ]
 }
 </script>
@@ -485,7 +485,9 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:90;display:none;align-items:center;justify-content:space-between;gap:12px;padding:12px var(--gut);background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--rule-2);transform:translateY(110%);transition:transform .4s var(--ease)}
 .sticky b{display:block;font-weight:500;font-size:14px}
 .sticky span{display:block;font-size:12px;color:var(--ink-3)}
-.sticky .btn{padding:12px 18px;font-size:14px}
+.sticky .btn{padding:12px 18px;font-size:14px;white-space:nowrap;flex:none}
+.sticky b{white-space:nowrap}
+@media(max-width:400px){.sticky span{display:none}}
 .sticky.show{transform:none}
 @media(max-width:700px){.sticky{display:flex}body{padding-bottom:72px}}
 
@@ -633,6 +635,54 @@ main{counter-reset:sec}
 .wm-emp{font-family:var(--ui);font-weight:400;font-size:15px;letter-spacing:.22em;text-transform:uppercase}
 @media(prefers-reduced-motion:reduce){.marq-t{animation:none}.marq-t[aria-hidden]{display:none!important}.marq{-webkit-mask-image:none;mask-image:none}.marq-t{flex-wrap:wrap}}
 @media(max-width:1000px){.lg-cdek{height:20px}.lg-mg{height:34px}.lg-ex{height:26px}.wm-vag{font-size:21px}.wm-uni{font-size:18px}.wm-emp{font-size:13px}}
+/* отчёт МРТ: разделы слева, разворот справа */
+.rpt{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.rpt-nav{display:flex;flex-direction:column;border-top:1px solid var(--rule-2)}
+.rpt-nav button{display:grid;grid-template-columns:2.6em minmax(0,1fr);text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);border-left:2px solid transparent;padding:16px 0 16px 14px;color:var(--ink-2);font:inherit;cursor:pointer;transition:border-color .2s}
+.rpt-nav button span{font-size:14px;color:var(--ink-4);font-feature-settings:"tnum" 1;padding-top:2px}
+.rpt-nav button b{font-weight:500;font-size:16px;color:var(--ink-2);transition:color .2s}
+.rpt-nav button em{grid-column:2;font-style:normal;font-size:13.5px;line-height:1.45;color:var(--ink-3);margin-top:4px}
+.rpt-nav button:hover b,.rpt-nav button[aria-selected="true"] b{color:var(--ink)}
+.rpt-nav button[aria-selected="true"]{border-left-color:var(--ink)}
+.rpt-view{display:grid;align-self:start;margin:0;border:1px solid var(--rule-2);border-radius:14px;overflow:hidden;background:var(--paper);box-shadow:0 40px 90px -40px var(--shadow)}
+.rpt-view img{grid-area:1/1;display:block;width:100%;height:auto;opacity:0;transition:opacity .45s var(--ease)}
+.rpt-view img.is-cur{opacity:1}
+.rpt-view:hover{border-color:var(--ink-4)}
+.rpt-view:focus-visible{outline:2px solid var(--ok);outline-offset:3px}
+@media(min-width:981px){.rpt{grid-template-columns:25% 75%;gap:0}.rpt-nav{padding-right:var(--cg)}}
+@media(max-width:980px){
+  .rpt-nav{flex-direction:row;gap:8px;overflow-x:auto;border-top:0;scrollbar-width:none}
+  .rpt-nav button{flex:none;display:block;border:1px solid var(--rule-2);border-radius:8px;padding:9px 14px}
+  .rpt-nav button span,.rpt-nav button em{display:none}
+  .rpt-nav button[aria-selected="true"]{background:var(--ink);border-color:var(--ink)}
+  .rpt-nav button[aria-selected="true"] b{color:var(--bg)}
+}
+/* внедрение — второй уровень раздела «Как это работает» */
+.route-h{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:clamp(64px,7vw,104px) 0 22px}
+.route-h p{font-size:15px;line-height:1.55;color:var(--ink-2);max-width:56ch}
+@media(min-width:981px){.route-h{grid-template-columns:50% 50%;gap:0;align-items:end}.route-h>:first-child{padding-right:var(--cg)}}
+/* цена найма: оклад и срок подставляет собственник */
+.bill-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px var(--cg);padding:22px 0 24px;border-bottom:1px solid var(--rule)}
+.bill-in label{display:flex;flex-direction:column;gap:6px}
+.bill-in label span{font-size:14px;color:var(--ink-3)}
+.bill-in input{width:100%;min-width:0;background:none;border:0;border-bottom:1px solid var(--rule-2);border-radius:0;color:var(--ink);font-family:var(--num);font-weight:600;font-size:clamp(22px,2vw,28px);padding:2px 0 8px;outline:none;font-feature-settings:"tnum" 1,"lnum" 1;transition:border-color .2s,box-shadow .2s}
+.bill-in input:focus{border-color:var(--ok);box-shadow:0 1px 0 var(--ok)}
+.bill-in p{grid-column:1/-1;font-size:13.5px;line-height:1.5;color:var(--ink-3)}
+.bill-in p a{color:var(--ink-2)}
+@media(min-width:981px){.bill-in{grid-template-columns:25% 25% 50%;column-gap:0}.bill-in>*{padding-right:var(--cg)}.bill-in p{grid-column:auto;align-self:end;padding-right:0}}
+/* исследования */
+.rs>*{border-top:1px solid var(--rule-2);padding-top:22px}
+.rs small{display:block;font-size:13px;color:var(--ink-3);margin-bottom:12px}
+.rs-main{grid-column:span 2;display:block;color:inherit;text-decoration:none}
+.rs-main h3{max-width:24ch}
+.rs-n{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px var(--cg);margin:26px 0}
+.rs-n b{display:block;font-family:var(--num);font-weight:600;font-size:clamp(34px,3.6vw,52px);letter-spacing:-.02em;line-height:1;font-feature-settings:"tnum" 1,"lnum" 1}
+.rs-n span{display:block;margin-top:10px;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.rs-main:hover .lnk{border-color:var(--ink)}
+.rs-next b{display:block;font-weight:500;font-size:17px;margin-bottom:8px}
+.rs-next p{font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+@media(max-width:1000px){.rs-main{grid-column:auto}}
+@media(max-width:520px){.rs-n{grid-template-columns:minmax(0,1fr)}}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -665,6 +715,7 @@ main{counter-reset:sec}
       <a class="bar-lnk" href="/mrt-demo/">Демо-МРТ</a>
       <a class="bar-lnk" href="/technology/">Технология</a>
       <a class="bar-lnk" href="/cases/">Кейсы</a>
+      <a class="bar-lnk" href="/research/">Исследования</a>
       
       
       
@@ -674,7 +725,7 @@ main{counter-reset:sec}
   </div>
   <i class="progress" id="progress"></i>
 </header>
-<div class="bar-mobile" id="barMobile"><a href="/mrt-demo/">Демо-МРТ</a><a href="/technology/">Технология</a><a href="/cases/">Кейсы</a><a href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ</a></div>
+<div class="bar-mobile" id="barMobile"><a href="/mrt-demo/">Демо-МРТ</a><a href="/technology/">Технология</a><a href="/cases/">Кейсы</a><a href="/research/">Исследования</a><a href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ</a></div>
 
 <main id="top">
 
@@ -768,6 +819,34 @@ main{counter-reset:sec}
   </div>
 </section>
 
+<!-- отчёт МРТ: пример на демо-данных, постоянная ссылка ?r= с пометкой _sample -->
+<section class="sec" id="report">
+  <div class="w">
+    <div class="head">
+      <div><p class="kick rv">Отчёт МРТ</p><h2 class="rv">Ведомость — одна страница из двадцати</h2></div>
+      <p class="lede rv">После МРТ у вас остаётся отчёт: до 14 разделов и около 20 страниц в PDF. Каждая цифра раскрывается до арифметики, в приложении перечислено, что расчёт не проверял.</p>
+    </div>
+    <div class="rpt rv">
+      <div class="rpt-nav" id="rptNav" role="tablist" aria-label="Разделы отчёта">
+        <button type="button" role="tab" aria-selected="true" aria-controls="rptView"><span>02</span><b>Резюме</b><em>Главный вывод, недополученная прибыль и сколько вернётся за 90 дней</em></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>05</span><b>Ведомость потерь</b><em>Где сгорает прибыль, этап за этапом, с арифметикой каждой строки</em></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>10</span><b>Что делать</b><em>Каждая ошибка разобрана до инструкции и оценена в рублях</em></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>11</span><b>Внедрение</b><em>90 дней, четыре волны, приёмка по цифрам</em></button>
+      </div>
+      <a class="rpt-view" id="rptView" role="tabpanel" href="/diagnostic/?r=zpZTPbuM2EMZfxZgzU0jOJk70ED31UKAoCJoaS6wpUiApO0JRIOsW6LFYoOe2j-Du1kC6SZxXGL1RMbQ3i573xuGf0czv-0Y_gvZdr9wIFdDvdKAnOl7QH_Qy7UBANAmhAhDgjG55eTqiI72n_fTbjJfTPX3IG4-88XbaTfd0pH_pifbTjg7TPT3Qnh5pT0_0AAL64OtBJ072Jx3pI-1n9EwHfvpLzvY0_UyP9JDTvKc9PdNxNv06vZt29JGOX4EANdQGneaClnMNAmrUJhrvZKfWGCJU4B2CgIA9qiSdSkPg233wP6BOnGLTSN2iXkNVXhVFUQjIoVxZvIMKnAcBnQqNcVBd3goYYs8l_0V7-puO0472TGs2vZ3Ni_J2lhn8Q3sx4yK5eXrmeDbd0z5TeTftZvRCRw7oQC90oGfujRvatqNcDuOXMLGoahn9EDRGqL4DVUdW0GujLAhI6GomI6BXITlefn96FGXnXWqhumUIrYqSn54J6FY5hzbKFAzWJy90yqkmUy4LAbVR1jcRqsX1lQDt3QYDSwFVuRBgfUwyoIq8Acl0xjVclrIYZTIdi9Iqu-JPqV5pk0ao5jkvKiv1qC1fuS6ymLH3LuKndw7vkqzVCAJW3lq_HVihOMaE3Wfte7bafP4aL61n0cH5c1kCvK3lUkXOGbAZrApwAqFDBxWMyNhWA4OQGxPN0thc5_mEbwbf_z_Gxr4yVNbKgNqHz1z91mGQNfafNvjRujevzvPJbFTKHKHHoNGxa1tUtfaD45ZuBKQhOL_BABWscAsCmuC3qWXg9Xiye83JTIzGNTJ4e_JGp8IaE4bzNLITtq2X0fpt_BIPblGtpTWO-eYOswwbdAOyBrfnQeuDXxlu4bY4bdi0gaq8WVxxMKIKsvGK-d3Ns9-Mk33wS4ssB1sMBGQdc-s8zSkFsxzOvCJmQ_XB-CBjj66G6nJRljeXAsxKOp9atmEF3HCNKrWsiEO5MncZt-8t_z00m7fHIHlMoCrzgGiloSrLOa9lVB1frUoBMhiej-Lbb94svgYBslb55zkv5tcXZXFRvIGf_gM" target="_blank" rel="noopener" aria-label="Открыть пример отчёта целиком">
+        <img class="is-cur" src="/media/report-summary.webp" width="1600" height="1103" loading="lazy" alt="Резюме отчёта: главный вывод, недополученная прибыль 3,96 млн ₽ в месяц и потенциал возврата за 90 дней">
+        <img src="/media/report-ledger.webp" width="1600" height="1103" loading="lazy" alt="Ведомость потерь: валовая прибыль по этапам воронки сейчас и при построенной системе">
+        <img src="/media/report-fix.webp" width="1600" height="1103" loading="lazy" alt="Что делать: ошибки по матрице усилия и эффекта с суммой в рублях">
+        <img src="/media/report-plan.webp" width="1600" height="1103" loading="lazy" alt="Внедрение: 90 дней, четыре волны с приёмкой по цифрам">
+      </a>
+    </div>
+    <div class="snap-foot rv">
+      <p>Пример на демо-данных: компания «Демо-Опт» выдуманная, цифры собраны для показа. На вашем МРТ каждая строка считается по вашим данным.</p>
+      <a class="btn btn-ghost" href="/diagnostic/?r=zpZTPbuM2EMZfxZgzU0jOJk70ED31UKAoCJoaS6wpUiApO0JRIOsW6LFYoOe2j-Du1kC6SZxXGL1RMbQ3i573xuGf0czv-0Y_gvZdr9wIFdDvdKAnOl7QH_Qy7UBANAmhAhDgjG55eTqiI72n_fTbjJfTPX3IG4-88XbaTfd0pH_pifbTjg7TPT3Qnh5pT0_0AAL64OtBJ072Jx3pI-1n9EwHfvpLzvY0_UyP9JDTvKc9PdNxNv06vZt29JGOX4EANdQGneaClnMNAmrUJhrvZKfWGCJU4B2CgIA9qiSdSkPg233wP6BOnGLTSN2iXkNVXhVFUQjIoVxZvIMKnAcBnQqNcVBd3goYYs8l_0V7-puO0472TGs2vZ3Ni_J2lhn8Q3sx4yK5eXrmeDbd0z5TeTftZvRCRw7oQC90oGfujRvatqNcDuOXMLGoahn9EDRGqL4DVUdW0GujLAhI6GomI6BXITlefn96FGXnXWqhumUIrYqSn54J6FY5hzbKFAzWJy90yqkmUy4LAbVR1jcRqsX1lQDt3QYDSwFVuRBgfUwyoIq8Acl0xjVclrIYZTIdi9Iqu-JPqV5pk0ao5jkvKiv1qC1fuS6ymLH3LuKndw7vkqzVCAJW3lq_HVihOMaE3Wfte7bafP4aL61n0cH5c1kCvK3lUkXOGbAZrApwAqFDBxWMyNhWA4OQGxPN0thc5_mEbwbf_z_Gxr4yVNbKgNqHz1z91mGQNfafNvjRujevzvPJbFTKHKHHoNGxa1tUtfaD45ZuBKQhOL_BABWscAsCmuC3qWXg9Xiye83JTIzGNTJ4e_JGp8IaE4bzNLITtq2X0fpt_BIPblGtpTWO-eYOswwbdAOyBrfnQeuDXxlu4bY4bdi0gaq8WVxxMKIKsvGK-d3Ns9-Mk33wS4ssB1sMBGQdc-s8zSkFsxzOvCJmQ_XB-CBjj66G6nJRljeXAsxKOp9atmEF3HCNKrWsiEO5MncZt-8t_z00m7fHIHlMoCrzgGiloSrLOa9lVB1frUoBMhiej-Lbb94svgYBslb55zkv5tcXZXFRvIGf_gM" target="_blank" rel="noopener">Открыть пример целиком</a>
+    </div>
+  </div>
+</section>
+
 <!-- почему не видно -->
 <section class="sec">
   <div class="w">
@@ -799,16 +878,7 @@ main{counter-reset:sec}
       <div><small>Шаг 3 · Дальше</small><b>Удержать</b><p>Работаем, пока система не держит план без нас. Оплата помесячно, остановиться можно после любого месяца.</p></div>
       <div><small>Кто ведёт</small><b>Основатель, лично</b><p>Каждый МРТ и каждое внедрение. Поэтому в работе одновременно не больше трёх компаний.</p></div>
     </div>
-  </div>
-</section>
-
-<!-- проект -->
-<section class="sec" id="route">
-  <div class="w">
-    <div class="head">
-      <div><p class="kick rv">Внедрение</p><h2 class="rv">Потери закрываются внахлёст, от самой дорогой</h2></div>
-      <p class="lede rv">Closery заходит в роль коммерческого директора. Пока одна потеря закрепляется, начинаем следующую. Нажмите на этап, чтобы увидеть, как это выглядит в компании.</p>
-    </div>
+    <div class="route-h rv" id="route"><h3>Вернуть: 12 недель на ведомости клиента выше</h3><p>Closery заходит в роль коммерческого директора. Пока одна потеря закрепляется, начинаем следующую. Нажмите на этап, чтобы увидеть, как это выглядит в компании.</p></div>
     <div class="route rv">
       <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 01–02</small><b>Замер по данным</b><span class="m">подтверждаем ведомость</span></div><div><p class="leak-btn">Только проверяемые цифры<i>Пример</i></p><div class="leak-ex"><p>В записи 40% звонков компании. Ведомость строим по ним: то, что нельзя перепроверить, в расчёт не идёт.</p></div></div></div>
       <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 02–05</small><b>Забытая база</b><span>−17 880 000 ₽</span></div><div><p class="leak-btn">Система повторных продаж<i>Пример</i></p><div class="leak-ex"><p>Клиент купил в марте и молчит до сентября. Правило: на 45-й день без покупки менеджер пишет ему лично, с поводом вернуться.</p></div></div></div>
@@ -817,28 +887,55 @@ main{counter-reset:sec}
       <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 07–09</small><b>Заявки без ответа</b><span>−4 100 000 ₽</span></div><div><p class="leak-btn">Приём входящего потока<i>Пример</i></p><div class="leak-ex"><p>Заявка пришла в 22:00, ответ — в 11 утра. За ночь клиент написал троим конкурентам. Норматив ответа — в минутах, и CRM показывает каждое нарушение.</p></div></div></div>
       <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 09–12</small><b>Решения через собственника</b><span>−1 500 000 ₽</span></div><div><p class="leak-btn">Управление без вас<i>Пример</i></p><div class="leak-ex"><p>Скидку 8% вместо 5% менеджер не может дать сам и ждёт вас из отпуска. Лимиты полномочий снимают эту паузу.</p></div></div></div>
     </div>
-    <div class="changes g4 rv"><div class="c4"><b>Что меняется</b>для компании после внедрения</div>
-      <div><b>Запас прочности</b><p>Деньги, которые терялись на стыках, остаются в компании. Это подушка, которую не нужно брать в кредит.</p></div>
-      <div><b>Та же команда</b><p>Больше сделок без нового найма: мощность, которая простаивала, начинает продавать.</p></div>
-      <div><b>Рост без нового бюджета</b><p>Сначала забираем то, за что уже заплатили: заявки, базу, сделки в работе. Реклама и найм — потом.</p></div>
-    </div>
   </div>
 </section>
 
-<!-- цена найма -->
-<section class="sec">
+<!-- цена найма: оклад — медиана из исследования Closery, срок — оценка собственника -->
+<section class="sec" id="hire">
   <div class="w">
     <div class="head">
       <div><p class="kick rv">Что обычно делают с такими цифрами</p><h2 class="rv">Не нанимайте человека, пока не знаете, что он должен исправить</h2></div>
       <p class="lede rv">Коммерческий директор может оказаться отличным человеком и всё равно не решить проблему: если узкое место не найдено, он будет улучшать то, что уже работает. Сначала диагностика, потом человек.</p>
     </div>
     <div class="bill rv">
+      <div class="bill-in">
+        <label><span>Оклад директора, ₽ в месяц</span><input id="hireSal" type="text" inputmode="numeric" autocomplete="off" class="ym-disable-keys" value="250 000"></label>
+        <label><span>Месяцев до результата</span><input id="hireMon" type="text" inputmode="numeric" autocomplete="off" class="ym-disable-keys" value="6"></label>
+        <p>250 000 ₽ — медиана нижней границы оклада в вакансиях коммерческого директора за июль–сентябрь 2026 года, <a href="/research/kogo-nanimayut-kogda-padaet-vyruchka-2026/">исследование Closery</a>. Взносы — ×1,3 к окладу. Подставьте свои цифры.</p>
+      </div>
       <div class="r"><div><b>Поиск, отбор, выход человека</b><small>Вакансия, собеседования, оффер, отработка на прежнем месте</small></div><span>2–3 мес</span></div>
-      <div class="r"><div><b>ФОТ до первого понятного результата</b><small>Медиана зарплаты коммерческого директора в вакансиях — 250 000 ₽, с взносами — 325 000 ₽ в месяц и выход на результат за 7 месяцев. Подставьте свои цифры</small></div><span class="neg">−2 275 000 ₽</span></div>
-      <div class="r"><div><b>Потери, которые всё это время идут</b><small>Те же 42,6 млн ₽ в год из ведомости выше, семь месяцев подряд</small></div><span class="neg">−24 850 000 ₽</span></div>
+      <div class="r"><div><b>ФОТ до первого понятного результата</b><small id="hireFotN">325 000 ₽ в месяц со взносами × 6 месяцев</small></div><span class="neg" id="hireFot">−1 950 000 ₽</span></div>
+      <div class="r"><div><b>Потери, которые всё это время идут</b><small id="hireLossN">42,6 млн ₽ в год из ведомости клиента выше, 6 месяцев подряд</small></div><span class="neg" id="hireLoss">−21 300 000 ₽</span></div>
       <div class="r"><div><b>Что остаётся компании, если он ушёл</b><small>Метод, база и договорённости уходят вместе с ним</small></div><span>ничего</span></div>
-      <div class="r t"><div><b>Цена семи месяцев до результата</b></div><span>−27 125 000 ₽</span></div>
-      <div class="cost-bar" aria-hidden="true"><i class="a" style="--w:8.4%"><em>ФОТ директора · 2,3 млн</em></i><i class="b" style="--w:91.6%"><em>Потери за семь месяцев · 24,85 млн</em></i></div>
+      <div class="r t"><div><b id="hireTotL">Цена 6 месяцев до результата</b></div><span id="hireTot">−23 250 000 ₽</span></div>
+      <div class="cost-bar" aria-hidden="true"><i class="a" id="hireBarA" style="--w:8.4%"><em>ФОТ директора · 1,95 млн</em></i><i class="b" id="hireBarB" style="--w:91.6%"><em>Потери за 6 месяцев · 21,3 млн</em></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- исследования -->
+<section class="sec" id="research">
+  <div class="w">
+    <div class="head">
+      <div><p class="kick rv">Исследования</p><h2 class="rv">Наши выводы стоят на данных. Данные открыты</h2></div>
+      <p class="lede rv">Собираем открытые данные о том, где российские компании недополучают деньги: кого нанимают, когда падает выручка, куда клиенту написать, как быстро ему ответят. У каждого исследования есть методика, таблица в CSV и строка для цитаты.</p>
+    </div>
+    <div class="rs g4 rv">
+      <a class="rs-main" href="/research/kogo-nanimayut-kogda-padaet-vyruchka-2026/">
+        <small>1 октября 2026 · 1 272 компании · отчётность ФНС</small>
+        <h3>Кого нанимают собственники, когда падает выручка</h3>
+        <div class="rs-n">
+          <div><b>35%</b><span>компаний, которые ищут руководителя продаж, заработали в 2025 году меньше, чем в 2024-м</span></div>
+          <div><b>150 000 ₽</b><span>медианный оклад руководителя отдела продаж — одинаковый при падении выручки и при росте</span></div>
+        </div>
+        <span class="lnk">Читать исследование</span>
+      </a>
+      <div class="rs-next"><small>Выйдет 7 октября</small><b>Куда клиенту написать</b><p>Сайты 933 компаний после блокировки Telegram и WhatsApp: какой канал у клиента остался.</p></div>
+      <div class="rs-next"><small>Выйдет во второй половине октября</small><b>Как быстро отвечают на заявку</b><p>Тайный покупатель: 100 компаний, три канала, 14 дней наблюдения.</p></div>
+    </div>
+    <div class="snap-foot rv">
+      <p>Цифры можно цитировать со ссылкой на Closery, лицензия CC BY 4.0. Названия компаний мы не публикуем.</p>
+      <a class="btn btn-ghost" href="/research/">Все исследования</a>
     </div>
   </div>
 </section>
@@ -907,11 +1004,11 @@ main{counter-reset:sec}
   <div class="w faq-wrap">
     <div><p class="kick rv">Вопросы и ответы</p><h2 class="rv">Что обычно спрашивают</h2></div>
     <div class="faq rv">
-      <div class="faq-item"><button class="faq-q" type="button">Сколько стоит МРТ?<i></i></button><div class="faq-a"><p>79 990 ₽. Две компании в неделю проходят МРТ за счёт Closery — по итогам отбора.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Сколько стоит МРТ?<i></i></button><div class="faq-a"><p>79 990 ₽ — 120 минут на ваших цифрах и отчёт, который остаётся у вас. Пройти МРТ за счёт Closery можно по отбору, условия — в разделе <a href="#selection">«Отбор»</a>.</p></div></div>
       <div class="faq-item"><button class="faq-q" type="button">Как пройти отбор?<i></i></button><div class="faq-a"><p>Оставить заявку. Берём компании с выручкой от 10 млн ₽ в месяц, командой продаж от трёх человек и CRM. На МРТ нужен собственник.</p></div></div>
       <div class="faq-item"><button class="faq-q" type="button">Сколько стоит внедрение?<i></i></button><div class="faq-a"><p>Зависит от потерь и масштаба бизнеса. Цену и метрику приёмки называем в конце МРТ, до старта. Оплата помесячно; метрика не дошла до цели — оплата месяца возвращается.</p></div></div>
       <div class="faq-item"><button class="faq-q" type="button">Что с нашими данными?<i></i></button><div class="faq-a"><p>NDA подписываем до доступа. CRM открываете только на чтение. После работы доступы закрываются, копии удаляются.</p></div></div>
-      <div class="faq-item"><button class="faq-q" type="button">Чем это отличается от найма коммерческого директора?<i></i></button><div class="faq-a"><p>Директор обходится примерно в 325 000 ₽ в месяц с взносами, выходит на результат за полгода и, уходя, уносит метод с собой. Мы начинаем с ведомости, работу каждого месяца вы принимаете по метрике, система остаётся компании.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Чем это отличается от найма коммерческого директора?<i></i></button><div class="faq-a"><p>Директор обходится примерно в 325 000 ₽ в месяц со взносами, выходит на результат за полгода и, уходя, уносит метод с собой. Мы начинаем с ведомости, работу каждого месяца вы принимаете по метрике, система остаётся компании.</p></div></div>
       <div class="faq-item"><button class="faq-q" type="button">Что нужно от нас?<i></i></button><div class="faq-a"><p>Для МРТ — 120 минут собственника и цифры воронки за последние месяцы: заявки, конверсия, чек, маржа. Для внедрения — доступ к CRM и телефонии и 2–3 часа собственника в неделю. Остальное — на нас.</p></div></div>
     </div>
   </div>
@@ -1101,6 +1198,42 @@ main{counter-reset:sec}
     var st=b.dataset.state;recs.classList.toggle('before',st==='before');
     $$('.rec',recs).forEach(function(r){r.querySelector('.rec-n b').textContent=r.dataset[st];});
   });});}
+
+  /* отчёт МРТ: разделы-вкладки, стрелки переключают */
+  (function(){
+    var nav=document.getElementById('rptNav');if(!nav)return;
+    var tabs=$$('button',nav),imgs=$$('#rptView img');
+    function sel(i,focus){tabs.forEach(function(t,k){t.setAttribute('aria-selected',String(k===i));t.tabIndex=k===i?0:-1;});imgs.forEach(function(im,k){im.classList.toggle('is-cur',k===i);});if(focus)tabs[i].focus();}
+    tabs.forEach(function(t,i){
+      t.addEventListener('click',function(){sel(i);});
+      t.addEventListener('keydown',function(e){var d=(e.key==='ArrowDown'||e.key==='ArrowRight')?1:(e.key==='ArrowUp'||e.key==='ArrowLeft')?-1:0;if(!d)return;e.preventDefault();sel((i+d+tabs.length)%tabs.length,true);});
+    });
+  })();
+
+  /* цена найма: оклад × 1,3 со взносами × месяцы; потери — 42,6 млн ₽ в год из ведомости клиента */
+  (function(){
+    var sal=document.getElementById('hireSal'),mon=document.getElementById('hireMon');if(!sal||!mon)return;
+    var LOSS=42600000,K=1.3,nf=new Intl.NumberFormat('ru-RU');
+    function g(id){return document.getElementById(id);}
+    function rub(v){return '\u2212'+nf.format(Math.round(v/1000)*1000)+'\u00a0₽';}
+    function mln(v){return (Math.round(v/1e4)/100).toLocaleString('ru-RU')+'\u00a0млн';}
+    function mw(n){var a=n%100,b=n%10;return (a>10&&a<20)?'месяцев':b===1?'месяц':(b>=2&&b<=4)?'месяца':'месяцев';}
+    function calc(){
+      var s=parseInt(sal.value.replace(/[^\d]/g,''),10)||0,n=Math.min(36,parseInt(mon.value.replace(/[^\d]/g,''),10)||0);
+      if(!s||!n){['hireFot','hireLoss','hireTot'].forEach(function(id){g(id).textContent='—';});return;}
+      var fot=s*K*n,loss=LOSS/12*n,tot=fot+loss,m=n+'\u00a0'+mw(n);
+      g('hireFotN').textContent=nf.format(Math.round(s*K))+'\u00a0₽ в месяц со взносами × '+m;
+      g('hireLossN').textContent='42,6 млн ₽ в год из ведомости клиента выше, '+m+' подряд';
+      g('hireFot').textContent=rub(fot);g('hireLoss').textContent=rub(loss);g('hireTot').textContent=rub(tot);
+      g('hireTotL').textContent='Цена '+m+' до результата';
+      var wa=Math.max(4,Math.min(96,fot/tot*100));
+      g('hireBarA').style.setProperty('--w',wa+'%');g('hireBarA').querySelector('em').textContent='ФОТ директора · '+mln(fot);
+      g('hireBarB').style.setProperty('--w',(100-wa)+'%');g('hireBarB').querySelector('em').textContent='Потери за '+m+' · '+mln(loss);
+    }
+    sal.addEventListener('input',function(){var d=sal.value.replace(/[^\d]/g,'').slice(0,8);sal.value=d?nf.format(+d):'';calc();});
+    mon.addEventListener('input',function(){mon.value=mon.value.replace(/[^\d]/g,'').slice(0,2);calc();});
+    calc();
+  })();
 
   /* появление: проверка по прокрутке, наблюдатель — запасной */
   function reveal(el){if(el._rv)return;el._rv=1;el.classList.add('in');if(el.hasAttribute('data-on'))setTimeout(function(){el.classList.add('on');},300);}
