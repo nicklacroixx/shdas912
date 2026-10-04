@@ -5,3 +5,4 @@ clients/.DS_Store
 # в публичный репозиторий и не должна отдаваться браузером.
 # Место этого файла — приватный кабинет, а не GitHub Pages.
 server/
+.claude/settings.local.json
