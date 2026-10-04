@@ -52,10 +52,11 @@
 
   function form(){
     rev='';role='';
+    var fromReport=/[?&]from=report/.test(location.search);  /* кнопка «Обсудить план и старт» из отчёта МРТ */
     body.innerHTML=''+
-      '<p class="lf-k">Коммерческий МРТ · 79&nbsp;990&nbsp;₽</p>'+
-      '<h3 id="lfT">Запись на МРТ</h3>'+
-      '<p class="lf-sub">Две встречи в неделю проводим без оплаты, по времени заявки. Николай ответит в течение рабочего дня и предложит время. На встрече нужен собственник.</p>'+
+      (fromReport
+        ? '<p class="lf-k">После МРТ</p><h3 id="lfT">Обсудить план и старт</h3><p class="lf-sub">Николай свяжется в течение рабочего дня: самая дорогая течь, план на месяц, метрика приёмки и дата старта.</p>'
+        : '<p class="lf-k">Коммерческий МРТ · 79&nbsp;990&nbsp;₽</p><h3 id="lfT">Запись на МРТ</h3><p class="lf-sub">Две встречи в неделю проводим без оплаты, по времени заявки. Николай ответит в течение рабочего дня и предложит время. На встрече нужен собственник.</p>')+
       '<form novalidate>'+
       '<div class="lf-row"><label class="lf-f" data-f="name"><span>Имя</span><input name="name" autocomplete="name" class="ym-disable-keys"></label>'+
       '<label class="lf-f" data-f="contact"><span>Телефон, Telegram или почта</span><input name="contact" autocomplete="tel" class="ym-disable-keys"></label></div>'+
