@@ -657,13 +657,8 @@ main{counter-reset:sec}
 html[data-theme="light"] .rpt-view picture.d{display:none}
 html[data-theme="light"] .rpt-view picture.l{display:block}
 .rpt-view picture.is-cur{opacity:1}
-/* выноска: одна на разворот, как на «Технологии»; та же стрелка стоит у подписи активной вкладки */
-.rpt-pin{position:absolute;z-index:2;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:13px;line-height:1;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transform:scale(.6);transition:opacity .25s var(--ease),transform .4s var(--ease)}
-.rpt-pin.is-cur{opacity:1;transform:none;transition-delay:.25s}
-.rpt-nav button[aria-selected="true"] em::before{content:"→";display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-right:8px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:11px;vertical-align:1px}
 .rpt-cap{display:none}
 @media(min-width:981px){.rpt{grid-template-columns:25% 75%;gap:0}.rpt-nav{padding-right:var(--cg)}}
-@media(max-width:600px){.rpt-pin{display:none}}
 @media(max-width:980px){
   .rpt-nav{flex-direction:row;gap:8px;overflow-x:auto;border-top:0;scrollbar-width:none}
   .rpt-nav button{flex:none;display:block;border:1px solid var(--rule-2);border-radius:8px;padding:9px 14px}
@@ -858,10 +853,6 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
         <picture class="l" data-i="2"><source media="(max-width:600px)" srcset="/media/report-fix-light-m.webp" width="1170" height="1671"><img src="/media/report-fix-light.webp" width="2000" height="1429" loading="lazy" alt="Что делать: матрица приоритетов — ошибки по эффекту в деньгах и сроку внедрения"></picture>
         <picture class="d" data-i="3"><source media="(max-width:600px)" srcset="/media/report-plan-dark-m.webp" width="1170" height="1671"><img src="/media/report-plan-dark.webp" width="2000" height="1429" loading="lazy" alt="Внедрение: 12 недель, четыре волны, приёмка каждой по критериям"></picture>
         <picture class="l" data-i="3"><source media="(max-width:600px)" srcset="/media/report-plan-light-m.webp" width="1170" height="1671"><img src="/media/report-plan-light.webp" width="2000" height="1429" loading="lazy" alt="Внедрение: 12 недель, четыре волны, приёмка каждой по критериям"></picture>
-        <span class="rpt-pin is-cur" data-i="0" style="left:2.12%;top:62.91%" aria-hidden="true">→</span>
-        <span class="rpt-pin" data-i="1" style="left:44.06%;top:38.59%" aria-hidden="true">→</span>
-        <span class="rpt-pin" data-i="2" style="left:28.57%;top:14.54%" aria-hidden="true">→</span>
-        <span class="rpt-pin" data-i="3" style="left:75.46%;top:55.5%" aria-hidden="true">→</span>
       </div>
       <p class="rpt-cap" id="rptCap">Главный вывод одной фразой и цена вопроса: 4,05 млн ₽ в месяц, из них 2,63 млн возвращаются за 90 дней.</p>
     </div>
@@ -1226,7 +1217,7 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
   /* отчёт МРТ: разделы-вкладки, стрелки переключают; у каждого раздела две картинки — ночная и дневная */
   (function(){
     var nav=document.getElementById('rptNav');if(!nav)return;
-    var tabs=$$('button',nav),pics=$$('#rptView picture, #rptView .rpt-pin'),cap=document.getElementById('rptCap');
+    var tabs=$$('button',nav),pics=$$('#rptView picture'),cap=document.getElementById('rptCap');
     function sel(i,focus){tabs.forEach(function(t,k){t.setAttribute('aria-selected',String(k===i));t.tabIndex=k===i?0:-1;});pics.forEach(function(p){p.classList.toggle('is-cur',+p.dataset.i===i);});if(cap)cap.textContent=tabs[i].querySelector('em').textContent;if(focus)tabs[i].focus();}
     tabs.forEach(function(t,i){
       t.addEventListener('click',function(){sel(i);});
