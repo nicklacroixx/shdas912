@@ -53,11 +53,13 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type": "Question", "name": "Что такое Коммерческий МРТ?", "acceptedAnswer": {"@type": "Answer", "text": "Диагностика коммерческой системы бизнеса: 120 минут с основателем на цифрах компании, 60 вопросов, данные CRM и телефонии. На руках — ведомость потерь в рублях, порядок их закрытия и отчёт с методикой."}},
-    {"@type": "Question", "name": "Сколько стоит МРТ?", "acceptedAnswer": {"@type": "Answer", "text": "79 990 ₽. NDA — до доступа к данным. Если потерь, которые можно посчитать в рублях, не нашлось, оплата возвращается. Двум компаниям в неделю МРТ проводится за счёт Closery — по итогам отбора."}},
-    {"@type": "Question", "name": "Как пройти отбор?", "acceptedAnswer": {"@type": "Answer", "text": "Оставить заявку. Отбор проходят компании с выручкой от 10 млн ₽ в месяц, командой продаж от трёх человек и CRM. На МРТ нужен собственник. Ответ — в тот же рабочий день."}},
-    {"@type": "Question", "name": "Сколько стоит внедрение?", "acceptedAnswer": {"@type": "Answer", "text": "Зависит от потерь и масштаба бизнеса. Цену и метрику приёмки основатель называет в конце МРТ, до старта. Оплата помесячно; метрика не дошла до цели — оплата месяца возвращается."}},
-    {"@type": "Question", "name": "Чем Closery отличается от найма коммерческого директора?", "acceptedAnswer": {"@type": "Answer", "text": "Директор обходится примерно в 325 000 ₽ в месяц со взносами, выходит на результат за полгода и, уходя, уносит метод с собой. Closery начинает с ведомости потерь, работа каждого месяца принимается по метрике, система остаётся компании."}}
+    {"@type": "Question", "name": "Сколько стоит МРТ?", "acceptedAnswer": {"@type": "Answer", "text": "79 990 ₽ — 120 минут на ваших цифрах и отчёт, который остаётся у вас, даже если внедрение не понадобится. Две компании в неделю проходят МРТ за счёт Closery, условия — в разделе «Отбор»."}},
+    {"@type": "Question", "name": "Чем МРТ отличается от обычного аудита продаж?", "acceptedAnswer": {"@type": "Answer", "text": "Аудит перечисляет, что работает плохо. МРТ добавляет цену: каждая потеря посчитана в рублях, у каждой есть порядок закрытия и метрика, по которой вы потом принимаете работу."}},
+    {"@type": "Question", "name": "Что можно понять за 120 минут?", "acceptedAnswer": {"@type": "Answer", "text": "Где и сколько бизнес теряет. 60 вопросов идут по шести системам бизнеса, расчёт собирается по ходу, и к концу встречи ведомость готова. Чего за два часа не проверить, отчёт перечисляет в приложении: видно, на чём стоит каждая цифра."}},
+    {"@type": "Question", "name": "В CRM бардак, данных мало. МРТ получится?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Считаем по тому, что есть: CRM, телефония, выгрузки, ваши ответы. Чего не хватает, отчёт помечает как допущение, а сам пропуск становится находкой: этой цифрой никто не управляет. CRM открываете только на чтение, NDA — до доступа."}},
+    {"@type": "Question", "name": "А если я не согласен с цифрами?", "acceptedAnswer": {"@type": "Answer", "text": "Цифры ваши: вы их называете, мы считаем. Строку, с которой не согласны, поправляем вместе, и отчёт пересчитывается при вас. Сумма потерь ограничена сверху: не больше 70% вашей валовой прибыли за год."}},
+    {"@type": "Question", "name": "Сколько стоит внедрение?", "acceptedAnswer": {"@type": "Answer", "text": "Зависит от потерь и масштаба бизнеса. Цену и метрику приёмки называем в конце МРТ, до старта. Оплата помесячно; метрика не дошла до цели — оплата месяца возвращается."}},
+    {"@type": "Question", "name": "Что нужно от нас?", "acceptedAnswer": {"@type": "Answer", "text": "Для МРТ — 120 минут собственника и цифры воронки за последние месяцы: заявки, конверсия, чек, маржа. Для внедрения — доступ к CRM и телефонии и 2–3 часа собственника в неделю. Остальное — на нас."}}
   ]
 }
 </script>
@@ -339,7 +341,7 @@ html[data-theme="light"] .hour::after{background:linear-gradient(180deg,color-mi
 .fit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px)}
 .fit>div{border-top:2px solid var(--rule-2);padding-top:22px}
 .fit .must{border-color:var(--ok)}
-.fit .no{border-color:var(--loss)}
+.fit .no{border-color:var(--amber)}
 .fit small{display:block;font-size:13px;color:var(--ink-3);margin-bottom:10px}
 .fit ul{list-style:none;margin-top:16px}
 .fit li{padding:11px 0;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.45;color:var(--ink-2)}
@@ -468,6 +470,21 @@ html[data-theme="light"] .hour::after{background:linear-gradient(180deg,color-mi
 .end{padding-top:clamp(120px,12vw,200px);padding-bottom:clamp(100px,10vw,160px)}
 .end h2{max-width:16ch;font-size:clamp(36px,5.6vw,92px)}
 .end .lede{margin-top:28px}
+/* финал: справа от кнопки — неделя отбора по дням; даты настоящие, сегодня отмечено линией, как активная вкладка */
+.end-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end}
+.end-row>div:first-child{padding-right:var(--cg)}
+.wk-h{font-size:14px;color:var(--ink-3)}
+.wk-d{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:18px;border-top:1px solid var(--rule-2)}
+.wk-d li{position:relative;padding-top:16px}
+.wk-d li::before{content:"";position:absolute;left:0;right:14px;top:-1px;height:2px}
+.wk-d li.now::before{background:var(--ink)}
+.wk-d span{display:block;font-size:13px;color:var(--ink-3)}
+.wk-d b{display:block;margin-top:8px;font-family:var(--num);font-weight:600;font-size:clamp(34px,3.6vw,54px);line-height:1;font-feature-settings:"tnum" 1,"lnum" 1;color:var(--ink-2)}
+.wk-d li.past span,.wk-d li.past b{color:var(--ink-4)}
+.wk-d li.now span,.wk-d li.now b{color:var(--ink)}
+.wk-t{margin-top:24px;font-size:14.5px;line-height:1.5;color:var(--ink-3);max-width:46ch}
+.wk-t b{font-weight:500;color:var(--ink)}
+@media(max-width:900px){.end-row{grid-template-columns:minmax(0,1fr)}.end-row>div:first-child{padding-right:0}.wk{margin-top:64px}}
 .end .hero-cta{margin-top:36px}
 .end-alt{margin-top:22px;font-size:14px;color:var(--ink-3)}
 .end-alt a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
@@ -987,6 +1004,7 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
       <div class="rec-toggle" id="recToggle" role="group" aria-label="Было или стало"><button type="button" data-state="before" aria-pressed="false">Было</button><button type="button" data-state="after" aria-pressed="true">Стало</button></div>
     </div>
     <div class="recs" id="recs">
+      <div class="rec rv" data-before="Всё зелёное" data-after="42,6 млн ₽"><div class="rec-co"><b>Клиент Closery</b><span>Коммерческий МРТ, оптовая торговля, выручка около 480 млн ₽ в год</span></div><div class="rec-d">Пять статей потерь, у каждой сумма в рублях и порядок закрытия. Крупнейшая — база: клиенты покупали, и к ним больше никто не возвращался. Название компании скрыто по NDA.</div><div class="rec-n"><b>42,6 млн ₽</b><span>недополученной прибыли за год нашёл МРТ</span></div></div>
       <div class="rec rv" data-before="30-е место" data-after="Топ-5"><div class="rec-co"><b>CDEK</b><span>Коммерческий директор франчайзи-сети</span></div><div class="rec-d">Пересобраны система продаж и найм: с шести человек в год до конкурсного конвейера на сотню кандидатов. Выручка сети из 8 точек удвоилась за десять месяцев.</div><div class="rec-n"><b>Топ-5</b><span>место среди ~1000 франчайзи сети, за 4,5 месяца</span></div></div>
       <div class="rec rv" data-before="0 ₽" data-after="2,5 млн ₽"><div class="rec-co"><b>Vagabond</b><span>Коммерческий директор, дизайн-студия</span></div><div class="rec-d">Из ресурсов только продукт. Отдел продаж под сложный чек собран с нуля: холодный поиск в LinkedIn и ручной парсинг вместо рекламного бюджета.</div><div class="rec-n"><b>2,5 млн ₽</b><span>общий чек первых двух сделок за 3 месяца, без единого лида извне</span></div></div>
       <div class="rec rv" data-before="Рекорд держался 3 года" data-after="100 млн ₽ в месяц"><div class="rec-co"><b>MarketGuru</b><span>Руководитель продаж, SaaS</span></div><div class="rec-d">Выращены три РОПа, поставлена единая методология. Конверсия из разбора в оплату 34%, шесть месяцев подряд рекордов по выручке. Система продолжила работать без автора.</div><div class="rec-n"><b>100 млн ₽ в месяц</b><span>рекорд выручки компании, прежний держался три года</span></div></div>
@@ -1019,11 +1037,12 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
   <div class="w faq-wrap">
     <div><p class="kick rv">Вопросы и ответы</p><h2 class="rv">Что обычно спрашивают</h2></div>
     <div class="faq rv">
-      <div class="faq-item"><button class="faq-q" type="button">Сколько стоит МРТ?<i></i></button><div class="faq-a"><p>79 990 ₽ — 120 минут на ваших цифрах и отчёт, который остаётся у вас. Пройти МРТ за счёт Closery можно по отбору, условия — в разделе <a href="#selection">«Отбор»</a>.</p></div></div>
-      <div class="faq-item"><button class="faq-q" type="button">Как пройти отбор?<i></i></button><div class="faq-a"><p>Оставить заявку. Берём компании с выручкой от 10 млн ₽ в месяц, командой продаж от трёх человек и CRM. На МРТ нужен собственник.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Сколько стоит МРТ?<i></i></button><div class="faq-a"><p>79 990 ₽ — 120 минут на ваших цифрах и отчёт, который остаётся у вас, даже если внедрение не понадобится. Две компании в неделю проходят МРТ за счёт Closery, условия — в разделе <a href="#selection">«Отбор»</a>.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Чем МРТ отличается от обычного аудита продаж?<i></i></button><div class="faq-a"><p>Аудит перечисляет, что работает плохо. МРТ добавляет цену: каждая потеря посчитана в рублях, у каждой есть порядок закрытия и метрика, по которой вы потом принимаете работу.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Что можно понять за 120 минут?<i></i></button><div class="faq-a"><p>Где и сколько бизнес теряет. 60 вопросов идут по шести системам бизнеса, расчёт собирается по ходу, и к концу встречи ведомость готова. Чего за два часа не проверить, отчёт перечисляет в приложении: видно, на чём стоит каждая цифра.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">В CRM бардак, данных мало. МРТ получится?<i></i></button><div class="faq-a"><p>Да. Считаем по тому, что есть: CRM, телефония, выгрузки, ваши ответы. Чего не хватает, отчёт помечает как допущение, а сам пропуск становится находкой: этой цифрой никто не управляет. CRM открываете только на чтение, NDA — до доступа.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">А если я не согласен с цифрами?<i></i></button><div class="faq-a"><p>Цифры ваши: вы их называете, мы считаем. Строку, с которой не согласны, поправляем вместе, и отчёт пересчитывается при вас. Сумма потерь ограничена сверху: не больше 70% вашей валовой прибыли за год.</p></div></div>
       <div class="faq-item"><button class="faq-q" type="button">Сколько стоит внедрение?<i></i></button><div class="faq-a"><p>Зависит от потерь и масштаба бизнеса. Цену и метрику приёмки называем в конце МРТ, до старта. Оплата помесячно; метрика не дошла до цели — оплата месяца возвращается.</p></div></div>
-      <div class="faq-item"><button class="faq-q" type="button">Что с нашими данными?<i></i></button><div class="faq-a"><p>NDA подписываем до доступа. CRM открываете только на чтение. После работы доступы закрываются, копии удаляются.</p></div></div>
-      <div class="faq-item"><button class="faq-q" type="button">Чем это отличается от найма коммерческого директора?<i></i></button><div class="faq-a"><p>Директор обходится примерно в 325 000 ₽ в месяц со взносами, выходит на результат за полгода и, уходя, уносит метод с собой. Мы начинаем с ведомости, работу каждого месяца вы принимаете по метрике, система остаётся компании.</p></div></div>
       <div class="faq-item"><button class="faq-q" type="button">Что нужно от нас?<i></i></button><div class="faq-a"><p>Для МРТ — 120 минут собственника и цифры воронки за последние месяцы: заявки, конверсия, чек, маржа. Для внедрения — доступ к CRM и телефонии и 2–3 часа собственника в неделю. Остальное — на нас.</p></div></div>
     </div>
   </div>
@@ -1032,10 +1051,19 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
 <section class="w end" id="end">
   <p class="kick rv">Коммерческий МРТ</p>
   <h2 class="rv">Вы знаете, сколько денег теряете прямо сейчас?</h2>
-  <p class="lede rv">После МРТ будете знать: в рублях, по каждому этапу, по вашим собственным данным.</p>
-  <div class="hero-cta rv">
-    <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
-    <span class="note">NDA · гарантия возврата</span>
+  <div class="end-row">
+    <div>
+      <p class="lede rv">После МРТ будете знать: в рублях, по каждому этапу, по вашим собственным данным.</p>
+      <div class="hero-cta rv">
+        <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <span class="note">NDA · гарантия возврата</span>
+      </div>
+    </div>
+    <div class="wk rv" role="group" aria-label="Отбор этой недели">
+      <p class="wk-h"><span data-week>Эта неделя</span></p>
+      <ol class="wk-d" id="wkDays"></ol>
+      <p class="wk-t"><b>Две компании в неделю</b> проходят МРТ за счёт Closery. Ответ по отбору — в тот же рабочий день.</p>
+    </div>
   </div>
 </section>
 
@@ -1223,6 +1251,17 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
       t.addEventListener('click',function(){sel(i);});
       t.addEventListener('keydown',function(e){var d=(e.key==='ArrowDown'||e.key==='ArrowRight')?1:(e.key==='ArrowUp'||e.key==='ArrowLeft')?-1:0;if(!d)return;e.preventDefault();sel((i+d+tabs.length)%tabs.length,true);});
     });
+  })();
+
+  /* финал: дни недели отбора; неделя считается так же, как [data-week] в lead.js — по Москве, в выходные следующая */
+  (function(){
+    var ol=document.getElementById('wkDays');if(!ol)return;
+    var D=['пн','вт','ср','чт','пт'],d=new Date(Date.now()+3*3600e3),wd=d.getUTCDay(),shift=(wd===0)?1:(wd===6)?2:(1-wd),mon=new Date(d.getTime()+shift*864e5),h='';
+    for(var k=0;k<5;k++){
+      var x=new Date(mon.getTime()+k*864e5),st=(wd>=1&&wd<=5)?(k+1<wd?' class="past"':k+1===wd?' class="now" aria-current="date"':''):'';
+      h+='<li'+st+'><span>'+D[k]+'</span><b>'+x.getUTCDate()+'</b></li>';
+    }
+    ol.innerHTML=h;
   })();
 
   /* цена найма: оклад × 1,3 со взносами × месяцы; потери — 42,6 млн ₽ в год из ведомости клиента */
