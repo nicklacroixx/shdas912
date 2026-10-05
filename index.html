@@ -650,17 +650,25 @@ main{counter-reset:sec}
 .rpt-nav button:focus-visible{outline:none}
 .rpt-nav button:focus-visible b{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
 /* разворот — картинка, а не ссылка: две версии под тему, грузится только видимая */
-.rpt-view{display:grid;align-self:start;margin:0;border:1px solid var(--rule-2);border-radius:16px;overflow:hidden;background:var(--paper)}
-.rpt-view img{grid-area:1/1;display:block;width:100%;height:auto;opacity:0;transition:opacity .45s var(--ease)}
-.rpt-view img.l{display:none}
-html[data-theme="light"] .rpt-view img.d{display:none}
-html[data-theme="light"] .rpt-view img.l{display:block}
-.rpt-view img.is-cur{opacity:1}
+.rpt-view{position:relative;display:grid;align-self:start;margin:0;border:1px solid var(--rule-2);border-radius:16px;overflow:hidden;background:var(--paper)}
+.rpt-view picture{grid-area:1/1;display:block;opacity:0;transition:opacity .45s var(--ease)}
+.rpt-view picture img{display:block;width:100%;height:auto}
+.rpt-view picture.l{display:none}
+html[data-theme="light"] .rpt-view picture.d{display:none}
+html[data-theme="light"] .rpt-view picture.l{display:block}
+.rpt-view picture.is-cur{opacity:1}
+/* выноска: одна на разворот, как на «Технологии»; та же стрелка стоит у подписи активной вкладки */
+.rpt-pin{position:absolute;z-index:2;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:13px;line-height:1;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transform:scale(.6);transition:opacity .25s var(--ease),transform .4s var(--ease)}
+.rpt-pin.is-cur{opacity:1;transform:none;transition-delay:.25s}
+.rpt-nav button[aria-selected="true"] em::before{content:"→";display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-right:8px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:11px;vertical-align:1px}
+.rpt-cap{display:none}
 @media(min-width:981px){.rpt{grid-template-columns:25% 75%;gap:0}.rpt-nav{padding-right:var(--cg)}}
+@media(max-width:600px){.rpt-pin{display:none}}
 @media(max-width:980px){
   .rpt-nav{flex-direction:row;gap:8px;overflow-x:auto;border-top:0;scrollbar-width:none}
   .rpt-nav button{flex:none;display:block;border:1px solid var(--rule-2);border-radius:8px;padding:9px 14px}
   .rpt-nav button::after{display:none}
+  .rpt-cap{display:block;margin-top:14px;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
   .rpt-nav button span,.rpt-nav button em{display:none}
   .rpt-nav button[aria-selected="true"]{background:var(--ink);border-color:var(--ink)}
   .rpt-nav button[aria-selected="true"] b{color:var(--bg)}
@@ -836,21 +844,26 @@ html[data-theme="light"] .rpt-view img.l{display:block}
     </div>
     <div class="rpt rv">
       <div class="rpt-nav" id="rptNav" role="tablist" aria-label="Разделы отчёта">
-        <button type="button" role="tab" aria-selected="true" aria-controls="rptView"><span>02</span><b>Резюме</b><em>Главный вывод, недополученная прибыль и сколько вернётся за 90 дней</em></button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>05</span><b>Ведомость потерь</b><em>Где сгорает прибыль, этап за этапом, с арифметикой каждой строки</em></button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>10</span><b>Что делать</b><em>Каждая ошибка разобрана до инструкции и оценена в рублях</em></button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>11</span><b>Внедрение</b><em>90 дней, четыре волны, приёмка по цифрам</em></button>
+        <button type="button" role="tab" aria-selected="true" aria-controls="rptView"><span>02</span><b>Резюме</b><em>Главный вывод одной фразой и цена вопроса: 4,05 млн ₽ в месяц, из них 2,63 млн возвращаются за 90 дней.</em></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>05</span><b>Ведомость потерь</b><em>Крупнейшая потеря — переговоры и закрытие, 2,69 млн ₽ в месяц. Зелёным — что из неё вернётся за 90 дней.</em></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>10</span><b>Что делать</b><em>Начинать с быстрых побед: три ошибки на 1,93 млн ₽ в месяц, каждая — до шести недель работы.</em></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>11</span><b>Внедрение</b><em>Каждая волна принимается по цифрам. Вторая чинит первый контакт, закрытие и повторные продажи: +1,44 млн ₽ в месяц.</em></button>
       </div>
       <div class="rpt-view" id="rptView" role="tabpanel">
-        <img class="d is-cur" data-i="0" src="/media/report-summary-dark.webp" width="2000" height="1429" loading="lazy" alt="Резюме отчёта: главный вывод, недополученная прибыль 4,05 млн ₽ в месяц и потенциал возврата за 90 дней">
-        <img class="l is-cur" data-i="0" src="/media/report-summary-light.webp" width="2000" height="1429" loading="lazy" alt="Резюме отчёта: главный вывод, недополученная прибыль 4,05 млн ₽ в месяц и потенциал возврата за 90 дней">
-        <img class="d" data-i="1" src="/media/report-ledger-dark.webp" width="2000" height="1429" loading="lazy" alt="Ведомость потерь: валовая прибыль по этапам воронки сейчас и при ориентире профиля">
-        <img class="l" data-i="1" src="/media/report-ledger-light.webp" width="2000" height="1429" loading="lazy" alt="Ведомость потерь: валовая прибыль по этапам воронки сейчас и при ориентире профиля">
-        <img class="d" data-i="2" src="/media/report-fix-dark.webp" width="2000" height="1429" loading="lazy" alt="Что делать: ошибки по матрице усилия и эффекта с суммой в рублях">
-        <img class="l" data-i="2" src="/media/report-fix-light.webp" width="2000" height="1429" loading="lazy" alt="Что делать: ошибки по матрице усилия и эффекта с суммой в рублях">
-        <img class="d" data-i="3" src="/media/report-plan-dark.webp" width="2000" height="1429" loading="lazy" alt="Внедрение: 90 дней, четыре волны с приёмкой по критериям">
-        <img class="l" data-i="3" src="/media/report-plan-light.webp" width="2000" height="1429" loading="lazy" alt="Внедрение: 90 дней, четыре волны с приёмкой по критериям">
+        <picture class="d is-cur" data-i="0"><source media="(max-width:600px)" srcset="/media/report-summary-dark-m.webp" width="1170" height="1671"><img src="/media/report-summary-dark.webp" width="2000" height="1429" loading="lazy" alt="Резюме отчёта: главный вывод, недополученная прибыль 4,05 млн ₽ в месяц и потенциал возврата за 90 дней"></picture>
+        <picture class="l is-cur" data-i="0"><source media="(max-width:600px)" srcset="/media/report-summary-light-m.webp" width="1170" height="1671"><img src="/media/report-summary-light.webp" width="2000" height="1429" loading="lazy" alt="Резюме отчёта: главный вывод, недополученная прибыль 4,05 млн ₽ в месяц и потенциал возврата за 90 дней"></picture>
+        <picture class="d" data-i="1"><source media="(max-width:600px)" srcset="/media/report-ledger-dark-m.webp" width="1170" height="1671"><img src="/media/report-ledger-dark.webp" width="2000" height="1429" loading="lazy" alt="Ведомость потерь: валовая прибыль по этапам воронки сейчас и при ориентире профиля"></picture>
+        <picture class="l" data-i="1"><source media="(max-width:600px)" srcset="/media/report-ledger-light-m.webp" width="1170" height="1671"><img src="/media/report-ledger-light.webp" width="2000" height="1429" loading="lazy" alt="Ведомость потерь: валовая прибыль по этапам воронки сейчас и при ориентире профиля"></picture>
+        <picture class="d" data-i="2"><source media="(max-width:600px)" srcset="/media/report-fix-dark-m.webp" width="1170" height="1671"><img src="/media/report-fix-dark.webp" width="2000" height="1429" loading="lazy" alt="Что делать: матрица приоритетов — ошибки по эффекту в деньгах и сроку внедрения"></picture>
+        <picture class="l" data-i="2"><source media="(max-width:600px)" srcset="/media/report-fix-light-m.webp" width="1170" height="1671"><img src="/media/report-fix-light.webp" width="2000" height="1429" loading="lazy" alt="Что делать: матрица приоритетов — ошибки по эффекту в деньгах и сроку внедрения"></picture>
+        <picture class="d" data-i="3"><source media="(max-width:600px)" srcset="/media/report-plan-dark-m.webp" width="1170" height="1671"><img src="/media/report-plan-dark.webp" width="2000" height="1429" loading="lazy" alt="Внедрение: 12 недель, четыре волны, приёмка каждой по критериям"></picture>
+        <picture class="l" data-i="3"><source media="(max-width:600px)" srcset="/media/report-plan-light-m.webp" width="1170" height="1671"><img src="/media/report-plan-light.webp" width="2000" height="1429" loading="lazy" alt="Внедрение: 12 недель, четыре волны, приёмка каждой по критериям"></picture>
+        <span class="rpt-pin is-cur" data-i="0" style="left:2.12%;top:62.91%" aria-hidden="true">→</span>
+        <span class="rpt-pin" data-i="1" style="left:44.06%;top:38.59%" aria-hidden="true">→</span>
+        <span class="rpt-pin" data-i="2" style="left:28.57%;top:14.54%" aria-hidden="true">→</span>
+        <span class="rpt-pin" data-i="3" style="left:75.46%;top:55.5%" aria-hidden="true">→</span>
       </div>
+      <p class="rpt-cap" id="rptCap">Главный вывод одной фразой и цена вопроса: 4,05 млн ₽ в месяц, из них 2,63 млн возвращаются за 90 дней.</p>
     </div>
     <div class="snap-foot rv">
       <p>Пример на демо-данных: компания «Демо-Опт» выдуманная, цифры собраны для показа. На вашем МРТ каждая строка считается по вашим данным.</p>
@@ -1213,8 +1226,8 @@ html[data-theme="light"] .rpt-view img.l{display:block}
   /* отчёт МРТ: разделы-вкладки, стрелки переключают; у каждого раздела две картинки — ночная и дневная */
   (function(){
     var nav=document.getElementById('rptNav');if(!nav)return;
-    var tabs=$$('button',nav),imgs=$$('#rptView img');
-    function sel(i,focus){tabs.forEach(function(t,k){t.setAttribute('aria-selected',String(k===i));t.tabIndex=k===i?0:-1;});imgs.forEach(function(im){im.classList.toggle('is-cur',+im.dataset.i===i);});if(focus)tabs[i].focus();}
+    var tabs=$$('button',nav),pics=$$('#rptView picture, #rptView .rpt-pin'),cap=document.getElementById('rptCap');
+    function sel(i,focus){tabs.forEach(function(t,k){t.setAttribute('aria-selected',String(k===i));t.tabIndex=k===i?0:-1;});pics.forEach(function(p){p.classList.toggle('is-cur',+p.dataset.i===i);});if(cap)cap.textContent=tabs[i].querySelector('em').textContent;if(focus)tabs[i].focus();}
     tabs.forEach(function(t,i){
       t.addEventListener('click',function(){sel(i);});
       t.addEventListener('keydown',function(e){var d=(e.key==='ArrowDown'||e.key==='ArrowRight')?1:(e.key==='ArrowUp'||e.key==='ArrowLeft')?-1:0;if(!d)return;e.preventDefault();sel((i+d+tabs.length)%tabs.length,true);});
