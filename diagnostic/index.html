@@ -5003,14 +5003,15 @@ const Final = {
     const empty = {
       q1:'Быстрых денег в этой воронке нет: всё крупное требует перестройки, за неделю его не сделать.',
       q2:'Крупных перестроек не требуется: деньги берутся процессом и регламентом.',
-      q3:'Мелочей не нашли: всё, что обнаружено, стоит заметных денег.',
+      q3:'Попутных мелочей нет: всё, что дешевле медианы, требует месяца работы и больше.',
       q4:'Откладывать нечего: всё найденное идёт в работу в первые 90 дней.'
     };
     const chips = (key, arr) => arr.length
       ? `<ul>${arr.sort((a, b) => b.d.gain - a.d.gain).map(m => `<li><span>${m.pb.err}</span><i>${Playbook.EF_SHORT[m.ef]}</i><b>${Fx.money(m.d.gain)}</b></li>`).join('')}</ul>`
       : `<p class="fx-pq-none">${empty[key]}</p>`;
+    // итог квадранта — только когда ошибок больше одной: при одной он дословно повторяет строку под ним
     const box = (key, title, note) => `<div class="fx-pq ${key}${cell[key].length ? '' : ' off'}">
-      <div class="fx-pq-h"><b>${title}</b><span>${note}</span>${cell[key].length ? `<em>${cell[key].length} ${Fx.plural(cell[key].length, 'ошибка', 'ошибки', 'ошибок')} · ${Fx.money(sum(cell[key]))} в месяц</em>` : ''}</div>${chips(key, cell[key])}</div>`;
+      <div class="fx-pq-h"><b>${title}</b><span>${note}</span>${cell[key].length > 1 ? `<em>${cell[key].length} ${Fx.plural(cell[key].length, 'ошибка', 'ошибки', 'ошибок')} · ${Fx.money(sum(cell[key]))} в месяц</em>` : ''}</div>${chips(key, cell[key])}</div>`;
     return `<div class="fx-sub" style="margin-top:44px">Приоритеты: усилие против эффекта</div>
       <div class="fx-prio">
         <div class="fx-prio-y">Эффект в деньгах</div>
