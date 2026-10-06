@@ -1,11 +1,11 @@
 /* Форма записи на МРТ для всех страниц Closery.
    Кнопки записи открывают полноэкранный лист с формой вместо перехода в Telegram. Заявка уходит в кабинет
-   (cabinet.closery.ru/api/mri/lead), оттуда сразу в Telegram Николаю. Telegram остаётся ссылкой
+   (lk.closery.ru/api/mri/lead), оттуда сразу в Telegram Николаю. Telegram остаётся ссылкой
    внутри листа — для тех, кому так удобнее.
    Вид — язык сайта, не модалка-анкета: слева утверждение и что будет дальше, справа поля линией
    по сетке 50 %. Только токены темы, поэтому лист работает и в дневной, и в ночной теме. */
 (function(){
-  var API='https://cabinet.closery.ru/api/mri/lead', TG='https://t.me/klimenko_prod';
+  var API='https://lk.closery.ru/api/mri/lead', TG='https://t.me/klimenko_prod';
   var css=`
 .lf-bg{position:fixed;inset:0;z-index:300;background:var(--bg);color:var(--ink);font-family:var(--ui,'Onest',system-ui,sans-serif);overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
 .lf-bg.open{opacity:1;visibility:visible;transition:opacity .35s}

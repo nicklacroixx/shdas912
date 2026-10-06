@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="/theme.js"></script>
 <title>Демо-МРТ · Closery</title>
-<meta name="description" content="Восемь цифр о воронке — и ведомость потерь в рублях за год. Модель полного Коммерческого МРТ: ориентир под ваш профиль, формула каждой строки на виду.">
+<meta name="description" content="Восемь цифр о воронке — и ведомость потерь в рублях за год. Считается в кабинете Closery по модели полного Коммерческого МРТ.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Closery">
 <meta property="og:title" content="Демо-МРТ · Closery">
@@ -21,75 +21,23 @@
 .hero h1{max-width:14ch}
 .hero-row{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;margin-top:clamp(32px,4vw,56px);padding-top:28px;border-top:1px solid var(--rule)}
 @media(min-width:981px){.hero-row{grid-template-columns:50% 50%;gap:0}.hero-row>:first-child{padding-right:var(--cg)}}
+.go{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:clamp(36px,4vw,56px)}
 
-/* инструмент: ввод слева, ведомость справа, между ними линия, как в документе */
-.tool{display:grid;grid-template-columns:minmax(0,1fr);margin-top:clamp(56px,6vw,96px);border-top:1px solid var(--rule)}
-@media(min-width:981px){.tool{grid-template-columns:50% 50%}.inp{padding-right:var(--cg);border-right:1px solid var(--rule)}.led{padding-left:var(--cg)}}
-.bar-t{display:flex;justify-content:space-between;align-items:baseline;gap:12px 20px;flex-wrap:wrap;padding:22px 0 4px}
-.bar-t b{font-weight:500;font-size:16px}
-.bar-t button{background:none;border:0;padding:0;font:inherit;font-size:14px;color:var(--ink-3);cursor:pointer;border-bottom:1px solid var(--rule-2);transition:color .2s,border-color .2s}
-.bar-t button:hover{color:var(--ink);border-color:var(--ink)}
-.grp{font-size:14px;color:var(--ink-3);padding:30px 0 4px}
-.q{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end;padding:16px 0;border-bottom:1px solid var(--rule)}
-.q>label,.q>.lb{padding-right:var(--cg)}
-.q b{display:block;font-weight:500;font-size:16px;color:var(--ink)}
-.q i{display:block;font-style:normal;font-size:13px;line-height:1.45;color:var(--ink-3);margin-top:3px}
-.fld{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--rule-2);padding-bottom:6px;transition:border-color .2s,box-shadow .2s}
-.fld:hover{border-color:var(--ink-4)}
-.fld:focus-within{border-color:var(--ok);box-shadow:0 1px 0 var(--ok)}
-.fld input{flex:1;min-width:0;background:none;border:none;outline:none;color:var(--ink);font-family:var(--num);font-weight:600;font-size:26px;line-height:1.2;text-align:right;font-feature-settings:"tnum" 1,"lnum" 1;transition:color .2s}
-.fld input.ex{color:var(--ink-4)}
-.fld input.err{color:var(--loss)}
-.fld .u{font-size:13px;color:var(--ink-3);min-width:20px}
-.q-err{grid-column:1/-1;font-size:13px;color:var(--loss);margin-top:8px}
-.seg{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
-.seg button{background:none;border:1px solid var(--rule-2);border-radius:8px;color:var(--ink-2);font:inherit;font-size:15px;padding:9px 15px;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
-.seg button:hover{border-color:var(--ink-4);color:var(--ink)}
-.seg button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
-.seg.ex button[aria-pressed="true"]{background:var(--ink-4);border-color:var(--ink-4)}
-.q.wide{grid-template-columns:minmax(0,1fr);row-gap:14px}
-.q.wide .seg{justify-content:flex-start}
-@media(max-width:560px){.q{grid-template-columns:minmax(0,1fr);row-gap:10px}.seg{justify-content:flex-start}}
-.inp-note{font-size:13px;line-height:1.55;color:var(--ink-3);padding:22px 0 0;max-width:52ch}
-
-.led-in{padding-top:22px}
-@media(min-width:981px){.led-in{position:sticky;top:92px}}
-.led-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px 20px;flex-wrap:wrap}
-.led-top b{font-weight:500;font-size:16px}
+/* что покажет ведомость: итог примера крупно, справа статьи */
+.see{margin-top:clamp(72px,8vw,120px);border-top:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr)}
+@media(min-width:981px){.see{grid-template-columns:50% 50%}.see>:first-child{padding-right:var(--cg);border-right:1px solid var(--rule)}.see>:last-child{padding-left:var(--cg)}}
+.ex-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px 20px;flex-wrap:wrap;padding:22px 0 0}
+.ex-h b{font-weight:500;font-size:16px}
 .chip{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-3)}
 .chip i{width:7px;height:7px;border-radius:50%;background:var(--amber)}
-.chip.own i{background:var(--ink)}
-.total{margin-top:clamp(22px,3vw,34px)}
-.total .v{display:block;font-family:var(--num);font-weight:600;font-size:clamp(46px,5.6vw,92px);line-height:.95;letter-spacing:-.02em;color:var(--loss);font-feature-settings:"tnum" 1,"lnum" 1}
-.total .v.wait{color:var(--ink-4)}
-.total p{margin-top:14px;font-size:15px;line-height:1.55;color:var(--ink-3);max-width:46ch}
-.total p b{color:var(--ink-2);font-weight:500}
-.prof{margin-top:24px;padding:14px 0;border-top:1px solid var(--rule);font-size:14px;line-height:1.55;color:var(--ink-2)}
-.prof b{font-weight:500;color:var(--ink)}
-.stg{padding:22px 0;border-top:1px solid var(--rule)}
-.stg-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-.stg-h b{font-weight:500;font-size:17px}
-.stg-h .v{font-family:var(--num);font-weight:600;font-size:clamp(24px,2.3vw,32px);line-height:1;color:var(--loss);white-space:nowrap;font-feature-settings:"tnum" 1,"lnum" 1}
-.stg.zero .v{font-family:var(--ui);font-weight:400;font-size:15px;color:var(--ink-3)}
-.stg.skip .v{color:var(--ink-4)}
-.track{position:relative;height:6px;margin:16px 0 8px;background:var(--rule)}
-.track .cur{position:absolute;left:0;top:0;bottom:0;background:var(--ink-4);transition:width .45s var(--ease)}
-.track .gap{position:absolute;top:0;bottom:0;background:color-mix(in srgb,var(--loss) 60%,transparent);transition:left .45s var(--ease),width .45s var(--ease)}
-.track .tgt{position:absolute;top:-5px;bottom:-5px;width:2px;margin-left:-1px;background:var(--ink);transition:left .45s var(--ease)}
-.track-cap{display:flex;justify-content:space-between;gap:16px;font-size:13px;color:var(--ink-3);font-feature-settings:"tnum" 1}
-.track-cap b{font-weight:500;color:var(--ink-2)}
-.stg .d{margin-top:12px;font-size:14px;line-height:1.55;color:var(--ink-2)}
-.stg .f{margin-top:6px;font-size:13px;line-height:1.5;color:var(--ink-3);font-feature-settings:"tnum" 1}
-.pp{padding:22px 0;border-top:1px solid var(--rule)}
-.pp>p{font-size:14px;color:var(--ink-3);margin-bottom:14px}
-.pp-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-.pp-g>div{padding-right:16px}
-.pp-g span{display:block;font-size:13px;color:var(--ink-3)}
-.pp-g b{display:block;margin-top:4px;font-family:var(--num);font-weight:600;font-size:clamp(19px,1.7vw,24px);color:var(--ink-2);font-feature-settings:"tnum" 1,"lnum" 1}
-.pp-g .top b{color:var(--ink)}
-.pp-g em{display:block;font-style:normal;font-size:12px;color:var(--ink-3);margin-top:2px}
-@media(max-width:560px){.pp-g{grid-template-columns:minmax(0,1fr);row-gap:14px}}
-.cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;padding:26px 0 0;border-top:1px solid var(--rule)}
+.ex-v{display:block;margin-top:clamp(22px,3vw,34px);font-family:var(--num);font-weight:600;font-size:clamp(46px,5.6vw,92px);line-height:.95;letter-spacing:-.02em;color:var(--loss);font-feature-settings:"tnum" 1,"lnum" 1}
+.ex-p{margin-top:14px;font-size:15px;line-height:1.55;color:var(--ink-3);max-width:46ch}
+.lines{padding-top:22px}
+.ln{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.ln:first-child{border-top:1px solid var(--rule)}
+.ln b{font-weight:500;font-size:17px}
+.ln span{font-size:14px;color:var(--ink-3);text-align:right;max-width:30ch}
+@media(max-width:560px){.ln{flex-direction:column;gap:4px}.ln span{text-align:left}}
 
 /* что добавляет полный МРТ */
 .full{padding-top:clamp(96px,10vw,160px);padding-bottom:clamp(90px,9vw,140px)}
@@ -101,13 +49,6 @@
 @media(max-width:980px){.g4{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:12px}}
 @media(max-width:560px){.g4{grid-template-columns:minmax(0,1fr)}}
 .full-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:clamp(40px,5vw,64px)}
-
-/* телефон: итог ведомости всегда под рукой, пока вводите цифры */
-.mini{position:fixed;left:0;right:0;bottom:0;z-index:40;display:none;align-items:center;justify-content:space-between;gap:16px;padding:12px var(--gut);border-top:1px solid var(--rule);background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
-.mini span{font-size:13px;color:var(--ink-3)}
-.mini b{display:block;font-family:var(--num);font-weight:600;font-size:22px;line-height:1.1;color:var(--loss);font-feature-settings:"tnum" 1,"lnum" 1}
-.mini a{font-size:14px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink-4);white-space:nowrap}
-@media(max-width:980px){.mini.show{display:flex}}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -150,70 +91,32 @@
 </header>
 <div class="bar-mobile" id="barMobile"><a href="/">Главная</a><a href="/mrt-demo/">Демо-МРТ</a><a href="/technology/">Технология</a><a href="/cases/">Кейсы</a><a href="/research/">Исследования</a><a href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ</a></div>
 
+
 <main id="top">
 <section class="w hero">
   <p class="kick rv">Демо-МРТ · 8 вопросов из 60</p>
   <h1 class="rv">Сколько теряет ваш бизнес</h1>
   <div class="hero-row">
-    <p class="lede rv">Восемь цифр о воронке — и ведомость потерь в рублях за год. Ведомость уже посчитана на примере: впишите свои цифры поверх, она пересчитается сразу.</p>
-    <p class="lede rv"><strong>Ориентир считается под ваш профиль</strong>: аудиторию, чек и цикл сделки. Средних по рынку в модели нет. Итог ограничен 70% нынешней валовой прибыли, как в полном МРТ. Цифры не уходят со страницы, пока вы сами не отправите заявку.</p>
+    <p class="lede rv">Восемь цифр о воронке — и ведомость потерь в рублях за год. Демо считается в кабинете Closery: регистрация за минуту, ведомость сохраняется, к ней можно вернуться.</p>
+    <p class="lede rv"><strong>Ориентир считается под ваш профиль</strong>: аудиторию, чек и цикл сделки. Средних по рынку в модели нет. Итог ограничен 70% нынешней валовой прибыли, как в полном МРТ. Цифры видите вы и Николай Клименко.</p>
+  </div>
+  <div class="go rv">
+    <a class="btn" href="https://lk.closery.ru/register" data-demo>Открыть демо-МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    <a class="lnk" href="https://lk.closery.ru/login" rel="nofollow">Уже есть доступ — войти</a>
   </div>
 </section>
 
-<div class="w tool">
-  <div class="inp">
-    <div class="bar-t"><b>Ваши цифры</b><button type="button" id="clear">Стереть пример</button></div>
-
-    <p class="grp">Профиль компании</p>
-    <div class="q wide"><div class="lb"><b>Кому продаёте</b><i>от этого зависит ориентир конверсии</i></div>
-      <div class="seg ex" id="aud" role="group" aria-label="Кому продаёте">
-        <button type="button" data-k="b2b" aria-pressed="true">B2B</button>
-        <button type="button" data-k="b2c" aria-pressed="false">B2C</button>
-        <button type="button" data-k="mixed" aria-pressed="false">Смешанно</button>
-      </div></div>
-    <div class="q"><label for="check"><b>Средний чек</b><i>сумма одной сделки</i></label>
-      <div class="fld"><input id="check" type="text" inputmode="numeric" autocomplete="off"><span class="u">₽</span></div></div>
-    <div class="q"><label for="margin"><b>Маржа</b><i>валовая, до постоянных расходов</i></label>
-      <div class="fld"><input id="margin" type="text" inputmode="numeric" autocomplete="off"><span class="u">%</span></div></div>
-    <div class="q"><label for="cycle"><b>Цикл сделки</b><i>от заявки до оплаты</i></label>
-      <div class="fld"><input id="cycle" type="text" inputmode="numeric" autocomplete="off"><span class="u">дн</span></div></div>
-
-    <p class="grp">Воронка за месяц</p>
-    <div class="q"><label for="leads"><b>Заявок</b><i>сайт, звонки, мессенджеры — все обращения</i></label>
-      <div class="fld"><input id="leads" type="text" inputmode="numeric" autocomplete="off"><span class="u">шт</span></div></div>
-    <div class="q"><label for="dial"><b>Дошли до разговора</b><i>состоялся диалог с клиентом</i></label>
-      <div class="fld"><input id="dial" type="text" inputmode="numeric" autocomplete="off"><span class="u">шт</span></div>
-      <p class="q-err" id="dial-err" hidden>Разговоров не может быть больше, чем заявок. Считаем по числу заявок.</p></div>
-    <div class="q"><label for="conv"><b>Конверсия заявка → оплата</b><i>доля всех заявок, дошедших до денег</i></label>
-      <div class="fld"><input id="conv" type="text" inputmode="decimal" autocomplete="off"><span class="u">%</span></div></div>
-    <div class="q"><label for="repeat"><b>Покупают повторно за год</b><i>доля клиентов, которые вернулись</i></label>
-      <div class="fld"><input id="repeat" type="text" inputmode="numeric" autocomplete="off"><span class="u">%</span></div></div>
+<div class="w see rv">
+  <div>
+    <div class="ex-h"><b>Ведомость потерь</b><span class="chip"><i></i>Пример</span></div>
+    <span class="ex-v">−7&nbsp;118&nbsp;000&nbsp;₽</span>
+    <p class="ex-p">В год у B2B-компании с чеком 85&nbsp;000&nbsp;₽ и 150 заявками в месяц. В кабинете та же ведомость пересчитывается на ваших цифрах.</p>
   </div>
-
-  <div class="led" id="led">
-    <div class="led-in">
-      <div class="led-top"><b>Ведомость потерь</b><span class="chip" id="chip"><i></i><span>Пример</span></span></div>
-      <div class="total"><span class="v" id="tot">—</span><p id="tot-cap">&nbsp;</p></div>
-      <p class="prof" id="prof">&nbsp;</p>
-
-      <div class="stg" id="s-reach"><div class="stg-h"><b>Заявки без разговора</b><span class="v">—</span></div>
-        <div class="track" aria-hidden="true"><i class="cur"></i><i class="gap"></i><i class="tgt"></i></div>
-        <div class="track-cap"><span class="c1"></span><span class="c2"></span></div><p class="d"></p><p class="f"></p></div>
-      <div class="stg" id="s-close"><div class="stg-h"><b>Разговоры без оплаты</b><span class="v">—</span></div>
-        <div class="track" aria-hidden="true"><i class="cur"></i><i class="gap"></i><i class="tgt"></i></div>
-        <div class="track-cap"><span class="c1"></span><span class="c2"></span></div><p class="d"></p><p class="f"></p></div>
-      <div class="stg" id="s-repeat"><div class="stg-h"><b>База, которая не вернулась</b><span class="v">—</span></div>
-        <div class="track" aria-hidden="true"><i class="cur"></i><i class="gap"></i><i class="tgt"></i></div>
-        <div class="track-cap"><span class="c1"></span><span class="c2"></span></div><p class="d"></p><p class="f"></p></div>
-
-      <div class="pp"><p>Цена одного пункта — сколько валовой прибыли в год даёт +1 п.п. на этапе</p>
-        <div class="pp-g"><div id="p-reach"><span>Дозвон</span><b>—</b><em></em></div><div id="p-close"><span>Закрытие</span><b>—</b><em></em></div><div id="p-repeat"><span>Повторные</span><b>—</b><em></em></div></div></div>
-
-      <div class="cta">
-        <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Разобрать мои цифры на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
-        <span class="note">120 минут · 79&nbsp;990&nbsp;₽ · NDA и возврат</span>
-      </div>
-    </div>
+  <div class="lines">
+    <div class="ln"><b>Заявки без разговора</b><span>оплачены маркетингом и потеряны до диалога</span></div>
+    <div class="ln"><b>Разговоры без оплаты</b><span>осторожный рост закрытия, не выше ориентира профиля</span></div>
+    <div class="ln"><b>База, которая не вернулась</b><span>повторные продажи против ориентира аудитории</span></div>
+    <div class="ln"><b>Цена одного пункта</b><span>какой этап даёт больше всего прибыли за +1 п.п.</span></div>
   </div>
 </div>
 
@@ -233,8 +136,6 @@
 </section>
 </main>
 
-<div class="mini" id="mini" aria-hidden="true"><div><span>Ведомость потерь за год</span><b id="mini-v">—</b></div><a href="#led">Смотреть</a></div>
-
 <footer>
   <div class="w ft">
     <div>
@@ -247,204 +148,15 @@
         <a href="https://t.me/klimenko_prod">Telegram</a>
         <a href="/research/">Исследования</a>
         <a href="/policy/">Политика&nbsp;конфиденциальности</a>
-        <a href="https://cabinet.closery.ru/" rel="nofollow">Личный&nbsp;кабинет</a>
+        <a href="https://lk.closery.ru/" rel="nofollow">Личный&nbsp;кабинет</a>
       </div>
       <div class="ft-legal">© 2026 Closery · ИП Клименко Николай Витальевич<br>ИНН 632200739609 · ОГРНИП 326632700116702</div>
     </div>
   </div>
 </footer>
 <script>
-/* Модель из Коммерческого МРТ (diagnostic): Profile.build + Funnel.
-   Каждая статья считается независимо и ограничена собственным потолком — строки не влияют друг на друга,
-   а их сумма равна итогу. Формула под строкой собрана из тех же округлённых чисел, что и расчёт,
-   поэтому воспроизводится на калькуляторе. */
-(function(){
-  var REACH_NORM=0.75, CLOSE_STEP=0.08, MONTHS=12, CAP=0.70;
-  var F=['check','margin','cycle','leads','dial','conv','repeat'];
-  var NAMES={check:'средний чек',margin:'маржу',cycle:'цикл сделки',leads:'заявки',dial:'разговоры',conv:'конверсию',repeat:'повторные'};
-  var EX={check:'85000',margin:'50',cycle:'15',leads:'150',dial:'105',conv:'18',repeat:'15'};
-  var STEP={check:5000,margin:1,cycle:1,leads:10,dial:5,conv:1,repeat:1};
-  var MAX={margin:95,conv:100,repeat:100};
-  var el={},own={},aud='b2b',done=false;
-  F.forEach(function(k){el[k]=document.getElementById(k);});
-  function $(id){return document.getElementById(id);}
-
-  function raw(v){return String(v).replace(/[^0-9.,]/g,'').replace(',','.');}
-  function n(v,min,max){var x=parseFloat(raw(v)); if(!isFinite(x))return null;
-    if(min!=null&&x<min)x=min; if(max!=null&&x>max)x=max; return x;}
-  function group(v){
-    var s=raw(v); if(s==='')return '';
-    var p=s.split('.'), i=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,' ');
-    return p.length>1 ? i+','+p[1] : i;
-  }
-  function rub(v){return Math.round(v).toLocaleString('ru-RU')+' ₽';}
-  function money(v){return (v<0?'−':'')+Math.abs(Math.round(v/1000)*1000).toLocaleString('ru-RU')+' ₽';}
-  function mln(v){return (v/1e6).toLocaleString('ru-RU',{maximumFractionDigits:2})+' млн ₽';}
-  function dec(x){return x.toLocaleString('ru-RU',{maximumFractionDigits:1});}
-  function pct(x){return dec(Math.round(x*1000)/10)+'%';}
-  function plural(x,a,b,c){x=Math.abs(Math.round(x))%100;var y=x%10;return (x>10&&x<20)?c:y===1?a:(y>=2&&y<=4)?b:c;}
-
-  function profile(check,cycle){
-    var convBase={b2b:22,b2c:8,mixed:14}[aud];
-    var cycleAdj=cycle>=120?0.70:cycle>=60?0.85:cycle>=21?1.00:1.15;
-    var checkAdj=check>500000?0.70:check>100000?0.85:check>=15000?1.00:1.15;
-    return {convTarget:Math.round(Math.min(45,Math.max(3,convBase*cycleAdj*checkAdj))), repeatTarget:(aud==='b2c')?35:30};
-  }
-
-  function track(id,cur,tgt,c1,c2){
-    var e=$(id), c=Math.max(0,Math.min(1,cur)), t=Math.max(0,Math.min(1,tgt));
-    e.querySelector('.cur').style.width=(c*100)+'%';
-    e.querySelector('.gap').style.left=(c*100)+'%';
-    e.querySelector('.gap').style.width=(Math.max(0,t-c)*100)+'%';
-    e.querySelector('.tgt').style.left=(t*100)+'%';
-    e.querySelector('.c1').innerHTML=c1; e.querySelector('.c2').innerHTML=c2;
-  }
-  function stage(id,val,d,f){
-    var e=$(id); e.classList.remove('skip');
-    e.classList.toggle('zero',!(val>0));
-    e.querySelector('.v').textContent=val>0?money(-val):'Потерь нет';
-    e.querySelector('.d').textContent=d; e.querySelector('.f').textContent=f||'';
-  }
-  function wait(missing){
-    $('tot').textContent='—'; $('tot').classList.add('wait'); $('mini-v').textContent='—';
-    var nums=missing.filter(function(k){return k!=='aud';});
-    $('tot-cap').innerHTML=(aud?'':'Выберите, кому продаёте. ')+(nums.length?'Впишите '+nums.map(function(k){return NAMES[k];}).join(', ')+'.':'');
-    $('prof').innerHTML='&nbsp;';
-    ['s-reach','s-close','s-repeat'].forEach(function(id){var e=$(id);e.classList.remove('skip','zero');
-      e.querySelector('.v').textContent='—';e.querySelector('.d').textContent='';e.querySelector('.f').textContent='';track(id,0,0,'','');});
-    ['p-reach','p-close','p-repeat'].forEach(function(id){$(id).querySelector('b').textContent='—';$(id).querySelector('em').textContent='';$(id).classList.remove('top');});
-    window.closeryLeadNote=null;
-  }
-
-  function calc(){
-    var nOwn=Object.keys(own).length, anyEx=F.some(function(k){return el[k].classList.contains('ex');})||$('aud').classList.contains('ex');
-    var chip=$('chip'); chip.classList.toggle('own',!anyEx);
-    chip.querySelector('span').textContent=nOwn===8?'Ваши цифры':anyEx?(nOwn?'Пример · ваших '+nOwn+' из 8':'Пример'):'Ваши цифры · '+nOwn+' из 8';
-    $('clear').hidden=!anyEx;
-
-    var missing=F.filter(function(k){return raw(el[k].value)===''||!isFinite(parseFloat(raw(el[k].value)));});
-    if(!aud)missing.unshift('aud');
-    if(missing.length) return wait(missing);
-    $('tot').classList.remove('wait');
-
-    var leads=n(el.leads.value,1), dialRaw=n(el.dial.value,1), conv=n(el.conv.value,.1,100),
-        check=n(el.check.value,1), margin=n(el.margin.value,1,95), cycle=n(el.cycle.value,1),
-        repeat=n(el.repeat.value,0,100), m=margin/100;
-
-    var dialBad=dialRaw>leads;
-    el.dial.classList.toggle('err',dialBad); $('dial-err').hidden=!dialBad;
-    var dial=Math.min(dialRaw,leads);
-
-    var p=profile(check,cycle);
-    var deals=leads*conv/100;
-    var reachRate=Math.min(1,dial/leads), closeRate=Math.min(1,deals/dial);
-    var closeNorm=Math.min(.95,(p.convTarget/100)/REACH_NORM);
-    var closeTarget=Math.max(closeRate,Math.min(closeNorm,closeRate+CLOSE_STEP));
-
-    // 1. заявки без разговора — по вашей же конверсии закрытия
-    var missed=Math.round(Math.max(0,leads*(REACH_NORM-reachRate))*10)/10;
-    var closeP=Math.round(closeRate*1000)/10;
-    var vReach=missed*closeP/100*check*MONTHS*m;
-    // 2. разговоры без оплаты — шаг не больше 8 п.п. и не выше ориентира профиля
-    var stepP=Math.round((closeTarget-closeRate)*1000)/10;
-    var vClose=dial*stepP/100*check*MONTHS*m;
-    // 3. база — клиенты за год против ориентира повторных для аудитории
-    var clients=Math.round(deals*MONTHS), repP=Math.max(0,p.repeatTarget-repeat);
-    var vRepeat=clients*repP/100*check*m;
-
-    var cyc=cycle>=120?'4+ месяца':cycle>=60?'около 2 месяцев':cycle>=21?'около 3 недель':'до 3 недель';
-    $('prof').innerHTML='Ориентир конверсии для профиля — <b>'+p.convTarget+'%</b>, у вас '+dec(conv)+'%. Профиль: '+
-      ({b2b:'B2B',b2c:'B2C',mixed:'B2B и B2C'})[aud]+', чек '+rub(check)+', цикл '+cyc+'.';
-
-    track('s-reach',reachRate,REACH_NORM,'у вас <b>'+pct(reachRate)+'</b>','ориентир '+pct(REACH_NORM));
-    stage('s-reach',vReach, missed>0
-      ? 'До разговора доходит '+pct(reachRate)+' заявок. Каждый месяц '+dec(missed)+' '+plural(missed,'заявка','заявки','заявок')+', уже оплаченных маркетингом, остаются без разговора. Считаем по вашей же конверсии закрытия.'
-      : 'До разговора доходит '+pct(reachRate)+' заявок — не ниже ориентира. На входе деньги не теряются.',
-      missed>0 ? dec(missed)+' заявки × '+dec(closeP)+'% закрытия × '+rub(check)+' × 12 мес × '+dec(margin)+'% маржи = '+mln(vReach) : '');
-
-    track('s-close',closeRate,closeTarget,'у вас <b>'+pct(closeRate)+'</b>','цель '+pct(closeTarget));
-    stage('s-close',vClose, stepP>0
-      ? 'Из разговоров оплачивают '+pct(closeRate)+'. Берём осторожный рост: +'+dec(stepP)+' п.п. — не больше 8 за раз и не выше ориентира профиля.'
-      : 'Из разговоров оплачивают '+pct(closeRate)+' — этап уже на ориентире профиля.',
-      stepP>0 ? dec(dial)+' разговоров × '+dec(stepP)+' п.п. × '+rub(check)+' × 12 мес × '+dec(margin)+'% маржи = '+mln(vClose) : '');
-
-    track('s-repeat',repeat/100,p.repeatTarget/100,'у вас <b>'+dec(repeat)+'%</b>','ориентир '+p.repeatTarget+'%');
-    stage('s-repeat',vRepeat, repP>0
-      ? 'Возвращается '+dec(repeat)+'% клиентов при ориентире '+p.repeatTarget+'% для вашей аудитории. Это люди, которые уже знают компанию и уже платили.'
-      : 'Возвращается '+dec(repeat)+'% клиентов — не ниже ориентира. База работает.',
-      repP>0 ? clients+' '+plural(clients,'клиент','клиента','клиентов')+' за год × '+dec(repP)+' п.п. × '+rub(check)+' × '+dec(margin)+'% маржи = '+mln(vRepeat) : '');
-
-    // Общий потолок, как в полном МРТ: итог не больше 70% нынешней валовой прибыли за год.
-    // Сначала самая крупная статья, затем остальные, пока влезают; невзятые подписаны.
-    var gp=deals*MONTHS*check*m, cap=CAP*gp, sum=0;
-    [['s-reach',vReach],['s-close',vClose],['s-repeat',vRepeat]].filter(function(x){return x[1]>0;})
-      .sort(function(a,b){return b[1]-a[1];}).forEach(function(x,i){
-        var e=$(x[0]), d=e.querySelector('.d');
-        if(i===0&&x[1]>cap){sum=cap;e.querySelector('.v').textContent=money(-cap);
-          d.textContent+=' В итоге ограничено 70% нынешней валовой прибыли за год: больший рост модель не обещает.';return;}
-        if(sum+x[1]<=cap){sum+=x[1];return;}
-        e.classList.add('skip');
-        d.textContent+=' В итог не вошло: вместе с более крупной статьёй сумма превысила бы 70% нынешней валовой прибыли за год.';
-      });
-    $('tot').textContent=money(-sum); $('mini-v').textContent=money(-sum);
-    $('tot-cap').innerHTML='Недополученная валовая прибыль за год, если этапы выйдут на ориентир. В месяц — <b>'+money(-sum/12)+'</b>, '+
-      (gp>0?Math.round(sum/gp*100):0)+'% нынешней валовой прибыли.';
-
-    // цена одного пункта: какой рычаг дороже
-    var pr=[['p-reach',leads*.01*closeRate*check*MONTHS*m,'+'+dec(leads*.01*closeRate)+' сделки в месяц'],
-            ['p-close',dial*.01*check*MONTHS*m,'+'+dec(dial*.01)+' сделки в месяц'],
-            ['p-repeat',deals*MONTHS*.01*check*m,'+'+dec(deals*MONTHS*.01)+' повторных в год']];
-    var best=pr.reduce(function(a,b){return b[1]>a[1]?b:a;});
-    pr.forEach(function(x){var e=$(x[0]);e.querySelector('b').textContent=money(x[1]);e.querySelector('em').textContent=x[2];e.classList.toggle('top',x===best);});
-
-    window.closeryLeadNote = nOwn===8 ? 'Демо-МРТ: '+({b2b:'B2B',b2c:'B2C',mixed:'B2B и B2C'})[aud]+', чек '+rub(check)+', маржа '+dec(margin)+'%, цикл '+dec(cycle)+' дн, заявок '+dec(leads)+
-      '/мес, разговоров '+dec(dial)+', конверсия '+dec(conv)+'%, повторные '+dec(repeat)+'%. Итог демо: '+money(-sum)+' в год.' : null;
-    if(nOwn===8&&!done){done=true;try{if(window.ym)ym(113130091,'reachGoal','demo_done');}catch(e){}}
-  }
-
-  function digitsBefore(s,pos){var c=0; for(var i=0;i<pos;i++){ if(/[0-9]/.test(s[i])) c++; } return c;}
-  function caretAfter(s,d){var c=0; for(var i=0;i<s.length;i++){ if(/[0-9]/.test(s[i])){c++; if(c===d) return i+1;} } return d===0?0:s.length;}
-  function mine(k){if(el[k].classList.contains('ex')){el[k].classList.remove('ex');} own[k]=1;}
-
-  F.forEach(function(k){
-    var x=el[k]; x.value=group(EX[k]); x.classList.add('ex');
-    // пример стирается первым же символом: поле выделяется целиком при входе
-    x.addEventListener('focus',function(){if(x.classList.contains('ex'))setTimeout(function(){x.select();},0);});
-    x.addEventListener('input',function(){
-      mine(k);
-      var before=x.value, pos=x.selectionStart||0, d=digitsBefore(before,pos), out=group(before);
-      if(out!==before){ x.value=out; try{ var np=caretAfter(out,d); x.setSelectionRange(np,np); }catch(e){} }
-      calc();
-    });
-    x.addEventListener('keydown',function(e){
-      if(e.key!=='ArrowUp'&&e.key!=='ArrowDown')return;
-      e.preventDefault();
-      var v=parseFloat(raw(x.value))||0, s=STEP[k]*(e.shiftKey?10:1);
-      v=Math.max(0,Math.round((v+(e.key==='ArrowUp'?s:-s))*10)/10); if(MAX[k])v=Math.min(MAX[k],v);
-      mine(k); x.value=group(String(v)); calc();
-    });
-  });
-  $('aud').addEventListener('click',function(e){
-    var b=e.target.closest('button'); if(!b)return;
-    aud=b.dataset.k; own.aud=1; this.classList.remove('ex');
-    [].forEach.call(this.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',String(x===b));});
-    calc();
-  });
-  $('clear').addEventListener('click',function(){
-    F.forEach(function(k){if(el[k].classList.contains('ex')){el[k].value='';el[k].classList.remove('ex');}});
-    if($('aud').classList.contains('ex')){aud=null;$('aud').classList.remove('ex');[].forEach.call($('aud').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed','false');});}
-    calc(); var first=F.filter(function(k){return !own[k];})[0]; if(first)el[first].focus();
-  });
-
-  // телефон: строка с итогом внизу, пока сама ведомость вне экрана
-  var mini=$('mini'), led=$('led'), tool=document.querySelector('.tool');
-  function miniCheck(){
-    var t=tool.getBoundingClientRect(), r=led.getBoundingClientRect();
-    mini.classList.toggle('show', t.top<innerHeight*.6 && r.top>innerHeight && t.bottom>0);
-  }
-  addEventListener('scroll',miniCheck,{passive:true}); addEventListener('resize',miniCheck);
-  calc(); miniCheck();
-})();
+/* демо-МРТ живёт в кабинете: здесь только вход в него и цель Метрики */
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-demo]');if(a){try{ym(113130091,'reachGoal','demo_open');}catch(_){}}});
 </script>
 <script src="/site.js"></script>
 <script src="/lead.js" defer></script>
