@@ -100,7 +100,9 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.035em;line-height:1.
 .hero-side{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(28px,5vw,96px);align-items:end;margin-top:clamp(36px,4vw,64px);padding-top:28px;border-top:1px solid var(--rule)}
 .hero-side .hero-cta{margin-top:0}
 .hero-side .lede{font-size:clamp(17px,1.35vw,19px)}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:32px}
+.cab-why{margin-top:28px;font-size:14px;line-height:1.5;color:var(--ink-3);max-width:52ch}
+.end .cab-why+.hero-cta{margin-top:16px}
 @media(max-width:980px){.hero-side{grid-template-columns:minmax(0,1fr)}}
 
 /* ведомость, которую проходит скан */
@@ -439,13 +441,13 @@ main{counter-reset:sec}
       <a class="bar-lnk" href="/cases/">Кейсы</a>
       <a class="bar-lnk" href="/research/">Исследования</a>
       <a class="bar-lnk opt" href="/#founder">Основатель</a>
-      <a class="bar-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ</a>
+      <a class="bar-cta" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=technology-header">Открыть кабинет</a>
       <button class="bar-burger" id="barBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </div>
   <i class="progress" id="progress"></i>
 </header>
-<div class="bar-mobile" id="barMobile"><a href="/mrt-demo/">Демо-МРТ</a><a class="on" href="/technology/">Технология</a><a href="/cases/">Кейсы</a><a href="/research/">Исследования</a><a href="/#founder">Основатель</a><a href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ</a></div>
+<div class="bar-mobile" id="barMobile"><a href="/mrt-demo/">Демо-МРТ</a><a class="on" href="/technology/">Технология</a><a href="/cases/">Кейсы</a><a href="/research/">Исследования</a><a href="/#founder">Основатель</a><a href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=technology-menu">Открыть кабинет</a></div>
 
 <main id="top">
 
@@ -458,8 +460,8 @@ main{counter-reset:sec}
     <div class="hero-side rv">
       <p class="lede">Консультант приходит с опытом и презентацией. Closery — с четырьмя системами. Они считают, сколько компания теряет в рублях, показывают, как это вернуть, находят покупателей и следят, чтобы ни одна сделка не потерялась.</p>
       <div class="hero-cta">
-        <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
-        <a class="btn btn-ghost" href="/mrt-demo/">Демо за 2 минуты</a>
+        <a class="btn" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=technology-hero">Открыть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <a class="lnk" href="https://lk.closery.ru/register?next=/mri&amp;utm_source=site&amp;utm_content=technology-hero-mri">Готовы к разбору →</a>
       </div>
     </div>
   </div>
@@ -746,10 +748,10 @@ main{counter-reset:sec}
 <section class="w end">
   <p class="kick rv">120 минут, ваши цифры</p>
   <h2 class="rv">Сделайте снимок своей компании</h2>
+  <p class="cab-why rv">Кабинет собственника: ведомость потерь за две минуты, 14 контуров управления, библиотека из 25 разборов ошибок.</p>
   <div class="hero-cta rv">
-    <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
-    <a class="btn btn-ghost" href="/mrt-demo/">Сначала демо</a>
-    <span class="note">79&nbsp;990&nbsp;₽ · NDA и гарантия возврата</span>
+    <a class="btn" href="https://lk.closery.ru/register?next=/demo&amp;utm_source=site&amp;utm_content=technology-final">Посчитать потери <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    <a class="lnk" href="https://lk.closery.ru/register?next=/mri&amp;utm_source=site&amp;utm_content=technology-final-mri">Готовы к разбору →</a>
   </div>
 </section>
 
@@ -883,5 +885,6 @@ main{counter-reset:sec}
 })();
 </script>
 <script src="/lead.js" defer></script>
+<script src="/cab.js" defer></script>
 </body>
 </html>

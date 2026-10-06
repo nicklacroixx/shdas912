@@ -76,6 +76,8 @@
 .end h2{max-width:16ch;font-size:clamp(36px,5.2vw,84px)}
 .end .lede{margin-top:26px}
 .hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:34px}
+.cab-why{margin-top:26px;font-size:14px;line-height:1.5;color:var(--ink-3);max-width:60ch}
+.cab-why+.hero-cta{margin-top:16px}
 
 /* ── сетка из четырёх колонок: линии 25 / 50 / 75%. Тройные блоки получают подпись в первой четверти ── */
 .c4{font-size:14px;line-height:1.5;color:var(--ink-3);padding-right:var(--cg)}
@@ -129,13 +131,13 @@
       <a class="bar-lnk on" href="/cases/">Кейсы</a>
       <a class="bar-lnk" href="/research/">Исследования</a>
       <a class="bar-lnk opt" href="/#founder">Основатель</a>
-      <a class="bar-cta" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ</a>
+      <a class="bar-cta" href="https://lk.closery.ru/register?next=/demo&amp;utm_source=site&amp;utm_content=cases-header">Открыть кабинет</a>
       <button class="bar-burger" id="barBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </div>
   <i class="progress" id="progress"></i>
 </header>
-<div class="bar-mobile" id="barMobile"><a href="/">Главная</a><a href="/mrt-demo/">Демо-МРТ</a><a href="/technology/">Технология</a><a href="/cases/">Кейсы</a><a href="/research/">Исследования</a><a href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ</a></div>
+<div class="bar-mobile" id="barMobile"><a href="/">Главная</a><a href="/mrt-demo/">Демо-МРТ</a><a href="/technology/">Технология</a><a href="/cases/">Кейсы</a><a href="/research/">Исследования</a><a href="https://lk.closery.ru/register?next=/demo&amp;utm_source=site&amp;utm_content=cases-menu">Открыть кабинет</a></div>
 
 <main id="top">
 
@@ -258,12 +260,13 @@
 </section>
 
 <section class="w end">
-  <p class="kick rv">Начнём с МРТ</p>
+  <p class="kick rv">Начнём с цифр</p>
   <h2 class="rv">Посчитаем, где теряет ваша коммерция</h2>
   <p class="lede rv">МРТ идёт по вашим цифрам: воронка, конверсии, экономика, люди, управление. На выходе ведомость: где уходят деньги, сколько стоит каждая потеря и что закрывать первым.</p>
+  <p class="cab-why rv">Методика, по которой собраны эти результаты, — в кабинете собственника: шесть систем бизнеса, 14 контуров управления, библиотека из 25 разборов ошибок.</p>
   <div class="hero-cta rv">
-    <a class="btn" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Заявка на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
-    <span class="note">120 минут · 79&nbsp;990&nbsp;₽ · NDA и гарантия возврата</span>
+    <a class="btn" href="https://lk.closery.ru/register?next=/systems&amp;utm_source=site&amp;utm_content=cases-final">Открыть методику <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    <a class="lnk" href="https://lk.closery.ru/register?next=/mri&amp;utm_source=site&amp;utm_content=cases-final-mri">Готовы к разбору →</a>
   </div>
 </section>
 
@@ -289,5 +292,6 @@
 </footer>
 <script src="/site.js"></script>
 <script src="/lead.js" defer></script>
+<script src="/cab.js" defer></script>
 </body>
 </html>
