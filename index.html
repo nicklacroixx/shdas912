@@ -474,22 +474,28 @@ html[data-theme="light"] .hour::after{background:linear-gradient(180deg,color-mi
 
 .end{padding-top:clamp(120px,12vw,200px);padding-bottom:clamp(100px,10vw,160px)}
 .end h2{max-width:16ch;font-size:clamp(36px,5.6vw,92px)}
-.end .lede{margin-top:28px}
-/* финал: справа от кнопки — неделя отбора по дням; даты настоящие, сегодня отмечено линией, как активная вкладка */
-.end-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end}
+.end .lede{margin-top:0}
+/* финал: справа от кнопки — что покажет диагностика, тот же пример, что на странице регистрации кабинета */
+.end-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;margin-top:clamp(28px,3vw,44px)}
 .end-row>div:first-child{padding-right:var(--cg)}
-.wk-h{font-size:14px;color:var(--ink-3)}
-.wk-d{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:18px;border-top:1px solid var(--rule-2)}
-.wk-d li{position:relative;padding-top:16px}
-.wk-d li::before{content:"";position:absolute;left:0;right:14px;top:-1px;height:2px}
-.wk-d li.now::before{background:var(--ink)}
-.wk-d span{display:block;font-size:13px;color:var(--ink-3)}
-.wk-d b{display:block;margin-top:8px;font-family:var(--num);font-weight:600;font-size:clamp(34px,3.6vw,54px);line-height:1;font-feature-settings:"tnum" 1,"lnum" 1;color:var(--ink-2)}
-.wk-d li.past span,.wk-d li.past b{color:var(--ink-4)}
-.wk-d li.now span,.wk-d li.now b{color:var(--ink)}
-.wk-t{margin-top:24px;font-size:14.5px;line-height:1.5;color:var(--ink-3);max-width:46ch}
-.wk-t b{font-weight:500;color:var(--ink)}
-@media(max-width:900px){.end-row{grid-template-columns:minmax(0,1fr)}.end-row>div:first-child{padding-right:0}.wk{margin-top:64px}}
+.dx{border:1px solid var(--rule-2);border-radius:14px;background:var(--paper);padding:clamp(20px,2.4vw,32px)}
+.dx-k{font-size:13px;color:var(--ink-3)}
+.dx-v{margin-top:14px;padding-bottom:20px;border-bottom:1px solid var(--rule-2)}
+.dx-v span{display:block;font-size:14px;color:var(--ink-2)}
+.dx-v b{display:block;margin-top:6px;font-family:var(--num);font-weight:600;font-size:clamp(34px,3.6vw,54px);line-height:1.05;font-feature-settings:"tnum" 1,"lnum" 1;color:var(--loss);white-space:nowrap}
+.dx-v small{display:block;margin-top:8px;font-size:13px;color:var(--ink-3)}
+.dx-r{list-style:none;margin-top:6px}
+.dx-r li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.dx-r li:last-child{border-bottom:0}
+.dx-r p{font-size:15px;line-height:1.35;color:var(--ink)}
+.dx-r b{font-family:var(--num);font-weight:600;font-size:17px;font-feature-settings:"tnum" 1,"lnum" 1;color:var(--ink);white-space:nowrap}
+.dx-r i{grid-column:1/-1;display:block;height:3px;border-radius:2px;background:var(--rule)}
+.dx-r i::after{content:"";display:block;height:100%;width:0;border-radius:2px;background:var(--loss);transition:width 1.4s var(--ease) .3s}
+.dx.in .dx-r i::after{width:var(--v)}
+.dx-t{margin-top:22px;font-size:14.5px;line-height:1.5;color:var(--ink-3);max-width:46ch}
+.dx-t b{font-weight:500;color:var(--ink)}
+@media(max-width:900px){.end-row{grid-template-columns:minmax(0,1fr)}.end-row>div:first-child{padding-right:0}.dx-wrap{margin-top:56px}}
+@media(prefers-reduced-motion:reduce){.dx-r i::after{width:var(--v);transition:none}}
 .end .hero-cta{margin-top:36px}
 .end-alt{margin-top:22px;font-size:14px;color:var(--ink-3)}
 .end-alt a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
@@ -510,6 +516,7 @@ footer{border-top:1px solid var(--rule);padding:40px 0 48px}
 .sticky .btn{padding:12px 18px;font-size:14px;white-space:nowrap;flex:none}
 .sticky b{white-space:nowrap}
 @media(max-width:400px){.sticky span{display:none}}
+@media(max-width:390px){.sticky>div{display:none}.sticky .btn{flex:1;justify-content:center;text-align:center}}   /* на узком экране плашке хватает одной кнопки */
 .sticky.show{transform:none}
 @media(max-width:700px){.sticky{display:flex}body{padding-bottom:72px}}
 
@@ -1061,16 +1068,23 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
   <div class="end-row">
     <div>
       <p class="lede rv">Первые цифры даст диагностика в кабинете из 14 вопросов. Полную ведомость покажет МРТ: в рублях, по каждому этапу, по вашим собственным данным.</p>
-      <p class="cab-why rv">Ответы сохраняются, CRM подставит цифры сама, итог покажет потери в рублях по каждой боли.</p>
+      <p class="cab-why rv">Ответы сохраняются на каждом шаге, CRM подставит цифры сама.</p>
       <div class="hero-cta rv">
-        <a class="btn" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=final">Открыть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <a class="btn" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=final">Начать диагностику <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
         <a class="lnk" href="https://lk.closery.ru/register?next=/mri&amp;utm_source=site&amp;utm_content=final-mri">Готовы к разбору →</a>
       </div>
     </div>
-    <div class="wk rv" role="group" aria-label="Отбор этой недели">
-      <p class="wk-h"><span data-week>Эта неделя</span></p>
-      <ol class="wk-d" id="wkDays"></ol>
-      <p class="wk-t"><b>Две компании в неделю</b> проходят МРТ за счёт Closery. Ответ по отбору — в тот же рабочий день.</p>
+    <div class="dx-wrap">
+      <div class="dx rv" role="img" aria-label="Итог диагностики на примере: отдел продаж недополучает 593 000 рублей в месяц, три боли с ценой">
+        <p class="dx-k">Итог диагностики · пример</p>
+        <div class="dx-v"><span>Недополучает отдел продаж</span><b>−593&nbsp;000&nbsp;₽</b><small>в месяц валовой прибыли, 7&nbsp;118&nbsp;000&nbsp;₽ за год</small></div>
+        <ul class="dx-r">
+          <li><p>Менеджеры не дожимают</p><b>−339&nbsp;000&nbsp;₽</b><i style="--v:100%"></i></li>
+          <li><p>Клиенты не возвращаются</p><b>−172&nbsp;000&nbsp;₽</b><i style="--v:51%"></i></li>
+          <li><p>Заявки теряются, отвечаем не сразу</p><b>−82&nbsp;000&nbsp;₽</b><i style="--v:24%"></i></li>
+        </ul>
+      </div>
+      <p class="dx-t rv"><b>Две компании в неделю</b> проходят МРТ за счёт Closery. Ответ по отбору в тот же рабочий день.</p>
     </div>
   </div>
 </section>
@@ -1096,7 +1110,7 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
   </div>
 </footer>
 
-<div class="sticky" id="sticky"><div><b>Кабинет собственника</b><span>Диагностика отдела продаж, 14 вопросов</span></div><a class="btn" href="https://lk.closery.ru/register?next=/demo&amp;utm_source=site&amp;utm_content=sticky">Посчитать потери</a></div>
+<div class="sticky" id="sticky"><div><b>Кабинет собственника</b><span>Диагностика отдела продаж, 14 вопросов</span></div><a class="btn" href="https://lk.closery.ru/register?next=/demo&amp;utm_source=site&amp;utm_content=sticky">Начать диагностику</a></div>
 
 <script>
 (function(){
@@ -1259,17 +1273,6 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
       t.addEventListener('click',function(){sel(i);});
       t.addEventListener('keydown',function(e){var d=(e.key==='ArrowDown'||e.key==='ArrowRight')?1:(e.key==='ArrowUp'||e.key==='ArrowLeft')?-1:0;if(!d)return;e.preventDefault();sel((i+d+tabs.length)%tabs.length,true);});
     });
-  })();
-
-  /* финал: дни недели отбора; неделя считается так же, как [data-week] в lead.js — по Москве, в выходные следующая */
-  (function(){
-    var ol=document.getElementById('wkDays');if(!ol)return;
-    var D=['пн','вт','ср','чт','пт'],d=new Date(Date.now()+3*3600e3),wd=d.getUTCDay(),shift=(wd===0)?1:(wd===6)?2:(1-wd),mon=new Date(d.getTime()+shift*864e5),h='';
-    for(var k=0;k<5;k++){
-      var x=new Date(mon.getTime()+k*864e5),st=(wd>=1&&wd<=5)?(k+1<wd?' class="past"':k+1===wd?' class="now" aria-current="date"':''):'';
-      h+='<li'+st+'><span>'+D[k]+'</span><b>'+x.getUTCDate()+'</b></li>';
-    }
-    ol.innerHTML=h;
   })();
 
   /* цена найма: оклад × 1,3 со взносами × месяцы; потери — 42,6 млн ₽ в год из ведомости клиента */
