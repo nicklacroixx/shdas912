@@ -378,7 +378,6 @@ html[data-theme="light"] .mri-band{padding:0}   /* днём обычный ра�
 @media(max-width:600px){.sys li{padding:16px 12px 18px 0}.sys p{display:none}.sys b{margin-top:6px;font-size:18px}.sys em{margin-top:10px;font-size:12px}}
 
 /* финал: итог диагностики на примере и первый шаг из «С чего начать», те же цифры, что на телефонах */
-.dx-q{margin-top:14px;padding-left:14px;border-left:2px solid var(--rule-2);font-size:14.5px;line-height:1.5;color:var(--ink-2)}
 .tot .dx-v{margin-top:18px}
 .dx-f{margin-top:14px;font-size:13.5px;line-height:1.5;color:var(--ink-3);font-feature-settings:"tnum" 1,"lnum" 1}
 .dx-bar{display:grid;grid-template-columns:auto auto;justify-content:space-between;row-gap:8px;margin-top:18px;font-size:13px;color:var(--ink-3)}
@@ -393,6 +392,14 @@ html[data-theme="light"] .mri-band{padding:0}   /* днём обычный ра�
 .dx-s p{margin-top:12px;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
 .dx-s p strong{display:block;margin-bottom:2px;font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
 @media(prefers-reduced-motion:reduce){.dx-bar i::after{width:calc(var(--b) - var(--a));transition:none}}
+/* финал: две половины по линии 50%, текст и итог по центру друг друга, заголовок в своей половине */
+.end-x{display:grid;grid-template-columns:50% 50%;align-items:center}
+.end-x>div:first-child{padding-right:var(--cg)}
+#end h2{max-width:none;font-size:clamp(28px,3.6vw,56px);text-wrap:balance}
+#end .lede{margin-top:clamp(18px,2vw,26px)}
+#end .hero-cta{margin-top:30px}
+#end .dx-wrap{margin-top:0}
+@media(max-width:980px){.end-x{grid-template-columns:minmax(0,1fr)}.end-x>div:first-child{padding-right:0}#end .dx-wrap{margin-top:40px}}
 
 /* ритм разделов плотнее, чем на прежней главной: страница короче, первый экран раздела с картинкой */
 .sec{padding-top:clamp(84px,8.5vw,136px)}
@@ -591,10 +598,10 @@ main{counter-reset:sec}
 </section>
 
 <section class="w end" id="end">
-  <p class="kick rv">Начать</p>
-  <h2 class="rv">Сколько теряет ваш бизнес?</h2>
-  <div class="end-row">
+  <div class="end-x">
     <div>
+      <p class="kick rv">Начать</p>
+      <h2 class="rv">Сколько теряет ваш бизнес?</h2>
       <p class="lede rv">Ответьте на 14 вопросов или подключите CRM. Итог в рублях и первый шаг откроются сразу. Бесплатно, нужна только регистрация.</p>
       <div class="hero-cta rv">
         <a class="btn" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=final">Посчитать потери бесплатно <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
@@ -603,7 +610,6 @@ main{counter-reset:sec}
     <div class="dx-wrap">
       <div class="dx tot rv" role="img" aria-label="Итог диагностики на примере: разговоры без оплаты, минус 7 258 000 рублей в год, конверсия 12,5% при цели 20,5%, первый шаг">
         <p class="dx-k">Итог диагностики · пример на демо-данных</p>
-        <p class="dx-q">«Менеджеры отправляют КП и пропадают, клиент уходит к конкурентам, а я узнаю об этом через месяц»</p>
         <div class="dx-v"><span>Разговоры без оплаты</span><b>−7 258 000 ₽</b><small>в год, в месяц −605 000 ₽</small></div>
         <p class="dx-f">120 разговоров × 8 п.п. × 180 000 ₽ × 12 мес × 35% маржи</p>
         <div class="dx-bar" style="--a:12.5%;--b:20.5%"><i></i><span>у вас 12,5%</span><span>цель 20,5%</span></div>
