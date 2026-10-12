@@ -355,7 +355,8 @@ html[data-theme="light"] .ph[data-pos="1"],html[data-theme="light"] .ph[data-pos
 
 /* ── МРТ: ночная полоса на всю ширину, слева цена и запись, справа с 50% шесть систем по четверти ── */
 .mri-band{margin-top:clamp(96px,10vw,160px);padding:clamp(72px,8vw,128px) 0}
-.mri-band{background:var(--bg-2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}   /* днём светло-серая полоса: тёмных островков на белом нет */
+html:not([data-theme="light"]) .mri-band{background:var(--bg-2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+html[data-theme="light"] .mri-band{padding:0}   /* днём обычный раздел на белом: ни тёмной, ни серой полосы */
 .mx{display:grid;grid-template-columns:50% 50%;align-items:start}
 .mx-t{padding-right:var(--cg)}
 .mx-t h2{max-width:14ch}
