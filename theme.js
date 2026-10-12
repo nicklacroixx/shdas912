@@ -1,9 +1,10 @@
 /* Тема Closery: дневная и ночная. Подключается в <head> без defer, чтобы страница не мигала тёмным.
-   Пока посетитель не выбрал сам, по умолчанию тёмная — фирменный вид. Выбор хранится в localStorage.
+   Пока посетитель не выбрал сам, по умолчанию дневная: с 12.10.2026 сайт открывается белым, бизнес для бизнеса. Выбор хранится в localStorage,
+   ключ v3, чтобы и те, кто раньше щёлкал тему, увидели дневную.
    Кнопка встаёт в шапку сама: круг, наполовину залитый, в ряд со ссылками. Клик поворачивает его на пол-оборота и меняет тему. */
 (function(){
-  var KEY='closery-theme-v2',root=document.documentElement;
-  function pref(){try{var v=localStorage.getItem(KEY);return v==='light'?'light':'dark';}catch(e){return 'dark';}}
+  var KEY='closery-theme-v3',root=document.documentElement;
+  function pref(){try{var v=localStorage.getItem(KEY);return v==='dark'?'dark':'light';}catch(e){return 'light';}}
   function paint(t){
     root.setAttribute('data-theme',t);root.style.colorScheme=t;
     var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='light'?'#F8F5EE':'#07100D');
