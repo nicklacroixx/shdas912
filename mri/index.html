@@ -15,7 +15,7 @@
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Closery">
 <meta property="og:title" content="Коммерческий МРТ: где бизнес теряет прибыль | Closery">
-<meta property="og:description" content="Находим, где бизнес теряет деньги, считаем потери в рублях и закрываем их, начиная с самой дорогой. Коммерческий МРТ — 120 минут на ваших цифрах.">
+<meta property="og:description" content="Находим, где бизнес теряет деньги, считаем потери в рублях и закрываем их, начиная с самой дорогой. Коммерческий МРТ: 120 минут на ваших цифрах.">
 <meta property="og:url" content="https://closery.ru/mri/">
 <meta property="og:image" content="https://closery.ru/og.png">
 <meta property="og:image:width" content="1200">
@@ -48,13 +48,13 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type": "Question", "name": "Сколько стоит МРТ?", "acceptedAnswer": {"@type": "Answer", "text": "79 990 ₽ — 120 минут на ваших цифрах и отчёт, который остаётся у вас, даже если внедрение не понадобится. Две компании в неделю проходят МРТ за счёт Closery, условия — в разделе «Отбор»."}},
+    {"@type": "Question", "name": "Сколько стоит МРТ?", "acceptedAnswer": {"@type": "Answer", "text": "79 990 ₽: 120 минут на ваших цифрах и отчёт, который остаётся у вас, даже если внедрение не понадобится. Две компании в неделю проходят МРТ за счёт Closery, условия в разделе «Отбор»."}},
     {"@type": "Question", "name": "Чем МРТ отличается от обычного аудита продаж?", "acceptedAnswer": {"@type": "Answer", "text": "Аудит перечисляет, что работает плохо. МРТ добавляет цену: каждая потеря посчитана в рублях, у каждой есть порядок закрытия и метрика, по которой вы потом принимаете работу."}},
     {"@type": "Question", "name": "Что можно понять за 120 минут?", "acceptedAnswer": {"@type": "Answer", "text": "Где и сколько бизнес теряет. 60 вопросов идут по шести системам бизнеса, расчёт собирается по ходу, и к концу встречи ведомость готова. Чего за два часа не проверить, отчёт перечисляет в приложении: видно, на чём стоит каждая цифра."}},
-    {"@type": "Question", "name": "В CRM бардак, данных мало. МРТ получится?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Считаем по тому, что есть: CRM, телефония, выгрузки, ваши ответы. Чего не хватает, отчёт помечает как допущение, а сам пропуск становится находкой: этой цифрой никто не управляет. CRM открываете только на чтение, NDA — до доступа."}},
+    {"@type": "Question", "name": "В CRM бардак, данных мало. МРТ получится?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Считаем по тому, что есть: CRM, телефония, выгрузки, ваши ответы. Чего не хватает, отчёт помечает как допущение, а сам пропуск становится находкой: этой цифрой никто не управляет. CRM открываете только на чтение, NDA до доступа."}},
     {"@type": "Question", "name": "А если я не согласен с цифрами?", "acceptedAnswer": {"@type": "Answer", "text": "Цифры ваши: вы их называете, мы считаем. Строку, с которой не согласны, поправляем вместе, и отчёт пересчитывается при вас. Сумма потерь ограничена сверху: не больше 70% вашей валовой прибыли за год."}},
-    {"@type": "Question", "name": "Сколько стоит внедрение?", "acceptedAnswer": {"@type": "Answer", "text": "Зависит от потерь и масштаба бизнеса. Цену и метрику приёмки называем в конце МРТ, до старта. Оплата помесячно; метрика не дошла до цели — оплата месяца возвращается."}},
-    {"@type": "Question", "name": "Что нужно от нас?", "acceptedAnswer": {"@type": "Answer", "text": "Для МРТ — 120 минут собственника и цифры воронки за последние месяцы: заявки, конверсия, чек, маржа. Для внедрения — доступ к CRM и телефонии и 2–3 часа собственника в неделю. Остальное — на нас."}}
+    {"@type": "Question", "name": "Сколько стоит внедрение?", "acceptedAnswer": {"@type": "Answer", "text": "Зависит от потерь и масштаба бизнеса. Цену и метрику приёмки называем в конце МРТ, до старта. Оплата помесячно. Если метрика не дошла до цели, оплата месяца возвращается."}},
+    {"@type": "Question", "name": "Что нужно от нас?", "acceptedAnswer": {"@type": "Answer", "text": "Для МРТ нужны 120 минут собственника и цифры воронки за последние месяцы: заявки, конверсия, чек, маржа. Для внедрения нужен доступ к CRM и телефонии и 2–3 часа собственника в неделю. Остальное на нас."}}
   ]
 }
 </script>
@@ -178,6 +178,7 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.03em;line-height:1.1
 .cab-why+.hero-cta{margin-top:16px}
 @media(max-width:980px){.hero-row{grid-template-columns:minmax(0,1fr)}}
 #hero .hero-row{grid-template-columns:minmax(0,1fr)}#hero .hero-row>div{max-width:760px}
+@media(max-width:420px){#hero h1{font-size:clamp(27px,8.4vw,36px)}}
 
 /* калькулятор часа */
 .hour{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--rule-2);background:var(--paper);min-height:330px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 60px 120px -40px var(--shadow)}
@@ -685,7 +686,7 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
 .rpt-cap{display:none}
 @media(min-width:981px){.rpt{grid-template-columns:25% 75%;gap:0}.rpt-nav{padding-right:var(--cg)}}
 @media(max-width:980px){
-  .rpt-nav{flex-direction:row;gap:8px;overflow-x:auto;border-top:0;scrollbar-width:none}
+  .rpt-nav{flex-direction:row;flex-wrap:wrap;gap:8px;border-top:0}
   .rpt-nav button{flex:none;display:block;border:1px solid var(--rule-2);border-radius:8px;padding:9px 14px}
   .rpt-nav button::after{display:none}
   .rpt-cap{display:block;margin-top:14px;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
@@ -748,7 +749,7 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
   <div class="w bar-in">
     <a class="logo" href="/"><i></i>Closery</a>
     <nav class="bar-nav">
-      <a class="bar-lnk" href="/#leaks">Где уходит прибыль</a>
+      <a class="bar-lnk" href="/#leaks">Где теряются деньги</a>
       <a class="bar-lnk" href="/mri/" aria-current="page">Коммерческий МРТ</a>
       <a class="bar-lnk" href="/research/">Исследования</a>
       <a class="bar-cta" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=mri-header">Посчитать потери</a>
@@ -757,25 +758,24 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
   </div>
   <i class="progress" id="progress"></i>
 </header>
-<div class="bar-mobile" id="barMobile"><a href="/#leaks">Где уходит прибыль</a><a href="/#how">Как это работает</a><a href="/mri/">Коммерческий МРТ</a><a href="/research/">Исследования</a><a href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=mri-menu">Посчитать потери</a></div>
+<div class="bar-mobile" id="barMobile"><a href="/#leaks">Где теряются деньги</a><a href="/#how">Как это работает</a><a href="/mri/">Коммерческий МРТ</a><a href="/research/">Исследования</a><a href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=mri-menu">Посчитать потери</a></div>
 
 <main id="top">
 
 <!-- обложка -->
 <section class="w hero" id="hero">
   <p class="kick rv">Коммерческий МРТ · 120 минут</p>
-  <h1 class="rv">Вы уже теряете деньги.<br>Вопрос — <em>сколько</em></h1>
+  <h1 class="rv">Вы уже теряете деньги.<br>Посчитаем, <em>сколько</em></h1>
   <div class="hero-row">
     <div class="rv">
-      <p class="lede">На ваших цифрах находим, на каких этапах бизнес теряет деньги, и считаем каждую потерю в рублях. Потом закрываем их, начиная с самой дорогой.</p>
-      <div class="guar-line">
-        <span><b>79&nbsp;990&nbsp;₽.</b> NDA — до доступа к данным. Не нашли потерь, которые считаются в рублях, — вернём оплату.</span>
-        <span><b>Две компании в неделю</b> проходят МРТ за счёт Closery. <a class="lnk" href="#selection">Условия отбора</a></span>
-      </div>
-      <p class="cab-why">Кабинет собственника: 14 коротких вопросов об отделе продаж, итог покажет, где теряются деньги и сколько в рублях.</p>
+      <p class="lede">На ваших цифрах находим, где бизнес теряет деньги, и считаем каждую потерю в рублях. Потом закрываем их, начиная с самой дорогой.</p>
       <div class="hero-cta">
-        <a class="btn" href="https://lk.closery.ru/register?next=/demo&amp;utm_source=site&amp;utm_content=mri-hero">Начать диагностику <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
-        <a class="lnk" href="https://lk.closery.ru/register?next=/mri&amp;utm_source=site&amp;utm_content=mri-hero-mri">Готовы к разбору →</a>
+        <a class="btn" href="https://lk.closery.ru/register?next=/mri&amp;utm_source=site&amp;utm_content=mri-hero">Записаться на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <a class="lnk" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=mri-hero-start">Сначала посчитать бесплатно →</a>
+      </div>
+      <div class="guar-line">
+        <span><b>79&nbsp;990&nbsp;₽.</b> NDA до доступа к данным. Не нашли потерь в рублях, вернём оплату.</span>
+        <span><b>Две компании в неделю</b> проходят МРТ за счёт Closery. <a class="lnk" href="#selection">Условия отбора</a></span>
       </div>
     </div>
   </div>
@@ -785,8 +785,8 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
 <section class="sec" id="ledger">
   <div class="w">
     <div class="head">
-      <div><p class="kick rv">Результат МРТ</p><h2 class="rv">Каждая потеря — отдельной строкой, в рублях за год</h2></div>
-      <p class="lede rv">Первая — ведомость реального клиента, «Другая компания» показывает расчёт для других отраслей. На вашем МРТ каждая строка считается только по вашим данным: CRM, телефония, управленческая отчётность.</p>
+      <div><p class="kick rv">Результат МРТ</p><h2 class="rv">Каждая потеря отдельной строкой, в рублях за год</h2></div>
+      <p class="lede rv">Пример: ведомость реального клиента. На вашем МРТ каждая строка считается по вашим данным: CRM, телефония, отчётность.</p>
     </div>
     <figure class="snap rv" id="snap" aria-label="Ведомость потерь, пример">
       <div class="snap-top">
@@ -815,14 +815,14 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
 <section class="sec" id="report">
   <div class="w">
     <div class="head">
-      <div><p class="kick rv">Отчёт МРТ</p><h2 class="rv">Ведомость — одна страница из двадцати</h2></div>
-      <p class="lede rv">После МРТ у вас остаётся отчёт: до 14 разделов и около 20 страниц в PDF. Каждая цифра раскрывается до арифметики, в приложении перечислено, что расчёт не проверял.</p>
+      <div><p class="kick rv">Отчёт МРТ</p><h2 class="rv">Ведомость: одна страница из двадцати</h2></div>
+      <p class="lede rv">После МРТ остаётся отчёт около 20 страниц в PDF. Каждая цифра раскрывается до арифметики, в приложении сказано, что расчёт не проверял.</p>
     </div>
     <div class="rpt rv">
       <div class="rpt-nav" id="rptNav" role="tablist" aria-label="Разделы отчёта">
         <button type="button" role="tab" aria-selected="true" aria-controls="rptView"><span>02</span><b>Резюме</b><em>Главный вывод одной фразой и цена вопроса: 4,05 млн ₽ в месяц, из них 2,63 млн возвращаются за 90 дней.</em></button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>05</span><b>Ведомость потерь</b><em>Крупнейшая потеря — переговоры и закрытие, 2,69 млн ₽ в месяц. Зелёным — что из неё вернётся за 90 дней.</em></button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>10</span><b>Что делать</b><em>Начинать с быстрых побед: три ошибки на 1,93 млн ₽ в месяц, каждая — до шести недель работы.</em></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>05</span><b>Ведомость потерь</b><em>Крупнейшая потеря: переговоры и закрытие, 2,69 млн ₽ в месяц. Зелёным отмечено, что из неё вернётся за 90 дней.</em></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>10</span><b>Что делать</b><em>Начинать с быстрых побед: три ошибки на 1,93 млн ₽ в месяц, каждая не дольше шести недель работы.</em></button>
         <button type="button" role="tab" aria-selected="false" aria-controls="rptView" tabindex="-1"><span>11</span><b>Внедрение</b><em>Каждая волна принимается по цифрам. Вторая чинит первый контакт, закрытие и повторные продажи: +1,44 млн ₽ в месяц.</em></button>
       </div>
       <div class="rpt-view" id="rptView" role="tabpanel">
@@ -830,8 +830,8 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
         <picture class="l is-cur" data-i="0"><source media="(max-width:600px)" srcset="/media/report-summary-light-m.webp" width="1170" height="1671"><img src="/media/report-summary-light.webp" width="2000" height="1429" loading="lazy" alt="Резюме отчёта: главный вывод, недополученная прибыль 4,05 млн ₽ в месяц и потенциал возврата за 90 дней"></picture>
         <picture class="d" data-i="1"><source media="(max-width:600px)" srcset="/media/report-ledger-dark-m.webp" width="1170" height="1671"><img src="/media/report-ledger-dark.webp" width="2000" height="1429" loading="lazy" alt="Ведомость потерь: валовая прибыль по этапам воронки сейчас и при ориентире профиля"></picture>
         <picture class="l" data-i="1"><source media="(max-width:600px)" srcset="/media/report-ledger-light-m.webp" width="1170" height="1671"><img src="/media/report-ledger-light.webp" width="2000" height="1429" loading="lazy" alt="Ведомость потерь: валовая прибыль по этапам воронки сейчас и при ориентире профиля"></picture>
-        <picture class="d" data-i="2"><source media="(max-width:600px)" srcset="/media/report-fix-dark-m.webp" width="1170" height="1671"><img src="/media/report-fix-dark.webp" width="2000" height="1429" loading="lazy" alt="Что делать: матрица приоритетов — ошибки по эффекту в деньгах и сроку внедрения"></picture>
-        <picture class="l" data-i="2"><source media="(max-width:600px)" srcset="/media/report-fix-light-m.webp" width="1170" height="1671"><img src="/media/report-fix-light.webp" width="2000" height="1429" loading="lazy" alt="Что делать: матрица приоритетов — ошибки по эффекту в деньгах и сроку внедрения"></picture>
+        <picture class="d" data-i="2"><source media="(max-width:600px)" srcset="/media/report-fix-dark-m.webp" width="1170" height="1671"><img src="/media/report-fix-dark.webp" width="2000" height="1429" loading="lazy" alt="Что делать: матрица приоритетов: ошибки по эффекту в деньгах и сроку внедрения"></picture>
+        <picture class="l" data-i="2"><source media="(max-width:600px)" srcset="/media/report-fix-light-m.webp" width="1170" height="1671"><img src="/media/report-fix-light.webp" width="2000" height="1429" loading="lazy" alt="Что делать: матрица приоритетов: ошибки по эффекту в деньгах и сроку внедрения"></picture>
         <picture class="d" data-i="3"><source media="(max-width:600px)" srcset="/media/report-plan-dark-m.webp" width="1170" height="1671"><img src="/media/report-plan-dark.webp" width="2000" height="1429" loading="lazy" alt="Внедрение: 12 недель, четыре волны, приёмка каждой по критериям"></picture>
         <picture class="l" data-i="3"><source media="(max-width:600px)" srcset="/media/report-plan-light-m.webp" width="1170" height="1671"><img src="/media/report-plan-light.webp" width="2000" height="1429" loading="lazy" alt="Внедрение: 12 недель, четыре волны, приёмка каждой по критериям"></picture>
       </div>
@@ -847,12 +847,12 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
 <section class="sec">
   <div class="w">
     <p class="kick rv">Почему это не видно</p>
-    <p class="big-claim rv">Все показатели зелёные.<br><em>Потери — между ними.</em></p>
+    <p class="big-claim rv">Все показатели зелёные.<br><em>Потери между ними.</em></p>
     <div class="claim-sub">
       <p class="lede rv">У каждого отдела свой показатель, и каждый его выполняет. Деньги теряются на стыках: между заявкой и звонком, между первой покупкой и второй. За стык не отвечает никто, поэтому в отчётах его нет.</p>
     </div>
     <div class="grid4 rv">
-      <div><small>Продажи</small><b>Воронка полная</b><p>Сколько сделок умерло на втором касании — такой строки в отчёте нет.</p></div>
+      <div><small>Продажи</small><b>Воронка полная</b><p>Сколько сделок умерло на втором касании? Такой строки в отчёте нет.</p></div>
       <div><small>Маркетинг</small><b>Лид дешёвый, поток стабильный</b><p>Что стало с лидом дальше, маркетинг уже не измеряет.</p></div>
       <div><small>Финансы</small><b>Отчёт сошёлся до копейки</b><p>P&amp;L показывает, сколько заработали. На каком этапе недополучили клиента и маржу, он не показывает.</p></div>
       <div><small>Собственник</small><b>Везде зелёный свет</b><p>А прибыль не растёт вместе с командой и бюджетом.</p></div>
@@ -878,9 +878,9 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
     <div class="route rv">
       <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 01–02</small><b>Замер по данным</b><span class="m">подтверждаем ведомость</span></div><div><p class="leak-btn">Только проверяемые цифры<i>Пример</i></p><div class="leak-ex"><p>В записи 40% звонков компании. Ведомость строим по ним: то, что нельзя перепроверить, в расчёт не идёт.</p></div></div></div>
       <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 02–05</small><b>Забытая база</b><span>−17 880 000 ₽</span></div><div><p class="leak-btn">Система повторных продаж<i>Пример</i></p><div class="leak-ex"><p>Клиент купил в марте и молчит до сентября. Правило: на 45-й день без покупки менеджер пишет ему лично, с поводом вернуться.</p></div></div></div>
-      <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 03–06</small><b>Команда вполсилы</b><span>−12 320 000 ₽</span></div><div><p class="leak-btn">Нагрузка и мотивация<i>Пример</i></p><div class="leak-ex"><p>Половина дня менеджера уходит на то, что не продаёт: ручные отчёты, поиск истории клиента, согласования. Убираем это — та же команда ведёт вдвое больше сделок.</p></div></div></div>
+      <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 03–06</small><b>Команда вполсилы</b><span>−12 320 000 ₽</span></div><div><p class="leak-btn">Нагрузка и мотивация<i>Пример</i></p><div class="leak-ex"><p>Половина дня менеджера уходит на то, что не продаёт: ручные отчёты, поиск истории клиента, согласования. Убираем это, и та же команда ведёт вдвое больше сделок.</p></div></div></div>
       <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 05–08</small><b>Сделки без дожима</b><span>−6 800 000 ₽</span></div><div><p class="leak-btn">Технология сделки<i>Пример</i></p><div class="leak-ex"><p>Сделка зависла: менеджер не назначил следующий шаг. Правило: у каждой стадии есть срок, после него CRM сама поднимает сделку руководителю.</p></div></div></div>
-      <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 07–09</small><b>Заявки без ответа</b><span>−4 100 000 ₽</span></div><div><p class="leak-btn">Приём входящего потока<i>Пример</i></p><div class="leak-ex"><p>Заявка пришла в 22:00, ответ — в 11 утра. За ночь клиент написал троим конкурентам. Норматив ответа — в минутах, и CRM показывает каждое нарушение.</p></div></div></div>
+      <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 07–09</small><b>Заявки без ответа</b><span>−4 100 000 ₽</span></div><div><p class="leak-btn">Приём входящего потока<i>Пример</i></p><div class="leak-ex"><p>Заявка пришла в 22:00, ответ в 11 утра. За ночь клиент написал троим конкурентам. Норматив ответа в минутах, и CRM показывает каждое нарушение.</p></div></div></div>
       <div class="leak" role="button" tabindex="0" aria-expanded="false"><div class="leak-l"><small class="leak-w">Недели 09–12</small><b>Решения через собственника</b><span>−1 500 000 ₽</span></div><div><p class="leak-btn">Управление без вас<i>Пример</i></p><div class="leak-ex"><p>Скидку 8% вместо 5% менеджер не может дать сам и ждёт вас из отпуска. Лимиты полномочий снимают эту паузу.</p></div></div></div>
     </div>
   </div>
@@ -891,13 +891,13 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
   <div class="w">
     <div class="head">
       <div><p class="kick rv">Что обычно делают с такими цифрами</p><h2 class="rv">Не нанимайте человека, пока не знаете, что он должен исправить</h2></div>
-      <p class="lede rv">Коммерческий директор может оказаться отличным человеком и всё равно не решить проблему: если узкое место не найдено, он будет улучшать то, что уже работает. Сначала диагностика, потом человек.</p>
+      <p class="lede rv">Пока узкое место не найдено, даже сильный коммерческий директор будет улучшать то, что уже работает. Сначала диагностика, потом человек.</p>
     </div>
     <div class="bill rv">
       <div class="bill-in">
         <label><span>Оклад директора, ₽ в месяц</span><input id="hireSal" type="text" inputmode="numeric" autocomplete="off" class="ym-disable-keys" value="330 000"></label>
         <label><span>Месяцев до результата</span><input id="hireMon" type="text" inputmode="numeric" autocomplete="off" class="ym-disable-keys" value="6"></label>
-        <p>330 000 ₽ — пример. Подставьте оклад, который предложили бы сами, и свой срок. Взносы — ×1,3 к окладу.</p>
+        <p>330 000 ₽ для примера. Подставьте оклад, который предложили бы сами, и свой срок. Взносы: ×1,3 к окладу.</p>
       </div>
       <div class="r"><div><b>Поиск, отбор, выход человека</b><small>Вакансия, собеседования, оффер, отработка на прежнем месте</small></div><span>2–3 мес</span></div>
       <div class="r"><div><b>ФОТ до первого понятного результата</b><small id="hireFotN">429 000 ₽ в месяц со взносами × 6 месяцев</small></div><span class="neg" id="hireFot">−2 574 000 ₽</span></div>
@@ -914,7 +914,7 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
   <div class="w">
     <div class="head">
       <div><p class="kick rv">Исследования</p><h2 class="rv">Наши выводы стоят на данных. Данные открыты</h2></div>
-      <p class="lede rv">Собираем открытые данные о том, где российские компании недополучают деньги: кого нанимают, когда падает выручка, куда клиенту написать, как быстро ему ответят. У каждого исследования есть методика, таблица в CSV и строка для цитаты.</p>
+      <p class="lede rv">Открытые данные о том, где компании недополучают деньги. У каждого исследования есть методика и таблица в CSV.</p>
     </div>
     <div class="rs g4 rv">
       <a class="rs-main" href="/research/kogo-nanimayut-kogda-padaet-vyruchka-2026/">
@@ -922,7 +922,7 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
         <h3>Кого нанимают собственники, когда падает выручка</h3>
         <div class="rs-n">
           <div><b>35%</b><span>компаний, которые ищут руководителя продаж, заработали в 2025 году меньше, чем в 2024-м</span></div>
-          <div><b>76% и 74%</b><span>падающих и растущих компаний ищут одного и того же человека — руководителя отдела продаж</span></div>
+          <div><b>76% и 74%</b><span>падающих и растущих компаний ищут одного и того же человека: руководителя отдела продаж</span></div>
         </div>
         <span class="lnk">Читать исследование</span>
       </a>
@@ -940,13 +940,13 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
 <section class="sec" id="price">
   <div class="w">
     <div class="head">
-      <div><p class="kick rv">Гарантии</p><h2 class="rv">Риск — на нашей стороне</h2></div>
+      <div><p class="kick rv">Гарантии</p><h2 class="rv">Риск на нашей стороне</h2></div>
       <p class="lede rv">Три условия записаны в договоре до старта.</p>
     </div>
     <div class="terms g4 rv"><div class="c4"><b>Договор</b>оферта Closery</div>
       <div><span class="n">01</span><span class="v">NDA</span><b>До доступа к данным</b><p>Подписываем до того, как вы откроете CRM и записи звонков. Данные остаются внутри работы. После неё доступы закрываются, копии удаляются.</p></div>
-      <div><span class="n">02</span><span class="v">100%</span><b>Возврат за МРТ и за месяц</b><p>Не нашли потерь, которые можно посчитать в рублях, — возвращаем 79&nbsp;990&nbsp;₽. Метрика месяца не дошла до цели — возвращаем оплату месяца.</p></div>
-      <div><span class="n">03</span><span class="v">Всё ваше</span><b>Система остаётся компании</b><p>Регламенты, скрипты, финмодель и доступы — ваши с первого дня. После нашего выхода система работает без нас.</p></div>
+      <div><span class="n">02</span><span class="v">100%</span><b>Возврат за МРТ и за месяц</b><p>Не нашли потерь, которые можно посчитать в рублях, возвращаем 79&nbsp;990&nbsp;₽. Метрика месяца не дошла до цели, возвращаем оплату месяца.</p></div>
+      <div><span class="n">03</span><span class="v">Всё ваше</span><b>Система остаётся компании</b><p>Регламенты, скрипты, финмодель и доступы ваши с первого дня. После нашего выхода система работает без нас.</p></div>
     </div>
   </div>
 </section>
@@ -956,14 +956,14 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
   <div class="w">
     <div class="head">
       <div><p class="kick rv">Отбор</p><h2 class="rv">Две компании в неделю проходят МРТ за счёт Closery</h2></div>
-      <p class="lede rv">Отбираем компании, где потери видны в данных и начинают закрываться в первый же месяц. С такими мы хотим работать дальше, поэтому первые 120 минут — за наш счёт.</p>
+      <p class="lede rv">Берём компании, где потери видны в данных и закрываются в первый месяц. С ними хотим работать дальше, поэтому первые 120 минут за наш счёт.</p>
     </div>
     <div class="fit g4 rv"><div class="c4"><b><span data-week>Эта неделя</span></b>два места в отборе</div>
-      <div class="must"><small>Критерии</small><h3>Кого берём</h3><ul><li>Выручка от 10 млн ₽ в месяц</li><li>Продаёт команда от трёх человек</li><li>Сделки ведутся в CRM, звонки записываются</li><li>На МРТ — собственник, готовый открыть цифры</li></ul></div>
-      <div><small>Порядок</small><h3>От заявки до МРТ</h3><ul><li>Диагностика в кабинете — 14 вопросов</li><li>Ответ по отбору — в тот же рабочий день</li><li>NDA — до доступа к данным</li><li>МРТ в ближайшее окно, 120 минут онлайн</li></ul></div>
+      <div class="must"><small>Критерии</small><h3>Кого берём</h3><ul><li>Выручка от 10 млн ₽ в месяц</li><li>Продаёт команда от трёх человек</li><li>Сделки ведутся в CRM, звонки записываются</li><li>На МРТ приходит собственник, готовый открыть цифры</li></ul></div>
+      <div><small>Порядок</small><h3>От заявки до МРТ</h3><ul><li>Диагностика в кабинете: 14 вопросов</li><li>Ответ по отбору в тот же рабочий день</li><li>NDA до доступа к данным</li><li>МРТ в ближайшее окно, 120 минут онлайн</li></ul></div>
     </div>
     <div class="fit-cta rv">
-      <div><b>Запись на МРТ в кабинете</b><span>Четыре цифры профиля, ответ в тот же рабочий день. Нужна точная дата — МРТ по обычной цене, 79&nbsp;990&nbsp;₽, с той же гарантией возврата.</span></div>
+      <div><b>Запись на МРТ в кабинете</b><span>Четыре цифры профиля, ответ в тот же рабочий день. Нужна точная дата? МРТ по обычной цене, 79&nbsp;990&nbsp;₽, с той же гарантией возврата.</span></div>
       <div class="fit-go"><a class="btn" href="https://lk.closery.ru/register?next=/mri&amp;utm_source=site&amp;utm_content=mri-selection">Записаться на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
     </div>
   </div>
@@ -974,13 +974,13 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
   <div class="w faq-wrap">
     <div><p class="kick rv">Вопросы и ответы</p><h2 class="rv">Что обычно спрашивают</h2></div>
     <div class="faq rv">
-      <div class="faq-item"><button class="faq-q" type="button">Сколько стоит МРТ?<i></i></button><div class="faq-a"><p>79 990 ₽ — 120 минут на ваших цифрах и отчёт, который остаётся у вас, даже если внедрение не понадобится. Две компании в неделю проходят МРТ за счёт Closery, условия — в разделе <a href="#selection">«Отбор»</a>.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Сколько стоит МРТ?<i></i></button><div class="faq-a"><p>79 990 ₽: 120 минут на ваших цифрах и отчёт, который остаётся у вас, даже если внедрение не понадобится. Две компании в неделю проходят МРТ за счёт Closery, условия в разделе <a href="#selection">«Отбор»</a>.</p></div></div>
       <div class="faq-item"><button class="faq-q" type="button">Чем МРТ отличается от обычного аудита продаж?<i></i></button><div class="faq-a"><p>Аудит перечисляет, что работает плохо. МРТ добавляет цену: каждая потеря посчитана в рублях, у каждой есть порядок закрытия и метрика, по которой вы потом принимаете работу.</p></div></div>
       <div class="faq-item"><button class="faq-q" type="button">Что можно понять за 120 минут?<i></i></button><div class="faq-a"><p>Где и сколько бизнес теряет. 60 вопросов идут по шести системам бизнеса, расчёт собирается по ходу, и к концу встречи ведомость готова. Чего за два часа не проверить, отчёт перечисляет в приложении: видно, на чём стоит каждая цифра.</p></div></div>
-      <div class="faq-item"><button class="faq-q" type="button">В CRM бардак, данных мало. МРТ получится?<i></i></button><div class="faq-a"><p>Да. Считаем по тому, что есть: CRM, телефония, выгрузки, ваши ответы. Чего не хватает, отчёт помечает как допущение, а сам пропуск становится находкой: этой цифрой никто не управляет. CRM открываете только на чтение, NDA — до доступа.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">В CRM бардак, данных мало. МРТ получится?<i></i></button><div class="faq-a"><p>Да. Считаем по тому, что есть: CRM, телефония, выгрузки, ваши ответы. Чего не хватает, отчёт помечает как допущение, а сам пропуск становится находкой: этой цифрой никто не управляет. CRM открываете только на чтение, NDA до доступа.</p></div></div>
       <div class="faq-item"><button class="faq-q" type="button">А если я не согласен с цифрами?<i></i></button><div class="faq-a"><p>Цифры ваши: вы их называете, мы считаем. Строку, с которой не согласны, поправляем вместе, и отчёт пересчитывается при вас. Сумма потерь ограничена сверху: не больше 70% вашей валовой прибыли за год.</p></div></div>
-      <div class="faq-item"><button class="faq-q" type="button">Сколько стоит внедрение?<i></i></button><div class="faq-a"><p>Зависит от потерь и масштаба бизнеса. Цену и метрику приёмки называем в конце МРТ, до старта. Оплата помесячно; метрика не дошла до цели — оплата месяца возвращается.</p></div></div>
-      <div class="faq-item"><button class="faq-q" type="button">Что нужно от нас?<i></i></button><div class="faq-a"><p>Для МРТ — 120 минут собственника и цифры воронки за последние месяцы: заявки, конверсия, чек, маржа. Для внедрения — доступ к CRM и телефонии и 2–3 часа собственника в неделю. Остальное — на нас.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Сколько стоит внедрение?<i></i></button><div class="faq-a"><p>Зависит от потерь и масштаба бизнеса. Цену и метрику приёмки называем в конце МРТ, до старта. Оплата помесячно. Если метрика не дошла до цели, оплата месяца возвращается.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Что нужно от нас?<i></i></button><div class="faq-a"><p>Для МРТ нужны 120 минут собственника и цифры воронки за последние месяцы: заявки, конверсия, чек, маржа. Для внедрения нужен доступ к CRM и телефонии и 2–3 часа собственника в неделю. Остальное на нас.</p></div></div>
     </div>
   </div>
 </section>
@@ -1018,7 +1018,7 @@ html[data-theme="light"] .rpt-view picture.l{display:block}
   <div class="w ft">
     <div>
       <a class="logo" href="/"><i></i>Closery</a>
-      <div class="ft-tag">Система, которая<br>не держится на собственнике</div>
+      <div class="ft-tag">Платформа для бизнеса,<br>меняющая прибыль</div>
     </div>
     <div>
       <div class="ft-links">

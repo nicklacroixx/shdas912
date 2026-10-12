@@ -100,7 +100,7 @@
     rev='';role='';extra={};
     var fromReport=/[?&]from=report/.test(location.search);  /* кнопка «Обсудить план и старт» из отчёта МРТ */
     var head=fromReport
-      ? '<p class="lf-k">После МРТ</p><h3 id="lfT">Обсудить план и старт</h3><p class="lf-sub">Николай свяжется в течение рабочего дня и пройдёт с вами план первого месяца.</p>'
+      ? '<p class="lf-k">После МРТ</p><h3 id="lfT">Обсудить план и старт</h3><p class="lf-sub">Напишем в течение рабочего дня и пройдём с вами план первого месяца.</p>'
       : '<p class="lf-k">Коммерческий МРТ · 79&nbsp;990&nbsp;₽</p><h3 id="lfT">Заявка на МРТ</h3><p class="lf-sub">120 минут с собственником. Итог — ведомость потерь в рублях по каждому этапу продаж и порядок, в котором их закрывать.</p>';
     var steps=fromReport
       ? ['Самая дорогая потеря из ведомости — первой в работу.','План месяца по неделям и метрика «было → цель».','Работу принимаете по метрике, а не по отчёту о часах.']
@@ -114,7 +114,7 @@
         '<div class="lf-row">'+seg('team','Команда продаж',['1–2 человека','3–10','больше 10'])+seg('crm','CRM',['Есть','Нет'])+'</div>'+
         seg('rev','Выручка в месяц',['до 10 млн','10–50 млн','50–200 млн','больше 200 млн'])+
         '<label class="lf-f"><span>Что беспокоит больше всего <em>· необязательно</em></span><textarea name="pain" rows="1" class="ym-disable-keys" placeholder="Например: заявок много, а продаж не прибавляется"></textarea></label>'+
-        (window.closeryLeadNote&&!fromReport?'<p class="lf-note lf-demo">Цифры из демо-МРТ и итог ведомости приложим к заявке — на МРТ Николай придёт уже с ними.</p>':'')+
+        (window.closeryLeadNote&&!fromReport?'<p class="lf-note lf-demo">Цифры из демо-МРТ и итог ведомости приложим к заявке, на МРТ мы придём уже с ними.</p>':'')+
         '<input class="lf-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">'+
         '<label class="lf-c"><input type="checkbox" name="consent"><span>Согласен на обработку персональных данных для ответа на заявку по <a href="/policy/" target="_blank">политике конфиденциальности</a></span></label>'+
         '<div class="lf-go-row"><button class="lf-go" type="submit">Отправить заявку '+ARROW+'</button><p class="lf-msg" aria-live="polite"></p></div>'+

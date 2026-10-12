@@ -7,27 +7,31 @@
   function pref(){try{var v=localStorage.getItem(KEY);return v==='dark'?'dark':'light';}catch(e){return 'light';}}
   function paint(t){
     root.setAttribute('data-theme',t);root.style.colorScheme=t;
-    var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='light'?'#F8F5EE':'#07100D');
+    var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='light'?'#FFFFFF':'#07100D');
   }
 
   var L='html[data-theme="light"]',css=
-  /* дневная палитра: нейтральная бумага без зелёного оттенка, акценты темнее, чтобы держать контраст на белом */
-  L+'{--bg:#F8F5EE;--bg-2:#F2EEE4;--paper:#FFFDF8;--paper-2:#F4F0E6;--rule:#E8E2D5;--rule-2:#D7CFBF;'+
-    '--ink:#15130F;--ink-2:#3F3B34;--ink-3:#746D61;--ink-4:#ADA596;--loss:#C4323A;--ok:#0F8A5F;--ok-soft:#0B6B4A;--amber:#8F6A17;'+
+  /* дневная палитра с 12.10.2026: чистый белый и нейтральные серые, бизнес для бизнеса. Акценты чёрные, зелёный за деньгами, красный за потерями.
+     --gold оставлен для старых страниц, на главной днём не используется */
+  L+'{--bg:#FFFFFF;--bg-2:#F5F5F3;--paper:#FAFAF9;--paper-2:#F2F2EF;--rule:#EAEAE6;--rule-2:#D9D9D3;'+
+    '--ink:#111110;--ink-2:#3B3B38;--ink-3:#6E6E69;--ink-4:#A6A6A0;--loss:#C4323A;--ok:#0F8A5F;--ok-soft:#0B6B4A;--amber:#8F6A17;'+
     '--gold:#86621A;--gold-2:#C9A24A;--gold-3:#EFE2BF;'+
-    '--loss-2:#DE8488;--loss-3:#EFC0C2;--mid:#CBC4B6;--ok-2:#4DB58C;--ok-3:#A9DCC7;'+
-    '--shadow:rgba(60,45,15,.08);--logo-filter:brightness(0);--veil:rgba(40,32,18,.30)}'+
+    '--loss-2:#DE8488;--loss-3:#EFC0C2;--mid:#CBCBC5;--ok-2:#4DB58C;--ok-3:#A9DCC7;'+
+    '--shadow:rgba(17,17,16,.10);--logo-filter:brightness(0);--veil:rgba(17,17,16,.28)}'+
+  /* ночной остров на белой странице: та же палитра, что у ночной темы в site.css */
+  '.ti-night{--bg:#07100D;--bg-2:#0B1714;--paper:#0F1D19;--paper-2:#14251F;--rule:#1B2B26;--rule-2:#2A3F38;'+
+    '--ink:#F4F8F6;--ink-2:#CBD6D0;--ink-3:#8FA099;--ink-4:#5A6B64;--loss:#EE5A5E;--ok:#34D399;--ok-soft:#7FE9C0;color:var(--ink);background:var(--bg)}'+
   ':root{--shadow:rgba(0,0,0,.8);--logo-filter:brightness(0) invert(1);--veil:rgba(4,9,7,.72)}'+
   /* днём без атмосферы ночной темы: ни свечений, ни изумрудного тумана, ни зерна */
   L+' body::after{display:none}'+
   L+' .logo i,'+L+' .cmp-logo i,'+L+' .progress,'+L+' .scanline{box-shadow:none!important}'+
   L+' .band{background:none}'+
-  /* днём акцент золотой: подписи разделов, номера, подчёркивания, полоса прочитанного. Зелёный остаётся за деньгами, красный за потерями */
-  L+' .kick{color:var(--gold)}'+L+' .kick::before{color:var(--gold-2)}'+
-  L+' .progress{background:var(--gold-2)!important}'+
-  L+' .lnk{border-bottom-color:var(--gold-2)!important}'+L+' a:hover{text-decoration-color:var(--gold-2)}'+
-  L+' .sh i{color:var(--gold-2)}'+
-  L+' ::selection{background:var(--gold-3)}'+
+  /* днём акцент чёрный: подписи разделов, подчёркивания, полоса прочитанного. Зелёный остаётся за деньгами, красный за потерями */
+  L+' .kick{color:var(--ink-2)}'+L+' .kick::before{color:var(--ink-4)}'+
+  L+' .progress{background:var(--ink)!important}'+
+  L+' .lnk{border-bottom-color:var(--ink)!important}'+L+' a:hover{text-decoration-color:var(--ink-3)}'+
+  L+' .sh i{color:var(--ink-3)}'+
+  L+' ::selection{background:var(--rule-2)}'+
   /* островки со светлым текстом в любой теме: подпись поверх фото */
   L+' .ti-dark{--ink:#F4F8F6;--ink-2:#CBD6D0;--ink-3:#8FA099;color:var(--ink)}'+
   /* плавная смена: View Transitions, иначе короткий переход цветов */
