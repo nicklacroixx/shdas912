@@ -210,10 +210,7 @@ html[data-theme="light"] .td,html:not([data-theme="light"]) .tl{display:none}
    показывает, сколько осталось. Устройство нарисовано в своём размере и масштабируется под колонку, --k ставит main.js */
 @media(min-width:1181px){.hx{grid-template-columns:44% 56%}.hero h1{font-size:clamp(30px,3vw,46px)}}
 .dv{position:relative;min-width:0}
-.dv-stage{position:relative;padding:clamp(20px,2.6vw,40px);border-radius:24px;background:var(--bg-2);overflow:hidden;isolation:isolate}
-.dv-stage::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(var(--rule-2) 1px,transparent 1.2px);background-size:16px 16px;
-  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000 20%,transparent 80%);mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000 20%,transparent 80%)}
-.dv-stage::after{content:"";position:absolute;left:30%;top:20%;width:60%;height:60%;z-index:-1;border-radius:50%;background:var(--ok);opacity:.07;filter:blur(60px)}
+.dv-stage{position:relative;padding:8px 0 24px}   /* окно прямо на странице, без подложки: тень сама отделяет его от фона */
 .dv-fit{position:relative;height:calc(var(--h,440px) * var(--k,.9))}
 .dv-dev{position:absolute;left:0;top:0;transform-origin:0 0;transform:scale(var(--k,.9));font-family:var(--ui);color:var(--ink);font-size:12.5px;line-height:1.45;
   font-variant-numeric:tabular-nums;text-align:left}
@@ -315,7 +312,7 @@ html[data-theme="light"] .m{box-shadow:0 0 0 1px #3B3D40,0 0 0 4px #C9C4BA,0 0 0
 .s-chat{display:grid;justify-items:start;gap:8px;max-width:400px}
 .s-chat .s-who{grid-area:1/1;margin:0}
 .s-dots,.b1{grid-area:2/1}
-.s-dots{display:flex;gap:4px;padding:11px 13px;border-radius:14px 14px 14px 4px;background:var(--bg-2);opacity:0}
+.s-dots{align-self:start;justify-self:start;display:flex;gap:4px;padding:11px 13px;border-radius:14px 14px 14px 4px;background:var(--bg-2);opacity:0}
 .s-dots i{width:6px;height:6px;border-radius:50%;background:var(--ink-4)}
 .s-bub{padding:9px 12px;border-radius:14px 14px 14px 4px;background:var(--bg-2);font-size:13px}
 .s-acts{position:relative;display:flex;gap:8px;margin-top:4px}
@@ -397,6 +394,7 @@ html[data-theme="light"] .m{box-shadow:0 0 0 1px #3B3D40,0 0 0 4px #C9C4BA,0 0 0
 .sc2.play .s-cur{animation:s-cur 1.2s var(--ease) both 2.8s}
 .sc2.play .s-btn.pri{animation:s-press .3s 3.75s}
 .sc2.play .s-done{animation:s-in .4s var(--ease) both 4.1s}
+.sc2.play .s-tasks{animation:s-fade .3s both 4.3s}
 .sc2.play .s-tasks li{animation:s-up .4s var(--ease) both calc(var(--i) * 120ms + 4.3s)}
 .sc1.play .s-next{animation:s-fade .5s both 1.5s}
 .sc3.play .s-dh,.sc3.play .s-tabs{animation:s-fade .4s both}
