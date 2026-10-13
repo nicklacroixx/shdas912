@@ -206,80 +206,218 @@ html[data-theme="light"] .td,html:not([data-theme="light"]) .tl{display:none}
   .hero .lede{order:6;margin-top:18px;font-size:16px}
 }
 
-/* окна кабинета: итог с сообщением Closery, ниже справа первый шаг, ниже слева сделки из CRM. Каскад, каждое окно заходит
-   на нижний край предыдущего. Появляются по очереди: окно, слова сообщения, полосы прибыли, строки сделок. Дальше сделки
-   по одной получают задачу на завтра, как по кнопке в кабинете. Без скриптов и при reduce motion всё видно сразу */
-.desk{position:relative;min-width:0;font-family:var(--ui);color:var(--ink);font-variant-numeric:tabular-nums}
-.dk{position:relative;display:grid;font-size:13px;line-height:1.45}
-.dw{position:relative;background:var(--bg);border:1px solid var(--rule-2);border-radius:12px;overflow:hidden;
-  box-shadow:0 1px 2px var(--shadow),0 18px 40px -22px var(--shadow),0 50px 90px -50px var(--shadow);transition:opacity .7s var(--ease),transform .9s var(--ease)}
-.dw-a{width:88%;z-index:1}
-.dw-b{width:58%;justify-self:end;margin-top:-22px;z-index:2;padding:16px 18px 24px}
-.dw-d{width:92%;margin-top:-12px;z-index:3}
-.dw-bar{display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-bottom:1px solid var(--rule);font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden}
-.dw-bar s{text-decoration:none;color:var(--ink-4)}
-.dw-bar b{font-weight:500;color:var(--ink);overflow:hidden;text-overflow:ellipsis}
-.dw-bar em{margin-left:auto;flex:none;font-style:normal;font-size:11.5px;padding:1px 8px;border-radius:99px;background:var(--bg-2);color:var(--ink-3)}
-.dk-mk{display:inline-flex;align-items:center;gap:7px;flex:none;font-family:var(--brand);font-weight:800;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink)}
+/* устройство: на компьютере окно кабинета в рамке браузера, на телефоне iPhone. Экраны сменяются сами, полоса под устройством
+   показывает, сколько осталось. Устройство нарисовано в своём размере и масштабируется под колонку, --k ставит main.js */
+@media(min-width:1181px){.hx{grid-template-columns:44% 56%}.hero h1{font-size:clamp(30px,3vw,46px)}}
+.dv{position:relative;min-width:0}
+.dv-stage{position:relative;padding:clamp(20px,2.6vw,40px);border-radius:24px;background:var(--bg-2);overflow:hidden;isolation:isolate}
+.dv-stage::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(var(--rule-2) 1px,transparent 1.2px);background-size:16px 16px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000 20%,transparent 80%);mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000 20%,transparent 80%)}
+.dv-stage::after{content:"";position:absolute;left:30%;top:20%;width:60%;height:60%;z-index:-1;border-radius:50%;background:var(--ok);opacity:.07;filter:blur(60px)}
+.dv-fit{position:relative;height:calc(var(--h,440px) * var(--k,.9))}
+.dv-dev{position:absolute;left:0;top:0;transform-origin:0 0;transform:scale(var(--k,.9));font-family:var(--ui);color:var(--ink);font-size:12.5px;line-height:1.45;
+  font-variant-numeric:tabular-nums;text-align:left}
+.dv-dev.d{width:680px;height:450px}
+.dv-dev.m{width:300px;height:600px;display:none}
+@media(max-width:700px){.dv-dev.d{display:none}.dv-dev.m{display:block}.dv-fit{max-width:300px;margin:0 auto}}
+@media(max-width:980px){.dv{order:5;margin-top:clamp(24px,5vw,40px);width:100%;max-width:760px;justify-self:center}}
+.dk-mk{display:inline-flex;align-items:center;gap:7px;flex:none;font-family:var(--brand);font-weight:800;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink)}
 .dk-mk i{width:7px;height:7px;border-radius:2px;background:var(--ok)}
-.dk-msg{padding:16px 18px 6px}
-.dk-who{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink-3);margin-bottom:6px}
-.dk-txt{font-size:14px;line-height:1.5;color:var(--ink);max-width:52ch}
-.dk-pf{margin:10px 18px 30px;border-top:1px solid var(--rule)}
-.dk-pf>p{padding:10px 0 2px;font-size:12px;color:var(--ink-3)}
-.dk-pf ol{list-style:none;margin:0;padding:0}
-.dk-pf li{display:grid;grid-template-columns:minmax(0,1fr) 34% 92px;align-items:center;gap:14px;height:33px;border-bottom:1px solid var(--rule)}
-.dk-pf li:last-child{border-bottom:0}
-.dk-pf li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dk-pf li i{position:relative;height:8px}
-.dk-pf li i::before{content:"";position:absolute;top:0;bottom:0;left:var(--x);width:var(--l);border-radius:2px;background:var(--mid,#CBCBC5);transform-origin:left;transition:transform 1s var(--ease) calc(var(--i) * 140ms)}
-.dk-pf li.up i::before{background:var(--ok)}
-.dk-pf li.can i::before{background:var(--ink)}
-.dk-pf li b{justify-self:end;font-weight:500;white-space:nowrap;color:var(--ink-2)}
-.dk-pf li.up b{color:var(--ok)}
-.dk-pf li.can span,.dk-pf li.can b{font-weight:600;color:var(--ink)}
-.dk-tags{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink-3)}
-.dk-tag{padding:2px 8px;border-radius:5px;background:color-mix(in srgb,var(--ok) 13%,transparent);color:var(--ok);font-weight:500}
-.dk-h{display:block;margin-top:10px;font-size:15.5px;font-weight:600;letter-spacing:-.01em}
-.dk-k{margin-top:10px;font-size:12px;color:var(--ink-3)}
-.dk-p{margin-top:2px;color:var(--ink-2)}
-.dk-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:7px 12px;border:1px solid var(--rule-2);border-radius:8px;font-weight:500;font-size:13px}
-.dk-btn svg{width:13px;height:13px}
-.dw-d ul{list-style:none;margin:0;padding:0 14px}
-.dw-d li{display:grid;grid-template-columns:minmax(0,1.4fr) 78px minmax(0,1fr) 88px;align-items:center;gap:12px;height:38px;border-bottom:1px solid var(--rule);transition:opacity .6s var(--ease),transform .7s var(--ease)}
-.dw-d li:last-child{border-bottom:0}
-.dw-d li>*{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dw-d li b{font-weight:500}
-.dw-d li span{color:var(--ink-3)}
-.dw-d li em{display:grid;font-style:normal;color:var(--loss)}
-.dw-d li em>*{grid-area:1/1;text-decoration:none;overflow:hidden;text-overflow:ellipsis;transition:opacity .4s,transform .5s var(--ease)}
-.dw-d li em u{justify-self:start;padding:0 7px;border-radius:5px;background:color-mix(in srgb,var(--ok) 13%,transparent);color:var(--ok);opacity:0;transform:translateY(6px)}
-.dw-d li.done em s{opacity:0;transform:translateY(-6px)}
-.dw-d li.done em u{opacity:1;transform:none}
-.dw-d li strong{justify-self:end;font-weight:500}
-.fan-note{margin-top:12px;font-size:12.5px;color:var(--ink-4)}
-/* сценарий: без классов всё спрятано, классы s1–s4 включает main.js по очереди */
-.js .desk:not(.s1) .dw-a,.js .desk:not(.s3) .dw-b,.js .desk:not(.s4) .dw-d{opacity:0;transform:translateY(18px)}
-.js .desk:not(.s1) .dk-txt span{opacity:0}
-.dk-txt span{transition:opacity .35s calc(var(--w) * 34ms + .35s)}
-.js .desk:not(.s2) .dk-pf li i::before{transform:scaleX(0)}
-.js .desk:not(.s2) .dk-pf li b{opacity:0}
-.dk-pf li b{transition:opacity .6s calc(var(--i) * 140ms + .5s)}
-.js .desk:not(.s4) .dw-d li{opacity:0;transform:translateY(8px)}
-.dw-d li{transition-delay:calc(var(--i) * 120ms + .3s)}
-@media(max-width:980px){.desk{order:5;margin-top:clamp(24px,5vw,40px);width:100%;max-width:640px;justify-self:center}}
-@media(max-width:600px){
-  .dk{font-size:12px}
-  .dw-a{width:100%}.dw-b{width:90%;padding:14px}.dw-d{width:96%;margin-left:0}
-  .dk-msg{padding:14px 14px 4px}.dk-txt{font-size:13px}.dk-pf{margin:8px 14px 28px}
-  .dk-pf li{grid-template-columns:minmax(0,1fr) 14% 76px;gap:10px;height:31px}
-  .dw-bar{padding:0 12px;height:34px}.dw-bar s{display:none}
-  .dw-d ul{padding:0 12px}
-  .dw-d li{grid-template-columns:minmax(0,1fr) 84px;grid-template-rows:auto auto;row-gap:0;height:auto;padding:7px 0}
-  .dw-d li span{display:none}.dw-d li em{grid-column:1;grid-row:2;font-size:11.5px}.dw-d li strong{grid-row:1/3;grid-column:2}
-}
+.crs{display:inline-grid;justify-items:start}
+.crs>*{grid-area:1/1;opacity:0;transition:opacity .3s}
+.crs>.on{opacity:1}
+
+/* окно браузера */
+.d{display:flex;flex-direction:column;border-radius:12px;overflow:hidden;background:var(--bg);
+  box-shadow:0 0 0 1px var(--rule-2),0 2px 6px var(--shadow),0 30px 60px -24px var(--shadow),0 90px 120px -70px var(--shadow)}
+.d-tb{flex:none;position:relative;display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;background:var(--paper);border-bottom:1px solid var(--rule)}
+.d-tb>i{width:10px;height:10px;border-radius:50%;background:#FF5F57}
+.d-tb>i:nth-child(2){background:#FEBC2E}
+.d-tb>i:nth-child(3){background:#28C840}
+.d-url{position:absolute;left:50%;top:6px;transform:translateX(-50%);display:flex;align-items:center;width:250px;height:22px;padding:0 12px;border-radius:6px;background:var(--bg-2);font-size:11px;color:var(--ink-2)}
+.d-url em{font-style:normal;color:var(--ink-4)}
+.d-app{flex:1;display:grid;grid-template-columns:152px minmax(0,1fr);min-height:0}
+.d-nav{display:flex;flex-direction:column;gap:1px;padding:16px 9px;background:var(--paper);border-right:1px solid var(--rule)}
+.d-nav .dk-mk{margin:0 7px}
+.d-co{margin:6px 7px 14px;font-size:10px;line-height:1.35;color:var(--ink-3)}
+.nv{display:flex;align-items:center;gap:8px;padding:6px 7px;border-radius:7px;font-size:11.5px;color:var(--ink-2);white-space:nowrap;transition:background .35s,color .35s}
+.nv svg{flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.6}
+.nv.on svg{opacity:1}
+.nv b{margin-left:auto;font-weight:500;font-size:10.5px;color:var(--loss)}
+.nv.on{background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink);font-weight:500}
+.d-nav hr{border:0;border-top:1px solid var(--rule);margin:8px 7px}
+.d-main{display:flex;flex-direction:column;min-width:0;min-height:0}
+.d-crumb{flex:none;display:flex;align-items:center;gap:6px;height:40px;padding:0 20px;border-bottom:1px solid var(--rule);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.d-crumb s{text-decoration:none;color:var(--ink-4)}
+.d-crumb b{font-weight:500;color:var(--ink)}
+.d-crumb em,.m-hd em{margin-left:auto;font-style:normal;font-size:10.5px;padding:1px 8px;border-radius:99px;background:var(--bg-2);color:var(--ink-3)}
+
+/* iPhone */
+.m{padding:9px;border-radius:50px;background:#0A0B0C;
+  box-shadow:0 0 0 1px #2A2C2F,0 0 0 4px #5D6064,0 0 0 5px #1D1F21,0 60px 90px -40px var(--shadow),0 30px 60px -30px var(--shadow)}
+html[data-theme="light"] .m{box-shadow:0 0 0 1px #3B3D40,0 0 0 4px #C9C4BA,0 0 0 5px #9D988F,0 60px 90px -40px rgba(40,35,20,.35),0 30px 60px -30px rgba(40,35,20,.25)}
+.m-scr{position:relative;display:flex;flex-direction:column;height:100%;border-radius:41px;overflow:hidden;background:var(--bg)}
+.ph-sb{position:relative;flex:none;display:grid;grid-template-columns:1fr 36% 1fr;align-items:center;height:46px;padding-top:4px;color:var(--ink);
+  font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ph-sb b{justify-self:center;font-weight:600}
+.ph-sb>i{position:absolute;left:50%;top:11px;width:92px;height:27px;border-radius:99px;background:#000;transform:translateX(-50%)}
+.ph-sb span{grid-column:3;justify-self:center;display:flex;align-items:center;gap:5px}
+.ph-sb svg{display:block;fill:currentColor}
+.m-app{flex:1;display:flex;flex-direction:column;min-height:0}
+.m-hd{flex:none;display:flex;align-items:center;gap:10px;height:40px;padding:0 16px;border-bottom:1px solid var(--rule)}
+.m-hd em{margin-left:auto}
+.m-hd>i{position:relative;width:16px;height:11px;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.m-hd>i::after{content:"";position:absolute;left:0;right:0;top:3.5px;border-top:1.5px solid var(--ink)}
+.m-crumb{flex:none;padding:14px 16px 0;font-size:17px;font-weight:600;letter-spacing:-.02em;line-height:1.2}
+.m-crumb b{font-weight:600}
+
+/* экраны */
+.scs{position:relative;flex:1;display:grid;min-height:0;overflow:hidden}
+.sc{position:relative;grid-area:1/1;padding:18px 22px;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .45s var(--ease);pointer-events:none}
+.sc.on{opacity:1;transform:none;transition:opacity .4s .12s,transform .6s var(--ease) .12s}
+.m .sc{padding:12px 16px}
+.s-who{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:11px;color:var(--ink-3)}
+.s-type{font-size:14px;line-height:1.5;max-width:50ch}
+.s-pf{margin-top:16px;border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.s-cap{display:flex;justify-content:space-between;gap:10px;padding:9px 14px;border-bottom:1px solid var(--rule);font-size:11.5px;font-weight:500;white-space:nowrap}
+.s-cap span{font-weight:400;color:var(--ink-4)}
+.s-pf ol{list-style:none;margin:0;padding:0 14px}
+.s-pf li{display:grid;grid-template-columns:minmax(0,1fr) 27% 84px;align-items:center;gap:12px;height:34px;border-bottom:1px solid var(--rule)}
+.s-pf li:last-child{border-bottom:0}
+.s-pf li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.s-pf li i{position:relative;height:8px}
+.s-pf li i::before{content:"";position:absolute;top:0;bottom:0;left:var(--x);width:var(--l);border-radius:2px;background:var(--mid,#CBCBC5);transform-origin:left}
+.s-pf li.up i::before{background:var(--ok)}
+.s-pf li.can i::before{background:var(--ink)}
+.s-pf li b{justify-self:end;font-weight:500;white-space:nowrap;color:var(--ink-2)}
+.s-pf li.up b{color:var(--ok)}
+.s-pf li.can span,.s-pf li.can b{font-weight:600;color:var(--ink)}
+.m .s-type{font-size:13px}
+.m .s-cap span{display:none}
+.m .s-pf ol{padding:0 12px}
+.m .s-pf li{grid-template-columns:minmax(0,1fr) 16% 76px;gap:8px;height:auto;min-height:33px;padding:5px 0;line-height:1.3}
+.m .s-pf li span{white-space:normal}
+.s-tags{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink-3)}
+.s-chip{padding:2px 8px;border-radius:5px;background:color-mix(in srgb,var(--ok) 13%,transparent);color:var(--ok);font-weight:500}
+.s-h{margin-top:10px;font-size:20px;font-weight:600;line-height:1.2;letter-spacing:-.02em}
+.s-big{margin-top:6px;font-size:13px;color:var(--ink-3)}
+.s-big b{margin-right:4px;font-size:28px;font-weight:600;letter-spacing:-.02em;color:var(--ok)}
+.s-bar{display:grid;grid-template-columns:auto auto;justify-content:space-between;row-gap:7px;margin-top:14px;font-size:11.5px;color:var(--ink-3)}
+.s-bar i{grid-column:1/-1;position:relative;height:6px;border-radius:3px;background:var(--rule)}
+.s-bar i::before,.s-bar i::after{content:"";position:absolute;top:0;bottom:0;border-radius:3px}
+.s-bar i::before{left:0;width:var(--a);background:var(--ink-3)}
+.s-bar i::after{left:var(--a);width:calc(var(--b) - var(--a));background:var(--ok);transform-origin:left}
+.s-f{margin-top:8px;font-size:11.5px;color:var(--ink-3)}
+.s-do{margin-top:14px;padding:10px 14px;border-radius:10px;background:var(--bg-2)}
+.s-k{font-size:11px;color:var(--ink-3)}
+.s-do p+p{margin-top:3px;font-size:13px}
+.m .s-h{font-size:18px}
+.s-chat{display:grid;justify-items:start;gap:8px;max-width:400px}
+.s-chat .s-who{grid-area:1/1;margin:0}
+.s-dots,.b1{grid-area:2/1}
+.s-dots{display:flex;gap:4px;padding:11px 13px;border-radius:14px 14px 14px 4px;background:var(--bg-2);opacity:0}
+.s-dots i{width:6px;height:6px;border-radius:50%;background:var(--ink-4)}
+.s-bub{padding:9px 12px;border-radius:14px 14px 14px 4px;background:var(--bg-2);font-size:13px}
+.s-acts{position:relative;display:flex;gap:8px;margin-top:4px}
+.s-btn{display:inline-flex;align-items:center;height:30px;padding:0 12px;border:1px solid var(--rule-2);border-radius:8px;background:var(--bg);font-size:12px;font-weight:500;white-space:nowrap}
+.s-btn.pri{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.s-cur{position:absolute;left:84px;top:16px;opacity:0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}
+.s-done{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500;color:var(--ok)}
+.s-done i{position:relative;width:15px;height:15px;border-radius:50%;background:var(--ok)}
+.s-done i::after{content:"";position:absolute;left:5px;top:2.5px;width:3.5px;height:7px;border:solid var(--bg);border-width:0 1.6px 1.6px 0;transform:rotate(45deg)}
+.m .s-acts .s-btn:not(.pri){display:none}
+.m .s-cur{display:none}   /* на телефоне палец, не мышь: остаётся только нажатие */
+.s-tasks{list-style:none;margin:2px 0 0;padding:0;justify-self:stretch;border-top:1px solid var(--rule)}
+.s-tasks li{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:10px;align-items:center;height:32px;border-bottom:1px solid var(--rule);font-size:12px;opacity:0}
+.s-tasks li>*{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.s-tasks b{font-weight:500}
+.s-tasks span{color:var(--ink-2)}
+.s-tasks em{font-style:normal;color:var(--ink-3)}
+.m .s-tasks li{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;height:auto;padding:6px 0;row-gap:0}
+.m .s-tasks em{display:none}
+.s-next{list-style:none;margin:12px 0 0;padding:0}
+.s-next li{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:8px;align-items:center;height:27px;border-top:1px solid var(--rule);color:var(--ink-3)}
+.s-next li.s-k{display:block;height:auto;padding-bottom:6px;border:0}
+.s-next i{font-style:normal;color:var(--ink-4)}
+.s-next b{font-weight:500;color:var(--ok)}
+.m .s-next li:not(.s-k){grid-template-columns:14px minmax(0,1fr) auto}
+.s-dh{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px}
+.s-dh b{font-weight:600}
+.s-dh em{font-style:normal;font-size:10.5px;padding:1px 8px;border-radius:99px;background:var(--bg-2);color:var(--ink-3)}
+.s-tabs{display:flex;gap:6px;margin-top:12px;font-size:11px;color:var(--ink-3);white-space:nowrap;overflow:hidden}
+.s-tabs>*{padding:3px 9px;border-radius:6px;background:var(--bg-2)}
+.s-tabs b{font-weight:500;background:var(--ink);color:var(--bg)}
+.s-deals{list-style:none;margin:8px 0 0;padding:0}
+.s-deals li{display:grid;grid-template-columns:minmax(0,1.45fr) 70px minmax(0,1.1fr) 84px;align-items:center;gap:10px;height:37px;border-bottom:1px solid var(--rule)}
+.s-deals li:last-child{border-bottom:0}
+.s-deals li>*{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.s-deals b{font-weight:500}
+.s-deals span{color:var(--ink-3)}
+.s-deals em{display:grid;font-style:normal;color:var(--loss)}
+.s-deals em>*{grid-area:1/1;text-decoration:none;overflow:hidden;text-overflow:ellipsis}
+.s-deals u{justify-self:start;padding:0 7px;border-radius:5px;background:color-mix(in srgb,var(--ok) 13%,transparent);color:var(--ok);opacity:0}
+.s-deals strong{justify-self:end;font-weight:500}
+.m .s-dh{display:block}.m .s-dh em{display:none}
+.m .s-tabs span:nth-of-type(n+2){display:none}
+.m .s-deals li{grid-template-columns:minmax(0,1fr) 84px;grid-template-rows:auto auto;row-gap:1px;height:auto;padding:8px 0}
+.m .s-deals span{display:none}
+.m .s-deals em{grid-row:2;grid-column:1;font-size:11.5px}
+.m .s-deals strong{grid-row:1/3;grid-column:2}
+
+/* сценарии: .play вешает main.js, когда экран выходит. Анимация без него не идёт, без скриптов виден первый экран целиком */
+@keyframes s-in{from{opacity:0;transform:translateY(8px)}}
+@keyframes s-fade{from{opacity:0}}
+@keyframes s-grow{from{transform:scaleX(0)}}
+@keyframes s-dots{0%{opacity:0;transform:translateY(6px)}15%,80%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes s-bounce{0%,60%,100%{transform:none}30%{transform:translateY(-3px)}}
+@keyframes s-cur{0%{opacity:0;transform:translate(150px,90px)}20%{opacity:1}70%{transform:none}80%{transform:scale(.85)}100%{opacity:1;transform:none}}
+@keyframes s-press{50%{transform:scale(.94);opacity:.8}}
+@keyframes s-out{to{opacity:0;transform:translateY(-6px)}}
+@keyframes s-up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sc0.play .s-who{animation:s-fade .4s both}
+.sc0.play .s-type span{animation:s-fade .25s both calc(var(--w) * 22ms + .15s)}
+.sc0.play .s-pf{animation:s-in .5s var(--ease) both .55s}
+.sc0.play .s-pf li i::before{animation:s-grow .8s var(--ease) both calc(var(--i) * 130ms + .95s)}
+.sc0.play .s-pf li b{animation:s-fade .4s both calc(var(--i) * 130ms + 1.25s)}
+.sc1.play .s-tags{animation:s-in .4s var(--ease) both .05s}
+.sc1.play .s-h{animation:s-in .45s var(--ease) both .15s}
+.sc1.play .s-big{animation:s-in .45s var(--ease) both .3s}
+.sc1.play .s-bar{animation:s-in .45s var(--ease) both .45s}
+.sc1.play .s-bar i::after{animation:s-grow 1s var(--ease) both .9s}
+.sc1.play .s-f{animation:s-fade .5s both .7s}
+.sc1.play .s-do{animation:s-in .5s var(--ease) both 1.2s}
+.sc2.play .s-who{animation:s-fade .3s both}
+.sc2.play .s-dots{animation:s-dots 1s both .2s}
+.sc2.play .s-dots i{animation:s-bounce .7s infinite}
+.sc2.play .s-dots i:nth-child(2){animation-delay:.12s}
+.sc2.play .s-dots i:nth-child(3){animation-delay:.24s}
+.sc2.play .b1{animation:s-in .4s var(--ease) both 1.15s}
+.sc2.play .b2{animation:s-in .4s var(--ease) both 1.8s}
+.sc2.play .s-acts{animation:s-in .4s var(--ease) both 2.4s}
+.sc2.play .s-cur{animation:s-cur 1.2s var(--ease) both 2.8s}
+.sc2.play .s-btn.pri{animation:s-press .3s 3.75s}
+.sc2.play .s-done{animation:s-in .4s var(--ease) both 4.1s}
+.sc2.play .s-tasks li{animation:s-up .4s var(--ease) both calc(var(--i) * 120ms + 4.3s)}
+.sc1.play .s-next{animation:s-fade .5s both 1.5s}
+.sc3.play .s-dh,.sc3.play .s-tabs{animation:s-fade .4s both}
+.sc3.play .s-deals li{animation:s-in .45s var(--ease) both calc(var(--i) * 90ms + .25s)}
+.sc3.play .s-deals li:nth-child(1) s{animation:s-out .35s both 2s}
+.sc3.play .s-deals li:nth-child(1) u{animation:s-up .4s both 2.1s}
+.sc3.play .s-deals li:nth-child(2) s{animation:s-out .35s both 2.7s}
+.sc3.play .s-deals li:nth-child(2) u{animation:s-up .4s both 2.8s}
+
+/* полоса экранов */
+.dv-rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:clamp(10px,1.4vw,20px);margin-top:16px}
+.dv-rail button{position:relative;padding:10px 0 2px;border:0;border-top:1px solid var(--rule-2);background:none;font:inherit;font-size:13.5px;line-height:1.3;color:var(--ink-3);text-align:left;cursor:pointer;transition:color .3s}
+.dv-rail button::before{content:"";position:absolute;left:0;top:-1px;width:0;height:2px;background:var(--ink)}
+.dv-rail button.on{color:var(--ink)}
+.dv-rail button.on::before{width:100%}
+.dv-rail button.on.run::before{width:0;animation:fill var(--t) linear forwards}
+@keyframes fill{to{width:100%}}
+.fan-note{margin-top:10px;font-size:12.5px;color:var(--ink-4)}
+@media(max-width:420px){.dv-rail button{font-size:12px}}
+@media(max-width:360px){.dv-rail{column-gap:8px}.dv-rail button{font-size:11px}}
 @media(max-width:420px){.hero h1{font-size:clamp(21px,6.4vw,27px)}.hero-cta .lnk{display:none}}
-@media(max-width:400px){.dk-pf li{height:auto;min-height:31px;padding:6px 0;line-height:1.3}.dk-pf li span{white-space:normal}}
 @media(max-width:360px){.hero .kick{font-size:12.5px}.hero .kick::before{display:none}}   /* «Платформа для бизнеса, меняющая прибыль» в одну строку на 320 */
 
 /* заголовок обложки в два тона: обещание тёмным, как именно светлее */
@@ -578,7 +716,7 @@ main{counter-reset:sec}
 
 <main id="top">
 
-<!-- обложка: найдём, посчитаем, покажем. Справа окна кабинета: итог с сообщением Closery, первый шаг, сделки из CRM -->
+<!-- обложка: найдём, посчитаем, покажем. Справа устройство со сменой экранов кабинета, hero.py -->
 <section class="w hero" id="hero">
   <div class="hx">
     <div class="hx-t">
@@ -591,7 +729,7 @@ main{counter-reset:sec}
       </div>
       <p class="cab-why rv">Нужна только регистрация, доступ откроется сразу.</p>
     </div>
-    <div class="desk" id="desk" role="img" aria-label="Окна кабинета на примере: валовая прибыль 907 000 рублей в месяц, может быть 1 546 000, ступени роста, первый шаг на сегодня и сделки из CRM, которые остывают"><div class="dk" aria-hidden="true"><div class="dw dw-a"><div class="dw-bar"><s>Кабинет&nbsp;/</s><b>Итог диагностики</b><em>Пример</em></div><div class="dk-msg"><p class="dk-who"><span class="dk-mk"><i></i>Closery</span><span>итог по вашим ответам</span></p><p class="dk-txt"><span style="--w:0">Сейчас </span><span style="--w:1">компания </span><span style="--w:2">зарабатывает </span><span style="--w:3">907 000 ₽ </span><span style="--w:4">валовой </span><span style="--w:5">прибыли </span><span style="--w:6">в </span><span style="--w:7">месяц. </span><span style="--w:8">Больше </span><span style="--w:9">всего </span><span style="--w:10">прибыли </span><span style="--w:11">теряется </span><span style="--w:12">здесь: </span><span style="--w:13">без </span><span style="--w:14">разговора </span><span style="--w:15">остаются </span><span style="--w:16">54 </span><span style="--w:17">заявки </span><span style="--w:18">из </span><span style="--w:19">120 </span><span style="--w:20">в </span><span style="--w:21">месяц. </span></p></div><div class="dk-pf"><p>Прибыль в месяц</p><ol><li class="now" style="--i:0"><span>Сейчас</span><i style="--x:0%;--l:58.7%"></i><b>14,4 оплаты</b></li><li class="up" style="--i:1"><span>Заявка ждёт первого ответа</span><i style="--x:58.7%;--l:21.3%"></i><b>+330 000 ₽</b></li><li class="up" style="--i:2"><span>База не возвращается</span><i style="--x:80.0%;--l:10.5%"></i><b>+163 000 ₽</b></li><li class="up" style="--i:3"><span>Разговоры без оплаты</span><i style="--x:90.5%;--l:9.5%"></i><b>+146 000 ₽</b></li><li class="can" style="--i:4"><span>Может быть</span><i style="--x:0%;--l:100%"></i><b>1 546 000 ₽</b></li></ol></div></div><div class="dw dw-b"><p class="dk-tags"><span class="dk-tag">Первый шаг</span><span>Ступень 1 из 3</span></p><b class="dk-h">Заявка ждёт первого ответа</b><p class="dk-k">С чего начать</p><p class="dk-p">Сегодня посмотрите, сколько вчерашних заявок до сих пор без звонка: в CRM, почте или мессенджерах.</p><span class="dk-btn">Открыть решение <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span></div><div class="dw dw-d"><div class="dw-bar"><b>21 сделка на 24 820 000 ₽ остывает</b><em>amoCRM</em></div><ul><li style="--i:0"><b>ООО «ТрансНефтеСервис»</b><span>Анна С.</span><em><s>12 дн. без касаний</s><u>задача на завтра</u></em><strong>5 400 000 ₽</strong></li><li style="--i:1"><b>АО «Росагромаш-Сервис»</b><span>Дмитрий О.</span><em><s>15 дн. без касаний</s><u>задача на завтра</u></em><strong>4 700 000 ₽</strong></li><li style="--i:2"><b>АО «Уралхим-Пласт»</b><span>Анна С.</span><em><s>нет следующего шага</s><u>задача на завтра</u></em><strong>2 900 000 ₽</strong></li></ul></div></div><p class="fan-note">Окна кабинета, пример на демо-данных</p></div>
+    <div class="dv" id="dv"><div class="dv-stage" role="img" aria-label="Экраны кабинета на примере: итог, валовая прибыль 907 000 рублей в месяц, может быть 1 546 000; первый шаг; утреннее сообщение Closery о сделках без касаний; сделки из amoCRM, которые остывают"><div class="dv-fit" aria-hidden="true"><div class="dv-dev d" data-w="680" data-h="450"><div class="d-tb"><i></i><i></i><i></i><span class="d-url">lk.closery.ru<span class="crs"><em class="cr on" data-i="0">/start</em><em class="cr" data-i="1">/solutions/1</em><em class="cr" data-i="2">/deals</em><em class="cr" data-i="3">/deals</em></span></span></div><div class="d-app"><nav class="d-nav"><span class="dk-mk"><i></i>Closery</span><p class="d-co">Кабинет · ООО «Техноснаб»</p><span class="nv on" data-n="0"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M2 12l4-4 3 3 5-6"/></svg>Итог диагностики</span><span class="nv" data-n="1"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 13V9M7 13V4M11 13V7M15 13V10"/></svg>Сделки<b>21</b></span><span class="nv"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M6 7a2.5 2.5 0 1 0 0-.01M1.5 14c.5-2.5 2.3-4 4.5-4s4 1.5 4.5 4M11 4.5a2 2 0 1 1 0 4M12.5 10c1.3.4 2.2 1.7 2.5 4"/></svg>Конкуренты</span><span class="nv"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M8 8m-6 0a6 6 0 1 0 12 0a6 6 0 1 0-12 0M8 8m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0"/></svg>Радар клиентов</span><hr><span class="nv"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M2 5V2h3M11 2h3v3M14 11v3h-3M5 14H2v-3"/></svg>Коммерческий МРТ</span><span class="nv"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 14V3h7v11M10 7h3v7M1.5 14h13M5.5 6h2M5.5 9h2"/></svg>Компания и CRM</span></nav><div class="d-main"><p class="d-crumb"><s>Кабинет&nbsp;/</s><span class="crs"><b class="cr on" data-i="0">Итог диагностики</b><b class="cr" data-i="1">Решения / Первый шаг</b><b class="cr" data-i="2">Сделки / Утренняя сводка</b><b class="cr" data-i="3">Сделки</b></span><em>Пример</em></p><div class="scs"><section class="sc sc0 on" data-i="0"><div class="s-msg"><p class="s-who"><span class="dk-mk"><i></i>Closery</span><span>итог по вашим ответам</span></p><p class="s-type"><span style="--w:0">Сейчас </span><span style="--w:1">компания </span><span style="--w:2">зарабатывает </span><span style="--w:3">907 000 ₽ </span><span style="--w:4">валовой </span><span style="--w:5">прибыли </span><span style="--w:6">в </span><span style="--w:7">месяц. </span><span style="--w:8">Больше </span><span style="--w:9">всего </span><span style="--w:10">прибыли </span><span style="--w:11">теряется </span><span style="--w:12">здесь: </span><span style="--w:13">без </span><span style="--w:14">разговора </span><span style="--w:15">остаются </span><span style="--w:16">54 </span><span style="--w:17">заявки </span><span style="--w:18">из </span><span style="--w:19">120 </span><span style="--w:20">в </span><span style="--w:21">месяц. </span></p></div><div class="s-pf"><p class="s-cap">Прибыль в месяц<span>нажмите на строку, чтобы увидеть расчёт</span></p><ol><li class="now" style="--i:0"><span>Сейчас</span><i style="--x:0%;--l:58.7%"></i><b>14,4 оплаты</b></li><li class="up" style="--i:1"><span>Заявка ждёт первого ответа</span><i style="--x:58.7%;--l:21.3%"></i><b>+330 000 ₽</b></li><li class="up" style="--i:2"><span>База не возвращается</span><i style="--x:80.0%;--l:10.5%"></i><b>+163 000 ₽</b></li><li class="up" style="--i:3"><span>Разговоры без оплаты</span><i style="--x:90.5%;--l:9.5%"></i><b>+146 000 ₽</b></li><li class="can" style="--i:4"><span>Может быть</span><i style="--x:0%;--l:100%"></i><b>1 546 000 ₽</b></li></ol></div></section><section class="sc sc1" data-i="1"><p class="s-tags"><span class="s-chip">Первый шаг</span><span>Ступень 1 из 3</span></p><p class="s-h">Заявка ждёт первого ответа</p><p class="s-big"><b>+330 000 ₽</b> в месяц</p><div class="s-bar" style="--a:55%;--b:75%"><i></i><span>до разговора доходят 55% заявок</span><span>можно 75%</span></div><p class="s-f">= 24 разговора × 21,8% закрытия × 180 000 ₽ × 35% маржи</p><div class="s-do"><p class="s-k">С чего начать</p><p>Сегодня посмотрите, сколько вчерашних заявок до сих пор без звонка: в CRM, почте или мессенджерах.</p></div><ul class="s-next"><li class="s-k">Следующие ступени</li><li><i>2</i><span>База не возвращается</span><b>+163 000 ₽</b></li><li><i>3</i><span>Разговоры без оплаты</span><b>+146 000 ₽</b></li></ul></section><section class="sc sc2" data-i="2"><div class="s-chat"><p class="s-who"><span class="dk-mk"><i></i>Closery</span><span>сегодня, 09:00</span></p><p class="s-dots"><i></i><i></i><i></i></p><p class="s-bub b1">Доброе утро. 3 сделки на 11 800 000 ₽ больше 10 дней без касаний.</p><p class="s-bub b2">Задачи готовы: Анне, Дмитрию и Елене по одной на завтра.</p><p class="s-acts"><span class="s-btn pri">Поставить в amoCRM</span><span class="s-btn">Открыть сделки</span><svg class="s-cur" viewBox="0 0 20 24" width="20" height="24" aria-hidden="true"><path d="M2 1.5v18.2l5-4.6 3.2 7.1 3.1-1.4-3.2-7h6.7z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></p><p class="s-done"><i></i>3 задачи поставлены в amoCRM на 14.10</p><ul class="s-tasks"><li style="--i:0"><b>Анна Соколова</b><span>ООО «ТрансНефтеСервис»</span><em>12 дн. без касаний</em></li><li style="--i:1"><b>Дмитрий Орлов</b><span>АО «Росагромаш-Сервис»</span><em>15 дн. без касаний</em></li><li style="--i:2"><b>Елена Васильева</b><span>ООО «Фарм-Логистик»</span><em>13 дн. без звонков</em></li></ul></div></section><section class="sc sc3" data-i="3"><p class="s-dh"><b>21 сделка на 24 820 000 ₽ остывает</b><em>amoCRM</em></p><p class="s-tabs"><b>Все</b><span>Анна Соколова</span><span>Дмитрий Орлов</span><span>Елена Васильева</span></p><ul class="s-deals"><li style="--i:0"><b>ООО «ТрансНефтеСервис»</b><span>Анна С.</span><em><s>12 дн. без касаний</s><u>задача на 14.10</u></em><strong>5 400 000 ₽</strong></li><li style="--i:1"><b>АО «Росагромаш-Сервис»</b><span>Дмитрий О.</span><em><s>15 дн. без касаний</s><u>задача на 14.10</u></em><strong>4 700 000 ₽</strong></li><li style="--i:2"><b>АО «Уралхим-Пласт»</b><span>Анна С.</span><em><s>нет следующего шага</s><u>задача на 14.10</u></em><strong>2 900 000 ₽</strong></li><li style="--i:3"><b>ООО «Фарм-Логистик»</b><span>Елена В.</span><em><s>13 дн. без звонков</s><u>задача на 14.10</u></em><strong>1 700 000 ₽</strong></li><li style="--i:4"><b>АО «СибЛесПром»</b><span>Анна С.</span><em><s>ЛПР в отпуске</s><u>задача на 14.10</u></em><strong>1 650 000 ₽</strong></li><li style="--i:5"><b>АО «ЭнергоМонтаж»</b><span>Елена В.</span><em><s>задача просрочена</s><u>задача на 14.10</u></em><strong>1 250 000 ₽</strong></li><li style="--i:6"><b>ООО «Профкухни»</b><span>Елена В.</span><em><s>нет задачи</s><u>задача на 14.10</u></em><strong>780 000 ₽</strong></li></ul></section></div></div></div></div><div class="dv-dev m" data-w="300" data-h="600"><div class="m-scr"><span class="ph-sb"><b>9:41</b><i></i><span><svg viewBox="0 0 17 11" width="17" height="11"><rect x="0" y="7" width="3" height="4" rx="1.1"/><rect x="4.67" y="5" width="3" height="6" rx="1.1"/><rect x="9.33" y="2.6" width="3" height="8.4" rx="1.1"/><rect x="14" y="0" width="3" height="11" rx="1.1"/></svg><svg viewBox="0 0 28 13" width="25" height="12"><rect x=".5" y=".5" width="24" height="12" rx="3.9" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="2" y="2" width="21" height="9" rx="2.4"/><path d="M26 4.6a2.1 2.1 0 0 1 0 3.8z" fill-opacity=".4"/></svg></span></span><div class="m-app"><p class="m-hd"><span class="dk-mk"><i></i>Closery</span><em>Пример</em><i></i></p><p class="m-crumb"><span class="crs"><b class="cr on" data-i="0">Итог диагностики</b><b class="cr" data-i="1">Решения / Первый шаг</b><b class="cr" data-i="2">Сделки / Утренняя сводка</b><b class="cr" data-i="3">Сделки</b></span></p><div class="scs"><section class="sc sc0 on" data-i="0"><div class="s-msg"><p class="s-who"><span class="dk-mk"><i></i>Closery</span><span>итог по вашим ответам</span></p><p class="s-type"><span style="--w:0">Сейчас </span><span style="--w:1">компания </span><span style="--w:2">зарабатывает </span><span style="--w:3">907 000 ₽ </span><span style="--w:4">валовой </span><span style="--w:5">прибыли </span><span style="--w:6">в </span><span style="--w:7">месяц. </span><span style="--w:8">Больше </span><span style="--w:9">всего </span><span style="--w:10">прибыли </span><span style="--w:11">теряется </span><span style="--w:12">здесь: </span><span style="--w:13">без </span><span style="--w:14">разговора </span><span style="--w:15">остаются </span><span style="--w:16">54 </span><span style="--w:17">заявки </span><span style="--w:18">из </span><span style="--w:19">120 </span><span style="--w:20">в </span><span style="--w:21">месяц. </span></p></div><div class="s-pf"><p class="s-cap">Прибыль в месяц<span>нажмите на строку, чтобы увидеть расчёт</span></p><ol><li class="now" style="--i:0"><span>Сейчас</span><i style="--x:0%;--l:58.7%"></i><b>14,4 оплаты</b></li><li class="up" style="--i:1"><span>Заявка ждёт первого ответа</span><i style="--x:58.7%;--l:21.3%"></i><b>+330 000 ₽</b></li><li class="up" style="--i:2"><span>База не возвращается</span><i style="--x:80.0%;--l:10.5%"></i><b>+163 000 ₽</b></li><li class="up" style="--i:3"><span>Разговоры без оплаты</span><i style="--x:90.5%;--l:9.5%"></i><b>+146 000 ₽</b></li><li class="can" style="--i:4"><span>Может быть</span><i style="--x:0%;--l:100%"></i><b>1 546 000 ₽</b></li></ol></div></section><section class="sc sc1" data-i="1"><p class="s-tags"><span class="s-chip">Первый шаг</span><span>Ступень 1 из 3</span></p><p class="s-h">Заявка ждёт первого ответа</p><p class="s-big"><b>+330 000 ₽</b> в месяц</p><div class="s-bar" style="--a:55%;--b:75%"><i></i><span>до разговора доходят 55% заявок</span><span>можно 75%</span></div><p class="s-f">= 24 разговора × 21,8% закрытия × 180 000 ₽ × 35% маржи</p><div class="s-do"><p class="s-k">С чего начать</p><p>Сегодня посмотрите, сколько вчерашних заявок до сих пор без звонка: в CRM, почте или мессенджерах.</p></div><ul class="s-next"><li class="s-k">Следующие ступени</li><li><i>2</i><span>База не возвращается</span><b>+163 000 ₽</b></li><li><i>3</i><span>Разговоры без оплаты</span><b>+146 000 ₽</b></li></ul></section><section class="sc sc2" data-i="2"><div class="s-chat"><p class="s-who"><span class="dk-mk"><i></i>Closery</span><span>сегодня, 09:00</span></p><p class="s-dots"><i></i><i></i><i></i></p><p class="s-bub b1">Доброе утро. 3 сделки на 11 800 000 ₽ больше 10 дней без касаний.</p><p class="s-bub b2">Задачи готовы: Анне, Дмитрию и Елене по одной на завтра.</p><p class="s-acts"><span class="s-btn pri">Поставить в amoCRM</span><span class="s-btn">Открыть сделки</span><svg class="s-cur" viewBox="0 0 20 24" width="20" height="24" aria-hidden="true"><path d="M2 1.5v18.2l5-4.6 3.2 7.1 3.1-1.4-3.2-7h6.7z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></p><p class="s-done"><i></i>3 задачи поставлены в amoCRM на 14.10</p><ul class="s-tasks"><li style="--i:0"><b>Анна Соколова</b><span>ООО «ТрансНефтеСервис»</span><em>12 дн. без касаний</em></li><li style="--i:1"><b>Дмитрий Орлов</b><span>АО «Росагромаш-Сервис»</span><em>15 дн. без касаний</em></li><li style="--i:2"><b>Елена Васильева</b><span>ООО «Фарм-Логистик»</span><em>13 дн. без звонков</em></li></ul></div></section><section class="sc sc3" data-i="3"><p class="s-dh"><b>21 сделка на 24 820 000 ₽ остывает</b><em>amoCRM</em></p><p class="s-tabs"><b>Все</b><span>Анна Соколова</span><span>Дмитрий Орлов</span><span>Елена Васильева</span></p><ul class="s-deals"><li style="--i:0"><b>ООО «ТрансНефтеСервис»</b><span>Анна С.</span><em><s>12 дн. без касаний</s><u>задача на 14.10</u></em><strong>5 400 000 ₽</strong></li><li style="--i:1"><b>АО «Росагромаш-Сервис»</b><span>Дмитрий О.</span><em><s>15 дн. без касаний</s><u>задача на 14.10</u></em><strong>4 700 000 ₽</strong></li><li style="--i:2"><b>АО «Уралхим-Пласт»</b><span>Анна С.</span><em><s>нет следующего шага</s><u>задача на 14.10</u></em><strong>2 900 000 ₽</strong></li><li style="--i:3"><b>ООО «Фарм-Логистик»</b><span>Елена В.</span><em><s>13 дн. без звонков</s><u>задача на 14.10</u></em><strong>1 700 000 ₽</strong></li><li style="--i:4"><b>АО «СибЛесПром»</b><span>Анна С.</span><em><s>ЛПР в отпуске</s><u>задача на 14.10</u></em><strong>1 650 000 ₽</strong></li><li style="--i:5"><b>АО «ЭнергоМонтаж»</b><span>Елена В.</span><em><s>задача просрочена</s><u>задача на 14.10</u></em><strong>1 250 000 ₽</strong></li><li style="--i:6"><b>ООО «Профкухни»</b><span>Елена В.</span><em><s>нет задачи</s><u>задача на 14.10</u></em><strong>780 000 ₽</strong></li></ul></section></div></div></div></div></div></div><div class="dv-rail" role="tablist" aria-label="Экраны кабинета"><button type="button" role="tab" data-t="0" aria-selected="true" class="on" style="--t:3800ms"><span>Итог в рублях</span></button><button type="button" role="tab" data-t="1" aria-selected="false" style="--t:3600ms"><span>Первый шаг</span></button><button type="button" role="tab" data-t="2" aria-selected="false" style="--t:5800ms"><span>Сообщение Closery</span></button><button type="button" role="tab" data-t="3" aria-selected="false" style="--t:4200ms"><span>Сделки из CRM</span></button></div><p class="fan-note">Экраны кабинета, пример на демо-данных</p></div>
   </div>
 </section>
 
@@ -611,7 +749,7 @@ main{counter-reset:sec}
     <div class="head"><div><p class="kick rv">Как это работает</p><h2 class="rv">Итог в&nbsp;рублях сразу после ответов</h2></div><p class="lede rv">Так выглядит расчёт, который откроется у вас. Цифры примера из демо-данных.</p></div>
     <div class="how">
       <ol class="steps rv"><li><div><b>Регистрация</b><p>Имя, почта, компания, телефон и пароль. Доступ открывается сразу.</p></div></li><li><div><b>14 вопросов</b><p>Чек, маржа, цикл сделки, заявки, разговоры, оплаты, повторные покупки и что болит. Если подключите CRM, часть цифр подставим из неё.</p></div></li><li><div><b>Итог в рублях</b><p>Валовая прибыль в месяц сейчас и сколько может быть. Ниже ступени роста, у каждой цена в месяц и формула, первая с шагом на завтра. Копия придёт на почту.</p></div></li></ol>
-      <figure class="st-fig ck-fig rv"><div class="dw ck-w"><div class="dw-bar"><s>Кабинет&nbsp;/</s><b>Итог диагностики</b><em>Пример</em></div><p class="ck-h">Прибыль в месяц<span>нажмите на строку, чтобы увидеть расчёт</span></p><div class="ck"><p class="ck-r"><b>Заявка ждёт первого ответа</b><em>+330 000 ₽</em></p><p class="ck-c">Без разговора остаются 54 заявки из 120 в месяц</p><p class="ck-f">= 24 разговора × 21,8% закрытия × 180 000 ₽ × 35% маржи</p><p class="ck-x">Если до разговора будут доходить 75% заявок, это ещё 24 разговора в месяц. Закрываться они будут так же, как сейчас.</p></div><div class="ck"><p class="ck-r"><b>База не возвращается</b><em>+163 000 ₽</em></p><p class="ck-c">Повторно покупают 12 из 100 клиентов за год</p><p class="ck-f">= 173 клиента за год × 18% × 180 000 ₽ × 35% маржи ÷ 12 мес</p><p class="ck-x">Столько прибыли добавится, если возвращаться будут 30% клиентов, как в среднем по вашему рынку.</p></div></div></figure>
+      <figure class="st-fig ck-fig rv"><div class="st-win ck-w"><div class="st-bar"><i></i><s>Кабинет&nbsp;/</s><b>Итог диагностики</b><em>Пример</em></div><p class="ck-h">Прибыль в месяц<span>нажмите на строку, чтобы увидеть расчёт</span></p><div class="ck"><p class="ck-r"><b>Заявка ждёт первого ответа</b><em>+330 000 ₽</em></p><p class="ck-c">Без разговора остаются 54 заявки из 120 в месяц</p><p class="ck-f">= 24 разговора × 21,8% закрытия × 180 000 ₽ × 35% маржи</p><p class="ck-x">Если до разговора будут доходить 75% заявок, это ещё 24 разговора в месяц. Закрываться они будут так же, как сейчас.</p></div><div class="ck"><p class="ck-r"><b>База не возвращается</b><em>+163 000 ₽</em></p><p class="ck-c">Повторно покупают 12 из 100 клиентов за год</p><p class="ck-f">= 173 клиента за год × 18% × 180 000 ₽ × 35% маржи ÷ 12 мес</p><p class="ck-x">Столько прибыли добавится, если возвращаться будут 30% клиентов, как в среднем по вашему рынку.</p></div></div></figure>
     </div>
   </div>
 </section>
@@ -719,24 +857,36 @@ main{counter-reset:sec}
     if(!was){it.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
   });});
 
-  /* окна обложки: итог и сообщение Closery, полосы прибыли, первый шаг, сделки. Потом раз в 2,6 с следующая сделка получает задачу
-     на завтра, у остальных видна причина, после последней пауза. За кадром стоит. Цифры со стенда кабинета, DESK в build_main.py */
-  var desk=document.getElementById('desk');
-  if(desk){
-    var steps=['s1','s2','s3','s4'],deals=$$('.dw-d li',desk),k=0,lt=null,shown=false;
-    var tick=function(){   // задача у одной сделки за раз: у остальных видна причина
-      deals.forEach(function(li,j){li.classList.toggle('done',j===k);});k=(k+1)%(deals.length+1);
+  /* устройство обложки: экраны кабинета сменяются сами, у каждого своё время на полосе. Масштаб под колонку, на телефоне iPhone.
+     За кадром стоит. Экраны и цифры в scripts/site_main/hero.py */
+  var dv=document.getElementById('dv');
+  if(dv){
+    var fit=dv.querySelector('.dv-fit'),devs=$$('.dv-dev',dv),tabs=$$('.dv-rail button',dv),at=0,tm=null,seen=false,started=false;
+    var size=function(){
+      var d=devs.filter(function(x){return getComputedStyle(x).display!=='none';})[0];if(!d)return;
+      var w=+d.dataset.w,k=Math.min(d.classList.contains('m')?1:1.12,fit.clientWidth/w);
+      fit.style.setProperty('--k',k.toFixed(4));fit.style.setProperty('--h',d.dataset.h+'px');
     };
-    var loop=function(on){clearInterval(lt);lt=null;if(on&&!reduce)lt=setInterval(tick,2600);};
-    var play=function(){
-      if(shown)return;shown=true;
-      if(reduce){desk.classList.add.apply(desk.classList,steps);return;}
-      [0,1300,2300,3100].forEach(function(ms,i){setTimeout(function(){desk.classList.add(steps[i]);},ms);});
-      setTimeout(function(){loop(true);},5200);
+    var show=function(i){
+      $$('.sc',dv).forEach(function(sc){
+        if(+sc.dataset.i===i){sc.classList.remove('play');void sc.offsetWidth;sc.classList.add('on');if(!reduce)sc.classList.add('play');}
+        else if(sc.classList.contains('on')){sc.classList.remove('on');setTimeout(function(){if(!sc.classList.contains('on'))sc.classList.remove('play');},500);}
+      });
+      $$('.cr',dv).forEach(function(x){x.classList.toggle('on',+x.dataset.i===i);});
+      $$('.nv[data-n]',dv).forEach(function(x){x.classList.toggle('on',+x.dataset.n===(i<2?0:1));});
+      tabs.forEach(function(b,j){b.classList.toggle('on',j===i);b.classList.remove('run');b.setAttribute('aria-selected',j===i?'true':'false');});
     };
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v)play();if(shown&&deals.length)loop(v&&desk.classList.contains('s4'));},{threshold:0.15}).observe(desk);
-    }else play();
+    var next=function(){
+      clearTimeout(tm);if(reduce||!seen)return;
+      var b=tabs[at];b.classList.remove('run');void b.offsetWidth;b.classList.add('run');
+      tm=setTimeout(function(){at=(at+1)%tabs.length;show(at);next();},parseInt(b.style.getPropertyValue('--t'),10));
+    };
+    tabs.forEach(function(b,j){b.onclick=function(){at=j;started=true;show(j);next();};});
+    size();addEventListener('resize',size);
+    if('ResizeObserver' in window)new ResizeObserver(size).observe(fit);
+    var go=function(v){seen=v;if(v){if(!started){started=true;show(at);}next();}else{clearTimeout(tm);tabs[at].classList.remove('run');}};
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){go(es[0].isIntersecting);},{threshold:0.2}).observe(dv);
+    else go(true);
   }
 
   /* появление: проверка по прокрутке, наблюдатель — запасной; видимое на первом экране показывается сразу */
