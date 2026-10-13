@@ -181,14 +181,14 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.03em;line-height:1.1
 .head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(28px,5vw,96px);align-items:end;margin-bottom:clamp(40px,5vw,72px)}
 @media(max-width:980px){.head{grid-template-columns:minmax(0,1fr)}}
 
-/* ── главная 2.0 (12.10.2026): найдём, где бизнес теряет деньги, посчитаем, покажем, как вернуть. Веер телефонов, путь денег, три правила расчёта,
+/* ── главная 2.0 (12.10.2026): найдём, где бизнес теряет деньги, посчитаем, покажем, как вернуть. Окна кабинета, путь денег, три правила расчёта,
    три шага после регистрации, сделки и конкуренты карточками, МРТ ночной полосой с шестью системами ── */
 :root{--cg:clamp(24px,3vw,56px);--acc:var(--ink);--veil:color-mix(in srgb,var(--bg) 68%,transparent)}
 html[data-theme="light"] .td,html:not([data-theme="light"]) .tl{display:none}
 .sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 @media(min-width:981px){.head,.faq-wrap{grid-template-columns:50% 50%;column-gap:0}.head>:first-child,.faq-wrap>:first-child{padding-right:var(--cg)}.head{align-items:start}.head>:last-child{padding-top:48px}}
 
-/* ── обложка: слева обещание и кнопка, справа с 50% веер. На узком экране кнопка сразу под заголовком, веер под ней: так кнопка в первом экране на любой высоте ── */
+/* ── обложка: слева обещание и кнопка, справа с 50% окна кабинета. На узком экране кнопка сразу под заголовком, окна под ней: так кнопка в первом экране на любой высоте ── */
 .hero{padding-top:clamp(28px,4vw,64px)}   /* без container: он замыкает счётчик разделов внутри обложки */
 .hx{display:grid;grid-template-columns:50% 50%;align-items:center}
 .hx-t{padding-right:var(--cg)}
@@ -203,76 +203,83 @@ html[data-theme="light"] .td,html:not([data-theme="light"]) .tl{display:none}
   .hero h1{order:2;font-size:clamp(25px,6.6vw,50px);line-height:1.06}
   .hero-cta{order:3;margin-top:clamp(18px,4.5vw,28px)}
   .cab-why{order:4;margin-top:12px}
-  .fan{order:5;margin-top:clamp(22px,5vw,36px)}
   .hero .lede{order:6;margin-top:18px;font-size:16px}
 }
 
-/* веер: три телефона, центральный впереди, боковые развёрнуты к нему. Раз в 5,6 с правый выходит в центр, центральный уходит влево,
-   левый проходит позади. Экран в центре листается вниз, под ним барабаном крутится главная сумма экрана */
-.fan{--pw:clamp(150px,min(17.5vw,(100svh - 300px) / 2.3),290px);position:relative;min-width:0}
-@media(max-width:980px){.fan{--pw:clamp(118px,39.5vw,230px);width:100%;max-width:620px;justify-self:center}}
-.fan-box{--rx:0deg;--ry:0deg;position:relative;height:calc(var(--pw) * 2.06 + 64px);transform:perspective(1600px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .8s var(--ease)}
-.ph{--x:0%;--y:0%;--a:0deg;--r:0deg;--s:1;--z:3;position:absolute;left:50%;top:calc(var(--pw) * 1.03 + 4px);z-index:var(--z);margin:0;
-  width:var(--pw);aspect-ratio:71.6/147.6;padding:calc(var(--pw) * .034);border-radius:calc(var(--pw) * .17);background:#0a0b0c;cursor:pointer;
-  box-shadow:0 0 0 1px #2a2c2f,0 0 0 calc(var(--pw) * .012 + 1px) #5d6064,0 0 0 calc(var(--pw) * .012 + 2px) #1d1f21,0 70px 90px -50px var(--shadow),0 30px 60px -36px var(--shadow);
-  transform:translate(-50%,-50%) translateX(var(--x)) translateY(var(--y)) perspective(1400px) rotateY(var(--a)) rotate(var(--r)) scale(var(--s));
-  transition:transform 1.15s var(--ease),filter 1s var(--ease)}
-html[data-theme="light"] .ph{box-shadow:0 0 0 1px #3b3d40,0 0 0 calc(var(--pw) * .012 + 1px) #c9c4ba,0 0 0 calc(var(--pw) * .012 + 2px) #9d988f,0 70px 90px -50px rgba(60,45,15,.35),0 30px 60px -36px rgba(60,45,15,.3)}
-.ph::before,.ph::after{content:"";position:absolute;width:calc(var(--pw) * .012 + 2px);border-radius:2px;background:#4a4d51}
-html[data-theme="light"] .ph::before,html[data-theme="light"] .ph::after{background:#b3ada3}
-.ph::before{left:calc(var(--pw) * -.012 - 4px);top:21%;height:10%}
-.ph::after{right:calc(var(--pw) * -.012 - 4px);top:27%;height:14%}
-.ph[data-pos="1"]{--x:60%;--y:3%;--a:-17deg;--r:4deg;--s:.84;--z:1;filter:brightness(.74) saturate(.85)}
-.ph[data-pos="2"]{--x:-60%;--y:3%;--a:17deg;--r:-4deg;--s:.84;--z:1;filter:brightness(.74) saturate(.85)}
-html[data-theme="light"] .ph[data-pos="1"],html[data-theme="light"] .ph[data-pos="2"]{filter:brightness(.93) saturate(.8)}
-.ph.back{z-index:0;animation:ph-back 1.15s var(--ease)}
-@keyframes ph-back{50%{transform:translate(-50%,-50%) translateY(-1%) scale(.64);filter:brightness(.5)}}
-.js .fan:not(.on) .ph{--x:0%;--y:8%;--a:0deg;--r:0deg;--s:.9}
-.ph-scr{position:relative;display:flex;flex-direction:column;height:100%;border-radius:calc(var(--pw) * .136);overflow:hidden;background:var(--bg);isolation:isolate}
-.ph-scr::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.07),transparent 38%)}
-/* строка статуса и остров: кабинет начинается под ними, как на настоящем телефоне */
-.ph-sb{position:relative;flex:none;display:grid;grid-template-columns:1fr 31% 1fr;align-items:center;height:calc(var(--pw) * .128);padding-top:calc(var(--pw) * .012);
-  color:var(--ink);background:var(--bg);font:600 calc(var(--pw) * .043)/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;letter-spacing:-.02em}
-.ph-sb b{justify-self:center;font-weight:600}
-.ph-sb>i{position:absolute;left:50%;top:calc(var(--pw) * .026);width:31%;height:calc(var(--pw) * .088);border-radius:99px;background:#000;transform:translateX(-50%)}
-.ph-sb span{grid-column:3;justify-self:center;display:flex;align-items:center;gap:.3em}
-.ph-sb svg{display:block;width:auto;fill:currentColor}
-.ph-sig{height:.72em}
-.ph-bat{height:.84em}
-.ph-feed{position:relative;flex:1;overflow:hidden}
-.ph-feed img{display:block;width:100%;height:auto;transform:translateY(0);transition:transform 1s var(--ease)}
-.ph.live .ph-feed img{transform:translateY(calc(var(--sy,0px) * -1));transition:transform 4.2s cubic-bezier(.45,0,.25,1) 1.1s}
-
-/* подпись под центральным телефоном: сумма экрана барабанами */
-.fan-call{position:absolute;left:50%;bottom:0;z-index:4;width:min(100%,max(calc(var(--pw) * 1.5),280px));transform:translateX(-50%);display:grid}
-.fan-call p{grid-area:1/1;display:grid;justify-items:center;gap:6px;padding:14px 18px 15px;text-align:center;
-  border:1px solid var(--rule-2);border-radius:18px;background:color-mix(in srgb,var(--paper) 80%,transparent);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);
-  box-shadow:0 30px 60px -30px var(--shadow);opacity:0;transform:translateY(10px) scale(.97);transition:opacity .25s,transform .4s var(--ease);pointer-events:none}
-.fan-call p.on{opacity:1;transform:none;transition:opacity .5s var(--ease) .45s,transform .7s var(--ease) .45s}
-.fan-call strong{font-family:var(--num);font-weight:600;font-size:clamp(24px,calc(var(--pw) * .13),36px);line-height:1;letter-spacing:-.01em;color:var(--ink);white-space:nowrap;font-feature-settings:"tnum" 1,"lnum" 1}
-.fan-call .loss strong{color:var(--loss)}
-.fan-call .ok strong{color:var(--ok)}
-.fan-call em{font-style:normal;font-size:13.5px;line-height:1.4;color:var(--ink-2)}
-.odo{display:inline-flex;align-items:flex-start;--lh:1.08em;line-height:var(--lh)}
-.od{display:inline-block;height:var(--lh);overflow:hidden}
-.od>span{display:flex;flex-direction:column;transition:transform 0s .6s}
-.od i{display:block;height:var(--lh);font-style:normal;text-align:center}
-.od-s{white-space:pre}
-.fan-call p.on .od>span{transform:translateY(calc(var(--d) * var(--lh) * -1));transition:transform 1.5s cubic-bezier(.16,.84,.24,1) calc(var(--i) * 70ms + .15s)}
-
-/* полоса под веером: когда что появится, у текущего экрана бежит время до следующего */
-.fan-rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(12px,1.6vw,24px);margin-top:6px}
-.fan-rail button{position:relative;display:grid;align-content:start;text-align:left;padding:14px 0 4px;border:0;border-top:1px solid var(--rule);background:none;color:inherit;font:inherit;cursor:pointer}
-.fan-rail button::before{content:"";position:absolute;left:0;top:-1px;height:1.5px;width:0;background:var(--acc)}
-.fan-rail button.on::before{width:100%}
-.fan-rail button.on.run::before{width:0;animation:fill var(--fan-t,5.6s) linear forwards}
-@keyframes fill{to{width:100%}}
-.fan-rail em{font-style:normal;font-size:12.5px;line-height:1.35;color:var(--ink-3);margin-bottom:4px}
-.fan-rail strong{font-weight:500;font-size:15px;line-height:1.3;color:var(--ink-3);transition:color .3s}
-.fan-rail button.on strong,.fan-rail button:hover strong{color:var(--ink)}
-.fan-note{margin-top:8px;font-size:12.5px;color:var(--ink-4)}
-@media(max-width:420px){.fan-rail em{display:none}.fan-rail strong{font-size:13.5px}
-  .hero h1{font-size:clamp(21px,6.4vw,27px)}.hero-cta .lnk{display:none}}   /* на узком телефоне веер поднимается в первый экран */
+/* окна кабинета: итог с сообщением Closery, ниже справа первый шаг, ниже слева сделки из CRM. Каскад, каждое окно заходит
+   на нижний край предыдущего. Появляются по очереди: окно, слова сообщения, полосы прибыли, строки сделок. Дальше сделки
+   по одной получают задачу на завтра, как по кнопке в кабинете. Без скриптов и при reduce motion всё видно сразу */
+.desk{position:relative;min-width:0;font-family:var(--ui);color:var(--ink);font-variant-numeric:tabular-nums}
+.dk{position:relative;display:grid;font-size:13px;line-height:1.45}
+.dw{position:relative;background:var(--bg);border:1px solid var(--rule-2);border-radius:12px;overflow:hidden;
+  box-shadow:0 1px 2px var(--shadow),0 18px 40px -22px var(--shadow),0 50px 90px -50px var(--shadow);transition:opacity .7s var(--ease),transform .9s var(--ease)}
+.dw-a{width:88%;z-index:1}
+.dw-b{width:58%;justify-self:end;margin-top:-22px;z-index:2;padding:16px 18px 24px}
+.dw-d{width:92%;margin-top:-12px;z-index:3}
+.dw-bar{display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-bottom:1px solid var(--rule);font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden}
+.dw-bar s{text-decoration:none;color:var(--ink-4)}
+.dw-bar b{font-weight:500;color:var(--ink);overflow:hidden;text-overflow:ellipsis}
+.dw-bar em{margin-left:auto;flex:none;font-style:normal;font-size:11.5px;padding:1px 8px;border-radius:99px;background:var(--bg-2);color:var(--ink-3)}
+.dk-mk{display:inline-flex;align-items:center;gap:7px;flex:none;font-family:var(--brand);font-weight:800;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink)}
+.dk-mk i{width:7px;height:7px;border-radius:2px;background:var(--ok)}
+.dk-msg{padding:16px 18px 6px}
+.dk-who{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink-3);margin-bottom:6px}
+.dk-txt{font-size:14px;line-height:1.5;color:var(--ink);max-width:52ch}
+.dk-pf{margin:10px 18px 30px;border-top:1px solid var(--rule)}
+.dk-pf>p{padding:10px 0 2px;font-size:12px;color:var(--ink-3)}
+.dk-pf ol{list-style:none;margin:0;padding:0}
+.dk-pf li{display:grid;grid-template-columns:minmax(0,1fr) 34% 92px;align-items:center;gap:14px;height:33px;border-bottom:1px solid var(--rule)}
+.dk-pf li:last-child{border-bottom:0}
+.dk-pf li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dk-pf li i{position:relative;height:8px}
+.dk-pf li i::before{content:"";position:absolute;top:0;bottom:0;left:var(--x);width:var(--l);border-radius:2px;background:var(--mid,#CBCBC5);transform-origin:left;transition:transform 1s var(--ease) calc(var(--i) * 140ms)}
+.dk-pf li.up i::before{background:var(--ok)}
+.dk-pf li.can i::before{background:var(--ink)}
+.dk-pf li b{justify-self:end;font-weight:500;white-space:nowrap;color:var(--ink-2)}
+.dk-pf li.up b{color:var(--ok)}
+.dk-pf li.can span,.dk-pf li.can b{font-weight:600;color:var(--ink)}
+.dk-tags{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink-3)}
+.dk-tag{padding:2px 8px;border-radius:5px;background:color-mix(in srgb,var(--ok) 13%,transparent);color:var(--ok);font-weight:500}
+.dk-h{display:block;margin-top:10px;font-size:15.5px;font-weight:600;letter-spacing:-.01em}
+.dk-k{margin-top:10px;font-size:12px;color:var(--ink-3)}
+.dk-p{margin-top:2px;color:var(--ink-2)}
+.dk-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:7px 12px;border:1px solid var(--rule-2);border-radius:8px;font-weight:500;font-size:13px}
+.dk-btn svg{width:13px;height:13px}
+.dw-d ul{list-style:none;margin:0;padding:0 14px}
+.dw-d li{display:grid;grid-template-columns:minmax(0,1.4fr) 78px minmax(0,1fr) 88px;align-items:center;gap:12px;height:38px;border-bottom:1px solid var(--rule);transition:opacity .6s var(--ease),transform .7s var(--ease)}
+.dw-d li:last-child{border-bottom:0}
+.dw-d li>*{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dw-d li b{font-weight:500}
+.dw-d li span{color:var(--ink-3)}
+.dw-d li em{display:grid;font-style:normal;color:var(--loss)}
+.dw-d li em>*{grid-area:1/1;text-decoration:none;overflow:hidden;text-overflow:ellipsis;transition:opacity .4s,transform .5s var(--ease)}
+.dw-d li em u{justify-self:start;padding:0 7px;border-radius:5px;background:color-mix(in srgb,var(--ok) 13%,transparent);color:var(--ok);opacity:0;transform:translateY(6px)}
+.dw-d li.done em s{opacity:0;transform:translateY(-6px)}
+.dw-d li.done em u{opacity:1;transform:none}
+.dw-d li strong{justify-self:end;font-weight:500}
+.fan-note{margin-top:12px;font-size:12.5px;color:var(--ink-4)}
+/* сценарий: без классов всё спрятано, классы s1–s4 включает main.js по очереди */
+.js .desk:not(.s1) .dw-a,.js .desk:not(.s3) .dw-b,.js .desk:not(.s4) .dw-d{opacity:0;transform:translateY(18px)}
+.js .desk:not(.s1) .dk-txt span{opacity:0}
+.dk-txt span{transition:opacity .35s calc(var(--w) * 34ms + .35s)}
+.js .desk:not(.s2) .dk-pf li i::before{transform:scaleX(0)}
+.js .desk:not(.s2) .dk-pf li b{opacity:0}
+.dk-pf li b{transition:opacity .6s calc(var(--i) * 140ms + .5s)}
+.js .desk:not(.s4) .dw-d li{opacity:0;transform:translateY(8px)}
+.dw-d li{transition-delay:calc(var(--i) * 120ms + .3s)}
+@media(max-width:980px){.desk{order:5;margin-top:clamp(24px,5vw,40px);width:100%;max-width:640px;justify-self:center}}
+@media(max-width:600px){
+  .dk{font-size:12px}
+  .dw-a{width:100%}.dw-b{width:90%;padding:14px}.dw-d{width:96%;margin-left:0}
+  .dk-msg{padding:14px 14px 4px}.dk-txt{font-size:13px}.dk-pf{margin:8px 14px 28px}
+  .dk-pf li{grid-template-columns:minmax(0,1fr) 14% 76px;gap:10px;height:31px}
+  .dw-bar{padding:0 12px;height:34px}.dw-bar s{display:none}
+  .dw-d ul{padding:0 12px}
+  .dw-d li{grid-template-columns:minmax(0,1fr) 84px;grid-template-rows:auto auto;row-gap:0;height:auto;padding:7px 0}
+  .dw-d li span{display:none}.dw-d li em{grid-column:1;grid-row:2;font-size:11.5px}.dw-d li strong{grid-row:1/3;grid-column:2}
+}
+@media(max-width:420px){.hero h1{font-size:clamp(21px,6.4vw,27px)}.hero-cta .lnk{display:none}}
+@media(max-width:400px){.dk-pf li{height:auto;min-height:31px;padding:6px 0;line-height:1.3}.dk-pf li span{white-space:normal}}
 @media(max-width:360px){.hero .kick{font-size:12.5px}.hero .kick::before{display:none}}   /* «Платформа для бизнеса, меняющая прибыль» в одну строку на 320 */
 
 /* заголовок обложки в два тона: обещание тёмным, как именно светлее */
@@ -284,10 +291,10 @@ html[data-theme="light"] .ph[data-pos="1"],html[data-theme="light"] .ph[data-pos
 .pt{position:relative;padding-right:var(--cg)}
 .pt-lk{display:flex;align-items:flex-end;min-height:2.9em;padding-bottom:16px;font-size:14px;line-height:1.4;color:var(--loss)}
 .pt-lk.pay{color:var(--ink-3)}
-.pt-ln{position:relative;height:1px;margin-right:calc(var(--cg) * -1);background:var(--rule-2)}
+.pt-ln{display:block;position:relative;height:1px;margin-right:calc(var(--cg) * -1);background:var(--rule-2)}
 .pt:last-child .pt-ln{margin-right:0}
 .pt-ln::before{content:"";position:absolute;left:0;top:-5px;width:11px;height:11px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 5px var(--bg)}
-.pt h3{margin-top:24px;font-family:inherit;font-weight:500;font-size:17px;letter-spacing:0}
+.pt h3{margin-top:44px;font-family:inherit;font-weight:500;font-size:17px;letter-spacing:0}
 .pt-n{margin-top:12px;font-family:var(--num);font-weight:600;font-size:clamp(36px,3.6vw,56px);line-height:1;letter-spacing:-.01em;font-feature-settings:"tnum" 1,"lnum" 1}
 .pt-c{margin-top:6px;font-size:14px;color:var(--ink-3)}
 .pt-f{margin-top:18px;padding-top:14px;border-top:1px solid var(--rule);font-size:14px;line-height:1.55;color:var(--ink-2)}
@@ -327,6 +334,20 @@ html[data-theme="light"] .ph[data-pos="1"],html[data-theme="light"] .ph[data-pos
 .steps b{display:block;font-weight:500;font-size:18px;line-height:1.3}
 .steps p{margin-top:8px;font-size:15px;line-height:1.6;color:var(--ink-2)}
 .st-fig{position:relative;margin:0}
+/* окно расчёта в «Как это работает»: две ступени раскрыты, как по нажатию в кабинете */
+.ck-fig{margin:0}
+.ck-w{font-family:var(--ui);font-size:13.5px;line-height:1.5;font-variant-numeric:tabular-nums}
+.ck-h{display:flex;justify-content:space-between;gap:16px;padding:14px 20px 10px;font-size:12.5px;color:var(--ink-3)}
+.ck-h span{color:var(--ink-4)}
+.ck{margin:0 20px;padding:14px 0 16px;border-top:1px solid var(--rule)}
+.ck:last-child{margin-bottom:6px}
+.ck-r{display:flex;justify-content:space-between;gap:16px;font-size:14.5px}
+.ck-r b{font-weight:500}
+.ck-r em{font-style:normal;font-weight:500;color:var(--ok);white-space:nowrap}
+.ck-c{margin-top:8px;color:var(--ink-2)}
+.ck-f{margin-top:4px;color:var(--ink-3)}
+.ck-x{margin-top:8px;padding-left:12px;border-left:2px solid var(--rule-2);color:var(--ink-2)}
+@media(max-width:600px){.ck-h span{display:none}.ck-h,.ck{padding-left:0;padding-right:0}.ck-h{margin:0 14px}.ck{margin:0 14px}.ck-w{font-size:12.5px}}
 .st-win,.st-float{border:1px solid var(--rule-2);border-radius:16px;overflow:hidden;background:var(--bg);box-shadow:0 40px 80px -48px var(--shadow)}
 .st-bar{display:flex;align-items:center;gap:10px;height:38px;padding:0 14px;border-bottom:1px solid var(--rule);background:var(--paper);font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden}
 .st-bar i{flex:none;width:7px;height:7px;border-radius:2px;background:var(--ok)}
@@ -352,6 +373,35 @@ html[data-theme="light"] .ph[data-pos="1"],html[data-theme="light"] .ph[data-pos
 .card .st-shot{position:relative;flex:1;min-height:clamp(220px,20vw,300px);overflow:hidden}
 .card .st-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left top}
 @media(max-width:980px){.more{grid-template-columns:minmax(0,1fr);row-gap:20px}.more>:first-child{margin-right:0}}
+/* окна карточек в HTML: сделки строками, конкуренты рычагами, второй раскрыт */
+.cw{font-family:var(--ui);font-size:13.5px;line-height:1.45;background:var(--bg);font-variant-numeric:tabular-nums}
+.cw-b{padding:4px 18px 0}
+.cw-tabs{display:flex;gap:6px;padding:10px 0;overflow:hidden;white-space:nowrap;font-size:12.5px;color:var(--ink-3)}
+.cw-tabs>*{padding:3px 10px;border-radius:7px}
+.cw-tabs b{font-weight:500;background:var(--ink);color:var(--bg)}
+.cw-tabs span{background:var(--bg-2)}
+.cw-deals{list-style:none;margin:0;padding:0}
+.cw-deals li{display:grid;grid-template-columns:minmax(0,1fr) auto 92px;align-items:center;gap:14px;padding:10px 0;border-top:1px solid var(--rule)}
+.cw-deals p{display:grid;min-width:0}
+.cw-deals p>*{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cw-deals b{font-weight:500}
+.cw-deals span{font-size:12.5px;color:var(--ink-3)}
+.cw-r{justify-items:end}
+.cw-r strong{font-weight:500;color:var(--loss)}
+.cw-deals i{justify-self:end;font-style:normal;font-size:12px;padding:2px 8px;border-radius:5px;background:var(--bg-2);color:var(--ink-3);white-space:nowrap}
+.cw-deals i.no{background:color-mix(in srgb,var(--loss) 11%,transparent);color:var(--loss)}
+.cw-k{padding:12px 0 8px;font-size:12.5px;color:var(--ink-3)}
+.cw-lev{list-style:none;margin:0;padding:0}
+.cw-lev li{padding:11px 0;border-top:1px solid var(--rule)}
+.cw-lh{display:flex;gap:12px;align-items:baseline}
+.cw-lh i{font-style:normal;color:var(--ink-4);width:12px;flex:none}
+.cw-lh b{font-weight:500}
+.cw-lev li>p:not(.cw-lh){margin:8px 0 0 24px;color:var(--ink-2)}
+.cw-lev .cw-st{padding-left:12px;border-left:2px solid var(--ok)}
+.cw-st b{display:block;font-weight:500;color:var(--ok)}
+.cw-lev .cw-src{font-size:12.5px;color:var(--ink-3)}
+@media(max-width:600px){.cw-b{padding:2px 14px 0}.cw{font-size:12.5px}.cw-deals li{grid-template-columns:minmax(0,1fr) auto}.cw-deals i{display:none}.cw-deals p>span{white-space:normal}.cw-tabs span:nth-of-type(3){display:none}}
+@media(max-width:400px){.cw-tabs span:nth-of-type(2){display:none}}
 @media(max-width:600px){.card .st-shot{min-height:0;aspect-ratio:390/300}}
 
 /* ── МРТ: ночная полоса на всю ширину, слева цена и запись, справа с 50% шесть систем по четверти ── */
@@ -528,7 +578,7 @@ main{counter-reset:sec}
 
 <main id="top">
 
-<!-- обложка: найдём, посчитаем, покажем. Веер из трёх телефонов: сколько, где, как вернуть -->
+<!-- обложка: найдём, посчитаем, покажем. Справа окна кабинета: итог с сообщением Closery, первый шаг, сделки из CRM -->
 <section class="w hero" id="hero">
   <div class="hx">
     <div class="hx-t">
@@ -541,7 +591,7 @@ main{counter-reset:sec}
       </div>
       <p class="cab-why rv">Нужна только регистрация, доступ откроется сразу.</p>
     </div>
-    <div class="fan rv" id="fan"><div class="fan-box"><figure class="ph" data-pos="0" aria-hidden="true"><span class="ph-scr"><span class="ph-sb" aria-hidden="true"><b>9:41</b><i></i><span><svg class="ph-sig" viewBox="0 0 17 11" width="17" height="11"><rect x="0" y="7" width="3" height="4" rx="1.1"/><rect x="4.67" y="5" width="3" height="6" rx="1.1"/><rect x="9.33" y="2.6" width="3" height="8.4" rx="1.1"/><rect x="14" y="0" width="3" height="11" rx="1.1"/></svg><svg class="ph-bat" viewBox="0 0 28 13" width="28" height="13"><rect x=".5" y=".5" width="24" height="12" rx="3.9" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="2" y="2" width="21" height="9" rx="2.4"/><path d="M26 4.6a2.1 2.1 0 0 1 0 3.8z" fill-opacity=".4"/></svg></span></span><span class="ph-feed"><img class="td" src="/media/cab/phone-total-dark.webp" width="390" height="1100" alt="" loading="lazy" decoding="async"><img class="tl" src="/media/cab/phone-total-light.webp" width="390" height="1100" alt="" loading="lazy" decoding="async"></span></span></figure><figure class="ph" data-pos="1" aria-hidden="true"><span class="ph-scr"><span class="ph-sb" aria-hidden="true"><b>9:41</b><i></i><span><svg class="ph-sig" viewBox="0 0 17 11" width="17" height="11"><rect x="0" y="7" width="3" height="4" rx="1.1"/><rect x="4.67" y="5" width="3" height="6" rx="1.1"/><rect x="9.33" y="2.6" width="3" height="8.4" rx="1.1"/><rect x="14" y="0" width="3" height="11" rx="1.1"/></svg><svg class="ph-bat" viewBox="0 0 28 13" width="28" height="13"><rect x=".5" y=".5" width="24" height="12" rx="3.9" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="2" y="2" width="21" height="9" rx="2.4"/><path d="M26 4.6a2.1 2.1 0 0 1 0 3.8z" fill-opacity=".4"/></svg></span></span><span class="ph-feed"><img class="td" src="/media/cab/phone-where-dark.webp" width="390" height="1100" alt="" loading="lazy" decoding="async"><img class="tl" src="/media/cab/phone-where-light.webp" width="390" height="1100" alt="" loading="lazy" decoding="async"></span></span></figure><figure class="ph" data-pos="2" aria-hidden="true"><span class="ph-scr"><span class="ph-sb" aria-hidden="true"><b>9:41</b><i></i><span><svg class="ph-sig" viewBox="0 0 17 11" width="17" height="11"><rect x="0" y="7" width="3" height="4" rx="1.1"/><rect x="4.67" y="5" width="3" height="6" rx="1.1"/><rect x="9.33" y="2.6" width="3" height="8.4" rx="1.1"/><rect x="14" y="0" width="3" height="11" rx="1.1"/></svg><svg class="ph-bat" viewBox="0 0 28 13" width="28" height="13"><rect x=".5" y=".5" width="24" height="12" rx="3.9" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="2" y="2" width="21" height="9" rx="2.4"/><path d="M26 4.6a2.1 2.1 0 0 1 0 3.8z" fill-opacity=".4"/></svg></span></span><span class="ph-feed"><img class="td" src="/media/cab/phone-start-dark.webp" width="390" height="1100" alt="" loading="lazy" decoding="async"><img class="tl" src="/media/cab/phone-start-light.webp" width="390" height="1100" alt="" loading="lazy" decoding="async"></span></span></figure><div class="fan-call" aria-live="polite"><p class="ok on" data-i="0"><strong>+64%</strong><em>валовая прибыль в месяц: 945 000 → 1 550 000 ₽</em></p><p class="ok" data-i="1"><strong>+605 000 ₽</strong><em>в месяц даст первая ступень: разговоры без оплаты</em></p><p class="" data-i="2"><strong>12,5% → 20,5%</strong><em>оплат после разговора, первый шаг на завтра</em></p></div></div><div class="fan-rail" role="tablist" aria-label="Что покажет кабинет"><button type="button" role="tab" data-t="0" aria-selected="true" class="on"><em>Сколько</em><strong>Прибыль сейчас и может быть</strong></button><button type="button" role="tab" data-t="1" aria-selected="false"><em>Где</em><strong>Ступень, с которой начать</strong></button><button type="button" role="tab" data-t="2" aria-selected="false"><em>Как вернуть</em><strong>Первый шаг на завтра</strong></button></div><p class="fan-note">Экраны кабинета, пример на демо-данных</p></div>
+    <div class="desk" id="desk" role="img" aria-label="Окна кабинета на примере: валовая прибыль 907 000 рублей в месяц, может быть 1 546 000, ступени роста, первый шаг на сегодня и сделки из CRM, которые остывают"><div class="dk" aria-hidden="true"><div class="dw dw-a"><div class="dw-bar"><s>Кабинет&nbsp;/</s><b>Итог диагностики</b><em>Пример</em></div><div class="dk-msg"><p class="dk-who"><span class="dk-mk"><i></i>Closery</span><span>итог по вашим ответам</span></p><p class="dk-txt"><span style="--w:0">Сейчас </span><span style="--w:1">компания </span><span style="--w:2">зарабатывает </span><span style="--w:3">907 000 ₽ </span><span style="--w:4">валовой </span><span style="--w:5">прибыли </span><span style="--w:6">в </span><span style="--w:7">месяц. </span><span style="--w:8">Больше </span><span style="--w:9">всего </span><span style="--w:10">прибыли </span><span style="--w:11">теряется </span><span style="--w:12">здесь: </span><span style="--w:13">без </span><span style="--w:14">разговора </span><span style="--w:15">остаются </span><span style="--w:16">54 </span><span style="--w:17">заявки </span><span style="--w:18">из </span><span style="--w:19">120 </span><span style="--w:20">в </span><span style="--w:21">месяц. </span></p></div><div class="dk-pf"><p>Прибыль в месяц</p><ol><li class="now" style="--i:0"><span>Сейчас</span><i style="--x:0%;--l:58.7%"></i><b>14,4 оплаты</b></li><li class="up" style="--i:1"><span>Заявка ждёт первого ответа</span><i style="--x:58.7%;--l:21.3%"></i><b>+330 000 ₽</b></li><li class="up" style="--i:2"><span>База не возвращается</span><i style="--x:80.0%;--l:10.5%"></i><b>+163 000 ₽</b></li><li class="up" style="--i:3"><span>Разговоры без оплаты</span><i style="--x:90.5%;--l:9.5%"></i><b>+146 000 ₽</b></li><li class="can" style="--i:4"><span>Может быть</span><i style="--x:0%;--l:100%"></i><b>1 546 000 ₽</b></li></ol></div></div><div class="dw dw-b"><p class="dk-tags"><span class="dk-tag">Первый шаг</span><span>Ступень 1 из 3</span></p><b class="dk-h">Заявка ждёт первого ответа</b><p class="dk-k">С чего начать</p><p class="dk-p">Сегодня посмотрите, сколько вчерашних заявок до сих пор без звонка: в CRM, почте или мессенджерах.</p><span class="dk-btn">Открыть решение <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span></div><div class="dw dw-d"><div class="dw-bar"><b>21 сделка на 24 820 000 ₽ остывает</b><em>amoCRM</em></div><ul><li style="--i:0"><b>ООО «ТрансНефтеСервис»</b><span>Анна С.</span><em><s>12 дн. без касаний</s><u>задача на завтра</u></em><strong>5 400 000 ₽</strong></li><li style="--i:1"><b>АО «Росагромаш-Сервис»</b><span>Дмитрий О.</span><em><s>15 дн. без касаний</s><u>задача на завтра</u></em><strong>4 700 000 ₽</strong></li><li style="--i:2"><b>АО «Уралхим-Пласт»</b><span>Анна С.</span><em><s>нет следующего шага</s><u>задача на завтра</u></em><strong>2 900 000 ₽</strong></li></ul></div></div><p class="fan-note">Окна кабинета, пример на демо-данных</p></div>
   </div>
 </section>
 
@@ -549,20 +599,19 @@ main{counter-reset:sec}
 <section class="sec" id="leaks">
   <div class="w">
     <div class="head"><div><p class="kick rv">Где теряются деньги</p><h2 class="rv">Деньги теряются в&nbsp;том, за&nbsp;что вы уже заплатили</h2></div><p class="lede rv">За рекламу, заявку и первую покупку вы уже заплатили. Считаем, сколько прибыли теряется на каждом переходе.</p></div>
-    <div class="path rv"><div class="pt"><p class="pt-lk pay">Вы заплатили за рекламу</p><i class="pt-ln" aria-hidden="true"></i><h3>Заявка</h3><p class="pt-n">200</p><p class="pt-c">заявок в месяц</p><p class="pt-f">Чек 180 000 ₽, маржа 35%, цикл сделки 30 дней</p></div><div class="pt"><p class="pt-lk">−80 заявок без разговора</p><i class="pt-ln" aria-hidden="true"></i><h3>Разговор</h3><p class="pt-n">120</p><p class="pt-c">дошли до разговора</p><p class="pt-f">Считаем, сколько оплат дали бы эти разговоры по вашей же конверсии, в прибыли</p></div><div class="pt"><p class="pt-lk">−105 разговоров без оплаты</p><i class="pt-ln" aria-hidden="true"></i><h3>Оплата</h3><p class="pt-n">15</p><p class="pt-c">оплат в месяц</p><p class="pt-f">Берём осторожный рост конверсии из разговора в оплату и умножаем на чек и маржу</p></div><div class="pt"><p class="pt-lk">−80% клиентов не вернулись</p><i class="pt-ln" aria-hidden="true"></i><h3>Повторная покупка</h3><p class="pt-n">20%</p><p class="pt-c">покупают снова за год</p><p class="pt-f">Сравниваем с ориентиром повторных для вашего рынка и считаем недобор в прибыли</p></div></div>
+    <div class="path rv"><div class="pt"><p class="pt-lk pay">Вы заплатили за рекламу</p><i class="pt-ln" aria-hidden="true"></i><h3>Заявка</h3><p class="pt-n">120</p><p class="pt-c">заявок в месяц</p><p class="pt-f">Чек 180 000 ₽, маржа 35%</p></div><div class="pt"><p class="pt-lk">−54 заявки без разговора</p><i class="pt-ln" aria-hidden="true"></i><h3>Разговор</h3><p class="pt-n">66</p><p class="pt-c">дошли до разговора</p><p class="pt-f">Считаем, сколько оплат дали бы эти разговоры по вашей же конверсии, в прибыли</p></div><div class="pt"><p class="pt-lk">−52 разговора без оплаты</p><i class="pt-ln" aria-hidden="true"></i><h3>Оплата</h3><p class="pt-n">14,4</p><p class="pt-c">оплаты в месяц</p><p class="pt-f">Берём осторожный рост конверсии из разговора в оплату и умножаем на чек и маржу</p></div><div class="pt"><p class="pt-lk">−88% клиентов не вернулись</p><i class="pt-ln" aria-hidden="true"></i><h3>Повторная покупка</h3><p class="pt-n">12%</p><p class="pt-c">покупают снова за год</p><p class="pt-f">Сравниваем с ориентиром повторных для вашего рынка и считаем недобор в прибыли</p></div></div>
     <p class="path-note rv">Пример на демо-данных. У вас считаем по вашим цифрам.</p>
     <div class="rules rv"><p class="c4"><b>Считаем осторожно</b>Формула под каждой строкой, ориентир под ваш рынок, чек и цикл сделки.</p><div><span class="ru-n">× 35%</span><b class="ru-t">Считаем в прибыли</b><p>Каждую ступень умножаем на вашу маржу. Это деньги, которые останутся в компании.</p></div><div><span class="ru-n">+8 из 100</span><b class="ru-t">Осторожный рост</b><p>За раз добавляем не больше 8 оплат на 100 разговоров и не выше ориентира для вашего рынка.</p></div><div><span class="ru-n">70%</span><b class="ru-t">Потолок роста</b><p>Рост не больше 70% вашей валовой прибыли. Больший рост модель не обещает.</p></div></div>
   </div>
 </section>
 
-<!-- как это работает: три шага после регистрации, окно итога и первая ступень -->
+<!-- как это работает: три шага после регистрации, окно расчёта двух ступеней -->
 <section class="sec" id="how">
   <div class="w">
-    <div class="head"><div><p class="kick rv">Как это работает</p><h2 class="rv">Итог в&nbsp;рублях сразу после ответов</h2></div><p class="lede rv">Так выглядят экраны, которые откроются у вас. Компании и суммы на кадрах из демо-данных.</p></div>
+    <div class="head"><div><p class="kick rv">Как это работает</p><h2 class="rv">Итог в&nbsp;рублях сразу после ответов</h2></div><p class="lede rv">Так выглядит расчёт, который откроется у вас. Цифры примера из демо-данных.</p></div>
     <div class="how">
       <ol class="steps rv"><li><div><b>Регистрация</b><p>Имя, почта, компания, телефон и пароль. Доступ открывается сразу.</p></div></li><li><div><b>14 вопросов</b><p>Чек, маржа, цикл сделки, заявки, разговоры, оплаты, повторные покупки и что болит. Если подключите CRM, часть цифр подставим из неё.</p></div></li><li><div><b>Итог в рублях</b><p>Валовая прибыль в месяц сейчас и сколько может быть. Ниже ступени роста, у каждой цена в месяц и формула, первая с шагом на завтра. Копия придёт на почту.</p></div></li></ol>
-      <figure class="st-fig rv"><div class="st-win"><div class="st-bar"><i></i><s>Кабинет&nbsp;/</s><b>Итог диагностики</b><em>Пример</em></div><div class="st-shot"><picture class="td"><source media="(max-width:600px)" srcset="/media/cab/total-m-dark.webp"><img src="/media/cab/total-d-dark.webp" alt="Итог диагностики: валовая прибыль 945 000 ₽ в месяц, может быть 1 550 000 ₽" loading="lazy" decoding="async"></picture><picture class="tl"><source media="(max-width:600px)" srcset="/media/cab/total-m-light.webp"><img src="/media/cab/total-d-light.webp" alt="Итог диагностики: валовая прибыль 945 000 ₽ в месяц, может быть 1 550 000 ₽" loading="lazy" decoding="async"></picture></div></div>
-        <div class="st-float"><div class="st-shot"><picture class="td"><source media="(max-width:600px)" srcset="/media/cab/sols-m-dark.webp"><img src="/media/cab/sols-d-dark.webp" alt="Первая ступень: разговоры без оплаты, +605 000 ₽ в месяц и первый шаг" loading="lazy" decoding="async"></picture><picture class="tl"><source media="(max-width:600px)" srcset="/media/cab/sols-m-light.webp"><img src="/media/cab/sols-d-light.webp" alt="Первая ступень: разговоры без оплаты, +605 000 ₽ в месяц и первый шаг" loading="lazy" decoding="async"></picture></div></div></figure>
+      <figure class="st-fig ck-fig rv"><div class="dw ck-w"><div class="dw-bar"><s>Кабинет&nbsp;/</s><b>Итог диагностики</b><em>Пример</em></div><p class="ck-h">Прибыль в месяц<span>нажмите на строку, чтобы увидеть расчёт</span></p><div class="ck"><p class="ck-r"><b>Заявка ждёт первого ответа</b><em>+330 000 ₽</em></p><p class="ck-c">Без разговора остаются 54 заявки из 120 в месяц</p><p class="ck-f">= 24 разговора × 21,8% закрытия × 180 000 ₽ × 35% маржи</p><p class="ck-x">Если до разговора будут доходить 75% заявок, это ещё 24 разговора в месяц. Закрываться они будут так же, как сейчас.</p></div><div class="ck"><p class="ck-r"><b>База не возвращается</b><em>+163 000 ₽</em></p><p class="ck-c">Повторно покупают 12 из 100 клиентов за год</p><p class="ck-f">= 173 клиента за год × 18% × 180 000 ₽ × 35% маржи ÷ 12 мес</p><p class="ck-x">Столько прибыли добавится, если возвращаться будут 30% клиентов, как в среднем по вашему рынку.</p></div></div></figure>
     </div>
   </div>
 </section>
@@ -571,7 +620,7 @@ main{counter-reset:sec}
 <section class="sec" id="more">
   <div class="w">
     <div class="head"><div><p class="kick rv">Дальше</p><h2 class="rv">Ещё два инструмента в&nbsp;том же кабинете</h2></div><p class="lede rv">Включаются, когда нужны. За счёт Closery, как и расчёт потерь.</p></div>
-    <div class="more"><article class="card rv" id="card-deals"><div class="card-t"><p class="card-k">Если подключите CRM</p><h3>Каждое утро знаете, какие деньги остывают в сделках</h3><p>amoCRM или Битрикс24. Кабинет поднимает наверх сделки без касаний, без задачи и с возражением без ответа. У каждой сумма под риском и готовое действие.</p><a class="lnk" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=crm">Подключить CRM →</a></div><div class="st-win"><div class="st-bar"><i></i><s>Кабинет&nbsp;/</s><b>Разбор сделок</b><em>Пример</em></div><div class="st-shot"><picture class="td"><source media="(max-width:600px)" srcset="/media/cab/deals-m-dark.webp"><img src="/media/cab/deals-d-dark.webp" alt="Разбор сделок: кому звонить сегодня, причина по сделке и кнопки действий" loading="lazy" decoding="async"></picture><picture class="tl"><source media="(max-width:600px)" srcset="/media/cab/deals-m-light.webp"><img src="/media/cab/deals-d-light.webp" alt="Разбор сделок: кому звонить сегодня, причина по сделке и кнопки действий" loading="lazy" decoding="async"></picture></div></div></article><article class="card rv" id="card-cmp"><div class="card-t"><p class="card-k">Когда захотите</p><h3>Три рычага роста по фактам о конкурентах</h3><p>Назовите конкурентов. Сравним их сайты, вакансии и отчётность ФНС и покажем, что из этого сработает у вас.</p><a class="lnk" href="https://lk.closery.ru/register?next=/competitors&amp;utm_source=site&amp;utm_content=competitors">Сразу к конкурентам →</a></div><div class="st-win"><div class="st-bar"><i></i><s>Кабинет&nbsp;/</s><b>Анализ конкурентов</b><em>Пример</em></div><div class="st-shot"><picture class="td"><source media="(max-width:600px)" srcset="/media/cab/cmp-m-dark.webp"><img src="/media/cab/cmp-d-dark.webp" alt="Анализ конкурентов: что делают конкуренты, чего нет у вас и первый шаг на этой неделе" loading="lazy" decoding="async"></picture><picture class="tl"><source media="(max-width:600px)" srcset="/media/cab/cmp-m-light.webp"><img src="/media/cab/cmp-d-light.webp" alt="Анализ конкурентов: что делают конкуренты, чего нет у вас и первый шаг на этой неделе" loading="lazy" decoding="async"></picture></div></div></article></div>
+    <div class="more"><article class="card rv" id="card-deals"><div class="card-t"><p class="card-k">Если подключите CRM</p><h3>Каждое утро знаете, какие деньги остывают в сделках</h3><p>amoCRM или Битрикс24. Кабинет поднимает наверх сделки без касаний, без задачи и с возражением без ответа. У каждой сумма под риском и готовое действие.</p><a class="lnk" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=crm">Подключить CRM →</a></div><div class="st-win cw" role="img" aria-label="Разбор сделок на примере: пять сделок с суммой под риском, менеджером и задачей"><div class="st-bar"><i></i><s>Кабинет&nbsp;/</s><b>Сделки</b><em>Пример</em></div><div class="cw-b"><p class="cw-tabs"><b>Все · 21</b><span>Анна Соколова</span><span>Дмитрий Орлов</span><span>Елена Васильева</span></p><ul class="cw-deals"><li><p><b>ООО «ТрансНефтеСервис»</b><span>Принимают решение · Анна Соколова</span></p><p class="cw-r"><strong>4,63 млн ₽</strong><span>под риском</span></p><i class="">задача 15.10</i></li><li><p><b>АО «Росагромаш-Сервис»</b><span>Переговоры · Дмитрий Орлов</span></p><p class="cw-r"><strong>3,13 млн ₽</strong><span>под риском</span></p><i class="">задача 17.10</i></li><li><p><b>АО «Уралхим-Пласт»</b><span>Согласование договора · Анна Соколова</span></p><p class="cw-r"><strong>2,9 млн ₽</strong><span>под риском</span></p><i class="no">без задачи</i></li><li><p><b>ООО «Фарм-Логистик»</b><span>Согласование договора · Елена Васильева</span></p><p class="cw-r"><strong>1,7 млн ₽</strong><span>под риском</span></p><i class="">задача 14.10</i></li><li><p><b>АО «СибЛесПром»</b><span>Принимают решение · Анна Соколова</span></p><p class="cw-r"><strong>1,41 млн ₽</strong><span>под риском</span></p><i class="no">без задачи</i></li></ul></div></div></article><article class="card rv" id="card-cmp"><div class="card-t"><p class="card-k">Когда захотите</p><h3>Три рычага роста по фактам о конкурентах</h3><p>Назовите конкурентов. Сравним их сайты, вакансии и отчётность ФНС и покажем, что из этого сработает у вас.</p><a class="lnk" href="https://lk.closery.ru/register?next=/competitors&amp;utm_source=site&amp;utm_content=competitors">Сразу к конкурентам →</a></div><div class="st-win cw" role="img" aria-label="Анализ конкурентов на примере: три рычага роста, у второго факт о конкуренте и первый шаг на этой неделе"><div class="st-bar"><i></i><s>Кабинет&nbsp;/</s><b>Конкуренты</b><em>Пример</em></div><div class="cw-b"><p class="cw-k">Три рычага роста · Техноснаб против Норда и Вектора</p><ol class="cw-lev"><li><p class="cw-lh"><i>1</i><b>Конкуренты ловят клиента гарантией на сайте</b></p></li><li class="open"><p class="cw-lh"><i>2</i><b>Конкурент растёт через партнёров вдобавок к рекламе</b></p><p>У Норда есть партнёрская программа. У вас на сайте её не видно.</p><p class="cw-st"><b>Первый шаг на этой неделе</b>Составить условия для партнёров: кто приводит клиента, какой процент и когда платите. Написать десяти знакомым компаниям, чьи клиенты могут стать вашими.</p><p class="cw-src">Источник: сайт компании</p></li><li><p class="cw-lh"><i>3</i><b>Конкурент ставит руководителя продаж</b></p></li></ol></div></div></article></div>
   </div>
 </section>
 
@@ -615,14 +664,14 @@ main{counter-reset:sec}
       </div>
     </div>
     <div class="dx-wrap">
-      <div class="dx tot rv" role="img" aria-label="Итог диагностики на примере: валовая прибыль 945 000 рублей в месяц, может быть 1 550 000 рублей, первая ступень разговоры без оплаты, плюс 605 000 рублей в месяц, первый шаг">
+      <div class="dx tot rv" role="img" aria-label="Итог диагностики на примере: валовая прибыль 907 000 рублей в месяц, может быть 1 546 000 рублей, первая ступень заявка ждёт первого ответа, плюс 330 000 рублей в месяц, первый шаг">
         <p class="dx-k">Итог диагностики · пример на демо-данных</p>
-        <p class="dx-h">Валовая прибыль может быть на 64% больше</p>
-        <div class="dx-pf"><span>Сейчас</span><b>945 000 ₽</b><span>Может быть</span><b class="up">1 550 000 ₽</b><small>В месяц: 15 оплат × 180 000 ₽ × 35% маржи.</small></div>
-        <div class="dx-s"><p class="dx-k">Ступень 1 · начните с неё</p><b>Разговоры без оплаты</b><span><em>+605 000 ₽</em> в месяц</span>
-          <p class="dx-f">= 120 разговоров × 8% × 180 000 ₽ × 35% маржи</p>
-          <div class="dx-bar" style="--a:12.5%;--b:20.5%"><i></i><span>у вас 12,5%</span><span>ориентир 20,5%</span></div>
-          <p><strong>Первый шаг</strong>Сегодня спросите менеджера про два последних разговора без оплаты: что ответил клиент и на какую дату назначен следующий шаг.</p></div>
+        <p class="dx-h">Больше всего прибыли теряется до первого разговора</p>
+        <div class="dx-pf"><span>Сейчас</span><b>907 000 ₽</b><span>Может быть</span><b class="up">1 546 000 ₽</b><small>В месяц: 14,4 оплаты × 180 000 ₽ × 35% маржи.</small></div>
+        <div class="dx-s"><p class="dx-k">Ступень 1 · начните с неё</p><b>Заявка ждёт первого ответа</b><span><em>+330 000 ₽</em> в месяц</span>
+          <p class="dx-f">= 24 разговора × 21,8% закрытия × 180 000 ₽ × 35% маржи</p>
+          <div class="dx-bar" style="--a:55%;--b:75%"><i></i><span>до разговора доходят 55%</span><span>можно 75%</span></div>
+          <p><strong>Первый шаг</strong>Сегодня посмотрите, сколько вчерашних заявок до сих пор без звонка: в CRM, почте или мессенджерах.</p></div>
       </div>
     </div>
   </div>
@@ -670,57 +719,24 @@ main{counter-reset:sec}
     if(!was){it.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
   });});
 
-  /* веер: раз в 5,6 с правый телефон выходит в центр, экран в центре листается вниз, под ним барабанами крутится сумма экрана.
-     Кадры и суммы со стенда кабинета, scripts/site_main/site_shots.py, демо-данные */
-  var fan=document.getElementById('fan');
-  if(fan){
-    var SLIDE=5600,box=fan.querySelector('.fan-box'),phones=$$('.ph',fan),calls=$$('.fan-call p',fan),tabs=$$('.fan-rail button',fan),
-      n=phones.length,at=0,t=null,hold=false,seen=true;
-    calls.forEach(function(p){
-      var s=p.querySelector('strong'),txt=s.textContent,i=0;
-      s.innerHTML='<span class="sr">'+txt+'</span><span class="odo" aria-hidden="true">'+txt.match(/\d|\D+/g).map(function(c){
-        if(!/\d/.test(c))return '<span class="od-s">'+c+'</span>';
-        return '<span class="od" style="--d:'+c+';--i:'+(i++)+'"><span>'+'0123456789'.split('').map(function(x){return '<i>'+x+'</i>';}).join('')+'</span></span>';
-      }).join('')+'</span>';
-    });
-    var vimg=function(ph){return $$('img',ph).filter(function(im){return im.offsetHeight>0;})[0];};
-    var scroll=function(ph){var feed=ph.querySelector('.ph-feed'),im=vimg(ph);if(im)ph.style.setProperty('--sy',Math.max(0,im.offsetHeight-feed.offsetHeight)+'px');};
-    var mark=function(){
-      tabs.forEach(function(b,j){b.classList.toggle('on',j===at);b.classList.remove('run');b.setAttribute('aria-selected',j===at?'true':'false');});
-      if(t){void tabs[at].offsetWidth;tabs[at].classList.add('run');}
+  /* окна обложки: итог и сообщение Closery, полосы прибыли, первый шаг, сделки. Потом раз в 2,6 с следующая сделка получает задачу
+     на завтра, у остальных видна причина, после последней пауза. За кадром стоит. Цифры со стенда кабинета, DESK в build_main.py */
+  var desk=document.getElementById('desk');
+  if(desk){
+    var steps=['s1','s2','s3','s4'],deals=$$('.dw-d li',desk),k=0,lt=null,shown=false;
+    var tick=function(){   // задача у одной сделки за раз: у остальных видна причина
+      deals.forEach(function(li,j){li.classList.toggle('done',j===k);});k=(k+1)%(deals.length+1);
     };
-    var show=function(i){
-      phones.forEach(function(ph,j){
-        var pos=(j-i+n)%n;
-        if(!reduce&&+ph.dataset.pos===2&&pos===1){   // левый уходит направо позади центрального
-          ph.classList.add('back');
-          ph.addEventListener('animationend',function done(){ph.removeEventListener('animationend',done);ph.classList.remove('back');});
-        }
-        ph.dataset.pos=pos;ph.classList.toggle('live',pos===0);if(pos===0)scroll(ph);
-      });
-      calls.forEach(function(c,j){c.classList.toggle('on',j===i);});
+    var loop=function(on){clearInterval(lt);lt=null;if(on&&!reduce)lt=setInterval(tick,2600);};
+    var play=function(){
+      if(shown)return;shown=true;
+      if(reduce){desk.classList.add.apply(desk.classList,steps);return;}
+      [0,1300,2300,3100].forEach(function(ms,i){setTimeout(function(){desk.classList.add(steps[i]);},ms);});
+      setTimeout(function(){loop(true);},5200);
     };
-    var go=function(i){if(i===at)return;at=i;show(i);mark();};
-    var run=function(){if(t||reduce||hold||!seen)return;t=setInterval(function(){go((at+1)%n);},SLIDE);mark();};
-    var stop=function(){clearInterval(t);t=null;mark();};
-    tabs.forEach(function(b,j){b.onclick=function(){stop();go(j);run();};});
-    phones.forEach(function(ph,j){ph.onclick=function(){if(j!==at){stop();go(j);run();}};});
-    box.onmouseenter=function(){hold=true;stop();};
-    box.onmouseleave=function(){hold=false;box.style.removeProperty('--rx');box.style.removeProperty('--ry');run();};
-    if(!reduce&&matchMedia('(hover: hover)').matches){   // веер чуть поворачивается за курсором
-      box.onmousemove=function(e){
-        var r=box.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-        box.style.setProperty('--ry',(x*9).toFixed(2)+'deg');box.style.setProperty('--rx',(-y*6).toFixed(2)+'deg');
-      };
-    }
-    fan.style.setProperty('--fan-t',SLIDE+'ms');
-    $$('img',fan).forEach(function(im){im.addEventListener('load',function(){scroll(phones[at]);});});
-    if('ResizeObserver' in window)new ResizeObserver(function(){scroll(phones[at]);}).observe(box);
-    new MutationObserver(function(){setTimeout(function(){scroll(phones[at]);},50);}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-    if('IntersectionObserver' in window){   // за кадром веер стоит
-      new IntersectionObserver(function(es){seen=es[0].isIntersecting;if(seen)run();else stop();},{threshold:0.2}).observe(fan);
-    }
-    setTimeout(function(){fan.classList.add('on');show(at);run();},reduce?0:300);
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v)play();if(shown&&deals.length)loop(v&&desk.classList.contains('s4'));},{threshold:0.15}).observe(desk);
+    }else play();
   }
 
   /* появление: проверка по прокрутке, наблюдатель — запасной; видимое на первом экране показывается сразу */
@@ -735,7 +751,7 @@ main{counter-reset:sec}
   function onScroll(){
     sweep();
     var h=document.documentElement.scrollHeight-innerHeight;bar.style.setProperty('--p',h>0?Math.min(1,scrollY/h):0);
-    var hb=hero.querySelector('.btn').getBoundingClientRect();   // плашка, пока кнопки обложки не видно: на низком экране она под веером
+    var hb=hero.querySelector('.btn').getBoundingClientRect();   // плашка, пока кнопки обложки не видно: на низком экране она под окнами
     sticky.classList.toggle('show',hb.bottom<0||hb.top>innerHeight-8);
   }
   addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(function(){onScroll();tk=false;});}},{passive:true});
