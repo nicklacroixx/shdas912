@@ -178,6 +178,17 @@ h3{font-family:var(--disp);font-weight:600;letter-spacing:-.03em;line-height:1.1
 .note{font-size:13.5px;color:var(--ink-3)}
 .note a{color:var(--ink-2)}
 .sec{padding-top:clamp(96px,10vw,160px)}
+/* 18.10 анализ ниши: слева зачем, справа игра в карточке. Игра своими токенами, game.css */
+.nx{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,560px);gap:clamp(32px,6vw,112px);align-items:start}
+.nx .lede{margin-top:22px}
+.nx-l{list-style:none;margin-top:32px;border-top:1px solid var(--rule);max-width:520px}
+.nx-l li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:4px 10px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.nx-l i{font:600 15px var(--num);color:var(--ink-3);font-style:normal}
+.nx-l b{font-weight:500}
+.nx-l span{grid-column:2;font-size:14px;color:var(--ink-3)}
+.nx-g{padding:clamp(20px,2.4vw,32px);border:1px solid var(--rule);border-radius:24px;background:var(--paper);min-height:300px;scroll-margin-top:96px}
+@media(max-width:980px){.nx{grid-template-columns:minmax(0,1fr);gap:28px}.nx-l{display:none}}
+@media(max-width:420px){.nx-g{padding:18px 16px;border-radius:20px}}
 .head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(28px,5vw,96px);align-items:end;margin-bottom:clamp(40px,5vw,72px)}
 @media(max-width:980px){.head{grid-template-columns:minmax(0,1fr)}}
 
@@ -903,13 +914,13 @@ html[data-theme="light"] .intro-word{color:#111110}
       <a class="bar-lnk" href="#leaks">Где теряются деньги</a>
       <a class="bar-lnk" href="#mri">Коммерческий МРТ</a>
       <a class="bar-lnk" href="/research/">Исследования</a>
-      <a class="bar-cta" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=header">Посчитать потери</a>
+      <a class="bar-cta" href="#niche">Анализ ниши</a>
       <button class="bar-burger" id="barBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </div>
   <i class="progress" id="progress"></i>
 </header>
-<div class="bar-mobile" id="barMobile"><a href="#leaks">Где теряются деньги</a><a href="#how">Как это работает</a><a href="#mri">Коммерческий МРТ</a><a href="/research/">Исследования</a><a href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=menu">Посчитать потери</a></div>
+<div class="bar-mobile" id="barMobile"><a href="#leaks">Где теряются деньги</a><a href="#how">Как это работает</a><a href="#mri">Коммерческий МРТ</a><a href="/research/">Исследования</a><a href="#niche">Анализ ниши</a></div>
 
 <main id="top">
 
@@ -921,12 +932,29 @@ html[data-theme="light"] .intro-word{color:#111110}
       <h1 class="rv">Найдём, где бизнес теряет <em>деньги</em>. <span>Посчитаем в&nbsp;рублях и&nbsp;покажем, как их&nbsp;вернуть.</span></h1>
       <p class="lede rv">Чаще всего после того, как реклама сработала. Заявке перезвонили на следующий день, КП ушло без ответа, клиент купил один раз и больше о вас не слышал. За&nbsp;14&nbsp;вопросов посчитаем, сколько это стоит вам в&nbsp;месяц.</p>
       <div class="hero-cta rv">
-        <a class="btn" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=hero">Посчитать потери бесплатно <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <a class="btn" href="#niche">Узнать свой рынок <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
         <a class="lnk" href="#leaks">Где утекает ↓</a>
       </div>
-      <p class="cab-why rv">Бесплатно, нужна только регистрация.</p>
+      <p class="cab-why rv">Бесплатно, по открытой отчётности ФНС.</p>
     </div>
     <div class="dv" id="dv"><div class="dv-stage" role="img" aria-label="Экраны кабинета на примере: итог, валовая прибыль 907 000 рублей в месяц, может быть 1 546 000; первый шаг; утреннее сообщение Closery о сделках без касаний; сделки из amoCRM, которые остывают"><div class="dv-fit" aria-hidden="true"><div class="dv-dev d" data-w="680" data-h="450"><div class="d-tb"><i></i><i></i><i></i><span class="d-url">lk.closery.ru<span class="crs"><em class="cr on" data-i="0">/start</em><em class="cr" data-i="1">/solutions/1</em><em class="cr" data-i="2">/deals</em><em class="cr" data-i="3">/deals</em></span></span></div><div class="d-app"><nav class="d-nav"><span class="dk-mk"><i></i>Closery</span><p class="d-co">Кабинет · ООО «Техноснаб»</p><span class="nv on" data-n="0"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M2 12l4-4 3 3 5-6"/></svg>Итог диагностики</span><span class="nv" data-n="1"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 13V9M7 13V4M11 13V7M15 13V10"/></svg>Сделки<b>21</b></span><span class="nv"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M6 7a2.5 2.5 0 1 0 0-.01M1.5 14c.5-2.5 2.3-4 4.5-4s4 1.5 4.5 4M11 4.5a2 2 0 1 1 0 4M12.5 10c1.3.4 2.2 1.7 2.5 4"/></svg>Конкуренты</span><span class="nv"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M8 8m-6 0a6 6 0 1 0 12 0a6 6 0 1 0-12 0M8 8m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0"/></svg>Радар клиентов</span><hr><span class="nv"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M2 5V2h3M11 2h3v3M14 11v3h-3M5 14H2v-3"/></svg>Коммерческий МРТ</span><span class="nv"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 14V3h7v11M10 7h3v7M1.5 14h13M5.5 6h2M5.5 9h2"/></svg>Компания и CRM</span></nav><div class="d-main"><p class="d-crumb"><s>Кабинет&nbsp;/</s><span class="crs"><b class="cr on" data-i="0">Итог диагностики</b><b class="cr" data-i="1">Решения / Первый шаг</b><b class="cr" data-i="2">Сделки / Утренняя сводка</b><b class="cr" data-i="3">Сделки</b></span><em>Пример</em></p><div class="scs"><section class="sc sc0 on" data-i="0"><div class="s-msg"><p class="s-who"><span class="dk-mk"><i></i>Closery</span><span>итог по вашим ответам</span></p><p class="s-type"><span style="--w:0">Сейчас </span><span style="--w:1">компания </span><span style="--w:2">зарабатывает </span><span style="--w:3">907 000 ₽ </span><span style="--w:4">валовой </span><span style="--w:5">прибыли </span><span style="--w:6">в </span><span style="--w:7">месяц. </span><span style="--w:8">Больше </span><span style="--w:9">всего </span><span style="--w:10">прибыли </span><span style="--w:11">теряется </span><span style="--w:12">здесь: </span><span style="--w:13">без </span><span style="--w:14">разговора </span><span style="--w:15">остаются </span><span style="--w:16">54 </span><span style="--w:17">заявки </span><span style="--w:18">из </span><span style="--w:19">120 </span><span style="--w:20">в </span><span style="--w:21">месяц. </span></p></div><div class="s-pf"><p class="s-cap">Прибыль в месяц<span>нажмите на строку, чтобы увидеть расчёт</span></p><ol><li class="now" style="--i:0"><span>Сейчас</span><i style="--x:0%;--l:58.7%"></i><b>14,4 оплаты</b></li><li class="up" style="--i:1"><span>Заявка ждёт первого ответа</span><i style="--x:58.7%;--l:21.3%"></i><b>+330 000 ₽</b></li><li class="up" style="--i:2"><span>База не возвращается</span><i style="--x:80.0%;--l:10.5%"></i><b>+163 000 ₽</b></li><li class="up" style="--i:3"><span>Разговоры без оплаты</span><i style="--x:90.5%;--l:9.5%"></i><b>+146 000 ₽</b></li><li class="can" style="--i:4"><span>Может быть</span><i style="--x:0%;--l:100%"></i><b>1 546 000 ₽</b></li></ol></div></section><section class="sc sc1" data-i="1"><p class="s-tags"><span class="s-chip">Первый шаг</span><span>Ступень 1 из 3</span></p><p class="s-h">Заявка ждёт первого ответа</p><p class="s-big"><b>+330 000 ₽</b> в месяц</p><div class="s-bar" style="--a:55%;--b:75%"><i></i><span>до разговора доходят 55% заявок</span><span>можно 75%</span></div><p class="s-f">= 24 разговора × 21,8% закрытия × 180 000 ₽ × 35% маржи</p><div class="s-do"><p class="s-k">С чего начать</p><p>Сегодня посмотрите, сколько вчерашних заявок до сих пор без звонка: в CRM, почте или мессенджерах.</p></div><ul class="s-next"><li class="s-k">Следующие ступени</li><li><i>2</i><span>База не возвращается</span><b>+163 000 ₽</b></li><li><i>3</i><span>Разговоры без оплаты</span><b>+146 000 ₽</b></li></ul></section><section class="sc sc2" data-i="2"><div class="s-chat"><p class="s-who"><span class="dk-mk"><i></i>Closery</span><span>сегодня, 09:00</span></p><p class="s-dots"><i></i><i></i><i></i></p><p class="s-bub b1">Доброе утро. 3 сделки на 11 800 000 ₽ больше 10 дней без касаний.</p><p class="s-bub b2">Задачи готовы: Анне, Дмитрию и Елене по одной на завтра.</p><p class="s-acts"><span class="s-btn pri">Поставить в amoCRM</span><span class="s-btn">Открыть сделки</span><svg class="s-cur" viewBox="0 0 20 24" width="20" height="24" aria-hidden="true"><path d="M2 1.5v18.2l5-4.6 3.2 7.1 3.1-1.4-3.2-7h6.7z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></p><p class="s-done"><i></i>3 задачи поставлены в amoCRM на 14.10</p><ul class="s-tasks"><li style="--i:0"><b>Анна Соколова</b><span>ООО «ТрансНефтеСервис»</span><em>12 дн. без касаний</em></li><li style="--i:1"><b>Дмитрий Орлов</b><span>АО «Росагромаш-Сервис»</span><em>15 дн. без касаний</em></li><li style="--i:2"><b>Елена Васильева</b><span>ООО «Фарм-Логистик»</span><em>13 дн. без звонков</em></li></ul></div></section><section class="sc sc3" data-i="3"><p class="s-dh"><b>21 сделка на 24 820 000 ₽ остывает</b><em>amoCRM</em></p><p class="s-tabs"><b>Все</b><span>Анна Соколова</span><span>Дмитрий Орлов</span><span>Елена Васильева</span></p><ul class="s-deals"><li style="--i:0"><b>ООО «ТрансНефтеСервис»</b><span>Анна С.</span><em><s>12 дн. без касаний</s><u>задача на 14.10</u></em><strong>5 400 000 ₽</strong></li><li style="--i:1"><b>АО «Росагромаш-Сервис»</b><span>Дмитрий О.</span><em><s>15 дн. без касаний</s><u>задача на 14.10</u></em><strong>4 700 000 ₽</strong></li><li style="--i:2"><b>АО «Уралхим-Пласт»</b><span>Анна С.</span><em><s>нет следующего шага</s><u>задача на 14.10</u></em><strong>2 900 000 ₽</strong></li><li style="--i:3"><b>ООО «Фарм-Логистик»</b><span>Елена В.</span><em><s>13 дн. без звонков</s><u>задача на 14.10</u></em><strong>1 700 000 ₽</strong></li><li style="--i:4"><b>АО «СибЛесПром»</b><span>Анна С.</span><em><s>ЛПР в отпуске</s><u>задача на 14.10</u></em><strong>1 650 000 ₽</strong></li><li style="--i:5"><b>АО «ЭнергоМонтаж»</b><span>Елена В.</span><em><s>задача просрочена</s><u>задача на 14.10</u></em><strong>1 250 000 ₽</strong></li><li style="--i:6"><b>ООО «Профкухни»</b><span>Елена В.</span><em><s>нет задачи</s><u>задача на 14.10</u></em><strong>780 000 ₽</strong></li></ul></section></div></div></div></div><div class="dv-dev m" data-w="300" data-h="600"><div class="m-scr"><span class="ph-sb"><b>9:41</b><i></i><span><svg viewBox="0 0 17 11" width="17" height="11"><rect x="0" y="7" width="3" height="4" rx="1.1"/><rect x="4.67" y="5" width="3" height="6" rx="1.1"/><rect x="9.33" y="2.6" width="3" height="8.4" rx="1.1"/><rect x="14" y="0" width="3" height="11" rx="1.1"/></svg><svg viewBox="0 0 28 13" width="25" height="12"><rect x=".5" y=".5" width="24" height="12" rx="3.9" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="2" y="2" width="21" height="9" rx="2.4"/><path d="M26 4.6a2.1 2.1 0 0 1 0 3.8z" fill-opacity=".4"/></svg></span></span><div class="m-app"><p class="m-hd"><span class="dk-mk"><i></i>Closery</span><em>Пример</em><i></i></p><p class="m-crumb"><span class="crs"><b class="cr on" data-i="0">Итог диагностики</b><b class="cr" data-i="1">Решения / Первый шаг</b><b class="cr" data-i="2">Сделки / Утренняя сводка</b><b class="cr" data-i="3">Сделки</b></span></p><div class="scs"><section class="sc sc0 on" data-i="0"><div class="s-msg"><p class="s-who"><span class="dk-mk"><i></i>Closery</span><span>итог по вашим ответам</span></p><p class="s-type"><span style="--w:0">Сейчас </span><span style="--w:1">компания </span><span style="--w:2">зарабатывает </span><span style="--w:3">907 000 ₽ </span><span style="--w:4">валовой </span><span style="--w:5">прибыли </span><span style="--w:6">в </span><span style="--w:7">месяц. </span><span style="--w:8">Больше </span><span style="--w:9">всего </span><span style="--w:10">прибыли </span><span style="--w:11">теряется </span><span style="--w:12">здесь: </span><span style="--w:13">без </span><span style="--w:14">разговора </span><span style="--w:15">остаются </span><span style="--w:16">54 </span><span style="--w:17">заявки </span><span style="--w:18">из </span><span style="--w:19">120 </span><span style="--w:20">в </span><span style="--w:21">месяц. </span></p></div><div class="s-pf"><p class="s-cap">Прибыль в месяц<span>нажмите на строку, чтобы увидеть расчёт</span></p><ol><li class="now" style="--i:0"><span>Сейчас</span><i style="--x:0%;--l:58.7%"></i><b>14,4 оплаты</b></li><li class="up" style="--i:1"><span>Заявка ждёт первого ответа</span><i style="--x:58.7%;--l:21.3%"></i><b>+330 000 ₽</b></li><li class="up" style="--i:2"><span>База не возвращается</span><i style="--x:80.0%;--l:10.5%"></i><b>+163 000 ₽</b></li><li class="up" style="--i:3"><span>Разговоры без оплаты</span><i style="--x:90.5%;--l:9.5%"></i><b>+146 000 ₽</b></li><li class="can" style="--i:4"><span>Может быть</span><i style="--x:0%;--l:100%"></i><b>1 546 000 ₽</b></li></ol></div></section><section class="sc sc1" data-i="1"><p class="s-tags"><span class="s-chip">Первый шаг</span><span>Ступень 1 из 3</span></p><p class="s-h">Заявка ждёт первого ответа</p><p class="s-big"><b>+330 000 ₽</b> в месяц</p><div class="s-bar" style="--a:55%;--b:75%"><i></i><span>до разговора доходят 55% заявок</span><span>можно 75%</span></div><p class="s-f">= 24 разговора × 21,8% закрытия × 180 000 ₽ × 35% маржи</p><div class="s-do"><p class="s-k">С чего начать</p><p>Сегодня посмотрите, сколько вчерашних заявок до сих пор без звонка: в CRM, почте или мессенджерах.</p></div><ul class="s-next"><li class="s-k">Следующие ступени</li><li><i>2</i><span>База не возвращается</span><b>+163 000 ₽</b></li><li><i>3</i><span>Разговоры без оплаты</span><b>+146 000 ₽</b></li></ul></section><section class="sc sc2" data-i="2"><div class="s-chat"><p class="s-who"><span class="dk-mk"><i></i>Closery</span><span>сегодня, 09:00</span></p><p class="s-dots"><i></i><i></i><i></i></p><p class="s-bub b1">Доброе утро. 3 сделки на 11 800 000 ₽ больше 10 дней без касаний.</p><p class="s-bub b2">Задачи готовы: Анне, Дмитрию и Елене по одной на завтра.</p><p class="s-acts"><span class="s-btn pri">Поставить в amoCRM</span><span class="s-btn">Открыть сделки</span><svg class="s-cur" viewBox="0 0 20 24" width="20" height="24" aria-hidden="true"><path d="M2 1.5v18.2l5-4.6 3.2 7.1 3.1-1.4-3.2-7h6.7z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></p><p class="s-done"><i></i>3 задачи поставлены в amoCRM на 14.10</p><ul class="s-tasks"><li style="--i:0"><b>Анна Соколова</b><span>ООО «ТрансНефтеСервис»</span><em>12 дн. без касаний</em></li><li style="--i:1"><b>Дмитрий Орлов</b><span>АО «Росагромаш-Сервис»</span><em>15 дн. без касаний</em></li><li style="--i:2"><b>Елена Васильева</b><span>ООО «Фарм-Логистик»</span><em>13 дн. без звонков</em></li></ul></div></section><section class="sc sc3" data-i="3"><p class="s-dh"><b>21 сделка на 24 820 000 ₽ остывает</b><em>amoCRM</em></p><p class="s-tabs"><b>Все</b><span>Анна Соколова</span><span>Дмитрий Орлов</span><span>Елена Васильева</span></p><ul class="s-deals"><li style="--i:0"><b>ООО «ТрансНефтеСервис»</b><span>Анна С.</span><em><s>12 дн. без касаний</s><u>задача на 14.10</u></em><strong>5 400 000 ₽</strong></li><li style="--i:1"><b>АО «Росагромаш-Сервис»</b><span>Дмитрий О.</span><em><s>15 дн. без касаний</s><u>задача на 14.10</u></em><strong>4 700 000 ₽</strong></li><li style="--i:2"><b>АО «Уралхим-Пласт»</b><span>Анна С.</span><em><s>нет следующего шага</s><u>задача на 14.10</u></em><strong>2 900 000 ₽</strong></li><li style="--i:3"><b>ООО «Фарм-Логистик»</b><span>Елена В.</span><em><s>13 дн. без звонков</s><u>задача на 14.10</u></em><strong>1 700 000 ₽</strong></li><li style="--i:4"><b>АО «СибЛесПром»</b><span>Анна С.</span><em><s>ЛПР в отпуске</s><u>задача на 14.10</u></em><strong>1 650 000 ₽</strong></li><li style="--i:5"><b>АО «ЭнергоМонтаж»</b><span>Елена В.</span><em><s>задача просрочена</s><u>задача на 14.10</u></em><strong>1 250 000 ₽</strong></li><li style="--i:6"><b>ООО «Профкухни»</b><span>Елена В.</span><em><s>нет задачи</s><u>задача на 14.10</u></em><strong>780 000 ₽</strong></li></ul></section></div></div></div></div></div></div><div class="dv-rail" role="tablist" aria-label="Экраны кабинета"><button type="button" role="tab" data-t="0" aria-selected="true" class="on" style="--t:3800ms"><span>Итог в рублях</span></button><button type="button" role="tab" data-t="1" aria-selected="false" style="--t:3600ms"><span>Первый шаг</span></button><button type="button" role="tab" data-t="2" aria-selected="false" style="--t:5800ms"><span>Сообщение Closery</span></button><button type="button" role="tab" data-t="3" aria-selected="false" style="--t:4200ms"><span>Сделки из CRM</span></button></div><p class="fan-note">Экраны кабинета, пример на демо-данных</p></div>
+  </div>
+</section>
+
+<!-- 18.10 анализ ниши: игра из кабинета (niche.js → lk.closery.ru/assets/game.js), имя и телефон открывают кабинет с отчётом -->
+<section class="sec" id="niche">
+  <div class="w nx">
+    <div class="nx-t">
+      <p class="kick rv">Анализ вашей ниши</p>
+      <h2 class="rv">Введите компанию и&nbsp;узнайте свой&nbsp;рынок за&nbsp;полминуты</h2>
+      <p class="lede rv">Поднимем отчётность ФНС по вашей нише: сколько компаний делят рынок, сколько лидеры зарабатывают на&nbsp;каждом сотруднике и&nbsp;кто ваши конкуренты по&nbsp;размеру.</p>
+      <ol class="nx-l rv">
+        <li><i>1</i><b>Ваш рынок</b><span>Компании, оборот, доля крупнейших, прогноз</span></li>
+        <li><i>2</i><b>Конкуренты вашего размера</b><span>Кто они и сколько зарабатывают на каждом сотруднике</span></li>
+        <li><i>3</i><b>Где теряете вы</b><span>Считаем вместе на разборе по вашим цифрам</span></li>
+      </ol>
+    </div>
+    <div class="nx-g rv"><div id="niche-game"></div></div>
   </div>
 </section>
 
@@ -993,7 +1021,7 @@ html[data-theme="light"] .intro-word{color:#111110}
       <h2 class="rv">На сколько может вырасти ваша прибыль?</h2>
       <p class="lede rv">Три коротких круга вопросов, и вы увидите сумму, которую бизнес недополучает каждый месяц, и с чего начать завтра. Бесплатно, нужна только регистрация.</p>
       <div class="hero-cta rv">
-        <a class="btn" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=final">Посчитать бесплатно <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <a class="btn" href="#niche">Узнать свой рынок <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
       </div>
     </div>
     <div class="dx-wrap">
@@ -1031,7 +1059,7 @@ html[data-theme="light"] .intro-word{color:#111110}
   </div>
 </footer>
 
-<div class="sticky" id="sticky"><div><b>Посчитать потери бесплатно</b><span>Нужна только регистрация</span></div><a class="btn" href="https://lk.closery.ru/register?next=/start&amp;utm_source=site&amp;utm_content=sticky">Посчитать</a></div>
+<div class="sticky" id="sticky"><div><b>Ваш рынок за полминуты</b><span>По отчётности ФНС, бесплатно</span></div><a class="btn" href="#niche">Узнать</a></div>
 
 <script>
 (function(){
@@ -1086,7 +1114,7 @@ html[data-theme="light"] .intro-word{color:#111110}
 
   /* появление: проверка по прокрутке, наблюдатель — запасной; видимое на первом экране показывается сразу */
   function reveal(el){if(el._rv)return;el._rv=1;el.classList.add('in');}
-  var pending=$$('.rv'),hero=document.getElementById('hero'),sticky=document.getElementById('sticky');
+  var pending=$$('.rv'),hero=document.getElementById('hero'),sticky=document.getElementById('sticky'),niche=document.getElementById('niche');
   function sweep(){var lim=innerHeight*.9;pending=pending.filter(function(el){if(el.getBoundingClientRect().top<lim){reveal(el);return false;}return true;});}
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}});},{rootMargin:'0px 0px -10% 0px'});
@@ -1097,7 +1125,8 @@ html[data-theme="light"] .intro-word{color:#111110}
     sweep();
     var h=document.documentElement.scrollHeight-innerHeight;bar.style.setProperty('--p',h>0?Math.min(1,scrollY/h):0);
     var hb=hero.querySelector('.btn').getBoundingClientRect();   // плашка, пока кнопки обложки не видно: на низком экране она под окнами
-    sticky.classList.toggle('show',hb.bottom<0||hb.top>innerHeight-8);
+    var nb=niche?niche.getBoundingClientRect():null;      /* у самого анализа ниши плашка не нужна и закрывает форму */
+    sticky.classList.toggle('show',(hb.bottom<0||hb.top>innerHeight-8)&&!(nb&&nb.top<innerHeight&&nb.bottom>0));
   }
   addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(function(){onScroll();tk=false;});}},{passive:true});
   addEventListener('resize',onScroll);
@@ -1107,5 +1136,6 @@ html[data-theme="light"] .intro-word{color:#111110}
 </script>
 <script src="/lead.js" defer></script>
 <script src="/cab.js" defer></script>
+<script src="/niche.js" defer></script>
 </body>
 </html>
