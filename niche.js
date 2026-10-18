@@ -26,7 +26,7 @@
     return out;
   }
   var css=document.createElement('link');css.rel='stylesheet';css.href=LK+'/assets/game.css?v=4';document.head.appendChild(css);
-  var js=document.createElement('script');js.src=LK+'/assets/game.js?v=3';
+  var js=document.createElement('script');js.src=LK+'/assets/game.js?v=4';
   js.onload=function(){
     window.ClGame.mount(box,{base:LK,src:source(),
       onResult:function(){goal('niche_found');},
