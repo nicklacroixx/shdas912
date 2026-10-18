@@ -1,10 +1,18 @@
 /* Тема Closery: дневная и ночная. Подключается в <head> без defer, чтобы страница не мигала тёмным.
-   Пока посетитель не выбрал сам, по умолчанию дневная: с 12.10.2026 сайт открывается белым, бизнес для бизнеса. Выбор хранится в localStorage,
-   ключ v3, чтобы и те, кто раньше щёлкал тему, увидели дневную.
+   Тема идёт по часам компьютера посетителя: днём с 08:00 до 20:00 дневная, остальное время ночная. Тема меняется сама, когда наступает час смены.
+   Кнопка в шапке — ручной выбор. Он держится до ближайшей смены по часам, потом снова идёт время. Выбор в localStorage, ключ v4.
+   Строка 'light' или 'dark' под этим ключом — выбор без срока, для скриптов проверки и скриншотов.
    Кнопка встаёт в шапку сама: круг, наполовину залитый, в ряд со ссылками. Клик поворачивает его на пол-оборота и меняет тему. */
 (function(){
-  var KEY='closery-theme-v3',root=document.documentElement;
-  function pref(){try{var v=localStorage.getItem(KEY);return v==='dark'?'dark':'light';}catch(e){return 'light';}}
+  var KEY='closery-theme-v4',root=document.documentElement;
+  var DAY_FROM=8,DAY_TO=20;
+  function byClock(d){var h=d.getHours();return h>=DAY_FROM&&h<DAY_TO?'light':'dark';}
+  function nextSwitch(d){var c=new Date(d.getTime());c.setMinutes(0,0,0);var h=c.getHours();
+    if(h<DAY_FROM)c.setHours(DAY_FROM);else if(h<DAY_TO)c.setHours(DAY_TO);else{c.setDate(c.getDate()+1);c.setHours(DAY_FROM);}
+    return c.getTime();}
+  function pick(){try{var raw=localStorage.getItem(KEY);if(raw==='light'||raw==='dark')return {t:raw,until:Infinity};
+    var o=JSON.parse(raw);if(o&&(o.t==='light'||o.t==='dark')&&Date.now()<o.until)return o;}catch(e){}return null;}
+  function pref(){var o=pick();return o?o.t:byClock(new Date());}
   function paint(t){
     root.setAttribute('data-theme',t);root.style.colorScheme=t;
     var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='light'?'#FFFFFF':'#07100D');
@@ -56,15 +64,22 @@
     var t=root.getAttribute('data-theme'),lbl=t==='light'?'Включить ночной режим':'Включить дневной режим';
     btns.forEach(function(b){b.setAttribute('aria-label',lbl);b.title=lbl;});
   }
-  function set(t){
-    try{localStorage.setItem(KEY,t);}catch(e){}
+  function show(t,animate){
     var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduce)paint(t);
+    if(!animate||reduce)paint(t);
     else if(document.startViewTransition&&document.visibilityState==='visible'){var vt=document.startViewTransition(function(){paint(t);});vt.ready.catch(function(){paint(t);});vt.finished.catch(function(){});vt.updateCallbackDone&&vt.updateCallbackDone.catch(function(){});}
     else{root.classList.add('ti-fade');paint(t);setTimeout(function(){root.classList.remove('ti-fade');},350);}
     sync();
   }
-  addEventListener('storage',function(e){if(e.key===KEY){paint(pref());sync();}});
+  function set(t){
+    try{localStorage.setItem(KEY,JSON.stringify({t:t,until:nextSwitch(new Date())}));}catch(e){}
+    show(t,true);
+  }
+  // по часам: когда наступил час смены или вкладка вернулась на экран, тема догоняет время
+  function follow(){var t=pref();if(t!==root.getAttribute('data-theme'))show(t,true);}
+  setInterval(follow,60000);
+  document.addEventListener('visibilitychange',follow);
+  addEventListener('storage',function(e){if(e.key===KEY)follow();});
 
   function mount(){
     var nav=document.querySelector('header .bar-nav, header .nav');

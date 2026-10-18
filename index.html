@@ -695,6 +695,205 @@ main{counter-reset:sec}
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+<!-- Заставка при входе: частицы со всего экрана собираются в квадрат знака Closery, рядом выезжает слово CLOSERY, всё растворяется.
+     Восстановлена из closery-site до коммита a24d29f (29.09.2026), анимация та же. Добавлено: цвет по теме из theme.js
+     (днём белый фон, тёмно-зелёные частицы, чёрное слово; ночью как было), показ только при входе снаружи или по обновлению страницы,
+     клик или клавиша убирают раньше. Тот же фрагмент вставляет build_main.py на closery.ru и lk.html в кабинете, держать в синхроне.
+     Без анимации (prefers-reduced-motion) и в автоматических браузерах (navigator.webdriver) не показываем. -->
+<style id="cl-splash-css">
+#intro{position:fixed;inset:0;z-index:2147483600;background:#07100D;
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity 1.2s cubic-bezier(.16,1,.3,1);}
+html[data-theme="light"] #intro{background:#FFFFFF}
+#intro.hide{opacity:0;pointer-events:none}
+#intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.intro-lockup{position:relative;z-index:2;display:flex;align-items:center;
+  gap:clamp(26px,4.2vw,46px);transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.intro-lockup.dissolve{opacity:0;filter:blur(14px);transform:scale(1.06)}
+.intro-icon-slot{width:clamp(56px,8vw,96px);height:clamp(56px,8vw,96px);flex:none}
+.intro-word{font-family:var(--brand,'Plus Jakarta Sans',system-ui,sans-serif);font-weight:800;font-size:clamp(26px,7vw,72px);
+  color:#fff;text-transform:uppercase;letter-spacing:0;opacity:0;line-height:1;
+  transform:translateY(6px);white-space:nowrap;
+  transition:opacity 1.3s cubic-bezier(.16,1,.3,1),letter-spacing 1.3s cubic-bezier(.16,1,.3,1),transform 1.3s cubic-bezier(.16,1,.3,1)}
+html[data-theme="light"] .intro-word{color:#111110}
+.intro-word.show{opacity:1;letter-spacing:.2em;transform:none}
+@media(max-width:640px){.intro-lockup{gap:14px}.intro-word{letter-spacing:0}
+  .intro-word.show{letter-spacing:.1em}}
+@media(prefers-reduced-motion:reduce){#intro{display:none!important}}
+</style>
+<div id="intro" aria-hidden="true">
+  <canvas id="introCanvas"></canvas>
+  <div class="intro-lockup" id="introLockup">
+    <span class="intro-icon-slot" id="introIconSlot"></span>
+    <span class="intro-word" id="introWord">Closery</span>
+  </div>
+</div>
+<script>
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var intro = document.getElementById('intro');
+  if (!intro) return;
+
+  // вход снаружи (адрес набран, ссылка с другого сайта) или обновление страницы; переходы внутри сайта без заставки
+  var reload = false;
+  try { var nav = performance.getEntriesByType('navigation')[0]; reload = !!nav && nav.type === 'reload'; } catch(e) {}
+  var inside = false;
+  try { inside = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch(e) {}
+
+  if (reduceMotion || navigator.webdriver || (inside && !reload) || !intro.querySelector('canvas').getContext) { intro.remove(); return; }
+
+  var html = document.documentElement;
+  var prevOverflow = html.style.overflow;
+  html.style.overflow = 'hidden';
+
+  var canvas = document.getElementById('introCanvas');
+  var ctx = canvas.getContext('2d');
+  var lockup = document.getElementById('introLockup');
+  var iconSlot = document.getElementById('introIconSlot');
+  var word = document.getElementById('introWord');
+  var W, H, DPR;
+  var target = { cx: 0, cy: 0, half: 40 };
+
+  // зелёный знака: ночью --ok ночной темы и свечение сложением, днём --ok дневной темы обычным наложением, иначе на белом выцветает
+  var light = html.getAttribute('data-theme') === 'light';
+  var COLOR = light ? { r: 15, g: 138, b: 95 } : { r: 52, g: 211, b: 153 };
+  var BLEND = light ? 'source-over' : 'lighter';
+
+  function measureTarget(){
+    var r = iconSlot.getBoundingClientRect();
+    target.cx = r.left + r.width / 2;
+    target.cy = r.top + r.height / 2;
+    target.half = r.width / 2;
+  }
+
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    measureTarget();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var radiusFactor = 0.26;
+
+  function inShape(x, y, half){
+    var radius = half * radiusFactor;
+    var ax = Math.abs(x), ay = Math.abs(y);
+    var inner = half - radius;
+    if (ax <= inner && ay <= half) return true;
+    if (ay <= inner && ax <= half) return true;
+    var dx = ax - inner, dy = ay - inner;
+    return (dx*dx + dy*dy) <= radius*radius;
+  }
+  function samplePoint(half){
+    var x, y, tries = 0;
+    do { x = (Math.random()*2-1)*half; y = (Math.random()*2-1)*half; tries++; }
+    while (!inShape(x, y, half) && tries < 40);
+    return { x: x, y: y };
+  }
+
+  // частицы создаются, когда окно уже имеет размер: во вкладке, открытой в фоне, ширина при загрузке бывает нулевой
+  var particles = [];
+  function seed(){
+    var COUNT = Math.min(2200, Math.round((W * H) / 780));
+    for (var i = 0; i < COUNT; i++){
+      var s = samplePoint(target.half || 44);
+      particles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        ox: s.x, oy: s.y, // офсет внутри фигуры относительно центра
+        size: .7 + Math.random()*1.3,
+        phase: Math.random()*Math.PI*2
+      });
+    }
+  }
+  seed();
+
+  var t0 = performance.now();
+  var MORPH_MS = 1300;
+  var raf;
+
+  function ease(p){ return 1 - Math.pow(1-p, 3); }
+
+  function frame(now){
+    if (!particles.length && window.innerWidth) { resize(); seed(); }
+    measureTarget();
+
+    var elapsed = now - t0;
+    var progress = Math.min(1, elapsed / MORPH_MS);
+    var eased = ease(progress);
+
+    ctx.clearRect(0,0,W,H);
+
+    var clipping = progress > 0.7;
+    if (clipping) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(target.cx - target.half - 10, target.cy - target.half - 10,
+                (target.half + 10) * 2, (target.half + 10) * 2);
+      ctx.clip();
+    }
+
+    ctx.globalCompositeOperation = BLEND;
+
+    for (var i = 0; i < particles.length; i++){
+      var p = particles[i];
+      var jitter = 0.5;
+      var jx = Math.sin(now*0.0015 + p.phase) * jitter;
+      var jy = Math.cos(now*0.0013 + p.phase) * jitter;
+
+      var tx = target.cx + p.ox;
+      var ty = target.cy + p.oy;
+
+      var px = p.x + (tx - p.x) * eased + jx;
+      var py = p.y + (ty - p.y) * eased + jy;
+
+      ctx.beginPath();
+      ctx.arc(px, py, p.size*1.15, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba('+COLOR.r+','+COLOR.g+','+COLOR.b+',0.09)';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(px, py, p.size, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba('+COLOR.r+','+COLOR.g+','+COLOR.b+',0.95)';
+      ctx.fill();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    if (clipping) ctx.restore();
+
+    if (progress < 1 || elapsed < MORPH_MS + 750) {
+      raf = requestAnimationFrame(frame);
+    }
+  }
+  raf = requestAnimationFrame(frame);
+
+  var wordTimer = setTimeout(function(){ word.classList.add('show'); }, MORPH_MS - 200);
+
+  var EXIT_DELAY = MORPH_MS + 900;
+  var EXIT_MS = 1200;
+  var gone = false;
+
+  function exit(){
+    if (gone) return;
+    gone = true;
+    clearTimeout(wordTimer); clearTimeout(exitTimer);
+    lockup.classList.add('dissolve');
+    intro.classList.add('hide');
+    html.style.overflow = prevOverflow;
+    setTimeout(function(){
+      cancelAnimationFrame(raf);
+      intro.remove();
+      window.removeEventListener('resize', resize);
+    }, EXIT_MS);
+  }
+  var exitTimer = setTimeout(exit, EXIT_DELAY);
+  intro.addEventListener('click', exit);
+  window.addEventListener('keydown', exit, { once: true });
+})();
+</script>
+
 <noscript><div><img src="https://mc.yandex.ru/watch/113130091" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
 <header class="bar">
