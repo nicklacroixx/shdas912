@@ -212,6 +212,41 @@ details[open] summary::after{transform:rotate(45deg)}
 details p{padding:0 0 18px;font-size:15.5px;max-width:58ch}
 @media(max-width:900px){.faq{grid-template-columns:minmax(0,1fr)}}
 
+/* калькулятор */
+.calc{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:stretch}
+.calc-in{border:1px solid var(--rule-2);border-radius:14px;padding:clamp(20px,2.4vw,32px);background:var(--paper);min-width:0}
+.fld{display:block;padding:14px 0;border-bottom:1px solid var(--rule)}
+.fld:first-child{padding-top:0}
+.fld>span{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--ink-3);margin-bottom:8px}
+.fld>span em{font-style:normal;color:var(--ink-4)}
+.inp{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--rule-2);border-radius:10px;padding:0 16px;transition:border-color .2s,box-shadow .2s}
+.inp:focus-within{border-color:var(--ok);box-shadow:0 0 0 3px var(--ok-bg)}
+.inp input{flex:1;min-width:0;width:100%;border:0;outline:0;background:none;color:var(--ink);font-family:var(--num);font-weight:600;font-size:clamp(22px,2vw,28px);letter-spacing:-.02em;padding:12px 0;font-feature-settings:"tnum" 1,"lnum" 1}
+.inp input::placeholder{color:var(--ink-4)}
+.inp b{flex:none;font-weight:500;font-size:15px;color:var(--ink-3)}
+.calc-terms{margin-top:6px;border:0}
+.calc-terms:first-of-type{border-top:0}
+.calc-terms summary{padding:16px 0 6px;font-size:14px;font-weight:500;color:var(--ink-3);justify-content:flex-start}
+.calc-terms summary::after{margin-left:auto}
+.calc-terms .tg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-top:8px}
+.calc-terms .fld{border:0;padding:0}
+.calc-terms .inp{padding:0 12px}
+.calc-terms .inp input{font-size:18px;padding:9px 0}
+.calc-terms .fld>span{font-size:12.5px;min-height:2.6em;align-items:flex-start}
+.calc-out{background:var(--ink);color:var(--bg);border-radius:20px;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;min-width:0}
+.calc-out .k{font-size:14px;color:color-mix(in srgb,var(--bg) 62%,var(--ink))}
+.calc-out .big{font-family:var(--num);font-weight:600;font-size:clamp(38px,4.6vw,68px);letter-spacing:-.035em;line-height:1.02;margin-top:10px;overflow-wrap:anywhere;font-feature-settings:"tnum" 1,"lnum" 1}
+.calc-out .big.off{color:color-mix(in srgb,var(--bg) 38%,var(--ink))}
+.calc-out .parts{margin-top:28px;border-top:1px solid color-mix(in srgb,var(--bg) 18%,var(--ink))}
+.calc-out .part{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid color-mix(in srgb,var(--bg) 18%,var(--ink));font-size:15px;color:color-mix(in srgb,var(--bg) 72%,var(--ink))}
+.calc-out .part b{font-family:var(--num);font-weight:600;font-size:20px;color:var(--bg);white-space:nowrap}
+.calc-out .goal{margin-top:auto;padding-top:24px}
+.calc-out .goal p{margin:0;font-size:15.5px;line-height:1.5;color:color-mix(in srgb,var(--bg) 78%,var(--ink))}
+.calc-out .goal p strong{color:var(--bg);font-weight:600}
+.calc-out .goal[hidden]{display:none}
+@media(max-width:900px){.calc{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:480px){.calc-terms .tg3{grid-template-columns:minmax(0,1fr)}.calc-terms .fld>span{min-height:0}}
+
 /* финал */
 .final{background:var(--ink);color:var(--bg);border-radius:20px;padding:clamp(32px,5vw,72px);display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:32px;align-items:end}
 .final h2{color:var(--bg)}
@@ -236,6 +271,7 @@ footer a:hover{color:var(--ink)}
       <a class="bar-lnk" href="#terms">Условия</a>
       <a class="bar-lnk" href="#path">Как идёт сделка</a>
       <a class="bar-lnk" href="#write">Что писать</a>
+      <a class="bar-lnk" href="#calc">Калькулятор</a>
       <a class="btn sm" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Написать Николаю</a>
     </nav>
   </div>
@@ -427,6 +463,40 @@ footer a:hover{color:var(--ink)}
     </div>
   </section>
 
+  <section class="sec" id="calc">
+    <div class="w">
+      <div class="head">
+        <div><div class="kick"><b>07</b> Калькулятор</div><h2>Посчитайте <em>свой доход</em></h2></div>
+        <p>Введите, сколько клиентов оплатят МРТ, какая часть дойдёт до проекта и какой в нём средний чек. Или назовите желаемый доход, и мы покажем, сколько клиентов для него нужно.</p>
+      </div>
+      <div class="calc">
+        <form class="calc-in" onsubmit="return false" autocomplete="off">
+          <label class="fld"><span>Клиентов, оплативших МРТ</span><div class="inp"><input id="c-n" inputmode="numeric" placeholder="0" aria-label="Клиентов, оплативших МРТ"><b>шт</b></div></label>
+          <label class="fld"><span>Из них идут в проект</span><div class="inp"><input id="c-s" inputmode="numeric" placeholder="0" aria-label="Доля клиентов, идущих в проект"><b>%</b></div></label>
+          <label class="fld"><span>Средний чек проекта <em>все оплаты за 90 дней</em></span><div class="inp"><input id="c-c" inputmode="numeric" placeholder="0" aria-label="Средний чек проекта"><b>₽</b></div></label>
+          <label class="fld"><span>Желаемый доход <em>по желанию</em></span><div class="inp"><input id="c-w" inputmode="numeric" placeholder="0" aria-label="Желаемый доход"><b>₽</b></div></label>
+          <details class="calc-terms">
+            <summary>Условия выплат</summary>
+            <div class="tg3">
+              <label class="fld"><span>С каждого МРТ</span><div class="inp"><input id="c-p" inputmode="numeric" value="30 000" aria-label="Выплата с каждого МРТ"><b>₽</b></div></label>
+              <label class="fld"><span>С первого проекта</span><div class="inp"><input id="c-f" inputmode="decimal" value="5" aria-label="Процент с первого проекта"><b>%</b></div></label>
+              <label class="fld"><span>С каждого следующего</span><div class="inp"><input id="c-x" inputmode="decimal" value="10" aria-label="Процент с каждого следующего проекта"><b>%</b></div></label>
+            </div>
+          </details>
+        </form>
+        <div class="calc-out" aria-live="polite">
+          <div class="k">Ваш доход</div>
+          <div class="big off" id="o-total">—</div>
+          <div class="parts">
+            <div class="part"><span id="o-mn">С оплат МРТ</span><b id="o-m">—</b></div>
+            <div class="part"><span id="o-pn">С проектов</span><b id="o-pr">—</b></div>
+          </div>
+          <div class="goal" id="o-goal" hidden><p id="o-goal-t"></p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="w" style="padding-block:clamp(24px,4vw,56px)">
     <div class="final">
       <div>
@@ -457,6 +527,54 @@ document.querySelectorAll('.copy').forEach(function(btn){
     try{navigator.clipboard.writeText(text).then(done,sel)}catch(e){sel()}
   });
 });
+
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var ids=['c-n','c-s','c-c','c-w','c-p','c-f','c-x'];
+  function num(id){var v=parseFloat(($(id).value||'').replace(/\s/g,'').replace(',','.'));return isFinite(v)&&v>0?v:0}
+  function rub(v){return Math.round(v).toLocaleString('ru-RU')+'\u00a0₽'}
+  function plural(n,a,b,c){var m=n%100,k=n%10;return (m>10&&m<20)?c:k===1?a:(k>1&&k<5)?b:c}
+  function income(n,sh,chk,pay,f,x){
+    var pr=Math.round(n*sh/100),proj=pr>0?chk*(f+(pr-1)*x)/100:0;
+    return {mri:n*pay,proj:proj,pr:pr};
+  }
+  function calc(){
+    var n=Math.round(num('c-n')),sh=Math.min(100,num('c-s')),chk=num('c-c'),want=num('c-w'),
+        pay=num('c-p'),f=num('c-f'),x=num('c-x');
+    var r=income(n,sh,chk,pay,f,x),total=r.mri+r.proj;
+    var big=$('o-total');
+    big.textContent=total>0?rub(total):'—';
+    big.classList.toggle('off',!(total>0));
+    $('o-m').textContent=n>0?rub(r.mri):'—';
+    $('o-mn').textContent=n>0?'С оплат МРТ, '+n+' '+plural(n,'клиент','клиента','клиентов'):'С оплат МРТ';
+    $('o-pr').textContent=r.pr>0&&chk>0?rub(r.proj):'—';
+    $('o-pn').textContent=r.pr>0?'С проектов, '+r.pr+' '+plural(r.pr,'проект','проекта','проектов'):'С проектов';
+    var g=$('o-goal'),t=$('o-goal-t');
+    if(want>0){
+      var k=0,hit=null;
+      for(var i=1;i<=5000;i++){var q=income(i,sh,chk,pay,f,x);if(q.mri+q.proj>=want){k=i;hit=q;break}}
+      g.hidden=false;
+      if(hit){
+        t.innerHTML='Чтобы получить <strong>'+rub(want)+'</strong>, нужно <strong>'+k+' '+plural(k,'клиент','клиента','клиентов')+'</strong> с МРТ'+(hit.pr>0?' и <strong>'+hit.pr+' '+plural(hit.pr,'проект','проекта','проектов')+'</strong>':'')+'.';
+      }else{
+        t.textContent='Чтобы посчитать, заполните выплату с МРТ или долю клиентов и чек проекта.';
+      }
+    }else{g.hidden=true}
+  }
+  ids.forEach(function(id){
+    var el=$(id);
+    el.addEventListener('input',function(){
+      if(id!=='c-f'&&id!=='c-x'){var d=el.value.replace(/\D/g,'');if(el.value!==d&&d!=='')el.value=d;if(d==='')el.value=''}
+      calc();
+    });
+    el.addEventListener('blur',function(){
+      if(id==='c-f'||id==='c-x'||id==='c-s')return;
+      var d=el.value.replace(/\D/g,'');el.value=d?parseInt(d,10).toLocaleString('ru-RU'):'';
+    });
+    el.addEventListener('focus',function(){if(id!=='c-f'&&id!=='c-x'&&id!=='c-s'){el.value=el.value.replace(/\s/g,'');el.select()}});
+  });
+  calc();
+})();
 </script>
 </body>
 </html>
