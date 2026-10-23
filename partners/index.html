@@ -72,6 +72,9 @@ header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;backgroun
 .btn.sm{font-size:14px;padding:10px 18px;border-radius:8px}
 .ghost{font-size:15px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink-4);padding-bottom:2px}
 .ghost:hover{border-color:var(--ink)}
+.tgl{flex:none;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ink);padding:0;cursor:pointer;background:linear-gradient(90deg,var(--ink) 50%,transparent 50%);transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .2s;opacity:.85}
+.tgl:hover{opacity:1}
+.tgl.flip{transform:rotate(180deg)}
 @media(max-width:860px){.bar-lnk{display:none}}
 @media(max-width:520px){.logo small{display:none}}
 
@@ -251,12 +254,13 @@ details p{padding:0 0 18px;font-size:15.5px;max-width:58ch}
 @media(max-width:900px){.cg{grid-template-columns:minmax(0,1fr)}.cout{border-left:0;border-top:1px solid var(--rule)}}
 
 /* финал */
-.final{background:var(--ink);color:var(--bg);border-radius:20px;padding:clamp(32px,5vw,72px);display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:32px;align-items:end}
-.final h2{color:var(--bg)}
-.final p{color:color-mix(in srgb,var(--bg) 72%,var(--ink));margin-top:18px;font-size:17px;max-width:52ch}
-.final .btn{background:var(--bg);color:var(--ink)}
-.final .btn:hover{background:var(--ok-bg)}
-.final .tg{display:block;margin-top:12px;font-size:14px;color:color-mix(in srgb,var(--bg) 60%,var(--ink));text-align:right}
+.final{position:relative;border:1px solid var(--rule-2);border-radius:20px;padding:clamp(32px,5vw,72px);display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:32px;align-items:end;overflow:hidden;background:radial-gradient(70% 140% at 100% 100%,color-mix(in srgb,var(--ok) 16%,transparent),transparent 62%),var(--paper);box-shadow:0 1px 0 var(--rule),0 40px 80px -52px rgba(20,24,20,.3)}
+.final .kick{margin-bottom:22px}
+.final h2{color:var(--ink)}
+.final p{color:var(--ink-2);margin-top:18px;font-size:17px;max-width:52ch}
+.final .btn{background:var(--ok);color:var(--bg)}
+.final .btn:hover{background:var(--ok-soft)}
+.final .tg{display:block;margin-top:12px;font-size:14px;color:var(--ink-3);text-align:right}
 @media(max-width:760px){.final{grid-template-columns:minmax(0,1fr);align-items:start}.final .tg{text-align:left}}
 
 footer{padding-block:40px 56px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;font-size:14px;color:var(--ink-3)}
@@ -264,6 +268,7 @@ footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
+<script>try{var t=localStorage.getItem("closery-partners-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 </head>
 <body>
 
@@ -275,6 +280,7 @@ footer a:hover{color:var(--ink)}
       <a class="bar-lnk" href="#path">Как идёт сделка</a>
       <a class="bar-lnk" href="#write">Что писать</a>
       <a class="bar-lnk" href="#calc">Калькулятор</a>
+      <button type="button" class="tgl" id="theme" aria-label="Переключить тему: светлая или тёмная" title="Светлая или тёмная тема"></button>
       <a class="btn sm" href="https://t.me/klimenko_prod" target="_blank" rel="noopener">Написать Николаю</a>
     </nav>
   </div>
@@ -511,7 +517,7 @@ footer a:hover{color:var(--ink)}
   <section class="w" style="padding-block:clamp(24px,4vw,56px)">
     <div class="final">
       <div>
-        <h2>Первый созвон с Николаем, 30 минут</h2>
+        <div class="kick"><b>08</b> Первый шаг</div><h2>Первый созвон с Николаем, <em>30 минут</em></h2>
         <p>Покажем продукт, и если вам зайдёт, сразу вместе напишем первому знакомому собственнику. Подумайте заранее о трёх людях, которым можете написать сегодня.</p>
       </div>
       <div>
@@ -606,6 +612,17 @@ document.querySelectorAll('.copy').forEach(function(btn){
     });
   });
   calc();
+})();
+
+(function(){
+  var b=document.getElementById('theme'),r=document.documentElement;
+  function dark(){var t=r.getAttribute('data-theme');return t?t==='dark':window.matchMedia('(prefers-color-scheme:dark)').matches}
+  b.addEventListener('click',function(){
+    var next=dark()?'light':'dark';
+    r.setAttribute('data-theme',next);
+    b.classList.toggle('flip');
+    try{localStorage.setItem('closery-partners-theme',next)}catch(e){}
+  });
 })();
 </script>
 </body>
