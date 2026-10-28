@@ -599,20 +599,41 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-hero-sub{font-size:17px;line-height:1.6;color:var(--ink-2);max-width:62ch;margin:0}
 
 /* 01 основание: четыре блока про методику */
-.fx-why{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px}
-.fx-why-b{padding:26px 28px;border:1px solid var(--rule);border-radius:10px;background:var(--paper)}
-.fx-why-b:nth-child(3){grid-column:1 / -1}
-.fx-why-n{display:block;font:500 12px/1 var(--mono);letter-spacing:.04em;color:var(--ok);margin-bottom:14px}
-.fx-why-b h4{font:600 18px/1.35 var(--ui);letter-spacing:-.015em;color:#fff;margin:0 0 14px}
-.fx-why-b p{font-size:14.5px;line-height:1.65;color:var(--ink-2);max-width:78ch}
-.fx-why-b p+p{margin-top:12px}
-.fx-why-b p+ul,.fx-why-b .fx-links+p{margin-top:16px}
-.fx-links{display:grid;gap:10px;margin-top:16px}
-.fx-link{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:11px 14px;border:1px solid var(--rule);border-radius:8px;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
-.fx-link i{flex:none;width:14px;height:1px;background:var(--rule-2);position:relative}
-.fx-link i::after{content:'';position:absolute;right:0;top:-2.5px;border:3px solid transparent;border-left-color:var(--rule-2)}
-.fx-link b{color:var(--ok);font-weight:500}
-@media(max-width:900px){.fx-why{grid-template-columns:minmax(0,1fr);gap:18px}.fx-why-b{padding:22px}.fx-link{gap:8px;padding:10px 12px;font-size:13px}}
+.fx-bcases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.fx-bcase{padding:22px 22px 20px;border:1px solid var(--rule);border-radius:12px;background:linear-gradient(160deg,rgba(52,211,153,.06),transparent 55%),var(--paper);display:flex;flex-direction:column;min-width:0}
+.fx-bcase-co{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:16px}
+.fx-bcase b{font:600 clamp(26px,3vw,36px)/1.05 var(--disp);letter-spacing:-.02em;color:var(--ok);white-space:nowrap}
+.fx-bcase em{font-style:normal;font-size:13px;color:var(--ink-2);margin-top:6px}
+.fx-bcase p{font-size:13.5px;line-height:1.55;color:var(--ink-2);margin:14px 0 0;padding-top:14px;border-top:1px solid var(--rule)}
+.fx-pipe{display:flex;align-items:stretch;gap:0;border:1px solid var(--rule);border-radius:12px;background:var(--paper);overflow:hidden}
+.fx-pipe-s{flex:1 1 0;min-width:0;padding:20px 18px;display:flex;flex-direction:column;gap:8px}
+.fx-pipe-s b{font:600 clamp(20px,2.2vw,28px)/1.1 var(--disp);color:#fff;letter-spacing:-.02em;white-space:nowrap}
+.fx-pipe-s span{font-size:13px;line-height:1.4;color:var(--ink-2)}
+.fx-pipe-s.ok{background:rgba(52,211,153,.07)}.fx-pipe-s.ok b{color:var(--ok)}
+.fx-pipe-s.loss{background:rgba(240,85,90,.07)}.fx-pipe-s.loss b{color:var(--loss)}
+.fx-pipe-a{flex:none;width:1px;background:var(--rule);position:relative}
+.fx-pipe-a::after{content:'';position:absolute;top:50%;left:-4px;width:7px;height:7px;border-top:1px solid var(--rule-2);border-right:1px solid var(--rule-2);background:var(--paper);transform:translateY(-50%) rotate(45deg)}
+.fx-guards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.fx-guard{background:var(--paper);padding:20px 20px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.fx-guard b{font:600 24px/1.1 var(--disp);letter-spacing:-.02em;color:#fff}
+.fx-guard span{font-size:13px;line-height:1.5;color:var(--ink-2)}
+.fx-blinks{display:grid;gap:6px}
+.fx-blink{display:grid;grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr) 22px minmax(0,1fr) 120px;align-items:center;gap:8px;padding:11px 14px;border:1px solid var(--rule);border-radius:8px;font-size:13.5px;line-height:1.4;color:var(--ink-3)}
+.fx-blink i{height:1px;background:var(--rule-2);position:relative}
+.fx-blink i::after{content:'';position:absolute;right:0;top:-2.5px;border:3px solid transparent;border-left-color:var(--rule-2)}
+.fx-blink b{font-weight:500;color:inherit}
+.fx-blink em{font:500 10.5px/1 var(--mono);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--ok);justify-self:end;white-space:nowrap}
+.fx-blink.on{color:var(--ink);border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.05)}
+.fx-blink.on b{color:var(--ok)}.fx-blink.on i{background:rgba(52,211,153,.5)}.fx-blink.on i::after{border-left-color:rgba(52,211,153,.5)}
+.fx-blink.hd{border:0;padding-top:0;padding-bottom:2px;font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.fx-blink.hd i{visibility:hidden}.fx-blink.hd b{font-weight:500}
+.fx-why3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:40px;padding-top:26px;border-top:1px solid var(--rule)}
+.fx-why3 b{display:block;font:600 15px/1.35 var(--ui);color:#fff;margin-bottom:8px}
+.fx-why3 p{font-size:13.5px;line-height:1.6;color:var(--ink-2);margin:0}
+@media(max-width:900px){.fx-bcases,.fx-why3{grid-template-columns:minmax(0,1fr)}.fx-guards{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .fx-pipe{flex-direction:column}.fx-pipe-s{flex-direction:row;align-items:baseline;gap:14px;padding:14px 18px}.fx-pipe-s b{min-width:110px}
+  .fx-pipe-a{width:auto;height:1px}.fx-pipe-a::after{left:28px;top:-4px;transform:rotate(135deg)}
+  .fx-blink{grid-template-columns:minmax(0,1fr);gap:4px;padding:10px 12px;font-size:13px}.fx-blink i{display:none}.fx-blink.hd{display:none}.fx-blink em{justify-self:start;margin-top:4px}}
 
 /* 01 резюме: выводы и рекомендация */
 .fx-concl{margin-top:48px}
@@ -732,6 +753,9 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-override input:focus{outline:none;border-color:var(--ok)}
 .fx-override button{background:none;border:0;color:var(--ink-3);font:500 11px var(--mono);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0}
 .fx-override small{flex-basis:100%;font-size:12px;color:var(--ink-3);line-height:1.5}
+.fx-override>span:first-child{flex:1 1 220px;line-height:1.45}
+.fx-override.done{border-color:color-mix(in srgb,var(--ok) 45%,transparent);animation:fx-ovr .9s var(--ease)}
+@keyframes fx-ovr{from{background:color-mix(in srgb,var(--ok) 12%,transparent)}to{background:transparent}}
 @media(max-width:900px){.fx-method{grid-template-columns:minmax(0,1fr)}}
 
 /* 04 диагноз */
@@ -911,6 +935,9 @@ body:not(.cl-unlocked) .gate{display:grid}
 @media(max-width:760px){.fx-gantt{grid-template-columns:86px repeat(12,minmax(0,1fr))}.fx-wl{font-size:11px}.fx-gbar span{display:none}}
 .fx-waves{margin-top:32px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 @media(max-width:900px){.fx-waves{grid-template-columns:minmax(0,1fr)}}
+.fx-wl.off{opacity:.45}.fx-wl.off b{text-decoration:line-through}
+.fx-goff{grid-column:1 / -1;font-size:12px;color:var(--ink-3);padding-left:4px;font-style:italic}
+.fx-wave.off{grid-column:1 / -1;background:transparent;border-style:dashed;padding:18px 24px;gap:6px}.fx-wave.off .fx-wgoal{margin:0;color:var(--ink-2);font-size:13px}.fx-wave.off .fx-weff span{color:var(--ink-3);font-size:12px}
 .fx-wave{border:1px solid var(--rule);border-radius:10px;padding:24px;display:flex;flex-direction:column;min-width:0;background:var(--paper)}
 .fx-wtop{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
 .fx-wno{font:500 11px/1.45 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
@@ -1258,6 +1285,7 @@ body.fx-prompter-on .fx-prompter{display:block}
   .pr-x-links>div{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px;font-size:9px;line-height:1.4;color:var(--pr-ink-2);padding:5px 0;border-bottom:1px solid var(--pr-line)}
   .pr-x-links em{font-style:normal;color:var(--pr-ink-3)}
   .pr-x-links b{color:var(--pr-accent);font-weight:700}
+  .pr-x-links>div:not(.on){opacity:.5}.pr-x-links>div.on span:first-child{font-weight:700;color:var(--pr-ink)}
   .pr-x-concl{list-style:none;counter-reset:pc;margin:4px 0 0;padding:0}
   .pr-x-concl li{counter-increment:pc;position:relative;padding-left:26px;margin-bottom:7px;font-size:10.5px;line-height:1.5;color:var(--pr-ink)}
   .pr-x-concl li::before{content:counter(pc,decimal-leading-zero);position:absolute;left:0;top:1px;font-size:8.5px;color:var(--pr-ink-3);font-weight:700}
@@ -2151,7 +2179,7 @@ const Profile = {
   },
   build(){
     const a = State.answers;
-    const check = FinModel.num('avg_check');
+    const check = FinModel.checkInfo().used;
     const cycle = this.cycleDays();
     const audience = a.audience || 'mixed';
 
@@ -2204,6 +2232,9 @@ const Funnel = {
     if (leads == null || conv == null || leads <= 0) return null;
     const deals = leads * conv / 100;
     if (dialogs == null || dialogs <= 0) return {leads, deals, conv, partial:true};
+    // Разговоров больше, чем заявок: считаются звонки, а не клиенты. Дозвон
+    // из такой пары не посчитать, иначе он молча обрезается до 100%
+    if (dialogs > leads) return {leads, deals, conv, partial:true, over:true, dialogsRaw:dialogs};
     const reachRate = Math.min(1, dialogs / leads);
     const closeRate = Math.min(1, deals / dialogs);
     const closeNorm = Math.min(0.95, (Profile.build().convTarget / 100) / this.REACH_NORM);
@@ -2285,7 +2316,8 @@ const FinModel = {
   base(){
     const leads  = this.num('leads_month');
     const conv   = this.num('conversion');
-    const check  = this.num('avg_check');
+    const ci     = this.checkInfo();
+    const check  = ci.used;
     const margin = this.num('margin');
     const repeat = this.num('repeat_pct');
     const revenue= this.num('revenue');
@@ -2293,7 +2325,46 @@ const FinModel = {
     // в блоке качества данных, а не подставляется молча.
     const marginAssumed = margin === null;
     const m = !marginAssumed ? Math.min(Math.max(margin,1),95)/100 : 0.30;
-    return { leads, conv, check, margin, m, marginAssumed, repeat, revenue };
+    return { leads, conv, check, checkStated: ci.stated, checkFixed: ci.fixed, margin, m, marginAssumed, repeat, revenue };
+  },
+
+  // Средний чек сверяется с выручкой. Деньги в ведомости — это сделки × чек,
+  // а в P&L — названная выручка. Если они расходятся, каждая сумма отчёта
+  // считается в другом масштабе: при чеке 3 млн ₽ и выручке 8 млн ₽ на 60
+  // сделках один пункт закрытия стоил дороже всей валовой прибыли. Выручка —
+  // цифра из отчётности, поэтому при расхождении больше чем на четверть
+  // чек берём из неё: выручка новых продаж ÷ число новых сделок.
+  CHECK_TOL: .25,
+  checkInfo(){
+    const stated = this.num('avg_check');
+    const leads = this.num('leads_month'), conv = this.num('conversion'), revenue = this.num('revenue'), repeat = this.num('repeat_pct');
+    const deals = leads != null && conv != null ? leads * conv / 100 : null;
+    if (stated == null || stated <= 0 || revenue == null || revenue <= 0 || !(deals > 0))
+      return {stated, used: stated, implied: null, fixed: false};
+    const rep = repeat != null ? Math.min(.9, Math.max(0, repeat / 100)) : 0;
+    const implied = revenue * (1 - rep) / deals;
+    const fixed = Math.abs(stated / implied - 1) > this.CHECK_TOL;
+    return {stated, implied, deals, rep, used: fixed ? implied : stated, fixed};
+  },
+  // Прибыль не может быть больше валовой: значит, в ответ попала выручка
+  // или валовая прибыль. Такую цифру в P&L не берём.
+  profitInfo(){
+    const profit = this.num('profit');
+    const b = this.base();
+    const rev = b.revenue != null && b.revenue > 0 ? b.revenue
+      : b.leads != null && b.conv != null && b.check != null ? b.leads * b.conv / 100 * b.check / (1 - Math.min(.9, Math.max(0, (b.repeat || 0) / 100))) : null;
+    const gp = rev != null ? rev * b.m : null;
+    const bad = profit != null && gp != null && profit > gp * 1.02;
+    return {stated: profit, used: bad ? null : profit, bad, gp, rev};
+  },
+  // Все расхождения в ответах, которые модель поправила сама: одна формулировка
+  // для экрана, PDF и суфлёра
+  issues(){
+    const out = [], b = this.base(), ci = this.checkInfo(), pi = this.profitInfo(), f = Funnel.build();
+    if (ci.fixed) out.push({id:'check', text: `Средний чек ${Fx.money(ci.stated)} не сходится с выручкой: ${Fx.money(b.revenue)} в месяц${ci.rep ? `, из них ${Math.round(ci.rep * 100)}% повторные,` : ''} при ${Fx.deals(ci.deals)} ${Fx.plural(Math.round(ci.deals), 'новой сделке', 'новых сделках', 'новых сделках')} — это ${Fx.money(ci.implied)} на сделку. Деньги в отчёте считаем от выручки, то есть от чека ${Fx.money(ci.implied)}. Если верен именно чек, поправьте выручку, заявки или конверсию: отчёт пересчитается.`});
+    if (f && f.over) out.push({id:'dialogs', text: `Разговоров ${Fx.nf.format(f.dialogsRaw)} больше, чем заявок ${Fx.nf.format(f.leads)}: похоже, считаются все звонки, включая повторные с одним клиентом. Дозвон по этим цифрам не посчитать, поэтому принимаем ориентир ${Math.round(Funnel.REACH_NORM * 100)}%, а закрытие считаем из общей конверсии.`});
+    if (pi.bad) out.push({id:'profit', text: `Прибыль ${Fx.money(pi.stated)} больше валовой прибыли ${Fx.money(pi.gp)}: так не бывает, похоже, в ответ попала выручка. В P&L прибыль не берём и считаем изменение валовой прибыли.`});
+    return out;
   },
 
   // Годовая валовая прибыль — знаменатель всех структурных потерь
@@ -2483,6 +2554,9 @@ const FinModel = {
 
   // Проверка на вменяемость: заявленная выручка vs выручка по воронке
   consistency(){
+    // Расхождения, которые модель поправила сама, называем прямо: что не сошлось и как считаем
+    const iss = this.issues();
+    if (iss.length) return {issues: iss, text: iss.map(i => i.text).join(' ')};
     const {leads, conv, check, revenue} = this.base();
     if (revenue === null || leads === null || conv === null || check === null) return null;
     const estMonthly = leads * conv / 100 * check;
@@ -3548,7 +3622,8 @@ const Ledger = {
       leads, conv, check, m, deals, repeat, repShare, rev, revKnown, funnelRev, gp: rev * m,
       margin: b.margin, marginAssumed: b.marginAssumed,
       cpl: FinModel.num('cost_per_lead'), cac: FinModel.num('cac'), ltv: FinModel.num('ltv'), romi: FinModel.num('romi'),
-      profit: FinModel.num('profit'), capacity: FinModel.num('capacity'), headroom: Capacity.headroomDeals(), capState,
+      profit: FinModel.profitInfo().used, capacity: FinModel.num('capacity'), headroom: Capacity.headroomDeals(), capState,
+      checkStated: b.checkStated, checkFixed: b.checkFixed, issues: FinModel.issues(),
       load: cap && cap.load != null ? cap.load : null, loadRatio: cap && cap.ratio != null ? cap.ratio : null,
       eff: cap ? cap.effective : null, timeAdj: cap ? cap.timeAdj : 1, managers: FinModel.num('managers'),
       convTarget: p.convTarget, repeatTarget: p.repeatTarget, loadNorm: p.loadNorm, respNorm: p.respNorm,
@@ -3583,7 +3658,6 @@ const Ledger = {
     if (cReal > ppRoom && cReal > 0){ const k = ppRoom / cReal; cPP.forEach(d => d.eff *= k); cReal = ppRoom; }
     const cNormGap = Math.min(Math.max(0, ppRoom - cReal), Math.max(0, L.reachNorm - L.reachCalc - cReal));
     if (cNormGap > .005) cPP.push({id:'creg', stage:'contact', unit:'pp', eff: cNormGap * 100, label:'Регламент первого касания', why:`дозвон ниже ориентира профиля ${Fx.pct(L.reachNorm)}`, wave:2, rec:.6});
-    cPP.forEach(d => { d.gain = d.eff / 100 * L.leads * L.closeCalc * check * m; add(d); });
 
     // ── Закрытие: вклад в процентах к текущей конверсии разговора в оплату ──
     const zREL = [];
@@ -3605,6 +3679,22 @@ const Ledger = {
     const closeNormRel = L.closeNorm ? Math.max(0, L.closeNorm / L.closeCalc - 1) : 0;
     const zGap = Math.min(Math.max(0, ceilRel - zReal), Math.max(0, closeNormRel - zReal));
     if (zGap > .01) zREL.push({id:'zreg', stage:'close', unit:'rel', eff: zGap, label:'Технология закрытия до ориентира', why:`закрытие ниже ориентира ${Fx.pct(L.closeNorm || 0)}`, wave:4, rec:.5});
+    // Ориентир конверсии, который назвал собственник, — потолок воронки: та же
+    // команда с инструментами не поднимется выше цифры, реальной для его ниши.
+    // Вклады обоих этапов ужимаются вместе, пропорционально.
+    L.ovrK = 1;
+    if (Profile.hasOverride()){
+      const tgt = p.convTarget / 100, now = L.reachCalc * L.closeCalc;
+      const cSum = cPP.reduce((t, d) => t + d.eff, 0) / 100, zSum = zREL.reduce((t, d) => t + d.eff, 0);
+      const pot = k => (L.reachCalc + k * cSum) * L.closeCalc * (1 + k * zSum);
+      if (pot(1) > tgt){
+        let lo = 0, hi = tgt <= now ? 0 : 1;
+        for (let i = 0; hi > 0 && i < 40; i++){ const mid = (lo + hi) / 2; if (pot(mid) > tgt) hi = mid; else lo = mid; }
+        cPP.forEach(d => d.eff *= hi); zREL.forEach(d => d.eff *= hi);
+        L.ovrK = hi;
+      }
+    }
+    cPP.forEach(d => { d.gain = d.eff / 100 * L.leads * L.closeCalc * check * m; add(d); });
     zREL.forEach(d => { d.gain = d.eff * L.closeCalc * L.dialogsCalc * check * m; add(d); });
 
     // ── Повторные продажи: вклад в процентных пунктах доли повторной выручки ──
@@ -3942,10 +4032,13 @@ const Story = {
   lead(L){
     if (!L) return '';
     const out = [], top = [...L.leaky].sort((a, b) => b.loss - a.loss)[0];
+    // «12% вместо 12%» не пишем: если при округлении цифры совпали, добавляем знак после запятой
+    const pp = (u, v) => { let d = 0; while (d < 2 && Fx.pct(u, d) === Fx.pct(v, d)) d++; return [Fx.pct(u, d), Fx.pct(v, d)]; };
+    const [r0, r1] = pp(L.reachCalc, L.P.reach), [c0, c1] = pp(L.closeCalc, L.P.close);
     if (top){
       const what = {
-        contact: `до разговора доходит ${Fx.pct(L.reachCalc)} заявок вместо ${Fx.pct(L.P.reach)}, которые даёт та же команда с нормативом ответа и регламентом касаний`,
-        close:   `из разговоров закрывается ${Fx.pct(L.closeCalc)} вместо ${Fx.pct(L.P.close)} со скриптом, разбором звонков и ежедневным управлением`,
+        contact: `до разговора доходит ${r0} заявок вместо ${r1}, которые даёт та же команда с нормативом ответа и регламентом касаний`,
+        close:   `из разговоров закрывается ${c0} вместо ${c1} со скриптом, разбором звонков и ежедневным управлением`,
         repeat:  `повторные продажи дают ${L.repeat}% выручки вместо ${Fx.dec(L.P.repeat, 0)}% при системной работе с базой`,
         price:   `цена не пересматривалась: рынок принимает ещё ${Fx.pct(L.P.check / L.check - 1)}`,
         lead:    `на продавца приходится ${Math.round(L.load || 0)} заявок при ориентире профиля ${L.loadNorm}: отдел работает вполсилы`
@@ -4166,14 +4259,30 @@ const GoalPath = {
 // контрольные метрики с его текущей цифрой и бинарные критерии приёмки.
 // Эффект волн складывается ровно в возврат из ведомости.
 const Waves = {
+  // Короткие имена практик для заголовков волн: заголовок называет то, что
+  // найдено у этой компании, а не одну и ту же рамку для всех
+  NOUN: {resp:'норматив ответа', crm:'CRM', watch:'контроль невзятых заявок', follow:'каскад касаний', creg:'регламент первого касания',
+    load:'разгрузка продавцов', admin:'документы с продавцов', script:'скрипт', calls:'разбор звонков', rop:'ежедневное управление',
+    motiv:'мотивация от результата', owner:'сделки без собственника', cascade:'дожим', qual:'квалификация', trust:'доказательства',
+    price_obj:'аргументация цены', plan:'план-факт', visib:'воронка в CRM', zreg:'технология закрытия', base:'работа с базой',
+    who:'ответственный за базу', reason:'повод вернуться', rreg:'реактивация базы', price:'прайс', traffic:'канал заявок'},
+  ART: {resp:'регламент первого ответа', crm:'настроенная CRM', watch:'отчёт по невзятым заявкам', follow:'каскад касаний', creg:'регламент первого касания',
+    script:'скрипт и карта возражений', cascade:'каскад дожима', qual:'чек-лист квалификации', trust:'папка доказательств: кейсы, гарантии, отзывы',
+    price_obj:'аргументация цены', visib:'воронка CRM по этапам', base:'сценарии работы с базой', who:'регламент повторных продаж', rreg:'план реактивации базы',
+    reason:'поводы вернуться и допродажи', calls:'чек-лист разбора звонков', plan:'дашборд план-факт', owner:'матрица передачи клиентов',
+    zreg:'стандарт закрытия', price:'новый прайс', traffic:'медиаплан канала', motiv:'схема мотивации', admin:'регламент документов', load:'расчёт нагрузки'},
   build(L){
     const a = State.answers, W = [];
     const dr = n => L ? L.D.filter(d => d.wave === n) : [];
+    const has = (n, ...ids) => dr(n).some(d => ids.includes(d.id));
     const money = n => L && L.byWave ? L.byWave[n - 1] : 0;
     const owner = a.owner_dep === 'yes' || ['all','most'].includes(a.owner_share);
     const senior = L && L.ropMode === 'senior', self = L && L.ropMode === 'self';
     const boss = senior ? 'старший продавец' : self ? 'собственник по регламенту' : 'РОП';
     const sameTxt = m => String(m[1]).trim() === String(m[2]).trim();
+    const nouns = (n, k = 3) => [...new Set(dr(n).map(d => this.NOUN[d.id]).filter(Boolean))].slice(0, k);
+    const arts = n => [...new Set(dr(n).map(d => this.ART[d.id]).filter(Boolean))];
+    const joinAnd = l => l.length > 1 ? l.slice(0, -1).join(', ') + ' и ' + l[l.length - 1] : (l[0] || '');
     const tasks = (n, extra) => {
       const list = dr(n).map(d => d.label);
       (extra || []).forEach(t => { if (t && !list.includes(t)) list.push(t); });
@@ -4182,79 +4291,121 @@ const Waves = {
     const effNote = n => {
       const names = {contact:'первый контакт', close:'закрытие', repeat:'повторные продажи', price:'цену', lead:'поток заявок'};
       const on = [...new Set(dr(n).map(d => names[d.stage]))];
-      return on.length ? 'за счёт того, что чиним ' + (on.length > 1 ? on.slice(0, -1).join(', ') + ' и ' + on[on.length - 1] : on[0]) : '';
+      return on.length ? 'за счёт того, что чиним ' + joinAnd(on) : '';
     };
+    // Волна без находок не выдумывается: она остаётся в плане строкой «не нужна»
+    // с причиной. Так видно, что план собран под компанию, а не под шаблон.
+    const skip = (n, wk, title, why) => W.push({n, wk, title, skip: why, tasks: [], metrics: [], acc: [], eff: 0, effNote: ''});
 
-    W.push({n:1, wk:[1,2], title:'Архитектура и P&L-модель',
-      goal:'Разложить деньги по этапам и утвердить конструкцию отдела до того, как тратить бюджет.',
-      tasks: tasks(1, [
-        a.has_crm === 'yes' ? 'Выгрузка сделок за 6 месяцев и сверка с оплатами: воронка по этапам на фактических данных'
-                            : 'Сбор сделок за 3 месяца из таблиц и мессенджеров: воронка по этапам на фактических данных',
-        'Архитектура отдела: роли, ФОТ, план на каждого',
-        'P&L-модель на 12 месяцев помесячно']),
-      metrics: (L && L.P.check > L.check && dr(1).some(d => d.stage === 'price') ? [['Средний чек', Fx.rub(L.check), Fx.rub(L.T.check)]] : []).filter(m => !sameTxt(m)),
-      acc:['Документ архитектуры подписан: структура, ФОТ, мотивация, планы',
-        'P&L-модель сходится с фактом последних 3 месяцев в пределах 5%',
-        'У каждого этапа воронки есть владелец и норматив'],
-      eff: money(1), effNote: effNote(1) || 'определяет, куда пойдут деньги',
-      art:'Карта потерь · архитектура отдела · P&L-модель', you:'Две встречи по 90 минут, доступ к CRM и выписке оплат'});
-
-    const m2 = [];
-    if (L && dr(2).some(d => d.stage === 'contact')) m2.push(['Дозвон до разговора', Fx.pct(L.reachCalc), Fx.pct(L.T.reach)]);
-    if (L && L.respSlow) m2.push(['Первый ответ в 90% заявок', FX_RESP[a.response_time], FX_RESP[L.respNorm]]);
-    if (L && dr(2).some(d => d.stage === 'repeat')) m2.push(['Повторные заказы в месяц', Fx.dec(L.repOrders, 0), Fx.dec(L.T.orders, 0)]);
-    if (a.has_crm === 'no') m2.push(['Сделки в CRM', 'вне системы', '100%']);
-    W.push({n:2, wk:[3,6], title:'Фундамент: CRM, регламенты, скрипты', goal:'Перестать терять оплаченные заявки.',
-      tasks: tasks(2, [a.has_crm === 'no' ? null : 'Автораспределение заявок и контроль невзятых в CRM',
-        a.has_regl === 'no' ? 'Прослушка 20 звонков и карта возражений под ваш продукт' : null]),
-      metrics: m2.filter(m => !sameTxt(m)),
-      acc:['Отдел неделю работает строго по регламентам: проверка по 20 записям звонков',
-        ['couple','nothing','manager'].includes(a.followup) ? 'Каждая незакрытая сделка получает 5 касаний и больше: проверка 20 случайных сделок' : null,
-        '100% заявок и сделок в CRM: сверка с оплатами без расхождений'].filter(Boolean),
-      eff: money(2), effNote: effNote(2),
-      art:'Регламент первого касания · каскад дожима · скрипт и карта возражений · воронка CRM', you:'Час в неделю и решение по доработке CRM'});
-
+    // ── Волна 1: карта денег. Нужна всем: без сверки с оплатами любая цифра отчёта — со слов ──
     const needSellers = L && L.loadRatio != null && L.loadRatio > 1.3 && L.managers > 0 ? Math.max(1, Math.ceil(L.leads / L.loadNorm) - L.managers) : 0;
     const hireFlow = a.turnover === 'half' || ['long','gaveup'].includes(a.hiring_time);
-    const hiring = (a.has_rop === 'no' && !self) || needSellers > 0 || hireFlow;
-    const t3 = tasks(3, [
-      a.has_rop === 'no' && !senior && !self ? 'Профиль РОПа и конкурсный день: 10–15 кандидатов продают ваш продукт вживую' : null,
-      senior ? 'Старший продавец с доплатой за управление: отдельный РОП на вашем масштабе пока не окупается' : null,
-      self ? 'Регламент управления для собственника: планёрка 30 минут в день по чек-листу' : null,
-      needSellers ? `+${needSellers} ${Fx.plural(needSellers, 'продавец', 'продавца', 'продавцов')} под нагрузку: сейчас ${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')} на человека при ориентире профиля ${L.loadNorm}` : null,
-      hireFlow ? 'Воронка найма: профиль, источники, конкурсный отбор вместо откликов' : null,
-      hiring ? 'Адаптация 30 дней: чек-лист ввода и план первых сделок' : 'Аттестация продавцов по скрипту и цифрам']);
-    const m3 = [];
-    if (a.has_rop === 'no') m3.push([senior || self ? 'Управление отделом' : 'РОП', 'нет', senior ? 'старший продавец' : self ? 'планёрка каждый день' : 'вышел и ведёт планёрки']);
-    if (needSellers) m3.push(['Нагрузка на продавца', `${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')}`, `не больше ${Math.round(L.loadNorm * 1.15)}`]);
-    if (['months','long','gaveup'].includes(a.hiring_time)) m3.push(['Поиск кандидата', ({months:'1–3 месяца', long:'больше 3 месяцев', gaveup:'почти отчаялись'})[a.hiring_time], 'закрыт за 4 недели']);
-    W.push({n:3, wk:[5,8], title: hiring ? 'Люди через конкурс' : 'Команда: аттестация и резерв',
-      goal: owner ? 'Снять продажи с собственника и разгрузить отдел.' : hiring ? 'Закрыть роли, без которых рост некому везти.' : 'Убедиться, что каждый в отделе тянет свой план.',
-      tasks: t3, metrics: m3.filter(m => !sameTxt(m)),
-      acc:[a.has_rop === 'no' && !senior && !self ? 'РОП вышел, план ввода на 30, 60 и 90 дней подписан' : null,
-        senior ? 'Старший продавец ведёт ежедневную планёрку по регламенту' : null,
-        self ? 'Планёрка по чек-листу проходит каждый день две недели подряд' : null,
-        hiring ? 'Новички две недели подряд выполняют норматив активности' : 'Каждый продавец прошёл аттестацию, по каждому есть план развития'].filter(Boolean),
-      guar: hiring ? 'Бесплатная замена кандидата в течение 3 месяцев' : null,
-      eff: money(3), effNote: effNote(3) || 'держит результат волн 2 и 4',
-      art: hiring ? 'Профиль кандидата · воронка найма · программа адаптации' : 'Аттестация · профиль продавца · резерв кандидатов',
-      you: hiring ? 'Конкурсный день: 4 часа. Финальное интервью с 2–3 кандидатами' : 'Два часа на аттестацию отдела'});
+    const hiring = (a.has_rop === 'no' && !self && !senior) || needSellers > 0 || hireFlow;
+    const reshape = hiring || senior || self || a.has_kpi === 'no' || has(1, 'motiv');
+    const n1 = nouns(1);
+    W.push({n:1, wk:[1,2], title: n1.length ? `P&L-модель: ${joinAnd(n1)}` : 'P&L-модель и карта денег',
+      goal: reshape ? 'Разложить деньги по этапам и утвердить конструкцию отдела до того, как тратить бюджет.'
+                    : 'Разложить деньги по этапам на фактических оплатах и закрепить цель каждого этапа.',
+      tasks: tasks(1, [
+        L && L.issues && L.issues.length ? `Сверить расхождения в ответах по фактическим оплатам: ${L.issues.map(i => ({check:'чек и выручка', dialogs:'разговоры и заявки', profit:'прибыль'})[i.id]).join(', ')}` : null,
+        a.has_crm === 'yes' ? 'Выгрузка сделок за 6 месяцев и сверка с оплатами: воронка по этапам на фактических данных'
+                            : 'Сбор сделок за 3 месяца из таблиц и мессенджеров: воронка по этапам на фактических данных',
+        reshape ? 'Архитектура отдела: роли, ФОТ, план на каждого' : null,
+        'P&L-модель на 12 месяцев помесячно']),
+      metrics: (L && L.P.check > L.check && has(1, 'price') ? [['Средний чек', Fx.rub(L.check), Fx.rub(L.T.check)]] : []).filter(m => !sameTxt(m)),
+      acc:[reshape ? 'Документ архитектуры подписан: структура, ФОТ, мотивация, планы' : null,
+        'P&L-модель сходится с фактом последних 3 месяцев в пределах 5%',
+        'У каждого этапа воронки есть владелец и норматив'].filter(Boolean),
+      eff: money(1), effNote: effNote(1) || 'определяет, куда пойдут деньги',
+      art: ['Карта потерь', reshape ? 'архитектура отдела' : null, 'P&L-модель', ...arts(1)].filter(Boolean).join(' · '),
+      you:'Две встречи по 90 минут, доступ к CRM и выписке оплат'});
 
+    // ── Волна 2: фундамент — только то, чего нет ──
+    const st2 = new Set(dr(2).map(d => d.stage));
+    const n2 = nouns(2);
+    if (!dr(2).length && a.has_crm !== 'no'){
+      skip(2, [3,6], 'Фундамент', 'CRM, регламенты и скрипт уже есть, первый контакт и закрытие в пределах потенциала. Строить заново нечего.');
+    } else {
+      const m2 = [];
+      if (L && st2.has('contact')) m2.push(['Дозвон до разговора', Fx.pct(L.reachCalc), Fx.pct(L.T.reach)]);
+      if (L && L.respSlow && has(2, 'resp')) m2.push(['Первый ответ в 90% заявок', FX_RESP[a.response_time], FX_RESP[L.respNorm]]);
+      if (L && st2.has('close') && !dr(4).some(d => d.stage === 'close')) m2.push(['Закрытие из разговора', Fx.pct(L.closeCalc, L.closeCalc < .2 ? 1 : 0), Fx.pct(L.T.close, L.closeCalc < .2 ? 1 : 0)]);
+      if (L && st2.has('repeat')) m2.push(['Повторные заказы в месяц', Fx.dec(L.repOrders, 0), Fx.dec(L.T.orders, 0)]);
+      if (a.has_crm === 'no') m2.push(['Сделки в CRM', 'вне системы', '100%']);
+      const goal = [st2.has('contact') ? 'перестать терять оплаченные заявки до разговора' : null,
+        st2.has('close') ? 'довести разговор до оплаты по одному стандарту' : null,
+        st2.has('repeat') ? 'вернуть в работу клиентскую базу' : null].filter(Boolean);
+      W.push({n:2, wk:[3,6], title: n2.length ? `Фундамент: ${joinAnd(n2)}` : 'Фундамент: CRM',
+        goal: goal.length ? Fx.cap(joinAnd(goal)) + '.' : 'Перевести сделки в CRM, чтобы каждую цифру было видно.',
+        tasks: tasks(2, [st2.has('contact') && a.has_crm === 'yes' ? 'Автораспределение заявок и контроль невзятых в CRM' : null,
+          has(2, 'script') ? 'Прослушка 20 звонков и карта возражений под ваш продукт' : null]),
+        metrics: m2.filter(m => !sameTxt(m)),
+        acc:[st2.has('contact') || st2.has('close') ? 'Отдел неделю работает строго по регламентам: проверка по 20 записям звонков' : null,
+          has(2, 'follow', 'cascade') ? 'Каждая незакрытая сделка получает 5 касаний и больше: проверка 20 случайных сделок' : null,
+          st2.has('repeat') ? 'По базе идёт сценарий касаний: у каждого клиента есть дата следующего контакта' : null,
+          a.has_crm === 'no' || has(2, 'visib', 'watch') ? '100% заявок и сделок в CRM: сверка с оплатами без расхождений' : null].filter(Boolean),
+        eff: money(2), effNote: effNote(2) || 'даёт данные, без которых не проверить остальные волны',
+        art: (arts(2).length ? arts(2) : ['воронка CRM']).map((t, i) => i ? t : Fx.cap(t)).join(' · '),
+        you: a.has_crm === 'no' ? 'Час в неделю и решение по выбору CRM' : 'Час в неделю на согласование регламентов'});
+    }
+
+    // ── Волна 3: люди — только если есть кого искать или кого разгрузить ──
+    const st3 = dr(3);
+    if (!hiring && !senior && !self && !st3.length){
+      skip(3, [5,8], 'Люди', `Найм не нужен: ${a.has_rop === 'no' ? '' : 'РОП есть, '}нагрузка на продавца в пределах ориентира${['none','few'].includes(a.turnover) ? ', текучки нет' : ''}. Рост везёт текущий состав.`);
+    } else {
+      const t3 = tasks(3, [
+        a.has_rop === 'no' && !senior && !self ? 'Профиль РОПа и конкурсный день: 10–15 кандидатов продают ваш продукт вживую' : null,
+        senior ? 'Старший продавец с доплатой за управление: отдельный РОП на вашем масштабе пока не окупается' : null,
+        self ? 'Регламент управления для собственника: планёрка 30 минут в день по чек-листу' : null,
+        needSellers ? `+${needSellers} ${Fx.plural(needSellers, 'продавец', 'продавца', 'продавцов')} под нагрузку: сейчас ${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')} на человека при ориентире профиля ${L.loadNorm}` : null,
+        hireFlow ? 'Воронка найма: профиль, источники, конкурсный отбор вместо откликов' : null,
+        hiring ? 'Адаптация 30 дней: чек-лист ввода и план первых сделок' : null]);
+      const m3 = [];
+      if (a.has_rop === 'no') m3.push([senior || self ? 'Управление отделом' : 'РОП', 'нет', senior ? 'старший продавец' : self ? 'планёрка каждый день' : 'вышел и ведёт планёрки']);
+      if (needSellers || has(3, 'load')) m3.push(['Нагрузка на продавца', `${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')}`, `не больше ${Math.round(L.loadNorm * 1.15)}`]);
+      if (has(3, 'admin')) m3.push(['Время продавцов на документы', a.sales_time === 'admin' ? 'больше половины' : 'половина', 'не больше 20%']);
+      if (hiring && ['months','long','gaveup'].includes(a.hiring_time)) m3.push(['Поиск кандидата', ({months:'1–3 месяца', long:'больше 3 месяцев', gaveup:'почти отчаялись'})[a.hiring_time], 'закрыт за 4 недели']);
+      const title = hiring ? (a.has_rop === 'no' && !needSellers && !hireFlow ? 'Люди: РОП через конкурс' : 'Люди через конкурс')
+        : senior ? 'Управление: старший продавец' : self ? 'Управление: регламент собственника'
+        : `Время продавцов: ${joinAnd(nouns(3))}`;
+      W.push({n:3, wk:[5,8], title,
+        goal: owner ? 'Снять продажи с собственника и разгрузить отдел.' : hiring ? 'Закрыть роли, без которых рост некому везти.'
+          : has(3, 'admin', 'load') ? 'Вернуть продавцам время на продажи без найма.' : 'Дать отделу ежедневное управление без новой ставки.',
+        tasks: t3, metrics: m3.filter(m => !sameTxt(m)),
+        acc:[a.has_rop === 'no' && !senior && !self ? 'РОП вышел, план ввода на 30, 60 и 90 дней подписан' : null,
+          senior ? 'Старший продавец ведёт ежедневную планёрку по регламенту' : null,
+          self ? 'Планёрка по чек-листу проходит каждый день две недели подряд' : null,
+          hiring ? 'Новички две недели подряд выполняют норматив активности' : null,
+          has(3, 'admin') ? 'Документы готовит не продавец: проверка по 20 последним сделкам' : null,
+          has(3, 'load') && !needSellers ? 'Нагрузка на продавца в пределах ориентира четыре недели подряд' : null].filter(Boolean),
+        guar: hiring ? 'Бесплатная замена кандидата в течение 3 месяцев' : null,
+        eff: money(3), effNote: effNote(3) || 'держит результат волн 2 и 4',
+        art: [hiring ? 'Профиль кандидата · воронка найма · программа адаптации' : null, ...arts(3)].filter(Boolean).join(' · ') || 'Регламент управления',
+        you: hiring ? 'Конкурсный день: 4 часа. Финальное интервью с 2–3 кандидатами' : senior || self ? 'Полчаса в день на планёрку первые две недели' : 'Решение, кто забирает документы у продавцов'});
+    }
+
+    // ── Волна 4: закрепление. Нужна всем, но названа по тому, что закрепляем ──
     const m4 = [];
-    if (L && dr(4).some(d => d.stage === 'close')) m4.push(['Закрытие из разговора', Fx.pct(L.closeCalc), Fx.pct(L.T.close)]);
+    if (L && dr(4).some(d => d.stage === 'close')) m4.push(['Закрытие из разговора', Fx.pct(L.closeCalc, L.closeCalc < .2 ? 1 : 0), Fx.pct(L.T.close, L.closeCalc < .2 ? 1 : 0)]);
     if (L && dr(4).some(d => d.stage === 'lead')) m4.push(['Заявок в месяц', String(L.leads), String(Math.round(L.T.leads))]);
+    if (L && dr(4).some(d => d.stage === 'repeat') && !dr(2).some(d => d.stage === 'repeat')) m4.push(['Повторные заказы в месяц', Fx.dec(L.repOrders, 0), Fx.dec(L.T.orders, 0)]);
     if (['gt25','10_25'].includes(a.owner_time)) m4.push(['Собственник в продажах', a.owner_time === 'gt25' ? '25+ ч в неделю' : '10–25 ч в неделю', 'не больше 8 ч']);
     if (['half','rare'].includes(a.plan_done)) m4.push(['План продаж', a.plan_done === 'half' ? 'через раз' : 'редко', '4 недели подряд']);
-    W.push({n:4, wk:[7,12], title: (a.has_rop === 'no' || owner) && !self ? (senior ? 'Разгон и передача управления' : 'Разгон и передача РОПу') : 'Разгон и контроль по цифрам',
-      goal:'Отдел держит результат без собственника и без нас.',
+    const handover = (a.has_rop === 'no' || owner) && !self;
+    const n4 = nouns(4);
+    W.push({n:4, wk:[7,12], title: handover ? (senior || a.has_rop !== 'no' ? 'Разгон и передача управления' : 'Разгон и передача РОПу')
+        : n4.length ? `Разгон: ${joinAnd(n4)}` : 'Разгон и контроль по цифрам',
+      goal: handover ? 'Отдел держит результат без собственника и без нас.' : 'Отдел держит новые цифры без нас: результат не откатывается за месяц.',
       tasks: tasks(4, [a.has_kpi === 'no' ? 'План на каждого менеджера и еженедельный план-факт' : null,
         owner ? 'Передача регулярных сделок менеджерам: за вами остаются стратегические клиенты' : null,
-        'Еженедельный план-факт как постоянный ритм отдела']),
+        a.has_kpi !== 'no' && !has(4, 'plan') ? 'Еженедельный план-факт как постоянный ритм отдела' : null]),
       metrics: m4.filter(m => !sameTxt(m)),
       acc:[a.has_rop === 'no' ? `4 недели план-факт и планёрки ведёт ${boss} без консультанта` : '4 недели отдел держит план без участия консультанта',
-        owner ? 'Матрица передачи клиентов выполнена: собственник не забирает сделки обратно' : null].filter(Boolean),
-      eff: money(4), effNote: effNote(4),
-      art:'Дашборд план-факт · регламент планёрок · матрица передачи клиентов',
+        owner ? 'Матрица передачи клиентов выполнена: собственник не забирает сделки обратно' : null,
+        has(4, 'calls') ? 'Разбор звонков идёт каждую неделю: 4 протокола подряд' : null].filter(Boolean),
+      eff: money(4), effNote: effNote(4) || 'закрепляет эффект волн 2 и 3',
+      art: ['Дашборд план-факт', 'регламент планёрок', owner ? 'матрица передачи клиентов' : null, ...arts(4).filter(t => t !== 'дашборд план-факт' && t !== 'матрица передачи клиентов')].filter(Boolean).join(' · '),
       you: owner ? 'Передать клиентов по матрице и не забирать сделки обратно' : 'Еженедельный разбор план-факта: 30 минут'});
     return W;
   }
@@ -4483,7 +4634,9 @@ const Final = {
     if (!a._date) a._date = new Date().toISOString().slice(0, 10);
   },
   // Пересчёт на месте: после правки нормы экран не должен прыгать наверх
-  rerender(){ const y = window.scrollY; this.render(); window.scrollTo(0, y); },
+  // Без плавной прокрутки: html{scroll-behavior:smooth} иначе тянет страницу от верха
+  // через весь заново собранный отчёт, и браузер дорисовывает его кусками поверх старого
+  rerender(){ const y = window.scrollY; this.render(); window.scrollTo({top:y, behavior:'instant'}); },
 
   ctx(){
     const a = State.answers, L = Ledger.build(), c = Constraint.detect();
@@ -4560,56 +4713,73 @@ const Final = {
     return `<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="${r}" fill="none" stroke="#24312D" stroke-width="4"/><circle cx="20" cy="20" r="${r}" fill="none" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${(c * v / 100).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 20 20)"/></svg>`;
   },
 
-  // Причинно-следственные связи модели: одна практика — один показатель — путь до денег
+  // Причинно-следственные связи модели: практика — показатель — путь до денег.
+  // Четвёртый элемент — рычаги ведомости, по которым связь считается активной в отчёте
   LINKS: [
-    ['Ответ на заявку до 15 минут', 'доходимость до разговора', 'сделки из того же трафика'],
-    ['Регламент касаний', 'возврат отложенных клиентов', 'сделки без роста бюджета'],
-    ['Скрипт и разбор звонков', 'конверсия ключевого этапа', 'выручка на том же потоке'],
-    ['Ежедневный план-факт', 'результат держится', 'эффект не откатывается за месяц'],
-    ['Мотивация от плана', 'усилие продавца на дожиме', 'закрытие сделок'],
-    ['Работа с базой', 'доля повторных продаж', 'стоимость роста падает'],
-    ['Оцифрованная воронка', 'просадку видно за день', 'решения принимаются по цифрам'],
-    ['Мощность отдела', 'потолок возврата', 'сколько успеваем забрать за 90 дней']
+    ['Ответ на заявку до 15 минут', 'доходимость до разговора', 'сделки из того же трафика', ['resp','creg','watch']],
+    ['Регламент касаний', 'возврат отложенных клиентов', 'сделки без роста бюджета', ['follow','cascade']],
+    ['Скрипт и разбор звонков', 'конверсия ключевого этапа', 'выручка на том же потоке', ['script','calls','qual','trust','price_obj','zreg']],
+    ['Ежедневный план-факт', 'результат держится', 'эффект не откатывается за месяц', ['plan','rop']],
+    ['Мотивация от плана', 'усилие продавца на дожиме', 'закрытие сделок', ['motiv']],
+    ['Работа с базой', 'доля повторных продаж', 'стоимость роста падает', ['base','who','reason','rreg']],
+    ['Оцифрованная воронка', 'просадку видно за день', 'решения принимаются по цифрам', ['crm','visib']],
+    ['Мощность отдела', 'потолок возврата', 'сколько успеваем забрать за 90 дней', ['load','admin','owner']]
   ],
+  CASES: [
+    {co:'СДЭК', big:'30 → 5', unit:'место в сети', p:'Из тридцатки в топ-5 за 4,5 месяца, выручка ×2 за 10 месяцев.'},
+    {co:'UniBox', big:'1,5 → 12,3', unit:'млн ₽ в месяц', p:'Коммерческий блок с нуля, рост за 9 месяцев.'},
+    {co:'MarketGuru', big:'34%', unit:'аудитов в оплату', p:'Шесть месяцев рекордов подряд после перестройки продаж.'}
+  ],
+  linkOn(c, L){
+    const ids = new Set(L && L.D ? L.D.map(d => d.id) : []);
+    return c[3].some(id => ids.has(id)) || (c[3].includes('load') && L && L.capCut < 1);
+  },
 
   // ── 01 Основание: на чём стоит разбор и почему ему можно верить ──
   actIntro(x, no){
     const L = x.L;
     const qn = State.visibleQuestions().length;
     const dn = L && L.D ? L.D.length : 0;
-    const blk = (n, t, body) => `<div class="fx-why-b"><span class="fx-why-n">${n}</span><h4>${t}</h4>${body}</div>`;
-    const list = arr => `<ul class="fx-ul dash">${arr.filter(Boolean).map(i => `<li><span>${i}</span></li>`).join('')}</ul>`;
-    const chains = this.LINKS.map(c => `<div class="fx-link"><span>${c[0]}</span><i></i><span>${c[1]}</span><i></i><b>${c[2]}</b></div>`).join('');
+    const on = this.LINKS.filter(c => this.linkOn(c, L)).length;
+    const cases = this.CASES.map(c => `<div class="fx-bcase"><span class="fx-bcase-co">${c.co}</span><b>${c.big}</b><em>${c.unit}</em><p>${c.p}</p></div>`).join('');
+    const step = (v, t, cls = '') => `<div class="fx-pipe-s ${cls}"><b>${v}</b><span>${t}</span></div>`;
+    const pipe = [step(qn, `${Fx.plural(qn, 'ответ', 'ответа', 'ответов')} в анкете`),
+      step(6, 'систем бизнеса'),
+      step(this.LINKS.length, 'связей практики с деньгами'),
+      step(dn, `${Fx.plural(dn, 'рычаг', 'рычага', 'рычагов')} нашлось у вас`, 'ok'),
+      L && L.lossMo > 0 ? step(Fx.money(L.lossMo), 'теряется в месяц', 'loss') : ''].filter(Boolean).join('<i class="fx-pipe-a"></i>');
+    const guard = (v, t) => `<div class="fx-guard"><b>${v}</b><span>${t}</span></div>`;
+    const guards = [
+      guard('0', 'отраслевых бенчмарков. Ориентир — ваша же команда с инструментами'),
+      guard(Fx.pct(Ledger.REACH_CEIL), 'потолок доходимости до разговора, даже если считать больше'),
+      guard('×' + Fx.dec(1 + Ledger.CLOSE_REL_CAP, 2), 'максимальный рост закрытия от сегодняшнего'),
+      guard(Fx.pct(Ledger.GP_CAP), `валовой прибыли — потолок всей суммы${L && L.capHit ? '. У вас он сработал' : ''}`),
+      guard(Fx.dec(Ledger.PRICE_FLOW, 2), 'коэффициент на отток клиентов при росте цены'),
+      guard('1 раз', 'считается каждый рубль: на том этапе, где он теряется')].join('');
+    const links = this.LINKS.map(c => { const act = this.linkOn(c, L);
+      return `<div class="fx-blink${act ? ' on' : ''}"><span>${c[0]}</span><i></i><span>${c[1]}</span><i></i><b>${c[2]}</b>${act ? '<em>в вашем отчёте</em>' : ''}</div>`; }).join('');
     return this.sec('intro', no, 'Основание', 'На чём стоит этот разбор',
-      'Прежде чем смотреть цифры — откуда они берутся и почему им можно верить.',
-      `<div class="fx-why">
-        ${blk('01', 'На чём основана технология', `
-          <p>Методика собрана из практики, где результат проверялся выручкой. СДЭК: возврат с тридцатого места в топ-5 сети за 4,5 месяца и выручка ×2 за 10 месяцев. UniBox: коммерческий блок с нуля и рост с 1,5 до 12,3 млн ₽ в месяц за 9 месяцев. MarketGuru: конверсия аудита в оплату 34% и шесть месяцев рекордов подряд. Все три кейса с цифрами выложены на closery.ru, каждая цифра подтверждается контактами основателей.</p>
-          <p>Из этой практики собран перечень управленческих контуров, которые реально двигают показатели, и для каждого известно, на что именно он влияет. Диагностика задаёт ${qn} ${Fx.plural(qn, 'вопрос', 'вопроса', 'вопросов')} по шести системам бизнеса и сопоставляет ваши ответы с этим перечнем${dn ? `: в вашем случае сработало ${dn} ${Fx.plural(dn, 'рычаг', 'рычага', 'рычагов')}` : ''}.</p>`)}
-        ${blk('02', 'Почему цифрам можно верить', `
-          <p>Мы не используем отраслевые бенчмарки: достоверной статистики по нишам почти не существует, и ссылаться на неё было бы подлогом. Ориентир один — потенциал вашей же команды, когда у неё появляются инструменты.</p>
-          ${list([
-            'Каждая сумма раскрывается до арифметики: нажмите на строку в ведомости и увидите формулу целиком.',
-            'Арифметика показывает размер эффекта. Сам вклад инструмента — экспертная оценка по опыту внедрений, на вашей компании его ещё не измеряли. Доказывает его метрика, которая стоит в плане на эту волну.',
-            'Деньги считаются один раз, на том этапе воронки, где теряются. Причины объясняют потерю, но не прибавляются сверху.',
-            `Потолки жёсткие: доходимость до разговора не выше ${Fx.pct(Ledger.REACH_CEIL)}, закрытие растёт не больше чем в ${Fx.mult(1 + Ledger.CLOSE_REL_CAP)} раза, прирост цены считается с коэффициентом ${Fx.dec(Ledger.PRICE_FLOW, 2)} на отток, вся сумма не больше ${Fx.pct(Ledger.GP_CAP)} валовой прибыли.`,
-            'Если рычагов набирается больше потолка, лишние в расчёт не берутся и названы в методике. Заниженная цифра полезнее красивой.',
-            'Возврат за 90 дней ограничен мощностью отдела: больше сделок текущий состав физически не обслужит.',
-            'Новые расходы на управление вычтены явно, а прибыль после внедрения никогда не показывается выше, чем получается по арифметике.',
-            'Поменяйте любой ответ — отчёт пересчитается при вас, вместе со всеми суммами.'
-          ])}`)}
-        ${blk('03', 'Какие связи учитываются', `
-          <p>Модель построена на механике: у каждой практики есть показатель, на который она влияет, и путь до денег. Вот эти пути.</p>
-          <div class="fx-links">${chains}</div>
-          <p class="fx-note" style="margin-top:20px">Связи односторонние и проверяемые: у каждой в плане стоит своя метрика. Не сдвинулась метрика — значит, не сработало, и ждать дальше незачем. Обратные эффекты учтены тоже: рост цены уменьшается на отток, рост конверсии упирается в мощность отдела, а расходы на управление вычитаются из прибыли.</p>`)}
-        ${blk('04', 'Почему это работает', `
-          <p>Потому что деньги берутся из трафика, за который вы уже заплатили. Это единственный источник, который не требует ни бюджета, ни найма, поэтому первые деньги приносит процесс, ещё до найма.</p>
-          ${list([
-            'Порядок работ начинается с управленческого контура, найм идёт после: руководитель без оцифрованной воронки управляет по ощущениям, а контроль качества без скрипта слушает звонки без эталона.',
-            'Каждая волна закрывается по бинарным критериям приёмки: выполнено или нет.',
-            'Сначала чинится то, где один пункт показателя стоит дороже всего, и только потом растёт объём.',
-            'Чего делать не нужно, тоже названо прямо: в диагнозе есть отдельный список на ближайшие 90 дней.'
-          ])}`)}
+      'Откуда методика, как из ваших ответов получились суммы и какие ограничители не дают им раздуться.',
+      `<div class="fx-k">Откуда методика</div>
+      <div class="fx-bcases">${cases}</div>
+      <p class="fx-note" style="margin-top:14px">Кейсы с цифрами выложены на closery.ru, каждую цифру подтверждают основатели этих компаний.</p>
+
+      <div class="fx-k" style="margin-top:44px">Как ваши ответы превратились в суммы</div>
+      <div class="fx-pipe">${pipe}</div>
+
+      <div class="fx-k" style="margin-top:44px">Ограничители расчёта</div>
+      <div class="fx-guards">${guards}</div>
+      <p class="fx-note">Арифметика показывает размер эффекта, вклад каждой практики — оценка по опыту внедрений. Проверяет её метрика, которая стоит в плане на свою волну. Любая сумма в ведомости раскрывается до формулы, а поменяйте ответ — отчёт пересчитается при вас.</p>
+
+      <div class="fx-k" style="margin-top:44px">Связи, по которым идут деньги · ${on ? `у вас работают ${on} из ${this.LINKS.length}` : 'карта модели'}</div>
+      <div class="fx-blinks">
+        <div class="fx-blink hd"><span>Практика</span><i></i><span>Что сдвигает</span><i></i><b>Где деньги</b></div>
+        ${links}
+      </div>
+      <div class="fx-why3">
+        <div><b>Деньги из оплаченного трафика</b><p>Первый рубль приходит из заявок, за которые вы уже заплатили: ни бюджета, ни найма.</p></div>
+        <div><b>Сначала управление, потом люди</b><p>Новичок без воронки и скрипта учится на ваших клиентах. Поэтому найм, если он нужен, идёт после фундамента.</p></div>
+        <div><b>Приёмка по цифрам</b><p>Не сдвинулась метрика волны — значит, не сработало, и ждать дальше незачем.</p></div>
       </div>`);
   },
 
@@ -4622,7 +4792,7 @@ const Final = {
     if (L){
       const p = L.pnl;
       tiles += tile('Недополученная прибыль в месяц', L.lossMo > 0 ? Fx.M + Fx.money(L.lossMo) : '0 ₽', L.lossMo > 0 ? `За год это ${Fx.mln(L.lossMo * 12)}` : 'Воронка в пределах ориентира', 'fx-red');
-      tiles += tile('Потенциал возврата в месяц', '+' + Fx.money(L.recMo), `Расчёт при достижении целевых показателей плана. За год это ${Fx.mln(L.recMo * 12)}`, 'fx-green');
+      tiles += tile('Потенциал возврата в месяц', '+' + Fx.money(L.recMo), `Когда план выйдет на целевые показатели. За первый год с разгоном по волнам ${Fx.mln(L.yearGP)}`, 'fx-green');
       if (p.pr0 != null && p.pr0 > 0){
         const d = p.pr1 / p.pr0 - 1;
         tiles += tile('Прибыль компании', (d >= 0 ? '+' : Fx.M) + Fx.pct(Math.abs(d)), `С ${Fx.money(p.pr0)} до ${Fx.money(p.pr1)} в месяц${p.cost ? '. Уже за вычетом ' + (L.ropMode === 'senior' ? 'доплаты старшему продавцу' : 'ФОТ нового РОПа') : ''}`, d >= 0 ? 'fx-green' : 'fx-red');
@@ -4639,6 +4809,7 @@ const Final = {
         <h1 class="fx-h1">${x.head}</h1>
         <p class="fx-hero-sub">${lead}</p>
         <div class="fx-kpis">${tiles}</div>
+        ${L && L.issues.length ? `<p class="fx-note fx-warnline">В ответах ${L.issues.length > 1 ? 'есть расхождения' : 'есть расхождение'}: ${L.issues.map(i => ({check:'средний чек не сходится с выручкой', dialogs:'разговоров больше, чем заявок', profit:'прибыль больше валовой'})[i.id]).join(', ')}. Суммы посчитаны с поправкой, разбор в разделе «Исходные данные».</p>` : ''}
         ${con.length ? `<div class="fx-concl"><div class="fx-sub">Что мы нашли</div><ol>${con.map(t => `<li>${t}</li>`).join('')}</ol></div>` : ''}
         ${L ? `<div class="fx-reco"><span class="fx-k">С чего начинать</span><p>${Story.recommend(L)}</p></div>` : ''}
       </div>
@@ -4689,7 +4860,7 @@ const Final = {
       `<div class="fx-fstep"><div class="fx-fn">${Fx.dec(L.rev / 1e6).replace(/,0$/, '')}</div><div class="fx-fl">млн ₽ выручки${L.repeat != null ? `<br>из них ${L.repeat}% повторные` : ''}</div></div>`
     ].join('');
     const bar = (lbl, v, norm, show) => `<div class="fx-fbar"><span>${lbl}</span><span class="fx-ft"><i style="width:${Math.min(100, v * 100)}%"></i>${norm != null ? `<u style="left:${Math.min(100, norm * 100)}%" data-n="ориентир ${Fx.pct(norm)}"></u>` : ''}</span><span class="fx-fp ${norm != null && v < norm ? 'fx-red' : ''}">${show}</span></div>`;
-    const bars = `${bar('Заявки', 1, null, '100%')}${L.full ? bar('Разговоры', L.reach, L.reachNorm, Fx.pct(L.reach)) : ''}${bar('Сделки', L.conv / 100, L.convTarget / 100, L.conv + '%')}`;
+    const bars = `${bar('Заявки', 1, null, '100%')}${L.full ? bar('Разговоры', L.reach, L.reachNorm, Fx.pct(L.reach)) : ''}${bar('Сделки из заявок', L.conv / 100, L.convTarget / 100, L.conv + '%')}`;
     const facts = [
       L.cpl ? ['Стоимость заявки', Fx.rub(L.cpl), 'сколько платите за обращение'] : null,
       L.cac ? ['Стоимость клиента', Fx.rub(L.cac), 'CAC: реклама на одного покупателя'] : null,
@@ -4707,7 +4878,8 @@ const Final = {
       team += L.timeAdj < 1 ? `: считаем с поправкой, ${a.sales_time === 'admin' ? 'больше половины' : 'половину'} времени продавцы заняты документами.` : '.';
     }
     let check = '';
-    if (x.cons) check = `<div class="fx-check warn"><span class="fx-ic">!</span><span><b>Проверьте цифры.</b> ${Fx.noParens(x.cons.text)}</span></div>`;
+    if (x.cons && x.cons.issues) check = `<div class="fx-check warn"><span class="fx-ic">!</span><div><b>Что не сошлось в ответах и как мы считаем.</b><ul class="fx-ul dash" style="margin-top:10px">${x.cons.issues.map(i => `<li><span>${i.text}</span></li>`).join('')}</ul></div></div>`;
+    else if (x.cons) check = `<div class="fx-check warn"><span class="fx-ic">!</span><span><b>Проверьте цифры.</b> ${Fx.noParens(x.cons.text)}</span></div>`;
     else if (L.revKnown && Math.abs(L.funnelRev / L.rev - 1) <= .25)
       check = `<div class="fx-check"><span class="fx-ic">✓</span><span><b>Цифры сходятся.</b> ${L.leads} ${Fx.plural(L.leads, 'заявка', 'заявки', 'заявок')} × ${L.conv}% × ${Fx.rub(L.check)} = ${Fx.mln(L.deals * L.check)} новых продаж.${L.repeat ? ` Вместе с ${L.repeat}% повторных это ${Fx.mln(L.funnelRev)}` : ` Это ${Fx.mln(L.funnelRev)}`} при заявленных ${Fx.mln(L.rev)}.</span></div>`;
     return this.sec('numbers', no, 'Исходные данные', 'Ваш коммерческий блок в цифрах',
@@ -4840,13 +5012,13 @@ const Final = {
         ${this.ledgerRows(x)}
         <div class="fx-lrow total"><div class="fx-lno"></div><div class="fx-lnm">Итого</div><div></div><div></div><div></div>
           <div data-k="Теряем в месяц"><div class="fx-lmo fx-red">${Fx.M}${Fx.money(L.lossMo)}</div><div class="fx-lsub">${Fx.mln(L.lossMo * 12)} за год<br>100% потерь</div></div>
-          <div data-k="Потенциал за 90 дней"><div class="fx-lrc fx-green">+${Fx.money(L.recMo)}</div><div class="fx-lsub">${Fx.mln(L.recMo * 12)} за год<br>${Fx.pct(L.recMo / L.lossMo)} потерь</div></div></div>
+          <div data-k="Потенциал за 90 дней"><div class="fx-lrc fx-green">+${Fx.money(L.recMo)}</div><div class="fx-lsub">${Fx.mln(L.yearGP)} за первый год<br>${Fx.pct(L.recMo / L.lossMo)} потерь</div></div></div>
       </div>
       ${quiet.length ? `<p class="fx-note">Без потенциала: ${quiet.map(s => s.name.toLowerCase()).join(', ')}. Здесь система уже работает, в ближайшие 90 дней не трогаем.</p>` : ''}
       ${cash}
       <div class="fx-method">
         <p>Потенциал каждого этапа собран из практик, которых сейчас нет. Вклад каждой — экспертная оценка по опыту внедрений: расчёт показывает размер эффекта, проверяет его метрика из плана. Сумма ограничена сверху: не больше ${Fx.pct(Ledger.GP_CAP)} валовой прибыли в год.${L.capHit ? ` Ваш расчёт в потолок упёрся: ещё ${L.dropped.n} ${Fx.plural(L.dropped.n, 'рычаг', 'рычага', 'рычагов')} на ${Fx.money(L.dropped.sum)} в месяц в расчёт не взяли, реальный потенциал выше.` : ''} Возврат за 90 дней ограничен мощностью отдела${L.capCut < 1 ? ' и в вашем случае урезан ею' : ''}. Ориентир профиля: ${Profile.explain()}.${L.marginAssumed ? ' Маржа не указана и принята 30%: уточните её, суммы пересчитаются.' : ''}</p>
-        <div class="fx-override"><span>Не согласны с ориентиром конверсии?</span><input id="fxOvr" type="number" min="1" max="95" value="${p.convTarget}" aria-label="Ориентир конверсии, %"><span>%</span>${Profile.hasOverride() ? '<button id="fxOvrReset" type="button">вернуть расчётный</button>' : ''}<small>Поставьте цифру, реальную для вашей ниши: весь отчёт пересчитается.</small></div>
+        <div class="fx-override"><span>${Profile.hasOverride() ? 'Потолок конверсии из заявки в оплату — ваша цифра по нише' : `Потенциал конверсии из заявки в оплату в этом расчёте — ${Fx.pct(L.P.conv)}. Для вашей ниши реально другое?`}</span><input id="fxOvr" type="text" inputmode="numeric" autocomplete="off" maxlength="2" value="${Profile.hasOverride() ? p.convTarget : Math.round(L.P.conv * 100)}" data-auto="${Profile.hasOverride() ? '' : Math.round(L.P.conv * 100)}" aria-label="Потолок конверсии из заявки в оплату, %"><span>%</span>${Profile.hasOverride() ? '<button id="fxOvrReset" type="button">вернуть расчётный</button>' : ''}<small>${Profile.hasOverride() ? `Выше этой цифры воронка в расчёте не растёт: сейчас ${L.conv}%, потенциал ${Fx.pct(L.P.conv)}. Ведомость, план и деньги пересчитаны.` : 'Поставьте свою цифру: потенциал воронки упрётся в неё, и весь отчёт пересчитается сразу.'}</small></div>
       </div>`);
   },
 
@@ -5109,7 +5281,7 @@ const Final = {
 
   // ── 11 Если ничего не делать ──
   nothingSVG(L, pfx = 'fx'){
-    const W = 1000, H = 250, top = 26, bot = 40, left = 16, right = 120;
+    const W = 1000, H = 250, top = 26, bot = 40, left = 16, right = 130;
     const {A, B} = this.nothingCurves(L);
     const maxV = A[11] * 1.06, X = i => left + (W - right - left) * i / 11, Y = v => top + (H - top - bot) * (1 - v / maxV);
     const path = arr => arr.map((v, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
@@ -5120,10 +5292,15 @@ const Final = {
     out += `<path d="${path(B)}" fill="none" stroke="#34D399" stroke-width="2.5"/>`;
     [2, 5, 11].forEach(i => { out += `<circle cx="${X(i)}" cy="${Y(A[i])}" r="3.5" fill="#F0555A"/><circle cx="${X(i)}" cy="${Y(B[i])}" r="3.5" fill="#34D399"/>`; });
     for (let i = 0; i < 12; i++) out += `<text x="${X(i)}" y="${H - bot + 20}" text-anchor="middle" class="fx-svg-c" style="font-size:12px">${i + 1}</text>`;
-    out += `<text x="${X(11) + 12}" y="${Y(A[11]) + 4}" class="fx-svg-v" fill="#F0555A">${Fx.mln(A[11])}</text>`;
-    out += `<text x="${X(11) + 12}" y="${Y(B[11]) + 4}" class="fx-svg-v" fill="#34D399">${Fx.mln(B[11])}</text>`;
+    out += `<text x="${X(11) + 12}" y="${Y(A[11]) + 4}" class="fx-svg-v" fill="#F0555A">${Fx.M}${Fx.mln(A[11])}</text>`;
+    out += `<text x="${X(11) + 12}" y="${Y(B[11]) + 4}" class="fx-svg-v" fill="#34D399">${Fx.M}${Fx.mln(B[11])}</text>`;
+    // Разрыв между линиями подписан прямо на графике: это и есть возврат за год
+    if (Y(B[11]) - Y(A[11]) > 26){
+      out += `<line x1="${X(11)}" x2="${X(11)}" y1="${Y(A[11]) + 6}" y2="${Y(B[11]) - 6}" stroke="#34D399" stroke-dasharray="3 4" stroke-width="1.5"/>`;
+      out += `<text x="${X(11) - 12}" y="${(Y(A[11]) + Y(B[11])) / 2 + 5}" text-anchor="end" class="fx-svg-v" fill="#34D399">+${Fx.mln(A[11] - B[11])} вернём</text>`;
+    }
     return `<svg class="${pfx}-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Накопленная недополученная прибыль за 12 месяцев в двух сценариях">${out}</svg>
-      <div class="${pfx}-legend"><span><i style="background:#F0555A"></i>ничего не меняем</span><span><i style="background:#34D399"></i>начинаем сейчас</span><span>по горизонтали месяцы с сегодняшнего дня</span></div>`;
+      <div class="${pfx}-legend"><span><i style="background:#F0555A"></i>недополучаем, если ничего не менять</span><span><i style="background:#34D399"></i>недополучаем, если начать сейчас</span><span>по горизонтали месяцы с сегодняшнего дня</span></div>`;
   },
   actNothing(x, no){
     const L = x.L, a = x.a;
@@ -5137,12 +5314,12 @@ const Final = {
       grow: 'Рост при сегодняшней воронке возможен, но он будет стоить дороже каждого следующего рубля: вы будете покупать заявки, часть которых снова не дойдёт до разговора.'
     }[a.if_nothing];
     return this.sec('nothing', no, 'Бездействие', 'Что будет, если не делать ничего',
-      'Два сценария на одних и тех же ваших цифрах: всё остаётся как есть и внедрение начинается сейчас. Линии показывают накопленную недополученную прибыль.',
+      'Два сценария на одних и тех же ваших цифрах: всё остаётся как есть и внедрение начинается сейчас. Обе линии — валовая прибыль, которую компания недополучает накопительным итогом. Чем ниже линия, тем меньше потерь, а разрыв между ними — деньги, которые возвращает внедрение.',
       `<div class="fx-sub">Накопленная недополученная прибыль за 12 месяцев</div>
       ${this.nothingSVG(L)}
       <div class="fx-nd">
         <div><span class="fx-k">Двенадцать месяцев без изменений</span><div class="fx-nbig">${Fx.M}${Fx.mln(year)}</div><p class="fx-note" style="margin-top:14px">Недополученная валовая прибыль накопительным итогом. В отчётности их не видно, это не расход и не убыток: деньги, которые компания заработала бы на уже оплаченных заявках.</p></div>
-        <div><span class="fx-k">Те же двенадцать месяцев со стартом сейчас</span><div class="fx-nbig fx-green">+${Fx.mln(L.yearGP)}</div><p class="fx-note" style="margin-top:14px">Столько возвращается за первый год с учётом разгона по волнам${L.pnl.cost ? `, а после новых расходов на управление остаётся ${Fx.sgn(L.yearNet)}` : ''}. Разрыв между линиями на графике — это эта сумма.</p></div>
+        <div><span class="fx-k">Те же двенадцать месяцев со стартом сейчас</span><div class="fx-nbig fx-green">+${Fx.mln(L.yearGP)}</div><p class="fx-note" style="margin-top:14px">Столько из ${Fx.mln(year)} возвращается за первый год: каждая волна даёт деньги после своей приёмки, первые месяцы уходят на разгон${L.pnl.cost ? `. После новых расходов на управление остаётся ${Fx.sgn(L.yearNet)}` : ''}. Оставшиеся ${Fx.mln(year - L.yearGP)} — зелёная линия: эта часть потенциала требует больше 90 дней и в расчёт первого года не взята.</p></div>
       </div>
       ${own ? `<div class="fx-quote"><q>${own}</q><span class="fx-who">Так вы ответили на вопрос, что будет, если ничего не менять ближайший год. <b>${react}</b></span></div>` : ''}
       <div class="fx-sub" style="margin-top:38px">Что дорожает, пока решение откладывается</div>
@@ -5218,22 +5395,24 @@ const Final = {
 
   // ── 06 План ──
   actPlan(x, no){
-    const W = x.waves, L = x.L;
+    const W = x.waves, L = x.L, act = W.filter(w => !w.skip), off = W.filter(w => w.skip);
     const gantt = `<div class="fx-gantt"><div class="fx-wk first">Неделя</div>${Array.from({length:12}, (_, i) => `<div class="fx-wk">${i + 1}</div>`).join('')}
-      ${W.map(w => `<div class="fx-wl"><b>0${w.n}</b>${w.title.split(':')[0]}</div><div class="fx-gcell"><div class="fx-gbar" style="grid-column:${w.wk[0]} / ${w.wk[1] + 1}"><span>недели ${w.wk[0]}–${w.wk[1]}</span></div></div>`).join('')}</div>
+      ${W.map(w => `<div class="fx-wl${w.skip ? ' off' : ''}"><b>0${w.n}</b>${w.title.split(':')[0]}</div><div class="fx-gcell">${w.skip ? '<span class="fx-goff">не нужна в вашем случае</span>' : `<div class="fx-gbar" style="grid-column:${w.wk[0]} / ${w.wk[1] + 1}"><span>недели ${w.wk[0]}–${w.wk[1]}</span></div>`}</div>`).join('')}</div>
       <div class="fx-gleg"><i></i>приёмка волны по критериям</div>`;
     const card = w => `<div class="fx-wave">
       <div class="fx-wtop"><div class="fx-wno"><b>Волна ${w.n}</b> · недели ${w.wk[0]}–${w.wk[1]}</div><div class="fx-weff">${w.eff > 0 ? `<b>+${Fx.money(w.eff)}</b><span>в месяц</span>` : ''}</div></div>
       <h4>${w.title}</h4><p class="fx-wgoal">${w.goal}</p>
-      <div class="fx-effnote">${w.eff > 0 ? `Эффект после приёмки: <b>+${Fx.money(w.eff)} валовой прибыли в месяц</b>${w.effNote ? ', ' + w.effNote : ''}.` : `Эффект: ${w.effNote}.`}</div>
+      <div class="fx-effnote">${w.eff > 0 ? `Эффект после приёмки: <b>+${Fx.money(w.eff)} валовой прибыли в месяц</b>${w.effNote ? ', ' + w.effNote : ''}.` : w.effNote ? `Прямых денег волна не даёт: она ${w.effNote}.` : ''}</div>
       <div class="fx-blk"><span class="fx-k">Что делаем</span><ul class="fx-tasks">${w.tasks.map(t => `<li>${t}</li>`).join('')}</ul></div>
       ${w.metrics.length ? `<div class="fx-blk"><span class="fx-k">Контрольные метрики</span><div class="fx-metrics">${w.metrics.map(m => `<div class="fx-metric"><span>${m[0]}</span><span class="fx-mv"><s>${m[1]}</s> → <em>${m[2]}</em></span></div>`).join('')}</div></div>` : ''}
       <div class="fx-blk"><span class="fx-k">Критерии приёмки</span><ul class="fx-acc">${w.acc.map(t => `<li>${t}</li>`).join('')}</ul>${w.guar ? `<div class="fx-guar">◆ ${w.guar}</div>` : ''}</div>
       <div class="fx-wfoot"><div><span class="fx-k">Артефакты у вас</span>${w.art}</div><div><span class="fx-k">От вас</span>${w.you}</div></div>
     </div>`;
-    return this.sec('plan', no, 'Внедрение', '90 дней, четыре волны, приёмка по цифрам',
-      'План внедрения на 90 дней. У каждой волны есть задачи, контрольные метрики с вашей сегодняшней цифрой и критерии приёмки без права трактовки: волна закрыта, когда выполнен каждый критерий, сколько бы недель на это ни ушло. Эффект волн — те же деньги из ведомости потерь, разложенные по срокам. Новой суммы сверху нет.',
-      `${gantt}<div class="fx-waves">${W.map(card).join('')}</div>
+    const offCard = w => `<div class="fx-wave off"><div class="fx-wtop"><div class="fx-wno"><b>Волна ${w.n}</b> · ${w.title}</div><div class="fx-weff"><span>не нужна</span></div></div><p class="fx-wgoal">${w.skip}</p></div>`;
+    const cnt = ['', 'одна волна', 'две волны', 'три волны', 'четыре волны'][act.length];
+    return this.sec('plan', no, 'Внедрение', `90 дней, ${cnt}, приёмка по цифрам`,
+      `План собран из того, что нашлось в ваших ответах: в задачи попадают только найденные ошибки${off.length ? `, а ${off.length > 1 ? 'волны' : 'волна'} без находок ${off.length > 1 ? 'вычеркнуты' : 'вычеркнута'} с причиной` : ''}. У каждой волны есть контрольные метрики с вашей сегодняшней цифрой и критерии приёмки без права трактовки: волна закрыта, когда выполнен каждый критерий, сколько бы недель на это ни ушло. Эффект волн — те же деньги из ведомости потерь, разложенные по срокам.`,
+      `${gantt}<div class="fx-waves">${act.map(card).join('')}${off.map(offCard).join('')}</div>
       ${L && L.recMo > 0 ? `<div class="fx-rule">Эффект волн складывается в <b class="fx-green">+${Fx.money(L.recMo)} валовой прибыли в месяц</b>: ровно та часть потерь из ведомости, которая возвращается за 90 дней. Отдельной суммы сверху нет.</div>` : ''}`);
   },
 
@@ -5275,13 +5454,18 @@ const Final = {
       ? ` Возврат пока не покрывает зарплату отдельного РОПа ${Fx.rub(L.ropFull)}: на первом этапе отдел ведёт старший продавец с доплатой ${Fx.rub(p.cost)}, РОП появляется вместе с ростом.`
       : ` ФОТ РОПа ${Fx.rub(p.cost)} в месяц ${L.ropAssumed ? '— допущение: вопрос о зарплате РОПа пропущен' : 'из ваших ответов'}.`) : '';
     const T = L.T;
-    const lever = (id, lbl, min, max, val) => `<div class="fx-lev"><label for="${id}">${lbl}</label><span class="fx-lv" id="${id}v"></span><input id="${id}" type="range" min="${min}" max="${max}" step="any" value="${val}"></div>`;
+    // Шкала от сегодняшней цифры до разумного потолка этапа, шаг — один пункт
+    // (полпункта у закрытия ниже 20%): ползунок должен ходить по живым цифрам,
+    // а не по пяти пунктам с хвостом за 100%
+    const lever = (id, lbl, min, max, val, step) => `<div class="fx-lev"><label for="${id}">${lbl}</label><span class="fx-lv" id="${id}v"></span><input id="${id}" type="range" min="${min}" max="${max}" step="${step}" value="${val}"></div>`;
+    const reachMax = Math.min(Ledger.REACH_CEIL, Math.max(L.P.reach, L.reachCalc + .15));
+    const closeMax = Math.min(Ledger.CLOSE_ABS_CEIL, Math.max(L.P.close * 1.15, L.closeCalc * 1.6, L.closeCalc + .05));
     const levers = [
-      lever('fxLvR', 'Доходимость до разговора', L.reachCalc, Math.max(L.P.reach, L.reachCalc + .05), L.reachCalc),
-      lever('fxLvC', 'Закрытие из разговора', L.closeCalc, Math.max(L.P.close, L.closeCalc + .03), L.closeCalc),
-      L.repeat != null ? lever('fxLvO', 'Повторных заказов в месяц', L.repOrders, Math.max(L.repOrders + 5, (L.P.orders || 0) * 1.25), L.repOrders) : '',
-      L.P.leads ? lever('fxLvL', 'Заявок в месяц', L.leads, Math.max(L.leads * 1.4, L.P.leads * 1.2), L.leads) : '',
-      lever('fxLvK', 'Средний чек', 0, Math.max(.2, L.P.check / L.check - 1 + .05), 0)
+      reachMax - L.reachCalc >= .01 ? lever('fxLvR', 'Доходимость до разговора', L.reachCalc, reachMax, L.reachCalc, .01) : '',
+      closeMax - L.closeCalc >= .005 ? lever('fxLvC', 'Закрытие из разговора', L.closeCalc, closeMax, L.closeCalc, L.closeCalc < .2 ? .005 : .01) : '',
+      L.repeat != null ? lever('fxLvO', 'Повторных заказов в месяц', L.repOrders, Math.max(L.repOrders + 5, (L.P.orders || 0) * 1.25), L.repOrders, 1) : '',
+      L.P.leads ? lever('fxLvL', 'Заявок в месяц', L.leads, Math.max(L.leads * 1.4, L.P.leads * 1.2), L.leads, 1) : '',
+      lever('fxLvK', 'Средний чек', 0, Math.max(.2, L.P.check / L.check - 1 + .05), 0, .01)
     ].join('');
     const planTxt = `дозвон ${Fx.pct(T.reach)}, закрытие ${Fx.pct(T.close)}`;
     return this.sec('pnl', no, 'Деньги', 'Что изменится в прибыли',
@@ -5427,7 +5611,7 @@ const Final = {
       obj:'«Мы это знаем» — «Знать и делать каждый день — разное. Покажите, как вчера проверялся норматив ответа».',
       next:'«Теперь порядок: что за чем и как принимаем».'};
     N.plan = {t:'План',
-      say:'«Четыре волны. У каждой критерии приёмки в цифрах: волна не закрыта, пока цифра не достигнута».',
+      say:'«Волны собраны под ваши находки: что не нужно, вычеркнуто. У каждой критерии приёмки в цифрах: волна не закрыта, пока цифра не достигнута».',
       ask:'«Какую из волн вы бы убрали?» Обычно ответ: никакую. Это согласие с планом, зафиксируйте его вслух.',
       obj:FinModel.num('prior_spend') > 0 ? `«Сделаем сами» — «Можно. Вы уже вложили ${Fx.rub(FinModel.num('prior_spend'))} в попытки. Сделать самим — ещё одна попытка тем же способом».` : '«Сделаем сами» — «Можно. Что из волны 2 вы уже пробовали за последний год и почему не закрепилось?»',
       next:'«Теперь в деньгах».'};
@@ -5472,7 +5656,20 @@ const Final = {
     const el = FlowUI.els.finalScreen, L = x.L;
     el.querySelectorAll('.fx-tog').forEach(b => b.onclick = () => b.closest('.fx-lrow').classList.toggle('open'));
     const ovr = document.getElementById('fxOvr');
-    if (ovr) ovr.onchange = () => { const v = Math.round(Number(ovr.value)); if (v >= 1 && v <= 95){ Profile.setOverride(v); this.rerender(); } };
+    // Пересчёт прямо при вводе, с паузой на набор двузначной цифры. После
+    // перерисовки поле новое, поэтому фокус и каретку возвращаем на место.
+    if (ovr){
+      const apply = () => {
+        const v = Math.round(Number(ovr.value));
+        if (!(v >= 1 && v <= 95) || String(v) === ovr.dataset.auto || v === Number(State.answers._conv_override)) return;
+        Profile.setOverride(v);
+        this.rerender();
+        const n = document.getElementById('fxOvr');
+        if (n){ n.focus({preventScroll:true}); n.setSelectionRange(n.value.length, n.value.length); n.closest('.fx-override').classList.add('done'); }
+      };
+      ovr.oninput = () => { ovr.value = ovr.value.replace(/\D/g, ''); clearTimeout(this._ovrT); this._ovrT = setTimeout(apply, 700); };
+      ovr.onkeydown = e => { if (e.key === 'Enter'){ clearTimeout(this._ovrT); apply(); } };
+    }
     const rst = document.getElementById('fxOvrReset');
     if (rst) rst.onclick = () => { Profile.setOverride(null); this.rerender(); };
     const pdf = document.getElementById('btnPDF');
@@ -5485,15 +5682,20 @@ const Final = {
     const $ = id => document.getElementById(id);
     const R = $('fxLvR'), Cc = $('fxLvC'), O = $('fxLvO'), Ld = $('fxLvL'), K = $('fxLvK');
     if (!K) return;
-    const set = (el, v) => { if (el && v != null) el.value = v; };
+    // Ползунок с шагом округляет значение: кнопки «как сейчас» и «цели плана»
+    // держат точные цифры, пока ползунок не сдвинули руками, — иначе цели плана
+    // давали бы не ровно возврат из ведомости
+    let exact = null;
+    const set = (el, v) => { if (el && v != null){ el.value = v; exact[el.id] = v; } };
+    const val = (el, def) => el ? (exact && exact[el.id] != null ? exact[el.id] : +el.value) : def;
     const upd = () => {
-      const r = R ? +R.value : L.reachCalc, c = Cc ? +Cc.value : L.closeCalc, o = O ? +O.value : L.repOrders,
-            ld = Ld ? +Ld.value : L.leads, k = +K.value;
+      const r = val(R, L.reachCalc), c = val(Cc, L.closeCalc), o = val(O, L.repOrders),
+            ld = val(Ld, L.leads), k = val(K, 0);
       const dDeals = L.leads * (r - L.reachCalc) * L.closeCalc + L.dialogsCalc * (c - L.closeCalc) + (ld - L.leads) * L.conv / 100;
       const dGP = dDeals * L.check * L.m + (o - L.repOrders) * L.check * L.m + (L.deals + L.repOrders) * L.check * k * Ledger.PRICE_FLOW;
       const cost = dGP > 1000 ? L.ropCost : 0;
       if (R) $('fxLvRv').innerHTML = `<s>${Fx.pct(L.reachCalc)}</s> → ${Fx.pct(r)}`;
-      if (Cc) $('fxLvCv').innerHTML = `<s>${Fx.pct(L.closeCalc)}</s> → ${Fx.pct(c)}`;
+      if (Cc){ const d = L.closeCalc < .2 ? 1 : 0; $('fxLvCv').innerHTML = `<s>${Fx.pct(L.closeCalc, d)}</s> → ${Fx.pct(c, d)}`; }
       if (O) $('fxLvOv').innerHTML = `<s>${Fx.dec(L.repOrders, 0)}</s> → ${Fx.dec(o, 0)}`;
       if (Ld) $('fxLvLv').innerHTML = `<s>${L.leads}</s> → ${Math.round(ld)}`;
       $('fxLvKv').innerHTML = `<s>${Fx.rub(L.check)}</s> → ${Fx.rub(L.check * (1 + k))}`;
@@ -5503,9 +5705,9 @@ const Final = {
         $('fxLvPR').innerHTML = `${pr < 0 ? Fx.M : ''}${Fx.money(Math.abs(pr))}${d != null ? ` <small class="${d >= 0 ? 'fx-green' : 'fx-red'}">${d >= 0 ? '+' : Fx.M}${Fx.pct(Math.abs(d))}</small>` : ''}`;
       } else $('fxLvPR').textContent = Fx.money(L.gp + dGP);
     };
-    [R, Cc, O, Ld, K].forEach(e => { if (e) e.oninput = upd; });
-    $('fxLvNow').onclick = () => { set(R, L.reachCalc); set(Cc, L.closeCalc); set(O, L.repOrders); set(Ld, L.leads); K.value = 0; upd(); };
-    $('fxLvPlan').onclick = () => { set(R, L.T.reach); set(Cc, L.T.close); set(O, L.T.orders); set(Ld, L.T.leads); K.value = L.T.check / L.check - 1; upd(); };
+    [R, Cc, O, Ld, K].forEach(e => { if (e) e.oninput = () => { if (exact) delete exact[e.id]; upd(); }; });
+    $('fxLvNow').onclick = () => { exact = {}; set(R, L.reachCalc); set(Cc, L.closeCalc); set(O, L.repOrders); set(Ld, L.leads); set(K, 0); upd(); };
+    $('fxLvPlan').onclick = () => { exact = {}; set(R, L.T.reach); set(Cc, L.T.close); set(O, L.T.orders); set(Ld, L.T.leads); set(K, L.T.check / L.check - 1); upd(); };
     upd();
   },
   // Какой блок сейчас на экране: подсветка навигации, заметки суфлёра, липкая кнопка
@@ -5628,25 +5830,25 @@ const Report = {
     }
     // ── Основание: на чём стоит разбор ──
     const qn = State.visibleQuestions().length, dn = L && L.D ? L.D.length : 0;
-    const wcol = (n, t, body) => `<div><span class="n">${n}</span><b class="t">${t}</b>${body}</div>`;
     const wlist = arr => `<ul class="pr-list">${arr.filter(Boolean).map(i => `<li><span>${i}</span></li>`).join('')}</ul>`;
     page('ОСНОВАНИЕ', `
       <div class="pr-tag">Прежде чем смотреть цифры</div>
       <div class="pr-title" style="font-size:23px">На чём стоит этот разбор</div>
-      <div class="pr-lede">Четыре вещи: на чём построена методика, как устроена проверяемость, какие связи между решениями и деньгами считает модель и почему результат воспроизводится в чужих руках.</div>
-      <div class="pr-x-why">
-        ${wcol('01', 'На чём основана технология', `<p>Методика собрана из практики, где результат проверялся выручкой. СДЭК: возврат с тридцатого места в топ-5 сети за 4,5 месяца, выручка ×2 за 10 месяцев. UniBox: коммерческий блок с нуля, 1,5 → 12,3 млн ₽ в месяц за 9 месяцев. MarketGuru: конверсия аудита в оплату 34%, шесть месяцев рекордов подряд. Каждая цифра подтверждается контактами основателей. Диагностика задаёт ${qn} ${Fx.plural(qn, 'вопрос', 'вопроса', 'вопросов')} по шести системам бизнеса${dn ? `, в вашем случае сработало ${dn} ${Fx.plural(dn, 'рычаг', 'рычага', 'рычагов')}` : ''}.</p>`)}
-        ${wcol('02', 'Почему цифрам можно верить', wlist([
-          'Отраслевые бенчмарки не используются: достоверной статистики по нишам почти нет. Ориентир — потенциал вашей же команды с инструментами.',
-          'Каждая сумма раскрывается до формулы, деньги считаются один раз на том этапе, где теряются.',
-          `Потолки: дозвон не выше ${Fx.pct(Ledger.REACH_CEIL)}, закрытие растёт не больше чем в ${Fx.mult(1 + Ledger.CLOSE_REL_CAP)} раза, цена с коэффициентом ${Fx.dec(Ledger.PRICE_FLOW, 2)} на отток, сумма не больше ${Fx.pct(Ledger.GP_CAP)} валовой прибыли.`,
-          'Лишние рычаги сверх потолка в расчёт не берутся и названы в методике. Возврат ограничен мощностью отдела.',
-          'Новые расходы вычтены явно, прибыль после внедрения не показывается выше расчётной.'
-        ]))}
+      <div class="pr-lede">Откуда методика, как из ваших ответов получились суммы и какие ограничители не дают им раздуться.</div>
+      <div class="pr-x-kpis" style="grid-template-columns:repeat(3,1fr)">${Final.CASES.map(c => stat(c.co, c.big, c.unit + '. ' + c.p)).join('')}</div>
+      <div class="pr-h2" style="margin-top:14px">Как ответы превратились в суммы <i>·</i></div>
+      <div class="pr-x-kpis" style="grid-template-columns:repeat(${L && L.lossMo > 0 ? 4 : 3},1fr)">
+        ${stat('Ответов в анкете', qn, 'по шести системам бизнеса')}${stat('Связей в модели', Final.LINKS.length, 'практика → показатель → деньги')}${stat('Рычагов у вас', dn, 'нашлось в ответах')}${L && L.lossMo > 0 ? stat('Теряется в месяц', Fx.money(L.lossMo), 'валовой прибыли', 'bad') : ''}
       </div>
-      <div class="pr-h2" style="margin-top:16px">Какие связи учитываются <i>·</i></div>
-      <div class="pr-x-links">${Final.LINKS.map(c => `<div><span>${c[0]}</span><em>→</em><span>${c[1]}</span><em>→</em><b>${c[2]}</b></div>`).join('')}</div>
-      <div class="pr-callout"><b>Почему это работает.</b> Деньги берутся из трафика, за который уже заплачено: это единственный источник, который не требует ни бюджета, ни найма. Порядок работ начинается с управленческого контура, найм идёт после. Каждая волна закрывается по бинарным критериям приёмки. Сначала чинится то, где один пункт показателя стоит дороже всего, и только потом растёт объём.</div>`);
+      <div class="pr-h2" style="margin-top:14px">Ограничители расчёта <i>·</i></div>
+      ${wlist([
+        'Отраслевые бенчмарки не используются: ориентир — ваша же команда с инструментами.',
+        `Дозвон не выше ${Fx.pct(Ledger.REACH_CEIL)}, закрытие растёт не больше чем в ${Fx.dec(1 + Ledger.CLOSE_REL_CAP, 2)} раза, цена с коэффициентом ${Fx.dec(Ledger.PRICE_FLOW, 2)} на отток, вся сумма не больше ${Fx.pct(Ledger.GP_CAP)} валовой прибыли${L && L.capHit ? ', у вас этот потолок сработал' : ''}.`,
+        'Каждый рубль считается один раз, на том этапе, где теряется. Любая сумма раскрывается до формулы, возврат ограничен мощностью отдела.'
+      ])}
+      <div class="pr-h2" style="margin-top:16px">Связи, по которым идут деньги <i>·</i> ${Final.LINKS.filter(c => Final.linkOn(c, L)).length ? `у вас работают ${Final.LINKS.filter(c => Final.linkOn(c, L)).length} из ${Final.LINKS.length}` : ''}</div>
+      <div class="pr-x-links">${Final.LINKS.map(c => `<div class="${Final.linkOn(c, L) ? 'on' : ''}"><span>${c[0]}</span><em>→</em><span>${c[1]}</span><em>→</em><b>${c[2]}</b></div>`).join('')}</div>
+      <div class="pr-callout"><b>Почему это работает.</b> Первый рубль приходит из заявок, за которые уже заплачено: ни бюджета, ни найма. Найм, если он нужен, идёт после фундамента. Не сдвинулась метрика волны — значит, не сработало, и ждать дальше незачем.</div>`);
 
     const con = Story.conclusions(L, x.c, x.perc, x.goal);
     page('РЕЗЮМЕ', `${demoMark}
@@ -5816,7 +6018,7 @@ const Report = {
 
     // ── 05–06 План: две волны на страницу ──
     const wave = w => `<div class="pr-x-wave">
-      <div class="pr-x-wh"><b>Волна ${w.n} · недели ${w.wk[0]}–${w.wk[1]}</b><em>${w.eff > 0 ? '+' + Fx.money(w.eff) + ' в месяц' : 'эффект: ' + w.effNote}</em></div>
+      <div class="pr-x-wh"><b>Волна ${w.n} · недели ${w.wk[0]}–${w.wk[1]}</b><em>${w.eff > 0 ? '+' + Fx.money(w.eff) + ' в месяц' : w.effNote}</em></div>
       <div class="pr-x-wt">${w.title}</div><div class="pr-x-wg">${w.goal}</div>
       <div class="pr-x-wcols">
         <div><span>Что делаем</span><ul>${w.tasks.map(t => `<li>${t}</li>`).join('')}</ul></div>
@@ -5825,12 +6027,14 @@ const Report = {
       </div>
       <div class="pr-x-wf">Артефакты: ${w.art} · От вас: ${w.you}</div>
     </div>`;
-    page('ПЛАН 90 ДНЕЙ · 1–2', `
+    const pAct = x.waves.filter(w => !w.skip), pOff = x.waves.filter(w => w.skip);
+    const pOffTxt = pOff.map(w => `<div class="pr-x-wf"><b>Волна ${w.n} · ${w.title}: не нужна.</b> ${w.skip}</div>`).join('');
+    page('ПЛАН 90 ДНЕЙ', `
       <div class="pr-tag">Внедрение</div>
-      <div class="pr-title">90 дней, четыре волны, приёмка по цифрам</div>
-      <div class="pr-lede">Волна закрыта, только когда выполнен каждый критерий приёмки. Эффект волн складывается в возврат из ведомости, отдельной суммы сверху нет.</div>
-      ${x.waves.slice(0, 2).map(wave).join('')}`);
-    page('ПЛАН 90 ДНЕЙ · 3–4', x.waves.slice(2).map(wave).join(''));
+      <div class="pr-title">90 дней, ${['', 'одна волна', 'две волны', 'три волны', 'четыре волны'][pAct.length]}, приёмка по цифрам</div>
+      <div class="pr-lede">В план попали только найденные ошибки. Волна закрыта, только когда выполнен каждый критерий приёмки. Эффект волн складывается в возврат из ведомости, отдельной суммы сверху нет.</div>
+      ${pAct.slice(0, 2).map(wave).join('')}${pAct.length <= 2 ? pOffTxt : ''}`);
+    if (pAct.length > 2) page('ПЛАН 90 ДНЕЙ · ПРОДОЛЖЕНИЕ', pAct.slice(2).map(wave).join('') + pOffTxt);
 
     // ── Если ничего не делать ──
     if (L && L.lossMo > 0 && L.recMo > 0){
