@@ -691,6 +691,29 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-ic{flex:none;width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.04);color:var(--ink-3);display:grid;place-items:center;font:500 11px var(--mono)}
 
 /* 03 ведомость */
+.fx-lb{margin:0 0 8px}
+.fx-lb-head{display:grid;grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr) 24px minmax(0,1fr);align-items:stretch;border:1px solid var(--rule);border-radius:12px;background:var(--paper);overflow:hidden}
+.fx-lb-head>div{padding:18px 20px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.fx-lb-head>i{font-style:normal;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:18px}
+.fx-lb-head span{font:500 11px/1.3 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.fx-lb-head b{font:600 clamp(20px,2.2vw,28px)/1.1 var(--disp);letter-spacing:-.02em;color:#fff;white-space:nowrap}
+.fx-lb-head em{font-style:normal;font-size:13px;line-height:1.4;color:var(--ink-2)}
+.fx-lb-head .ok b{color:var(--ok)}
+.fx-lb-head .loss{background:rgba(240,85,90,.07)}.fx-lb-head .loss b{color:var(--loss)}
+.fx-lb-alt{margin:12px 0 0;padding:12px 16px;border:1px solid rgba(251,191,36,.35);border-radius:8px;background:rgba(251,191,36,.06);font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+.fx-lb-alt button{margin-left:6px;background:none;border:0;border-bottom:1px solid var(--warn);color:var(--warn);font:inherit;cursor:pointer;padding:0}
+.fx-lb-rows{display:grid;gap:2px;margin-top:22px}
+.fx-lb-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr) minmax(0,.9fr);gap:20px;align-items:center;padding:14px 0;border-top:1px solid var(--rule)}
+.fx-lb-nm b{display:block;font:600 15px/1.35 var(--ui);color:#fff}
+.fx-lb-nm span{display:block;font-size:12.5px;line-height:1.45;color:var(--ink-3);margin-top:3px}
+.fx-lb-bar{height:14px;border-radius:3px;background:var(--rule);overflow:hidden}
+.fx-lb-bar>i{display:block;height:100%;background:rgba(240,85,90,.85);border-radius:3px;position:relative}
+.fx-lb-bar>i>em{position:absolute;left:0;top:0;bottom:0;background:var(--ok);border-radius:3px 0 0 3px}
+.fx-lb-v{text-align:right}
+.fx-lb-v b{display:block;font:600 18px/1.2 var(--ui);color:var(--loss);white-space:nowrap}
+.fx-lb-v span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:3px}.fx-lb-v span em{font-style:normal;color:var(--ok)}
+@media(max-width:760px){.fx-lb-head{grid-template-columns:minmax(0,1fr)}.fx-lb-head>i{display:none}.fx-lb-head>div{padding:14px 16px}
+  .fx-lb-row{grid-template-columns:minmax(0,1fr);gap:8px}.fx-lb-v{text-align:left;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}.fx-lb-v span{margin:0}}
 .fx-chart{width:100%;height:auto;display:block}
 .fx-svg-v{font:600 16px var(--ui);letter-spacing:-.01em}
 .fx-svg-c{font:400 15px var(--ui);fill:var(--ink-2)}
@@ -4810,6 +4833,7 @@ const Final = {
         <p class="fx-hero-sub">${lead}</p>
         <div class="fx-kpis">${tiles}</div>
         ${L && L.issues.length ? `<p class="fx-note fx-warnline">В ответах ${L.issues.length > 1 ? 'есть расхождения' : 'есть расхождение'}: ${L.issues.map(i => ({check:'средний чек не сходится с выручкой', dialogs:'разговоров больше, чем заявок', profit:'прибыль больше валовой'})[i.id]).join(', ')}. Суммы посчитаны с поправкой, разбор в разделе «Исходные данные».</p>` : ''}
+        ${(() => { const m = L && this.modelLedger(); return m && m.lossMo > L.lossMo * 1.15 ? `<p class="fx-note fx-warnline">Суммы ограничены вашей конверсией по нише ${State.answers._conv_override}%. По расчёту модели недобор ${Fx.money(m.lossMo)} в месяц, разница разобрана в «Ведомости потерь».</p>` : ''; })()}
         ${con.length ? `<div class="fx-concl"><div class="fx-sub">Что мы нашли</div><ol>${con.map(t => `<li>${t}</li>`).join('')}</ol></div>` : ''}
         ${L ? `<div class="fx-reco"><span class="fx-k">С чего начинать</span><p>${Story.recommend(L)}</p></div>` : ''}
       </div>
@@ -4919,33 +4943,32 @@ const Final = {
   },
 
   // ── 03 Ведомость потерь ──
-  bridgeSVG(L){
-    const steps = L.st.filter(s => s.loss > 0);
+  // Шапка ведомости: «сейчас → с системой = теряется», под ней этапы. Полосы
+  // мерятся от самой крупной потери, а не от всей прибыли: от прибыли потери
+  // выходили щепками над огромным столбцом, и график читался как «теряете 3,2 млн»
+  bridge(L, alt){
+    const steps = L.st.filter(s => s.loss > 0).sort((p, q) => q.loss - p.loss);
     if (!steps.length) return '';
-    const end = L.gp + L.lossMo;
-    const W = 1000, H = 300, top = 40, bot = 56, cols = steps.length + 2, bw = Math.min(130, (W - 40 * (cols - 1)) / cols);
-    const gap = (W - cols * bw) / (cols - 1), maxV = end * 1.06, base = H - bot;
-    const Y = v => top + (H - top - bot) * (1 - v / maxV), Hh = v => (H - top - bot) * v / maxV;
-    const lbl = (x0, y, t, fill) => `<text x="${x0 + bw / 2}" y="${y - 12}" text-anchor="middle" class="fx-svg-v" fill="${fill}">${t}</text>`;
-    const cat = (x0, lines) => `<text x="${x0 + bw / 2}" y="${base + 24}" text-anchor="middle" class="fx-svg-c">${lines.map((l, i) => `<tspan x="${x0 + bw / 2}" dy="${i ? 17 : 0}">${l}</tspan>`).join('')}</text>`;
-    const nm = {lead:['Поток','заявок'], contact:['Первый','контакт'], close:['Переговоры','и закрытие'], repeat:['Повторные','продажи'], price:['Цена','и чек']};
-    let x0 = 0, acc = L.gp;
-    let out = `<line x1="0" x2="${W}" y1="${base}" y2="${base}" stroke="#2E3D38"/>`;
-    out += `<rect x="0" y="${Y(L.gp)}" width="${bw}" height="${Hh(L.gp)}" rx="3" fill="#26332F"/>${lbl(0, Y(L.gp), Fx.money(L.gp), '#F1F6F3')}${cat(0, ['Сейчас','в месяц'])}`;
-    for (const s of steps){
-      const px = x0; x0 += bw + gap;
-      out += `<line x1="${px + bw}" x2="${x0}" y1="${Y(acc)}" y2="${Y(acc)}" stroke="#5B6863" stroke-dasharray="3 4"/>`;
-      out += `<rect x="${x0}" y="${Y(acc + s.loss)}" width="${bw}" height="${Math.max(2, Hh(s.loss))}" rx="3" fill="#F0555A" fill-opacity=".82"/>`;
-      if (s.rec > 0) out += `<rect x="${x0}" y="${Y(acc + s.rec)}" width="${bw}" height="${Math.max(2, Hh(s.rec))}" rx="3" fill="#34D399"/>`;
-      out += lbl(x0, Y(acc + s.loss), Fx.M + Fx.money(s.loss), '#F0555A') + cat(x0, nm[s.id]);
-      acc += s.loss;
-    }
-    const px = x0; x0 += bw + gap;
-    out += `<line x1="${px + bw}" x2="${x0}" y1="${Y(acc)}" y2="${Y(acc)}" stroke="#5B6863" stroke-dasharray="3 4"/>`;
-    out += `<rect x="${x0 + 1}" y="${Y(end)}" width="${bw - 2}" height="${Hh(end) - 1}" rx="3" fill="rgba(52,211,153,.08)" stroke="#34D399" stroke-dasharray="5 4"/>`;
-    out += lbl(x0, Y(end), Fx.money(end), '#34D399') + cat(x0, ['При ориентире','профиля']);
-    return `<svg class="fx-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Валовая прибыль в месяц: сейчас и при ориентире профиля">${out}</svg>
-      <div class="fx-legend"><span><i style="background:#F0555A"></i>теряется на этапе</span><span><i style="background:#34D399"></i>из них возвращаем за 90 дней</span><span><i class="fx-dash"></i>при ориентире вашего профиля</span></div>`;
+    const end = L.gp + L.lossMo, max = steps[0].loss, ovr = Profile.hasOverride();
+    const nm = {lead:'Поток заявок', contact:'Первый контакт', close:'Переговоры и закрытие', repeat:'Повторные продажи', price:'Цена и чек'};
+    const why = id => L.D.filter(d => d.stage === id).sort((p, q) => q.gain - p.gain).slice(0, 2).map(d => d.label).join(' · ');
+    const rows = steps.map(s => `<div class="fx-lb-row">
+        <div class="fx-lb-nm"><b>${nm[s.id] || s.name}</b><span>${why(s.id)}</span></div>
+        <div class="fx-lb-bar"><i style="width:${Math.max(1.5, s.loss / max * 100).toFixed(1)}%"><em style="width:${(s.rec / s.loss * 100).toFixed(1)}%"></em></i></div>
+        <div class="fx-lb-v"><b>${Fx.M}${Fx.money(s.loss)}</b><span>${Fx.pct(s.loss / L.lossMo)} потерь${s.rec > 0 ? ` · <em>+${Fx.money(s.rec)}</em> за 90 дней` : ''}</span></div>
+      </div>`).join('');
+    return `<div class="fx-lb">
+      <div class="fx-lb-head">
+        <div><span>Сейчас</span><b>${Fx.money(L.gp)}</b><em>валовой прибыли в месяц</em></div>
+        <i>→</i>
+        <div class="ok"><span>С построенной системой</span><b>${Fx.money(end)}</b><em>${ovr ? `при вашей конверсии по нише ${State.answers._conv_override}%` : `при конверсии ${Fx.pct(L.P.conv)} из заявки в оплату`}</em></div>
+        <i>=</i>
+        <div class="loss"><span>Недобираете</span><b>${Fx.M}${Fx.money(L.lossMo)}</b><em>в месяц, ${Fx.pct(L.lossMo / L.gp)} к сегодняшней прибыли</em></div>
+      </div>
+      ${alt ? `<div class="fx-lb-alt">Потолок конверсии ${State.answers._conv_override}% задан вами, сейчас у вас ${L.conv}%. По расчёту модели потолок этой команды ${Fx.pct(alt.P.conv)}, и тогда недобор ${Fx.money(alt.lossMo)} в месяц. <button type="button" class="fx-ovr-reset">Считать по модели</button></div>` : ''}
+      <div class="fx-lb-rows">${rows}</div>
+      <div class="fx-legend"><span><i style="background:var(--loss)"></i>недобираете в месяц</span><span><i style="background:var(--ok)"></i>из них возвращаем за 90 дней</span></div>
+    </div>`;
   },
   ledgerRows(x){
     const L = x.L, a = x.a, max = Math.max(1, ...L.st.map(s => s.loss));
@@ -4996,6 +5019,14 @@ const Final = {
       </div>`;
     }).join('');
   },
+  // Ведомость без потолка конверсии, который вписал сам собственник: показать,
+  // сколько видит модель. Иначе цифра «по нише» молча срезает весь отчёт
+  modelLedger(){
+    if (!Profile.hasOverride()) return null;
+    const v = State.answers._conv_override;
+    delete State.answers._conv_override;
+    try { return Ledger.build(); } finally { State.answers._conv_override = v; }
+  },
   actLedger(x, no){
     const L = x.L;
     if (!L || !L.leaky.length) return '';
@@ -5004,8 +5035,8 @@ const Final = {
     const cash = L.cash > 0 ? `<div class="fx-cash"><div class="fx-cash-v">${Fx.M}${Fx.rub(L.cash)}</div><p><b>Отдельно от прибыли: деньги, которые уже списаны со счёта.</b> Столько рекламного бюджета в месяц уходит на заявки, до разговора с которыми дело не доходит. За год это ${Fx.mln(L.cash * 12)} живых денег.</p></div>` : '';
     return this.sec('ledger', no, 'Ведомость потерь', 'Где именно сгорает прибыль',
       `Путь клиента по этапам: где именно остаётся валовая прибыль и из-за чего. Ориентир — потенциал вашей же команды с построенной системой. Деньги считаются один раз, на том этапе, где теряются. Нажмите на строку — раскроется арифметика.`,
-      `<div class="fx-sub">Валовая прибыль в месяц: сейчас и при построенной системе</div>
-      ${this.bridgeSVG(L)}
+      `<div class="fx-sub">Валовая прибыль в месяц: сколько недобираете и на каком этапе</div>
+      ${this.bridge(L, this.modelLedger())}
       <div class="fx-tblnote"><b>Как читать таблицу.</b> Красным — валовая прибыль, которую этап недобирает каждый месяц при сегодняшних показателях. Зелёным — та её часть, которую система возвращает за первые 90 дней. Остальное требует больше времени${L.capCut < 1 ? ' и упирается в мощность отдела' : ''}. Колонка «потенциал» — показатель той же команды с построенной системой.</div>
       <div class="fx-ledger">
         <div class="fx-lrow head"><div>№</div><div>Этап воронки</div><div>Как сейчас</div><div>Потенциал</div><div>Что мешает и сколько это даёт</div><div class="r">Теряем в месяц<br><span class="fx-th-note">валовой прибыли</span></div><div class="r">Потенциал за 90 дней<br><span class="fx-th-note">из этих потерь, при целевых показателях</span></div></div>
@@ -5670,8 +5701,7 @@ const Final = {
       ovr.oninput = () => { ovr.value = ovr.value.replace(/\D/g, ''); clearTimeout(this._ovrT); this._ovrT = setTimeout(apply, 700); };
       ovr.onkeydown = e => { if (e.key === 'Enter'){ clearTimeout(this._ovrT); apply(); } };
     }
-    const rst = document.getElementById('fxOvrReset');
-    if (rst) rst.onclick = () => { Profile.setOverride(null); this.rerender(); };
+    el.querySelectorAll('#fxOvrReset, .fx-ovr-reset').forEach(b => b.onclick = () => { Profile.setOverride(null); this.rerender(); });
     const pdf = document.getElementById('btnPDF');
     if (pdf) pdf.onclick = () => Report.printPDF();
     const lnk = document.getElementById('btnLink');
