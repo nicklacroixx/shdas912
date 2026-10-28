@@ -1004,6 +1004,17 @@ body:not(.cl-unlocked) .gate{display:grid}
 @media(max-width:640px){.fx-delay{flex-direction:column;gap:8px}}
 
 /* 08 решение */
+.fx-kp{border:1px solid var(--rule);border-radius:10px;background:var(--paper);overflow:hidden}
+.fx-kp-r{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr) 150px;gap:28px;padding:20px 26px;border-top:1px solid var(--rule)}
+.fx-kp-r:first-child{border-top:0}
+.fx-kp-r .fx-k{display:block;margin-bottom:6px}
+.fx-kp-r b{font:600 15px/1.4 var(--ui);color:#fff}
+.fx-kp-r p{font-size:14px;line-height:1.55;color:var(--ink-2);margin:0 0 8px}
+.fx-kp-r p:last-child{margin:0}
+.fx-kp-p{text-align:right;white-space:nowrap;font:600 17px/1.4 var(--ui);color:#fff;font-variant-numeric:tabular-nums}
+.fx-kp-t{border-top:1px solid var(--rule-2);background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.fx-kp-t .fx-kp-p{font-size:26px;line-height:1.1;letter-spacing:-.02em}
+@media(max-width:900px){.fx-kp-r{grid-template-columns:minmax(0,1fr);gap:10px;padding:18px 20px}.fx-kp-p{text-align:left}.fx-kp-t>div:nth-child(2){display:none}}
 .fx-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule)}
 .fx-stp{padding:24px 24px 24px 0;min-width:0}
 .fx-stp+.fx-stp{padding-left:24px;border-left:1px solid var(--rule)}
@@ -1337,6 +1348,15 @@ body.fx-prompter-on .fx-prompter{display:block}
   .pr-x-fb ol{margin:0;padding-left:14px}
   .pr-x-fb li{font-size:9.5px;line-height:1.5;color:var(--pr-ink);margin-bottom:5px}
   .pr-x-fb p{font-size:9.5px;line-height:1.5;color:var(--pr-ink-2)}
+  .pr-x-kp{width:100%;border-collapse:collapse;margin-top:6px}
+  .pr-x-kp td{padding:7px 8px;border-bottom:1px solid var(--pr-line);vertical-align:top;font-size:9.5px;line-height:1.45;color:var(--pr-ink-2)}
+  .pr-x-kp td:first-child{width:31%;padding-left:0}
+  .pr-x-kp td:last-child{width:15%;padding-right:0;text-align:right;white-space:nowrap;font-family:var(--pr-serif);font-size:12px;font-weight:600;color:var(--pr-ink)}
+  .pr-x-kp .k{display:block;font-size:7.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pr-ink-3);margin-bottom:3px}
+  .pr-x-kp b{font-size:10.5px;font-weight:600;color:var(--pr-ink)}
+  .pr-x-kp .m{display:block;margin-top:4px;color:var(--pr-ink);font-weight:500}
+  .pr-x-kp tr.t td{border-top:1px solid var(--pr-ink);border-bottom:0;padding-top:9px}
+  .pr-x-kp tr.t td:last-child{font-size:18px}
   .pr-x-fb p.e{margin-top:6px;padding-top:6px;border-top:1px solid var(--pr-line);color:var(--pr-accent);font-weight:700}
   .pr-x-sb{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
   .pr-x-fb ul{margin:0;padding-left:12px}
@@ -4216,6 +4236,68 @@ const Systems = {
   }
 };
 
+// ═══ ПРЕДЛОЖЕНИЕ ═══
+// КП в конце отчёта: проект на 12 недель под системы, которые нашёл МРТ.
+// Цена считается от объёма работ, а не от суммы потерь: иначе собственник
+// читает её как обещание «верните мне X миллионов». Диапазон проекта —
+// от MIN до MAX, всё ведение входит в базу
+const Offer = {
+  MIN: 1500000, MAX: 1950000, WEEKS: 12, MONTHS: 3, DAYS: 7,
+  BASE: 500000,
+  // Цена работ по системе: сколько людей и регламентов меняем руками
+  W: {mgmt: 450000, sales: 400000, econ: 350000, team: 300000, mkt: 300000},
+  // Состав работ по рычагам, которые МРТ нашёл в системе: ключи — Systems.MOVE
+  WORK: {first:'стандарт первого контакта', crm:'воронка и сделки в одной CRM', follow:'серия касаний для отложивших покупку',
+    script:'сценарий продажи с ответами на возражения', rop:'отбор и ввод руководителя продаж', plan:'план на каждого продавца и план-факт',
+    motiv:'мотивация от результата', calls:'еженедельный разбор звонков', owner:'передача сделок от собственника отделу',
+    traffic:'задача маркетингу в цифрах и управляемый канал', qual:'портрет клиента и качество заявок', trust:'доказательства в каждой продаже',
+    load:'конкурсный отбор продавцов под поток', admin:'рутина уходит с продавцов', price:'пересмотр прайса и пакетов',
+    base:'ответственный за клиентскую базу', reason:'поводы для повторной покупки'},
+  // Одна работа — одна строка КП: воронку в CRM чинят и продажи, и управление
+  does(s, used){
+    const keys = [];
+    s.drivers.forEach(d => { const k = d.id === 'crm' && d.stage === 'repeat' ? 'base' : Systems.MOVE[d.id]; if (k && !keys.includes(k)) keys.push(k); });
+    const own = keys.filter(k => !used.has(k));
+    const w = (own.length ? own : keys).slice(0, 4).map(k => (used.add(k), this.WORK[k]));
+    return w.length ? Fx.cap(w.join(', ')) + '.' : '';
+  },
+  r10(v){ return Math.round(v / 10000) * 10000; },
+  title(O){
+    const n = O.lines.length, w = ['', 'одна', 'две', 'три', 'четыре', 'пять'][n] || n;
+    return `Проект на ${this.WEEKS} недель: ${w} ${Fx.plural(n, 'система', 'системы', 'систем')} бизнеса за ${Fx.money(O.total)}`;
+  },
+  LEAD: 'Предложение собрано под ваши потери: каждая система из раздела «Что делать» стала строкой работ с ценой и метрикой приёмки. Цена считается от объёма работ, сумма потерь на неё не влияет. Оплата тремя платежами, каждый месяц принимаете по метрике.',
+  // Меньше месяца — в неделях: «0,3 месяца» читается как вычисление
+  payback(O){
+    if (!O.payback) return '';
+    if (O.payback < 1){ const w = Math.max(1, Math.round(O.payback * 52 / 12)); return `${w} ${Fx.plural(w, 'неделю', 'недели', 'недель')}`; }
+    return Fx.qty(Math.round(O.payback * 10) / 10, 'месяц', 'месяца', 'месяцев', 'месяца');
+  },
+  build(L){
+    if (!L || !(L.lossMo > 0)) return null;
+    const S = Systems.build(L);
+    const big = S.filter((s, i) => i < 1 || s.loss >= L.lossMo * .08), rest = S.filter(s => !big.includes(s));
+    const ppl = Systems.people(L);
+    const raw = this.BASE + big.reduce((t, s) => t + this.W[s.id], 0);
+    // Платёж месяца круглый, шаг 50 тысяч: три платежа по 600 тыс ₽ читаются как цена, 567 тыс — как расчёт
+    const monthly = Math.min(this.MAX / this.MONTHS, Math.max(this.MIN / this.MONTHS, Math.round(raw / this.MONTHS / 50000) * 50000));
+    const total = monthly * this.MONTHS;
+    const k = total / raw;
+    const used = new Set();
+    const lines = big.map(s => ({id: s.id, name: s.name, title: s.title, does: this.does(s, used), metric: s.metric, loss: s.loss, price: this.r10(this.W[s.id] * k)}));
+    const base = {name: 'Ведение проекта', title: `${this.WEEKS} недель с собственником`,
+      does: 'Еженедельный план-факт, приёмка каждой волны по метрике, отчёт о деньгах раз в месяц.' +
+        (rest.length ? ` Сюда же входит ${rest.map(s => Systems.NAME[s.id].toLowerCase()).join(' и ')}: закрывается вместе с системами выше.` : '') +
+        (ppl.length ? ` Постановка задачи и отбор: ${ppl.map(p => p.role.toLowerCase()).join(', ')}.` : ''),
+      price: total - lines.reduce((t, l) => t + l.price, 0)};
+    const d = State.answers._date ? new Date(State.answers._date + 'T00:00:00') : new Date();
+    const until = new Date(d.getTime() + this.DAYS * 864e5);
+    return {total, monthly, base, lines, rest, ppl,
+      payback: L.recMo > 0 ? total / L.recMo : null,
+      until: until.toLocaleDateString('ru-RU', {day: 'numeric', month: 'long'})};
+  }
+};
+
 // ═══ ДИАГНОЗ СЛОВАМИ ═══
 const Story = {
   cid(c){
@@ -4899,7 +4981,7 @@ const Final = {
     add('plan', 'План', this.actPlan);
     add('pnl', 'Деньги', this.actPnl);
     add('nothing', 'Бездействие', this.actNothing);
-    add('decision', 'Решение', this.actDecision);
+    add('decision', Offer.build(x.L) ? 'Предложение' : 'Решение', this.actDecision);
     this.stamp();
     const date = Fx.dateRu(x.a._date);
     const dqN = ['leads_month','conversion','avg_check','revenue','margin','dialogs'].filter(id => FinModel.num(id) != null).length;
@@ -5690,36 +5772,50 @@ const Final = {
 
   // ── 08 Решение ──
   actDecision(x, no){
-    const L = x.L, a = x.a;
+    const L = x.L, a = x.a, O = Offer.build(L);
     const bring = [a.has_crm === 'yes' ? 'выгрузку сделок из CRM за 3 месяца' : 'таблицу или переписку по сделкам за 3 месяца',
       a.call_records === 'yes' ? '5 записей звонков' : null, 'текущую схему мотивации продавцов'].filter(Boolean);
-    const title = L && L.delay3 > 0 ? `Каждая неделя отсрочки стоит ${Fx.money(L.weekDelay)}. Следующий шаг — старт внедрения` : 'Следующий шаг — старт внедрения';
-    return this.sec('decision', no, 'Решение', title,
-      'Отчёт заканчивается решением. Цену месяца и метрику приёмки мы называем в конце МРТ и записываем в договор. Ниже три шага до старта, условия работы и то, что подготовить к первым неделям.',
-      `<div class="fx-steps">
-        <div class="fx-stp"><span class="fx-sn">Шаг 1</span><h5>Метрика</h5><p>Берём самую дорогую потерю из ведомости и фиксируем метрику месяца: было → цель.</p></div>
-        <div class="fx-stp"><span class="fx-sn">Шаг 2</span><h5>Договор</h5><p>Оферта с NDA, ценой месяца, метрикой приёмки и условием возврата. Оплата — до старта месяца.</p></div>
-        <div class="fx-stp"><span class="fx-sn">Шаг 3</span><h5>Старт</h5><p>Первые две недели подтверждаем ведомость по CRM и записям звонков. Следующую потерю начинаем, пока закрепляется первая.</p></div>
+    const title = O ? Offer.title(O) : 'Следующий шаг — старт внедрения';
+    const lead = O ? Offer.LEAD
+      : 'Отчёт заканчивается решением. Состав работ и метрику приёмки фиксируем по итогам МРТ и записываем в договор.';
+    const row = l => `<div class="fx-kp-r">
+        <div><span class="fx-k">${l.name}</span><b>${l.title}</b></div>
+        <div><p>${l.does}</p>${l.metric ? `<div class="fx-sc-mt">${l.metric[0]}: ${l.metric[1]}<i>→</i><b>${l.metric[2]}</b></div>` : ''}</div>
+        <div class="fx-kp-p">${Fx.money(l.price)}</div>
+      </div>`;
+    const kp = O ? `<div class="fx-kp">
+        ${O.lines.map(row).join('')}
+        ${row(O.base)}
+        <div class="fx-kp-r fx-kp-t"><div><span class="fx-k">Итого · ${Offer.WEEKS} недель</span><b>Три платежа по ${Fx.money(O.monthly)}</b></div><div></div><div class="fx-kp-p">${Fx.money(O.total)}</div></div>
+      </div>` : '';
+    return this.sec('decision', no, O ? 'Предложение' : 'Решение', title, lead,
+      `${kp}
+      <div class="fx-steps"${O ? ' style="margin-top:40px"' : ''}>
+        <div class="fx-stp"><span class="fx-sn">Шаг 1</span><h5>Состав</h5><p>${O ? 'Подтверждаем системы и метрики приёмки из этого предложения.' : 'Берём самую дорогую потерю из ведомости и фиксируем метрику: было → цель.'}</p></div>
+        <div class="fx-stp"><span class="fx-sn">Шаг 2</span><h5>Договор</h5><p>Оферта с NDA, составом работ, метриками и условием возврата. Первый платёж — до старта.</p></div>
+        <div class="fx-stp"><span class="fx-sn">Шаг 3</span><h5>Старт</h5><p>Ближайший понедельник после оплаты. Первые две недели подтверждаем ведомость по CRM и записям звонков.</p></div>
       </div>
       <div class="fx-offer">
         <div>
           <div class="fx-sub">Условия</div>
           <ul class="fx-ul plus">
-            <li><span><b>Оплата помесячно.</b> Остановиться можно после любого месяца.</span></li>
+            <li><span><b>Оплата помесячно.</b> ${O ? `Три платежа, каждый до старта месяца.` : 'Каждый платёж до старта месяца.'} Остановиться можно после любого месяца.</span></li>
             <li><span><b>Приёмка по метрике.</b> Метрика месяца не дошла до цели — возвращаем оплату месяца.</span></li>
             <li><span><b>Всё остаётся вам.</b> Регламенты, скрипты, финмодель и доступы — ваши с первого дня.</span></li>
+            ${O ? `<li><span><b>Предложение действует до ${O.until}.</b> Дальше состав и цену собираем заново по свежим цифрам.</span></li>` : ''}
           </ul>
           <div class="fx-sub" style="margin-top:28px">Подготовьте к старту</div>
           <p class="fx-note" style="margin:0">${Fx.cap(bring.join(', '))}. По ним в первые две недели подтверждаем ведомость.</p>
         </div>
         ${L ? `<div class="fx-econ">
-          <div><span>Потери сейчас</span><b class="fx-red">${Fx.M}${Fx.money(L.lossMo)} в месяц</b></div>
+          ${O ? `<div><span>Проект, ${Offer.WEEKS} недель</span><b>${Fx.money(O.total)}</b></div>` : ''}
           <div><span>Вернуть за 90 дней</span><b class="fx-green">+${Fx.money(L.recMo)} в месяц</b></div>
-          <div><span>Первый год после старта</span><b class="fx-green">+${Fx.mln(L.yearGP)} валовой прибыли</b></div>
+          ${O && O.payback ? `<div><span>Проект окупается при расчётном возврате за</span><b>${Offer.payback(O)}</b></div>` : ''}
+          ${L.delay3 > 0 ? `<div><span>Каждая неделя отсрочки</span><b class="fx-red">${Fx.M}${Fx.money(L.weekDelay)}</b></div>` : ''}
         </div>` : ''}
       </div>
       <p class="fx-sign">«Строю системы в условиях дефицита ресурсов через конверсию на ключевых этапах. Каждую цифру подтверждаю контактами основателей.»<b>Николай Клименко, основатель Closery</b></p>
-      <div class="fx-cta"><a class="btn-primary" href="${State.answers._sample ? 'https://closery.ru/?lead=1' : C.BOOKING_URL}" target="_blank" rel="noopener">${State.answers._sample ? 'Заявка на МРТ →' : 'Обсудить план и старт →'}</a><button class="btn-ghost" id="btnPDF" type="button">Скачать PDF-разбор</button><button class="btn-ghost" id="btnLink" type="button">Скопировать ссылку на отчёт</button></div>
+      <div class="fx-cta"><a class="btn-primary" href="${State.answers._sample ? 'https://closery.ru/?lead=1' : C.BOOKING_URL}" target="_blank" rel="noopener">${State.answers._sample ? 'Заявка на МРТ →' : 'Согласовать старт →'}</a><button class="btn-ghost" id="btnPDF" type="button">Скачать PDF-разбор</button><button class="btn-ghost" id="btnLink" type="button">Скопировать ссылку на отчёт</button></div>
       <p class="fx-small">${State.answers._sample ? 'Это пример на демо-данных. На вашем МРТ каждая строка считается по вашим цифрам.' : 'Ответ в течение рабочего дня.'} PDF остаётся у вас и у ваших партнёров. Ссылка на отчёт постоянная: она открывается на любом устройстве и в любом браузере, отчёт пересобирается из неё целиком.</p>`);
   },
 
@@ -5825,12 +5921,20 @@ const Final = {
       ask:'«Какой из двух сценариев вы считаете своим на ближайший год?»',
       obj:`«Подождём до следующего квартала» — «Подождать можно. Три месяца стоят ${Fx.mln(L ? L.delay3 : 0)} за первый год, и эта цифра от ожидания не уменьшится».`,
       next:'«Тогда финальный вопрос: с чего начинаем».'};
-    const topLoss = L && L.leaky.length ? [...L.leaky].sort((p, q) => q.loss - p.loss)[0] : null;
-    N.decision = {t:'Решение',
-      say:`«По цифрам здесь есть работа для нас. Первый месяц закрываем ${topLoss ? `«${topLoss.name}»: ${Fx.money(topLoss.loss)} в месяц` : 'самую дорогую потерю'}. Метрику было → цель подписываем до старта». Дальше цена — дословно по сценарию встречи, раздел «Цена».`,
-      ask:'«Ближайший старт — [дата]. Что скажете?» И молчать, пока собственник не заговорит.',
-      obj:`«Дорого» — «По сравнению с чем? ${L && L.lossMo > 0 ? `Потери на экране — ${Fx.money(L.lossMo)} в месяц, ${Fx.money(L.weekLoss)} каждую неделю` : 'Цена ожидания — в блоке P&L'}. Метрика не дойдёт до цели — оплату вернём». «Подумаю» — «Что должно быть правдой, чтобы вы сказали да? Разберём сейчас, пока цифры перед глазами».`,
-      next:'«Да» — счёт сегодня, оферта, дата старта, доступы: CRM на чтение, записи звонков, P&L. «Подумаю» — 15 минут в течение 48 часов, с партнёром.'};
+    const OF = Offer.build(L);
+    // Ближайший понедельник от дня встречи: старт называется датой, а не «скоро»
+    const mon = (() => { const d = new Date(); d.setDate(d.getDate() + ((8 - d.getDay()) % 7 || 7)); return d.toLocaleDateString('ru-RU', {day:'numeric', month:'long'}); })();
+    N.decision = OF ? {t:'Предложение',
+      say:`«Мы собрали предложение под ваши потери: ${Fx.qty(OF.lines.length, 'система', 'системы', 'систем')}, ${Offer.WEEKS} недель, ${Fx.money(OF.total)}, три платежа по ${Fx.money(OF.monthly)}. Каждую строку принимаете по метрике». Пройти строки сверху вниз: система → что делаем → метрика → цена. Итог назвать один раз и замолчать.`,
+      ask:`«Ближайший старт — понедельник, ${mon}. Фиксируем?» И молчать, пока собственник не заговорит.`,
+      obj:`«Дорого» — «${OF.payback ? `При расчётном возврате проект окупается за ${Offer.payback(OF)}, ` : ''}${L.delay3 > 0 ? `неделя отсрочки стоит ${Fx.money(L.weekDelay)}. ` : ''}Метрика месяца не дойдёт до цели — оплату месяца вернём». «Сами справимся» — «План у вас на руках. Вопрос, кто двенадцать недель каждый день держит ритм, пока идут текущие продажи. Если вы, сколько часов в неделю готовы отдать?» «Подумаю» — «Что должно быть правдой, чтобы вы сказали да сегодня? Разберём сейчас, пока цифры перед глазами». «Скидка» — «Можно убрать строку целиком вместе с её метрикой. Цена строки равна объёму работ и не торгуется».`,
+      more:`Как сложилась цена: ведение ${Fx.money(Offer.BASE)} плюс работы по каждой системе, от ${Fx.money(Offer.W.mkt)} за маркетинг и команду до ${Fx.money(Offer.W.mgmt)} за управление; платёж месяца округлён до 50 тысяч, проект — от ${Fx.money(Offer.MIN)} до ${Fx.money(Offer.MAX)}. Для себя: это ${Fx.pct(OF.total / (L.lossMo * 12), 0)} годового потенциала из ведомости. Вслух процент не называть: иначе цену начнут привязывать к обещанию вернуть сумму.`,
+      next:`«Да» — счёт сегодня, оферта, старт ${mon}, доступы: CRM на чтение, записи звонков, P&L. «Подумаю» — следующий разговор назначить прямо сейчас, в пределах 48 часов, с партнёром. Предложение действует до ${OF.until}.`}
+    : {t:'Решение',
+      say:'«По цифрам здесь есть работа для нас. Состав и метрику было → цель фиксируем до старта».',
+      ask:`«Ближайший старт — понедельник, ${mon}. Что скажете?» И молчать, пока собственник не заговорит.`,
+      obj:'«Подумаю» — «Что должно быть правдой, чтобы вы сказали да? Разберём сейчас, пока цифры перед глазами».',
+      next:'«Да» — оферта, дата старта, доступы: CRM на чтение, записи звонков, P&L. «Подумаю» — 15 минут в течение 48 часов, с партнёром.'};
     return N;
   },
   // Досье: техническая проверка данных и с кем имеем дело
@@ -6260,20 +6364,25 @@ const Report = {
         <div class="pr-callout warn">Старт через три месяца стоит ${Fx.mln(L.delay3)} за первый год: волны сдвигаются целиком, а потери всё это время идут в прежнем режиме.</div>`);
     }
 
-    // ── 07 Следующий шаг ──
-    page('СЛЕДУЮЩИЙ ШАГ', `
-      <div class="pr-tag">Решение</div>
-      <div class="pr-title">${L && L.delay3 > 0 ? `Каждая неделя отсрочки стоит ${Fx.money(L.weekDelay)}. Следующий шаг — старт внедрения` : 'Следующий шаг — старт внедрения'}</div>
-      <div class="pr-lede">Первый месяц закрывает самую дорогую потерю из ведомости. Цену месяца и метрику приёмки мы называем в конце МРТ и записываем в договор.</div>
-      <div class="pr-x-steps">
-        <div><b>1 · Метрика</b><p>Самая дорогая потеря из ведомости и метрика месяца: было → цель.</p></div>
-        <div><b>2 · Договор</b><p>NDA, цена месяца, метрика приёмки и условие возврата.</p></div>
-        <div><b>3 · Старт</b><p>Первые две недели подтверждаем ведомость по CRM и записям звонков.</p></div>
+    // ── Предложение ──
+    const OF = Offer.build(L);
+    const kpRow = l => `<tr><td><span class="k">${l.name}</span><b>${l.title}</b></td><td>${l.does}${l.metric ? `<span class="m">${l.metric[0]}: ${l.metric[1]} → ${l.metric[2]}</span>` : ''}</td><td>${Fx.money(l.price)}</td></tr>`;
+    page(OF ? 'ПРЕДЛОЖЕНИЕ' : 'СЛЕДУЮЩИЙ ШАГ', `
+      <div class="pr-tag">${OF ? 'Предложение' : 'Решение'}</div>
+      <div class="pr-title">${OF ? Offer.title(OF) : 'Следующий шаг — старт внедрения'}</div>
+      <div class="pr-lede">${OF ? Offer.LEAD : 'Состав работ и метрику приёмки фиксируем по итогам МРТ и записываем в договор.'}</div>
+      ${OF ? `<table class="pr-x-kp">${OF.lines.map(kpRow).join('')}${kpRow(OF.base)}
+        <tr class="t"><td><span class="k">Итого · ${Offer.WEEKS} недель</span><b>Три платежа по ${Fx.money(OF.monthly)}</b></td><td>${[OF.payback ? `Проект окупается при расчётном возврате за ${Offer.payback(OF)}.` : '', L && L.delay3 > 0 ? `Каждая неделя отсрочки — <b style="color:var(--pr-bad)">${Fx.M}${Fx.money(L.weekDelay)}</b>.` : ''].filter(Boolean).join(' ')}</td><td>${Fx.money(OF.total)}</td></tr></table>` : ''}
+      <div class="pr-x-steps" style="margin-top:14px">
+        <div><b>1 · Состав</b><p>${OF ? 'Подтверждаем системы и метрики приёмки из этого предложения.' : 'Самая дорогая потеря из ведомости и метрика: было → цель.'}</p></div>
+        <div><b>2 · Договор</b><p>Оферта с NDA, составом работ, метриками и условием возврата. Первый платёж — до старта.</p></div>
+        <div><b>3 · Старт</b><p>Ближайший понедельник после оплаты. Первые две недели подтверждаем ведомость по CRM.</p></div>
       </div>
-      <ul class="pr-ledger good" style="margin-top:14px">
+      <ul class="pr-ledger good" style="margin-top:12px">
         <li><span class="lbl">Оплата помесячно, остановиться можно после любого месяца</span><b>✓</b></li>
         <li><span class="lbl">Метрика месяца не дошла до цели — возвращаем оплату месяца</span><b>✓</b></li>
         <li><span class="lbl">Регламенты, скрипты, финмодель и доступы остаются компании</span><b>✓</b></li>
+        ${OF ? `<li><span class="lbl">Предложение действует до ${OF.until}</span><b>✓</b></li>` : ''}
       </ul>`);
 
     // ── Приложение ──
@@ -6311,7 +6420,7 @@ const Report = {
       <div class="pr-cover-mid">
         <div class="pr-cover-kicker">Следующий шаг</div>
         <div class="pr-back-title">Ведомость показала <i>где и сколько</i>. Внедрение возвращает, начиная <i>с самой дорогой потери</i>.</div>
-        <div class="pr-back-text">Цену месяца и метрику «было → цель» мы называем в конце МРТ и записываем в договор. Оплата помесячно. Метрика месяца не дошла до цели — возвращаем оплату месяца.</div>
+        <div class="pr-back-text">Состав работ, цена и метрики «было → цель» — на странице предложения. Они же записываются в договор. Оплата помесячно. Метрика месяца не дошла до цели — возвращаем оплату месяца.</div>
       </div>
       <div class="pr-cover-bottom pr-back-contact" style="border-top:1px solid rgba(255,255,255,.14)">
         <div><div class="k">Почта</div><div class="v">klimenko@closery.ru</div></div>
@@ -6605,7 +6714,7 @@ document.addEventListener('DOMContentLoaded', ()=>App.init());
 // Наружу отдаём модули модели — для проверки расчётов и отладки в консоли
 return { State, Scoring, FinModel, Profile, Funnel, Capacity, KeyMetrics,
          Constraint, Problems, Perception, GoalGap, DataQuality, Roadmap, Final, Report, TestFill,
-         Fx, Ledger, Story, GoalPath, Waves, Prompter, Playbook, Systems, Share, Session, Storage, Editor };
+         Fx, Ledger, Story, GoalPath, Waves, Prompter, Playbook, Systems, Offer, Share, Session, Storage, Editor };
 })();
 </script>
 </body>
