@@ -4243,7 +4243,7 @@ const Systems = {
 // читает её как обещание «верните мне X миллионов». Диапазон проекта —
 // от MIN до MAX, всё ведение входит в базу
 const Offer = {
-  MIN: 1500000, WEEKS: 12, MONTHS: 3, DAYS: 7,
+  MIN: 1500000, FLOOR: 450000, WEEKS: 12, MONTHS: 3, DAYS: 7,
   BASE: 500000,
   // Масштаб компании по выручке в месяц: на 80 млн в каждой системе больше людей, сделок и согласований.
   // k множит объём работ, max — потолок проекта. Без выручки в ответах берётся выручка по воронке
@@ -4267,22 +4267,27 @@ const Offer = {
     return w.length ? Fx.cap(w.join(', ')) + '.' : '';
   },
   r10(v){ return Math.round(v / 10000) * 10000; },
+  // Сначала что строим, потом цена, потом окупаемость: цена в заголовке читалась как ценник без предмета
   title(O){
-    if (O.payback) return `Проект за ${Fx.mln(O.total)} окупается за ${this.payback(O)}`;
-    const n = O.lines.length, w = ['', 'одна', 'две', 'три', 'четыре', 'пять'][n] || n;
-    return `Проект на ${this.WEEKS} недель: ${w} ${Fx.plural(n, 'система', 'системы', 'систем')} бизнеса за ${Fx.money(O.total)}`;
+    const n = O.lines.length, w = ['', 'одну', 'две', 'три', 'четыре', 'пять'][n] || n;
+    return `За ${this.WEEKS} недель строим ${w} ${Fx.plural(n, 'систему', 'системы', 'систем')} бизнеса`;
   },
-  // Подводка начинается с денег собственника: сколько недополучает сейчас и сколько вернёт вложение
+  // Окупается до конца третьего месяца — то есть за время самого проекта
+  quick(O){ return O.payback != null && O.payback <= this.MONTHS; },
   lead(O){
-    const E = O.econ, n = O.lines.length, w = ['', 'одну', 'две', 'три', 'четыре', 'пять'][n] || n;
-    return `Сейчас бизнес недополучает ${Fx.mln(E.lossYear)} валовой прибыли в год. Проект за ${this.WEEKS} недель строит ${w} ${Fx.plural(n, 'систему', 'системы', 'систем')} из раздела «Что делать»: расчётный возврат при достижении целевых показателей — ${Fx.mln(E.y1)} за первый год с учётом разгона. Цена считается от объёма работ и масштаба компании, каждый месяц принимаете по метрике.`;
+    const E = O.econ;
+    return `Сейчас бизнес недополучает ${Fx.mln(E.lossYear)} валовой прибыли в год. Ниже по каждой системе из раздела «Что делать»: что меняем, по какой метрике принимаете работу и цена. ${this.quick(O) ? 'Цена не выше расчётного возврата первых трёх месяцев: вложение окупается за время самого проекта, дальше возврат остаётся компании.' : `Расчётный возврат при достижении целевых показателей — ${Fx.mln(E.y1)} за первый год.`}`;
   },
   // Экономика вложения из разгона Ledger: первый год по волнам, дальше результат держится на уровне 90 дней, без роста.
   // Возврат — после новых расходов системы, окупаемость считается по накопленному возврату, а не делением цены на месяц
   YEARS: 3,
-  econ(L, total){
+  cum(L){
     const flat = L.ramp[11].net, cum = [];
     for (let i = 0, t = 0; i < this.YEARS * 12; i++) cum.push(t += i < 12 ? L.ramp[i].net : flat);
+    return cum;
+  },
+  econ(L, total){
+    const cum = this.cum(L);
     const k = cum.findIndex(v => v >= total), prev = k > 0 ? cum[k - 1] : 0;
     const wave = L.byWave.findIndex(v => v > 0);
     return {cum, lossYear: L.lossMo * 12, y1: cum[11], y3: cum[cum.length - 1],
@@ -4332,7 +4337,11 @@ const Offer = {
     const ppl = Systems.people(L);
     const raw = this.BASE + big.reduce((t, s) => t + this.W[s.id], 0), T = this.tier(L);
     // Платёж месяца круглый, шаг 50 тысяч: три платежа по 600 тыс ₽ читаются как цена, 567 тыс — как расчёт
-    const monthly = Math.min(T.max / this.MONTHS, Math.max(this.MIN / this.MONTHS, Math.round(raw * T.k / this.MONTHS / 50000) * 50000));
+    const scope = Math.min(T.max / this.MONTHS, Math.max(this.MIN / this.MONTHS, Math.round(raw * T.k / this.MONTHS / 50000) * 50000));
+    // Цена не выше расчётного возврата первых трёх месяцев: проект окупается, пока идёт.
+    // Объём работ задаёт цену сверху, возврат — потолок. Ниже FLOOR проект не берём дешевле, даже если окупится дольше
+    const cap = Math.floor(this.cum(L)[this.MONTHS - 1] / this.MONTHS / 50000) * 50000;
+    const monthly = Math.max(this.FLOOR / this.MONTHS, Math.min(scope, cap));
     const total = monthly * this.MONTHS;
     const k = total / raw;
     const used = new Set();
@@ -4345,7 +4354,7 @@ const Offer = {
     const d = State.answers._date ? new Date(State.answers._date + 'T00:00:00') : new Date();
     const until = new Date(d.getTime() + this.DAYS * 864e5);
     const econ = this.econ(L, total);
-    return {total, monthly, base, lines, rest, ppl, tier: T, econ,
+    return {total, monthly, base, lines, rest, ppl, tier: T, econ, scope: scope * this.MONTHS, capped: monthly < scope,
       payback: econ.pay,
       until: until.toLocaleDateString('ru-RU', {day: 'numeric', month: 'long'})};
   }
@@ -5843,17 +5852,18 @@ const Final = {
       </div>` : '';
     const tile = (k, v, s2, cls = '') => `<div class="fx-kpi"><span class="fx-k">${k}</span><div class="fx-val ${cls}">${v}</div><div class="fx-s">${s2}</div></div>`;
     const R = O && Offer.roi(O);
-    const econ = O ? `<div class="fx-kpis fx-kpis-inv">
+    // Окупаемость идёт после состава и цены: сначала предмет, потом деньги
+    const econ = O ? `<div class="fx-sub" style="margin-top:48px">Окупаемость</div>
+      <div class="fx-kpis fx-kpis-inv">
         ${tile('Вложение', Fx.mln(O.total), `три платежа по ${Fx.money(O.monthly)}`)}
+        ${O.payback ? tile('Окупается за', Offer.payback(O), Offer.quick(O) ? 'за время самого проекта' : 'по накопленному возврату') : tile(`За ${Offer.YEARS} года`, '+' + Fx.mln(O.econ.y3), 'при удержании результата', 'fx-green')}
         ${tile('Возврат за первый год', '+' + Fx.mln(O.econ.y1), 'с учётом разгона по волнам', 'fx-green')}
-        ${tile(`За ${Offer.YEARS} года`, '+' + Fx.mln(O.econ.y3), 'при удержании результата, без роста', 'fx-green')}
         ${tile(R.k, R.v, R.s, 'fx-green')}
       </div>
       <div style="margin-top:36px">${Offer.svg(O, L)}</div>
-      <p class="fx-note">${Offer.NOTE(O, L)}</p>
-      <div class="fx-sub" style="margin-top:44px">Состав работ и цена</div>` : '';
+      <p class="fx-note">${Offer.NOTE(O, L)}</p>` : '';
     return this.sec('decision', no, O ? 'Предложение' : 'Решение', title, lead,
-      `${econ}${kp}
+      `${kp}${econ}
       <div class="fx-steps"${O ? ' style="margin-top:40px"' : ''}>
         <div class="fx-stp"><span class="fx-sn">Шаг 1</span><h5>Состав</h5><p>${O ? 'Подтверждаем системы и метрики приёмки из этого предложения.' : 'Берём самую дорогую потерю из ведомости и фиксируем метрику: было → цель.'}</p></div>
         <div class="fx-stp"><span class="fx-sn">Шаг 2</span><h5>Договор</h5><p>Оферта с NDA, составом работ, метриками и условием возврата. Первый платёж — до старта.</p></div>
@@ -5987,10 +5997,10 @@ const Final = {
     // Ближайший понедельник от дня встречи: старт называется датой, а не «скоро»
     const mon = (() => { const d = new Date(); d.setDate(d.getDate() + ((8 - d.getDay()) % 7 || 7)); return d.toLocaleDateString('ru-RU', {day:'numeric', month:'long'}); })();
     N.decision = OF ? {t:'Предложение',
-      say:`Начать с денег, потом состав. «Вы недополучаете ${Fx.mln(OF.econ.lossYear)} в год. Вложение ${Fx.mln(OF.total)}, за первый год расчётно ${Fx.mln(OF.econ.y1)}, это ${Offer.roi(OF).v}${OF.payback ? `, окупается за ${Offer.payback(OF)}` : ''}». Показать график: где зелёная линия пересекает вложение. Потом строки сверху вниз: система → что делаем → метрика → цена. Итог назвать один раз и замолчать.`,
+      say:`Сначала предмет, потом цена, потом окупаемость. Строки сверху вниз: система → что делаем → метрика → цена. Итог назвать один раз: ${Fx.mln(OF.total)}. Сразу следом: «${OF.payback ? `Окупается за ${Offer.payback(OF)}${Offer.quick(OF) ? ' — пока идёт сам проект' : ''}. ` : ''}За первый год расчётно ${Fx.mln(OF.econ.y1)}, это ${Offer.roi(OF).v} на вложение». Показать график: где зелёная линия пересекает вложение. И замолчать.`,
       ask:`«Ближайший старт — понедельник, ${mon}. Фиксируем?» И молчать, пока собственник не заговорит.`,
       obj:`«Дорого» — «Дорого относительно чего? Бизнес сейчас недополучает ${Fx.mln(OF.econ.lossYear)} в год. Вложение ${Fx.mln(OF.total)}, расчётно ${Fx.mln(OF.econ.y1)} за первый год${OF.payback ? `, окупается за ${Offer.payback(OF)}` : ''}». И молчать. «Наймём коммерческого директора» — «Директор — расход каждый месяц. Проект — вложение: ${Fx.mln(OF.total)} один раз, ${Offer.roi(OF).v} за ${OF.econ.roi1 >= .1 ? 'первый год' : Offer.YEARS + ' года'}». Не спорить и не сравнивать дальше. «Сами справимся» — «План у вас на руках. Вопрос, кто двенадцать недель каждый день держит ритм, пока идут текущие продажи. Если вы, сколько часов в неделю готовы отдать?» «Подумаю» — «Что должно быть правдой, чтобы вы сказали да сегодня? Разберём сейчас, пока цифры перед глазами». «Скидка» — «Можно убрать строку целиком вместе с её метрикой. Цена строки равна объёму работ и не торгуется».`,
-      more:`Как сложилась цена: ведение ${Fx.money(Offer.BASE)} плюс работы по каждой системе, от ${Fx.money(Offer.W.mkt)} за маркетинг и команду до ${Fx.money(Offer.W.mgmt)} за управление; ${OF.tier.k > 1 ? `объём умножен на ${String(OF.tier.k).replace('.', ',')} за масштаб: выручка ${Fx.mln(L.rev)} в месяц; ` : ''}платёж месяца округлён до 50 тысяч, проект — от ${Fx.money(Offer.MIN)} до ${Fx.money(OF.tier.max)}. Для себя: это ${Fx.pct(OF.total / (L.lossMo * 12), 0)} годового потенциала из ведомости. Вслух процент не называть: иначе цену начнут привязывать к обещанию вернуть сумму.`,
+      more:`Как сложилась цена: ведение ${Fx.money(Offer.BASE)} плюс работы по каждой системе, от ${Fx.money(Offer.W.mkt)} за маркетинг и команду до ${Fx.money(Offer.W.mgmt)} за управление; ${OF.tier.k > 1 ? `объём умножен на ${String(OF.tier.k).replace('.', ',')} за масштаб: выручка ${Fx.mln(L.rev)} в месяц; ` : ''}платёж месяца округлён до 50 тысяч, по объёму — от ${Fx.money(Offer.MIN)} до ${Fx.money(OF.tier.max)}. Потолок — расчётный возврат первых трёх месяцев, чтобы проект окупался, пока идёт${OF.capped ? `: здесь он сработал, по объёму было бы ${Fx.money(OF.scope)}` : ''}. Для себя: это ${Fx.pct(OF.total / (L.lossMo * 12), 0)} годового потенциала из ведомости. Вслух процент не называть: иначе цену начнут привязывать к обещанию вернуть сумму.`,
       next:`«Да» — счёт сегодня, оферта, старт ${mon}, доступы: CRM на чтение, записи звонков, P&L. «Подумаю» — следующий разговор назначить прямо сейчас, в пределах 48 часов, с партнёром. Предложение действует до ${OF.until}.`}
     : {t:'Решение',
       say:'«По цифрам здесь есть работа для нас. Состав и метрику было → цель фиксируем до старта».',
@@ -6429,27 +6439,26 @@ const Report = {
     // ── Предложение ──
     const OF = Offer.build(L);
     if (OF){
-      const R = Offer.roi(OF), st = (k, v, s2, c = '') => `<div class="pr-stat ${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${s2}</div></div>`;
+      const kpRow = l => `<tr><td><span class="k">${l.name}</span><b>${l.title}</b></td><td>${l.does}${l.metric ? `<span class="m">${l.metric[0]}: ${l.metric[1]} → ${l.metric[2]}</span>` : ''}</td><td>${Fx.money(l.price)}</td></tr>`;
       page('ПРЕДЛОЖЕНИЕ', `
         <div class="pr-tag">Предложение</div>
         <div class="pr-title">${Offer.title(OF)}</div>
-        <div class="pr-lede">${Offer.lead(OF)}</div>
-        <div class="pr-x-kpis">
+        <div class="pr-lede">${Offer.lead(OF)} Строки и метрики записываются в договор.</div>
+        <table class="pr-x-kp">${OF.lines.map(kpRow).join('')}${kpRow(OF.base)}
+        <tr class="t"><td><span class="k">Итого · ${Offer.WEEKS} недель</span><b>Три платежа по ${Fx.money(OF.monthly)}</b></td><td></td><td>${Fx.money(OF.total)}</td></tr></table>`);
+    }
+    page(OF ? 'ПРЕДЛОЖЕНИЕ' : 'СЛЕДУЮЩИЙ ШАГ', `
+      <div class="pr-tag">${OF ? 'Предложение' : 'Решение'}</div>
+      <div class="pr-title">${OF ? (OF.payback ? `Окупается за ${Offer.payback(OF)}` : 'Окупаемость') : 'Следующий шаг — старт внедрения'}</div>
+      ${OF ? (() => { const R = Offer.roi(OF), st = (k, v, s2, c = '') => `<div class="pr-stat ${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${s2}</div></div>`;
+        return `<div class="pr-x-kpis">
           ${st('Вложение', Fx.mln(OF.total), `три платежа по ${Fx.money(OF.monthly)}`)}
           ${st('Первый год', '+' + Fx.mln(OF.econ.y1), 'с учётом разгона', 'good')}
           ${st(`За ${Offer.YEARS} года`, '+' + Fx.mln(OF.econ.y3), 'без роста', 'good')}
           ${st(R.k, R.v, R.s, 'good')}
         </div>
         ${Offer.svg(OF, L)}
-        <div class="pr-callout">${Offer.NOTE(OF, L)}</div>`);
-    }
-    const kpRow = l => `<tr><td><span class="k">${l.name}</span><b>${l.title}</b></td><td>${l.does}${l.metric ? `<span class="m">${l.metric[0]}: ${l.metric[1]} → ${l.metric[2]}</span>` : ''}</td><td>${Fx.money(l.price)}</td></tr>`;
-    page(OF ? 'ПРЕДЛОЖЕНИЕ' : 'СЛЕДУЮЩИЙ ШАГ', `
-      <div class="pr-tag">${OF ? 'Предложение' : 'Решение'}</div>
-      <div class="pr-title">${OF ? 'Состав работ и цена' : 'Следующий шаг — старт внедрения'}</div>
-      <div class="pr-lede">${OF ? 'Каждая система из раздела «Что делать» — строка работ с ценой и метрикой приёмки. Строки и метрики записываются в договор.' : 'Состав работ и метрику приёмки фиксируем по итогам МРТ и записываем в договор.'}</div>
-      ${OF ? `<table class="pr-x-kp">${OF.lines.map(kpRow).join('')}${kpRow(OF.base)}
-        <tr class="t"><td><span class="k">Итого · ${Offer.WEEKS} недель</span><b>Три платежа по ${Fx.money(OF.monthly)}</b></td><td>${OF.payback ? `Окупается за ${Offer.payback(OF)}, за первый год расчётно <b style="color:var(--pr-accent)">+${Fx.mln(OF.econ.y1)}</b>.` : ''}</td><td>${Fx.money(OF.total)}</td></tr></table>` : ''}
+        <div class="pr-callout">${Offer.NOTE(OF, L)}</div>`; })() : '<div class="pr-lede">Состав работ и метрику приёмки фиксируем по итогам МРТ и записываем в договор.</div>'}
       <div class="pr-x-steps" style="margin-top:14px">
         <div><b>1 · Состав</b><p>${OF ? 'Подтверждаем системы и метрики приёмки из этого предложения.' : 'Самая дорогая потеря из ведомости и метрика: было → цель.'}</p></div>
         <div><b>2 · Договор</b><p>Оферта с NDA, составом работ, метриками и условием возврата. Первый платёж — до старта.</p></div>
