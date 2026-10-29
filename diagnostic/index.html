@@ -1022,6 +1022,20 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-kp-r p{font-size:14px;line-height:1.55;color:var(--ink-2);margin:0 0 8px}
 .fx-kp-r p:last-child{margin:0}
 .fx-kp-p{text-align:right;white-space:nowrap;font:600 17px/1.4 var(--ui);color:var(--hd);font-variant-numeric:tabular-nums}
+/* течи: строка раскрывается в разбивку работ с ценами */
+.fx-leak{border-top:1px solid var(--rule)}
+.fx-leak:first-child{border-top:0}
+.fx-leak>summary{list-style:none;cursor:pointer;border-top:0}
+.fx-leak>summary::-webkit-details-marker{display:none}
+.fx-leak>summary:hover{background:color-mix(in srgb,var(--ink) 3%,transparent)}
+.fx-leak-more{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font:500 11px/1.4 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ok)}
+.fx-leak-more::after{content:'';width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .25s}
+.fx-leak[open] .fx-leak-more::after{transform:rotate(-135deg) translateY(-1px)}
+.fx-leak-items{list-style:none;margin:0;padding:0 26px 20px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr) 150px;column-gap:28px}
+.fx-leak-items li{grid-column:2/4;display:grid;grid-template-columns:minmax(0,1fr) 150px;column-gap:28px;padding:9px 0;border-top:1px dashed var(--rule);font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.fx-leak-items li:first-child{border-top:0}
+.fx-leak-items li b{text-align:right;font:500 14px/1.5 var(--ui);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+@media(max-width:900px){.fx-leak-items{display:block;padding:0 20px 16px}.fx-leak-items li{grid-template-columns:minmax(0,1fr) auto}}
 .fx-kp-t{border-top:1px solid var(--rule-2);background:color-mix(in srgb,var(--ink) 4%,transparent)}
 .fx-kp-t .fx-kp-p{font-size:26px;line-height:1.1;letter-spacing:-.02em}
 @media(max-width:900px){.fx-kp-r{grid-template-columns:minmax(0,1fr);gap:10px;padding:18px 20px}.fx-kp-p{text-align:left}.fx-kp-t>div:nth-child(2){display:none}}
@@ -1921,6 +1935,15 @@ const QUESTIONS = [
     title:'Сколько готовы платить РОПу в месяц?',
     sub:'Оклад плюс бонус до вычета налогов. Нужно для честного P&L: окупает ли система собственного руководителя. Не знаете — пропустите, возьмём 200 000 ₽.',
     insight:v => (v!=='' && v!=null && Number(v) > 0 && Number(v) < 120000) ? {tone:'warn', text:'<b>Меньше 120 000 ₽</b> — на рынке это чаще старший менеджер, чем руководитель. Конкурсный отбор покажет точно, но заложите запас.'} : null },
+  { id:'team_plan', section:'sales', type:'select',
+    when:a => Number(a.managers) > 0,
+    title:'Если людей не хватает: нанимать новых или усилить текущих?',
+    sub:'От ответа зависит состав работ в предложении и расходы в P&L: найм добавляет оклады, усиление своих стоит дешевле.',
+    options:[
+      {v:'grow', t:'Усилить текущих: обучение, план, руководитель из своих'},
+      {v:'hire', t:'Нанимать новых людей'},
+      {v:'both', t:'И то и другое: сначала усилить, потом добирать'}
+    ] },
   { id:'has_regl', section:'sales', type:'yesno',
     title:'Есть ли регламенты и скрипты продаж?',
     sub:'Описанные этапы сделки, стандарты общения, база знаний.',
@@ -3824,7 +3847,8 @@ const Ledger = {
       stages.forEach(s => s.rec = s.drivers.reduce((t, d) => t + d.rec90, 0));
     }
     L.recMo = stages.reduce((t, s) => t + s.rec, 0);
-    L.cash = L.cpl && L.S('contact').loss > 0 ? L.leads * (L.S('contact').drivers.reduce((t, d) => t + d.eff, 0) / 100) * L.cpl : 0;
+    // Реклама «впустую» считалась отдельной плашкой, но суммы там мелкие и отвлекают от главного: в отчёт не выводим
+    L.cash = 0;
     L.recNoAds = !(L.S('lead').rec > 0);
 
     // ── Показатели: сейчас → потенциал системы → цель 90 дней ──
@@ -3856,7 +3880,9 @@ const Ledger = {
     L.needRop = a.has_rop === 'no';
     L.ropFull = L.needRop ? (ropAns > 0 ? ropAns : this.ROP_DEFAULT) : 0;
     L.ropAssumed = L.needRop && !(ropAns > 0);
-    L.ropMode = !L.needRop ? null : L.recMo >= L.ropFull * 1.5 ? 'hire' : L.recMo >= seniorCost * 2 ? 'senior' : 'self';
+    // Своё решение собственника главнее арифметики: усиливать своих или нанимать со стороны
+    L.ropMode = !L.needRop ? null : a.team_plan === 'grow' ? 'senior' : a.team_plan === 'hire' ? 'hire'
+      : L.recMo >= L.ropFull * 1.5 ? 'hire' : L.recMo >= seniorCost * 2 ? 'senior' : 'self';
     L.ropCost = L.ropMode === 'hire' ? L.ropFull : L.ropMode === 'senior' ? seniorCost : 0;
     L.ropLabel = L.ropMode === 'senior' ? 'доплата старшему продавцу за управление' : 'ФОТ нового РОПа';
     L.pnl = {rev0:rev, rev1:rev + L.recMo / m, gp0:L.gp, gp1:L.gp + L.recMo, cost:L.ropCost,
@@ -4088,6 +4114,15 @@ const Systems = {
     reason:'Повод вернуться: допродажи, сервис, следующая покупка.'
   },
 
+  // Шаги, где формулировка зависит от решения собственника: нанимать или усилить своих
+  step(k){
+    if (State.answers.team_plan === 'grow'){
+      if (k === 'rop') return 'Руководитель из текущей команды: оценка по звонкам, обучение, передача плана-факта и разбора сделок.';
+      if (k === 'load') return 'Усиление текущих продавцов: разбор звонков, личный план и распределение заявок по силе.';
+    }
+    return this.STEP[k];
+  },
+
   // Факты — только то, что собственник сам сказал в анкете. Выводов здесь нет
   facts(id, L){
     const a = State.answers, n = k => FinModel.num(k), out = [];
@@ -4166,9 +4201,9 @@ const Systems = {
     const a = State.answers, has = k => s.drivers.some(d => d.id === k);
     return {
       sales: 'Closery ставит процесс, дальше его держит руководитель продаж.',
-      mgmt: a.has_rop === 'no' ? 'Руководитель продаж. Closery находит его через конкурсный отбор и вводит в работу.' : 'Ваш руководитель продаж. Closery ставит ритм управления и передаёт его.',
+      mgmt: a.has_rop === 'no' ? (a.team_plan === 'grow' ? 'Руководитель продаж из вашей команды. Closery выбирает его по звонкам, учит и вводит в работу.' : 'Руководитель продаж. Closery находит его через конкурсный отбор и вводит в работу.') : 'Ваш руководитель продаж. Closery ставит ритм управления и передаёт его.',
       mkt: 'Сильный маркетолог. Closery ставит ему задачу в цифрах: сколько заявок, какого качества и по какой цене.',
-      team: 'Closery: конкурсный отбор продавцов и разгрузка от рутины.',
+      team: a.team_plan === 'grow' ? 'Closery: усиливает текущих продавцов и снимает с них рутину.' : 'Closery: конкурсный отбор продавцов и разгрузка от рутины.',
       econ: has('price') ? 'Цена — решение собственника, расчёт пакетов готовит Closery. Базу ведёт отдельный ответственный.' : 'Отдельный ответственный за базу: роль или часть плана продавца.'
     }[id];
   },
@@ -4200,7 +4235,7 @@ const Systems = {
         : ['Сделок в месяц', Fx.deals(L.deals), Fx.deals(dealsTo)];
       const mv = new Map();
       dr.forEach(d => { const k = d.id === 'crm' && d.stage === 'repeat' ? 'base' : this.MOVE[d.id]; if (k) mv.set(k, (mv.get(k) || 0) + d.gain); });
-      s.steps = [...mv.entries()].sort((p, q) => q[1] - p[1]).slice(0, 3).map(e => this.STEP[e[0]]);
+      s.steps = [...mv.entries()].sort((p, q) => q[1] - p[1]).slice(0, 3).map(e => this.step(e[0]));
       s.facts = this.facts(id, L);
       s.title = this.head(id, s, L);
       s.who = this.who(id, s);
@@ -4256,7 +4291,7 @@ const Offer = {
   BASE: 500000,
   // Масштаб компании по выручке в месяц: на 80 млн в каждой системе больше людей, сделок и согласований.
   // k множит объём работ, max — потолок проекта. Без выручки в ответах берётся выручка по воронке
-  TIERS: [{to: 20e6, k: 1, max: 1950000}, {to: 50e6, k: 1.2, max: 2400000}, {to: Infinity, k: 1.4, max: 3000000}],
+  TIERS: [{to: 20e6, k: 1, max: 2700000}, {to: 50e6, k: 1.2, max: 3400000}, {to: Infinity, k: 1.4, max: 4200000}],
   tier(L){ return this.TIERS.find(t => (L.rev || 0) < t.to); },
   // Цена работ по системе: сколько людей и регламентов меняем руками
   W: {mgmt: 450000, sales: 400000, econ: 350000, team: 300000, mkt: 300000},
@@ -4267,26 +4302,71 @@ const Offer = {
     traffic:'задача маркетингу в цифрах и управляемый канал', qual:'портрет клиента и качество заявок', trust:'доказательства в каждой продаже',
     load:'конкурсный отбор продавцов под поток', admin:'рутина уходит с продавцов', price:'пересмотр прайса и пакетов',
     base:'ответственный за клиентскую базу', reason:'поводы для повторной покупки'},
-  // Одна работа — одна строка КП: воронку в CRM чинят и продажи, и управление
-  does(s, used){
-    const keys = [];
-    s.drivers.forEach(d => { const k = d.id === 'crm' && d.stage === 'repeat' ? 'base' : Systems.MOVE[d.id]; if (k && !keys.includes(k)) keys.push(k); });
-    const own = keys.filter(k => !used.has(k));
-    const w = (own.length ? own : keys).slice(0, 4).map(k => (used.add(k), this.WORK[k]));
-    return w.length ? Fx.cap(w.join(', ')) + '.' : '';
-  },
   r10(v){ return Math.round(v / 10000) * 10000; },
+  // Течь — крупный узел, где уходят деньги. Внутри каждой — работы, из которых она закрывается.
+  // Цена течи складывается из цен рычагов, которые МРТ нашёл у этой компании: чем больше найдено, тем дороже
+  MACRO: [
+    {id:'reach', t:'Заявки доходят до разговора', ids:['resp','creg','watch']},
+    {id:'close', t:'Продажи: каждый пункт конверсии выжат на максимум', ids:['script','price_obj','zreg']},
+    {id:'follow', t:'Дожим: никто из отложивших покупку не теряется', ids:['follow','cascade']},
+    {id:'funnel', t:'Воронка в цифрах: вся картина в одной системе', ids:['crm','visib']},
+    {id:'mgmt', t:'Управление: отдел работает по плану, а не по настроению', ids:['rop','plan','motiv','calls']},
+    {id:'owner', t:'Собственник выходит из операционных продаж', ids:['owner']},
+    {id:'mkt', t:'Маркетинг приводит нужных клиентов в нужном объёме', ids:['traffic','qual','trust']},
+    {id:'team', t:'Команда: людей хватает, и они заняты продажами', ids:['load','admin']},
+    {id:'econ', t:'Клиент приносит больше: цена и повторные продажи', ids:['price','base','who','reason','rreg']}
+  ],
+  // p — цена рычага в тысячах рублей до масштаба, it — работы с весом внутри цены
+  DRV: {
+    resp: {p:200, it:[['Норматив первого ответа и автоответ клиенту',2],['Дежурный по заявкам в каждый час рабочего дня',2],['Сигнал руководителю по невзятой заявке',1],['Недельный отчёт по скорости ответа',1]]},
+    creg: {p:150, it:[['Регламент первого разговора: кто звонит и что говорит',2],['Правило повторных дозвонов в первые сутки',1],['Шаблоны сообщений, если клиент не берёт трубку',1],['Контроль дозвона по каждому менеджеру',1]]},
+    watch:{p:150, it:[['Экран очереди новых заявок',1],['Метка «не взята» и таймер на карточке',1],['Ежедневный разбор потерянных заявок',2],['Правило передачи заявки, если менеджера нет',1]]},
+    crm:  {p:350, it:[['Все источники заявок в одной CRM',3],['Этапы воронки и обязательные поля перехода',2],['Запрет вести сделку вне карточки',1],['Автоотчёты по конверсии каждого этапа',2],['Обучение отдела и контроль заполнения',1]]},
+    visib:{p:250, it:[['Дашборд воронки по этапам',2],['Ежедневные цифры собственнику',1],['Сигналы при просадке по этапу',1],['Недельный ритм решений по цифрам',1]]},
+    follow:{p:250, it:[['Серия касаний для тех, кто не купил сразу',2],['Сроки и каналы каждого касания',1],['Повод для каждого касания',2],['Возврат «замёрзших» сделок раз в квартал',1]]},
+    cascade:{p:200, it:[['Каскад: звонок, мессенджер, письмо',2],['Условия остановки дожима',1],['Скрипты повторного контакта',2],['Отчёт по возвращённым клиентам',1]]},
+    script:{p:400, it:[['Сценарий продажи по этапам разговора',3],['Карта возражений с готовыми ответами',3],['Квалификация клиента в первые минуты',1],['Как просить оплату на финале',1],['Тренировка отдела на живых разговорах',2]]},
+    price_obj:{p:250, it:[['Ответы на возражение «дорого»',2],['Подача цены через ценность и варианты',2],['Правила скидок: кому, когда, сколько',1],['Тренировка на реальных отказах',1]]},
+    zreg: {p:200, it:[['Регламент работы с договором и оплатой',2],['Сроки между этапами сделки',1],['Правила закрытия и передачи в работу',1],['Чек-лист менеджера на финале сделки',1]]},
+    calls:{p:300, it:[['Запись всех разговоров',1],['Чек-лист оценки звонка',2],['Еженедельный разбор звонков с руководителем',3],['Обратная связь менеджерам и план роста',1]]},
+    plan: {p:300, it:[['Расчёт плана от цели компании',2],['План на каждого продавца по этапам',2],['Ежедневный план-факт на 15 минут',2],['Еженедельный разбор отклонений',1]]},
+    rop:  {p:450, it:[['Профиль и тест руководителя продаж',1],['Конкурсный отбор кандидатов',3],['Ввод в должность за 30 дней',2],['Передача ему плана, разборов и отчётов',1]],
+           grow:[['Оценка продавцов по звонкам и цифрам',2],['Выбор будущего руководителя из своих',1],['Программа роста до руководителя на 30 дней',3],['Передача ему плана, разборов и отчётов',1]]},
+    motiv:{p:300, it:[['Схема дохода от результата, а не от оклада',3],['Расчёт под маржу компании',1],['Премия за ключевые действия',1],['Запуск схемы и разъяснение отделу',1]]},
+    owner:{p:350, it:[['Список сделок, которые остаются у собственника',1],['Регламент передачи сделок отделу',2],['Сопровождение первых передач',2],['Контроль качества без участия собственника',1]]},
+    traffic:{p:350, it:[['Задача маркетингу в цифрах: заявки, цена, качество',2],['Портфель каналов под мощность отдела',2],['Сквозная аналитика каналов до оплаты',2],['Еженедельный ритм перераспределения бюджета',1]]},
+    qual: {p:300, it:[['Портрет целевого клиента',2],['Квалифицирующие вопросы в форме и на входе',1],['Критерии «не наш клиент»',1],['Обратная связь продаж маркетингу раз в неделю',1]]},
+    trust:{p:250, it:[['Кейсы и отзывы в каждой продаже',2],['Гарантии и условия возврата',1],['Материалы для сомневающегося клиента',1],['Экспертность в разговоре и на сайте',1]]},
+    load: {p:300, it:[['Профиль продавца и тестовое задание',1],['Конкурсный отбор продавцов',3],['Адаптация новичка за 30 дней',2],['План выхода на выработку',1]],
+           grow:[['Оценка текущих продавцов по звонкам',2],['Распределение заявок по силе продавцов',2],['Разгрузка от низкоценных задач',1],['План роста выработки каждого',1]]},
+    admin:{p:250, it:[['Список рутины, которую снимаем с продавцов',1],['Помощник или автоматизация документов',3],['Шаблоны договоров и счетов',1],['Контроль доли времени на продажи',1]]},
+    price:{p:300, it:[['Анализ прайса и пакетов',2],['Новая структура пакетов',2],['План повышения цены без потери спроса',2],['Контроль чека и конверсии после изменения',1]]},
+    base: {p:250, it:[['Ответственный за клиентскую базу',1],['Сегментация базы по ценности',2],['Календарь повторных касаний',2],['Отчёт по повторным продажам',1]]},
+    who:  {p:150, it:[['Выделенный человек и его KPI',1],['Чистка и актуализация базы',1],['Доступы к данным клиентов',1]]},
+    reason:{p:250, it:[['Поводы для второй покупки',2],['Допродажи и сопутствующие предложения',2],['Предложение «вернитесь к нам»',1],['Тест и замер работающих поводов',1]]},
+    rreg: {p:150, it:[['Регламент повторного касания',1],['Передача клиента из продаж в сервис',1],['Сроки и каналы повторных предложений',1]]}
+  },
+  BASE_IT: [['Еженедельный план-факт с собственником',2],['Приёмка каждой волны по метрике',2],['Ежемесячный отчёт о деньгах',1]],
+  r50(v){ return Math.round(v / 50000) * 50000; },
+  // Делим цену по весам, округляя до 10 тысяч; остаток уходит в самую крупную работу
+  split(price, items){
+    const w = items.reduce((t, i) => t + i.w, 0);
+    items.forEach(i => { i.price = Math.max(10000, Math.round(price * i.w / w / 10000) * 10000); });
+    const big = items.reduce((a, b) => b.price > a.price ? b : a, items[0]);
+    big.price = Math.max(10000, big.price + price - items.reduce((t, i) => t + i.price, 0));
+    return items;
+  },
   // Сначала что строим, потом цена, потом окупаемость: цена в заголовке читалась как ценник без предмета
   title(O){
-    const n = O.lines.length, w = ['', 'одну', 'две', 'три', 'четыре', 'пять'][n] || n;
-    return `За ${this.WEEKS} недель строим ${w} ${Fx.plural(n, 'систему', 'системы', 'систем')} бизнеса`;
+    const n = O.lines.length, w = ['', 'одну', 'две', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять'][n] || n;
+    return `За ${this.WEEKS} недель закрываем ${w} ${Fx.plural(n, 'течь', 'течи', 'течей')}`;
   },
   // Окупается до конца третьего месяца — то есть за время самого проекта
   quick(O){ return O.payback != null && O.payback <= this.MONTHS; },
   months(v){ return Fx.qty(Math.round(v * 10) / 10, 'месяц', 'месяца', 'месяцев', 'месяца'); },
   lead(O){
     const E = O.econ;
-    return `Сейчас бизнес недополучает ${Fx.mln(E.lossYear)} валовой прибыли в год. Ниже по каждой системе из раздела «Что делать»: что меняем, по какой метрике принимаете работу и цена. Расчётный возврат при достижении целевых показателей — ${Fx.mln(E.y1)} за первый год, ${this.quick(O) ? 'вложение окупается за время самого проекта' : O.result && O.result <= 12 ? `вложение равно ${this.months(O.result)} результата системы` : 'окупаемость на горизонте нескольких лет'}.`;
+    return `Сейчас бизнес недополучает ${Fx.mln(E.lossYear)} валовой прибыли в год. Ниже самые крупные течи по порядку, у каждой своя цена. Нажмите на течь, чтобы увидеть, из чего она состоит. После 90 дней система возвращает около ${Fx.money(O.run)} в месяц${O.payback ? `, вложение окупается за ${this.payback(O)}` : ''}.`;
   },
   // Экономика вложения из разгона Ledger: первый год по волнам, дальше результат держится на уровне 90 дней, без роста.
   // Возврат — после новых расходов системы, окупаемость считается по накопленному возврату, а не делением цены на месяц
@@ -4340,32 +4420,51 @@ const Offer = {
     if (O.payback < 1){ const w = Math.max(1, Math.round(O.payback * 52 / 12)); return `${w} ${Fx.plural(w, 'неделю', 'недели', 'недель')}`; }
     return Fx.qty(Math.round(O.payback * 10) / 10, 'месяц', 'месяца', 'месяцев', 'месяца');
   },
-  build(L, any){
+  build(L){
     if (!L || !(L.lossMo > 0)) return null;
-    const S = Systems.build(L);
-    const big = S.filter((s, i) => i < 1 || s.loss >= L.lossMo * .08), rest = S.filter(s => !big.includes(s));
-    const ppl = Systems.people(L);
-    const raw = this.BASE + big.reduce((t, s) => t + this.W[s.id], 0), T = this.tier(L);
+    const grow = State.answers.team_plan === 'grow';
+    const T = this.tier(L), ppl = Systems.people(L), SYS = Systems.build(L);
+    // Рычаги ведомости сводим по id: CRM на повторных продажах — это база клиентов
+    const by = new Map();
+    L.D.forEach(d => { const k = d.id === 'crm' && d.stage === 'repeat' ? 'base' : d.id; by.set(k, (by.get(k) || 0) + d.gain); });
+    let M = this.MACRO.map(m => {
+      const ds = m.ids.filter(id => by.has(id) && this.DRV[id]).sort((p, q) => by.get(q) - by.get(p));
+      if (!ds.length) return null;
+      return {id: m.id, t: m.t, ds, loss: ds.reduce((t, id) => t + by.get(id), 0), raw: ds.reduce((t, id) => t + this.DRV[id].p, 0) * 1000};
+    }).filter(Boolean).sort((p, q) => q.loss - p.loss);
+    // Редкий случай: рычаги есть, но ни один не попал в течи. Предложение всё равно выводим одной строкой
+    if (!M.length) M = [{id: 'all', t: 'Коммерческий блок: сквозная настройка', ds: [], loss: L.lossMo, raw: 600000}];
+    const raw = this.BASE + M.reduce((t, m) => t + m.raw, 0);
     // Платёж месяца круглый, шаг 50 тысяч: три платежа по 600 тыс ₽ читаются как цена, 567 тыс — как расчёт
     const monthly = Math.min(T.max / this.MONTHS, Math.max(this.MIN / this.MONTHS, Math.round(raw * T.k / this.MONTHS / 50000) * 50000));
-    const total = monthly * this.MONTHS;
-    const k = total / raw;
-    const used = new Set();
-    const lines = big.map(s => ({id: s.id, name: s.name, title: s.title, does: this.does(s, used), metric: s.metric, loss: s.loss, price: this.r10(this.W[s.id] * k)}));
-    const base = {name: 'Ведение проекта', title: `${this.WEEKS} недель с собственником`,
+    const total = monthly * this.MONTHS, k = total / raw;
+    const prices = M.map(m => Math.max(150000, this.r50(m.raw * k)));
+    // Ведение — остаток до итога, но не меньше 150 тысяч: лишнее снимаем с самой дорогой течи
+    let basePrice = total - prices.reduce((t, v) => t + v, 0);
+    for (let g = 0; basePrice < 150000 && g < 40; g++){
+      const i = prices.indexOf(Math.max(...prices)); prices[i] -= 50000; basePrice += 50000;
+    }
+    const first = new Set();
+    const lines = M.map((m, i) => {
+      const items = this.split(prices[i], m.ds.flatMap(id => (grow && this.DRV[id].grow || this.DRV[id].it).map(x => ({t: x[0], w: x[1]}))));
+      // Метрика приёмки показывается один раз на систему: у соседних течей она общая
+      const sid = m.ds.length ? Systems.OF[m.ds[0]] || (m.ds[0] === 'base' ? 'econ' : 'sales') : null;
+      const sys = sid && !first.has(sid) ? SYS.find(s => s.id === sid) : null;
+      if (sys) first.add(sid);
+      return {id: m.id, name: `Течь ${i + 1}`, title: m.t, items, loss: m.loss, price: prices[i], metric: sys ? sys.metric : null,
+        does: items.slice(0, 3).map((x, j) => j ? x.t.charAt(0).toLowerCase() + x.t.slice(1) : x.t).join(', ') + ' и другое.'};
+    });
+    const base = {name: 'Ведение проекта', title: `${this.WEEKS} недель с собственником`, price: basePrice,
       does: 'Еженедельный план-факт, приёмка каждой волны по метрике, отчёт о деньгах раз в месяц.' +
-        (rest.length ? ` Сюда же входит ${rest.map(s => Systems.NAME[s.id].toLowerCase()).join(' и ')}: закрывается вместе с системами выше.` : '') +
         (ppl.length ? ` Постановка задачи и отбор: ${ppl.map(p => p.role.toLowerCase()).join(', ')}.` : ''),
-      price: total - lines.reduce((t, l) => t + l.price, 0)};
+      items: this.split(basePrice, this.BASE_IT.map(x => ({t: x[0], w: x[1]})))};
     const d = State.answers._date ? new Date(State.answers._date + 'T00:00:00') : new Date();
     const until = new Date(d.getTime() + this.DAYS * 864e5);
     const econ = this.econ(L, total);
-    // Цену не снижаем. Вложение сверяем с результатом системы: цена ÷ возврат в месяц после 90 дней, без разгона.
-    // Накопленная окупаемость от старта на это не годится: первая волна почти всегда без денег, и проект за два месяца
-    // результата выпадал. КП выводим всегда, пока есть потери: собственник, который теряет деньги, должен видеть цену решения.
+    // КП выводим всегда, пока есть потери: собственник, который теряет деньги, должен видеть цену решения.
     // Сколько месяцев результата стоит проект, пишем в тексте как есть
-    const result = L.ramp[11].net > 0 ? total / L.ramp[11].net : null;
-    return {total, monthly, base, lines, rest, ppl, tier: T, econ, result,
+    const run = L.ramp[11].net, result = run > 0 ? total / run : null;
+    return {total, monthly, base, lines, rest: [], ppl, tier: T, econ, result, run,
       payback: econ.pay,
       until: until.toLocaleDateString('ru-RU', {day: 'numeric', month: 'long'})};
   }
@@ -5408,7 +5507,6 @@ const Final = {
       ${cash}
       <div class="fx-method">
         <p>Потенциал этапа собран из практик, которых сейчас нет. Вклад каждой — оценка по опыту внедрений, её проверяет метрика из плана. Сумма не больше ${Fx.pct(Ledger.GP_CAP)} валовой прибыли в год.${L.capHit ? ` У вас этот потолок сработал: ещё ${L.dropped.n} ${Fx.plural(L.dropped.n, 'рычаг', 'рычага', 'рычагов')} на ${Fx.money(L.dropped.sum)} в месяц в расчёт не вошли, реальный потенциал выше.` : ''} Возврат за 90 дней ограничен мощностью отдела${L.capCut < 1 ? ', у вас она его урезала' : ''}.${L.marginAssumed ? ' Маржа не указана и принята 30%: уточните её, суммы пересчитаются.' : ''}</p>
-        <div class="fx-override"><span>${Profile.hasOverride() ? 'Потолок конверсии из заявки в оплату — ваша цифра по нише' : `Потенциал конверсии из заявки в оплату в этом расчёте — ${Fx.pct(L.P.conv)}. Для вашей ниши реально другое?`}</span><input id="fxOvr" type="text" inputmode="numeric" autocomplete="off" maxlength="2" value="${Profile.hasOverride() ? p.convTarget : Math.round(L.P.conv * 100)}" data-auto="${Profile.hasOverride() ? '' : Math.round(L.P.conv * 100)}" aria-label="Потолок конверсии из заявки в оплату, %"><span>%</span>${Profile.hasOverride() ? '<button id="fxOvrReset" type="button">вернуть расчётный</button>' : ''}<small>${Profile.hasOverride() ? `Выше этой цифры воронка в расчёте не растёт: сейчас ${L.conv}%, потенциал ${Fx.pct(L.P.conv)}. Ведомость, план и деньги пересчитаны.` : 'Поставьте свою цифру: потенциал воронки упрётся в неё, и весь отчёт пересчитается сразу.'}</small></div>
       </div>`);
   },
 
@@ -5850,11 +5948,14 @@ const Final = {
     const title = O ? Offer.title(O) : 'Следующий шаг — старт внедрения';
     const lead = O ? Offer.lead(O)
       : 'Отчёт заканчивается решением. Состав работ и метрику приёмки фиксируем по итогам МРТ и записываем в договор.';
-    const row = l => `<div class="fx-kp-r">
-        <div><span class="fx-k">${l.name}</span><b>${l.title}</b></div>
-        <div><p>${l.does}</p>${l.metric ? `<div class="fx-sc-mt">${l.metric[0]}: ${l.metric[1]}<i>→</i><b>${l.metric[2]}</b></div>` : ''}</div>
-        <div class="fx-kp-p">${Fx.money(l.price)}</div>
-      </div>`;
+    const yr = v => v >= 1e6 ? Fx.mln(v) : Fx.money(v);
+    const row = l => {
+      const head = `<div><span class="fx-k">${l.name}${l.loss ? ` · теряется ${yr(l.loss * 12)} в год` : ''}</span><b>${l.title}</b></div>
+        <div><p>${l.does}</p>${l.metric ? `<div class="fx-sc-mt">${l.metric[0]}: ${l.metric[1]}<i>→</i><b>${l.metric[2]}</b></div>` : ''}<span class="fx-leak-more">Из чего состоит · ${l.items.length} ${Fx.plural(l.items.length, 'работа', 'работы', 'работ')}</span></div>
+        <div class="fx-kp-p">${Fx.money(l.price)}</div>`;
+      return `<details class="fx-leak"><summary class="fx-kp-r">${head}</summary>
+        <ul class="fx-leak-items">${l.items.map(i => `<li><span>${i.t}</span><b>${Fx.money(i.price)}</b></li>`).join('')}</ul></details>`;
+    };
     const kp = O ? `<div class="fx-kp">
         ${O.lines.map(row).join('')}
         ${row(O.base)}
@@ -5867,8 +5968,8 @@ const Final = {
     const econ = O ? `<div class="fx-sub" style="margin-top:48px">Окупаемость</div>
       <div class="fx-kpis fx-kpis-inv">
         ${tile('Вложение', Fx.mln(O.total), `три платежа по ${Fx.money(O.monthly)}`)}
-        ${O.payback ? tile('Окупается за', Offer.payback(O), Offer.quick(O) ? 'за время самого проекта' : `от старта, с разгоном${O.result && O.result <= 12 ? `; вложение — ${Offer.months(O.result)} результата` : ''}`) : tile(`За ${Offer.YEARS} года`, sg(O.econ.y3), 'при удержании результата', O.econ.y3 > 0 ? 'fx-green' : 'fx-red')}
-        ${tile('Возврат за первый год', sg(O.econ.y1), 'с учётом разгона по волнам', O.econ.y1 > 0 ? 'fx-green' : 'fx-red')}
+        ${tile('Возврат в месяц', '+' + Fx.money(O.run), `после 90 дней, из ${Fx.money(L.lossMo)} потерь в месяц`, 'fx-green')}
+        ${O.payback ? tile('Окупается за', Offer.payback(O), Offer.quick(O) ? 'за время самого проекта' : 'от старта проекта, с учётом разгона') : tile(`За ${Offer.YEARS} года`, sg(O.econ.y3), 'при удержании результата', O.econ.y3 > 0 ? 'fx-green' : 'fx-red')}
         ${tile(R.k, R.v, R.s, O.econ.roi1 >= .1 ? 'fx-green' : O.econ.roi3 > 0 ? '' : 'fx-red')}
       </div>
       <div style="margin-top:36px">${Offer.svg(O, L)}</div>
@@ -6012,7 +6113,7 @@ const Final = {
       say:`Сначала предмет, потом цена, потом окупаемость. Строки сверху вниз: система → что делаем → метрика → цена. Итог назвать один раз: ${Fx.mln(OF.total)}. Сразу следом: «${OF.payback ? `Окупается за ${Offer.payback(OF)}${Offer.quick(OF) ? ' — пока идёт сам проект' : ''}. ` : ''}За первый год расчётно ${Fx.mln(OF.econ.y1)}, это ${Offer.roi(OF).v} на вложение». Показать график: где зелёная линия пересекает вложение. И замолчать.`,
       ask:`«Ближайший старт — понедельник, ${mon}. Фиксируем?» И молчать, пока собственник не заговорит.`,
       obj:`«Дорого» — «Дорого относительно чего? Бизнес сейчас недополучает ${Fx.mln(OF.econ.lossYear)} в год. Вложение ${Fx.mln(OF.total)}, расчётно ${Fx.mln(OF.econ.y1)} за первый год${OF.payback ? `, окупается за ${Offer.payback(OF)}` : ''}». И молчать. «Наймём коммерческого директора» — «Директор — расход каждый месяц. Проект — вложение: ${Fx.mln(OF.total)} один раз, ${Offer.roi(OF).v} за ${OF.econ.roi1 >= .1 ? 'первый год' : Offer.YEARS + ' года'}». Не спорить и не сравнивать дальше. «Сами справимся» — «План у вас на руках. Вопрос, кто двенадцать недель каждый день держит ритм, пока идут текущие продажи. Если вы, сколько часов в неделю готовы отдать?» «Подумаю» — «Что должно быть правдой, чтобы вы сказали да сегодня? Разберём сейчас, пока цифры перед глазами». «Скидка» — «Можно убрать строку целиком вместе с её метрикой. Цена строки равна объёму работ и не торгуется».`,
-      more:`Как сложилась цена: ведение ${Fx.money(Offer.BASE)} плюс работы по каждой системе, от ${Fx.money(Offer.W.mkt)} за маркетинг и команду до ${Fx.money(Offer.W.mgmt)} за управление; ${OF.tier.k > 1 ? `объём умножен на ${String(OF.tier.k).replace('.', ',')} за масштаб: выручка ${Fx.mln(L.rev)} в месяц; ` : ''}платёж месяца округлён до 50 тысяч, проект — от ${Fx.money(Offer.MIN)} до ${Fx.money(OF.tier.max)}, ниже не снижаем. Для себя: это ${Fx.pct(OF.total / (L.lossMo * 12), 0)} годового потенциала из ведомости. Вслух процент не называть: иначе цену начнут привязывать к обещанию вернуть сумму.`,
+      more:`Как сложилась цена: ведение плюс ${OF.lines.length} ${Fx.plural(OF.lines.length, 'течь', 'течи', 'течей')}: от ${Fx.money(Math.min(...OF.lines.map(l => l.price)))} до ${Fx.money(Math.max(...OF.lines.map(l => l.price)))}, цена течи складывается из работ внутри неё; ${OF.tier.k > 1 ? `объём умножен на ${String(OF.tier.k).replace('.', ',')} за масштаб: выручка ${Fx.mln(L.rev)} в месяц; ` : ''}платёж месяца округлён до 50 тысяч, проект — от ${Fx.money(Offer.MIN)} до ${Fx.money(OF.tier.max)}, ниже не снижаем. Для себя: это ${Fx.pct(OF.total / (L.lossMo * 12), 0)} годового потенциала из ведомости. Вслух процент не называть: иначе цену начнут привязывать к обещанию вернуть сумму.`,
       next:`«Да» — счёт сегодня, оферта, старт ${mon}, доступы: CRM на чтение, записи звонков, P&L. «Подумаю» — следующий разговор назначить прямо сейчас, в пределах 48 часов, с партнёром. Предложение действует до ${OF.until}.`}
     : {t:'Решение',
       say:'«По цифрам здесь есть работа для нас. Состав и метрику было → цель фиксируем до старта».',
@@ -6464,7 +6565,8 @@ const Report = {
     // ── Предложение ──
     const OF = Offer.build(L);
     if (OF){
-      const kpRow = l => `<tr><td><span class="k">${l.name}</span><b>${l.title}</b></td><td>${l.does}${l.metric ? `<span class="m">${l.metric[0]}: ${l.metric[1]} → ${l.metric[2]}</span>` : ''}</td><td>${Fx.money(l.price)}</td></tr>`;
+      const kpIt = l => l.items ? l.items.slice(0, 5).map(i => i.t).join(' · ') + (l.items.length > 5 ? ` · и ещё ${l.items.length - 5}` : '') : l.does;
+      const kpRow = l => `<tr><td><span class="k">${l.name}</span><b>${l.title}</b></td><td>${kpIt(l)}${l.metric ? `<span class="m">${l.metric[0]}: ${l.metric[1]} → ${l.metric[2]}</span>` : ''}</td><td>${Fx.money(l.price)}</td></tr>`;
       page('ПРЕДЛОЖЕНИЕ', `
         <div class="pr-tag">Предложение</div>
         <div class="pr-title">${Offer.title(OF)}</div>
