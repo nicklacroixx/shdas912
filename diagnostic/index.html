@@ -647,6 +647,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-kpis{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);grid-auto-rows:auto;margin-top:44px;border-top:1px solid var(--rule-2)}
 .fx-kpi{display:grid;grid-template-rows:subgrid;grid-row:span 3;align-content:start;justify-items:center;text-align:center;padding:24px 22px 8px;border-left:1px solid var(--rule);min-width:0}
 .fx-kpi:first-child{border-left:0}
+@media(max-width:560px){.fx-kpis-inv .fx-kpi{padding-inline:8px}.fx-kpis-inv .fx-val{font-size:20px}}
 @supports not (grid-template-rows:subgrid){.fx-kpi{display:block}.fx-kpi .fx-k{min-height:2.9em}}
 .fx-val{font-family:var(--ui);font-weight:600;font-size:clamp(23px,2.4vw,31px);line-height:1.1;letter-spacing:-.01em;white-space:nowrap;display:flex;align-items:center;gap:10px}
 .fx-val small{font-size:.5em;color:var(--ink-3);font-weight:600}
@@ -4242,8 +4243,12 @@ const Systems = {
 // читает её как обещание «верните мне X миллионов». Диапазон проекта —
 // от MIN до MAX, всё ведение входит в базу
 const Offer = {
-  MIN: 1500000, MAX: 1950000, WEEKS: 12, MONTHS: 3, DAYS: 7,
+  MIN: 1500000, WEEKS: 12, MONTHS: 3, DAYS: 7,
   BASE: 500000,
+  // Масштаб компании по выручке в месяц: на 80 млн в каждой системе больше людей, сделок и согласований.
+  // k множит объём работ, max — потолок проекта. Без выручки в ответах берётся выручка по воронке
+  TIERS: [{to: 20e6, k: 1, max: 1950000}, {to: 50e6, k: 1.2, max: 2400000}, {to: Infinity, k: 1.4, max: 3000000}],
+  tier(L){ return this.TIERS.find(t => (L.rev || 0) < t.to); },
   // Цена работ по системе: сколько людей и регламентов меняем руками
   W: {mgmt: 450000, sales: 400000, econ: 350000, team: 300000, mkt: 300000},
   // Состав работ по рычагам, которые МРТ нашёл в системе: ключи — Systems.MOVE
@@ -4263,10 +4268,57 @@ const Offer = {
   },
   r10(v){ return Math.round(v / 10000) * 10000; },
   title(O){
+    if (O.payback) return `Проект за ${Fx.mln(O.total)} окупается за ${this.payback(O)}`;
     const n = O.lines.length, w = ['', 'одна', 'две', 'три', 'четыре', 'пять'][n] || n;
     return `Проект на ${this.WEEKS} недель: ${w} ${Fx.plural(n, 'система', 'системы', 'систем')} бизнеса за ${Fx.money(O.total)}`;
   },
-  LEAD: 'Предложение собрано под ваши потери: каждая система из раздела «Что делать» стала строкой работ с ценой и метрикой приёмки. Цена считается от объёма работ, сумма потерь на неё не влияет. Оплата тремя платежами, каждый месяц принимаете по метрике.',
+  // Подводка начинается с денег собственника: сколько недополучает сейчас и сколько вернёт вложение
+  lead(O){
+    const E = O.econ, n = O.lines.length, w = ['', 'одну', 'две', 'три', 'четыре', 'пять'][n] || n;
+    return `Сейчас бизнес недополучает ${Fx.mln(E.lossYear)} валовой прибыли в год. Проект за ${this.WEEKS} недель строит ${w} ${Fx.plural(n, 'систему', 'системы', 'систем')} из раздела «Что делать»: расчётный возврат при достижении целевых показателей — ${Fx.mln(E.y1)} за первый год с учётом разгона. Цена считается от объёма работ и масштаба компании, каждый месяц принимаете по метрике.`;
+  },
+  // Экономика вложения из разгона Ledger: первый год по волнам, дальше результат держится на уровне 90 дней, без роста.
+  // Возврат — после новых расходов системы, окупаемость считается по накопленному возврату, а не делением цены на месяц
+  YEARS: 3,
+  econ(L, total){
+    const flat = L.ramp[11].net, cum = [];
+    for (let i = 0, t = 0; i < this.YEARS * 12; i++) cum.push(t += i < 12 ? L.ramp[i].net : flat);
+    const k = cum.findIndex(v => v >= total), prev = k > 0 ? cum[k - 1] : 0;
+    const wave = L.byWave.findIndex(v => v > 0);
+    return {cum, lossYear: L.lossMo * 12, y1: cum[11], y3: cum[cum.length - 1],
+      pay: k < 0 ? null : k + (total - prev) / (cum[k] - prev),
+      roi1: cum[11] / total - 1, roi3: cum[cum.length - 1] / total - 1,
+      first: wave < 0 ? null : Ledger.WAVE_ACC[wave + 1]};
+  },
+  // Накопленный возврат против вложения: где кривая пересекает линию — там проект окупился
+  svg(O, L){
+    const E = O.econ, n = E.cum.length, W = 1000, H = 250, top = 34, bot = 40, left = 8, right = 210;
+    const maxV = Math.max(E.y3, O.total) * 1.08, X = i => left + (W - right - left) * i / n, Y = v => top + (H - top - bot) * (1 - Math.max(0, v) / maxV);
+    const pts = [[X(0), Y(0)], ...E.cum.map((v, i) => [X(i + 1), Y(v)])];
+    const line = pts.map((p, i) => `${i ? 'L' : 'M'}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+    let out = `<path d="${line} L${X(n)},${Y(0)} Z" fill="rgba(52,211,153,.10)"/>`;
+    out += `<line x1="0" x2="${X(n)}" y1="${Y(0)}" y2="${Y(0)}" stroke="#2E3D38"/>`;
+    for (let y = 1; y <= this.YEARS; y++){
+      if (y < this.YEARS) out += `<line x1="${X(y * 12)}" x2="${X(y * 12)}" y1="${top - 10}" y2="${Y(0)}" stroke="#2E3D38" stroke-dasharray="2 5"/>`;
+      out += `<text x="${X(y * 12 - 6)}" y="${H - bot + 22}" text-anchor="middle" class="fx-svg-c" style="font-size:13px">${y}-й год</text>`;
+    }
+    out += `<line x1="0" x2="${X(n)}" y1="${Y(O.total)}" y2="${Y(O.total)}" stroke="#8B958E" stroke-dasharray="6 5" stroke-width="1.5"/>`;
+    out += `<text x="${X(n) + 14}" y="${Y(O.total) + 5}" class="fx-svg-c" style="font-size:14px">вложение ${Fx.mln(O.total)}</text>`;
+    out += `<path d="${line}" fill="none" stroke="#34D399" stroke-width="2.5"/>`;
+    out += `<circle cx="${X(12)}" cy="${Y(E.y1)}" r="4" fill="#34D399"/><text x="${X(12) - 12}" y="${Y(E.y1) - 12}" text-anchor="end" class="fx-svg-v" fill="#34D399">+${Fx.mln(E.y1)} за год</text>`;
+    out += `<circle cx="${X(n)}" cy="${Y(E.y3)}" r="4" fill="#34D399"/><text x="${X(n) + 14}" y="${Y(E.y3) + 5}" class="fx-svg-v" fill="#34D399">+${Fx.mln(E.y3)} за ${this.YEARS} года</text>`;
+    if (E.pay) out += `<circle cx="${X(E.pay)}" cy="${Y(O.total)}" r="5" fill="none" stroke="#34D399" stroke-width="2"/><text x="${X(E.pay)}" y="${Y(O.total) - 14}" text-anchor="middle" class="fx-svg-c" style="font-size:13px">окупился</text>`;
+    return `<svg class="fx-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Накопленный расчётный возврат против вложения за ${this.YEARS} года">${out}</svg>`;
+  },
+  NOTE(O, L){
+    return `Накопленный расчётный возврат валовой прибыли после новых расходов системы, по месяцам от старта. Первый год идёт с разгоном: деньги появляются после приёмки каждой волны${O.econ.first ? `, первые — с ${O.econ.first}-й недели` : ''}. Дальше результат держится на уровне 90 дней, рост не закладываем.${L.delay3 > 0 ? ` Каждая неделя отсрочки сдвигает кривую вправо и стоит ${Fx.money(L.weekDelay)}.` : ''}`;
+  },
+  // Доходность первого года; если год не окупает вложение — показываем три года
+  roi(O){
+    const E = O.econ, y = E.roi1 >= .1 ? 1 : this.YEARS, r = y === 1 ? E.roi1 : E.roi3, per = r + 1;
+    return {k: y === 1 ? 'Доходность за первый год' : `Доходность за ${this.YEARS} года`, v: `${r > 0 ? '+' : Fx.M}${Fx.pct(Math.abs(r), 0)}`,
+      s: `вложенный рубль возвращает ${Fx.dec(per, 1)} ₽${y === 1 ? ' за год' : ''}`};
+  },
   // Меньше месяца — в неделях: «0,3 месяца» читается как вычисление
   payback(O){
     if (!O.payback) return '';
@@ -4278,9 +4330,9 @@ const Offer = {
     const S = Systems.build(L);
     const big = S.filter((s, i) => i < 1 || s.loss >= L.lossMo * .08), rest = S.filter(s => !big.includes(s));
     const ppl = Systems.people(L);
-    const raw = this.BASE + big.reduce((t, s) => t + this.W[s.id], 0);
+    const raw = this.BASE + big.reduce((t, s) => t + this.W[s.id], 0), T = this.tier(L);
     // Платёж месяца круглый, шаг 50 тысяч: три платежа по 600 тыс ₽ читаются как цена, 567 тыс — как расчёт
-    const monthly = Math.min(this.MAX / this.MONTHS, Math.max(this.MIN / this.MONTHS, Math.round(raw / this.MONTHS / 50000) * 50000));
+    const monthly = Math.min(T.max / this.MONTHS, Math.max(this.MIN / this.MONTHS, Math.round(raw * T.k / this.MONTHS / 50000) * 50000));
     const total = monthly * this.MONTHS;
     const k = total / raw;
     const used = new Set();
@@ -4292,8 +4344,9 @@ const Offer = {
       price: total - lines.reduce((t, l) => t + l.price, 0)};
     const d = State.answers._date ? new Date(State.answers._date + 'T00:00:00') : new Date();
     const until = new Date(d.getTime() + this.DAYS * 864e5);
-    return {total, monthly, base, lines, rest, ppl,
-      payback: L.recMo > 0 ? total / L.recMo : null,
+    const econ = this.econ(L, total);
+    return {total, monthly, base, lines, rest, ppl, tier: T, econ,
+      payback: econ.pay,
       until: until.toLocaleDateString('ru-RU', {day: 'numeric', month: 'long'})};
   }
 };
@@ -5776,7 +5829,7 @@ const Final = {
     const bring = [a.has_crm === 'yes' ? 'выгрузку сделок из CRM за 3 месяца' : 'таблицу или переписку по сделкам за 3 месяца',
       a.call_records === 'yes' ? '5 записей звонков' : null, 'текущую схему мотивации продавцов'].filter(Boolean);
     const title = O ? Offer.title(O) : 'Следующий шаг — старт внедрения';
-    const lead = O ? Offer.LEAD
+    const lead = O ? Offer.lead(O)
       : 'Отчёт заканчивается решением. Состав работ и метрику приёмки фиксируем по итогам МРТ и записываем в договор.';
     const row = l => `<div class="fx-kp-r">
         <div><span class="fx-k">${l.name}</span><b>${l.title}</b></div>
@@ -5788,8 +5841,19 @@ const Final = {
         ${row(O.base)}
         <div class="fx-kp-r fx-kp-t"><div><span class="fx-k">Итого · ${Offer.WEEKS} недель</span><b>Три платежа по ${Fx.money(O.monthly)}</b></div><div></div><div class="fx-kp-p">${Fx.money(O.total)}</div></div>
       </div>` : '';
+    const tile = (k, v, s2, cls = '') => `<div class="fx-kpi"><span class="fx-k">${k}</span><div class="fx-val ${cls}">${v}</div><div class="fx-s">${s2}</div></div>`;
+    const R = O && Offer.roi(O);
+    const econ = O ? `<div class="fx-kpis fx-kpis-inv">
+        ${tile('Вложение', Fx.mln(O.total), `три платежа по ${Fx.money(O.monthly)}`)}
+        ${tile('Возврат за первый год', '+' + Fx.mln(O.econ.y1), 'с учётом разгона по волнам', 'fx-green')}
+        ${tile(`За ${Offer.YEARS} года`, '+' + Fx.mln(O.econ.y3), 'при удержании результата, без роста', 'fx-green')}
+        ${tile(R.k, R.v, R.s, 'fx-green')}
+      </div>
+      <div style="margin-top:36px">${Offer.svg(O, L)}</div>
+      <p class="fx-note">${Offer.NOTE(O, L)}</p>
+      <div class="fx-sub" style="margin-top:44px">Состав работ и цена</div>` : '';
     return this.sec('decision', no, O ? 'Предложение' : 'Решение', title, lead,
-      `${kp}
+      `${econ}${kp}
       <div class="fx-steps"${O ? ' style="margin-top:40px"' : ''}>
         <div class="fx-stp"><span class="fx-sn">Шаг 1</span><h5>Состав</h5><p>${O ? 'Подтверждаем системы и метрики приёмки из этого предложения.' : 'Берём самую дорогую потерю из ведомости и фиксируем метрику: было → цель.'}</p></div>
         <div class="fx-stp"><span class="fx-sn">Шаг 2</span><h5>Договор</h5><p>Оферта с NDA, составом работ, метриками и условием возврата. Первый платёж — до старта.</p></div>
@@ -5807,10 +5871,8 @@ const Final = {
           <div class="fx-sub" style="margin-top:28px">Подготовьте к старту</div>
           <p class="fx-note" style="margin:0">${Fx.cap(bring.join(', '))}. По ним в первые две недели подтверждаем ведомость.</p>
         </div>
-        ${L ? `<div class="fx-econ">
-          ${O ? `<div><span>Проект, ${Offer.WEEKS} недель</span><b>${Fx.money(O.total)}</b></div>` : ''}
+        ${L && !O ? `<div class="fx-econ">
           <div><span>Вернуть за 90 дней</span><b class="fx-green">+${Fx.money(L.recMo)} в месяц</b></div>
-          ${O && O.payback ? `<div><span>Проект окупается при расчётном возврате за</span><b>${Offer.payback(O)}</b></div>` : ''}
           ${L.delay3 > 0 ? `<div><span>Каждая неделя отсрочки</span><b class="fx-red">${Fx.M}${Fx.money(L.weekDelay)}</b></div>` : ''}
         </div>` : ''}
       </div>
@@ -5925,10 +5987,10 @@ const Final = {
     // Ближайший понедельник от дня встречи: старт называется датой, а не «скоро»
     const mon = (() => { const d = new Date(); d.setDate(d.getDate() + ((8 - d.getDay()) % 7 || 7)); return d.toLocaleDateString('ru-RU', {day:'numeric', month:'long'}); })();
     N.decision = OF ? {t:'Предложение',
-      say:`«Мы собрали предложение под ваши потери: ${Fx.qty(OF.lines.length, 'система', 'системы', 'систем')}, ${Offer.WEEKS} недель, ${Fx.money(OF.total)}, три платежа по ${Fx.money(OF.monthly)}. Каждую строку принимаете по метрике». Пройти строки сверху вниз: система → что делаем → метрика → цена. Итог назвать один раз и замолчать.`,
+      say:`Начать с денег, потом состав. «Вы недополучаете ${Fx.mln(OF.econ.lossYear)} в год. Вложение ${Fx.mln(OF.total)}, за первый год расчётно ${Fx.mln(OF.econ.y1)}, это ${Offer.roi(OF).v}${OF.payback ? `, окупается за ${Offer.payback(OF)}` : ''}». Показать график: где зелёная линия пересекает вложение. Потом строки сверху вниз: система → что делаем → метрика → цена. Итог назвать один раз и замолчать.`,
       ask:`«Ближайший старт — понедельник, ${mon}. Фиксируем?» И молчать, пока собственник не заговорит.`,
-      obj:`«Дорого» — «${OF.payback ? `При расчётном возврате проект окупается за ${Offer.payback(OF)}, ` : ''}${L.delay3 > 0 ? `неделя отсрочки стоит ${Fx.money(L.weekDelay)}. ` : ''}Метрика месяца не дойдёт до цели — оплату месяца вернём». «Сами справимся» — «План у вас на руках. Вопрос, кто двенадцать недель каждый день держит ритм, пока идут текущие продажи. Если вы, сколько часов в неделю готовы отдать?» «Подумаю» — «Что должно быть правдой, чтобы вы сказали да сегодня? Разберём сейчас, пока цифры перед глазами». «Скидка» — «Можно убрать строку целиком вместе с её метрикой. Цена строки равна объёму работ и не торгуется».`,
-      more:`Как сложилась цена: ведение ${Fx.money(Offer.BASE)} плюс работы по каждой системе, от ${Fx.money(Offer.W.mkt)} за маркетинг и команду до ${Fx.money(Offer.W.mgmt)} за управление; платёж месяца округлён до 50 тысяч, проект — от ${Fx.money(Offer.MIN)} до ${Fx.money(Offer.MAX)}. Для себя: это ${Fx.pct(OF.total / (L.lossMo * 12), 0)} годового потенциала из ведомости. Вслух процент не называть: иначе цену начнут привязывать к обещанию вернуть сумму.`,
+      obj:`«Дорого» — «Дорого относительно чего? Бизнес сейчас недополучает ${Fx.mln(OF.econ.lossYear)} в год. Вложение ${Fx.mln(OF.total)}, расчётно ${Fx.mln(OF.econ.y1)} за первый год${OF.payback ? `, окупается за ${Offer.payback(OF)}` : ''}». И молчать. «Наймём коммерческого директора» — «Директор — расход каждый месяц. Проект — вложение: ${Fx.mln(OF.total)} один раз, ${Offer.roi(OF).v} за ${OF.econ.roi1 >= .1 ? 'первый год' : Offer.YEARS + ' года'}». Не спорить и не сравнивать дальше. «Сами справимся» — «План у вас на руках. Вопрос, кто двенадцать недель каждый день держит ритм, пока идут текущие продажи. Если вы, сколько часов в неделю готовы отдать?» «Подумаю» — «Что должно быть правдой, чтобы вы сказали да сегодня? Разберём сейчас, пока цифры перед глазами». «Скидка» — «Можно убрать строку целиком вместе с её метрикой. Цена строки равна объёму работ и не торгуется».`,
+      more:`Как сложилась цена: ведение ${Fx.money(Offer.BASE)} плюс работы по каждой системе, от ${Fx.money(Offer.W.mkt)} за маркетинг и команду до ${Fx.money(Offer.W.mgmt)} за управление; ${OF.tier.k > 1 ? `объём умножен на ${String(OF.tier.k).replace('.', ',')} за масштаб: выручка ${Fx.mln(L.rev)} в месяц; ` : ''}платёж месяца округлён до 50 тысяч, проект — от ${Fx.money(Offer.MIN)} до ${Fx.money(OF.tier.max)}. Для себя: это ${Fx.pct(OF.total / (L.lossMo * 12), 0)} годового потенциала из ведомости. Вслух процент не называть: иначе цену начнут привязывать к обещанию вернуть сумму.`,
       next:`«Да» — счёт сегодня, оферта, старт ${mon}, доступы: CRM на чтение, записи звонков, P&L. «Подумаю» — следующий разговор назначить прямо сейчас, в пределах 48 часов, с партнёром. Предложение действует до ${OF.until}.`}
     : {t:'Решение',
       say:'«По цифрам здесь есть работа для нас. Состав и метрику было → цель фиксируем до старта».',
@@ -6366,13 +6428,28 @@ const Report = {
 
     // ── Предложение ──
     const OF = Offer.build(L);
+    if (OF){
+      const R = Offer.roi(OF), st = (k, v, s2, c = '') => `<div class="pr-stat ${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${s2}</div></div>`;
+      page('ПРЕДЛОЖЕНИЕ', `
+        <div class="pr-tag">Предложение</div>
+        <div class="pr-title">${Offer.title(OF)}</div>
+        <div class="pr-lede">${Offer.lead(OF)}</div>
+        <div class="pr-x-kpis">
+          ${st('Вложение', Fx.mln(OF.total), `три платежа по ${Fx.money(OF.monthly)}`)}
+          ${st('Первый год', '+' + Fx.mln(OF.econ.y1), 'с учётом разгона', 'good')}
+          ${st(`За ${Offer.YEARS} года`, '+' + Fx.mln(OF.econ.y3), 'без роста', 'good')}
+          ${st(R.k, R.v, R.s, 'good')}
+        </div>
+        ${Offer.svg(OF, L)}
+        <div class="pr-callout">${Offer.NOTE(OF, L)}</div>`);
+    }
     const kpRow = l => `<tr><td><span class="k">${l.name}</span><b>${l.title}</b></td><td>${l.does}${l.metric ? `<span class="m">${l.metric[0]}: ${l.metric[1]} → ${l.metric[2]}</span>` : ''}</td><td>${Fx.money(l.price)}</td></tr>`;
     page(OF ? 'ПРЕДЛОЖЕНИЕ' : 'СЛЕДУЮЩИЙ ШАГ', `
       <div class="pr-tag">${OF ? 'Предложение' : 'Решение'}</div>
-      <div class="pr-title">${OF ? Offer.title(OF) : 'Следующий шаг — старт внедрения'}</div>
-      <div class="pr-lede">${OF ? Offer.LEAD : 'Состав работ и метрику приёмки фиксируем по итогам МРТ и записываем в договор.'}</div>
+      <div class="pr-title">${OF ? 'Состав работ и цена' : 'Следующий шаг — старт внедрения'}</div>
+      <div class="pr-lede">${OF ? 'Каждая система из раздела «Что делать» — строка работ с ценой и метрикой приёмки. Строки и метрики записываются в договор.' : 'Состав работ и метрику приёмки фиксируем по итогам МРТ и записываем в договор.'}</div>
       ${OF ? `<table class="pr-x-kp">${OF.lines.map(kpRow).join('')}${kpRow(OF.base)}
-        <tr class="t"><td><span class="k">Итого · ${Offer.WEEKS} недель</span><b>Три платежа по ${Fx.money(OF.monthly)}</b></td><td>${[OF.payback ? `Проект окупается при расчётном возврате за ${Offer.payback(OF)}.` : '', L && L.delay3 > 0 ? `Каждая неделя отсрочки — <b style="color:var(--pr-bad)">${Fx.M}${Fx.money(L.weekDelay)}</b>.` : ''].filter(Boolean).join(' ')}</td><td>${Fx.money(OF.total)}</td></tr></table>` : ''}
+        <tr class="t"><td><span class="k">Итого · ${Offer.WEEKS} недель</span><b>Три платежа по ${Fx.money(OF.monthly)}</b></td><td>${OF.payback ? `Окупается за ${Offer.payback(OF)}, за первый год расчётно <b style="color:var(--pr-accent)">+${Fx.mln(OF.econ.y1)}</b>.` : ''}</td><td>${Fx.money(OF.total)}</td></tr></table>` : ''}
       <div class="pr-x-steps" style="margin-top:14px">
         <div><b>1 · Состав</b><p>${OF ? 'Подтверждаем системы и метрики приёмки из этого предложения.' : 'Самая дорогая потеря из ведомости и метрика: было → цель.'}</p></div>
         <div><b>2 · Договор</b><p>Оферта с NDA, составом работ, метриками и условием возврата. Первый платёж — до старта.</p></div>
