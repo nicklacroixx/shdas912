@@ -234,7 +234,7 @@ main{counter-reset:sec}
 
 
 /* ── главная v3 (22.10.2026): продаёт регистрацию в кабинете. Шрифт и точность кабинета: Onest, панели как интерфейс, живые кадры
-   разделов в обеих темах. Порядок: обложка, где теряются деньги, платформа, как начать, кто за этим стоит, МРТ полосой, вопросы, финал ── */
+   разделов в обеих темах. Порядок: обложка, где теряются деньги, платформа, Коммерческий МРТ, как начать, кто за этим стоит, вопросы, финал ── */
 :root{--disp:'Onest',system-ui,-apple-system,sans-serif;--cg:clamp(24px,3vw,56px)}
 html[data-theme="light"] .td,html:not([data-theme="light"]) .tl{display:none!important}
 .sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -322,17 +322,99 @@ html:not([data-theme="light"]) .win{box-shadow:0 40px 90px -30px rgba(0,0,0,.75)
 }
 @media(max-width:360px){.stage .rail button:nth-child(5){display:none}}
 
-/* ── где теряются деньги: три ситуации глазами собственника и что кабинет с этим делает ── */
-.lk{list-style:none;border-top:1px solid var(--rule-2)}
-.lk li{display:grid;grid-template-columns:56px minmax(0,1.15fr) minmax(0,1fr);gap:0 var(--cg);padding:30px 0;border-bottom:1px solid var(--rule)}
-.lk .n{font-size:14px;color:var(--ink-4);font-feature-settings:"tnum" 1;padding-top:4px}
-.lk h3{max-width:24ch}
-.lk .t p{margin-top:10px;font-size:16px;line-height:1.6;color:var(--ink-2);max-width:46ch}
-.lk .c{font-size:15px;line-height:1.6;color:var(--ink-2);padding-top:3px}
-.lk .c b{display:inline-flex;align-items:center;gap:7px;font-weight:500;font-size:13px;color:var(--ink);margin-bottom:8px}
-.lk .c b::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--ok)}
-.lk-go{margin-top:30px}
-@media(max-width:860px){.lk li{grid-template-columns:36px minmax(0,1fr)}.lk .c{grid-column:2;margin-top:16px;padding:14px 16px;border-radius:12px;background:var(--paper);border:1px solid var(--rule)}}
+/* ── где теряются деньги: в первой четверти итог примера Техноснаба, в трёх следующих места потерь по пути клиента.
+   Над карточками путь «заявка → разговор → оплата → повторная покупка», разрыв на каждом переходе. Строки карточек
+   выровнены подсеткой. Полосы: у итога три доли, у карточки её доля на той же шкале. На телефоне путь в подписи карточки ── */
+.lk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:var(--cg)}
+.lk-sum{grid-column:1;grid-row:1/span 6;display:flex;flex-direction:column}
+.lk-tot{font-weight:600;font-size:clamp(40px,4vw,60px);letter-spacing:-.045em;line-height:.95;color:var(--loss);white-space:nowrap}
+.lk-tx{margin-top:14px;font-weight:500;font-size:clamp(17px,1.35vw,19px);line-height:1.4;letter-spacing:-.01em;max-width:15em}
+.lk-sum .b{flex:1;display:flex;flex-direction:column;align-items:flex-start}
+.lk-stack{display:flex;gap:3px;width:100%;height:10px;margin-top:clamp(24px,2.4vw,32px)}
+.lk-stack i{flex:var(--w) 1 0;border-radius:2px;background:var(--loss)}
+.lk-sum .note{margin:14px 0 24px;max-width:24ch}
+.lk-sum .more{margin-top:auto}
+.lk-rail{grid-column:2/-1;grid-row:1;display:grid;grid-template-columns:subgrid;margin-bottom:clamp(24px,2.4vw,36px)}
+.lk-hop{position:relative;display:flex;justify-content:space-between;gap:12px;padding-bottom:22px;font-size:13px;font-weight:500;color:var(--ink-2);white-space:nowrap}
+.lk-hop b{font-weight:500}
+.lk-hop::before{content:"";position:absolute;left:0;right:calc(-1*var(--cg));bottom:4px;border-top:1px solid var(--rule-2)}
+.lk-hop:last-child::before{right:0}
+.lk-hop::after,.lk-hop b::after{content:"";position:absolute;left:0;bottom:0;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1.5px solid var(--ink-3)}
+.lk-hop b::after{left:auto;right:0}
+.lk-hop .brk{position:absolute;bottom:-1.5px;left:calc(50% + var(--cg)/2);margin-left:-6px}
+.lk-hop:last-child .brk{left:50%}
+.brk{position:relative;display:block;width:12px;height:12px;background:var(--bg)}
+.brk::before,.brk::after{content:"";position:absolute;top:0;bottom:0;width:1.5px;background:var(--loss);transform:skewX(-24deg)}
+.brk::before{left:3px}.brk::after{right:3px}
+.lk-card{grid-row:2/span 5;display:grid;grid-template-rows:subgrid}
+.lk>.lk-card:nth-child(3){grid-column:2}.lk>.lk-card:nth-child(4){grid-column:3}.lk>.lk-card:nth-child(5){grid-column:4}
+.lk-hm{display:none;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;font-weight:500;color:var(--ink-2)}
+.lk-hm span{position:relative;flex:none;width:44px;display:grid;place-items:center}
+.lk-hm span::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px solid var(--rule-2)}
+.lk-tray{display:grid;align-content:center;padding:clamp(12px,1.2vw,18px);border-radius:16px;background:var(--paper);border:1px solid var(--rule)}
+.lk-card h3{margin-top:24px;max-width:22ch;text-wrap:pretty}
+.lk-m{margin-top:18px;font-weight:600;font-size:clamp(22px,1.8vw,28px);letter-spacing:-.03em;line-height:1.1;color:var(--loss);white-space:nowrap}
+.lk-m small{margin-left:4px;font-weight:400;font-size:15px;letter-spacing:0;color:var(--ink-3)}
+.lk-bar{position:relative;height:6px;margin-top:12px;border-radius:3px;overflow:hidden;background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.lk-bar i{position:absolute;top:0;bottom:0;left:calc(var(--a)*1%);width:calc(var(--w)*1%);border-radius:3px;background:var(--loss)}
+.lk-cap{margin-top:12px;font-size:14px;line-height:1.5;color:var(--ink-3);max-width:30ch;text-wrap:pretty}
+/* полосы растут, когда до них доходит экран */
+.js .lk .rv{opacity:1;transform:none}
+.lk-stack i,.lk-bar i{transform-origin:0 50%;transition:transform 1.1s var(--ease)}
+.js .lk-stack:not(.in) i,.js .lk-bar:not(.in) i{transform:scaleX(0)}
+.lk-stack i:nth-child(2),.lk>.lk-card:nth-child(4) .lk-bar i{transition-delay:.14s}
+.lk-stack i:nth-child(3),.lk>.lk-card:nth-child(5) .lk-bar i{transition-delay:.28s}
+@media(prefers-reduced-motion:reduce){.js .lk-stack:not(.in) i,.js .lk-bar:not(.in) i{transform:none}}
+/* мини-интерфейсы в карточках: заявка, сделка в CRM, клиент */
+.ui{background:var(--bg);border:1px solid var(--rule);border-radius:12px;padding:14px;font-size:13px;line-height:1.4;color:var(--ink-2)}
+html[data-theme="light"] .ui{box-shadow:0 1px 2px color-mix(in srgb,var(--ink) 5%,transparent),0 10px 24px -14px color-mix(in srgb,var(--ink) 18%,transparent)}
+.ui b{font-weight:500;color:var(--ink)}
+.ui-tl p{position:relative;padding-left:20px}
+.ui-tl p::before{content:"";position:absolute;left:0;top:.3em;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink-3);background:var(--bg)}
+.ui-tl b{display:block}
+.ui-tl .gap{margin:4px 0;padding:12px 0 12px 20px;font-weight:500;color:var(--loss)}
+.ui-tl .gap::before{top:0;bottom:0;left:4px;width:0;height:auto;border:0;border-left:1.5px dashed var(--loss);border-radius:0;background:none}
+.ui .hd b{display:block}
+.ui .hd span{display:block;color:var(--ink-3)}
+.stg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;margin-top:12px}
+.stg i{height:4px;border-radius:2px;background:var(--rule-2)}
+.stg i:nth-child(-n+3){background:var(--ink-2)}
+.stg-l{margin-top:6px;font-size:12px;color:var(--ink-3)}
+.mo{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;margin-top:10px}
+.mo i{height:18px;border-radius:3px;border:1px dashed var(--rule-2)}
+.mo i:first-child{border:0;background:var(--ink-2)}
+.kv{margin-top:12px}
+.kv div{padding-top:8px;margin-top:8px;border-top:1px solid var(--rule)}
+.kv dt{font-size:12px;color:var(--ink-3)}
+.kv dd{margin-top:1px;font-weight:500;color:var(--ink)}
+.kv dd.loss{color:var(--loss)}
+@media(max-width:1100px){
+  .lk{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .lk-sum{grid-column:1/-1;grid-row:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:var(--cg);align-items:end;margin-bottom:clamp(40px,5vw,56px)}
+  .lk-sum .b{display:block}
+  .lk-stack{margin-top:0}
+  .lk-sum .note{margin-bottom:20px}
+  .lk-sum .more{margin-top:0}
+  .lk-rail{grid-column:1/-1;grid-row:2}
+  .lk-card{grid-row:3/span 5}
+  .lk>.lk-card:nth-child(3){grid-column:1}.lk>.lk-card:nth-child(4){grid-column:2}.lk>.lk-card:nth-child(5){grid-column:3}
+}
+@media(max-width:860px){
+  .lk{display:flex;flex-direction:column;gap:clamp(48px,9vw,64px)}
+  .lk-sum{display:block;margin:0}
+  .lk-stack{margin-top:24px}
+  .lk-rail{display:none}
+  .lk-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:none;column-gap:var(--cg);align-content:start}
+  .lk>.lk-card>*{grid-column:2}
+  .lk>.lk-card .lk-tray{grid-column:1;grid-row:1/span 6;align-self:start}
+  .lk-hm{display:flex}
+  .lk-card h3{margin-top:0}
+}
+@media(max-width:560px){
+  .lk-card{grid-template-columns:minmax(0,1fr)}
+  .lk>.lk-card>*,.lk>.lk-card .lk-tray{grid-column:1;grid-row:auto}
+  .lk-card h3{margin-top:22px}
+}
 
 /* ── платформа: слева разделы списком, у выбранного ответ; справа окно этого раздела. На телефоне сверху телефон ── */
 .pf{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(28px,4vw,64px);align-items:start}
@@ -385,15 +467,50 @@ html:not([data-theme="light"]) .win{box-shadow:0 40px 90px -30px rgba(0,0,0,.75)
 @media(max-width:900px){.team{grid-template-columns:minmax(0,1fr)}.fd-ph{max-width:440px;width:100%}}
 @media(max-width:480px){.facts li{grid-template-columns:minmax(0,1fr);gap:8px}}
 
-/* ── Коммерческий МРТ одной полосой: что это, цена, запись из кабинета ── */
-.mb{display:grid;grid-template-columns:minmax(0,1.5fr) auto auto;gap:20px clamp(28px,4vw,64px);align-items:center;padding:28px clamp(20px,3vw,36px);border:1px solid var(--rule-2);border-radius:16px;background:var(--paper)}
-.mb .l{font-size:13px;color:var(--ink-3);margin-bottom:6px}
-.mb p{font-size:16px;line-height:1.55;color:var(--ink-2);max-width:56ch}
-.mb p b{color:var(--ink);font-weight:500}
-.mb .pr{font-weight:600;font-size:clamp(24px,2.2vw,30px);letter-spacing:-.03em;white-space:nowrap}
-.mb .pr small{display:block;font-weight:400;font-size:13px;letter-spacing:0;color:var(--ink-3);margin-top:4px}
-@media(max-width:860px){.mb{grid-template-columns:minmax(0,1fr) auto}.mb>:first-child{grid-column:1/-1}}
-@media(max-width:480px){.mb{grid-template-columns:minmax(0,1fr)}}
+/* ── Коммерческий МРТ, сразу после платформы: слева отчёт, который остаётся у собственника, справа четыре цифры и цена.
+   Половины на линии 50% общей сетки. Сумм примера здесь нет, только устройство продукта. На телефоне сначала цифры, потом отчёт ── */
+.mr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--cg)}
+.mr-doc{position:relative;padding-bottom:22px}
+.mr-doc::before,.mr-doc::after{content:"";position:absolute;left:4%;right:4%;bottom:11px;height:80px;border:1px solid var(--rule-2);border-radius:14px;background:var(--paper);z-index:1}
+.mr-doc::after{left:8%;right:8%;bottom:0;z-index:0}
+.mr-sh{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;padding:clamp(22px,2.8vw,40px);border:1px solid var(--rule-2);border-radius:14px;background:var(--bg)}
+html[data-theme="light"] .mr-sh{box-shadow:0 30px 60px -40px color-mix(in srgb,var(--ink) 35%,transparent)}
+.mr-top{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:12px;color:var(--ink-3)}
+.mr-top .logo{font-size:11px;gap:8px}
+.mr-top .logo i{width:7px;height:7px}
+.mr-ttl{margin-top:clamp(28px,3.4vw,48px);font-weight:600;font-size:clamp(24px,2.3vw,34px);letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+.mr-toc-h{margin-top:clamp(24px,2.6vw,36px);font-size:13px;color:var(--ink-3)}
+.mr-toc{list-style:none;margin-top:10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(7,auto);grid-auto-flow:column;column-gap:clamp(16px,2vw,32px);border-top:1px solid var(--rule)}
+.mr-toc li{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.35;color:var(--ink-3)}
+.mr-toc span{flex:none;min-width:2ch;font-size:13px;color:var(--ink-4);font-feature-settings:"tnum" 1}
+.mr-toc .k{font-weight:500;color:var(--ink)}
+.mr-toc .k span{color:var(--ink-3)}
+.mr-toc .k::after{content:"";flex:none;margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.mr-foot{margin-top:auto;padding-top:24px;font-size:13px;color:var(--ink-3)}
+.mr-side{display:flex;flex-direction:column;justify-content:space-between;gap:clamp(40px,4vw,56px)}
+.mr-facts{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,3vw,44px) var(--cg)}
+.mr-facts li{padding-top:18px;border-top:1px solid var(--rule-2)}
+.mr-facts b{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 8px;font-weight:600;font-size:clamp(40px,4vw,60px);letter-spacing:-.045em;line-height:1}
+.mr-facts small{font-weight:500;font-size:clamp(16px,1.3vw,19px);letter-spacing:-.01em;color:var(--ink-2)}
+.mr-facts span{display:block;margin-top:12px;font-size:15px;line-height:1.55;color:var(--ink-2);max-width:28ch;text-wrap:pretty}
+.mr-buy{padding-top:28px;border-top:1px solid var(--rule-2)}
+.mr-pr{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 22px;margin-bottom:24px}
+.mr-pr b{font-weight:600;font-size:clamp(30px,2.8vw,42px);letter-spacing:-.035em;line-height:1;white-space:nowrap}
+.mr-pr span{font-size:15px;line-height:1.5;color:var(--ink-2);max-width:34ch}
+@media(max-width:860px){
+  .mr{grid-template-columns:minmax(0,1fr);row-gap:44px}
+  .mr-side{display:contents}
+  .mr-facts{order:1}.mr-doc{order:2}.mr-buy{order:3}
+}
+@media(max-width:560px){
+  .mr-facts{gap:28px 20px}
+  .mr-facts b{font-size:clamp(32px,10vw,40px)}
+  .mr-facts span{font-size:14px}
+  .mr-toc{column-gap:14px}
+  .mr-toc li{gap:8px;font-size:14px}
+  .mr-pr{flex-direction:column;gap:8px}
+  .mr-buy .go .more{align-self:center}
+}
 
 /* ── финал: слева вопрос и кнопка, справа итог кабинета на телефоне ── */
 .end{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(32px,6vw,120px);align-items:center;padding-top:clamp(100px,10vw,160px);padding-bottom:clamp(80px,8vw,120px)}
@@ -632,6 +749,7 @@ html[data-theme="light"] .intro-word{color:#111110}
     <a class="logo" href="#top"><i></i>Closery</a>
     <nav class="bar-nav">
       <a class="bar-lnk" href="#platform">Платформа</a>
+      <a class="bar-lnk" href="#mri">Коммерческий МРТ</a>
       <a class="bar-lnk" href="#how">Как начать</a>
       <a class="bar-lnk opt" href="#team">Кто за этим стоит</a>
       <a class="bar-cta" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=bar">Открыть кабинет</a>
@@ -640,7 +758,7 @@ html[data-theme="light"] .intro-word{color:#111110}
   </div>
   <i class="progress" id="progress"></i>
 </header>
-<div class="bar-mobile" id="barMobile"><a href="#platform">Платформа</a><a href="#how">Как начать</a><a href="#team">Кто за этим стоит</a><a href="#mri">Коммерческий МРТ</a><a href="/research/">Исследования</a><a href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=menu">Открыть кабинет</a></div>
+<div class="bar-mobile" id="barMobile"><a href="#platform">Платформа</a><a href="#mri">Коммерческий МРТ</a><a href="#how">Как начать</a><a href="#team">Кто за этим стоит</a><a href="/research/">Исследования</a><a href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=menu">Открыть кабинет</a></div>
 
 <main id="top">
 
@@ -662,8 +780,37 @@ html[data-theme="light"] .intro-word{color:#111110}
     <div><p class="kick">Где теряются деньги</p><h2>Деньги теряются в том, за что вы уже заплатили</h2></div>
     <p class="lede">Реклама сработала, заявка пришла. Дальше деньги уходят на переходах между людьми, и в отчёте о выручке этого не видно.</p>
   </div>
-  <ol class="lk"><li><span class="n">01</span><div class="t"><h3>Заявка пришла в пятницу вечером, перезвонили в понедельник</h3><p>Клиент уже купил у тех, кто ответил первым. Реклама оплачена, разговора не было.</p></div><div class="c"><b>Кабинет · Итог</b><br>Считает, сколько заявок остаются без разговора и сколько прибыли они уносят за месяц.</div></li><li><span class="n">02</span><div class="t"><h3>КП отправлено, следующего шага нет</h3><p>Крупная сделка две недели без звонка, а вы узнаёте об этом на планёрке.</p></div><div class="c"><b>Кабинет · Сделки</b><br>Каждое утро ставит такие сделки в очередь, самые дорогие первыми, и даёт скрипт звонка.</div></li><li><span class="n">03</span><div class="t"><h3>Клиент купил один раз и больше о вас не слышал</h3><p>Второй раз он купил у тех, кто позвонил. База лежит в CRM и не работает.</p></div><div class="c"><b>Кабинет · Итог</b><br>Показывает, сколько стоит база, к которой никто не возвращается, и с кого начать.</div></li></ol>
-  <div class="lk-go"><a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=leaks">Посчитать, сколько теряет ваш бизнес <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
+  <div class="lk">
+    <div class="lk-sum">
+      <div class="a"><p class="lk-tot">936&nbsp;000&nbsp;₽</p><p class="lk-tx">валовой прибыли в месяц уходит в трёх местах</p></div>
+      <div class="b"><div class="lk-stack rv" aria-hidden="true"><i style="--w:236"></i><i style="--w:605"></i><i style="--w:95"></i></div><p class="note">Расчёт кабинета на примере компании Техноснаб</p><a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=leaks">Посчитать свой бизнес <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
+    </div>
+    <div class="lk-rail" aria-hidden="true"><span class="lk-hop">Заявка<i class="brk"></i></span><span class="lk-hop">Разговор<i class="brk"></i></span><span class="lk-hop">Оплата<i class="brk"></i><b>Повторная покупка</b></span></div>
+    <div class="lk-card">
+      <p class="lk-hm">Заявка<span><i class="brk"></i></span>Разговор</p>
+      <div class="lk-tray"><div class="ui ui-tl" aria-hidden="true"><p><b>Пт 19:42</b>Заявка с сайта</p><p class="gap">62 часа без ответа</p><p><b>Пн 10:05</b>Первый звонок: «Уже купили»</p></div></div>
+      <h3>Заявка пришла в пятницу, перезвонили в понедельник</h3>
+      <p class="lk-m">−236&nbsp;000&nbsp;₽<small>в месяц</small></p>
+      <div class="lk-bar rv" style="--a:0;--w:25.2" aria-hidden="true"><i></i></div>
+      <p class="lk-cap">Без разговора остаются 80 заявок из 200 в месяц</p>
+    </div>
+    <div class="lk-card">
+      <p class="lk-hm">Разговор<span><i class="brk"></i></span>Оплата</p>
+      <div class="lk-tray"><div class="ui" aria-hidden="true"><p class="hd"><b>Поставка оборудования</b><span>1&nbsp;840&nbsp;000&nbsp;₽</span></p><div class="stg"><i></i><i></i><i></i><i></i><i></i></div><p class="stg-l">Этап: КП отправлено</p><dl class="kv"><div><dt>Следующий шаг</dt><dd class="loss">не назначен</dd></div><div><dt>Последнее касание</dt><dd>14 дней назад</dd></div></dl></div></div>
+      <h3>КП отправлено, следующего шага нет</h3>
+      <p class="lk-m">−605&nbsp;000&nbsp;₽<small>в месяц</small></p>
+      <div class="lk-bar rv" style="--a:25.2;--w:64.6" aria-hidden="true"><i></i></div>
+      <p class="lk-cap">Оплатой заканчиваются 15 из 120 разговоров в месяц</p>
+    </div>
+    <div class="lk-card">
+      <p class="lk-hm">Оплата<span><i class="brk"></i></span>Повторная покупка</p>
+      <div class="lk-tray"><div class="ui" aria-hidden="true"><p class="hd"><b>Покупки клиента за 12 месяцев</b></p><div class="mo"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><dl class="kv"><div><dt>Последняя покупка</dt><dd>11 месяцев назад</dd></div><div><dt>Звонков после покупки</dt><dd class="loss">0</dd></div></dl></div></div>
+      <h3>Клиент купил один раз и больше о вас не слышал</h3>
+      <p class="lk-m">−95&nbsp;000&nbsp;₽<small>в месяц</small></p>
+      <div class="lk-bar rv" style="--a:89.8;--w:10.2" aria-hidden="true"><i></i></div>
+      <p class="lk-cap">Повторно покупают 20 из 100 клиентов за год</p>
+    </div>
+  </div>
 </section>
 
 <section class="sec w" id="platform">
@@ -676,6 +823,31 @@ html[data-theme="light"] .intro-word{color:#111110}
     <div class="pf-view"><div class="win"><div class="win-b"><i></i><i></i><i></i><span>lk.closery.ru<b>/start</b></span></div><div class="shots"><img class="tl on" data-i="0" src="/media/v3/itog-d-light.webp" width="1800" height="1125" alt="Итог: сколько бизнес теряет в месяц и где" loading="lazy" decoding="async"><img class="td on" data-i="0" src="/media/v3/itog-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="1" src="/media/v3/today-d-light.webp" width="1800" height="1125" alt="Сделки · Сегодня: кому звонить сегодня" loading="lazy" decoding="async"><img class="td" data-i="1" src="/media/v3/today-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="2" src="/media/v3/deal-d-light.webp" width="1800" height="1125" alt="Сделки · Сделка: что сказать клиенту" loading="lazy" decoding="async"><img class="td" data-i="2" src="/media/v3/deal-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="3" src="/media/v3/pulse-d-light.webp" width="1800" height="1125" alt="Пульт продаж: кто добирает план, а кто нет" loading="lazy" decoding="async"><img class="td" data-i="3" src="/media/v3/pulse-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="4" src="/media/v3/comp-d-light.webp" width="1800" height="1125" alt="Конкуренты: за счёт чего растут конкуренты" loading="lazy" decoding="async"><img class="td" data-i="4" src="/media/v3/comp-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="5" src="/media/v3/niche-d-light.webp" width="1800" height="1125" alt="Выбор ниши: куда расти дальше" loading="lazy" decoding="async"><img class="td" data-i="5" src="/media/v3/niche-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"></div></div><div class="ph"><div class="scr"><div class="sb"><b>9:41</b><i class="isl"></i><span class="ic"><svg class="sig" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1.1"/><rect x="4.67" y="5" width="3" height="6" rx="1.1"/><rect x="9.33" y="2.6" width="3" height="8.4" rx="1.1"/><rect x="14" y="0" width="3" height="11" rx="1.1"/></svg><svg class="bat" viewBox="0 0 28 13"><rect x=".5" y=".5" width="24" height="12" rx="3.9" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="2" y="2" width="21" height="9" rx="2.4"/><path d="M26 4.6a2.1 2.1 0 0 1 0 3.8z" fill-opacity=".4"/></svg></span></div><div class="shots"><img class="tl on" data-i="0" src="/media/v3/itog-m-light.webp" width="780" height="1688" alt="Итог: сколько бизнес теряет в месяц и где" loading="lazy" decoding="async"><img class="td on" data-i="0" src="/media/v3/itog-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="1" src="/media/v3/today-m-light.webp" width="780" height="1688" alt="Сделки · Сегодня: кому звонить сегодня" loading="lazy" decoding="async"><img class="td" data-i="1" src="/media/v3/today-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="2" src="/media/v3/deal-m-light.webp" width="780" height="1688" alt="Сделки · Сделка: что сказать клиенту" loading="lazy" decoding="async"><img class="td" data-i="2" src="/media/v3/deal-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="3" src="/media/v3/pulse-m-light.webp" width="780" height="1688" alt="Пульт продаж: кто добирает план, а кто нет" loading="lazy" decoding="async"><img class="td" data-i="3" src="/media/v3/pulse-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="4" src="/media/v3/comp-m-light.webp" width="780" height="1688" alt="Конкуренты: за счёт чего растут конкуренты" loading="lazy" decoding="async"><img class="td" data-i="4" src="/media/v3/comp-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="5" src="/media/v3/niche-m-light.webp" width="780" height="1688" alt="Выбор ниши: куда расти дальше" loading="lazy" decoding="async"><img class="td" data-i="5" src="/media/v3/niche-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"></div><i class="home"></i></div></div></div>
   </div>
   <div class="go pf-go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=platform">Открыть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a><span class="note">Бесплатно, нужна только регистрация</span></div>
+</section>
+
+<section class="sec w" id="mri">
+  <div class="head">
+    <div><p class="kick">Коммерческий МРТ</p><h2>Разберём всю компанию на ваших цифрах и соберём план на 90 дней</h2></div>
+    <p class="lede">Кабинет показывает, где уходят деньги в продажах. На МРТ мы вместе с вами проходим всю компанию, проверяем каждую сумму на данных CRM и решаем, что менять первым.</p>
+  </div>
+  <div class="mr">
+    <figure class="mr-doc">
+      <div class="mr-sh">
+        <p class="mr-top"><span class="logo"><i></i>Closery</span><span>Конфиденциально</span></p>
+        <p class="mr-ttl">Отчёт Коммерческого МРТ</p>
+        <p class="mr-toc-h">Содержание</p>
+        <ol class="mr-toc"><li><span>01</span>Основание</li><li><span>02</span>Резюме</li><li><span>03</span>Периметр</li><li><span>04</span>Данные</li><li class="k"><span>05</span>Потери</li><li><span>06</span>Сравнение</li><li><span>07</span>Диагноз</li><li><span>08</span>Цель</li><li><span>09</span>Риски роста</li><li class="k"><span>10</span>Что делать</li><li class="k"><span>11</span>План</li><li class="k"><span>12</span>Деньги</li><li><span>13</span>Бездействие</li><li><span>14</span>Предложение</li></ol>
+        <p class="mr-foot">PDF около 20 страниц, остаётся у вас</p>
+      </div>
+    </figure>
+    <div class="mr-side">
+      <ul class="mr-facts"><li><b>120<small>минут</small></b><span>онлайн, вместе с собственником</span></li><li><b>6<small>систем</small></b><span>маркетинг, продажи, команда, управление, экономика, стратегия</span></li><li><b>20<small>страниц</small></b><span>каждая потеря в рублях и расчёт под ней</span></li><li><b>90<small>дней</small></b><span>план по волнам, у каждой метрика приёмки</span></li></ul>
+      <div class="mr-buy">
+        <p class="mr-pr"><b>79&nbsp;990&nbsp;₽</b><span>Не найдём потерь в рублях, вернём оплату. NDA до доступа к данным.</span></p>
+        <div class="go"><a class="btn" href="https://lk.closery.ru/register?next=/mri&amp;utm_source=site&amp;utm_content=mri">Записаться на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a><a class="more" href="/mri/">Как проходит <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="sec w" id="how">
@@ -697,14 +869,6 @@ html[data-theme="light"] .intro-word{color:#111110}
       <ul class="facts"><li><b>×2</b><span><i>CDEK, франчайзи-сеть из 8 точек</i>Выручка удвоилась за 10 месяцев после того, как пересобрали продажи и найм.</span></li><li><b>3 РОПа</b><span><i>MarketGuru, SaaS</i>Выросли из менеджеров и остались в компании. Рекорд выручки 100 млн ₽ в месяц.</span></li><li><b>42,6 млн ₽</b><span><i>Оптовая компания, выручка 480 млн ₽</i>Прибыль за год, которую нашли в базе: клиенты покупали, и к ним никто не возвращался.</span></li></ul>
       <a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=team">Посмотреть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
     </div>
-  </div>
-</section>
-
-<section class="sec w" id="mri">
-  <div class="mb">
-    <div><p class="l">Коммерческий МРТ</p><p><b>Когда нужно разобрать всю компанию.</b> 120 минут с вами по шести системам бизнеса, потери в рублях и план на 90 дней. Записаться можно из кабинета.</p></div>
-    <div class="pr">79 990 ₽<small>не найдём потерь, вернём оплату</small></div>
-    <a class="more" href="/mri/">Как проходит <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
   </div>
 </section>
 
