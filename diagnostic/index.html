@@ -6409,13 +6409,25 @@ const Report = {
       <div class="pr-x-wf">Артефакты: ${w.art} · От вас: ${w.you}</div>
     </div>`;
     const pAct = x.waves.filter(w => !w.skip), pOff = x.waves.filter(w => w.skip);
-    const pOffTxt = pOff.map(w => `<div class="pr-x-wf"><b>Волна ${w.n} · ${w.title}: не нужна.</b> ${w.skip}</div>`).join('');
+    // Волны раскладываются по длине текста: две длинные волны на одном листе выходили за A4 на несколько миллиметров
+    // Высота волны в мм по строкам текста, откалибрована по вёрстке: 26 + 3,6 на строку, плюс запас на перенос.
+    // Под волны на первом листе 176 мм, на продолжении 211: две длинные волны вместе выходили за A4
+    const pLn = (t, c) => Math.max(1, Math.ceil(String(t || '').replace(/<[^>]+>/g, '').length / c));
+    const pSum = (arr, c) => arr.reduce((t, x) => t + pLn(x, c), 0);
+    const pMM = w => 26 + 3.63 * (pLn(w.title, 70) + pLn(w.goal, 110) + pLn(`${w.art} ${w.you}`, 150) + Math.max(1 + pSum(w.tasks, 48),
+      (w.metrics.length ? 1 + pSum(w.metrics.map(m => m.join(' ')), 48) : 0) + 1 + pSum(w.acc, 48) + (w.guar ? pLn(w.guar, 48) : 0))) + 10;
+    const pItems = [...pAct.map(w => [wave(w), pMM(w)]), ...pOff.map(w => [`<div class="pr-x-wf"><b>Волна ${w.n} · ${w.title}: не нужна.</b> ${w.skip}</div>`, 6 + 3.63 * pLn(w.skip, 150)])];
+    const pChunks = [''], pUsed = [0];
+    pItems.forEach(([h, mm]) => {
+      const i = pChunks.length - 1;
+      if (!pChunks[i] || pUsed[i] + mm <= (i ? 211 : 176)){ pChunks[i] += h; pUsed[i] += mm; } else { pChunks.push(h); pUsed.push(mm); }
+    });
     page('ПЛАН 90 ДНЕЙ', `
       <div class="pr-tag">Внедрение</div>
       <div class="pr-title">90 дней, ${['', 'одна волна', 'две волны', 'три волны', 'четыре волны'][pAct.length]}, приёмка по цифрам</div>
       <div class="pr-lede">В план попали только найденные ошибки. Волна закрыта, только когда выполнен каждый критерий приёмки. Эффект волн складывается в возврат из ведомости, отдельной суммы сверху нет.</div>
-      ${pAct.slice(0, 2).map(wave).join('')}${pAct.length <= 2 ? pOffTxt : ''}`);
-    if (pAct.length > 2) page('ПЛАН 90 ДНЕЙ · ПРОДОЛЖЕНИЕ', pAct.slice(2).map(wave).join('') + pOffTxt);
+      ${pChunks[0]}`);
+    pChunks.slice(1).forEach(c => page('ПЛАН 90 ДНЕЙ · ПРОДОЛЖЕНИЕ', c));
 
     // ── Если ничего не делать ──
     if (L && L.lossMo > 0 && L.recMo > 0){
