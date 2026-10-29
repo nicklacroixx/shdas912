@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/theme.js"></script>
 <title>Закрытая диагностика · Closery</title>
 <meta name="description" content="Коммерческий МРТ: 60 вопросов по шести системам бизнеса. Ориентиры под ваш профиль, разбор воронки по этапам, финмодель потерь и дорожная карта на 90 дней.">
 <meta name="robots" content="noindex, nofollow">
@@ -52,15 +53,21 @@
 
   /* алиасы, которые читает движок диагностики (diag_script.js) напрямую через var(--x) */
   --font-display:var(--disp); --font-body:var(--ui); --font-mono:var(--mono); --font-serif:var(--doc);
-  --surface:rgba(255,255,255,.03); --surface-2:rgba(255,255,255,.05);
+  --surface:color-mix(in srgb,var(--ink) 3%,transparent); --surface-2:color-mix(in srgb,var(--ink) 5%,transparent);
   --line:var(--rule-2); --line-soft:var(--rule);
   --teal:var(--ok); --teal-2:#6EE7B7; --teal-deep:#1E7A57; --teal-soft:rgba(52,211,153,.08);
   --good:var(--ok); --warn:#fbbf24; --bad:var(--loss);
   --red-soft:rgba(240,85,90,.06);
   --glow:0 0 40px rgba(52,211,153,.14);
-  --shadow:0 30px 70px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04);
+  --shadow:0 30px 70px rgba(0,0,0,.5),inset 0 1px 0 color-mix(in srgb,var(--ink) 4%,transparent);
   --dur:.45s; --ease:cubic-bezier(.16,1,.3,1);
+  --hd:#fff;--panel:#0B1210;--field:#0F1715;--track:#1A2422;
 }
+/* дневная тема: палитру задаёт theme.js, здесь только то, что читает диагностика */
+html[data-theme="light"]{--hd:#111110;--panel:#FFFFFF;--field:#F5F5F3;--track:#E6E6E1;--warn:#8F6A17;
+  --surface:rgba(17,17,16,.03);--surface-2:rgba(17,17,16,.05);--teal-soft:rgba(15,138,95,.08);--red-soft:rgba(196,50,58,.06);
+  --loss-soft:#C4323A;--teal-2:#0B6B4A;--teal-deep:#0B6B4A;--glow:none;--shadow:0 24px 50px -24px rgba(17,17,16,.18)}
+html[data-theme="light"] body::before{display:none}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.55;
@@ -79,12 +86,12 @@ input,textarea,select{font-family:inherit;color:inherit}
 a{color:inherit}:focus-visible{outline:2px solid var(--ok);outline-offset:3px}
 
 /* ── шапка: один в один с остальным сайтом (см. /mrt-demo/) ── */
-header.bar{position:sticky;top:0;z-index:50;background:rgba(9,13,12,.82);
+header.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);
   backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
   border-bottom:1px solid var(--rule)}
 .bar-in{display:flex;justify-content:space-between;align-items:center;height:70px;gap:20px}
 .logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);
-  font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:#fff;
+  font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:var(--hd);
   transition:letter-spacing .35s,color .22s;white-space:nowrap}
 .logo i{width:9px;height:9px;border-radius:2px;flex:none;background:var(--ok);box-shadow:0 0 16px rgba(52,211,153,.65);transition:box-shadow .3s}
 .logo:hover{letter-spacing:.3em;color:var(--ok)}
@@ -111,10 +118,10 @@ body.fx-reading:not(.fx-shared) .fx-edit-btn{display:inline-flex}
 .fx-nav-btn i{flex:none;width:0;height:0;border:4px solid transparent;border-top-color:var(--ink-3);margin-top:3px;transition:transform .2s}
 .fx-nav-btn:hover{color:var(--ink);border-color:var(--ink-3)}
 .fx-nav-btn[aria-expanded="true"] i{transform:rotate(180deg);margin-top:-3px}
-.fx-nav-menu{position:absolute;right:0;top:calc(100% + 12px);width:284px;max-height:min(70vh,560px);overflow:auto;background:#0B1210;border:1px solid var(--rule-2);border-radius:10px;padding:8px;box-shadow:0 26px 64px rgba(0,0,0,.62)}
+.fx-nav-menu{position:absolute;right:0;top:calc(100% + 12px);width:284px;max-height:min(70vh,560px);overflow:auto;background:var(--panel);border:1px solid var(--rule-2);border-radius:10px;padding:8px;box-shadow:0 26px 64px rgba(0,0,0,.62)}
 .fx-nav-menu a{display:flex;gap:12px;align-items:baseline;padding:9px 12px;border-radius:7px;text-decoration:none;color:var(--ink-2);font:500 12.5px/1.35 var(--ui)}
 .fx-nav-menu a b{font:500 11px/1 var(--mono);color:var(--ink-3);min-width:18px;flex:none}
-.fx-nav-menu a:hover{background:rgba(255,255,255,.05);color:var(--ink)}
+.fx-nav-menu a:hover{background:color-mix(in srgb,var(--ink) 5%,transparent);color:var(--ink)}
 .fx-nav-menu a.on,.fx-nav-menu a.on b{color:var(--ok)}
 @media(max-width:560px){.fx-nav-menu{position:fixed;left:12px;right:12px;top:80px;width:auto}.fx-nav-btn{padding:7px 10px;gap:8px}}
 body.fx-reading #progressFill{transition:none}
@@ -199,7 +206,7 @@ body.fx-reading #progressFill{transition:none}
 @keyframes tag-pulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 14px rgba(52,211,153,.18)}}
 .intro h1{
   font-family:var(--disp);font-weight:600;font-size:clamp(28px,4.4vw,50px);line-height:1.1;letter-spacing:-.02em;margin-bottom:24px;
-  background:linear-gradient(135deg,#fff 0%,#9fa8a4 100%);
+  background:linear-gradient(135deg,var(--hd) 0%,var(--ink-2) 100%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   padding-left:.06em;padding-right:.06em;margin-left:-.06em;margin-right:-.06em;
 }
@@ -250,7 +257,7 @@ body.fx-reading #progressFill{transition:none}
 .qcard.leaving{animation:cardOut .28s ease forwards}
 @keyframes cardOut{to{opacity:0;transform:translateY(-14px)}}
 .q-count{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
-.q-title{font-family:var(--disp);font-size:clamp(18px,2.2vw,25px);font-weight:600;letter-spacing:-.01em;margin-bottom:6px;color:#fff;line-height:1.25}
+.q-title{font-family:var(--disp);font-size:clamp(18px,2.2vw,25px);font-weight:600;letter-spacing:-.01em;margin-bottom:6px;color:var(--hd);line-height:1.25}
 .q-sub{color:var(--ink-2);font-size:14px;margin-bottom:24px}
 .q-input input[type=text],.q-input input[type=number],.q-input textarea{
   width:100%;padding:16px;border:1px solid var(--line);border-radius:8px;
@@ -307,7 +314,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
   padding:15px 18px;font-size:13.5px;color:var(--ink-2);
   animation:cardIn .4s var(--ease);display:none;
 }
-.insight b{color:#fff}
+.insight b{color:var(--hd)}
 .insight.bad{border-left-color:var(--bad)}
 .insight.good{border-left-color:var(--good)}
 .dash{position:sticky;top:92px;display:flex;flex-direction:column;gap:14px}
@@ -324,20 +331,20 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
 .gauge-wrap{display:flex;align-items:center;gap:20px}
 .gauge{position:relative;width:150px;height:150px;flex:none}
 .gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
-.gauge .track{fill:none;stroke:rgba(255,255,255,.07);stroke-width:10}
+.gauge .track{fill:none;stroke:color-mix(in srgb,var(--ink) 7%,transparent);stroke-width:10}
 .gauge .val{fill:none;stroke:var(--teal);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .8s var(--ease),stroke .5s;filter:drop-shadow(0 0 6px rgba(52,211,153,.4))}
 .gauge .scanline{fill:none;stroke:var(--teal-2);stroke-width:2;opacity:.5;stroke-dasharray:6 460;animation:scan 2.6s linear infinite}
 @keyframes scan{to{stroke-dashoffset:-466}}
 .gauge-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.gauge-num b{font-family:var(--mono);font-weight:700;font-size:38px;line-height:1;letter-spacing:-.02em;color:#fff}
+.gauge-num b{font-family:var(--mono);font-weight:700;font-size:38px;line-height:1;letter-spacing:-.02em;color:var(--hd)}
 .gauge-num span{font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin-top:5px}
 .gauge-side{flex:1;min-width:0}
-.gauge-side .verdict{font-family:var(--disp);font-weight:600;font-size:15px;margin-bottom:4px;color:#fff}
+.gauge-side .verdict{font-family:var(--disp);font-weight:600;font-size:15px;margin-bottom:4px;color:var(--hd)}
 .gauge-side p{font-size:12.5px;color:var(--ink-2)}
 .cat-rows{display:flex;flex-direction:column;gap:11px}
 .cat-row{display:grid;grid-template-columns:96px 1fr 34px;align-items:center;gap:10px;font-size:12.5px}
 .cat-row .name{color:var(--ink-2);font-weight:600}
-.cat-bar{height:5px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
+.cat-bar{height:5px;border-radius:99px;background:color-mix(in srgb,var(--ink) 6%,transparent);overflow:hidden}
 .cat-bar i{display:block;height:100%;width:0;transition:width .7s var(--ease),background .5s;box-shadow:0 0 8px rgba(52,211,153,.3)}
 .cat-row .num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;color:var(--ink-2)}
 .constraint-card{
@@ -357,10 +364,10 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
 .sanity-warn.crit{background:rgba(240,85,90,.1);border-color:rgba(240,85,90,.4);color:#f7b3b3}
 .sanity-warn.crit b{color:#fbd2d2}
 .loss-factors{margin-top:14px;display:flex;flex-direction:column;gap:7px}
-.loss-factor{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--ink-2);border-top:1px dashed rgba(255,255,255,.08);padding-top:7px}
+.loss-factor{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--ink-2);border-top:1px dashed color-mix(in srgb,var(--ink) 8%,transparent);padding-top:7px}
 .loss-factor b{font-family:var(--mono);color:var(--bad);font-weight:700;white-space:nowrap}
 .growth-rows{display:flex;flex-direction:column;gap:10px}
-.growth-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;color:var(--ink-2);padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
+.growth-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;color:var(--ink-2);padding:9px 0;border-bottom:1px dashed color-mix(in srgb,var(--ink) 6%,transparent)}
 .growth-row:last-child{border-bottom:none}
 .growth-row b{font-family:var(--mono);color:var(--good);font-weight:700;white-space:nowrap;text-shadow:0 0 16px rgba(52,211,153,.4)}
 .empty-note{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--ink-3)}
@@ -377,12 +384,12 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
 @media(max-width:760px){.final-grid{grid-template-columns:1fr;gap:24px}}
 .final-index b{font-family:var(--mono);font-weight:700;font-size:clamp(56px,7.4vw,86px);line-height:1;display:block;text-shadow:0 0 32px rgba(52,211,153,.25)}
 .final-index span{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3)}
-.final-verdict h2{font-family:var(--disp);font-weight:600;font-size:clamp(20px,2.8vw,30px);margin-bottom:10px;line-height:1.24;color:#fff}
+.final-verdict h2{font-family:var(--disp);font-weight:600;font-size:clamp(20px,2.8vw,30px);margin-bottom:10px;line-height:1.24;color:var(--hd)}
 .final-verdict p{color:var(--ink-2);max-width:580px}
 .final-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:20px}
 .list-num{display:flex;flex-direction:column;gap:12px}
 .list-num li{list-style:none;display:flex;gap:12px;font-size:14px;color:var(--ink-2)}
-.list-num li b{color:#fff;font-weight:600}
+.list-num li b{color:var(--hd);font-weight:600}
 .list-num .n{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--bad);border:1px solid rgba(240,85,90,.3);border-radius:50%;height:26px;min-width:26px;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
 .rec-list li .n{color:var(--teal);border-color:rgba(52,211,153,.3)}
 .cta-panel{
@@ -391,13 +398,13 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
   overflow:clip;   /* hidden оставляет карточку прокручиваемой: свечение вылезает вниз, и фокус на кнопке уводил заголовок вверх */
 }
 .cta-panel::before{content:'';position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(52,211,153,.1) 0%,transparent 70%);top:-160px;right:-120px;pointer-events:none;animation:glow-breathe 7s ease-in-out infinite}
-.cta-panel h3{font-family:var(--disp);font-weight:600;font-size:clamp(19px,2.4vw,25px);margin-bottom:12px;color:#fff;position:relative}
+.cta-panel h3{font-family:var(--disp);font-weight:600;font-size:clamp(19px,2.4vw,25px);margin-bottom:12px;color:var(--hd);position:relative}
 .cta-panel p{color:var(--ink-2);max-width:540px;margin:0 auto 26px;position:relative}
 .final-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
 .sc-good{color:var(--good)!important}.sc-warn{color:var(--warn)!important}.sc-bad{color:var(--bad)!important}
 .bg-good{background:var(--good)!important}.bg-warn{background:var(--warn)!important}.bg-bad{background:var(--bad)!important}
 .find-count{font-family:var(--mono);font-size:9px;color:var(--bad);letter-spacing:.1em}
-.find-row{display:flex;gap:9px;font-size:12px;line-height:1.45;color:var(--ink-2);padding:8px 0;border-top:1px dashed rgba(255,255,255,.06);align-items:flex-start;animation:cardIn .4s var(--ease)}
+.find-row{display:flex;gap:9px;font-size:12px;line-height:1.45;color:var(--ink-2);padding:8px 0;border-top:1px dashed color-mix(in srgb,var(--ink) 6%,transparent);align-items:flex-start;animation:cardIn .4s var(--ease)}
 .find-row:first-child{border-top:none;padding-top:0}
 .find-dot{width:6px;height:6px;border-radius:50%;flex:none;margin-top:5px}
 .find-dot.bad{background:var(--bad);box-shadow:0 0 8px rgba(240,85,90,.6)}
@@ -408,7 +415,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
 @media(max-width:700px){.find-grid{grid-template-columns:1fr}}
 .prob-detail{font-size:12px;color:var(--ink-3);margin-top:3px;line-height:1.5}
 .mirror-quote{margin-top:20px;border-left:2px solid var(--teal);padding:14px 18px;background:rgba(52,211,153,.05);font-family:var(--doc);font-style:italic;font-size:15px;color:var(--ink-2);max-width:640px}
-.mirror-quote b{color:#fff;font-style:normal}
+.mirror-quote b{color:var(--hd);font-style:normal}
 .cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:640px){.cases-grid{grid-template-columns:1fr}}
 .cases-grid>div{border:1px solid var(--line-soft);border-radius:10px;padding:16px 18px;background:var(--surface)}
@@ -420,7 +427,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
 @media(max-width:820px){.km{grid-template-columns:repeat(2,1fr)}}
 .km>div{background:var(--paper);padding:13px 15px}
 .km .kk{display:block;font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
-.km .kv{font-family:var(--mono);font-size:17px;font-weight:700;color:#fff;line-height:1.2}
+.km .kv{font-family:var(--mono);font-size:17px;font-weight:700;color:var(--hd);line-height:1.2}
 .km .kd{display:block;font-size:10.5px;color:var(--ink-3);margin-top:3px}
 /* Цена одного шага — единица измерения масштаба задачи */
 .step-price{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:10px;overflow:hidden;margin-top:16px}
@@ -443,16 +450,16 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
 @media(max-width:560px){.fn-stage{grid-template-columns:96px 1fr 78px;gap:8px}}
 .fn-stage .fl{font-size:12px;color:var(--ink-2)}
 .fn-stage .fv{font-family:var(--mono);font-size:13px;font-weight:700;text-align:right}
-.fn-bar{position:relative;height:9px;border-radius:99px;background:rgba(255,255,255,.05);overflow:hidden}
+.fn-bar{position:relative;height:9px;border-radius:99px;background:color-mix(in srgb,var(--ink) 5%,transparent);overflow:hidden}
 .fn-bar i{position:absolute;left:0;top:0;bottom:0;background:var(--teal);opacity:.85}
 .fn-bar u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--warn);text-decoration:none}
 .fn-verdict{margin-top:14px;border-left:2px solid var(--teal);padding:12px 16px;background:rgba(52,211,153,.05);font-size:13px;color:var(--ink-2);line-height:1.6}
-.fn-verdict b{color:#fff}
+.fn-verdict b{color:var(--hd)}
 /* Возможности: ценность + срок + ответственный */
 .opp{border-bottom:1px solid var(--line-soft);padding:12px 0}
 .opp:last-child{border-bottom:none}
 .opp-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
-.opp-top span{font-size:13px;color:#fff;font-weight:600}
+.opp-top span{font-size:13px;color:var(--hd);font-weight:600}
 .opp-top b{font-family:var(--mono);font-size:14px;color:var(--teal);white-space:nowrap}
 .opp-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
 .opp-meta i{font-style:normal;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
@@ -468,13 +475,13 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
 .wave-num{position:absolute;right:20px;top:18px;font-family:var(--mono);font-size:34px;font-weight:700;
   color:rgba(52,211,153,.14);line-height:1;pointer-events:none}
 .wave-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap;position:relative}
-.wave-h b{font-family:var(--disp);font-size:16px;font-weight:600;letter-spacing:-.01em;color:#fff}
+.wave-h b{font-family:var(--disp);font-size:16px;font-weight:600;letter-spacing:-.01em;color:var(--hd)}
 .wave-h span{font-size:12.5px;color:var(--ink-2)}
 .wave-h em{font-style:normal;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--teal)}
 .wave ul{list-style:none;margin:0;padding:0;position:relative}
 .wave li{font-size:13px;color:var(--ink-2);line-height:1.55;padding:6px 0 6px 16px;position:relative}
 .wave li::before{content:'';position:absolute;left:0;top:13px;width:5px;height:5px;background:var(--teal);border-radius:50%}
-.wave li b{color:#fff;font-weight:600}
+.wave li b{color:var(--hd);font-weight:600}
 /* Разделители смысловых блоков отчёта — чтобы стена панелей читалась по частям */
 .report-section-h{display:flex;align-items:center;gap:14px;margin:44px 0 20px}
 .report-section-h b{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.24em;
@@ -484,7 +491,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
 /* Расхождение «вы думаете vs данные» */
 .gapbox{border-left:2px solid var(--warn);border-radius:0 8px 8px 0;padding:14px 18px;background:rgba(251,191,36,.05);font-size:13.5px;color:var(--ink-2);line-height:1.65}
 .gapbox.match{border-left-color:var(--teal);background:rgba(52,211,153,.05)}
-.gapbox h4{font-family:var(--disp);font-size:14px;color:#fff;font-weight:600;margin:0 0 7px}
+.gapbox h4{font-family:var(--disp);font-size:14px;color:var(--hd);font-weight:600;margin:0 0 7px}
 /* Демо-режим (?test=1): цифры случайные — пометка обязана быть заметной */
 .demo-banner{display:flex;align-items:center;gap:12px;border:1px solid #fbbf24;border-radius:8px;
   background:rgba(251,191,36,.09);padding:12px 18px;margin-bottom:20px}
@@ -492,7 +499,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;paddi
 .demo-banner span{font-size:12.5px;color:var(--ink-2);line-height:1.5}
 @media(max-width:560px){.demo-banner{flex-direction:column;align-items:flex-start;gap:6px}}
 /* Служебный блок — виден только оператору на созвоне, в PDF не попадает */
-.op-note{border:1px dashed var(--line);border-radius:8px;background:rgba(255,255,255,.02);padding:12px 16px;
+.op-note{border:1px dashed var(--line);border-radius:8px;background:color-mix(in srgb,var(--ink) 2%,transparent);padding:12px 16px;
   margin-bottom:20px;font-size:12.5px;color:var(--ink-2);line-height:1.55}
 .op-note b{display:block;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -511,7 +518,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .gate-card::before{content:'';position:absolute;width:420px;height:420px;border-radius:50%;
   background:radial-gradient(circle,rgba(52,211,153,.14) 0%,transparent 70%);top:-160px;right:-160px;pointer-events:none}
 .gate-card .eyebrow{margin-bottom:16px}
-.gate-title{font-family:var(--disp);font-weight:600;font-size:clamp(23px,3vw,29px);margin:0 0 10px;color:#fff;line-height:1.2}
+.gate-title{font-family:var(--disp);font-weight:600;font-size:clamp(23px,3vw,29px);margin:0 0 10px;color:var(--hd);line-height:1.2}
 .gate-sub{color:var(--ink-2);font-size:14px;line-height:1.6;margin-bottom:24px;max-width:34ch}
 .gate-input-row{display:flex;gap:10px;flex-wrap:wrap;position:relative}
 .gate-input-wrap{flex:1;min-width:0;position:relative;display:flex}
@@ -568,20 +575,22 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-demo b{font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--warn);white-space:nowrap}
 
 /* шапка документа */
-.fx-doc{display:grid;grid-template-columns:.85fr 1.75fr .85fr .85fr 1.1fr;border-bottom:1px solid var(--rule)}
-.fx-doc>div{padding:18px 20px 18px 0;min-width:0}
+.fx-doc{border-top:1px solid var(--rule)}
+.fx-doc>div{display:grid;grid-template-columns:var(--fx-lab) minmax(0,1fr);column-gap:var(--fx-gap);align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule);min-width:0}
+.fx-doc .fx-k{margin:0}
+.fx-dot{color:var(--ink-3);margin:0 4px}
 .fx-v{font-size:14px;line-height:1.45;color:var(--ink)}
 .fx-conf{display:flex;align-items:center;gap:8px}
 .fx-conf i{width:6px;height:6px;border-radius:50%;background:var(--ok);flex:none}
 .fx-conf.mid i{background:var(--warn)} .fx-conf.low i{background:var(--loss)}
-@media(max-width:900px){.fx-doc{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media(max-width:1000px){.fx-doc>div{grid-template-columns:minmax(0,1fr);row-gap:4px}}
 
 /* обложка документа */
 .fx-cover{padding-top:0}
 .fx-cv-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--rule);font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
 .fx-cv-top b{color:var(--ok);font-weight:500}
 .fx-kicker{font:500 11px/1.45 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ok);margin:0 0 18px}
-.fx-cv-h{font-family:var(--ui);font-weight:600;font-size:clamp(32px,4.4vw,58px);line-height:1.08;letter-spacing:-.03em;margin:38px 0 20px;color:#fff;max-width:20ch}
+.fx-cv-h{font-family:var(--ui);font-weight:600;font-size:clamp(32px,4.4vw,58px);line-height:1.08;letter-spacing:-.03em;margin:38px 0 20px;color:var(--hd);max-width:20ch}
 .fx-cv-sub{font-size:17px;line-height:1.6;color:var(--ink-2);max-width:58ch;margin:0 0 46px}
 @media(max-width:700px){.fx-cv-top{flex-direction:column;align-items:flex-start;gap:6px}.fx-cv-h{margin-top:28px}}
 
@@ -593,8 +602,8 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-body{min-width:0}
 @media(max-width:1000px){.fx-act{grid-template-columns:minmax(0,1fr);gap:16px;padding:52px 0}.fx-lab{position:static}}
 
-.fx-h1{font-family:var(--ui);font-weight:600;font-size:clamp(29px,3.3vw,43px);line-height:1.16;letter-spacing:-.025em;margin:0 0 26px;max-width:22ch;color:#fff}
-.fx-title{font-family:var(--ui);font-weight:600;font-size:clamp(23px,2.4vw,31px);line-height:1.25;letter-spacing:-.022em;margin:0 0 16px;max-width:26ch;color:#fff}
+.fx-h1{font-family:var(--ui);font-weight:600;font-size:clamp(29px,3.3vw,43px);line-height:1.16;letter-spacing:-.025em;margin:0 0 26px;max-width:22ch;color:var(--hd)}
+.fx-title{font-family:var(--ui);font-weight:600;font-size:clamp(23px,2.4vw,31px);line-height:1.25;letter-spacing:-.022em;margin:0 0 16px;max-width:26ch;color:var(--hd)}
 .fx-lead{font-size:16px;line-height:1.65;color:var(--ink-2);max-width:66ch;margin:0 0 34px}
 .fx-hero-sub{font-size:17px;line-height:1.6;color:var(--ink-2);max-width:62ch;margin:0}
 
@@ -606,8 +615,8 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-bcase em{font-style:normal;font-size:13px;color:var(--ink-2);margin-top:6px}
 .fx-bcase p{font-size:13.5px;line-height:1.55;color:var(--ink-2);margin:16px 0 0;padding-top:16px;border-top:1px solid var(--rule);align-self:stretch}
 .fx-pipe{display:flex;align-items:stretch;gap:0;border:1px solid var(--rule);border-radius:12px;background:var(--paper);overflow:hidden}
-.fx-pipe-s{flex:1 1 0;min-width:0;padding:22px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px}
-.fx-pipe-s b{font:600 clamp(22px,2.2vw,28px)/1.1 var(--ui);color:#fff;letter-spacing:-.02em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.fx-pipe-s{flex:1 1 0;min-width:0;padding:22px 14px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:8px}
+.fx-pipe-s b{font:600 clamp(22px,2.2vw,28px)/1.1 var(--ui);color:var(--hd);letter-spacing:-.02em;white-space:nowrap;font-variant-numeric:tabular-nums}
 .fx-pipe-s span{font-size:13px;line-height:1.4;color:var(--ink-2)}
 .fx-pipe-s.ok{background:rgba(52,211,153,.07)}.fx-pipe-s.ok b{color:var(--ok)}
 .fx-pipe-s.loss{background:rgba(240,85,90,.07);flex-grow:1.6}.fx-pipe-s.loss b{color:var(--loss)}
@@ -615,7 +624,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-pipe-a::after{content:'';position:absolute;top:50%;left:-4px;width:7px;height:7px;border-top:1px solid var(--rule-2);border-right:1px solid var(--rule-2);background:var(--paper);transform:translateY(-50%) rotate(45deg)}
 .fx-guards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
 .fx-guard{background:var(--paper);padding:22px 20px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;min-width:0}
-.fx-guard b{font:600 26px/1.1 var(--ui);font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#fff}
+.fx-guard b{font:600 26px/1.1 var(--ui);font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--hd)}
 .fx-guard span{font-size:13px;line-height:1.5;color:var(--ink-2);max-width:30ch}
 .fx-blinks{display:grid;gap:6px}
 .fx-blink{display:grid;grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr) 22px minmax(0,1fr) 120px;align-items:center;gap:8px;padding:11px 14px;border:1px solid var(--rule);border-radius:8px;font-size:13.5px;line-height:1.4;color:var(--ink-3)}
@@ -628,10 +637,10 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-blink.hd{border:0;padding-top:0;padding-bottom:2px;font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .fx-blink.hd i{visibility:hidden}.fx-blink.hd b{font-weight:500}
 .fx-why3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:40px;padding-top:26px;border-top:1px solid var(--rule)}
-.fx-why3 b{display:block;font:600 15px/1.35 var(--ui);color:#fff;margin-bottom:8px}
+.fx-why3 b{display:block;font:600 15px/1.35 var(--ui);color:var(--hd);margin-bottom:8px}
 .fx-why3 p{font-size:13.5px;line-height:1.6;color:var(--ink-2);margin:0}
 @media(max-width:900px){.fx-bcases,.fx-why3{grid-template-columns:minmax(0,1fr)}.fx-guards{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  .fx-pipe{flex-direction:column}.fx-pipe-s{flex-direction:row;align-items:baseline;gap:14px;padding:14px 18px}.fx-pipe-s b{min-width:110px}
+  .fx-pipe{flex-direction:column}.fx-pipe-s{flex-direction:row;align-items:baseline;gap:14px;padding:14px 18px}.fx-pipe-s b{min-width:150px}
   .fx-pipe-a{width:auto;height:1px}.fx-pipe-a::after{left:28px;top:-4px;transform:rotate(135deg)}
   .fx-blink{grid-template-columns:minmax(0,1fr);gap:4px;padding:10px 12px;font-size:13px}.fx-blink i{display:none}.fx-blink.hd{display:none}.fx-blink em{justify-self:start;margin-top:4px}}
 
@@ -692,7 +701,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-team{margin-top:22px;font-size:14px;line-height:1.7;color:var(--ink-2);max-width:78ch}
 .fx-check{margin-top:20px;display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.6;color:var(--ink-2);padding:14px 16px;border:1px solid var(--rule);border-radius:8px;max-width:80ch}
 .fx-check.warn{border-color:rgba(251,191,36,.3)}
-.fx-ic{flex:none;width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.04);color:var(--ink-3);display:grid;place-items:center;font:500 11px var(--mono)}
+.fx-ic{flex:none;width:18px;height:18px;border-radius:50%;background:color-mix(in srgb,var(--ink) 4%,transparent);color:var(--ink-3);display:grid;place-items:center;font:500 11px var(--mono)}
 
 /* 03 ведомость */
 .fx-lb{margin:0 0 8px}
@@ -700,7 +709,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-lb-head>div{padding:20px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;min-width:0}
 .fx-lb-head>i{font-style:normal;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:18px}
 .fx-lb-head span{font:500 11px/1.3 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
-.fx-lb-head b{font:600 clamp(22px,2.2vw,30px)/1.1 var(--ui);font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#fff;white-space:nowrap}
+.fx-lb-head b{font:600 clamp(22px,2.2vw,30px)/1.1 var(--ui);font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--hd);white-space:nowrap}
 .fx-lb-head em{font-style:normal;font-size:13px;line-height:1.4;color:var(--ink-2)}
 .fx-lb-head .ok b{color:var(--ok)}
 .fx-lb-head .loss{background:rgba(240,85,90,.07)}.fx-lb-head .loss b{color:var(--loss)}
@@ -708,7 +717,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-lb-alt button{margin-left:6px;background:none;border:0;border-bottom:1px solid var(--warn);color:var(--warn);font:inherit;cursor:pointer;padding:0}
 .fx-lb-rows{display:grid;gap:2px;margin-top:22px}
 .fx-lb-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr) minmax(0,.9fr);gap:20px;align-items:center;padding:14px 0;border-top:1px solid var(--rule)}
-.fx-lb-nm b{display:block;font:600 15px/1.35 var(--ui);color:#fff}
+.fx-lb-nm b{display:block;font:600 15px/1.35 var(--ui);color:var(--hd)}
 .fx-lb-nm span{display:block;font-size:12.5px;line-height:1.45;color:var(--ink-3);margin-top:3px}
 .fx-lb-bar{height:14px;border-radius:3px;background:var(--rule);overflow:hidden}
 .fx-lb-bar>i{display:block;height:100%;background:rgba(240,85,90,.85);border-radius:3px;position:relative}
@@ -733,7 +742,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-lrow.head .r{text-align:right}
 .fx-th-note{display:block;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-3);font-size:10.5px;margin-top:5px}
 .fx-lno{font:500 12px var(--mono);color:var(--ink-3);padding-top:3px}
-.fx-lnm{font-weight:600;font-size:15px;color:#fff;line-height:1.35}
+.fx-lnm{font-weight:600;font-size:15px;color:var(--hd);line-height:1.35}
 .fx-lc{font-size:14px;color:var(--ink-2);line-height:1.5}
 .fx-lmo,.fx-lsh,.fx-lrc{font:600 17px/1.35 var(--ui);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.015em}
 .fx-lsub{font:400 12.5px/1.45 var(--ui);color:var(--ink-3);text-align:right;margin-top:10px;font-variant-numeric:tabular-nums}
@@ -790,7 +799,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-node+.fx-node{padding-left:24px;border-left:1px solid var(--rule)}
 .fx-step{font:500 11px/1 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:9px}
 .fx-step::before{content:attr(data-i);width:18px;height:18px;border-radius:50%;border:1px solid var(--rule-2);display:grid;place-items:center;font-size:9.5px;color:var(--ink-3);letter-spacing:0}
-.fx-node h4{font-family:var(--ui);font-weight:600;font-size:17px;line-height:1.3;margin:14px 0 8px;color:#fff}
+.fx-node h4{font-family:var(--ui);font-weight:600;font-size:17px;line-height:1.3;margin:14px 0 8px;color:var(--hd)}
 .fx-node.money h4{color:var(--loss)}
 .fx-node p{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
 @media(max-width:900px){.fx-chain{grid-template-columns:minmax(0,1fr)!important}.fx-node+.fx-node{padding-left:0;border-left:0;border-top:1px solid var(--rule)}}
@@ -802,7 +811,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-perc.two{grid-template-columns:repeat(2,minmax(0,1fr))}
 .fx-perc>div{padding:20px 22px 0 0;min-width:0}
 .fx-perc>div+div{border-left:1px solid var(--rule);padding-left:22px}
-.fx-perc h5{font-family:var(--ui);font-weight:600;font-size:18px;line-height:1.3;margin:0 0 10px;color:#fff}
+.fx-perc h5{font-family:var(--ui);font-weight:600;font-size:18px;line-height:1.3;margin:0 0 10px;color:var(--hd)}
 .fx-perc p{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
 .fx-pyou h5{color:var(--ink-3);text-decoration:line-through;text-decoration-thickness:1px}
 .fx-perr h5{color:var(--loss)}
@@ -826,7 +835,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-mx{margin-top:-34px}
 .fx-mx-h{align-items:end;position:sticky;top:45px;z-index:3;background:var(--bg);border-top:1px solid var(--rule-2);padding:68px 0 12px;line-height:16.5px;box-shadow:0 1px 0 var(--rule)}
 .fx-mx-g{font:500 11px/1.4 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ok);padding:22px 0 10px}
-.fx-mx-n b{display:block;font-weight:600;font-size:15px;line-height:1.4;color:#fff}
+.fx-mx-n b{display:block;font-weight:600;font-size:15px;line-height:1.4;color:var(--hd)}
 .fx-mx-n span{display:block;font-size:13px;line-height:1.55;color:var(--ink-3);margin-top:6px;max-width:62ch}
 .fx-mk.unk{color:#41504B}
 .fx-mx-h{font:500 11px/1.35 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
@@ -841,9 +850,9 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-mk.mine{color:var(--loss)}
 .fx-bpos{margin-top:34px}
 .fx-bp-h{display:flex;justify-content:space-between;font:500 11px/1.4 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
-.fx-bp-t{position:relative;height:6px;border-radius:3px;background:#1A2422;overflow:visible}
+.fx-bp-t{position:relative;height:6px;border-radius:3px;background:var(--track);overflow:visible}
 .fx-bp-t i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:linear-gradient(90deg,var(--loss),var(--ok))}
-.fx-bp-t u{position:absolute;top:-5px;width:2px;height:16px;background:#fff;transform:translateX(-1px)}
+.fx-bp-t u{position:absolute;top:-5px;width:2px;height:16px;background:var(--hd);transform:translateX(-1px)}
 .fx-bp-v{font-size:15px;line-height:1.6;color:var(--ink-2);margin-top:16px;max-width:76ch}
 @media(max-width:820px){.fx-mx,.fx-mx-h,.fx-mx-r{margin-top:0}.fx-mx-h,.fx-mx-r{grid-template-columns:minmax(0,1fr) 40px 40px;gap:10px}.fx-mx-h{top:45px;padding:14px 0 12px}.fx-mx-h{font-size:9.5px;letter-spacing:.04em;align-items:end}.fx-lgl{display:none}.fx-smt{display:inline}.fx-mx-n b{font-size:14px}.fx-mx-n span{font-size:12.5px}}
 
@@ -851,7 +860,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-tree{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
 .fx-tn{flex:1 1 150px;min-width:0;padding:20px 16px 18px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);display:flex;flex-direction:column;align-items:center;text-align:center}
 .fx-tn.top{border-color:rgba(52,211,153,.4)}
-.fx-tn b{display:block;font:600 22px/1.15 var(--ui);letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums;margin-top:2px}
+.fx-tn b{display:block;font:600 22px/1.15 var(--ui);letter-spacing:-.02em;color:var(--hd);font-variant-numeric:tabular-nums;margin-top:2px}
 .fx-tn i{display:block;font-style:normal;font-size:12.5px;line-height:1.5;color:var(--ink-3);margin-top:7px;flex:1}
 .fx-tsens{margin-top:16px;padding-top:13px;border-top:1px solid var(--rule);align-self:stretch}
 .fx-tsens span{display:block;font-size:12px;line-height:1.35;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -864,7 +873,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-sc{border:1px solid var(--rule);border-radius:10px;background:var(--paper);overflow:hidden}
 .fx-sc-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:center;padding:24px 26px 20px;border-bottom:1px solid var(--rule)}
 .fx-sc-k{display:block;font:500 11px/1.4 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
-.fx-sc h4{font:600 21px/1.3 var(--ui);letter-spacing:-.015em;color:#fff;margin:0}
+.fx-sc h4{font:600 21px/1.3 var(--ui);letter-spacing:-.015em;color:var(--hd);margin:0}
 .fx-sc-m{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .fx-sc-m b{display:block;font:600 28px/1.1 var(--ui);letter-spacing:-.02em;color:var(--loss)}
 .fx-sc-m span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:6px}
@@ -886,7 +895,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-sc-mt b{font-weight:600;color:var(--ok)}
 .fx-pp{border-top:1px solid var(--rule)}
 .fx-pp-r{display:grid;grid-template-columns:220px minmax(0,1fr) minmax(0,1fr);gap:28px;padding:20px 0;border-bottom:1px solid var(--rule)}
-.fx-pp-r>b{font:600 15px/1.4 var(--ui);color:#fff}
+.fx-pp-r>b{font:600 15px/1.4 var(--ui);color:var(--hd)}
 .fx-pp-r .fx-k{display:block;margin-bottom:6px}
 .fx-pp-r p{font-size:14px;line-height:1.55;color:var(--ink-2)}
 @media(max-width:900px){.fx-sc-h{grid-template-columns:minmax(0,1fr);gap:14px;padding:20px}.fx-sc-m{text-align:left}
@@ -902,7 +911,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-rsev{display:flex;align-items:center;gap:10px;font:500 11px/1 var(--ui);letter-spacing:.09em;text-transform:uppercase;color:var(--warn);margin-bottom:12px}
 .fx-rsev b{font:500 12px/1 var(--mono);color:var(--ink-3);letter-spacing:.04em}
 .fx-risk.high .fx-rsev{color:var(--loss)}
-.fx-risk h5{font:600 17px/1.35 var(--ui);color:#fff;margin:0 0 10px;letter-spacing:-.01em}
+.fx-risk h5{font:600 17px/1.35 var(--ui);color:var(--hd);margin:0 0 10px;letter-spacing:-.01em}
 .fx-risk p{font-size:14.5px;line-height:1.6;color:var(--ink-2)}
 .fx-rc{font-size:14px;line-height:1.6;color:var(--ink);padding-left:26px;border-left:1px solid var(--rule);align-self:center}
 @media(max-width:820px){.fx-risk{grid-template-columns:minmax(0,1fr);gap:16px;padding:20px}.fx-rc{padding:16px 0 0;border-left:0;border-top:1px solid var(--rule)}}
@@ -917,7 +926,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 /* 05 цель */
 .fx-paths{display:grid;gap:26px;border-top:1px solid var(--rule-2);padding-top:26px}
 .fx-path{display:grid;grid-template-columns:190px minmax(0,1fr);gap:24px;align-items:start}
-.fx-pl{font-family:var(--ui);font-weight:600;font-size:16px;line-height:1.3;color:#fff}
+.fx-pl{font-family:var(--ui);font-weight:600;font-size:16px;line-height:1.3;color:var(--hd)}
 .fx-pl small{display:block;margin-top:10px;font:500 11px/1.4 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .fx-pl small.yes{color:var(--ok)}
 .fx-ptrack{height:30px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;position:relative}
@@ -953,7 +962,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-weff b{font-family:var(--ui);font-weight:600;font-size:18px;color:var(--ok)}
 .fx-weff b.zero{color:var(--ink-3);font-size:14px}
 .fx-weff span{font:500 11px var(--ui);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-.fx-wave h4{font-family:var(--ui);font-weight:600;font-size:19px;line-height:1.25;margin:16px 0 8px;color:#fff}
+.fx-wave h4{font-family:var(--ui);font-weight:600;font-size:19px;line-height:1.25;margin:16px 0 8px;color:var(--hd)}
 .fx-wgoal{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
 .fx-effnote{margin-top:10px;font-size:13px;line-height:1.6;color:var(--ink-3)}
 .fx-effnote b{color:var(--ok);font-weight:500}
@@ -1009,10 +1018,10 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-kp-r{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr) 150px;gap:28px;padding:20px 26px;border-top:1px solid var(--rule)}
 .fx-kp-r:first-child{border-top:0}
 .fx-kp-r .fx-k{display:block;margin-bottom:6px}
-.fx-kp-r b{font:600 15px/1.4 var(--ui);color:#fff}
+.fx-kp-r b{font:600 15px/1.4 var(--ui);color:var(--hd)}
 .fx-kp-r p{font-size:14px;line-height:1.55;color:var(--ink-2);margin:0 0 8px}
 .fx-kp-r p:last-child{margin:0}
-.fx-kp-p{text-align:right;white-space:nowrap;font:600 17px/1.4 var(--ui);color:#fff;font-variant-numeric:tabular-nums}
+.fx-kp-p{text-align:right;white-space:nowrap;font:600 17px/1.4 var(--ui);color:var(--hd);font-variant-numeric:tabular-nums}
 .fx-kp-t{border-top:1px solid var(--rule-2);background:color-mix(in srgb,var(--ink) 4%,transparent)}
 .fx-kp-t .fx-kp-p{font-size:26px;line-height:1.1;letter-spacing:-.02em}
 @media(max-width:900px){.fx-kp-r{grid-template-columns:minmax(0,1fr);gap:10px;padding:18px 20px}.fx-kp-p{text-align:left}.fx-kp-t>div:nth-child(2){display:none}}
@@ -1020,7 +1029,7 @@ body:not(.cl-unlocked) .gate{display:grid}
 .fx-stp{padding:24px 24px 24px 0;min-width:0}
 .fx-stp+.fx-stp{padding-left:24px;border-left:1px solid var(--rule)}
 .fx-sn{display:block;font:500 11px/1.45 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
-.fx-stp h5{font-family:var(--ui);font-weight:600;font-size:18px;margin:12px 0 8px;color:#fff}
+.fx-stp h5{font-family:var(--ui);font-weight:600;font-size:18px;margin:12px 0 8px;color:var(--hd)}
 .fx-stp p{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
 @media(max-width:900px){.fx-steps{grid-template-columns:minmax(0,1fr)}.fx-stp+.fx-stp{padding-left:0;border-left:0;border-top:1px solid var(--rule)}}
 .fx-offer{margin-top:32px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:32px}
@@ -1068,14 +1077,14 @@ body:not(.cl-unlocked) .gate{display:grid}
 body.fx-prompter-on .fx-rail{display:none}
 
 /* суфлёр ведущего */
-.fx-edit{position:fixed;top:70px;right:0;bottom:0;width:420px;max-width:100%;background:#0B1210;border-left:1px solid var(--rule-2);z-index:60;overflow:auto;padding:22px 22px 44px;display:none}
+.fx-edit{position:fixed;top:70px;right:0;bottom:0;width:420px;max-width:100%;background:var(--panel);border-left:1px solid var(--rule-2);z-index:60;overflow:auto;padding:22px 22px 44px;display:none}
 body.fx-edit-on .fx-edit{display:block}
 @media(min-width:1280px){body.fx-edit-on .shell{padding-right:calc(420px + var(--gut))}}
 .fx-ed-h{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .fx-ed-h .fx-k{margin:0;color:var(--ok)}
 .fx-ed-note{font-size:12.5px;line-height:1.55;color:var(--ink-3);margin:12px 0 16px}
-.fx-ed-tools{display:flex;gap:8px;margin-bottom:14px;position:sticky;top:-22px;background:#0B1210;padding:6px 0;z-index:2}
-#fxEdSearch{flex:1;min-width:0;background:#0F1715;border:1px solid var(--rule-2);border-radius:8px;padding:9px 11px;color:var(--ink);font:400 13px var(--ui)}
+.fx-ed-tools{display:flex;gap:8px;margin-bottom:14px;position:sticky;top:-22px;background:var(--panel);padding:6px 0;z-index:2}
+#fxEdSearch{flex:1;min-width:0;background:var(--field);border:1px solid var(--rule-2);border-radius:8px;padding:9px 11px;color:var(--ink);font:400 13px var(--ui)}
 #fxEdSearch:focus{outline:none;border-color:var(--ok)}
 .fx-ed-only{flex:none;background:none;border:1px solid var(--rule-2);border-radius:8px;padding:0 11px;color:var(--ink-3);font:500 10.5px var(--ui);letter-spacing:.07em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
 .fx-ed-only.on{color:var(--ok);border-color:var(--ok)}
@@ -1083,18 +1092,18 @@ body.fx-edit-on .fx-edit{display:block}
 .fx-ed-row{display:grid;gap:7px;padding:11px 0;border-bottom:1px solid var(--rule)}
 .fx-ed-row.empty .fx-ed-q{color:var(--ink-3)}
 .fx-ed-q{font-size:13px;line-height:1.5;color:var(--ink-2)}
-.fx-ed-in{display:flex;align-items:center;gap:8px;background:#0F1715;border:1px solid var(--rule-2);border-radius:8px;padding:0 11px}
+.fx-ed-in{display:flex;align-items:center;gap:8px;background:var(--field);border:1px solid var(--rule-2);border-radius:8px;padding:0 11px}
 .fx-ed-in i{font-style:normal;font-size:12px;color:var(--ink-3);flex:none}
 .fx-ed-in.num input{font-variant-numeric:tabular-nums}
 .fx-edit input[data-qid],.fx-edit textarea[data-qid],.fx-edit select[data-qid]{width:100%;min-width:0;background:none;border:0;color:var(--ink);font:400 13.5px var(--ui);padding:10px 0}
-.fx-edit textarea[data-qid],.fx-edit select[data-qid]{background:#0F1715;border:1px solid var(--rule-2);border-radius:8px;padding:10px 11px}
+.fx-edit textarea[data-qid],.fx-edit select[data-qid]{background:var(--field);border:1px solid var(--rule-2);border-radius:8px;padding:10px 11px}
 .fx-edit input[data-qid]:focus,.fx-edit textarea[data-qid]:focus,.fx-edit select[data-qid]:focus{outline:none}
 .fx-ed-in:focus-within,.fx-edit textarea[data-qid]:focus,.fx-edit select[data-qid]:focus{border-color:var(--ok)}
 .fx-ed-chips{display:flex;flex-wrap:wrap;gap:6px}
-.fx-ed-chips button{background:#0F1715;border:1px solid var(--rule-2);border-radius:7px;padding:7px 10px;color:var(--ink-3);font:400 12px var(--ui);cursor:pointer}
+.fx-ed-chips button{background:var(--field);border:1px solid var(--rule-2);border-radius:7px;padding:7px 10px;color:var(--ink-3);font:400 12px var(--ui);cursor:pointer}
 .fx-ed-chips button.on{color:var(--ok);border-color:var(--ok)}
 .fx-ed-empty{font-size:13px;color:var(--ink-3);padding:16px 0}
-.fx-prompter{position:fixed;top:70px;right:0;bottom:0;width:380px;max-width:100%;background:#0B1210;border-left:1px solid var(--rule-2);z-index:60;overflow:auto;padding:24px 24px 44px;display:none}
+.fx-prompter{position:fixed;top:70px;right:0;bottom:0;width:380px;max-width:100%;background:var(--panel);border-left:1px solid var(--rule-2);z-index:60;overflow:auto;padding:24px 24px 44px;display:none}
 body.fx-prompter-on .fx-prompter{display:block}
 @media(min-width:1280px){body.fx-prompter-on .shell{padding-right:calc(380px + var(--gut))}}
 .fx-pr-h{display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -1103,7 +1112,7 @@ body.fx-prompter-on .fx-prompter{display:block}
 .fx-pr-win{width:100%;margin:0 0 6px;padding:11px}
 .fx-pr-x:hover,.fx-pr-win:hover{color:var(--ink);border-color:var(--ink-3)}
 .fx-pr-warn{margin:14px 0 16px;font-size:12px;line-height:1.6;color:var(--ink-3)}
-.fx-pr-act{font-family:var(--ui);font-weight:600;font-size:20px;line-height:1.3;margin:18px 0 14px;color:#fff}
+.fx-pr-act{font-family:var(--ui);font-weight:600;font-size:20px;line-height:1.3;margin:18px 0 14px;color:var(--hd)}
 .fx-pr-blk{padding:14px 0;border-top:1px solid var(--rule)}
 .fx-pr-blk p{margin:0;font-size:13.5px;line-height:1.6;color:var(--ink)}
 .fx-pr-blk.ask p{color:var(--ok)}
@@ -5057,12 +5066,11 @@ const Final = {
         <div class="fx-cv-top"><b>Closery · Коммерческий МРТ</b><span>Конфиденциально · для собственника и первых лиц компании</span></div>
         <p class="fx-kicker" style="margin-top:44px">Аудит коммерческого блока</p>
         <h1 class="fx-cv-h">${Fx.esc(x.a.company || 'Ваша компания')}</h1>
-        <p class="fx-cv-sub">Где бизнес недополучает прибыль, сколько это стоит каждый месяц и что с этим делать за 90 дней. Все расчёты построены на ваших цифрах и показаны вместе с арифметикой.</p>
+        <p class="fx-cv-sub">Где вы недополучаете прибыль, сколько это стоит в месяц и что делать за 90 дней. Каждая цифра показана с арифметикой.</p>
         <div class="fx-doc">
-          <div><span class="fx-k">Профиль бизнеса</span><div class="fx-v">${Profile.explain()}</div></div>
+          <div><span class="fx-k">Бизнес</span><div class="fx-v">${Profile.explain()}</div></div>
           <div><span class="fx-k">Подготовил</span><div class="fx-v">Николай Клименко, Closery</div></div>
-          <div><span class="fx-k">Дата отчёта</span><div class="fx-v">${date}</div></div>
-          <div><span class="fx-k">Номер</span><div class="fx-v fx-mono">MRI-${x.a._rid || '000000'}</div></div>
+          <div><span class="fx-k">Дата и номер</span><div class="fx-v">${date} <span class="fx-dot">·</span> <span class="fx-mono">MRI-${x.a._rid || '000000'}</span></div></div>
           <div><span class="fx-k">Полнота данных</span><div class="fx-v fx-conf ${dq[0]}"><i></i>${dqN} из 6 ключевых цифр</div></div>
         </div>
       </header>
@@ -5119,33 +5127,33 @@ const Final = {
     const on = this.LINKS.filter(c => this.linkOn(c, L)).length;
     const cases = this.CASES.map(c => `<div class="fx-bcase"><span class="fx-bcase-co">${c.co}</span><b>${c.big}</b><em>${c.unit}</em><p>${c.p}</p></div>`).join('');
     const step = (v, t, cls = '') => `<div class="fx-pipe-s ${cls}"><b>${v}</b><span>${t}</span></div>`;
-    const pipe = [step(qn, `${Fx.plural(qn, 'ответ', 'ответа', 'ответов')} в анкете`),
+    const pipe = [step(qn, Fx.plural(qn, 'ответ', 'ответа', 'ответов')),
       step(6, 'систем бизнеса'),
-      step(this.LINKS.length, 'связей практики с деньгами'),
-      step(dn, `${Fx.plural(dn, 'рычаг', 'рычага', 'рычагов')} нашлось у вас`, 'ok'),
+      step(this.LINKS.length, 'связей с деньгами'),
+      step(dn, `${Fx.plural(dn, 'рычаг', 'рычага', 'рычагов')} у вас`, 'ok'),
       L && L.lossMo > 0 ? step(Fx.money(L.lossMo), 'теряется в месяц', 'loss') : ''].filter(Boolean).join('<i class="fx-pipe-a"></i>');
     const guard = (v, t) => `<div class="fx-guard"><b>${v}</b><span>${t}</span></div>`;
     const guards = [
-      guard('0', 'отраслевых бенчмарков. Ориентир — ваша же команда с инструментами'),
-      guard(Fx.pct(Ledger.REACH_CEIL), 'потолок доходимости до разговора, даже если считать больше'),
-      guard('×' + Fx.dec(1 + Ledger.CLOSE_REL_CAP, 2), 'максимальный рост закрытия от сегодняшнего'),
-      guard(Fx.pct(Ledger.GP_CAP), `валовой прибыли — потолок всей суммы${L && L.capHit ? '. У вас он сработал' : ''}`),
-      guard(Fx.dec(Ledger.PRICE_FLOW, 2), 'коэффициент на отток клиентов при росте цены'),
-      guard('1 раз', 'считается каждый рубль: на том этапе, где он теряется')].join('');
+      guard('0', 'отраслевых бенчмарков'),
+      guard(Fx.pct(Ledger.REACH_CEIL), 'потолок доходимости до разговора'),
+      guard('×' + Fx.dec(1 + Ledger.CLOSE_REL_CAP, 2), 'потолок роста закрытия'),
+      guard(Fx.pct(Ledger.GP_CAP), `потолок от валовой прибыли${L && L.capHit ? ', у вас сработал' : ''}`),
+      guard(Fx.dec(Ledger.PRICE_FLOW, 2), 'отток клиентов при росте цены'),
+      guard('1 раз', 'каждый рубль считается один раз')].join('');
     const links = this.LINKS.map(c => { const act = this.linkOn(c, L);
       return `<div class="fx-blink${act ? ' on' : ''}"><span>${c[0]}</span><i></i><span>${c[1]}</span><i></i><b>${c[2]}</b>${act ? '<em>в вашем отчёте</em>' : ''}</div>`; }).join('');
     return this.sec('intro', no, 'Основание', 'На чём стоит этот разбор',
-      'Откуда методика, как из ваших ответов получились суммы и какие ограничители не дают им раздуться.',
+      'Откуда методика, как ответы стали суммами и что не даёт этим суммам раздуться.',
       `<div class="fx-k">Откуда методика</div>
       <div class="fx-bcases">${cases}</div>
-      <p class="fx-note" style="margin-top:14px">Кейсы с цифрами выложены на closery.ru, каждую цифру подтверждают основатели этих компаний.</p>
+      <p class="fx-note" style="margin-top:14px">Кейсы лежат на closery.ru, цифры подтверждают основатели.</p>
 
-      <div class="fx-k" style="margin-top:44px">Как ваши ответы превратились в суммы</div>
+      <div class="fx-k" style="margin-top:44px">Как ответы стали суммами</div>
       <div class="fx-pipe">${pipe}</div>
 
       <div class="fx-k" style="margin-top:44px">Ограничители расчёта</div>
       <div class="fx-guards">${guards}</div>
-      <p class="fx-note">Арифметика показывает размер эффекта, вклад каждой практики — оценка по опыту внедрений. Проверяет её метрика, которая стоит в плане на свою волну. Любая сумма в ведомости раскрывается до формулы, а поменяйте ответ — отчёт пересчитается при вас.</p>
+      <p class="fx-note">Вклад каждой практики — оценка по опыту внедрений, её проверяет метрика волны. Любая сумма раскрывается до формулы.</p>
 
       <div class="fx-k" style="margin-top:44px">Связи, по которым идут деньги · ${on ? `у вас работают ${on} из ${this.LINKS.length}` : 'карта модели'}</div>
       <div class="fx-blinks">
@@ -5153,9 +5161,9 @@ const Final = {
         ${links}
       </div>
       <div class="fx-why3">
-        <div><b>Деньги из оплаченного трафика</b><p>Первый рубль приходит из заявок, за которые вы уже заплатили: ни бюджета, ни найма.</p></div>
-        <div><b>Сначала управление, потом люди</b><p>Новичок без воронки и скрипта учится на ваших клиентах. Поэтому найм, если он нужен, идёт после фундамента.</p></div>
-        <div><b>Приёмка по цифрам</b><p>Не сдвинулась метрика волны — значит, не сработало, и ждать дальше незачем.</p></div>
+        <div><b>Деньги из оплаченного трафика</b><p>Первый рубль идёт из заявок, за которые вы уже заплатили.</p></div>
+        <div><b>Сначала управление, потом люди</b><p>Новичок без воронки и скрипта учится на ваших клиентах.</p></div>
+        <div><b>Приёмка по цифрам</b><p>Метрика волны не сдвинулась — значит, не сработало.</p></div>
       </div>`);
   },
 
@@ -5204,7 +5212,7 @@ const Final = {
       : L && L.revKnown ? 'расходятся не критично' : 'выручка посчитана по воронке';
     const col = (t, items) => `<div><div class="fx-sub">${t}</div><ul class="fx-ul dash">${items.filter(Boolean).map(i => `<li><span>${i}</span></li>`).join('')}</ul></div>`;
     return this.sec('scope', no, 'Периметр', 'Что мы смотрели и на каких данных',
-      'Аудит охватывает коммерческий блок: как заявка превращается в деньги. Ниже граница работы и источник каждой цифры.',
+      'Мы смотрим, как заявка превращается в деньги. Ниже граница работы и откуда взята каждая цифра.',
       `<div class="fx-three">
         ${col('Что смотрели', ['Шесть систем: маркетинг, продажи, команда, управление, экономика, стратегия',
           'Воронку по этапам: заявка, разговор, сделка, повторная покупка',
@@ -5219,7 +5227,7 @@ const Final = {
           'Рынок и конкурентов: сравниваем с потенциалом вашей же команды',
           'Выгрузку CRM и записи звонков: все цифры приняты с ваших слов'])}
       </div>
-      <p class="fx-note">Метод расчёта один на весь отчёт. Ваш показатель сравнивается с тем, что даёт та же команда, когда у неё есть инструменты: норматив ответа, скрипт, разбор звонков, работа по базе. Вклад каждого инструмента в показатель подписан отдельной строкой в ведомости потерь, там же раскрывается арифметика по клику. Если какая-то цифра указана неточно, поправьте её в ответах: отчёт пересчитается целиком.</p>`);
+      <p class="fx-note">Ваш показатель мы сравниваем с тем, что даёт та же команда с инструментами: нормативом ответа, скриптом, разбором звонков, работой по базе. Если цифра неточная, поправьте её в ответах, отчёт пересчитается.</p>`);
   },
 
   // ── 02 Цифры ──
@@ -5237,7 +5245,7 @@ const Final = {
       `<div class="fx-fstep"><div class="fx-fn">${Fx.dec(L.rev / 1e6).replace(/,0$/, '')}</div><div class="fx-fl">млн ₽ выручки${L.repeat != null ? `<br>из них ${L.repeat}% повторные` : ''}</div></div>`
     ].join('');
     const bar = (lbl, v, norm, show) => `<div class="fx-fbar"><span>${lbl}</span><span class="fx-ft"><i style="width:${Math.min(100, v * 100)}%"></i>${norm != null ? `<u style="left:${Math.min(100, norm * 100)}%" data-n="потенциал ${Fx.pct(norm)}"></u>` : ''}</span><span class="fx-fp ${norm != null && v < norm ? 'fx-red' : ''}">${show}</span></div>`;
-    const bars = `${bar('Заявки', 1, null, '100%')}${L.full ? bar('Разговоры', L.reach, L.P.reach, Fx.pct(L.reach)) : ''}${bar('Сделки из заявок', L.conv / 100, L.P.reach * L.P.close, L.conv + '%')}`;
+    const bars = `${bar('Заявки', 1, null, '100%')}${L.full ? bar('Разговоры', L.reach, L.P.reach, Fx.pct(L.reach)) : ''}${bar('Сделки', L.conv / 100, L.P.reach * L.P.close, L.conv + '%')}`;
     const facts = [
       L.cpl ? ['Стоимость заявки', Fx.rub(L.cpl), 'сколько платите за обращение'] : null,
       L.cac ? ['Стоимость клиента', Fx.rub(L.cac), 'CAC: реклама на одного покупателя'] : null,
@@ -5260,7 +5268,7 @@ const Final = {
     else if (L.revKnown && Math.abs(L.funnelRev / L.rev - 1) <= .25)
       check = `<div class="fx-check"><span class="fx-ic">✓</span><span><b>${Math.abs(L.funnelRev / L.rev - 1) <= .1 ? 'Цифры сходятся.' : `Цифры сходятся с допуском ${Fx.pct(Math.abs(L.funnelRev / L.rev - 1))}.`}</b> ${L.leads} ${Fx.plural(L.leads, 'заявка', 'заявки', 'заявок')} × ${L.conv}% × ${Fx.rub(L.check)} = ${Fx.mln(L.deals * L.check)} новых продаж.${L.repeat ? ` Вместе с ${L.repeat}% повторных это ${Fx.mln(L.funnelRev)}` : ` Это ${Fx.mln(L.funnelRev)}`} при заявленных ${Fx.mln(L.rev)}.${Math.abs(L.funnelRev / L.rev - 1) > .1 ? ' Расчёт ведём от заявленной выручки, расхождение стоит сверить по CRM в первую неделю.' : ''}</span></div>`;
     return this.sec('numbers', no, 'Исходные данные', 'Ваш коммерческий блок в цифрах',
-      'Здесь нет наших оценок: только то, что вы назвали сами, сведённое в одну картину. Деньги за месяц, путь клиента по этапам, юнит-экономика и загрузка отдела. Все выводы дальше опираются на эти цифры и ни на что больше, поэтому пройдите их глазами: если что-то неверно, лучше поправить сейчас.',
+      'Только то, что назвали вы сами. Все выводы дальше стоят на этих цифрах, так что сверьте их: если что-то неверно, поправьте сейчас.',
       `<div class="fx-snap">
         <div class="fx-card"><div class="fx-sub">Деньги за месяц</div>${money}</div>
         <div class="fx-card"><div class="fx-sub">Путь клиента за месяц</div><div class="fx-fsteps" style="grid-template-columns:repeat(${L.full ? 4 : 3},minmax(0,1fr))">${steps}</div><div class="fx-fbars">${bars}</div></div>
@@ -5290,9 +5298,9 @@ const Final = {
       <span class="fx-k">${n.k}</span><b>${n.v}</b><i>${n.u}</i>
       <div class="fx-tsens"><span>${n.s}</span><em>+${Fx.money(n.g)}</em></div></div>`).join('');
     const ratio = top !== lead && lead.g > 0 ? top.g / lead.g : null;
-    return `<div class="fx-sub" style="margin-top:38px">Дерево ценности: из чего складывается выручка и сколько стоит каждый пункт</div>
+    return `<div class="fx-sub" style="margin-top:38px">Из чего складывается выручка и сколько стоит каждый пункт</div>
       <div class="fx-tree">${cards}</div>
-      <p class="fx-note">Валовая прибыль в месяц при марже ${L.marginAssumed ? '30%, принято' : L.margin + '%'}. Сильнее всего на деньги влияет <b>${top.k.toLowerCase()}</b>: ${top.s.toLowerCase()} даёт <b class="fx-green">+${Fx.money(top.g)}</b> валовой прибыли в месяц${ratio ? ` — столько же, сколько даёт рост рекламного бюджета на ${Fx.mult(ratio)}% при сегодняшней воронке` : ''}. Отсюда и порядок работ: сначала то, где один пункт стоит дороже всего, потом объём.</p>`;
+      <p class="fx-note">Сильнее всего на деньги влияет <b>${top.k.toLowerCase()}</b>: ${top.s.toLowerCase()} даёт <b class="fx-green">+${Fx.money(top.g)}</b> валовой прибыли в месяц${ratio ? `, как рост рекламного бюджета на ${Fx.mult(ratio)}%` : ''}. Поэтому начинаем с него.</p>`;
   },
 
   // ── 03 Ведомость потерь ──
@@ -5385,9 +5393,9 @@ const Final = {
     if (!L || !L.leaky.length) return '';
     const p = Profile.build();
     const quiet = L.quiet.filter(s => s.id !== 'lead' || L.capState !== 'starving');
-    const cash = L.cash > 0 ? `<div class="fx-cash"><div class="fx-cash-v">${Fx.M}${Fx.money(L.cash)}</div><p><b>Отдельно от прибыли: деньги, которые уже списаны со счёта.</b> Столько рекламного бюджета в месяц уходит на заявки, до разговора с которыми дело не доходит. За год это ${Fx.mln(L.cash * 12)} живых денег.</p></div>` : '';
+    const cash = L.cash > 0 ? `<div class="fx-cash"><div class="fx-cash-v">${Fx.M}${Fx.money(L.cash)}</div><p><b>Отдельно от прибыли: деньги, которые уже списаны.</b> Столько рекламы в месяц уходит на заявки, до разговора с которыми дело не доходит. За год ${Fx.mln(L.cash * 12)}.</p></div>` : '';
     return this.sec('ledger', no, 'Ведомость потерь', 'Где именно сгорает прибыль',
-      `Путь клиента по этапам: где именно остаётся валовая прибыль и из-за чего. Ориентир — потенциал вашей же команды с построенной системой. Деньги считаются один раз, на том этапе, где теряются. Нажмите на строку — раскроется арифметика.`,
+      `Путь клиента по этапам: где остаётся валовая прибыль и почему. Ориентир — потенциал вашей же команды с системой. Нажмите на строку, раскроется арифметика.`,
       `<div class="fx-sub">Валовая прибыль в месяц: сколько недобираете и на каком этапе</div>
       ${this.bridge(L, this.modelLedger())}
       <div class="fx-ledger">
@@ -5400,7 +5408,7 @@ const Final = {
       ${quiet.length ? `<p class="fx-note">Без потенциала: ${quiet.map(s => s.name.toLowerCase()).join(', ')}. Здесь система уже работает, в ближайшие 90 дней не трогаем.</p>` : ''}
       ${cash}
       <div class="fx-method">
-        <p>Потенциал каждого этапа собран из практик, которых сейчас нет. Вклад каждой — экспертная оценка по опыту внедрений: расчёт показывает размер эффекта, проверяет его метрика из плана. Сумма ограничена сверху: не больше ${Fx.pct(Ledger.GP_CAP)} валовой прибыли в год.${L.capHit ? ` Ваш расчёт в потолок упёрся: ещё ${L.dropped.n} ${Fx.plural(L.dropped.n, 'рычаг', 'рычага', 'рычагов')} на ${Fx.money(L.dropped.sum)} в месяц в расчёт не взяли, реальный потенциал выше.` : ''} Возврат за 90 дней ограничен мощностью отдела${L.capCut < 1 ? ' и в вашем случае урезан ею' : ''}. Ориентир профиля: ${Profile.explain()}.${L.marginAssumed ? ' Маржа не указана и принята 30%: уточните её, суммы пересчитаются.' : ''}</p>
+        <p>Потенциал этапа собран из практик, которых сейчас нет. Вклад каждой — оценка по опыту внедрений, её проверяет метрика из плана. Сумма не больше ${Fx.pct(Ledger.GP_CAP)} валовой прибыли в год.${L.capHit ? ` У вас этот потолок сработал: ещё ${L.dropped.n} ${Fx.plural(L.dropped.n, 'рычаг', 'рычага', 'рычагов')} на ${Fx.money(L.dropped.sum)} в месяц в расчёт не вошли, реальный потенциал выше.` : ''} Возврат за 90 дней ограничен мощностью отдела${L.capCut < 1 ? ', у вас она его урезала' : ''}.${L.marginAssumed ? ' Маржа не указана и принята 30%: уточните её, суммы пересчитаются.' : ''}</p>
         <div class="fx-override"><span>${Profile.hasOverride() ? 'Потолок конверсии из заявки в оплату — ваша цифра по нише' : `Потенциал конверсии из заявки в оплату в этом расчёте — ${Fx.pct(L.P.conv)}. Для вашей ниши реально другое?`}</span><input id="fxOvr" type="text" inputmode="numeric" autocomplete="off" maxlength="2" value="${Profile.hasOverride() ? p.convTarget : Math.round(L.P.conv * 100)}" data-auto="${Profile.hasOverride() ? '' : Math.round(L.P.conv * 100)}" aria-label="Потолок конверсии из заявки в оплату, %"><span>%</span>${Profile.hasOverride() ? '<button id="fxOvrReset" type="button">вернуть расчётный</button>' : ''}<small>${Profile.hasOverride() ? `Выше этой цифры воронка в расчёте не растёт: сейчас ${L.conv}%, потенциал ${Fx.pct(L.P.conv)}. Ведомость, план и деньги пересчитаны.` : 'Поставьте свою цифру: потенциал воронки упрётся в неё, и весь отчёт пересчитается сразу.'}</small></div>
       </div>`);
   },
@@ -5412,46 +5420,46 @@ const Final = {
     const st = (cond, known) => known === false ? null : !!cond;
     return [
       {g:'Экономика', t:'Юнит-экономика посчитана',
-        d:'Известны стоимость клиента, его пожизненная ценность и окупаемость привлечения. Бюджет двигают по цифрам окупаемости.',
+        d:'Известны стоимость клиента, его ценность и окупаемость. Бюджет двигают по этим цифрам.',
         s:st(n('cac') > 0 && n('ltv') > 0 && n('cost_per_lead') > 0)},
       {g:'Экономика', t:'Управление прибылью',
-        d:'Прибыль и рентабельность считают помесячно и по направлениям. Решения о найме, скидках и бюджете принимают, глядя на маржу.',
+        d:'Прибыль считают помесячно и по направлениям. Найм, скидки и бюджет решают по марже.',
         s:st(n('profit') != null && !FinModel.base().marginAssumed)},
       {g:'Экономика', t:'Цена — управляемый рычаг',
-        d:'Прайс пересматривают планово, рынок это принимает. Цена растёт вместе с ценностью.',
+        d:'Прайс пересматривают по плану, и рынок это принимает.',
         s:st(a.check_flex === 'raised', a.check_flex != null)},
       {g:'Маркетинг', t:'Портфель каналов вместо одной трубы',
-        d:'Заявки идут минимум из трёх источников, и выпадение одного не обнуляет месяц. Каналы сравнивают между собой по стоимости сделки.',
+        d:'Заявки идут минимум из трёх источников, выпадение одного не обнуляет месяц.',
         s:st(src >= 3, src != null)},
       {g:'Маркетинг', t:'Атрибуция доведена до денег',
-        d:'Видно, какой канал приносит оплаты. Бюджет перекладывают в сильный канал за неделю.',
+        d:'Видно, какой канал приносит оплаты, и бюджет переезжает в сильный за неделю.',
         s:st(n('cost_per_lead') > 0 && a.funnel_visibility === 'yes' && a.has_crm === 'yes')},
       {g:'Продажи', t:'Воронка оцифрована по этапам',
-        d:'Конверсия считается на каждом шаге воронки. Просадку видно в тот же день, задолго до итогов месяца.',
+        d:'Конверсия считается на каждом шаге. Просадку видно в тот же день.',
         s:st(a.funnel_visibility === 'yes' && a.has_crm === 'yes')},
       {g:'Продажи', t:'Скорость и касания заданы нормативом',
-        d:'Время первого ответа и число касаний закреплены регламентом и проверяются по отчёту. Это не зависит от загруженности и настроения менеджера.',
+        d:'Время ответа и число касаний закреплены регламентом и проверяются по отчёту.',
         s:st(a.response_time === '15m' && a.followup === 'system')},
       {g:'Продажи', t:'Технология продажи воспроизводима',
-        d:'Есть скрипт ключевого этапа, карта возражений и разбор сделок. Новый продавец выходит на результат по инструкции.',
+        d:'Есть скрипт, карта возражений и разбор сделок. Новичок выходит на результат по инструкции.',
         s:st(a.has_regl === 'yes' && a.call_records === 'yes')},
       {g:'Продажи', t:'База клиентов — отдельный поток выручки',
-        d:'У повторных продаж есть ответственный, план и повод для второй покупки. О старых клиентах вспоминают по календарю, провал месяца для этого не нужен.',
+        d:'У повторных продаж есть ответственный, план и повод для второй покупки.',
         s:st(a.old_base === 'regular', a.old_base != null)},
       {g:'Управление', t:'Отделом управляет руководитель',
-        d:'Есть человек, для которого план-факт и разбор сделок — основная работа. Собственник не заменяет его собой в конце месяца.',
+        d:'Есть человек, для которого план-факт и разбор сделок — основная работа.',
         s:st(a.has_rop === 'yes' && a.owner_dep === 'no')},
       {g:'Управление', t:'План выполняется из месяца в месяц',
-        d:'План — рабочий инструмент на весь месяц. Отклонение видят на второй неделе и успевают его отработать.',
+        d:'Отклонение от плана видят на второй неделе и успевают исправить.',
         s:st(a.plan_done === 'stable', a.plan_done != null)},
       {g:'Управление', t:'Мотивация собрана под план',
-        d:'Оклад и процент связаны с выполнением плана и ключевыми действиями. Продавцу выгодно то же, что и компании, без ручных договорённостей.',
+        d:'Оклад и процент привязаны к плану и ключевым действиям. Продавцу выгодно то же, что компании.',
         s:st(a.motivation === 'balanced', a.motivation != null)},
       {g:'Масштаб', t:'Есть запас мощности под рост',
-        d:'Компания знает, какой поток выдержит без потери качества, и что именно упрётся первым. Рост планируют заранее.',
+        d:'Компания знает, какой поток выдержит и что упрётся первым.',
         s:st(a.growth_ready === 'nothing', a.growth_ready != null)},
       {g:'Масштаб', t:'Команда воспроизводится',
-        d:'Найм и адаптация работают как конвейер: замена не останавливает выручку. Уход сильного продавца — не событие месяца.',
+        d:'Найм и адаптация работают как конвейер, уход сильного продавца не роняет месяц.',
         s:st(a.turnover === 'none' && !['long','gaveup'].includes(a.hiring_time), a.turnover != null)}
     ];
   },
@@ -5466,7 +5474,7 @@ const Final = {
       const hires = capHires = L.managers > 0 ? Math.max(1, Math.ceil(L.managers * need / L.capacity) - L.managers) : Math.max(1, Math.ceil(need / L.capacity) - 1);
       const slow = {long:'Людей вы ищете больше трёх месяцев уже сейчас.', gaveup:'По вашему ответу найм почти остановился: подходящих людей не находите.', months:'Поиск идёт 1–3 месяца и пока не закрыт.'}[a.hiring_time] || '';
       R.push({kind:'people', sev:'high', t:'Мощность отдела',
-        p:`Сегодня отдел закрывает ${Fx.deals(L.deals)} ${Fx.plural(Math.round(L.deals), 'сделку', 'сделки', 'сделок')} в месяц при заявленном потолке ${L.capacity}. Цель ×${mTxt} на сегодняшней конверсии требует ${Fx.deals(need)} ${Fx.plural(Math.round(need), 'новой сделки', 'новых сделок', 'новых сделок')} в месяц. Разрыв закрывается только людьми: ${hires} ${Fx.plural(hires, 'продавец', 'продавца', 'продавцов')} сверх текущего состава.`,
+        p:`Отдел закрывает ${Fx.deals(L.deals)} ${Fx.plural(Math.round(L.deals), 'сделку', 'сделки', 'сделок')} в месяц при потолке ${L.capacity}. Цель ×${mTxt} требует ${Fx.deals(need)} ${Fx.plural(Math.round(need), 'новой сделки', 'новых сделок', 'новых сделок')}. Разрыв закрывают только люди: ${hires} ${Fx.plural(hires, 'продавец', 'продавца', 'продавцов')} сверх текущих.`,
         c:`${slow} Конкурсный найм даёт кандидата за 2–3 недели, поштучный поиск — за 2–3 месяца на человека. Это первое, что упирается в календарь.`});
     }
     const mgrNow = L.managers || 1, hires = capHires, mgrAfter = mgrNow + hires;
@@ -5474,9 +5482,9 @@ const Final = {
     if (a.has_rop === 'no' && (mgrAfter >= 3 || mgrNow >= 3))
       R.push({kind:'people', sev:'high', t:'Управление отделом',
         p:hires > 0
-          ? `Сейчас отделом из ${mgrNow} ${Fx.plural(mgrNow, 'человека', 'человек', 'человек')} управляет собственник${ownTime}. На ${mgrAfter} ${Fx.plural(mgrAfter, 'продавце', 'продавцах', 'продавцах')} ручное управление рассыпается: руководитель ведёт 6–8 человек с ежедневным планом-фактом и разбором звонков, и это полноценная работа: во вторую половину дня собственника она не помещается.`
-          : `Отделом из ${mgrNow} ${Fx.plural(mgrNow, 'человека', 'человек', 'человек')} управляет собственник${ownTime}, отдельного руководителя нет. Рост упирается в это первым: пока вы одновременно продаёте, нанимаете и разбираете звонки, добавлять людей некуда — управлять ими будет некому.`,
-        c:`Без руководителя рост превращает контроль в еженедельную отчётность постфактум. ${a.year_goal === 'system' ? 'И цель выйти из операционки отменяется сама собой: чем больше отдел, тем плотнее вы в нём заняты.' : 'Собственник остаётся в операционке на весь период роста.'}`});
+          ? `Сейчас отделом из ${mgrNow} ${Fx.plural(mgrNow, 'человека', 'человек', 'человек')} управляет собственник${ownTime}. На ${mgrAfter} ${Fx.plural(mgrAfter, 'продавце', 'продавцах', 'продавцах')} ручное управление рассыпается: руководитель с ежедневным планом-фактом и разбором звонков ведёт 6–8 человек, и это целый рабочий день.`
+          : `Отделом из ${mgrNow} ${Fx.plural(mgrNow, 'человека', 'человек', 'человек')} управляет собственник${ownTime}, отдельного руководителя нет. Рост упрётся в это первым: пока вы сами и продаёте, и нанимаете, управлять новыми людьми будет некому.`,
+        c:`Без руководителя контроль превращается в отчёт постфактум. ${a.year_goal === 'system' ? 'А цель выйти из операционки отпадает: чем больше отдел, тем плотнее вы в нём заняты.' : 'Собственник остаётся в операционке на весь рост.'}`});
     const cs = L.st.find(s => s.id === 'contact');
     if (a.response_time && a.response_time !== '15m' && cs)
       R.push({kind:'quality', sev:a.response_time === 'hour' ? 'mid' : 'high', t:'Скорость первого контакта',
@@ -5484,11 +5492,11 @@ const Final = {
         c:`Сегодня этот этап стоит ${Fx.money(cs.loss)} в месяц. При выручке ×${mTxt} та же дыра стоит около ${Fx.money(cs.loss * mult)} в месяц: потери масштабируются вместе с оборотом.`});
     if (a.has_crm === 'no' || a.funnel_visibility === 'no')
       R.push({kind:'quality', sev:'mid', t:'Учёт и управляемость',
-        p:`${a.has_crm === 'no' ? 'Сделки живут вне CRM' : 'Конверсия по этапам воронки не видна'}. Пока сделок ${Fx.deals(L.deals)} в месяц, картину держит голова собственника. На ${Fx.deals(need)} сделках так уже нельзя: ответить, где именно просело, будет нечем.`,
+        p:`${a.has_crm === 'no' ? 'Сделки живут вне CRM' : 'Конверсия по этапам воронки не видна'}. Пока сделок ${Fx.deals(L.deals)} в месяц, картину держит голова собственника. На ${Fx.deals(need)} так уже нельзя: где просело, будет не видно.`,
         c:`Любая ошибка масштабируется вместе с оборотом и всплывает через месяц, когда деньги уже потеряны. Решения в этот момент принимаются по ощущениям.`});
     if (a.turnover === 'half' || (a.turnover === 'few' && mgrNow <= 3))
       R.push({kind:'people', sev:a.turnover === 'half' ? 'high' : 'mid', t:'Текучка и адаптация',
-        p:`За год ${a.turnover === 'half' ? 'сменилась половина отдела и больше' : 'заменили 1–2 человек'}. Новый продавец без записей звонков, скриптов и понятного плана выходит на выработку месяцами, а при росте новых людей будет больше, чем сейчас.`,
+        p:`За год ${a.turnover === 'half' ? 'сменилась половина отдела и больше' : 'заменили 1–2 человек'}. Новичок без записей звонков, скриптов и плана выходит на выработку месяцами, а при росте новичков станет больше.`,
         c:`Каждый несработавший найм — это оклад, время руководителя и потерянные заявки, которые он вёл. При росте эта статья умножается.`});
     if (a.growth_ready === 'money' || (L.profit != null && L.profit <= 0))
       R.push({kind:'money', sev:'high', t:'Оборотный капитал',
@@ -5580,7 +5588,7 @@ const Final = {
       <div class="fx-pp">${P.map(p => `<div class="fx-pp-r"><b>${p.role}</b><div><span class="fx-k">Что видно</span><p>${Fx.cap(p.seen.join(', '))}.</p></div><div><span class="fx-k">Задача</span><p>${p.task}</p></div></div>`).join('')}</div>` : '';
     const nw = ['', 'Одна система', 'Две системы', 'Три системы', 'Четыре системы', 'Пять систем'][S.length];
     return this.sec('fix', no, 'Что делать', `${nw} бизнеса ${S.length > 1 ? 'недобирают' : 'недобирает'} ${Fx.mln(L.lossMo * 12)} в год`,
-      `Те же деньги, что в ведомости, собраны по системам бизнеса: где теряется прибыль, на чём это видно в ваших ответах, что меняем и кто за это отвечает. Тактику по каждой системе разбираем вместе на МРТ.`,
+      `Те же деньги, что в ведомости, но по системам: где теряется, что меняем и кто отвечает. Тактику разбираем вместе на МРТ.`,
       `<div class="fx-scs">${big.map(card).join('')}</div>
       ${small.length ? `<p class="fx-note">${small.map(s => s.name).join(' и ')}: отдельной работы не ${small.length > 1 ? 'требуют, закрываются' : 'требует, закрывается'} вместе с системами выше.</p>` : ''}
       ${ppl}`);
@@ -5599,7 +5607,7 @@ const Final = {
       rows += `<div class="fx-mx-r"><div class="fx-mx-n"><b>${p.t}</b><span>${p.d}</span></div>${mk(p.s === null ? 'unk' : p.s ? 'yes' : 'mine', p.s === null ? '—' : p.s ? '✓' : '✕', 'У вас')}${mk('yes', '✓', 'Система Closery')}</div>`;
     });
     return this.sec('bench', no, 'Сравнение', 'Где вы между ручным режимом и системой Closery',
-      `Средних по рынку у нас нет: такие цифры публикуются редко и по несопоставимой методике. Сравниваем по управленческим контурам — тому, что определяет потолок компании независимо от ниши. Галочка означает, что контур работает каждый день и это можно проверить. Одного документа для неё мало.`,
+      `Средних по рынку у нас нет, поэтому сравниваем по управленческим контурам. Галочка значит, что контур работает каждый день и это можно проверить.`,
       `<div class="fx-mx">
         <div class="fx-mx-h"><div>Контур управления</div><div>У вас</div><div><b class="fx-lgl">Система Closery</b><b class="fx-smt">Closery</b></div></div>
         ${rows}
@@ -5609,7 +5617,7 @@ const Final = {
         <div class="fx-bp-t"><i style="width:${pos}%"></i><u style="left:${pos}%"></u></div>
         <div class="fx-bp-v"><b>${have} из ${known.length} ${Fx.plural(known.length, 'контура', 'контуров', 'контуров')}</b> работают у вас сегодня.${P.length > known.length ? ` Ещё ${P.length - known.length} оценить не смогли: не хватило ответов.` : ''}</div>
       </div>
-      <p class="fx-note">Ни один из этих контуров не закрывается одним наймом. Руководитель отдела без оцифрованной воронки управляет по ощущениям, контроль качества без скрипта слушает звонки без эталона, а маркетолог без юнит-экономики оптимизирует стоимость клика вместо стоимости клиента. Поэтому порядок работ начинается с контура, найм идёт после.</p>`);
+      <p class="fx-note">Ни один контур не закрывается одним наймом: руководитель без воронки в цифрах управляет по ощущениям, а маркетолог без юнит-экономики оптимизирует клик вместо клиента. Поэтому сначала контур, потом найм.</p>`);
   },
 
   // ── 08 Риски роста ──
@@ -5623,7 +5631,7 @@ const Final = {
       <div><span class="fx-rsev"><b>${String(i + 1).padStart(2, '0')}</b>${r.sev === 'high' ? 'критично' : 'требует решения'}</span><h5>${r.t}</h5><p>${r.p}</p></div>
       <div class="fx-rc">${r.c}</div></div>`).join('');
     return this.sec('risk', no, 'Риски роста', 'Что сломается первым, если расти на сегодняшней системе',
-      `Рост умножает проблемы: те же дыры на большем обороте стоят дороже, а ручное управление перестаёт справляться раньше, чем заканчиваются деньги на рекламу. Ниже то, что упрётся в потолок при движении к вашей цели ×${mTxt}, в порядке очереди. Каждый пункт следует из ваших же ответов и сегодняшних цифр.`,
+      `На большем обороте те же дыры стоят дороже. Ниже, что упрётся в потолок по пути к цели ×${mTxt}, в порядке очереди. Всё следует из ваших ответов.`,
       `${match}<div class="fx-risks">${cards}</div>
       <p class="fx-note">План на 90 дней собран так, чтобы эти узкие места расшивались до роста: сначала процесс и управление, потом люди, и только потом объём.</p>`);
   },
@@ -5659,16 +5667,16 @@ const Final = {
     const react = {
       same: 'Остаться на месте при сегодняшней воронке не получится нейтрально: это и есть цена ниже. Издержки и зарплаты при этом растут каждый год.',
       slowdeath: 'Потеря рынка начинается раньше падения выручки: сильные продавцы уходят туда, где система даёт им заработать. Это уже происходит внутри цифр выше.',
-      crisis: 'Денежный поток мы не считали: в периметр диагностики он не входит. Что видно по нашим данным — оплаченные заявки не доходят до сделки, и на этой воронке каждый следующий рубль рекламы возвращается хуже предыдущего.',
+      crisis: 'Денежный поток мы не считали, он вне периметра. По нашим данным видно другое: оплаченные заявки не доходят до сделки, и каждый следующий рубль рекламы возвращается хуже предыдущего.',
       grow: 'Рост при сегодняшней воронке возможен, но он будет стоить дороже каждого следующего рубля: вы будете покупать заявки, часть которых снова не дойдёт до разговора.'
     }[a.if_nothing];
     return this.sec('nothing', no, 'Бездействие', 'Что будет, если не делать ничего',
-      'Два сценария на одних и тех же ваших цифрах: всё остаётся как есть и внедрение начинается сейчас. Обе линии — валовая прибыль, которую компания недополучает накопительным итогом. Чем ниже линия, тем меньше потерь, а разрыв между ними — деньги, которые возвращает внедрение.',
+      'Два сценария на ваших цифрах: всё остаётся как есть или внедрение начинается сейчас. Линия показывает недополученную прибыль накопительным итогом, разрыв между линиями — деньги, которые вернёт внедрение.',
       `<div class="fx-sub">Накопленная недополученная прибыль за 12 месяцев</div>
       ${this.nothingSVG(L)}
       <div class="fx-nd">
-        <div><span class="fx-k">Двенадцать месяцев без изменений</span><div class="fx-nbig">${Fx.M}${Fx.mln(year)}</div><p class="fx-note" style="margin-top:14px">Недополученная валовая прибыль накопительным итогом. В отчётности их не видно, это не расход и не убыток: деньги, которые компания заработала бы на уже оплаченных заявках.</p></div>
-        <div><span class="fx-k">Те же двенадцать месяцев со стартом сейчас</span><div class="fx-nbig fx-green">+${Fx.mln(L.yearGP)}</div><p class="fx-note" style="margin-top:14px">Столько из ${Fx.mln(year)} возвращается за первый год: каждая волна даёт деньги после своей приёмки, первые месяцы уходят на разгон${L.pnl.cost ? `. После новых расходов на управление остаётся ${Fx.sgn(L.yearNet)}` : ''}. Оставшиеся ${Fx.mln(year - L.yearGP)} — зелёная линия: эта часть потенциала требует больше 90 дней и в расчёт первого года не взята.</p></div>
+        <div><span class="fx-k">Двенадцать месяцев без изменений</span><div class="fx-nbig">${Fx.M}${Fx.mln(year)}</div><p class="fx-note" style="margin-top:14px">Недополученная валовая прибыль накопительным итогом. В отчётности её не видно: это деньги, которые принесли бы уже оплаченные заявки.</p></div>
+        <div><span class="fx-k">Те же двенадцать месяцев со стартом сейчас</span><div class="fx-nbig fx-green">+${Fx.mln(L.yearGP)}</div><p class="fx-note" style="margin-top:14px">Столько из ${Fx.mln(year)} вернётся за первый год: каждая волна даёт деньги после приёмки, первые месяцы уходят на разгон${L.pnl.cost ? `. После новых расходов на управление остаётся ${Fx.sgn(L.yearNet)}` : ''}. Оставшиеся ${Fx.mln(year - L.yearGP)} требуют больше 90 дней и в первый год не входят.</p></div>
       </div>
       ${own ? `<div class="fx-quote"><q>${own}</q><span class="fx-who">Так вы ответили на вопрос, что будет, если ничего не менять ближайший год. <b>${react}</b></span></div>` : ''}
       <div class="fx-sub" style="margin-top:38px">Что дорожает, пока решение откладывается</div>
@@ -5704,7 +5712,7 @@ const Final = {
       .map(([k, l]) => `<div class="fx-sys-row"><span>${l}</span><span class="fx-sys-t"><i style="width:${x.cats[k].score}%;background:${col(x.cats[k].score)}"></i></span><span class="fx-sys-n" style="color:${col(x.cats[k].score)}">${x.cats[k].score}</span></div>`).join('');
     const list = (arr, cls) => arr.length ? `<ul class="fx-ul ${cls}">${arr.map(t => `<li><span>${t}</span></li>`).join('')}</ul>` : '<p class="fx-note">—</p>';
     return this.sec('diagnosis', no, 'Диагноз', title,
-      `Механизмы на разных этапах разные: на первом контакте теряет скорость ответа, на закрытии — отсутствие скрипта и разбора сделок. Но знаменатель у них один: коммерческий блок не стандартизирован и не управляется как единая система. Ниже цепочка от этого знаменателя до денег, ваш ответ о главной проблеме рядом с тем, что показывают цифры, и оценка шести систем бизнеса.`,
+      `Причины на этапах разные, корень один: коммерческий блок не стандартизирован и не управляется как система. Ниже цепочка от корня до денег, ваш ответ рядом с цифрами и оценка шести систем.`,
       `<div class="fx-chain" style="grid-template-columns:repeat(${x.chain.length},minmax(0,1fr))">${nodes}</div>
       ${quote}${perc}
       <div class="fx-three">
@@ -5731,7 +5739,7 @@ const Final = {
       : `${Fx.cap(sysParts)} дают ${Fx.mln(g.sysRevBase, 1)}. Остальное: +${g.sysLeads - L.leads} ${Fx.plural(g.sysLeads - L.leads, 'заявка', 'заявки', 'заявок')} в месяц${g.sysAd ? `, +${Fx.money(g.sysAd)} рекламы` : ''}, но уже на починенной воронке.${g.hires ? ` Плюс ${g.hires} ${Fx.plural(g.hires, 'продавец', 'продавца', 'продавцов')} к концу года.` : ''}`;
     const formula = `${Fx.mln(g.sysRevBase, 1)} = ${Fx.qty(L.leads, 'заявка', 'заявки', 'заявок')} × ${Fx.pct(L.P.reach)} дозвон × ${Fx.pct(L.P.close, 1)} закрытие × ${Fx.price(g.sysCheck)} чек ÷ ${Fx.pct(1 - g.sysRep)} доля новых продаж`;
     return this.sec('goal', no, 'Цель', g.sysOk ? `Цель ×${g.multTxt} закрывается без роста рекламного бюджета` : `Цель ×${g.multTxt} закрывается только системой плюс трафик`,
-      `Цель проверяется арифметикой. Ваша цель на год — ${g.label}, это ${Fx.mln(g.target, 1)} выручки в месяц. Мы посчитали три дороги к ней на ваших же цифрах: только трафик, только конверсия и система. У каждой дороги видно, что именно для неё потребуется и где она ломается.`,
+      `Ваша цель на год — ${g.label}, это ${Fx.mln(g.target, 1)} выручки в месяц. Посчитали три дороги к ней: только трафик, только конверсия и система. У каждой видно, что потребуется и где она ломается.`,
       `<div class="fx-paths">
         <div class="fx-path"><div class="fx-pl">Только трафик<small class="${g.trafficOk ? 'mid' : 'no'}">${g.trafficOk ? 'Дорого и с потерями' : 'Упрётся в отдел'}</small></div><div>${bar(g.trafficRev, g.trafficOk ? amber : red, true)}<p>${trafficTxt}</p></div></div>
         <div class="fx-path"><div class="fx-pl">Только конверсия<small class="${g.convOk ? 'mid' : 'no'}">${g.convOk ? 'Возможно, но хрупко' : 'Не хватает одной'}</small></div><div>${bar(g.convRev, g.convOk ? amber : red)}<p>${convTxt}</p></div></div>
@@ -5759,7 +5767,7 @@ const Final = {
     const offCard = w => `<div class="fx-wave off"><div class="fx-wtop"><div class="fx-wno"><b>Волна ${w.n}</b> · ${w.title}</div><div class="fx-weff"><span>не нужна</span></div></div><p class="fx-wgoal">${w.skip}</p></div>`;
     const cnt = ['', 'одна волна', 'две волны', 'три волны', 'четыре волны'][act.length];
     return this.sec('plan', no, 'Внедрение', `90 дней, ${cnt}, приёмка по цифрам`,
-      `План собран из того, что нашлось в ваших ответах: в задачи попадают только найденные ошибки${off.length ? `, а ${off.length > 1 ? 'волны' : 'волна'} без находок ${off.length > 1 ? 'вычеркнуты' : 'вычеркнута'} с причиной` : ''}. У каждой волны есть контрольные метрики с вашей сегодняшней цифрой и критерии приёмки без права трактовки: волна закрыта, когда выполнен каждый критерий, сколько бы недель на это ни ушло. Эффект волн — те же деньги из ведомости потерь, разложенные по срокам.`,
+      `В план попадают только найденные ошибки${off.length ? `, ${off.length > 1 ? 'волны' : 'волна'} без находок ${off.length > 1 ? 'вычеркнуты' : 'вычеркнута'} с причиной` : ''}. У каждой волны есть метрика с вашей сегодняшней цифрой и критерии приёмки: волна закрыта, когда выполнен каждый.`,
       `${gantt}<div class="fx-waves">${act.map(card).join('')}${off.map(offCard).join('')}</div>
       ${L && L.recMo > 0 ? `<div class="fx-rule">Эффект волн складывается в <b class="fx-green">+${Fx.money(L.recMo)} валовой прибыли в месяц</b>: ровно та часть потерь из ведомости, которая возвращается за 90 дней. Отдельной суммы сверху нет.</div>` : ''}`);
   },
@@ -5817,7 +5825,7 @@ const Final = {
     ].join('');
     const planTxt = `дозвон ${Fx.pct(T.reach)}, закрытие ${Fx.pct(T.close)}`;
     return this.sec('pnl', no, 'Деньги', 'Что изменится в прибыли',
-      `Ведомость в виде P&L: выручка, валовая прибыль и рентабельность через 90 дней и за первый год с учётом разгона. Прочие постоянные расходы не растут, новые вычтены отдельной строкой${p.cost && L.recMo > 0 ? `: до прибыли доходит ${Fx.pct(Math.max(0, L.recMo - p.cost) / L.recMo)} возвращённой валовой прибыли` : ', поэтому возвращённая валовая прибыль целиком доходит до прибыли'}. Справа калькулятор: поставьте свои цифры и проверьте сами.`,
+      `Выручка, валовая прибыль и рентабельность через 90 дней и за первый год. Постоянные расходы не растут${p.cost && L.recMo > 0 ? `, новые вычтены строкой: до прибыли доходит ${Fx.pct(Math.max(0, L.recMo - p.cost) / L.recMo)} возврата` : ', поэтому возврат целиком идёт в прибыль'}. Справа калькулятор: поставьте свои цифры.`,
       `<div class="fx-pnl-grid">
         <div>
           <div class="fx-pnl-wrap"><table class="fx-pnl"><thead><tr><th>В месяц</th><th>Сейчас</th><th>После 90 дней</th><th>Изменение</th></tr></thead><tbody>${rows}</tbody></table></div>
