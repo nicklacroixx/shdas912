@@ -4306,15 +4306,15 @@ const Offer = {
   // Течь — крупный узел, где уходят деньги. Внутри каждой — работы, из которых она закрывается.
   // Цена течи складывается из цен рычагов, которые МРТ нашёл у этой компании: чем больше найдено, тем дороже
   MACRO: [
-    {id:'reach', t:'Заявки доходят до разговора', ids:['resp','creg','watch']},
-    {id:'close', t:'Продажи: каждый пункт конверсии выжат на максимум', ids:['script','price_obj','zreg']},
-    {id:'follow', t:'Дожим: никто из отложивших покупку не теряется', ids:['follow','cascade']},
-    {id:'funnel', t:'Воронка в цифрах: вся картина в одной системе', ids:['crm','visib']},
-    {id:'mgmt', t:'Управление: отдел работает по плану, а не по настроению', ids:['rop','plan','motiv','calls']},
-    {id:'owner', t:'Собственник выходит из операционных продаж', ids:['owner']},
-    {id:'mkt', t:'Маркетинг приводит нужных клиентов в нужном объёме', ids:['traffic','qual','trust']},
-    {id:'team', t:'Команда: людей хватает, и они заняты продажами', ids:['load','admin']},
-    {id:'econ', t:'Клиент приносит больше: цена и повторные продажи', ids:['price','base','who','reason','rreg']}
+    {id:'reach', s:'Заявки', t:'Заявки доходят до разговора', ids:['resp','creg','watch']},
+    {id:'close', s:'Конверсия', t:'Продажи: каждый пункт конверсии выжат на максимум', ids:['script','price_obj','zreg']},
+    {id:'follow', s:'Дожим', t:'Дожим: никто из отложивших покупку не теряется', ids:['follow','cascade']},
+    {id:'funnel', s:'Воронка в цифрах', t:'Воронка в цифрах: вся картина в одной системе', ids:['crm','visib']},
+    {id:'mgmt', s:'Управление', t:'Управление: отдел работает по плану, а не по настроению', ids:['rop','plan','motiv','calls']},
+    {id:'owner', s:'Собственник вне продаж', t:'Собственник выходит из операционных продаж', ids:['owner']},
+    {id:'mkt', s:'Маркетинг', t:'Маркетинг приводит нужных клиентов в нужном объёме', ids:['traffic','qual','trust']},
+    {id:'team', s:'Команда', t:'Команда: людей хватает, и они заняты продажами', ids:['load','admin']},
+    {id:'econ', s:'Клиент приносит больше', t:'Клиент приносит больше: цена и повторные продажи', ids:['price','base','who','reason','rreg']}
   ],
   // p — цена рычага в тысячах рублей до масштаба, it — работы с весом внутри цены
   DRV: {
@@ -4347,6 +4347,21 @@ const Offer = {
     rreg: {p:150, it:[['Регламент повторного касания',1],['Передача клиента из продаж в сервис',1],['Сроки и каналы повторных предложений',1]]}
   },
   BASE_IT: [['Еженедельный план-факт с собственником',2],['Приёмка каждой волны по метрике',2],['Ежемесячный отчёт о деньгах',1]],
+  // Метрика приёмки течи: было → станет. Одна и та же в предложении и в плане, поэтому считается здесь
+  metric(L, id, ds, rec){
+    const a = State.answers, pc = (v, d = 0) => Fx.pct(v, d), cd = L.closeCalc < .2 ? 1 : 0, cv = L.conv < 10 ? 1 : 0;
+    const deals = () => ['Сделок в месяц', Fx.deals(L.deals), Fx.deals(L.deals + rec / (L.check * L.m))];
+    let m = null;
+    if (id === 'reach') m = L.full ? ['Дозвон до разговора', pc(L.reachCalc), pc(L.T.reach)] : ['Конверсия заявки в оплату', pc(L.conv / 100, cv), pc(L.T.conv, cv)];
+    else if (id === 'close') m = L.full ? ['Закрытие из разговора', pc(L.closeCalc, cd), pc(L.T.close, cd)] : ['Конверсия заявки в оплату', pc(L.conv / 100, cv), pc(L.T.conv, cv)];
+    else if (id === 'funnel') m = a.has_crm === 'no' ? ['Сделки в CRM', 'вне системы', '100%'] : ['Воронка по этапам', 'не видна', 'каждый день'];
+    else if (id === 'mgmt') m = ['План продаж', ({rare:'редко', half:'через раз'})[a.plan_done] || 'нерегулярно', '4 недели подряд'];
+    else if (id === 'owner') m = ['Собственник в продажах', ({gt25:'25+ ч в неделю', '10_25':'10–25 ч в неделю'})[a.owner_time] || 'большая часть', 'до 8 ч в неделю'];
+    else if (id === 'mkt') m = L.S('lead') && L.S('lead').loss > 0 ? ['Заявок в месяц', Fx.nf.format(L.leads), Fx.nf.format(Math.round(L.T.leads))] : null;
+    else if (id === 'team') m = L.load != null ? ['Нагрузка на продавца', Math.round(L.load) + ' заявок', 'до ' + Math.round(L.loadNorm * 1.15)] : ['Время на продажи', a.sales_time === 'admin' ? '<50%' : '≈50%', 'от 80%'];
+    else if (id === 'econ') m = ds[0] !== 'price' && L.repeat != null ? ['Повторные, доля выручки', L.repeat + '%', Fx.dec(L.T.repeat, 0) + '%'] : ['Средний чек', Fx.rub(L.check), Fx.rub(L.T.check)];
+    return m && String(m[1]).trim() !== String(m[2]).trim() ? m : deals();
+  },
   r50(v){ return Math.round(v / 50000) * 50000; },
   // Делим цену по весам, округляя до 10 тысяч; остаток уходит в самую крупную работу
   split(price, items){
@@ -4366,7 +4381,7 @@ const Offer = {
   months(v){ return Fx.qty(Math.round(v * 10) / 10, 'месяц', 'месяца', 'месяцев', 'месяца'); },
   lead(O){
     const E = O.econ;
-    return `Сейчас бизнес недополучает ${Fx.mln(E.lossYear)} валовой прибыли в год. Ниже самые крупные течи по порядку, у каждой своя цена. Нажмите на течь, чтобы увидеть, из чего она состоит. После 90 дней система возвращает около ${Fx.money(O.run)} в месяц${O.payback ? `, вложение окупается за ${this.payback(O)}` : ''}.`;
+    return `Сейчас бизнес недополучает ${Fx.mln(E.lossYear)} валовой прибыли в год. Ниже самые крупные течи по порядку, у каждой своя цена. Нажмите на течь, чтобы увидеть, из чего она состоит. После 90 дней система возвращает около ${Fx.money(O.rec)} в месяц${O.payback ? `, вложение окупается за ${this.payback(O)}` : ''}.`;
   },
   // Экономика вложения из разгона Ledger: первый год по волнам, дальше результат держится на уровне 90 дней, без роста.
   // Возврат — после новых расходов системы, окупаемость считается по накопленному возврату, а не делением цены на месяц
@@ -4423,17 +4438,17 @@ const Offer = {
   build(L){
     if (!L || !(L.lossMo > 0)) return null;
     const grow = State.answers.team_plan === 'grow';
-    const T = this.tier(L), ppl = Systems.people(L), SYS = Systems.build(L);
+    const T = this.tier(L), ppl = Systems.people(L);
     // Рычаги ведомости сводим по id: CRM на повторных продажах — это база клиентов
     const by = new Map();
     L.D.forEach(d => { const k = d.id === 'crm' && d.stage === 'repeat' ? 'base' : d.id; by.set(k, (by.get(k) || 0) + d.gain); });
     let M = this.MACRO.map(m => {
       const ds = m.ids.filter(id => by.has(id) && this.DRV[id]).sort((p, q) => by.get(q) - by.get(p));
       if (!ds.length) return null;
-      return {id: m.id, t: m.t, ds, loss: ds.reduce((t, id) => t + by.get(id), 0), raw: ds.reduce((t, id) => t + this.DRV[id].p, 0) * 1000};
+      return {id: m.id, s: m.s, t: m.t, ds, loss: ds.reduce((t, id) => t + by.get(id), 0), raw: ds.reduce((t, id) => t + this.DRV[id].p, 0) * 1000};
     }).filter(Boolean).sort((p, q) => q.loss - p.loss);
     // Редкий случай: рычаги есть, но ни один не попал в течи. Предложение всё равно выводим одной строкой
-    if (!M.length) M = [{id: 'all', t: 'Коммерческий блок: сквозная настройка', ds: [], loss: L.lossMo, raw: 600000}];
+    if (!M.length) M = [{id: 'all', s: 'Коммерческий блок', t: 'Коммерческий блок: сквозная настройка', ds: [], loss: L.lossMo, raw: 600000}];
     const raw = this.BASE + M.reduce((t, m) => t + m.raw, 0);
     // Платёж месяца круглый, шаг 50 тысяч: три платежа по 600 тыс ₽ читаются как цена, 567 тыс — как расчёт
     const monthly = Math.min(T.max / this.MONTHS, Math.max(this.MIN / this.MONTHS, Math.round(raw * T.k / this.MONTHS / 50000) * 50000));
@@ -4444,14 +4459,14 @@ const Offer = {
     for (let g = 0; basePrice < 150000 && g < 40; g++){
       const i = prices.indexOf(Math.max(...prices)); prices[i] -= 50000; basePrice += 50000;
     }
-    const first = new Set();
     const lines = M.map((m, i) => {
       const items = this.split(prices[i], m.ds.flatMap(id => (grow && this.DRV[id].grow || this.DRV[id].it).map(x => ({t: x[0], w: x[1]}))));
-      // Метрика приёмки показывается один раз на систему: у соседних течей она общая
-      const sid = m.ds.length ? Systems.OF[m.ds[0]] || (m.ds[0] === 'base' ? 'econ' : 'sales') : null;
-      const sys = sid && !first.has(sid) ? SYS.find(s => s.id === sid) : null;
-      if (sys) first.add(sid);
-      return {id: m.id, name: `Течь ${i + 1}`, title: m.t, items, loss: m.loss, price: prices[i], metric: sys ? sys.metric : null,
+      // Рычаги течи: возврат за 90 дней и волна внедрения берутся из ведомости, чтобы план и предложение сходились
+      const mine = L.D.filter(d => m.ds.includes(d.id === 'crm' && d.stage === 'repeat' ? 'base' : d.id));
+      const top = mine.reduce((a, b) => !a || b.gain > a.gain ? b : a, null);
+      const rec = mine.reduce((t, d) => t + (d.rec90 || 0), 0);
+      return {id: m.id, name: `Течь ${i + 1}`, short: m.s, title: m.t, items, ds: m.ds, loss: m.loss, price: prices[i], rec,
+        wave: top && top.wave || 1, metric: this.metric(L, m.id, m.ds, rec),
         does: items.slice(0, 3).map((x, j) => j ? x.t.charAt(0).toLowerCase() + x.t.slice(1) : x.t).join(', ') + ' и другое.'};
     });
     const base = {name: 'Ведение проекта', title: `${this.WEEKS} недель с собственником`, price: basePrice,
@@ -4464,7 +4479,8 @@ const Offer = {
     // КП выводим всегда, пока есть потери: собственник, который теряет деньги, должен видеть цену решения.
     // Сколько месяцев результата стоит проект, пишем в тексте как есть
     const run = L.ramp[11].net, result = run > 0 ? total / run : null;
-    return {total, monthly, base, lines, rest: [], ppl, tier: T, econ, result, run,
+    const rec = lines.reduce((t, l) => t + l.rec, 0);
+    return {total, monthly, base, lines, rest: [], ppl, tier: T, econ, result, run, rec,
       payback: econ.pay,
       until: until.toLocaleDateString('ru-RU', {day: 'numeric', month: 'long'})};
   }
@@ -4733,163 +4749,41 @@ const GoalPath = {
 // контрольные метрики с его текущей цифрой и бинарные критерии приёмки.
 // Эффект волн складывается ровно в возврат из ведомости.
 const Waves = {
-  // Короткие имена практик для заголовков волн: заголовок называет то, что
-  // найдено у этой компании, а не одну и ту же рамку для всех
-  NOUN: {resp:'норматив ответа', crm:'CRM', watch:'контроль невзятых заявок', follow:'каскад касаний', creg:'регламент первого касания',
-    load:'разгрузка продавцов', admin:'документы с продавцов', script:'скрипт', calls:'разбор звонков', rop:'ежедневное управление',
-    motiv:'мотивация от результата', owner:'сделки без собственника', cascade:'дожим', qual:'квалификация', trust:'доказательства',
-    price_obj:'аргументация цены', plan:'план-факт', visib:'воронка в CRM', zreg:'технология закрытия', base:'работа с базой',
-    who:'ответственный за базу', reason:'повод вернуться', rreg:'реактивация базы', price:'прайс', traffic:'канал заявок'},
+  // Волны плана — те же течи, что в предложении, разложенные по срокам. Состав, названия, метрики и цены
+  // берутся из Offer, поэтому цифры в плане и в предложении совпадают. Волна без течей не показывается.
+  WK: {1:[1,2], 2:[3,6], 3:[5,8], 4:[7,12]},
   ART: {resp:'регламент первого ответа', crm:'настроенная CRM', watch:'отчёт по невзятым заявкам', follow:'каскад касаний', creg:'регламент первого касания',
     script:'скрипт и карта возражений', cascade:'каскад дожима', qual:'чек-лист квалификации', trust:'папка доказательств: кейсы, гарантии, отзывы',
     price_obj:'аргументация цены', visib:'воронка CRM по этапам', base:'сценарии работы с базой', who:'регламент повторных продаж', rreg:'план реактивации базы',
     reason:'поводы вернуться и допродажи', calls:'чек-лист разбора звонков', plan:'дашборд план-факт', owner:'матрица передачи клиентов',
     zreg:'стандарт закрытия', price:'новый прайс', traffic:'медиаплан канала', motiv:'схема мотивации', admin:'регламент документов', load:'расчёт нагрузки'},
   build(L){
-    const a = State.answers, W = [];
-    const dr = n => L ? L.D.filter(d => d.wave === n) : [];
-    const has = (n, ...ids) => dr(n).some(d => ids.includes(d.id));
-    const money = n => L && L.byWave ? L.byWave[n - 1] : 0;
-    const owner = a.owner_dep === 'yes' || ['all','most'].includes(a.owner_share);
-    const senior = L && L.ropMode === 'senior', self = L && L.ropMode === 'self';
-    const boss = senior ? 'старший продавец' : self ? 'собственник по регламенту' : 'РОП';
-    const sameTxt = m => String(m[1]).trim() === String(m[2]).trim();
-    const nouns = (n, k = 3) => [...new Set(dr(n).map(d => this.NOUN[d.id]).filter(Boolean))].slice(0, k);
-    const arts = n => [...new Set(dr(n).map(d => this.ART[d.id]).filter(Boolean))];
+    const O = L && L.lossMo > 0 ? Offer.build(L) : null;
+    if (!O) return [];
+    const a = State.answers, grow = a.team_plan === 'grow';
+    const by = new Map();
+    O.lines.forEach(l => by.set(l.wave, [...(by.get(l.wave) || []), l]));
+    const total = O.lines.reduce((t, l) => t + l.rec, 0) || 1;
     const joinAnd = l => l.length > 1 ? l.slice(0, -1).join(', ') + ' и ' + l[l.length - 1] : (l[0] || '');
-    const tasks = (n, extra) => {
-      const list = dr(n).map(d => d.label);
-      (extra || []).forEach(t => { if (t && !list.includes(t)) list.push(t); });
-      return list;
-    };
-    const effNote = n => {
-      const names = {contact:'первый контакт', close:'закрытие', repeat:'повторные продажи', price:'цену', lead:'поток заявок'};
-      const on = [...new Set(dr(n).map(d => names[d.stage]))];
-      return on.length ? 'за счёт того, что чиним ' + joinAnd(on) : '';
-    };
-    // Волна без находок не выдумывается: она остаётся в плане строкой «не нужна»
-    // с причиной. Так видно, что план собран под компанию, а не под шаблон.
-    const skip = (n, wk, title, why) => W.push({n, wk, title, skip: why, tasks: [], metrics: [], acc: [], eff: 0, effNote: ''});
-
-    // ── Волна 1: карта денег. Нужна всем: без сверки с оплатами любая цифра отчёта — со слов ──
-    // Сколько продавцов добрать — одна цифра на весь отчёт: если есть цель, берём найм
-    // из дороги «Система» раздела «Цель», иначе считаем по нагрузке
-    const gp = L ? GoalPath.build(L) : null;
-    const needSellers = gp && gp.hires != null ? gp.hires
-      : L && L.loadRatio != null && L.loadRatio > 1.3 && L.managers > 0 ? Math.max(1, Math.ceil(L.leads / L.loadNorm) - L.managers) : 0;
-    const byGoal = !!(gp && gp.hires != null);
-    const hireFlow = a.turnover === 'half' || ['long','gaveup'].includes(a.hiring_time);
-    const hiring = (a.has_rop === 'no' && !self && !senior) || needSellers > 0 || hireFlow;
-    const reshape = hiring || senior || self || a.has_kpi === 'no' || has(1, 'motiv');
-    const n1 = nouns(1);
-    W.push({n:1, wk:[1,2], title: n1.length ? `P&L-модель: ${joinAnd(n1)}` : 'P&L-модель и карта денег',
-      goal: reshape ? 'Разложить деньги по этапам и утвердить конструкцию отдела до того, как тратить бюджет.'
-                    : 'Разложить деньги по этапам на фактических оплатах и закрепить цель каждого этапа.',
-      tasks: tasks(1, [
-        L && L.issues && L.issues.length ? `Сверить расхождения в ответах по фактическим оплатам: ${L.issues.map(i => ({check:'чек и выручка', dialogs:'разговоры и заявки', profit:'прибыль'})[i.id]).join(', ')}` : null,
-        a.has_crm === 'yes' ? 'Выгрузка сделок за 6 месяцев и сверка с оплатами: воронка по этапам на фактических данных'
-                            : 'Сбор сделок за 3 месяца из таблиц и мессенджеров: воронка по этапам на фактических данных',
-        reshape ? 'Архитектура отдела: роли, ФОТ, план на каждого' : null,
-        'P&L-модель на 12 месяцев помесячно']),
-      metrics: (L && L.P.check > L.check && has(1, 'price') ? [['Средний чек', Fx.rub(L.check), Fx.rub(L.T.check)]] : []).filter(m => !sameTxt(m)),
-      acc:[reshape ? 'Документ архитектуры подписан: структура, ФОТ, мотивация, планы' : null,
-        'P&L-модель сходится с фактом последних 3 месяцев в пределах 5%',
-        'У каждого этапа воронки есть владелец и норматив'].filter(Boolean),
-      eff: money(1), effNote: effNote(1) || 'определяет, куда пойдут деньги',
-      art: ['Карта потерь', reshape ? 'архитектура отдела' : null, 'P&L-модель', ...arts(1)].filter(Boolean).join(' · '),
-      you:'Две встречи по 90 минут, доступ к CRM и выписке оплат'});
-
-    // ── Волна 2: фундамент — только то, чего нет ──
-    const st2 = new Set(dr(2).map(d => d.stage));
-    const n2 = nouns(2);
-    if (!dr(2).length && a.has_crm !== 'no'){
-      skip(2, [3,6], 'Фундамент', 'CRM, регламенты и скрипт уже есть, первый контакт и закрытие в пределах потенциала. Строить заново нечего.');
-    } else {
-      const m2 = [];
-      if (L && st2.has('contact')) m2.push(['Дозвон до разговора', Fx.pct(L.reachCalc), Fx.pct(L.T.reach)]);
-      if (L && L.respSlow && has(2, 'resp')) m2.push(['Первый ответ в 90% заявок', FX_RESP[a.response_time], FX_RESP[L.respNorm]]);
-      if (L && st2.has('close') && !dr(4).some(d => d.stage === 'close')) m2.push(['Закрытие из разговора', Fx.pct(L.closeCalc, L.closeCalc < .2 ? 1 : 0), Fx.pct(L.T.close, L.closeCalc < .2 ? 1 : 0)]);
-      if (L && st2.has('repeat')) m2.push(['Повторные заказы в месяц', Fx.dec(L.repOrders, 0), Fx.dec(L.T.orders, 0)]);
-      if (a.has_crm === 'no') m2.push(['Сделки в CRM', 'вне системы', '100%']);
-      const goal = [st2.has('contact') ? 'перестать терять оплаченные заявки до разговора' : null,
-        st2.has('close') ? 'довести разговор до оплаты по одному стандарту' : null,
-        st2.has('repeat') ? 'вернуть в работу клиентскую базу' : null].filter(Boolean);
-      W.push({n:2, wk:[3,6], title: n2.length ? `Фундамент: ${joinAnd(n2)}` : 'Фундамент: CRM',
-        goal: goal.length ? Fx.cap(joinAnd(goal)) + '.' : 'Перевести сделки в CRM, чтобы каждую цифру было видно.',
-        tasks: tasks(2, [st2.has('contact') && a.has_crm === 'yes' ? 'Автораспределение заявок и контроль невзятых в CRM' : null,
-          has(2, 'script') ? 'Прослушка 20 звонков и карта возражений под ваш продукт' : null]),
-        metrics: m2.filter(m => !sameTxt(m)),
-        acc:[st2.has('contact') || st2.has('close') ? 'Отдел неделю работает строго по регламентам: проверка по 20 записям звонков' : null,
-          has(2, 'follow', 'cascade') ? 'Каждая незакрытая сделка получает 5 касаний и больше: проверка 20 случайных сделок' : null,
-          st2.has('repeat') ? 'По базе идёт сценарий касаний: у каждого клиента есть дата следующего контакта' : null,
-          a.has_crm === 'no' || has(2, 'visib', 'watch') ? '100% заявок и сделок в CRM: сверка с оплатами без расхождений' : null].filter(Boolean),
-        eff: money(2), effNote: effNote(2) || 'даёт данные, без которых не проверить остальные волны',
-        art: (arts(2).length ? arts(2) : ['воронка CRM']).map((t, i) => i ? t : Fx.cap(t)).join(' · '),
-        you: a.has_crm === 'no' ? 'Час в неделю и решение по выбору CRM' : 'Час в неделю на согласование регламентов'});
-    }
-
-    // ── Волна 3: люди — только если есть кого искать или кого разгрузить ──
-    const st3 = dr(3);
-    if (!hiring && !senior && !self && !st3.length){
-      skip(3, [5,8], 'Люди', `Найм не нужен: ${a.has_rop === 'no' ? '' : 'РОП есть, '}нагрузка на продавца в пределах ориентира${['none','few'].includes(a.turnover) ? ', текучки нет' : ''}. Рост везёт текущий состав.`);
-    } else {
-      const t3 = tasks(3, [
-        a.has_rop === 'no' && !senior && !self ? 'Профиль РОПа и конкурсный день: 10–15 кандидатов продают ваш продукт вживую' : null,
-        senior ? 'Старший продавец с доплатой за управление: отдельный РОП на вашем масштабе пока не окупается' : null,
-        self ? 'Регламент управления для собственника: планёрка 30 минут в день по чек-листу' : null,
-        needSellers ? (byGoal
-          ? `+${needSellers} ${Fx.plural(needSellers, 'продавец', 'продавца', 'продавцов')} под цель года: столько сделок нынешний состав не потянет`
-          : `+${needSellers} ${Fx.plural(needSellers, 'продавец', 'продавца', 'продавцов')} под нагрузку: сейчас ${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')} на человека при ориентире профиля ${L.loadNorm}`) : null,
-        hireFlow ? 'Воронка найма: профиль, источники, конкурсный отбор вместо откликов' : null,
-        hiring ? 'Адаптация 30 дней: чек-лист ввода и план первых сделок' : null]);
-      const m3 = [];
-      if (a.has_rop === 'no') m3.push([senior || self ? 'Управление отделом' : 'РОП', 'нет', senior ? 'старший продавец' : self ? 'планёрка каждый день' : 'вышел и ведёт планёрки']);
-      if (needSellers && byGoal) m3.push(['Продавцов в отделе', String(L.managers), String(L.managers + needSellers)]);
-      else if (needSellers || has(3, 'load')) m3.push(['Нагрузка на продавца', `${Math.round(L.load)} ${Fx.plural(Math.round(L.load), 'заявка', 'заявки', 'заявок')}`, `не больше ${Math.round(L.loadNorm * 1.15)}`]);
-      if (has(3, 'admin')) m3.push(['Время продавцов на документы', a.sales_time === 'admin' ? 'больше половины' : 'половина', 'не больше 20%']);
-      if (hiring && ['months','long','gaveup'].includes(a.hiring_time)) m3.push(['Поиск кандидата', ({months:'1–3 месяца', long:'больше 3 месяцев', gaveup:'почти отчаялись'})[a.hiring_time], 'закрыт за 4 недели']);
-      const title = hiring ? (a.has_rop === 'no' && !needSellers && !hireFlow ? 'Люди: РОП через конкурс' : 'Люди через конкурс')
-        : senior ? 'Управление: старший продавец' : self ? 'Управление: регламент собственника'
-        : `Время продавцов: ${joinAnd(nouns(3))}`;
-      W.push({n:3, wk:[5,8], title,
-        goal: owner ? 'Снять продажи с собственника и разгрузить отдел.' : hiring ? 'Закрыть роли, без которых рост некому везти.'
-          : has(3, 'admin', 'load') ? 'Вернуть продавцам время на продажи без найма.' : 'Дать отделу ежедневное управление без новой ставки.',
-        tasks: t3, metrics: m3.filter(m => !sameTxt(m)),
-        acc:[a.has_rop === 'no' && !senior && !self ? 'РОП вышел, план ввода на 30, 60 и 90 дней подписан' : null,
-          senior ? 'Старший продавец ведёт ежедневную планёрку по регламенту' : null,
-          self ? 'Планёрка по чек-листу проходит каждый день две недели подряд' : null,
-          hiring ? 'Новички две недели подряд выполняют норматив активности' : null,
-          has(3, 'admin') ? 'Документы готовит не продавец: проверка по 20 последним сделкам' : null,
-          has(3, 'load') && !needSellers ? 'Нагрузка на продавца в пределах ориентира четыре недели подряд' : null].filter(Boolean),
-        guar: hiring ? 'Бесплатная замена кандидата в течение 3 месяцев' : null,
-        eff: money(3), effNote: effNote(3) || 'держит результат волн 2 и 4',
-        art: [hiring ? 'Профиль кандидата · воронка найма · программа адаптации' : null, ...arts(3)].filter(Boolean).join(' · ') || 'Регламент управления',
-        you: hiring ? 'Конкурсный день: 4 часа. Финальное интервью с 2–3 кандидатами' : senior || self ? 'Полчаса в день на планёрку первые две недели' : 'Решение, кто забирает документы у продавцов'});
-    }
-
-    // ── Волна 4: закрепление. Нужна всем, но названа по тому, что закрепляем ──
-    const m4 = [];
-    if (L && dr(4).some(d => d.stage === 'close')) m4.push(['Закрытие из разговора', Fx.pct(L.closeCalc, L.closeCalc < .2 ? 1 : 0), Fx.pct(L.T.close, L.closeCalc < .2 ? 1 : 0)]);
-    if (L && dr(4).some(d => d.stage === 'lead')) m4.push(['Заявок в месяц', String(L.leads), String(Math.round(L.T.leads))]);
-    if (L && dr(4).some(d => d.stage === 'repeat') && !dr(2).some(d => d.stage === 'repeat')) m4.push(['Повторные заказы в месяц', Fx.dec(L.repOrders, 0), Fx.dec(L.T.orders, 0)]);
-    if (['gt25','10_25'].includes(a.owner_time)) m4.push(['Собственник в продажах', a.owner_time === 'gt25' ? '25+ ч в неделю' : '10–25 ч в неделю', 'не больше 8 ч']);
-    if (['half','rare'].includes(a.plan_done)) m4.push(['План продаж', a.plan_done === 'half' ? 'через раз' : 'редко', '4 недели подряд']);
-    const handover = (a.has_rop === 'no' || owner) && !self;
-    const n4 = nouns(4);
-    W.push({n:4, wk:[7,12], title: handover ? (senior || a.has_rop !== 'no' ? 'Разгон и передача управления' : 'Разгон и передача РОПу')
-        : n4.length ? `Разгон: ${joinAnd(n4)}` : 'Разгон и контроль по цифрам',
-      goal: handover ? 'Отдел держит результат без собственника и без нас.' : 'Отдел держит новые цифры без нас: результат не откатывается за месяц.',
-      tasks: tasks(4, [a.has_kpi === 'no' ? 'План на каждого менеджера и еженедельный план-факт' : null,
-        owner ? 'Передача регулярных сделок менеджерам: за вами остаются стратегические клиенты' : null,
-        a.has_kpi !== 'no' && !has(4, 'plan') ? 'Еженедельный план-факт как постоянный ритм отдела' : null]),
-      metrics: m4.filter(m => !sameTxt(m)),
-      acc:[a.has_rop === 'no' ? `4 недели план-факт и планёрки ведёт ${boss} без консультанта` : '4 недели отдел держит план без участия консультанта',
-        owner ? 'Матрица передачи клиентов выполнена: собственник не забирает сделки обратно' : null,
-        has(4, 'calls') ? 'Разбор звонков идёт каждую неделю: 4 протокола подряд' : null].filter(Boolean),
-      eff: money(4), effNote: effNote(4) || 'закрепляет эффект волн 2 и 3',
-      art: ['Дашборд план-факт', 'регламент планёрок', owner ? 'матрица передачи клиентов' : null, ...arts(4).filter(t => t !== 'дашборд план-факт' && t !== 'матрица передачи клиентов')].filter(Boolean).join(' · '),
-      you: owner ? 'Передать клиентов по матрице и не забирать сделки обратно' : 'Еженедельный разбор план-факта: 30 минут'});
-    return W;
+    return [...by.keys()].sort((p, q) => p - q).map((n, i) => {
+      const ls = by.get(n).sort((p, q) => q.loss - p.loss);
+      const rec = ls.reduce((t, l) => t + l.rec, 0), ids = ls.flatMap(l => l.ds);
+      // Пять главных работ по кругу из течей, остальное — в предложении
+      const all = ls.map(l => l.items.map(x => x.t)), tasks = [];
+      for (let k = 0; tasks.length < 5 && k < 6; k++) all.forEach(it => { if (it[k] && tasks.length < 5) tasks.push(it[k]); });
+      const rest = all.reduce((t, it) => t + it.length, 0) - tasks.length;
+      if (rest > 0) tasks.push(`и ещё ${rest} ${Fx.plural(rest, 'работа', 'работы', 'работ')}: полный состав в предложении`);
+      const art = [...new Set(ids.map(id => this.ART[id]).filter(Boolean))].slice(0, 3);
+      const you = ids.some(id => id === 'rop' || id === 'load') ? (grow ? 'Два часа на оценку своих продавцов и решение, кого растим' : 'Конкурсный день: 4 часа и финальное интервью с кандидатами')
+        : ids.includes('owner') ? 'Передать клиентов по матрице и не забирать сделки обратно'
+        : ids.includes('crm') && a.has_crm === 'no' ? 'Час в неделю и решение по выбору CRM'
+        : 'Час в неделю на согласование и приёмку';
+      return {n: i + 1, wk: this.WK[n] || [7, 12], title: Fx.cap(joinAnd(ls.slice(0, 2).map(l => l.short.toLowerCase()))) + (ls.length > 2 ? ` и ещё ${ls.length - 2}` : ''),
+        goal: ls.map(l => `<b>${l.name}.</b> ${l.title}`).join('<br>'), tasks, metrics: ls.map(l => l.metric).filter(Boolean),
+        acc: ['Метрики волны достигнуты и держатся четыре недели подряд'], guar: null,
+        eff: rec, share: Math.round(rec / total * 100), effNote: '', leaks: ls.map(l => l.name),
+        art: art.length ? Fx.cap(art.join(' · ')) : 'Регламенты и отчёты по волне', you};
+    });
   }
 };
 
@@ -5848,25 +5742,30 @@ const Final = {
 
   // ── 06 План ──
   actPlan(x, no){
-    const W = x.waves, L = x.L, act = W.filter(w => !w.skip), off = W.filter(w => w.skip);
+    const W = x.waves, L = x.L;
+    if (!W.length) return '';
     const gantt = `<div class="fx-gantt"><div class="fx-wk first">Неделя</div>${Array.from({length:12}, (_, i) => `<div class="fx-wk">${i + 1}</div>`).join('')}
-      ${W.map(w => `<div class="fx-wl${w.skip ? ' off' : ''}"><b>0${w.n}</b>${w.title.split(':')[0]}</div><div class="fx-gcell">${w.skip ? '<span class="fx-goff">не нужна в вашем случае</span>' : `<div class="fx-gbar" style="grid-column:${w.wk[0]} / ${w.wk[1] + 1}"><span>недели ${w.wk[0]}–${w.wk[1]}</span></div>`}</div>`).join('')}</div>
-      <div class="fx-gleg"><i></i>приёмка волны по критериям</div>`;
-    const card = w => `<div class="fx-wave">
-      <div class="fx-wtop"><div class="fx-wno"><b>Волна ${w.n}</b> · недели ${w.wk[0]}–${w.wk[1]}</div><div class="fx-weff">${w.eff > 0 ? `<b>+${Fx.money(w.eff)}</b><span>в месяц</span>` : ''}</div></div>
-      <h4>${w.title}</h4><p class="fx-wgoal">${w.goal}</p>
-      <div class="fx-effnote">${w.eff > 0 ? `Эффект после приёмки: <b>+${Fx.money(w.eff)} валовой прибыли в месяц</b>${w.effNote ? ', ' + w.effNote : ''}.` : w.effNote ? `Прямых денег волна не даёт: она ${w.effNote}.` : ''}</div>
-      <div class="fx-blk"><span class="fx-k">Что делаем</span><ul class="fx-tasks">${w.tasks.map(t => `<li>${t}</li>`).join('')}</ul></div>
-      ${w.metrics.length ? `<div class="fx-blk"><span class="fx-k">Контрольные метрики</span><div class="fx-metrics">${w.metrics.map(m => `<div class="fx-metric"><span>${m[0]}</span><span class="fx-mv"><s>${m[1]}</s> → <em>${m[2]}</em></span></div>`).join('')}</div></div>` : ''}
-      <div class="fx-blk"><span class="fx-k">Критерии приёмки</span><ul class="fx-acc">${w.acc.map(t => `<li>${t}</li>`).join('')}</ul>${w.guar ? `<div class="fx-guar">◆ ${w.guar}</div>` : ''}</div>
-      <div class="fx-wfoot"><div><span class="fx-k">Артефакты у вас</span>${w.art}</div><div><span class="fx-k">От вас</span>${w.you}</div></div>
+      ${W.map(w => `<div class="fx-wl"><b>0${w.n}</b>${w.title}</div><div class="fx-gcell"><div class="fx-gbar" style="grid-column:${w.wk[0]} / ${w.wk[1] + 1}"><span>недели ${w.wk[0]}–${w.wk[1]}</span></div></div>`).join('')}</div>
+      <div class="fx-gleg"><i></i>приёмка волны по метрике</div>`;
+    const O = Offer.build(L), first = O.lines[0];
+    const tile = (k, v, s2, cls = '') => `<div class="fx-kpi"><span class="fx-k">${k}</span><div class="fx-val ${cls}">${v}</div><div class="fx-s">${s2}</div></div>`;
+    const key = `<div class="fx-kpis">
+      ${tile('Теряется сейчас', Fx.M + Fx.mln(L.lossMo * 12), 'в год, валовая прибыль', 'fx-red')}
+      ${tile('Вернём за 90 дней', '+' + Fx.money(L.recMo), `в месяц, это ${Fx.pct(L.recMo / L.lossMo)} потерь`, 'fx-green')}
+      ${tile('Главная течь', Fx.pct(first.loss / L.lossMo), `всех потерь: ${first.short.toLowerCase()}`)}
     </div>`;
-    const offCard = w => `<div class="fx-wave off"><div class="fx-wtop"><div class="fx-wno"><b>Волна ${w.n}</b> · ${w.title}</div><div class="fx-weff"><span>не нужна</span></div></div><p class="fx-wgoal">${w.skip}</p></div>`;
-    const cnt = ['', 'одна волна', 'две волны', 'три волны', 'четыре волны'][act.length];
-    return this.sec('plan', no, 'Внедрение', `90 дней, ${cnt}, приёмка по цифрам`,
-      `В план попадают только найденные ошибки${off.length ? `, ${off.length > 1 ? 'волны' : 'волна'} без находок ${off.length > 1 ? 'вычеркнуты' : 'вычеркнута'} с причиной` : ''}. У каждой волны есть метрика с вашей сегодняшней цифрой и критерии приёмки: волна закрыта, когда выполнен каждый.`,
-      `${gantt}<div class="fx-waves">${act.map(card).join('')}${off.map(offCard).join('')}</div>
-      ${L && L.recMo > 0 ? `<div class="fx-rule">Эффект волн складывается в <b class="fx-green">+${Fx.money(L.recMo)} валовой прибыли в месяц</b>: ровно та часть потерь из ведомости, которая возвращается за 90 дней. Отдельной суммы сверху нет.</div>` : ''}`);
+    const card = w => `<div class="fx-wave">
+      <div class="fx-wtop"><div class="fx-wno"><b>Волна ${w.n}</b> · недели ${w.wk[0]}–${w.wk[1]}</div><div class="fx-weff"><b>${w.share}%</b><span>возврата</span></div></div>
+      <h4>${w.title}</h4><p class="fx-wgoal">${w.goal}</p>
+      <div class="fx-blk"><span class="fx-k">Что делаем</span><ul class="fx-tasks">${w.tasks.map(t => `<li>${t}</li>`).join('')}</ul></div>
+      ${w.metrics.length ? `<div class="fx-blk"><span class="fx-k">Принимаем по метрике</span><div class="fx-metrics">${w.metrics.map(m => `<div class="fx-metric"><span>${m[0]}</span><span class="fx-mv"><s>${m[1]}</s> → <em>${m[2]}</em></span></div>`).join('')}</div></div>` : ''}
+      <div class="fx-wfoot"><div><span class="fx-k">Останется у вас</span>${w.art}</div><div><span class="fx-k">От вас</span>${w.you}</div></div>
+    </div>`;
+    const cnt = ['', 'одна волна', 'две волны', 'три волны', 'четыре волны'][W.length];
+    return this.sec('plan', no, 'Внедрение', `90 дней, ${cnt}, приёмка по метрике`,
+      `План собран из тех же течей, что и предложение, в порядке работ. Каждая волна принимается по метрике: не дошла до цели, возвращаем оплату месяца.`,
+      `${key}${gantt}<div class="fx-waves">${W.map(card).join('')}</div>
+      <div class="fx-rule">Волны складываются в <b class="fx-green">+${Fx.money(L.recMo)} валовой прибыли в месяц</b>. Это та же сумма, что в предложении, отдельной суммы сверху нет.</div>`);
   },
 
   // ── 07 P&L ──
@@ -5968,7 +5867,7 @@ const Final = {
     const econ = O ? `<div class="fx-sub" style="margin-top:48px">Окупаемость</div>
       <div class="fx-kpis fx-kpis-inv">
         ${tile('Вложение', Fx.mln(O.total), `три платежа по ${Fx.money(O.monthly)}`)}
-        ${tile('Возврат в месяц', '+' + Fx.money(O.run), `после 90 дней, из ${Fx.money(L.lossMo)} потерь в месяц`, 'fx-green')}
+        ${tile('Возврат в месяц', '+' + Fx.money(L.recMo), `после 90 дней, из ${Fx.money(L.lossMo)} потерь в месяц`, 'fx-green')}
         ${O.payback ? tile('Окупается за', Offer.payback(O), Offer.quick(O) ? 'за время самого проекта' : 'от старта проекта, с учётом разгона') : tile(`За ${Offer.YEARS} года`, sg(O.econ.y3), 'при удержании результата', O.econ.y3 > 0 ? 'fx-green' : 'fx-red')}
         ${tile(R.k, R.v, R.s, O.econ.roi1 >= .1 ? 'fx-green' : O.econ.roi3 > 0 ? '' : 'fx-red')}
       </div>
@@ -6513,23 +6412,22 @@ const Report = {
 
     // ── 05–06 План: две волны на страницу ──
     const wave = w => `<div class="pr-x-wave">
-      <div class="pr-x-wh"><b>Волна ${w.n} · недели ${w.wk[0]}–${w.wk[1]}</b><em>${w.eff > 0 ? '+' + Fx.money(w.eff) + ' в месяц' : w.effNote}</em></div>
+      <div class="pr-x-wh"><b>Волна ${w.n} · недели ${w.wk[0]}–${w.wk[1]}</b><em>${w.share}% возврата</em></div>
       <div class="pr-x-wt">${w.title}</div><div class="pr-x-wg">${w.goal}</div>
       <div class="pr-x-wcols">
         <div><span>Что делаем</span><ul>${w.tasks.map(t => `<li>${t}</li>`).join('')}</ul></div>
-        <div>${w.metrics.length ? `<span>Контрольные метрики</span><ul class="m">${w.metrics.map(m => `<li>${m[0]}: ${m[1]} → <b>${m[2]}</b></li>`).join('')}</ul>` : ''}
-          <span>Критерии приёмки</span><ul class="acc">${w.acc.map(t => `<li>${t}</li>`).join('')}</ul>${w.guar ? `<p class="g">${w.guar}</p>` : ''}</div>
+        <div><span>Принимаем по метрике</span><ul class="m">${w.metrics.map(m => `<li>${m[0]}: ${m[1]} → <b>${m[2]}</b></li>`).join('')}</ul></div>
       </div>
-      <div class="pr-x-wf">Артефакты: ${w.art} · От вас: ${w.you}</div>
+      <div class="pr-x-wf">Останется у вас: ${w.art} · От вас: ${w.you}</div>
     </div>`;
-    const pAct = x.waves.filter(w => !w.skip), pOff = x.waves.filter(w => w.skip);
+    const pAct = x.waves, pOff = [];
     // Волны раскладываются по длине текста: две длинные волны на одном листе выходили за A4 на несколько миллиметров
     // Высота волны в мм по строкам текста, откалибрована по вёрстке: 26 + 3,6 на строку, плюс запас на перенос.
     // Под волны на первом листе 176 мм, на продолжении 211: две длинные волны вместе выходили за A4
     const pLn = (t, c) => Math.max(1, Math.ceil(String(t || '').replace(/<[^>]+>/g, '').length / c));
     const pSum = (arr, c) => arr.reduce((t, x) => t + pLn(x, c), 0);
     const pMM = w => 26 + 3.63 * (pLn(w.title, 70) + pLn(w.goal, 110) + pLn(`${w.art} ${w.you}`, 150) + Math.max(1 + pSum(w.tasks, 48),
-      (w.metrics.length ? 1 + pSum(w.metrics.map(m => m.join(' ')), 48) : 0) + 1 + pSum(w.acc, 48) + (w.guar ? pLn(w.guar, 48) : 0))) + 10;
+      (w.metrics.length ? 1 + pSum(w.metrics.map(m => m.join(' ')), 48) : 0))) + 10;
     const pItems = [...pAct.map(w => [wave(w), pMM(w)]), ...pOff.map(w => [`<div class="pr-x-wf"><b>Волна ${w.n} · ${w.title}: не нужна.</b> ${w.skip}</div>`, 6 + 3.63 * pLn(w.skip, 150)])];
     const pChunks = [''], pUsed = [0];
     pItems.forEach(([h, mm]) => {
@@ -6538,8 +6436,8 @@ const Report = {
     });
     page('ПЛАН 90 ДНЕЙ', `
       <div class="pr-tag">Внедрение</div>
-      <div class="pr-title">90 дней, ${['', 'одна волна', 'две волны', 'три волны', 'четыре волны'][pAct.length]}, приёмка по цифрам</div>
-      <div class="pr-lede">В план попали только найденные ошибки. Волна закрыта, только когда выполнен каждый критерий приёмки. Эффект волн складывается в возврат из ведомости, отдельной суммы сверху нет.</div>
+      <div class="pr-title">90 дней, ${['', 'одна волна', 'две волны', 'три волны', 'четыре волны'][pAct.length]}, приёмка по метрике</div>
+      <div class="pr-lede">План собран из тех же течей, что и предложение. Волна принимается по метрике: не дошла до цели, возвращаем оплату месяца. Возврат волн складывается в сумму из предложения, отдельной суммы сверху нет.</div>
       ${pChunks[0]}`);
     pChunks.slice(1).forEach(c => page('ПЛАН 90 ДНЕЙ · ПРОДОЛЖЕНИЕ', c));
 
