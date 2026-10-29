@@ -4286,7 +4286,7 @@ const Offer = {
   months(v){ return Fx.qty(Math.round(v * 10) / 10, 'месяц', 'месяца', 'месяцев', 'месяца'); },
   lead(O){
     const E = O.econ;
-    return `Сейчас бизнес недополучает ${Fx.mln(E.lossYear)} валовой прибыли в год. Ниже по каждой системе из раздела «Что делать»: что меняем, по какой метрике принимаете работу и цена. Расчётный возврат при достижении целевых показателей — ${Fx.mln(E.y1)} за первый год, вложение ${this.quick(O) ? 'окупается за время самого проекта' : `равно ${this.months(O.result)} результата системы`}.`;
+    return `Сейчас бизнес недополучает ${Fx.mln(E.lossYear)} валовой прибыли в год. Ниже по каждой системе из раздела «Что делать»: что меняем, по какой метрике принимаете работу и цена. Расчётный возврат при достижении целевых показателей — ${Fx.mln(E.y1)} за первый год, ${this.quick(O) ? 'вложение окупается за время самого проекта' : O.result && O.result <= 12 ? `вложение равно ${this.months(O.result)} результата системы` : 'окупаемость на горизонте нескольких лет'}.`;
   },
   // Экономика вложения из разгона Ledger: первый год по волнам, дальше результат держится на уровне 90 дней, без роста.
   // Возврат — после новых расходов системы, окупаемость считается по накопленному возврату, а не делением цены на месяц
@@ -4362,10 +4362,9 @@ const Offer = {
     const econ = this.econ(L, total);
     // Цену не снижаем. Вложение сверяем с результатом системы: цена ÷ возврат в месяц после 90 дней, без разгона.
     // Накопленная окупаемость от старта на это не годится: первая волна почти всегда без денег, и проект за два месяца
-    // результата выпадал. Дороже RESULT_MAX месяцев результата КП не выводим: раздел становится «Решением»,
-    // ведущий видит цену в суфлёре — для него any
+    // результата выпадал. КП выводим всегда, пока есть потери: собственник, который теряет деньги, должен видеть цену решения.
+    // Сколько месяцев результата стоит проект, пишем в тексте как есть
     const result = L.ramp[11].net > 0 ? total / L.ramp[11].net : null;
-    if (!any && !(result <= this.RESULT_MAX)) return null;
     return {total, monthly, base, lines, rest, ppl, tier: T, econ, result,
       payback: econ.pay,
       until: until.toLocaleDateString('ru-RU', {day: 'numeric', month: 'long'})};
@@ -5863,13 +5862,14 @@ const Final = {
       </div>` : '';
     const tile = (k, v, s2, cls = '') => `<div class="fx-kpi"><span class="fx-k">${k}</span><div class="fx-val ${cls}">${v}</div><div class="fx-s">${s2}</div></div>`;
     const R = O && Offer.roi(O);
+    const sg = v => (v < 0 ? Fx.M : '+') + Fx.mln(Math.abs(v));
     // Окупаемость идёт после состава и цены: сначала предмет, потом деньги
     const econ = O ? `<div class="fx-sub" style="margin-top:48px">Окупаемость</div>
       <div class="fx-kpis fx-kpis-inv">
         ${tile('Вложение', Fx.mln(O.total), `три платежа по ${Fx.money(O.monthly)}`)}
-        ${O.payback ? tile('Окупается за', Offer.payback(O), Offer.quick(O) ? 'за время самого проекта' : `от старта, с разгоном; вложение — ${Offer.months(O.result)} результата`) : tile(`За ${Offer.YEARS} года`, '+' + Fx.mln(O.econ.y3), 'при удержании результата', 'fx-green')}
-        ${tile('Возврат за первый год', '+' + Fx.mln(O.econ.y1), 'с учётом разгона по волнам', 'fx-green')}
-        ${tile(R.k, R.v, R.s, 'fx-green')}
+        ${O.payback ? tile('Окупается за', Offer.payback(O), Offer.quick(O) ? 'за время самого проекта' : `от старта, с разгоном${O.result && O.result <= 12 ? `; вложение — ${Offer.months(O.result)} результата` : ''}`) : tile(`За ${Offer.YEARS} года`, sg(O.econ.y3), 'при удержании результата', O.econ.y3 > 0 ? 'fx-green' : 'fx-red')}
+        ${tile('Возврат за первый год', sg(O.econ.y1), 'с учётом разгона по волнам', O.econ.y1 > 0 ? 'fx-green' : 'fx-red')}
+        ${tile(R.k, R.v, R.s, O.econ.roi1 >= .1 ? 'fx-green' : O.econ.roi3 > 0 ? '' : 'fx-red')}
       </div>
       <div style="margin-top:36px">${Offer.svg(O, L)}</div>
       <p class="fx-note">${Offer.NOTE(O, L)}</p>` : '';
@@ -6478,8 +6478,8 @@ const Report = {
       ${OF ? (() => { const R = Offer.roi(OF), st = (k, v, s2, c = '') => `<div class="pr-stat ${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${s2}</div></div>`;
         return `<div class="pr-x-kpis">
           ${st('Вложение', Fx.mln(OF.total), `три платежа по ${Fx.money(OF.monthly)}`)}
-          ${st('Первый год', '+' + Fx.mln(OF.econ.y1), 'с учётом разгона', 'good')}
-          ${st(`За ${Offer.YEARS} года`, '+' + Fx.mln(OF.econ.y3), 'без роста', 'good')}
+          ${st('Первый год', (OF.econ.y1 < 0 ? Fx.M : '+') + Fx.mln(Math.abs(OF.econ.y1)), 'с учётом разгона', OF.econ.y1 > 0 ? 'good' : 'bad')}
+          ${st(`За ${Offer.YEARS} года`, (OF.econ.y3 < 0 ? Fx.M : '+') + Fx.mln(Math.abs(OF.econ.y3)), 'без роста', OF.econ.y3 > 0 ? 'good' : 'bad')}
           ${st(R.k, R.v, R.s, 'good')}
         </div>
         ${Offer.svg(OF, L)}
