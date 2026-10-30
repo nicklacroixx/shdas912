@@ -380,6 +380,13 @@ html:not([data-theme="light"]) .film-surface{box-shadow:0 40px 90px -30px rgba(0
 .history-copy{font-size:14px;line-height:1.55;padding-top:16px;color:var(--ink-2)}.history-copy p+p{margin-top:12px}
 @media(max-width:1100px) and (min-width:901px){.founder-intro{gap:16px;margin-bottom:20px}.founder-photo{width:90px;height:110px}.founder-quote{font-size:19px}.founder-origin{font-size:14px}.film-caption{font-size:18px}.film-note{flex-wrap:wrap;gap:8px}}
 @media(max-width:900px){.story-body{grid-template-columns:minmax(0,1fr);gap:30px}.product-film{max-width:700px;width:100%;margin-inline:auto}.founder-letter{max-width:700px;width:100%;margin-inline:auto}.founder-intro{float:left;margin:0 28px 12px 0}.founder-photo{width:90px;height:110px}.founder-intro .hello{font-size:28px}.founder-quote{max-width:none;font-size:20px}.founder-origin{max-width:none}.founder-history{clear:both}.sx{grid-template-columns:minmax(0,1fr);row-gap:28px}}
+@media(min-width:561px) and (max-width:900px){
+ #story .head,#mri .head,.story-body,#mri .sx{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px}
+ #story .head .lede,#mri .head .lede{font-size:16px;line-height:1.5}
+ .founder-intro{float:none;margin:0 0 16px;gap:14px}.founder-photo{width:65px;height:78px}.founder-intro .hello{font-size:24px}.founder-sign{font-size:10px;margin-top:6px}
+ .founder-quote{font-size:17px;line-height:1.45}.founder-origin{font-size:14px;margin-top:15px}.founder-history{margin-top:16px}
+ .film-caption{font-size:18px}.film-note{flex-wrap:wrap;gap:7px}
+}
 @media(max-width:560px){
  #story .head,#mri .head{gap:16px;margin-bottom:23px}
  #story .head .lede{display:none}#mri .head .lede{font-size:15px;line-height:1.45}
@@ -462,6 +469,13 @@ html:not([data-theme="light"]) .film-surface{box-shadow:0 40px 90px -30px rgba(0
 .mri-case-expand summary::-webkit-details-marker{display:none}.mri-case-expand summary::after{content:'+';margin-left:8px}.mri-case-expand[open] summary::after{content:'−'}
 @media(max-width:1100px) and (min-width:901px){.mri-case{padding:24px}.mri-case-detail h3,.mri-case-detail .case-loss{font-size:21px}.mri-result b{font-size:31px}.mri-offer-intro{font-size:15px;margin-bottom:22px}.mri-guarantee{font-size:20px}}
 @media(max-width:900px){.mri-example{max-width:700px;width:100%;margin-inline:auto}.mri-offer{max-width:700px;width:100%;margin-inline:auto}.mri-offer-intro{max-width:52ch}}
+@media(min-width:561px) and (max-width:900px){
+ .mri-case{padding:22px}.mri-case-meta{font-size:10px;flex-wrap:wrap;gap:4px}.mri-case-meta span:last-child{display:none}.mri-case-title{font-size:14px;margin-top:21px}.mri-total b{font-size:76px}.mri-total span{font-size:25px}.mri-case-sub{font-size:11px}
+ .mri-case-detail{margin-top:21px;padding-top:17px;gap:12px}.mri-case-detail h3,.mri-case-detail .case-loss{font-size:20px}.mri-case-detail p{font-size:13px}
+ .mri-result{gap:12px}.mri-result span{font-size:11px}.mri-result b{font-size:29px}.mri-result b small{font-size:15px}
+ .mri-offer-intro{font-size:15px;margin-bottom:20px}.mri-guarantee{font-size:19px}.mri-facts{font-size:12px;gap:8px}.mri-offer .go{width:100%;gap:16px}.mri-offer .btn{font-size:14px;padding-inline:12px}.mri-offer .more{font-size:13px}
+}
+@media(min-width:561px) and (max-width:740px){.mri-result{display:block}.mri-result span{display:block;max-width:none}.mri-result b{display:block;margin-top:8px}.mri-total{gap:8px}.mri-total b{font-size:66px}.mri-total span{font-size:22px}}
 @media(max-width:560px){
  #mri .head{margin-bottom:19px}#mri .head .lede{display:none}.mri-offer{order:-1;padding-top:0}.mri-offer-intro{display:none}
  .mri-price{font-size:55px}.mri-guarantee{font-size:18px;line-height:1.35;margin-top:12px}.mri-facts{font-size:12px;margin-top:17px;padding-top:14px;gap:6px 18px}.mri-offer .go{margin-top:19px;gap:14px;flex-direction:row;align-items:center}.mri-offer .btn{font-size:14px;padding-inline:18px}.mri-offer .more{font-size:12px}
