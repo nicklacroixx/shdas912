@@ -324,74 +324,70 @@ picture.tl,picture.td{display:block}
 .shot{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--rule-2);background:var(--bg)}
 .sx{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(32px,4.5vw,80px);align-items:start}
 .sx-f{margin:0}
-/* ── 01: основатель и метод. Общая картина приближается к одной причине ── */
+/* ── 01: портрет и письмо, рядом разбор связанного процесса ── */
 #story .head,#mri .head{margin-bottom:36px}
-#story h2,#mri h2{max-width:24ch}
-.story-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,4.5vw,80px);align-items:start}
-.founder-letter{min-width:0}
-.founder-opening{display:grid;grid-template-columns:clamp(150px,14vw,200px) minmax(0,1fr);gap:26px;align-items:start}
-.founder-photo{margin:0}
-.founder-photo img{display:block;width:100%;height:auto;aspect-ratio:790/850;object-fit:cover;object-position:50% 35%;border-radius:16px;background:var(--paper)}
-.founder-photo figcaption{margin-top:12px;font-size:13px;line-height:1.45;color:var(--ink-3)}
-.founder-photo figcaption b{display:block;color:var(--ink);font-weight:500}
-.founder-letter .hello{font-size:clamp(24px,2vw,30px);font-weight:500;letter-spacing:-.035em;line-height:1.15;margin:0 0 18px;color:var(--ink)}
-.founder-letter p{font-size:17px;line-height:1.6;color:var(--ink-2);text-wrap:pretty}
-.founder-letter p+p{margin-top:14px}
-.founder-letter .origin{margin-top:22px;max-width:62ch}
-.founder-letter .origin strong{color:var(--ink);font-weight:500}
-.founder-history{margin-top:20px}
-.founder-history summary{width:fit-content;cursor:pointer;list-style:none;font-size:14px;color:var(--ink-3);border-bottom:1px solid var(--rule-2);padding-bottom:3px}
+#story h2,#mri h2{max-width:25ch}
+.story-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,4.5vw,80px);align-items:stretch}
+.founder-letter{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,4fr);margin:0;background:var(--ink);color:var(--bg);border-radius:18px;overflow:hidden;min-width:0}
+.founder-photo{margin:0;position:relative;min-height:410px}
+.founder-photo img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 36%}
+.founder-copy{position:relative;display:flex;flex-direction:column;align-items:start;padding:30px 28px;min-width:0}
+.founder-copy .hello{font-size:clamp(28px,2.7vw,40px);font-weight:500;letter-spacing:-.045em;line-height:1.08;margin-bottom:24px}
+.founder-copy .founder-quote{font-size:clamp(17px,1.5vw,21px);line-height:1.45;letter-spacing:-.015em;text-wrap:pretty}
+.founder-copy .origin{font-size:15px;line-height:1.55;margin-top:20px;opacity:.8;text-wrap:pretty}
+.founder-sign{margin-top:auto;padding-top:24px;font-size:12px;line-height:1.5;opacity:.8}
+.founder-sign b{display:block;font-weight:500;font-size:14px;opacity:1}
+.founder-history{margin-top:16px;width:100%;min-width:0}
+.founder-history summary{display:inline-flex;width:fit-content;cursor:pointer;list-style:none;font-size:13px;color:inherit;border-bottom:1px solid currentColor;padding-bottom:3px;gap:8px}
 .founder-history summary::-webkit-details-marker{display:none}
-.founder-history summary::after{content:' +';color:var(--ink)}
-.founder-history[open] summary::after{content:' −'}
-.founder-history .history-copy{padding:18px 0 0;max-width:62ch}
-.founder-history .history-copy p{font-size:15px}
-.method{margin:0;padding:24px 28px 22px;border:1px solid var(--rule-2);border-radius:18px;background:var(--paper);min-width:0}
-.method-top{display:flex;justify-content:space-between;align-items:center;gap:16px;color:var(--ink-3);font-size:13px}
+.founder-history summary::after{content:'+'}
+.founder-history[open] summary::after{content:'−'}
+.history-copy{font-size:14px;line-height:1.55;padding-top:16px;overflow-wrap:anywhere}
+.history-copy p+p{margin-top:12px}
+.method{margin:0;min-width:0;display:flex;flex-direction:column;padding-top:2px}
+.method-top{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:13px;color:var(--ink-3)}
 .motion-toggle{background:none;border-top:0;border-left:0;border-right:0;border-radius:0;cursor:pointer;font-family:inherit;font-size:12px;font-weight:400;line-height:1.5;color:var(--ink-3)}
 .motion-toggle[hidden]{display:none}
-.method-stage{position:relative;height:240px;margin-top:16px}
-.method-overview{position:absolute;inset:0;transform-origin:28% 38%;opacity:0}
-.method-overview svg{display:block;width:100%;height:100%;overflow:visible}
-.method-overview text{font-family:var(--ui);font-size:12px;fill:var(--ink-3)}
-.method-overview .method-profit{font-size:24px;font-weight:500;fill:var(--ink);letter-spacing:-.6px}
-.method-overview .trunk{fill:none;stroke:var(--rule-2);stroke-width:1.5;vector-effect:non-scaling-stroke}
-.method-overview .trouble{stroke:var(--loss)}
-.method-overview .business-point{fill:var(--paper);stroke:var(--ink-4);stroke-width:1.5;vector-effect:non-scaling-stroke}
-.method-overview .business-point.trouble{stroke:var(--loss);fill:var(--loss)}
-.method-focus{position:absolute;inset:0;padding:3px 0;display:flex;flex-direction:column;justify-content:center}
-.method-focus .focus-label{font-size:12px;line-height:1.4;color:var(--ink-3);margin-bottom:14px}
-.method-chain{list-style:none;display:grid;gap:0}
-.method-chain li{position:relative;padding:0 0 22px 30px;font-size:clamp(18px,1.55vw,23px);line-height:1.25;letter-spacing:-.025em;min-height:56px;color:var(--ink-2)}
-.method-chain li::before{content:'';position:absolute;left:1px;top:7px;width:8px;height:8px;border:1px solid var(--rule-2);border-radius:50%;background:var(--paper)}
-.method-chain li+li::after{content:'';position:absolute;left:5px;bottom:calc(100% - 7px);height:48px;width:1px;background:var(--rule-2)}
-.method-chain li:last-child{padding-bottom:0;min-height:35px}
-.method-chain li:first-child{color:var(--loss)}
-.method-chain li:first-child::before{background:var(--loss);border-color:var(--loss)}
-.chain-after{position:absolute;left:30px;top:0;color:var(--ok);opacity:0}
-.method-chain li:first-child .chain-after{font-weight:500}
-.method-note{font-size:14px;line-height:1.5;color:var(--ink-2);border-top:1px solid var(--rule);padding-top:15px}
-.method-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:20px}
+.method-stage{position:relative;height:295px;margin-top:15px;isolation:isolate}
+.method-stage svg{display:block;width:100%;height:100%;overflow:visible}
+.method-overview,.method-focus{position:absolute;inset:0}
+.method-overview{opacity:1;transform-origin:40% 40%}
+.method-overview text{fill:var(--ink-2);font-family:var(--ui);font-size:13px;font-weight:400}
+.method-overview .stream{fill:none;stroke:var(--ink);stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
+.method-overview .active{stroke:var(--loss)}
+.method-overview .signal{fill:none;stroke:var(--bg);stroke-width:4;stroke-linecap:round;stroke-dasharray:.035 .965;stroke-dashoffset:1}
+.method-overview .profit-word{font-size:28px;font-weight:500;letter-spacing:-.7px;fill:var(--ink)}
+.method-overview .profit-mark{fill:var(--ink)}
+.method-overview .process-flow{fill:none;stroke:var(--ok);stroke-width:12;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.method-overview .signal-fixed{opacity:0}
+.method-overview .fixed-mark{fill:var(--ok);opacity:0}
+.method-overview .active-label{fill:var(--loss)}
+.method-overview .fixed-label{fill:var(--ok);opacity:0}
+.method-overview .fixed-word{fill:var(--ok);opacity:0}
+.method-note{font-size:16px;line-height:1.5;color:var(--ink-2);max-width:34ch;margin-top:10px;min-height:3em}
+.method-foot{margin-top:auto;padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .method-foot .note{font-size:12px}
 .method-foot .more{font-size:14px;white-space:nowrap}
-@media(max-width:1100px) and (min-width:901px){.founder-opening{grid-template-columns:130px minmax(0,1fr);gap:20px}.founder-letter p{font-size:16px}.method{padding:22px}.method-foot{flex-wrap:wrap;gap:10px}}
-@media(max-width:900px){.story-body{grid-template-columns:minmax(0,1fr);gap:28px}.founder-opening{grid-template-columns:150px minmax(0,1fr)}.method{max-width:none}.method-stage{height:220px}.method-overview svg{max-width:440px;margin:auto}.sx{grid-template-columns:minmax(0,1fr);row-gap:28px}}
+@media(max-width:1100px) and (min-width:901px){.founder-letter{grid-template-columns:minmax(0,2fr) minmax(0,3fr)}.founder-copy{padding:24px 20px}.founder-copy .hello{font-size:30px}.founder-copy .founder-quote{font-size:17px}.founder-copy .origin{font-size:14px}.method-stage{height:275px}.method-foot{flex-wrap:wrap}}
+@media(max-width:900px){.story-body{grid-template-columns:minmax(0,1fr);gap:36px}.founder-letter{grid-template-columns:minmax(0,3fr) minmax(0,4fr)}.founder-photo{min-height:380px}.founder-copy{padding:28px 32px}.founder-copy .hello{font-size:34px}.founder-copy .founder-quote{font-size:20px}.method-stage{max-width:550px;width:100%;margin-inline:auto;height:280px}.method-note{max-width:45ch}.method-foot{margin-top:0}.sx{grid-template-columns:minmax(0,1fr);row-gap:28px}}
 @media(max-width:560px){
-  #story .head,#mri .head{gap:20px;margin-bottom:28px}
-  #story h2,#mri h2{max-width:23ch}
-  .founder-opening{grid-template-columns:90px minmax(0,1fr);gap:18px}
-  .founder-photo img{aspect-ratio:1/1.15;border-radius:10px}
-  .founder-photo figcaption{font-size:11px;margin-top:8px}
-  .founder-letter .hello{font-size:23px;margin-bottom:12px}
-  .founder-letter p{font-size:15px;line-height:1.55}
-  .founder-letter .origin{margin-top:18px}
-  .founder-history{margin-top:15px}
-  .method{padding:20px;border-radius:16px}
-  .method-stage{height:204px;margin-top:10px}
-  .method-chain li{font-size:20px;min-height:50px;padding-bottom:20px}
-  .method-chain li+li::after{height:42px}
-  .method-foot{flex-wrap:wrap;gap:12px;margin-top:16px}
-  .method-note{font-size:13px}
+  #story .head,#mri .head{gap:18px;margin-bottom:28px}
+  #story h2,#mri h2{max-width:24ch}
+  #story .head .lede{display:none}
+  .founder-letter{grid-template-columns:minmax(0,2fr) minmax(0,3fr);border-radius:16px}
+  .founder-photo{min-height:345px}
+  .founder-copy{padding:22px 18px}
+  .founder-copy .hello{font-size:28px;margin-bottom:18px}
+  .founder-copy .founder-quote{font-size:16px;line-height:1.4}
+  .founder-copy .origin{font-size:13px;line-height:1.45;margin-top:16px}
+  .founder-sign{font-size:10px;padding-top:20px}.founder-sign b{font-size:12px}
+  .founder-history{margin-top:12px}.founder-history summary{font-size:11px}
+  .history-copy{font-size:12px}
+  .method-stage{height:230px;margin-top:10px}
+  .method-overview text{font-size:19px}
+  .method-overview .profit-word{font-size:30px}
+  .method-note{font-size:14px;margin-top:0}
+  .method-foot{padding-top:14px;flex-wrap:wrap;gap:10px}
 }
 
 /* ── платформа: слева разделы списком, у выбранного ответ; справа окно этого раздела. На телефоне сверху телефон ── */
@@ -441,51 +437,48 @@ picture.tl,picture.td{display:block}
 
 @media(max-width:480px){.facts li{grid-template-columns:minmax(0,1fr);gap:8px}}
 
-/* ── 03: одна потеря раскрывается до действия и расчётного возврата ── */
-.mri-study{margin:0;border:1px solid var(--rule-2);border-radius:18px;background:var(--paper);padding:26px 30px;min-width:0}
-.mri-study-top{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:12px;color:var(--ink-3)}
-.mri-total{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 14px;margin:14px 0 7px;color:var(--loss);line-height:1;letter-spacing:-.055em;font-variant-numeric:tabular-nums}
-.mri-total b{font-size:clamp(62px,6.4vw,92px);font-weight:500}
-.mri-total span{font-size:clamp(22px,2.2vw,32px);letter-spacing:-.035em}
-.mri-total-note{font-size:14px;color:var(--ink-3)}
-.mri-cause{margin-top:24px;padding-top:18px;border-top:1px solid var(--rule-2)}
-.mri-cause-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-.mri-cause-head h3{font-size:20px;font-weight:500;letter-spacing:-.025em}
-.mri-cause-head b{color:var(--loss);font-size:18px;font-weight:500;white-space:nowrap;letter-spacing:-.025em}
-.mri-repair{display:grid;grid-template-columns:18px minmax(0,1fr);gap:12px;margin-top:16px}
-.mri-repair svg{display:block;width:18px;height:88px;overflow:visible}
-.mri-repair .repair-base{stroke:var(--rule-2);fill:none;stroke-width:1.5}
-.mri-repair .repair-ink{stroke:var(--ok);fill:none;stroke-width:1.5;stroke-dasharray:1;stroke-dashoffset:0}
-.mri-repair circle{fill:var(--paper);stroke:var(--ok);stroke-width:1.5}
-.mri-repair p{font-size:15px;line-height:1.5;color:var(--ink-2);max-width:44ch}
-.mri-return{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin-top:12px}
-.mri-return b{font-size:28px;font-weight:500;letter-spacing:-.035em;line-height:1.2;color:var(--ok);white-space:nowrap}
-.mri-return span{font-size:12px;line-height:1.4;color:var(--ink-3);max-width:23ch}
-.mri-study figcaption{font-size:12px;color:var(--ink-3);margin-top:20px;padding-top:14px;border-top:1px solid var(--rule)}
+/* ── 03: сумма потерь и стоимость разбора, крупно и без интерфейсных карточек ── */
+.mri-study{margin:0;min-width:0}
+.mri-loss-field{background:var(--loss);color:var(--bg);border-radius:18px;padding:26px 30px 24px;overflow:hidden}
+.mri-study-top{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:12px;opacity:.85}
+.mri-total{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 14px;margin:20px 0 8px;line-height:.9;letter-spacing:-.065em;font-variant-numeric:tabular-nums}
+.mri-total b{font-size:clamp(90px,10vw,144px);font-weight:500}
+.mri-total span{font-size:clamp(26px,2.7vw,38px);letter-spacing:-.045em}
+.mri-total-note{font-size:16px;line-height:1.4}
+.mri-cause{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr) minmax(0,1fr);gap:20px;align-items:start;margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-2)}
+.mri-cause small{display:block;font-size:12px;font-weight:400;color:var(--ink-3);margin-bottom:7px}
+.mri-cause h3{font-size:17px;line-height:1.25;font-weight:500;letter-spacing:-.025em}
+.mri-cause .case-loss{display:block;margin-top:8px;font-size:23px;line-height:1.2;color:var(--loss);font-weight:500;letter-spacing:-.035em;white-space:nowrap}
+.mri-action p{font-size:14px;line-height:1.5;color:var(--ink-2)}
+.mri-return b{font-size:30px;font-weight:500;letter-spacing:-.045em;line-height:1.2;color:var(--ok);white-space:nowrap}
+.mri-return span{display:block;font-size:12px;line-height:1.45;color:var(--ink-3);margin-top:6px;max-width:22ch}
+.mri-study figcaption{font-size:12px;line-height:1.5;color:var(--ink-3);margin-top:14px}
 .mri-offer{display:flex;flex-direction:column;align-items:start;min-width:0;padding-top:2px}
-.mri-facts{list-style:none;width:100%;border-top:1px solid var(--rule-2)}
-.mri-facts li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:20px;padding:17px 0;border-bottom:1px solid var(--rule);align-items:baseline}
-.mri-facts b{font-size:22px;font-weight:500;letter-spacing:-.035em;line-height:1.2;white-space:nowrap}
-.mri-facts span{font-size:15px;line-height:1.5;color:var(--ink-2)}
-.mri-price{font-weight:500;font-size:clamp(34px,3.4vw,48px);letter-spacing:-.045em;line-height:1;margin-top:28px;white-space:nowrap}
-.mri-guarantee{font-size:15px;line-height:1.5;color:var(--ink-2);margin-top:10px;max-width:30ch}
-.mri-offer .go{margin-top:22px;gap:16px 22px}
+.mri-price{font-weight:500;font-size:clamp(44px,5vw,72px);letter-spacing:-.06em;line-height:1;white-space:nowrap}
+.mri-guarantee{font-size:clamp(17px,1.6vw,23px);letter-spacing:-.015em;line-height:1.4;color:var(--ink);margin-top:20px;max-width:28ch}
+.mri-facts{list-style:none;width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-top:28px;padding-top:22px;border-top:1px solid var(--rule-2)}
+.mri-facts b{display:block;font-size:24px;letter-spacing:-.035em;line-height:1.2;font-weight:500}
+.mri-facts span{display:block;margin-top:7px;font-size:14px;line-height:1.45;color:var(--ink-3);max-width:23ch}
+.mri-plan{font-size:14px;color:var(--ink-2);margin-top:18px}
+.mri-offer .go{margin-top:26px;gap:16px 22px}
+@media(max-width:1100px) and (min-width:901px){.mri-cause{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.mri-action{grid-column:1/-1;grid-row:2}.mri-return b{font-size:28px}.mri-total b{font-size:105px}}
 @media(max-width:560px){
-  .mri-study{padding:20px;border-radius:16px}
-  .mri-study-top{font-size:11px;gap:10px}
-  .mri-total{margin-top:16px;gap:0 9px}
-  .mri-total b{font-size:66px}.mri-total span{font-size:24px}
-  .mri-total-note{font-size:13px}
-  .mri-cause{margin-top:20px;padding-top:16px}
-  .mri-cause-head{gap:10px}.mri-cause-head h3{font-size:17px}.mri-cause-head b{font-size:16px}
-  .mri-repair{gap:9px}.mri-repair p{font-size:14px}
-  .mri-return b{font-size:26px}.mri-return span{max-width:none}
-  .mri-facts li{grid-template-columns:112px minmax(0,1fr);gap:16px;padding:15px 0}
-  .mri-facts b{font-size:21px}.mri-facts span{font-size:14px}
-  .mri-price{margin-top:24px;font-size:38px}
   .mri-offer{order:-1}
-  .mri-offer .go{width:100%;gap:18px}
-  .mri-offer .btn{justify-content:center;font-size:15px}
+  .mri-price{font-size:58px}
+  .mri-guarantee{font-size:19px;margin-top:15px;max-width:28ch}
+  .mri-facts{margin-top:22px;padding-top:18px;gap:18px}.mri-facts b{font-size:23px}.mri-facts span{font-size:13px}
+  .mri-plan{font-size:13px;margin-top:16px}
+  .mri-offer .go{width:100%;margin-top:22px;gap:16px}
+  .mri-offer .btn{font-size:15px;justify-content:center}
+  .mri-loss-field{border-radius:16px;padding:22px 20px}
+  .mri-study-top{font-size:11px;gap:10px}.mri-study-top span:last-child{display:none}
+  .mri-total{gap:0 8px;margin-top:24px}.mri-total b{font-size:88px}.mri-total span{font-size:27px}
+  .mri-total-note{font-size:14px;max-width:24ch}
+  .mri-cause{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 18px;margin-top:20px;padding-top:16px}
+  .mri-cause h3{font-size:17px}.mri-cause .case-loss{font-size:23px}
+  .mri-action{grid-row:2;grid-column:1/-1}.mri-action p{font-size:14px}
+  .mri-return b{font-size:27px}.mri-return span{font-size:11px}
+  .mri-study figcaption{font-size:11px}
 }
 
 /* ── финал: слева вопрос и кнопка, справа итог кабинета на телефоне ── */
@@ -754,36 +747,43 @@ html[data-theme="light"] .intro-word{color:#111110}
 
 <section class="sec w" id="story">
   <div class="head">
-    <div><p class="kick">Откуда Closery</p><h2>Бизнесы разные. Причины потерь повторяются.</h2></div>
-    <p class="lede">Я находил их внутри компаний. Из этого опыта вырос Closery.</p>
+    <div><p class="kick">Откуда Closery</p><h2>Разные бизнесы. Одни и те же причины потерь.</h2></div>
+    <p class="lede">Я видел это изнутри компаний. И два года создавал платформу, чтобы находить эти причины в каждом бизнесе.</p>
   </div>
   <div class="story-body">
     <div class="founder-letter rv">
-      <div class="founder-opening">
-        <figure class="founder-photo"><img src="/founder-portrait.webp" width="790" height="750" alt="Николай Клименко" loading="lazy" decoding="async"><figcaption><b>Николай Клименко</b>Основатель Closery</figcaption></figure>
-        <div><p class="hello">Привет, я Николай.</p><p>Я работал в бизнесах от инфобизнеса до логистики. Видел компании изнутри и находил одни и те же причины, из-за которых они не растут.</p></div>
+      <figure class="founder-photo"><img src="/founder.webp" width="790" height="905" alt="Николай Клименко, основатель Closery" loading="lazy" decoding="async"></figure>
+      <div class="founder-copy">
+        <p class="hello">Привет,<br>я Николай.</p>
+        <p class="founder-quote">Я работал в бизнесах от инфобизнеса до логистики. Был коммерческим директором, входил в совет директоров.</p>
+        <p class="origin">У разных компаний повторялись одни и те же причины потерь. Два года я разрабатывал Closery, чтобы этот опыт помогал каждому бизнесу.</p>
+        <p class="founder-sign"><b>Николай Клименко</b>Основатель Closery</p>
+        <details class="founder-history"><summary>Моя история</summary><div class="history-copy"><p>Я был коммерческим директором, входил в совет директоров. Видел бизнесы насквозь и находил причины, из-за которых компании не растут.</p><p>Два года назад мы с партнёром открыли агентство: помогать бизнесу через найм, адаптацию и качественный онбординг. Агентство не пошло: нам не хватило нужных инвестиций.</p><p>Идея осталась. Два года я разрабатывал платформу, чтобы найденный в проектах метод работал в разных бизнесах. Разбираем, что просело, и идём по причинно-следственной связи до причины.</p></div></details>
       </div>
-      <p class="origin">Два года я разрабатывал платформу, чтобы <strong>этот опыт помогал каждому бизнесу.</strong> Так появился Closery.</p>
-      <details class="founder-history"><summary>Как всё начиналось</summary><div class="history-copy"><p>Я был коммерческим директором, входил в совет директоров. В проектах разбирался, что мешает компании расти, и шёл по причинно-следственной связи до самой причины.</p><p>Два года назад мы с партнёром открыли агентство. Хотели помогать бизнесу через найм, адаптацию и качественный онбординг. Агентство не пошло: на эту модель нам не хватило инвестиций.</p><p>Идея осталась. Этот способ работы я перенёс в платформу, чтобы применять его в разных бизнесах.</p></div></details>
     </div>
-    <div class="rv">
-      <figure class="method" id="closery-method" aria-label="Метод Closery: от общей картины бизнеса к причине. Заявка ждёт ответа, разговор не состоялся, сделка не движется. После исправления первого ответа меняется вся связанная цепочка.">
-        <div class="method-top"><span>От результата к причине</span><button class="more motion-toggle" type="button" aria-pressed="false" aria-label="Остановить движение схемы" hidden>Остановить</button></div>
-        <div class="method-stage" aria-hidden="true">
-          <div class="method-overview">
-            <svg viewBox="0 0 410 240" fill="none">
-              <path class="trunk" d="M25 52V99Q25 112 38 112H372Q385 112 385 99V52M97 52V112M169 52V112M241 52V112M313 52V112M205 112V170"/>
-              <path class="trunk trouble" d="M97 52V99Q97 112 110 112H192Q205 112 205 125V170"/>
-              <circle class="business-point" cx="25" cy="52" r="4"/><circle class="business-point trouble" cx="97" cy="52" r="4"/><circle class="business-point" cx="169" cy="52" r="4"/><circle class="business-point" cx="241" cy="52" r="4"/><circle class="business-point" cx="313" cy="52" r="4"/><circle class="business-point" cx="385" cy="52" r="4"/>
-              <g text-anchor="middle"><text x="25" y="24">Заявки</text><text x="97" y="15"><tspan x="97">Первый</tspan><tspan x="97" dy="15">ответ</tspan></text><text x="169" y="24">Разговор</text><text x="241" y="24">Оплата</text><text x="313" y="15"><tspan x="313">Средний</tspan><tspan x="313" dy="15">чек</tspan></text><text x="385" y="15"><tspan x="385">Повторная</tspan><tspan x="385" dy="15">покупка</tspan></text><text class="method-profit" x="205" y="204">Прибыль</text></g>
-            </svg>
-          </div>
-          <div class="method-focus"><p class="focus-label">Разбираем первый ответ</p><ol class="method-chain"><li><span class="chain-before">Заявка ждёт ответа</span><span class="chain-after">Ответили вовремя</span></li><li><span class="chain-before">Разговор не состоялся</span><span class="chain-after">Начали разговор</span></li><li><span class="chain-before">Сделка не движется</span><span class="chain-after">Есть следующий шаг</span></li></ol></div>
-        </div>
-        <figcaption class="method-note">Находим причину. Исправляем её и смотрим, как меняется вся цепочка.</figcaption>
-      </figure>
-      <div class="method-foot"><span class="note">Посмотрите на свою компанию</span><a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=leaks">Посчитать свой бизнес <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
-    </div>
+    <figure class="method rv" id="closery-method" aria-label="Сначала смотрим на шесть параметров бизнеса целиком. Затем разбираем первый ответ: задержка мешает разговору и оплате. Исправление причины восстанавливает связанный процесс.">
+      <div class="method-top"><span>Как работает наш метод</span><button class="more motion-toggle" type="button" aria-pressed="false" aria-label="Остановить движение схемы" hidden>Остановить</button></div>
+      <div class="method-stage" aria-hidden="true">
+        <div class="method-overview"><svg viewBox="0 0 500 310" fill="none">
+          <g class="streams">
+            <path class="stream secondary" d="M116 35H140C270 35 205 148 350 148H430" pathLength="1"/>
+            <path class="stream active" d="M116 78H160C270 78 230 148 350 148H430" pathLength="1"/>
+            <path class="stream secondary" d="M116 121H180C260 121 270 148 350 148H430" pathLength="1"/>
+            <path class="stream secondary" d="M116 164H200C270 164 280 148 350 148H430" pathLength="1"/>
+            <path class="stream secondary" d="M116 207H160C270 207 230 148 350 148H430" pathLength="1"/>
+            <path class="stream secondary" d="M116 250H140C270 250 205 148 350 148H430" pathLength="1"/>
+          </g>
+          <path class="process-flow" d="M116 78H160C270 78 230 148 350 148H430" pathLength="1"/>
+          <path class="signal signal-stuck" d="M116 78H160C270 78 230 148 350 148H430" pathLength="1"/>
+          <path class="signal signal-fixed" d="M116 78H160C270 78 230 148 350 148H430" pathLength="1"/>
+          <g><text class="secondary" x="0" y="40">Заявки</text><text class="active-label" x="0" y="83">Первый ответ</text><text class="fixed-label" x="0" y="83">Первый ответ</text><text class="secondary" x="0" y="126">Разговор</text><text class="secondary" x="0" y="169">Оплата</text><text class="secondary" x="0" y="212">Средний чек</text><text class="secondary" x="0" y="245"><tspan x="0">Повторная</tspan><tspan x="0" dy="16">покупка</tspan></text></g>
+          <circle class="profit-mark" cx="441" cy="148" r="22"/><circle class="fixed-mark" cx="441" cy="148" r="22"/>
+          <text class="profit-word" x="330" y="215">Прибыль</text><text class="profit-word fixed-word" x="330" y="215">Прибыль</text>
+        </svg></div>
+      </div>
+      <figcaption class="method-note">Заявка ждёт ответа. Мы находим, почему её не взяли в работу, и исправляем первый контакт.</figcaption>
+      <div class="method-foot"><span class="note">Примените к своей компании</span><a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=leaks">Посчитать свой бизнес <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
+    </figure>
   </div>
 </section>
 
@@ -801,27 +801,28 @@ html[data-theme="light"] .intro-word{color:#111110}
 
 <section class="sec w" id="mri">
   <div class="head">
-    <div><p class="kick">Коммерческий МРТ</p><h2>Вы увидите, где теряется прибыль и что менять первым</h2></div>
-    <p class="lede">Разбираем компанию целиком. Находим причины потерь и собираем план работы.</p>
+    <div><p class="kick">Коммерческий МРТ</p><h2>Разберёмся, где теряется прибыль. И что менять.</h2></div>
+    <p class="lede">МРТ показывает, что мешает зарабатывать, из-за чего это происходит и что менять первым.</p>
   </div>
   <div class="sx">
     <figure class="mri-study rv" id="mri-study">
-      <div class="mri-study-top"><span>Пример: компания Техноснаб</span><span>Разбор МРТ</span></div>
-      <p class="mri-total"><b>−653</b><span>тыс. ₽</span></p>
-      <p class="mri-total-note">валовой прибыли теряется каждый месяц</p>
-      <div class="mri-cause">
-        <div class="mri-cause-head"><h3>Одно из мест: первый контакт</h3><b>−189 тыс. ₽</b></div>
-        <div class="mri-repair">
-          <svg viewBox="0 0 18 88" aria-hidden="true"><path class="repair-base" d="M9 1V77"/><path class="repair-ink" d="M9 1V77" pathLength="1"/><circle cx="9" cy="80" r="4"/></svg>
-          <div><p>Вводим норматив первого ответа и контроль заявок, которые не взяли в работу.</p><div class="mri-return"><b>+156 тыс. ₽</b><span>расчётный возврат в месяц по плану на 90 дней</span></div></div>
-        </div>
+      <div class="mri-loss-field">
+        <div class="mri-study-top"><span>Пример: компания Техноснаб</span><span>Коммерческий МРТ</span></div>
+        <p class="mri-total"><b>−653</b><span>тыс. ₽</span></p>
+        <p class="mri-total-note">валовой прибыли недобирает компания в месяц</p>
       </div>
-      <figcaption>Так разбираем каждое место потерь и собираем план работы.</figcaption>
+      <div class="mri-cause">
+        <div><small>Одно из мест потерь</small><h3>Первый контакт</h3><b class="case-loss">−189 тыс. ₽</b></div>
+        <div class="mri-action"><small>Что меняем</small><p>Норматив первого ответа и контроль заявок, которые не взяли в работу.</p></div>
+        <div class="mri-return"><small>По плану на 90 дней</small><b>+156 тыс. ₽</b><span>расчётный возврат в месяц по этому этапу</span></div>
+      </div>
+      <figcaption>Весь разбор: причины потерь, расчёты и порядок работы.</figcaption>
     </figure>
     <div class="mri-offer rv">
-      <ul class="mri-facts"><li><b>120 минут</b><span>Онлайн с собственником.</span></li><li><b>20 страниц</b><span>PDF с причинами потерь и расчётами в рублях.</span></li><li><b>90 дней</b><span>План: что менять и в каком порядке.</span></li></ul>
       <p class="mri-price">79&nbsp;990&nbsp;₽</p>
       <p class="mri-guarantee">Не найдём потерь в рублях, вернём оплату.</p>
+      <ul class="mri-facts"><li><b>120 минут</b><span>онлайн с собственником</span></li><li><b>20 страниц</b><span>PDF с причинами потерь и расчётами</span></li></ul>
+      <p class="mri-plan">И план: что менять и в каком порядке за 90 дней.</p>
       <div class="go"><a class="btn" href="https://lk.closery.ru/register?next=/mri&amp;utm_source=site&amp;utm_content=mri">Записаться на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a><a class="more" href="/mri/">Как проходит <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
     </div>
   </div>
@@ -962,45 +963,33 @@ html[data-theme="light"] .intro-word{color:#111110}
 
 </script>
 <script>
-/* 01 и 03: движение только в видимой части страницы. Все переходы принадлежат
-   Web Animations API: пауза сохраняет точный кадр, смена темы берёт CSS-токены. */
+/* Схема: общая картина, приближение к причине, восстановление связанного потока.
+   Web Animations API сохраняет кадр на паузе; цвета берутся из токенов темы. */
 (function(){
-  var method=document.getElementById('closery-method'),study=document.getElementById('mri-study');
   var media=matchMedia('(prefers-reduced-motion: reduce)'),controls=[];
   function motion(root,build){
     if(!root)return;
     var animations=[],visible=false,stopped=false,button=root.querySelector('.motion-toggle');
     function sync(){var run=visible&&!document.hidden&&!stopped&&!media.matches;animations.forEach(function(a){run?a.play():a.pause();});root.dataset.motion=run?'running':'paused';}
-    function reset(){animations.forEach(function(a){a.cancel();});animations=[];
-      if(!media.matches)animations=build(root);
-      if(button)button.hidden=media.matches;
-      sync();}
+    function reset(){animations.forEach(function(a){a.cancel();});animations=[];if(!media.matches)animations=build(root);if(button)button.hidden=media.matches;sync();}
     if(button)button.addEventListener('click',function(){stopped=!stopped;button.setAttribute('aria-pressed',String(stopped));button.setAttribute('aria-label',stopped?'Продолжить движение схемы':'Остановить движение схемы');button.textContent=stopped?'Продолжить':'Остановить';sync();});
-    if('IntersectionObserver' in window)new IntersectionObserver(function(es){visible=es[0].isIntersecting;sync();},{threshold:.2}).observe(root);
-    else visible=true;
-    document.addEventListener('visibilitychange',sync);
-    controls.push(reset);reset();
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){visible=es[0].isIntersecting;sync();},{threshold:.2}).observe(root);else visible=true;
+    document.addEventListener('visibilitychange',sync);controls.push(reset);reset();
   }
-  function loop(el,frames,delay){var a=el.animate(frames,{duration:14000,iterations:Infinity,fill:'both',easing:'linear',delay:delay||0});a.pause();return a;}
-  motion(method,function(root){
+  function loop(el,frames){var a=el.animate(frames,{duration:14000,iterations:Infinity,fill:'both',easing:'linear'});a.pause();return a;}
+  motion(document.getElementById('closery-method'),function(root){
     var a=[],ease=getComputedStyle(root).getPropertyValue('--ease').trim()||'linear';
-    a.push(loop(root.querySelector('.method-overview'),[
-      {offset:0,opacity:1,transform:'scale(1)'},{offset:.15,opacity:1,transform:'scale(1)',easing:ease},
-      {offset:.24,opacity:0,transform:'scale(1.2)'},{offset:.88,opacity:0,transform:'scale(.96)',easing:ease},
-      {offset:.97,opacity:1,transform:'scale(1)'},{offset:1,opacity:1,transform:'scale(1)'}]));
-    a.push(loop(root.querySelector('.method-focus'),[
-      {offset:0,opacity:0,transform:'translateY(16px)'},{offset:.19,opacity:0,transform:'translateY(16px)',easing:ease},
-      {offset:.28,opacity:1,transform:'translateY(0)'},{offset:.86,opacity:1,transform:'translateY(0)',easing:ease},
-      {offset:.93,opacity:0,transform:'translateY(-8px)'},{offset:1,opacity:0,transform:'translateY(16px)'}]));
-    root.querySelectorAll('.chain-before').forEach(function(el,i){var k=i*.045;a.push(loop(el,[{offset:0,opacity:1},{offset:.5+k,opacity:1},{offset:.55+k,opacity:0},{offset:.93,opacity:0},{offset:1,opacity:1}]));});
-    root.querySelectorAll('.chain-after').forEach(function(el,i){var k=i*.045;a.push(loop(el,[{offset:0,opacity:0,transform:'translateY(5px)'},{offset:.5+k,opacity:0,transform:'translateY(5px)',easing:ease},{offset:.57+k,opacity:1,transform:'translateY(0)'},{offset:.86,opacity:1,transform:'translateY(0)'},{offset:.93,opacity:0,transform:'translateY(0)'},{offset:1,opacity:0,transform:'translateY(5px)'}]));});
+    a.push(loop(root.querySelector('.method-overview'),[{offset:0,transform:'scale(1)'},{offset:.22,transform:'scale(1)',easing:ease},{offset:.36,transform:'scale(1.045)'},{offset:.86,transform:'scale(1.045)',easing:ease},{offset:1,transform:'scale(1)'}]));
+    root.querySelectorAll('path.secondary').forEach(function(el){a.push(loop(el,[{offset:0,opacity:1},{offset:.22,opacity:1},{offset:.34,opacity:.3},{offset:.78,opacity:.3},{offset:.92,opacity:1},{offset:1,opacity:1}]));});
+    a.push(loop(root.querySelector('.signal-stuck'),[{offset:0,strokeDashoffset:0,opacity:1},{offset:.12,strokeDashoffset:-.32,opacity:0},{offset:.13,strokeDashoffset:0,opacity:1},{offset:.26,strokeDashoffset:-.32,opacity:0},{offset:.27,strokeDashoffset:0,opacity:1},{offset:.42,strokeDashoffset:-.32,opacity:0},{offset:1,strokeDashoffset:-.32,opacity:0}]));
+    a.push(loop(root.querySelector('.signal-fixed'),[{offset:0,strokeDashoffset:0,opacity:0},{offset:.54,strokeDashoffset:0,opacity:0},{offset:.55,strokeDashoffset:0,opacity:1},{offset:.69,strokeDashoffset:-1,opacity:1},{offset:.7,strokeDashoffset:0,opacity:1},{offset:.84,strokeDashoffset:-1,opacity:1},{offset:.85,strokeDashoffset:0,opacity:1},{offset:.99,strokeDashoffset:-1,opacity:1},{offset:1,strokeDashoffset:-1,opacity:0}]));
+    a.push(loop(root.querySelector('.process-flow'),[{offset:0,strokeDashoffset:1},{offset:.5,strokeDashoffset:1,easing:'ease-in-out'},{offset:.72,strokeDashoffset:0},{offset:.92,strokeDashoffset:0},{offset:1,strokeDashoffset:1}]));
+    root.querySelectorAll('.fixed-label,.fixed-mark,.fixed-word').forEach(function(el,i){var at=i===0?.5:.7;a.push(loop(el,[{offset:0,opacity:0},{offset:at,opacity:0},{offset:at+.035,opacity:1},{offset:.92,opacity:1},{offset:1,opacity:0}]));});
     return a;
   });
-  motion(study,function(root){
+  motion(document.getElementById('mri-study'),function(root){
     var ease=getComputedStyle(root).getPropertyValue('--ease').trim()||'linear';
-    var a=root.querySelector('.repair-ink').animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:2000,fill:'both',easing:ease});
-    var b=root.querySelector('.mri-return').animate([{opacity:.35,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:1600,delay:700,fill:'both',easing:ease});
-    a.pause();b.pause();return[a,b];
+    var a=root.querySelector('.mri-return').animate([{opacity:.3,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:1800,delay:400,fill:'both',easing:ease});a.pause();return[a];
   });
   media.addEventListener('change',function(){controls.forEach(function(reset){reset();});});
 })();
