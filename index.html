@@ -137,8 +137,6 @@ header.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--b
 .logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:var(--ink)}
 .logo i{width:9px;height:9px;border-radius:2px;background:var(--ok)}
 .bar-nav{display:flex;align-items:center;gap:clamp(14px,2.2vw,30px)}
-.bar-lnk{font-size:14px;text-decoration:none;color:var(--ink-3);transition:color .2s;white-space:nowrap}
-.bar-lnk:hover{color:var(--ink)}
 .bar-cta{font-weight:500;font-size:14px;text-decoration:none;color:var(--bg);border-radius:8px;padding:10px 18px;background:var(--ink);white-space:nowrap;transition:background .2s}
 .bar-cta:hover{background:var(--ok-soft)}
 .bar-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:30px;height:30px;cursor:pointer;background:none;border:none;padding:4px}
@@ -150,8 +148,6 @@ header.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--b
 .bar-mobile.open{display:flex}
 .bar-mobile a{padding:16px var(--gut);color:var(--ink-2);text-decoration:none;font-size:16px;border-bottom:1px solid var(--rule)}
 .progress{position:absolute;left:0;bottom:-1px;height:1px;width:100%;transform-origin:0 50%;transform:scaleX(var(--p,0));background:var(--ink-3)}
-@media(max-width:1100px){.bar-lnk.opt{display:none}}
-@media(max-width:860px){.bar-lnk{display:none}}
 @media(max-width:700px){.bar-burger{display:flex}.bar-cta{display:none}}
 
 /* типографика */
@@ -239,7 +235,7 @@ h1 em,h2 em{color:var(--loss)}
 .sec{padding-top:clamp(88px,9vw,144px)}
 .head{margin-bottom:clamp(36px,4.5vw,64px)}
 .head .lede{max-width:46ch}
-.head h2,.fd h2{text-wrap:balance}
+.head h2{text-wrap:balance}
 .head .lede{text-wrap:pretty}
 .btn{border-radius:12px}
 .go{display:flex;align-items:center;gap:14px 22px;flex-wrap:wrap}
@@ -328,11 +324,9 @@ picture.tl,picture.td{display:block}
 #story,#mri{scroll-margin-top:calc(96px - clamp(88px,9vw,144px))}
 #story .head,#mri .head{margin-bottom:34px}
 #story h2,#mri h2{max-width:24ch}
-.story-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,4.5vw,80px);align-items:center}
+.story-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,4.5vw,80px);align-items:start}
 .product-film{margin:0;min-width:0;overflow:clip}
 .film-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;color:var(--ink-3);font-size:12px}
-.motion-toggle{border:0;border-bottom:1px solid var(--rule-2);background:none;color:var(--ink-3);font:inherit;font-size:12px;cursor:pointer;padding-bottom:2px}
-.motion-toggle[hidden]{display:none}
 .film-stage{height:auto;aspect-ratio:1000/560;position:relative;isolation:isolate;overflow:hidden;margin:12px 0 0}
 .film-world{position:absolute;left:50%;top:50%;width:1000px;height:560px;margin:-280px 0 0 -500px;transform:scale(var(--film-scale, .65));perspective:1800px;perspective-origin:50% 45%}
 .film-camera{position:absolute;inset:0;transform-style:preserve-3d;transform:translate3d(-12px,0,0) rotateX(23deg) rotateY(-16deg) rotateZ(-7deg) scale(.95)}
@@ -391,7 +385,7 @@ html:not([data-theme="light"]) .film-surface{box-shadow:0 40px 90px -30px rgba(0
  #story .head,#mri .head{gap:16px;margin-bottom:23px}
  #story .head .lede{display:none}#mri .head .lede{font-size:15px;line-height:1.45}
  .story-body{gap:22px}.film-stage{margin:7px 0 0;aspect-ratio:1000/560}
- .film-meta{font-size:10px}.motion-toggle{font-size:10px}
+ .film-meta{font-size:10px}
  .film-bottom{margin-top:0;padding-top:12px;gap:12px}.film-caption{font-size:18px;min-height:44px}.film-chapters{gap:5px}.film-chapters button{width:22px}
  .film-note{font-size:10px;gap:8px;flex-wrap:wrap;margin-top:5px}.film-note .more{font-size:12px}
  .founder-intro{float:none;gap:16px;margin:0 0 15px}.founder-photo{width:60px;height:72px;border-radius:6px}.founder-intro .hello{font-size:25px}.founder-sign{font-size:10px;margin-top:5px}
@@ -423,28 +417,16 @@ html:not([data-theme="light"]) .film-surface{box-shadow:0 40px 90px -30px rgba(0
 
 /* ── как начать: четыре шага по четвертям, у каждого что получаете ── */
 .st{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 var(--cg);list-style:none;counter-reset:st}
-.st li{position:relative;padding-top:30px;border-top:1px solid var(--rule-2);counter-increment:st}
+.st li{position:relative;display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0;align-content:start;padding-top:30px;border-top:1px solid var(--rule-2);counter-increment:st}
 .st li::before{content:counter(st);position:absolute;top:-14px;left:0;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--rule-2);color:var(--ink)}
 .st li:first-child::before{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .st p{margin-top:10px;font-size:15px;line-height:1.6;color:var(--ink-2)}
-.st em{display:flex;gap:9px;margin-top:16px;font-style:normal;font-size:14px;font-weight:500;line-height:1.45;color:var(--ink)}
+.st em{display:flex;align-self:start;gap:9px;margin-top:16px;font-style:normal;font-size:14px;font-weight:500;line-height:1.45;color:var(--ink)}
 .st em::before{content:"";flex:none;width:14px;height:1.5px;margin-top:.7em;background:var(--ok)}
 .st-go{margin-top:clamp(36px,4vw,56px)}
 @media(max-width:980px){.st{grid-template-columns:repeat(2,minmax(0,1fr));gap:44px var(--cg)}}
 @media(max-width:560px){.st{grid-template-columns:minmax(0,1fr);gap:40px}}
 
-/* ── кто за этим стоит: фото ч/б и три факта. Сетка .team готова принять карточки команды ── */
-.team{max-width:900px}
-.fd h2{max-width:18ch}
-.fd .lede{margin-top:20px;max-width:44ch}
-.facts{list-style:none;margin-top:36px;border-top:1px solid var(--rule-2);display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:clamp(20px,2.4vw,36px)}
-.facts li{grid-column:1/-1;display:grid;grid-template-columns:subgrid;padding:20px 0;border-bottom:1px solid var(--rule);align-items:baseline}
-.facts b{font-weight:600;font-size:clamp(26px,2.4vw,36px);letter-spacing:-.03em;line-height:1;white-space:nowrap}
-.facts span{font-size:15px;line-height:1.55;color:var(--ink-2)}
-.facts span i{display:block;font-style:normal;color:var(--ink);font-weight:500;margin-bottom:2px}
-.fd .more{margin-top:28px}
-
-@media(max-width:480px){.facts li{grid-template-columns:minmax(0,1fr);gap:8px}}
 
 /* ── 03: настоящий отчёт МРТ веером. Пачка листов раскладывается по мере прокрутки, лист поднимается по наведению или нажатию,
    под ним подпись с цифрой этой страницы. Рядом предложение и цена ── */
@@ -469,7 +451,7 @@ html:not([data-theme="light"]) .doc-page.is-up{filter:none;box-shadow:0 40px 80p
 .doc-nav{display:flex;gap:6px}
 .doc-nav button{width:36px;height:36px;border:1px solid var(--rule-2);border-radius:50%;background:none;color:var(--ink-2);cursor:pointer;display:grid;place-items:center}
 .doc-nav button:hover{color:var(--ink);border-color:var(--ink-3)}
-.mri-offer{display:flex;flex-direction:column;align-items:start;min-width:0;padding-top:36px}
+.mri-offer{display:flex;flex-direction:column;align-items:start;min-width:0}
 .mri-offer-intro{font-size:17px;line-height:1.5;color:var(--ink-2);max-width:40ch;margin-bottom:24px}
 .mri-price{font-weight:500;font-size:clamp(44px,5vw,72px);letter-spacing:-.06em;line-height:1;white-space:nowrap}
 .mri-guarantee{font-size:clamp(17px,1.6vw,23px);letter-spacing:-.015em;line-height:1.4;color:var(--ink);margin-top:18px;max-width:29ch}
@@ -727,17 +709,13 @@ html[data-theme="light"] .intro-word{color:#111110}
   <div class="w bar-in">
     <a class="logo" href="#top"><i></i>Closery</a>
     <nav class="bar-nav">
-      <a class="bar-lnk" href="#platform">Платформа</a>
-      <a class="bar-lnk" href="#mri">Коммерческий МРТ</a>
-      <a class="bar-lnk" href="#how">Как начать</a>
-      <a class="bar-lnk opt" href="#team">Кто за этим стоит</a>
       <a class="bar-cta" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=bar">Открыть кабинет</a>
       <button class="bar-burger" id="barBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </div>
   <i class="progress" id="progress"></i>
 </header>
-<div class="bar-mobile" id="barMobile"><a href="#platform">Платформа</a><a href="#mri">Коммерческий МРТ</a><a href="#how">Как начать</a><a href="#team">Кто за этим стоит</a><a href="/research/">Исследования</a><a href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=menu">Открыть кабинет</a></div>
+<div class="bar-mobile" id="barMobile"><a href="/research/">Исследования</a><a href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=menu">Открыть кабинет</a></div>
 
 <main id="top">
 
@@ -758,11 +736,10 @@ html[data-theme="light"] .intro-word{color:#111110}
 <section class="sec w" id="story">
   <div class="head">
     <div><p class="kick">Откуда Closery</p><h2>Разные бизнесы.<br>Одни и те же причины.</h2></div>
-    <p class="lede">Видеть потерю мало. Нужно дойти до причины, которая её создаёт. На этом построен Closery.</p>
   </div>
   <div class="story-body">
     <figure class="product-film rv" id="closery-method" aria-label="Настоящий интерфейс Closery: от общей картины потерь к расчёту и действию. Пример: компания Техноснаб.">
-      <div class="film-meta"><span>Метод внутри Closery</span><button class="motion-toggle" type="button" aria-pressed="false" aria-label="Приостановить показ платформы" hidden>Пауза</button></div>
+      <div class="film-meta"><span>Метод внутри Closery</span></div>
       <div class="film-stage shots" aria-hidden="true"><div class="film-world"><div class="film-camera">
         <div class="film-base"><div class="film-surface"><img class="tl" src="/media/v3/itog-d-light.webp" width="1800" height="1125" alt="" loading="lazy"><img class="td" src="/media/v3/itog-d-dark.webp" width="1800" height="1125" alt="" loading="lazy"><div class="film-hole"></div></div></div>
         <div class="film-row"><div class="film-surface"><p>Разговоры без оплаты</p><b>−605 000 ₽</b><small>Оплачивают 15 из 120 разговоров в месяц</small></div></div>
@@ -784,7 +761,6 @@ html[data-theme="light"] .intro-word{color:#111110}
 <section class="sec w" id="platform">
   <div class="head">
     <div><p class="kick">Платформа</p><h2>Что вы увидите в кабинете</h2></div>
-    <p class="lede">Рынок, конкуренты и ниша открываются сразу. Сделки и Пульт ждут вашу CRM: amoCRM или Битрикс24.</p>
   </div>
   <div class="pf" id="pf" data-cycle="6500">
     <ol class="pf-list"><li class="on"><button type="button" data-i="0" data-url="start"><span class="nm">Итог</span><span class="q">Сколько бизнес теряет в месяц и где</span><span class="a">Потери в рублях по местам, самое дорогое первым.</span></button></li><li><button type="button" data-i="1" data-url="review"><span class="nm">Сделки · Сегодня</span><span class="q">Кому звонить сегодня</span><span class="a">Очередь из остывающих сделок, собранная из CRM.</span></button></li><li><button type="button" data-i="2" data-url="review"><span class="nm">Сделки · Сделка</span><span class="q">Что сказать клиенту</span><span class="a">Причина, следующий шаг и скрипт звонка. Задача уходит в amoCRM кнопкой.</span></button></li><li><button type="button" data-i="3" data-url="pulse"><span class="nm">Пульт продаж</span><span class="q">Кто добирает план, а кто нет</span><span class="a">Заявки, разговоры и оплаты за неделю. Где просело и сколько это в рублях.</span></button></li><li><button type="button" data-i="4" data-url="competitors"><span class="nm">Конкуренты</span><span class="q">За счёт чего растут конкуренты</span><span class="a">Сайты, вакансии и отчётность конкурентов. Три рычага роста.</span></button></li><li><button type="button" data-i="5" data-url="niche"><span class="nm">Выбор ниши</span><span class="q">Куда расти дальше</span><span class="a">Все компании России за 10 лет по данным ФНС. Где ниши растут и где мало игроков.</span></button></li></ol>
@@ -796,7 +772,6 @@ html[data-theme="light"] .intro-word{color:#111110}
 <section class="sec w" id="mri">
   <div class="head">
     <div><p class="kick">Коммерческий МРТ</p><h2>Разберём бизнес за два часа.<br>План на 90 дней останется у вас.</h2></div>
-    <p class="lede">Каждая потеря посчитана в рублях и доведена до причины. Отчёт ваш, даже если внедрять будете сами.</p>
   </div>
   <div class="sx">
     <figure class="mri-doc rv">
@@ -818,22 +793,9 @@ html[data-theme="light"] .intro-word{color:#111110}
 <section class="sec w" id="how">
   <div class="head">
     <div><p class="kick">Как начать</p><h2>Первая цифра через несколько минут после регистрации</h2></div>
-    <p class="lede">Подключать всё в первый день не нужно.</p>
   </div>
   <ol class="st"><li><h3>Регистрация</h3><p>Телефон или почта и пароль. Кабинет открывается сразу.</p><em>Рынок вашей ниши по ФНС</em></li><li><h3>Цифры бизнеса</h3><p>Заявки, разговоры, оплаты, чек и маржа. Всё это вы знаете.</p><em>Потери в рублях и с чего начать</em></li><li><h3>amoCRM или Битрикс24</h3><p>Подключение за минуту.</p><em>Очередь остывающих сделок и Пульт</em></li><li><h3>Конкуренты</h3><p>Название компании или ИНН.</p><em>Три рычага роста</em></li></ol>
   <div class="go st-go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=how">Зарегистрироваться <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
-</section>
-
-<section class="sec w" id="team">
-  <div class="team">
-    <div class="fd">
-      <p class="kick">Кто за этим стоит</p>
-      <h2>Десять лет Николай строил продажи в CDEK, MarketGuru и Vagabond</h2>
-      
-      <ul class="facts"><li><b>×2</b><span><i>CDEK, франчайзи-сеть из 8 точек</i>Выручка выросла вдвое за 10 месяцев.</span></li><li><b>3 РОПа</b><span><i>MarketGuru, SaaS</i>Выросли из менеджеров. Рекорд выручки 100 млн ₽ в месяц.</span></li><li><b>42,6 млн ₽</b><span><i>Оптовая компания, выручка 480 млн ₽</i>Прибыль за год в базе, к которой никто не возвращался.</span></li></ul>
-      <a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=team">Посмотреть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
-    </div>
-  </div>
 </section>
 
 <section class="sec w" id="faq">
@@ -954,11 +916,9 @@ html[data-theme="light"] .intro-word{color:#111110}
    сохраняет синхронность камеры, деталей и подписей при паузе и переключении темы. */
 (function(){
   var root=document.getElementById('closery-method');if(!root)return;
-  var example=document.querySelector('.mri-case-expand'),compact=matchMedia('(max-width:560px)');
-  function fitExample(){if(example)example.open=!compact.matches}fitExample();compact.addEventListener('change',fitExample);
   var stage=root.querySelector('.film-stage'),world=root.querySelector('.film-world'),camera=root.querySelector('.film-camera');
-  var media=matchMedia('(prefers-reduced-motion: reduce)'),duration=18000,animations=[],visible=false,held=false,lastScene=-1,raf=0;
-  var toggle=root.querySelector('.motion-toggle'),chapters=Array.from(root.querySelectorAll('[data-scene]'));
+  var media=matchMedia('(prefers-reduced-motion: reduce)'),duration=18000,animations=[],visible=false,lastScene=-1,raf=0;
+  var chapters=Array.from(root.querySelectorAll('[data-scene]'));
   function fit(){world.style.setProperty('--film-scale',stage.clientWidth/1000)}
   if(window.ResizeObserver)new ResizeObserver(fit).observe(stage);else addEventListener('resize',fit);fit();
   function track(selector,frames){var el=typeof selector==='string'?root.querySelector(selector):selector;var a=el.animate(frames,{duration:duration,iterations:Infinity,fill:'both',easing:'linear'});a.pause();animations.push(a);return a;}
@@ -976,12 +936,11 @@ html[data-theme="light"] .intro-word{color:#111110}
       track('.film-action',[frame(0,{opacity:0,transform:'translateZ(72px)'}),frame(.64,{opacity:0,transform:'translateZ(72px)'}),frame(.68,{opacity:1,transform:'translateZ(72px)'},e),frame(.76,{opacity:1,transform:'translateZ(150px)'}),frame(.85,{opacity:1,transform:'translateZ(150px)'},e),frame(.91,{opacity:0,transform:'translateZ(72px)'}),frame(1,{opacity:0,transform:'translateZ(72px)'})]);
       Array.from(root.querySelectorAll('.film-caption span')).forEach(function(el,i){var starts=[0,.35,.66],ends=[.35,.66,.94],start=starts[i],end=ends[i];var k=[frame(0,{opacity:i===0?1:0,transform:'translateY(0)'})];if(i>0)k.push(frame(start-.005,{opacity:0,transform:'translateY(6px)'}),frame(start+.035,{opacity:1,transform:'translateY(0)'}));k.push(frame(end-.04,{opacity:1,transform:'translateY(0)'}),frame(end-.01,{opacity:0,transform:'translateY(-6px)'}));if(i===0)k.push(frame(.965,{opacity:0,transform:'translateY(6px)'}));k.push(frame(1,{opacity:i===0?1:0,transform:'translateY(0)'}));track(el,k)});
     }
-    toggle.hidden=media.matches;chapters.forEach(function(b){b.hidden=media.matches});lastScene=-1;sync();
+    chapters.forEach(function(b){b.hidden=media.matches});lastScene=-1;sync();
   }
   function tick(){if(!animations.length)return;var t=((animations[0].currentTime||0)%duration)/duration,n=t<.35?0:t<.66?1:t<.94?2:0;if(n!==lastScene){lastScene=n;chapters.forEach(function(b,i){b.setAttribute('aria-pressed',String(i===n))})}raf=requestAnimationFrame(tick)}
-  function sync(){var run=visible&&!document.hidden&&!held&&!media.matches;animations.forEach(function(a){run?a.play():a.pause()});root.dataset.motion=run?'running':'paused';cancelAnimationFrame(raf);if(run)tick();}
-  toggle.addEventListener('click',function(){held=!held;toggle.setAttribute('aria-pressed',String(held));toggle.setAttribute('aria-label',held?'Продолжить показ платформы':'Приостановить показ платформы');toggle.textContent=held?'Продолжить':'Пауза';sync()});
-  chapters.forEach(function(b,i){b.addEventListener('click',function(){animations.forEach(function(a){a.currentTime=[1200,9000,14400][i]});lastScene=-1;if(held){chapters.forEach(function(x,j){x.setAttribute('aria-pressed',String(i===j))})}else sync();})});
+  function sync(){var run=visible&&!document.hidden&&!media.matches;animations.forEach(function(a){run?a.play():a.pause()});root.dataset.motion=run?'running':'paused';cancelAnimationFrame(raf);if(run)tick();}
+  chapters.forEach(function(b,i){b.addEventListener('click',function(){animations.forEach(function(a){a.currentTime=[1200,9000,14400][i]});lastScene=-1;sync();})});
   if(window.IntersectionObserver)new IntersectionObserver(function(entries){visible=entries[0].isIntersecting;sync()},{threshold:.25}).observe(root);else visible=true;
   document.addEventListener('visibilitychange',sync);media.addEventListener('change',build);build();
 })();
