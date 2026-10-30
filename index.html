@@ -410,7 +410,38 @@ html:not([data-theme="light"]) .og-ph img{filter:brightness(.88) contrast(1.04)}
 
 @media(max-width:480px){.facts li{grid-template-columns:minmax(0,1fr);gap:8px}}
 
-/* ── Коммерческий МРТ: слева кадр настоящего отчёта (нижняя часть размыта), справа что внутри, цифры и цена ── */
+/* ── Коммерческий МРТ: слева план МРТ Техноснаба ступенями (что чиним по порядку и сколько это даёт), справа что внутри, цифры и цена ── */
+.gr-k{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px clamp(16px,2vw,32px);padding-top:22px;border-top:1px solid var(--rule-2)}
+.gr-k small{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.gr-k b{display:block;font-weight:600;font-size:clamp(24px,2.4vw,36px);letter-spacing:-.04em;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.gr-k div:nth-child(2) b{color:var(--ok)}
+.gr-k div:nth-child(3) b{color:var(--ink-3)}
+.gr-ch{position:relative;margin-top:clamp(20px,2.4vw,32px);aspect-ratio:1000/520}
+.gr-ch svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.gr-ch .ax{stroke:var(--rule-2);stroke-width:1}
+.gr-ch .cap{stroke:var(--ink-4);stroke-width:1;stroke-dasharray:3 5}
+.gr-ch .pre{fill:none;stroke:var(--ink-3);stroke-width:2.2}
+.gr-ch .ln{fill:none;stroke:var(--ok);stroke-width:2.6;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 2.6s var(--ease) .3s}
+.gr-ch .ar{fill:url(#grf);opacity:1;transition:opacity 1.2s ease 1.6s}
+.gr-ch .mk{stroke:var(--ink-4);stroke-width:1}
+.gr-ch .dt{fill:var(--bg);stroke:var(--ok);stroke-width:2;transition:opacity .5s}
+.gr-ch .dt0{fill:var(--ink-3);stroke:none}
+.gr-l{position:absolute;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:translate(-50%,0)}
+.gr-n{position:absolute;width:22px;height:22px;margin:-34px 0 0 -11px;border-radius:50%;background:var(--ok);color:var(--bg);font-size:12px;font-weight:600;display:grid;place-items:center;transition:opacity .5s,transform .5s var(--ease)}
+.js .gr:not(.in) .ln{stroke-dashoffset:1}
+.js .gr:not(.in) .ar{opacity:0}
+.js .gr:not(.in) .dt,.js .gr:not(.in) .gr-n{opacity:0}
+.js .gr:not(.in) .gr-n{transform:translateY(6px)}
+.gr .gr-n:nth-of-type(1),.gr .dt1{transition-delay:.8s}.gr .gr-n:nth-of-type(2),.gr .dt2{transition-delay:1.3s}.gr .gr-n:nth-of-type(3),.gr .dt3{transition-delay:1.8s}.gr .gr-n:nth-of-type(4),.gr .dt4{transition-delay:2.2s}
+@media(prefers-reduced-motion:reduce){.js .gr:not(.in) .ln{stroke-dashoffset:0}.js .gr:not(.in) .ar,.js .gr:not(.in) .dt,.js .gr:not(.in) .gr-n{opacity:1;transform:none}}
+.gr-st{list-style:none;margin-top:clamp(20px,2.4vw,28px);border-top:1px solid var(--rule)}
+.gr-st li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;column-gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--rule)}
+.gr-st i{font-style:normal;width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--ok);color:var(--ok);font-size:12px;font-weight:600;display:grid;place-items:center;transform:translateY(4px)}
+.gr-st span{font-size:15.5px;font-weight:500;color:var(--ink)}
+.gr-st small{display:block;font-size:13.5px;font-weight:400;color:var(--ink-3)}
+.gr-st b{font-weight:600;font-size:16px;color:var(--ok);white-space:nowrap;font-variant-numeric:tabular-nums}
+.gr .note{margin-top:14px}
+@media(max-width:560px){.gr-k{grid-template-columns:repeat(2,minmax(0,1fr))}.gr-k div:nth-child(3){grid-column:1/-1}.gr-l{font-size:10px}}
 .mr-side{display:flex;flex-direction:column;gap:clamp(32px,3.4vw,48px)}
 .mr-toc{list-style:none;border-top:1px solid var(--rule-2)}
 .mr-toc li{padding:16px 0;border-bottom:1px solid var(--rule)}
@@ -745,11 +776,29 @@ html[data-theme="light"] .intro-word{color:#111110}
 
 <section class="sec w" id="mri">
   <div class="head">
-    <div><p class="kick">Коммерческий МРТ</p><h2>Разбор всей компании за 120 минут</h2></div>
-    <p class="lede">Потери в рублях по данным вашей CRM и план на 90 дней.</p>
+    <div><p class="kick">Коммерческий МРТ</p><h2>МРТ показывает всё, что мешает зарабатывать</h2></div>
+    <p class="lede">За 120 минут разбираем компанию целиком и строим цепочку: что просело, из-за чего и сколько это стоит. Потом чиним по порядку, с самого дорогого, и прибыль растёт ступенями.</p>
   </div>
   <div class="sx">
-    <figure class="sx-f rv"><picture class="tl"><source media="(max-width:900px)" srcset="/media/s/mri-m-light.webp" width="780" height="1850"><img class="shot" src="/media/s/mri-d-light.webp" width="1800" height="1447" alt="Отчёт Коммерческого МРТ: ведомость потерь по этапам, недобираете 1,53 млн ₽ в месяц" loading="lazy" decoding="async"></picture><picture class="td"><source media="(max-width:900px)" srcset="/media/s/mri-m-dark.webp" width="780" height="1850"><img class="shot" src="/media/s/mri-d-dark.webp" width="1800" height="1447" alt="" loading="lazy" decoding="async"></picture></figure>
+    <figure class="sx-f rv gr">
+      <div class="gr-k"><div><small>Сейчас</small><b>945&nbsp;тыс&nbsp;₽</b></div><div><small>Через 90 дней</small><b>1,34&nbsp;млн&nbsp;₽</b></div><div><small>С выстроенной системой</small><b>1,6&nbsp;млн&nbsp;₽</b></div></div>
+      <div class="gr-ch" role="img" aria-label="Валовая прибыль Техноснаба в месяц: сейчас 945 тысяч рублей, после МРТ чиним четыре этапа по порядку, через 90 дней 1,34 миллиона, потолок с выстроенной системой 1,6 миллиона">
+        <svg viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="grf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--ok)" stop-opacity=".16"/><stop offset="1" stop-color="var(--ok)" stop-opacity="0"/></linearGradient></defs>
+          <line class="cap" x1="0" x2="1000" y1="59.4" y2="59.4" vector-effect="non-scaling-stroke"/>
+          <line class="ax" x1="0" x2="1000" y1="500" y2="500" vector-effect="non-scaling-stroke"/>
+          <line class="mk" x1="150" x2="150" y1="458.2" y2="500" vector-effect="non-scaling-stroke"/>
+          <path class="ar" d="M150 444.2 H270 C300 444.2 300 351.9 330 351.9 H460 C490 351.9 490 260.3 520 260.3 H640 C670 260.3 670 234.5 700 234.5 H820 C850 234.5 850 209.8 880 209.8 H1000 V500 H150 Z"/>
+          <path class="pre" d="M0 444.2 H150" vector-effect="non-scaling-stroke"/>
+          <path class="ln" d="M150 444.2 H270 C300 444.2 300 351.9 330 351.9 H460 C490 351.9 490 260.3 520 260.3 H640 C670 260.3 670 234.5 700 234.5 H820 C850 234.5 850 209.8 880 209.8 H1000" pathLength="1" vector-effect="non-scaling-stroke"/>
+          <circle class="dt dt0" cx="150" cy="444.2" r="4.5"/><circle class="dt dt1" cx="330" cy="351.9" r="5"/><circle class="dt dt2" cx="520" cy="260.3" r="5"/><circle class="dt dt3" cx="700" cy="234.5" r="5"/><circle class="dt dt4" cx="880" cy="209.8" r="5"/>
+        </svg>
+        <span class="gr-n" style="left:33.0%;top:67.67307692307692%">1</span><span class="gr-n" style="left:52.0%;top:50.05769230769231%">2</span><span class="gr-n" style="left:70.0%;top:45.09615384615385%">3</span><span class="gr-n" style="left:88.0%;top:40.34615384615385%">4</span>
+        <span class="gr-l" style="left:15%;top:calc(96.15384615384615% + 10px)">МРТ</span>
+        <span class="gr-l" style="left:auto;right:0;transform:none;top:calc(11.423076923076922% - 22px)">потолок</span>
+      </div>
+      <ol class="gr-st"><li><i>1</i><span>Переговоры и закрытие<small>продажи, управление</small></span><b>+157&nbsp;тыс&nbsp;₽</b></li><li><i>2</i><span>Первый контакт<small>продажи</small></span><b>+156&nbsp;тыс&nbsp;₽</b></li><li><i>3</i><span>Цена<small>экономика клиента</small></span><b>+44&nbsp;тыс&nbsp;₽</b></li><li><i>4</i><span>Повторные продажи<small>экономика клиента</small></span><b>+42&nbsp;тыс&nbsp;₽</b></li></ol>
+      <p class="note">Валовая прибыль в месяц. Пример: план МРТ для компании Техноснаб</p>
+    </figure>
     <div class="mr-side">
       <ol class="mr-toc"><li><b>Куда уходят деньги</b><i>каждая потеря в рублях, с расчётом</i></li><li><b>С чего начать</b><i>что менять первым, по сумме</i></li><li><b>План на 90 дней</b><i>шаги по неделям, у каждого своя цифра</i></li><li><b>Окупаемость</b><i>во что обойдётся и когда вернётся</i></li></ol>
       <ul class="mr-facts"><li><b>120<small>минут</small></b><span>онлайн, вместе с собственником</span></li><li><b>20<small>страниц</small></b><span>PDF остаётся у вас</span></li></ul>
