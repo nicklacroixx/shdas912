@@ -46,31 +46,7 @@
    "name": "Что такое Closery?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Платформа для бизнеса, меняющая прибыль. Находим, где бизнес теряет деньги, считаем потери в прибыли по вашим цифрам и показываем, как их вернуть. Кабинет бесплатный, нужна только регистрация. Платные только Коммерческий МРТ, 79 990 ₽, и работа после него."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "Откуда берутся цифры?",
-   "acceptedAnswer": {
-    "@type": "Answer",
-    "text": "Рынок и конкуренты из открытой отчётности ФНС за последний год. Потери кабинет считает по данным вашей CRM: заявки, разговоры, оплаты, чек и маржа. Каждая статья в прибыли, с формулой под строкой. Итог не больше 70% вашей валовой прибыли за год."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "CRM нет или продаю сам. Подойдёт?",
-   "acceptedAnswer": {
-    "@type": "Answer",
-    "text": "Да. Рынок и конкуренты откроются по названию компании, а без CRM пульт продаж считает по четырём цифрам в неделю, которые вы вносите сами. Подходит для B2B, B2C и ИП."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "Что вы делаете с данными CRM?",
-   "acceptedAnswer": {
-    "@type": "Answer",
-    "text": "Читаем этапы, задачи, звонки и примечания открытых сделок, чтобы найти те, что остывают. В CRM пишем только по вашей кнопке: задачу ответственному на ближайший рабочий день. Отключить CRM можно одной кнопкой в разделе «Компания и CRM», доступ сотрём."
+    "text": "Платформа для бизнеса, меняющая прибыль. Находим, где бизнес теряет деньги, считаем потери в рублях и показываем, что менять первым. Кабинет бесплатный, платные только Коммерческий МРТ и работа после него."
    }
   },
   {
@@ -78,7 +54,31 @@
    "name": "Что будет после регистрации?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Компания, имя, телефон и пароль. Кабинет откроется сразу: рынок и конкуренты по ФНС, а все разделы на примере компании с подключённой CRM. Подключите amoCRM или Битрикс24, и через минуту там будут ваши сделки."
+    "text": "Кабинет откроется сразу. Рынок, конкуренты и ниша работают по данным ФНС, а Сделки и Пульт до подключения CRM показаны на компании Техноснаб. Подключите amoCRM или Битрикс24, и появятся ваши сделки."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Откуда берутся цифры?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Рынок и конкуренты из открытой отчётности ФНС. Потери считаем по вашим ответам и данным CRM, под каждой суммой стоит формула."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "CRM нет или продаю сам. Подойдёт?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Да. Рынок, конкуренты и ниша открываются по названию компании, а Пульт считает по четырём цифрам в неделю, которые вы вносите сами."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Что вы делаете с данными CRM?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Читаем этапы, задачи и звонки открытых сделок, чтобы найти те, что остывают. В CRM пишем только по вашей кнопке. Отключить CRM можно в разделе «Компания и CRM», доступ сотрём."
    }
   },
   {
@@ -86,15 +86,7 @@
    "name": "Чем кабинет отличается от Коммерческого МРТ?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Кабинет каждый день смотрит в рынок, сделки и работу менеджеров. На МРТ смотрим всю компанию вместе с вами: 120 минут по шести системам бизнеса, потери в рублях и план на 90 дней. Записаться можно в кабинете."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "Как вы внедряете?",
-   "acceptedAnswer": {
-    "@type": "Answer",
-    "text": "Заходим в роль коммерческого директора на 90 дней и закрываем потери, начиная с самой дорогой. Цену и метрику приёмки называем в конце МРТ, до старта. Метрика месяца не дошла до цели, оплату месяца возвращаем. Регламенты, скрипты и доступы ваши с первого дня."
+    "text": "Кабинет каждый день следит за рынком, сделками и менеджерами. МРТ разбирает всю компанию за 120 минут: потери в рублях по шести системам бизнеса и план на 90 дней. NDA подписываем до доступа к данным, записаться можно в кабинете."
    }
   }
  ]
@@ -247,6 +239,8 @@ h1 em,h2 em{color:var(--loss)}
 .sec{padding-top:clamp(88px,9vw,144px)}
 .head{margin-bottom:clamp(36px,4.5vw,64px)}
 .head .lede{max-width:46ch}
+.head h2,.fd h2{text-wrap:balance}
+.head .lede{text-wrap:pretty}
 .btn{border-radius:12px}
 .go{display:flex;align-items:center;gap:14px 22px;flex-wrap:wrap}
 .go .note{max-width:34ch}
@@ -479,15 +473,12 @@ html[data-theme="light"] .mr-sh{box-shadow:0 30px 60px -40px color-mix(in srgb,v
 .mr-top .logo{font-size:11px;gap:8px}
 .mr-top .logo i{width:7px;height:7px}
 .mr-ttl{margin-top:clamp(28px,3.4vw,48px);font-weight:600;font-size:clamp(24px,2.3vw,34px);letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
-.mr-toc-h{margin-top:clamp(24px,2.6vw,36px);font-size:13px;color:var(--ink-3)}
-.mr-toc{list-style:none;margin-top:10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(7,auto);grid-auto-flow:column;column-gap:clamp(16px,2vw,32px);border-top:1px solid var(--rule)}
-.mr-toc li{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.35;color:var(--ink-3)}
-.mr-toc span{flex:none;min-width:2ch;font-size:13px;color:var(--ink-4);font-feature-settings:"tnum" 1}
-.mr-toc .k{font-weight:500;color:var(--ink)}
-.mr-toc .k span{color:var(--ink-3)}
-.mr-toc .k::after{content:"";flex:none;margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--ink)}
-.mr-foot{margin-top:auto;padding-top:24px;font-size:13px;color:var(--ink-3)}
-.mr-side{display:flex;flex-direction:column;justify-content:space-between;gap:clamp(40px,4vw,56px)}
+.mr-toc{list-style:none;margin-top:clamp(28px,3vw,44px);border-top:1px solid var(--rule-2)}
+.mr-toc li{display:grid;grid-template-columns:3ch minmax(0,1fr);column-gap:14px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--rule)}
+.mr-toc span{font-size:13px;color:var(--ink-4);font-feature-settings:"tnum" 1}
+.mr-toc b{font-weight:500;font-size:17px;line-height:1.35;color:var(--ink)}
+.mr-toc i{grid-column:2;margin-top:2px;font-style:normal;font-size:14px;line-height:1.5;color:var(--ink-3)}
+.mr-side{display:flex;flex-direction:column;justify-content:flex-start;gap:clamp(48px,5vw,72px)}
 .mr-facts{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,3vw,44px) var(--cg)}
 .mr-facts li{padding-top:18px;border-top:1px solid var(--rule-2)}
 .mr-facts b{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 8px;font-weight:600;font-size:clamp(40px,4vw,60px);letter-spacing:-.045em;line-height:1}
@@ -506,8 +497,6 @@ html[data-theme="light"] .mr-sh{box-shadow:0 30px 60px -40px color-mix(in srgb,v
   .mr-facts{gap:28px 20px}
   .mr-facts b{font-size:clamp(32px,10vw,40px)}
   .mr-facts span{font-size:14px}
-  .mr-toc{column-gap:14px}
-  .mr-toc li{gap:8px;font-size:14px}
   .mr-pr{flex-direction:column;gap:8px}
   .mr-buy .go .more{align-self:center}
 }
@@ -778,12 +767,12 @@ html[data-theme="light"] .intro-word{color:#111110}
 <section class="sec w" id="leaks">
   <div class="head">
     <div><p class="kick">Где теряются деньги</p><h2>Деньги теряются в том, за что вы уже заплатили</h2></div>
-    <p class="lede">Реклама сработала, заявка пришла. Дальше деньги уходят на переходах между людьми, и в отчёте о выручке этого не видно.</p>
+    <p class="lede">Реклама сработала, заявка пришла. Дальше деньги теряются на стыках, и в выручке их не видно.</p>
   </div>
   <div class="lk">
     <div class="lk-sum">
       <div class="a"><p class="lk-tot">936&nbsp;000&nbsp;₽</p><p class="lk-tx">валовой прибыли в месяц уходит в трёх местах</p></div>
-      <div class="b"><div class="lk-stack rv" aria-hidden="true"><i style="--w:236"></i><i style="--w:605"></i><i style="--w:95"></i></div><p class="note">Расчёт кабинета на примере компании Техноснаб</p><a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=leaks">Посчитать свой бизнес <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
+      <div class="b"><div class="lk-stack rv" aria-hidden="true"><i style="--w:236"></i><i style="--w:605"></i><i style="--w:95"></i></div><p class="note">Пример расчёта: компания Техноснаб</p><a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=leaks">Посчитать свой бизнес <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
     </div>
     <div class="lk-rail" aria-hidden="true"><span class="lk-hop">Заявка<i class="brk"></i></span><span class="lk-hop">Разговор<i class="brk"></i></span><span class="lk-hop">Оплата<i class="brk"></i><b>Повторная покупка</b></span></div>
     <div class="lk-card">
@@ -815,35 +804,33 @@ html[data-theme="light"] .intro-word{color:#111110}
 
 <section class="sec w" id="platform">
   <div class="head">
-    <div><p class="kick">Платформа</p><h2>Каждый раздел отвечает на вопрос собственника</h2></div>
-    <p class="lede">Рынок, конкуренты и ниша открываются сразу после регистрации. Сделки и Пульт заработают на ваших цифрах, когда подключите amoCRM или Битрикс24.</p>
+    <div><p class="kick">Платформа</p><h2>Что вы увидите в кабинете</h2></div>
+    <p class="lede">Рынок, конкуренты и ниша открываются сразу. Сделки и Пульт ждут вашу CRM: amoCRM или Битрикс24.</p>
   </div>
   <div class="pf" id="pf" data-cycle="6500">
-    <ol class="pf-list"><li class="on"><button type="button" data-i="0" data-url="start"><span class="nm">Итог</span><span class="q">Сколько бизнес теряет в месяц и где</span><span class="a">Места потерь в рублях, самое дорогое первым. У каждого видно, откуда сумма и что менять.</span></button></li><li><button type="button" data-i="1" data-url="review"><span class="nm">Сделки · Сегодня</span><span class="q">Кому звонить сегодня</span><span class="a">Каждое утро кабинет читает CRM и собирает очередь из сделок, которые остывают.</span></button></li><li><button type="button" data-i="2" data-url="review"><span class="nm">Сделки · Сделка</span><span class="q">Что сказать клиенту</span><span class="a">У красной сделки причина, следующий шаг и скрипт звонка. Задача уходит в amoCRM одной кнопкой.</span></button></li><li><button type="button" data-i="3" data-url="pulse"><span class="nm">Пульт продаж</span><span class="q">Кто добирает план, а кто нет</span><span class="a">Заявки, разговоры, оплаты и выручка за неделю. Видно, где просело и сколько это в рублях.</span></button></li><li><button type="button" data-i="4" data-url="competitors"><span class="nm">Конкуренты</span><span class="q">За счёт чего растут конкуренты</span><span class="a">Сайты, вакансии и отчётность конкурентов. Три рычага роста и первый шаг на этой неделе.</span></button></li><li><button type="button" data-i="5" data-url="niche"><span class="nm">Выбор ниши</span><span class="q">Куда расти дальше</span><span class="a">Все компании России за 10 лет по данным ФНС: какие ниши растут, где мало игроков, в каких регионах.</span></button></li></ol>
+    <ol class="pf-list"><li class="on"><button type="button" data-i="0" data-url="start"><span class="nm">Итог</span><span class="q">Сколько бизнес теряет в месяц и где</span><span class="a">Потери в рублях по местам, самое дорогое первым.</span></button></li><li><button type="button" data-i="1" data-url="review"><span class="nm">Сделки · Сегодня</span><span class="q">Кому звонить сегодня</span><span class="a">Очередь из остывающих сделок, собранная из CRM.</span></button></li><li><button type="button" data-i="2" data-url="review"><span class="nm">Сделки · Сделка</span><span class="q">Что сказать клиенту</span><span class="a">Причина, следующий шаг и скрипт звонка. Задача уходит в amoCRM кнопкой.</span></button></li><li><button type="button" data-i="3" data-url="pulse"><span class="nm">Пульт продаж</span><span class="q">Кто добирает план, а кто нет</span><span class="a">Заявки, разговоры и оплаты за неделю. Где просело и сколько это в рублях.</span></button></li><li><button type="button" data-i="4" data-url="competitors"><span class="nm">Конкуренты</span><span class="q">За счёт чего растут конкуренты</span><span class="a">Сайты, вакансии и отчётность конкурентов. Три рычага роста.</span></button></li><li><button type="button" data-i="5" data-url="niche"><span class="nm">Выбор ниши</span><span class="q">Куда расти дальше</span><span class="a">Все компании России за 10 лет по данным ФНС. Где ниши растут и где мало игроков.</span></button></li></ol>
     <div class="pf-view"><div class="win"><div class="win-b"><i></i><i></i><i></i><span>lk.closery.ru<b>/start</b></span></div><div class="shots"><img class="tl on" data-i="0" src="/media/v3/itog-d-light.webp" width="1800" height="1125" alt="Итог: сколько бизнес теряет в месяц и где" loading="lazy" decoding="async"><img class="td on" data-i="0" src="/media/v3/itog-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="1" src="/media/v3/today-d-light.webp" width="1800" height="1125" alt="Сделки · Сегодня: кому звонить сегодня" loading="lazy" decoding="async"><img class="td" data-i="1" src="/media/v3/today-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="2" src="/media/v3/deal-d-light.webp" width="1800" height="1125" alt="Сделки · Сделка: что сказать клиенту" loading="lazy" decoding="async"><img class="td" data-i="2" src="/media/v3/deal-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="3" src="/media/v3/pulse-d-light.webp" width="1800" height="1125" alt="Пульт продаж: кто добирает план, а кто нет" loading="lazy" decoding="async"><img class="td" data-i="3" src="/media/v3/pulse-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="4" src="/media/v3/comp-d-light.webp" width="1800" height="1125" alt="Конкуренты: за счёт чего растут конкуренты" loading="lazy" decoding="async"><img class="td" data-i="4" src="/media/v3/comp-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="5" src="/media/v3/niche-d-light.webp" width="1800" height="1125" alt="Выбор ниши: куда расти дальше" loading="lazy" decoding="async"><img class="td" data-i="5" src="/media/v3/niche-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"></div></div><div class="ph"><div class="scr"><div class="sb"><b>9:41</b><i class="isl"></i><span class="ic"><svg class="sig" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1.1"/><rect x="4.67" y="5" width="3" height="6" rx="1.1"/><rect x="9.33" y="2.6" width="3" height="8.4" rx="1.1"/><rect x="14" y="0" width="3" height="11" rx="1.1"/></svg><svg class="bat" viewBox="0 0 28 13"><rect x=".5" y=".5" width="24" height="12" rx="3.9" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="2" y="2" width="21" height="9" rx="2.4"/><path d="M26 4.6a2.1 2.1 0 0 1 0 3.8z" fill-opacity=".4"/></svg></span></div><div class="shots"><img class="tl on" data-i="0" src="/media/v3/itog-m-light.webp" width="780" height="1688" alt="Итог: сколько бизнес теряет в месяц и где" loading="lazy" decoding="async"><img class="td on" data-i="0" src="/media/v3/itog-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="1" src="/media/v3/today-m-light.webp" width="780" height="1688" alt="Сделки · Сегодня: кому звонить сегодня" loading="lazy" decoding="async"><img class="td" data-i="1" src="/media/v3/today-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="2" src="/media/v3/deal-m-light.webp" width="780" height="1688" alt="Сделки · Сделка: что сказать клиенту" loading="lazy" decoding="async"><img class="td" data-i="2" src="/media/v3/deal-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="3" src="/media/v3/pulse-m-light.webp" width="780" height="1688" alt="Пульт продаж: кто добирает план, а кто нет" loading="lazy" decoding="async"><img class="td" data-i="3" src="/media/v3/pulse-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="4" src="/media/v3/comp-m-light.webp" width="780" height="1688" alt="Конкуренты: за счёт чего растут конкуренты" loading="lazy" decoding="async"><img class="td" data-i="4" src="/media/v3/comp-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="5" src="/media/v3/niche-m-light.webp" width="780" height="1688" alt="Выбор ниши: куда расти дальше" loading="lazy" decoding="async"><img class="td" data-i="5" src="/media/v3/niche-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"></div><i class="home"></i></div></div></div>
   </div>
-  <div class="go pf-go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=platform">Открыть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a><span class="note">Бесплатно, нужна только регистрация</span></div>
+  <div class="go pf-go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=platform">Посчитать потери <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
 </section>
 
 <section class="sec w" id="mri">
   <div class="head">
-    <div><p class="kick">Коммерческий МРТ</p><h2>Разберём всю компанию на ваших цифрах и соберём план на 90 дней</h2></div>
-    <p class="lede">Кабинет показывает, где уходят деньги в продажах. На МРТ мы вместе с вами проходим всю компанию, проверяем каждую сумму на данных CRM и решаем, что менять первым.</p>
+    <div><p class="kick">Коммерческий МРТ</p><h2>Разбор всей компании за 120 минут</h2></div>
+    <p class="lede">Потери в рублях по данным вашей CRM и план на 90 дней.</p>
   </div>
   <div class="mr">
     <figure class="mr-doc">
       <div class="mr-sh">
         <p class="mr-top"><span class="logo"><i></i>Closery</span><span>Конфиденциально</span></p>
         <p class="mr-ttl">Отчёт Коммерческого МРТ</p>
-        <p class="mr-toc-h">Содержание</p>
-        <ol class="mr-toc"><li><span>01</span>Основание</li><li><span>02</span>Резюме</li><li><span>03</span>Периметр</li><li><span>04</span>Данные</li><li class="k"><span>05</span>Потери</li><li><span>06</span>Сравнение</li><li><span>07</span>Диагноз</li><li><span>08</span>Цель</li><li><span>09</span>Риски роста</li><li class="k"><span>10</span>Что делать</li><li class="k"><span>11</span>План</li><li class="k"><span>12</span>Деньги</li><li><span>13</span>Бездействие</li><li><span>14</span>Предложение</li></ol>
-        <p class="mr-foot">PDF около 20 страниц, остаётся у вас</p>
+        <ol class="mr-toc"><li><span>05</span><b>Потери</b><i>каждая сумма в рублях и расчёт под ней</i></li><li><span>10</span><b>Что делать</b><i>что менять первым</i></li><li><span>11</span><b>План</b><i>90 дней по волнам, у каждой метрика приёмки</i></li><li><span>12</span><b>Деньги</b><i>во что обойдётся и когда вернётся</i></li></ol>
       </div>
     </figure>
     <div class="mr-side">
-      <ul class="mr-facts"><li><b>120<small>минут</small></b><span>онлайн, вместе с собственником</span></li><li><b>6<small>систем</small></b><span>маркетинг, продажи, команда, управление, экономика, стратегия</span></li><li><b>20<small>страниц</small></b><span>каждая потеря в рублях и расчёт под ней</span></li><li><b>90<small>дней</small></b><span>план по волнам, у каждой метрика приёмки</span></li></ul>
+      <ul class="mr-facts"><li><b>120<small>минут</small></b><span>онлайн, вместе с собственником</span></li><li><b>20<small>страниц</small></b><span>PDF остаётся у вас</span></li></ul>
       <div class="mr-buy">
-        <p class="mr-pr"><b>79&nbsp;990&nbsp;₽</b><span>Не найдём потерь в рублях, вернём оплату. NDA до доступа к данным.</span></p>
+        <p class="mr-pr"><b>79&nbsp;990&nbsp;₽</b><span>Не найдём потерь в рублях, вернём оплату.</span></p>
         <div class="go"><a class="btn" href="https://lk.closery.ru/register?next=/mri&amp;utm_source=site&amp;utm_content=mri">Записаться на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a><a class="more" href="/mri/">Как проходит <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
       </div>
     </div>
@@ -853,10 +840,10 @@ html[data-theme="light"] .intro-word{color:#111110}
 <section class="sec w" id="how">
   <div class="head">
     <div><p class="kick">Как начать</p><h2>Первая цифра через несколько минут после регистрации</h2></div>
-    <p class="lede">Каждый шаг сразу даёт результат. Подключать всё в первый день не нужно.</p>
+    <p class="lede">Подключать всё в первый день не нужно.</p>
   </div>
-  <ol class="st"><li><h3>Регистрация</h3><p>Телефон или почта и пароль. Кабинет открывается сразу, с полным меню.</p><em>Рынок вашей ниши по ФНС</em></li><li><h3>Цифры бизнеса</h3><p>Заявки, разговоры, оплаты, чек и маржа. То, что вы и так знаете.</p><em>Потери в рублях в месяц и с чего начать</em></li><li><h3>amoCRM или Битрикс24</h3><p>Подключение за минуту. Кабинет читает открытые сделки каждое утро.</p><em>Очередь сделок, которые остывают, и Пульт по менеджерам</em></li><li><h3>Конкуренты</h3><p>Назовите компании по названию или ИНН.</p><em>Три рычага роста и первый шаг на неделю</em></li></ol>
-  <div class="go st-go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=how">Открыть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a><span class="note">Бесплатно, нужна только регистрация</span></div>
+  <ol class="st"><li><h3>Регистрация</h3><p>Телефон или почта и пароль. Кабинет открывается сразу.</p><em>Рынок вашей ниши по ФНС</em></li><li><h3>Цифры бизнеса</h3><p>Заявки, разговоры, оплаты, чек и маржа. Всё это вы знаете.</p><em>Потери в рублях и с чего начать</em></li><li><h3>amoCRM или Битрикс24</h3><p>Подключение за минуту.</p><em>Очередь остывающих сделок и Пульт</em></li><li><h3>Конкуренты</h3><p>Название компании или ИНН.</p><em>Три рычага роста</em></li></ol>
+  <div class="go st-go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=how">Зарегистрироваться <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
 </section>
 
 <section class="sec w" id="team">
@@ -864,9 +851,9 @@ html[data-theme="light"] .intro-word{color:#111110}
     <figure class="fd-ph"><img src="/founder.webp" srcset="/media/v3/founder-1x.webp 395w, /founder.webp 790w" sizes="(max-width:900px) 92vw, 440px" width="790" height="905" alt="Николай Клименко, основатель Closery" loading="lazy" decoding="async"><figcaption><span><b>Николай Клименко</b>основатель Closery</span></figcaption></figure>
     <div class="fd">
       <p class="kick">Кто за этим стоит</p>
-      <h2>Платформу собрал человек, который 10 лет строил продажи изнутри</h2>
-      <p class="lede">CDEK, MarketGuru, Vagabond. В кабинет вошло то, что Николай на каждом новом месте проверял в первую неделю, и порядок, в котором закрывал потери.</p>
-      <ul class="facts"><li><b>×2</b><span><i>CDEK, франчайзи-сеть из 8 точек</i>Выручка удвоилась за 10 месяцев после того, как пересобрали продажи и найм.</span></li><li><b>3 РОПа</b><span><i>MarketGuru, SaaS</i>Выросли из менеджеров и остались в компании. Рекорд выручки 100 млн ₽ в месяц.</span></li><li><b>42,6 млн ₽</b><span><i>Оптовая компания, выручка 480 млн ₽</i>Прибыль за год, которую нашли в базе: клиенты покупали, и к ним никто не возвращался.</span></li></ul>
+      <h2>Десять лет Николай строил продажи в CDEK, MarketGuru и Vagabond</h2>
+      
+      <ul class="facts"><li><b>×2</b><span><i>CDEK, франчайзи-сеть из 8 точек</i>Выручка выросла вдвое за 10 месяцев.</span></li><li><b>3 РОПа</b><span><i>MarketGuru, SaaS</i>Выросли из менеджеров. Рекорд выручки 100 млн ₽ в месяц.</span></li><li><b>42,6 млн ₽</b><span><i>Оптовая компания, выручка 480 млн ₽</i>Прибыль за год в базе, к которой никто не возвращался.</span></li></ul>
       <a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=team">Посмотреть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
     </div>
   </div>
@@ -875,15 +862,15 @@ html[data-theme="light"] .intro-word{color:#111110}
 <section class="sec w" id="faq">
   <div class="faq-wrap">
     <div><p class="kick">Вопросы и ответы</p><h2>Что обычно спрашивают</h2></div>
-    <div class="faq"><div class="faq-item"><button class="faq-q" type="button">Что такое Closery?<i></i></button><div class="faq-a"><p>Платформа для бизнеса, меняющая прибыль. Находим, где бизнес теряет деньги, считаем потери в рублях по вашим цифрам и показываем, как их вернуть. Кабинет бесплатный, нужна только регистрация. Платные только Коммерческий МРТ и работа после него.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Что будет после регистрации?<i></i></button><div class="faq-a"><p>Кабинет откроется сразу, с полным меню. Рынок, конкуренты и выбор ниши работают по данным ФНС с первой минуты. Сделки и Пульт до подключения CRM показаны на компании Техноснаб, чтобы было видно, как они устроены. Подключите amoCRM или Битрикс24, и там появятся ваши сделки.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Откуда берутся цифры?<i></i></button><div class="faq-a"><p>Рынок, ниши и конкуренты из открытой отчётности ФНС. Потери кабинет считает по вашим ответам и данным CRM: заявки, разговоры, оплаты, чек и маржа. Под каждой суммой формула, по которой она посчитана.</p></div></div><div class="faq-item"><button class="faq-q" type="button">CRM нет или продаю сам. Подойдёт?<i></i></button><div class="faq-a"><p>Да. Рынок, конкуренты и ниша откроются по названию компании, а без CRM Пульт считает по четырём цифрам в неделю, которые вы вносите сами. Подходит для B2B, B2C и ИП.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Что вы делаете с данными CRM?<i></i></button><div class="faq-a"><p>Читаем этапы, задачи, звонки и примечания открытых сделок, чтобы найти те, что остывают. В CRM пишем только по вашей кнопке: задачу ответственному на ближайший рабочий день. Отключить CRM можно одной кнопкой в разделе «Компания и CRM», доступ сотрём.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Чем кабинет отличается от Коммерческого МРТ?<i></i></button><div class="faq-a"><p>Кабинет каждый день смотрит в рынок, сделки и работу менеджеров. На МРТ мы смотрим всю компанию вместе с вами: 120 минут по шести системам бизнеса, потери в рублях и план на 90 дней. Записаться можно в кабинете.</p></div></div></div>
+    <div class="faq"><div class="faq-item"><button class="faq-q" type="button">Что такое Closery?<i></i></button><div class="faq-a"><p>Платформа для бизнеса, меняющая прибыль. Находим, где бизнес теряет деньги, считаем потери в рублях и показываем, что менять первым. Кабинет бесплатный, платные только Коммерческий МРТ и работа после него.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Что будет после регистрации?<i></i></button><div class="faq-a"><p>Кабинет откроется сразу. Рынок, конкуренты и ниша работают по данным ФНС, а Сделки и Пульт до подключения CRM показаны на компании Техноснаб. Подключите amoCRM или Битрикс24, и появятся ваши сделки.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Откуда берутся цифры?<i></i></button><div class="faq-a"><p>Рынок и конкуренты из открытой отчётности ФНС. Потери считаем по вашим ответам и данным CRM, под каждой суммой стоит формула.</p></div></div><div class="faq-item"><button class="faq-q" type="button">CRM нет или продаю сам. Подойдёт?<i></i></button><div class="faq-a"><p>Да. Рынок, конкуренты и ниша открываются по названию компании, а Пульт считает по четырём цифрам в неделю, которые вы вносите сами.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Что вы делаете с данными CRM?<i></i></button><div class="faq-a"><p>Читаем этапы, задачи и звонки открытых сделок, чтобы найти те, что остывают. В CRM пишем только по вашей кнопке. Отключить CRM можно в разделе «Компания и CRM», доступ сотрём.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Чем кабинет отличается от Коммерческого МРТ?<i></i></button><div class="faq-a"><p>Кабинет каждый день следит за рынком, сделками и менеджерами. МРТ разбирает всю компанию за 120 минут: потери в рублях по шести системам бизнеса и план на 90 дней. NDA подписываем до доступа к данным, записаться можно в кабинете.</p></div></div></div>
   </div>
 </section>
 
 <section class="w end" id="end">
   <div>
     <h2>Посмотрите, где ваш бизнес теряет деньги</h2>
-    <p class="lede">Регистрация за минуту. Рынок и конкуренты сразу, потери в рублях после ответов о бизнесе, сделки после подключения CRM.</p>
-    <div class="go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=end">Открыть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a><span class="note">Бесплатно, нужна только регистрация</span></div>
+    <p class="lede">Регистрация за минуту. Первую цифру увидите после ответов о бизнесе.</p>
+    <div class="go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=end">Открыть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
   </div>
   <div class="ph"><div class="scr"><div class="sb"><b>9:41</b><i class="isl"></i><span class="ic"><svg class="sig" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1.1"/><rect x="4.67" y="5" width="3" height="6" rx="1.1"/><rect x="9.33" y="2.6" width="3" height="8.4" rx="1.1"/><rect x="14" y="0" width="3" height="11" rx="1.1"/></svg><svg class="bat" viewBox="0 0 28 13"><rect x=".5" y=".5" width="24" height="12" rx="3.9" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="2" y="2" width="21" height="9" rx="2.4"/><path d="M26 4.6a2.1 2.1 0 0 1 0 3.8z" fill-opacity=".4"/></svg></span></div><div class="shots"><img class="tl on" data-i="0" src="/media/v3/itog-m-light.webp" width="780" height="1688" alt="Итог кабинета: места потерь в рублях" loading="lazy" decoding="async"><img class="td on" data-i="0" src="/media/v3/itog-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"></div><i class="home"></i></div></div>
 </section>
