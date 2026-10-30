@@ -132,7 +132,8 @@ a{color:inherit}
 .loss{color:var(--loss)}
 
 /* шапка */
-header.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--rule)}
+header.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--rule);transition:transform .5s var(--ease),opacity .35s var(--ease)}
+header.bar.away{transform:translateY(-100%);opacity:0;pointer-events:none}   /* листают вниз: шапка уезжает, назад выезжает */
 .bar-in{display:flex;justify-content:space-between;align-items:center;height:68px;gap:20px}
 .logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:var(--ink)}
 .logo i{width:9px;height:9px;border-radius:2px;background:var(--ok)}
@@ -365,6 +366,7 @@ html:not([data-theme="light"]) .film-surface{box-shadow:0 40px 90px -30px rgba(0
 .founder-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 28%}
 .founder-intro .hello{font-size:clamp(27px,2.4vw,36px);font-weight:500;letter-spacing:-.04em;line-height:1.13}
 .founder-sign{font-size:12px;line-height:1.45;color:var(--ink-3);margin-top:12px}
+.brand-mark{display:inline-flex;align-items:center;gap:.6em;margin-left:.2em;white-space:nowrap;font-family:var(--brand);font-weight:700;font-size:.9em;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-2)}.brand-mark i{width:.62em;height:.62em;border-radius:2px;background:var(--ok)}
 .founder-quote{font-size:clamp(19px,1.65vw,24px);line-height:1.42;letter-spacing:-.025em;color:var(--ink);max-width:33ch;text-wrap:pretty}
 .founder-origin{font-size:16px;line-height:1.55;color:var(--ink-2);margin-top:18px;max-width:43ch;text-wrap:pretty}
 .founder-history{margin-top:22px;max-width:44ch}
@@ -465,7 +467,7 @@ html:not([data-theme="light"]) .doc-page.is-up{filter:none;box-shadow:0 40px 80p
 }
 @media(max-width:560px){
  #mri .head{margin-bottom:18px}#mri .head .lede{display:none}.mri-offer{order:-1}#mri .sx{row-gap:30px}
- .doc-meta span:last-child{display:none}.doc-meta{font-size:10px}
+ .doc-meta{font-size:10px}
  .doc-stage{--pw:min(104px,27vw);--sx:.36;--rz:3deg;height:calc(var(--pw) * 1.41 + 66px);margin-top:2px}
  .doc-page.is-up{--lift:-22px;--s:1.12}
  .doc-cap{margin-top:2px;padding-top:12px;gap:4px 14px}.doc-no{font-size:11px}.doc-line{font-size:16px;min-height:2.7em}.doc-nav button{width:32px;height:32px}
@@ -750,7 +752,7 @@ html[data-theme="light"] .intro-word{color:#111110}
       <div class="film-note"><span>Пример: компания Техноснаб</span><a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=leaks">Посчитать свой бизнес <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
     </figure>
     <div class="founder-letter rv">
-      <div class="founder-intro"><figure class="founder-photo"><img src="/founder.webp" width="790" height="905" alt="Николай Клименко" loading="lazy" decoding="async"></figure><div><p class="hello">Привет,<br>я Николай.</p><p class="founder-sign">Николай Клименко<br>Основатель Closery</p></div></div>
+      <div class="founder-intro"><figure class="founder-photo"><img src="/founder.webp" width="790" height="905" alt="Николай Клименко" loading="lazy" decoding="async"></figure><div><p class="hello">Привет!<br>Это Николай.</p><p class="founder-sign">Николай Клименко<br>Автор методологии <span class="brand-mark"><i></i>Closery</span></p></div></div>
       <p class="founder-quote">Я работал в бизнесах от инфобизнеса до логистики. Компании разные, а причины, которые мешают им расти, повторяются.</p>
       <p class="founder-origin">Два года я превращал этот опыт в платформу. Чтобы путь от потери к её причине можно было пройти в своём бизнесе.</p>
       <details class="founder-history"><summary>Как родился Closery</summary><div class="history-copy"><p>Я был коммерческим директором, входил в совет директоров. Видел бизнесы изнутри и находил причины, из-за которых компании не растут.</p><p>Два года назад мы с партнёром открыли агентство: помогать бизнесу через найм, адаптацию и качественный онбординг. Агентство не пошло: нам не хватило нужных инвестиций.</p><p>Идея осталась. Два года я разрабатывал Closery, чтобы метод поиска причин, найденный в проектах, помогал расти и другим компаниям.</p></div></details>
@@ -775,8 +777,8 @@ html[data-theme="light"] .intro-word{color:#111110}
   </div>
   <div class="sx">
     <figure class="mri-doc rv">
-      <div class="doc-meta"><span>Пример на демо-данных: компания Демо-Опт выдуманная</span><span>Листы настоящего отчёта МРТ</span></div>
-      <div class="doc-stage" id="mriDoc"><button class="doc-page" type="button" style="--i:0;--j:-1.5deg" data-no="Обложка" data-name="Обложка" data-cap="Главный вывод выносим на обложку: <b>рост упёрся в собственника.</b>" aria-label="Обложка" aria-pressed="false"><img src="media/report-pdf/cover.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:1;--j:2deg" data-no="02" data-name="Резюме" data-cap="Теряется <em class=&quot;neg&quot;>3,09&nbsp;млн&nbsp;₽</em> валовой прибыли в месяц. <em class=&quot;pos&quot;>2,03&nbsp;млн&nbsp;₽</em> из них возвращаются после 90 дней." aria-label="Страница 02 из 20: Резюме" aria-pressed="false"><img src="media/report-pdf/summary.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:2;--j:-2.5deg" data-no="04" data-name="Ведомость потерь" data-cap="Дороже всего переговоры и закрытие: <em class=&quot;neg&quot;>2,09&nbsp;млн&nbsp;₽</em> в месяц, 68% всех потерь." aria-label="Страница 04 из 20: Ведомость потерь" aria-pressed="false"><img src="media/report-pdf/ledger.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:3;--j:1deg" data-no="07" data-name="Диагноз" data-cap="Корень один: продажи замкнуты на собственнике. Из него растут потери на трёх этапах воронки." aria-label="Страница 07 из 20: Диагноз" aria-pressed="false"><img src="media/report-pdf/diagnosis.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:4;--j:-1deg" data-no="10" data-name="Что делать" data-cap="Разговоры не доходят до оплаты: <em class=&quot;neg&quot;>1,5&nbsp;млн&nbsp;₽</em> в месяц. Что меняем и как это посчитали." aria-label="Страница 10 из 20: Что делать" aria-pressed="false"><img src="media/report-pdf/fix.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:5;--j:2.5deg" data-no="12" data-name="План на 90 дней" data-cap="Три волны за 90 дней. Каждую принимаем по метрике." aria-label="Страница 12 из 20: План на 90 дней" aria-pressed="false"><img src="media/report-pdf/plan.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button></div>
+      <div class="doc-meta"><span>Листы настоящего отчёта МРТ</span></div>
+      <div class="doc-stage" id="mriDoc"><button class="doc-page" type="button" style="--i:0;--j:-1.5deg" data-no="02" data-name="Резюме" data-cap="Теряется <em class=&quot;neg&quot;>3,09&nbsp;млн&nbsp;₽</em> валовой прибыли в месяц. <em class=&quot;pos&quot;>2,03&nbsp;млн&nbsp;₽</em> из них возвращаются после 90 дней." aria-label="Страница 02 из 20: Резюме" aria-pressed="false"><img src="media/report-pdf/summary.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:1;--j:2deg" data-no="04" data-name="Ведомость потерь" data-cap="Дороже всего переговоры и закрытие: <em class=&quot;neg&quot;>2,09&nbsp;млн&nbsp;₽</em> в месяц, 68% всех потерь." aria-label="Страница 04 из 20: Ведомость потерь" aria-pressed="false"><img src="media/report-pdf/ledger.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:2;--j:-2.5deg" data-no="07" data-name="Диагноз" data-cap="Корень один: продажи замкнуты на собственнике. Из него растут потери на трёх этапах воронки." aria-label="Страница 07 из 20: Диагноз" aria-pressed="false"><img src="media/report-pdf/diagnosis.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:3;--j:1deg" data-no="10" data-name="Что делать" data-cap="Разговоры не доходят до оплаты: <em class=&quot;neg&quot;>1,5&nbsp;млн&nbsp;₽</em> в месяц. Что меняем и как это посчитали." aria-label="Страница 10 из 20: Что делать" aria-pressed="false"><img src="media/report-pdf/fix.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:4;--j:-1deg" data-no="12" data-name="План на 90 дней" data-cap="Три волны за 90 дней. Каждую принимаем по метрике." aria-label="Страница 12 из 20: План на 90 дней" aria-pressed="false"><img src="media/report-pdf/plan.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:5;--j:2.5deg" data-no="14" data-name="Цена ожидания" data-cap="Если ничего не менять, за год компания недополучит <em class=&quot;neg&quot;>37,1&nbsp;млн&nbsp;₽</em>. Со стартом сейчас вернётся <em class=&quot;pos&quot;>20,5&nbsp;млн&nbsp;₽</em>." aria-label="Страница 14 из 20: Цена ожидания" aria-pressed="false"><img src="media/report-pdf/wait.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button></div>
       <figcaption class="doc-cap" aria-live="polite"><p class="doc-no" id="mriDocNo"><b>02</b> / 20 · Резюме</p><p class="doc-line" id="mriDocLine">Теряется <em class="neg">3,09&nbsp;млн&nbsp;₽</em> валовой прибыли в месяц. <em class="pos">2,03&nbsp;млн&nbsp;₽</em> из них возвращаются после 90 дней.</p>
         <div class="doc-nav"><button type="button" id="mriDocPrev" aria-label="Предыдущий лист"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" id="mriDocNext" aria-label="Следующий лист"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></button></div></figcaption>
     </figure>
@@ -898,9 +900,11 @@ html[data-theme="light"] .intro-word{color:#111110}
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}});},{rootMargin:'0px 0px -10% 0px'});
     pending.forEach(function(el){io.observe(el);});
   }
-  var bar=document.getElementById('progress'),tk=false;
+  var bar=document.getElementById('progress'),head=document.querySelector('header.bar'),lastY=scrollY,tk=false;
   function onScroll(){
     sweep();
+    var y=scrollY,dy=y-lastY;   // шапка прячется, когда листают вниз, и выезжает при первом движении вверх
+    if(Math.abs(dy)>6||y<80){head.classList.toggle('away',y>=80&&dy>0&&!(menu&&menu.classList.contains('open')));lastY=y;}
     var h=document.documentElement.scrollHeight-innerHeight;bar.style.setProperty('--p',h>0?Math.min(1,scrollY/h):0);
     var hb=hero.querySelector('.btn').getBoundingClientRect();   // плашка, пока кнопки обложки не видно
     sticky.classList.toggle('show',hb.bottom<0||hb.top>innerHeight-8);
@@ -959,7 +963,7 @@ html[data-theme="light"] .intro-word{color:#111110}
     cur = i;
     pages.forEach(function(p, k){ p.classList.toggle('is-up', k === i); p.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
     var p = pages[i];
-    no.innerHTML = p.dataset.no === 'Обложка' ? '<b>Обложка</b> · 20 страниц' : '<b>' + p.dataset.no + '</b> / 20 · ' + p.dataset.name;
+    no.innerHTML = '<b>' + p.dataset.no + '</b> / 20 · ' + p.dataset.name;
     line.innerHTML = p.dataset.cap;
   }
   // Лист выбирается по месту над веером, а не по видимому краю: средние листы почти закрыты соседями.
@@ -980,7 +984,7 @@ html[data-theme="light"] .intro-word{color:#111110}
   });
   document.getElementById('mriDocPrev').addEventListener('click', function(){ pick(cur - 1); });
   document.getElementById('mriDocNext').addEventListener('click', function(){ pick(cur + 1); });
-  pick(1);
+  pick(0);
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   function spread(){
     raf = 0;
