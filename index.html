@@ -891,7 +891,7 @@ html[data-theme="light"] .intro-word{color:#111110}
     if(y!==lastY&&d!==down){down=d;turnY=lastY;}
     lastY=y;
     var away=head.classList.contains('away');
-    if(y<120||(menu&&menu.classList.contains('open')))away=false;
+    if(y<120)away=false;
     else if(down&&y-turnY>60)away=true;
     else if(!down&&turnY-y>30)away=false;
     head.classList.toggle('away',away);
