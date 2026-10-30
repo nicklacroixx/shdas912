@@ -46,7 +46,7 @@
    "name": "Что такое Closery?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Платформа для бизнеса, меняющая прибыль. Находим, где бизнес теряет деньги, считаем потери в рублях и показываем, что менять первым. Кабинет бесплатный, платные только Коммерческий МРТ и работа после него."
+    "text": "Платформа для бизнеса, меняющая прибыль. Считаем, где бизнес теряет деньги, и показываем, что менять первым. Кабинет бесплатный. Платные только Коммерческий МРТ и внедрение после него."
    }
   },
   {
@@ -54,7 +54,7 @@
    "name": "Что будет после регистрации?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Кабинет откроется сразу. Рынок, конкуренты и ниша работают по данным ФНС, а Сделки и Пульт до подключения CRM показаны на компании Техноснаб. Подключите amoCRM или Битрикс24, и появятся ваши сделки."
+    "text": "Кабинет откроется сразу. Рынок, конкуренты и ниша работают сразу. Сделки и Пульт до подключения CRM показаны на примере, после amoCRM или Битрикс24 там ваши сделки."
    }
   },
   {
@@ -62,7 +62,7 @@
    "name": "Откуда берутся цифры?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Рынок и конкуренты из открытой отчётности ФНС. Потери считаем по вашим ответам и данным CRM, под каждой суммой стоит формула."
+    "text": "Рынок и конкуренты из открытой отчётности ФНС. Потери по вашим ответам и CRM, под каждой суммой формула."
    }
   },
   {
@@ -78,7 +78,7 @@
    "name": "Что вы делаете с данными CRM?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Читаем этапы, задачи и звонки открытых сделок, чтобы найти те, что остывают. В CRM пишем только по вашей кнопке. Отключить CRM можно в разделе «Компания и CRM», доступ сотрём."
+    "text": "Читаем этапы, задачи и звонки открытых сделок, чтобы найти остывающие. Пишем в CRM только по вашей кнопке. Отключите CRM в разделе «Компания и CRM», и доступ удалится."
    }
   },
   {
@@ -86,7 +86,7 @@
    "name": "Чем кабинет отличается от Коммерческого МРТ?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Кабинет каждый день следит за рынком, сделками и менеджерами. МРТ разбирает всю компанию за 120 минут: потери в рублях по шести системам бизнеса и план на 90 дней. NDA подписываем до доступа к данным, записаться можно в кабинете."
+    "text": "Кабинет каждый день следит за сделками, менеджерами и рынком. МРТ за 120 минут разбирает всю компанию по шести системам и даёт план на 90 дней. NDA подписываем до доступа к данным. Записаться можно в кабинете."
    }
   }
  ]
@@ -132,8 +132,8 @@ a{color:inherit}
 .loss{color:var(--loss)}
 
 /* шапка */
-header.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--rule);transition:transform .5s var(--ease),opacity .35s var(--ease)}
-header.bar.away{transform:translateY(-100%);opacity:0;pointer-events:none}   /* листают вниз: шапка уезжает, назад выезжает */
+header.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--rule);will-change:transform;transition:transform .6s cubic-bezier(.33,1,.68,1)}
+header.bar.away{transform:translateY(calc(-100% - 2px));pointer-events:none;transition-duration:.8s;transition-timing-function:cubic-bezier(.65,0,.35,1)}   /* листают вниз: шапка уезжает, назад выезжает */
 .bar-in{display:flex;justify-content:space-between;align-items:center;height:68px;gap:20px}
 .logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--brand);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:var(--ink)}
 .logo i{width:9px;height:9px;border-radius:2px;background:var(--ok)}
@@ -725,7 +725,7 @@ html[data-theme="light"] .intro-word{color:#111110}
   <div class="t">
     <p class="kick">Платформа для бизнеса, меняющая прибыль</p>
     <h1>Найдём, где бизнес теряет деньги</h1>
-    <p class="lede">Кабинет считает в рублях, куда уходят деньги, и каждое утро говорит, с чего начать.</p>
+    <p class="lede">Кабинет посчитает потери в рублях и каждое утро подскажет, с чего начать.</p>
     <p class="for">Для собственников и руководителей продаж</p>
     <div class="go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=hero">Открыть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a><span class="note">Бесплатно, нужна только регистрация</span></div>
   </div>
@@ -753,9 +753,9 @@ html[data-theme="light"] .intro-word{color:#111110}
     </figure>
     <div class="founder-letter rv">
       <div class="founder-intro"><figure class="founder-photo"><img src="/founder.webp" width="790" height="905" alt="Николай Клименко" loading="lazy" decoding="async"></figure><div><p class="hello">Привет!<br>Это Николай.</p><p class="founder-sign">Николай Клименко<br>Автор методологии <span class="brand-mark"><i></i>Closery</span></p></div></div>
-      <p class="founder-quote">Я работал в бизнесах от инфобизнеса до логистики. Компании разные, а причины, которые мешают им расти, повторяются.</p>
-      <p class="founder-origin">Два года я превращал этот опыт в платформу. Чтобы путь от потери к её причине можно было пройти в своём бизнесе.</p>
-      <details class="founder-history"><summary>Как родился Closery</summary><div class="history-copy"><p>Я был коммерческим директором, входил в совет директоров. Видел бизнесы изнутри и находил причины, из-за которых компании не растут.</p><p>Два года назад мы с партнёром открыли агентство: помогать бизнесу через найм, адаптацию и качественный онбординг. Агентство не пошло: нам не хватило нужных инвестиций.</p><p>Идея осталась. Два года я разрабатывал Closery, чтобы метод поиска причин, найденный в проектах, помогал расти и другим компаниям.</p></div></details>
+      <p class="founder-quote">Я работал в компаниях от инфобизнеса до логистики. Рынки разные, а стоят на месте они по одним и тем же причинам.</p>
+      <p class="founder-origin">Два года я собирал этот опыт в платформу. Теперь собственник сам доходит от потери до её причины.</p>
+      <details class="founder-history"><summary>Как родился Closery</summary><div class="history-copy"><p>Я был коммерческим директором и входил в совет директоров. Изнутри хорошо видно, почему компания перестаёт расти.</p><p>Два года назад мы с партнёром открыли агентство по найму, адаптации и онбордингу. Оно не взлетело, не хватило инвестиций.</p><p>Идея осталась. Метод, которым я находил причины в своих проектах, теперь работает в Closery для любой компании.</p></div></details>
     </div>
   </div>
 </section>
@@ -765,7 +765,7 @@ html[data-theme="light"] .intro-word{color:#111110}
     <div><p class="kick">Платформа</p><h2>Что вы увидите в кабинете</h2></div>
   </div>
   <div class="pf" id="pf" data-cycle="6500">
-    <ol class="pf-list"><li class="on"><button type="button" data-i="0" data-url="start"><span class="nm">Итог</span><span class="q">Сколько бизнес теряет в месяц и где</span><span class="a">Потери в рублях по местам, самое дорогое первым.</span></button></li><li><button type="button" data-i="1" data-url="review"><span class="nm">Сделки · Сегодня</span><span class="q">Кому звонить сегодня</span><span class="a">Очередь из остывающих сделок, собранная из CRM.</span></button></li><li><button type="button" data-i="2" data-url="review"><span class="nm">Сделки · Сделка</span><span class="q">Что сказать клиенту</span><span class="a">Причина, следующий шаг и скрипт звонка. Задача уходит в amoCRM кнопкой.</span></button></li><li><button type="button" data-i="3" data-url="pulse"><span class="nm">Пульт продаж</span><span class="q">Кто добирает план, а кто нет</span><span class="a">Заявки, разговоры и оплаты за неделю. Где просело и сколько это в рублях.</span></button></li><li><button type="button" data-i="4" data-url="competitors"><span class="nm">Конкуренты</span><span class="q">За счёт чего растут конкуренты</span><span class="a">Сайты, вакансии и отчётность конкурентов. Три рычага роста.</span></button></li><li><button type="button" data-i="5" data-url="niche"><span class="nm">Выбор ниши</span><span class="q">Куда расти дальше</span><span class="a">Все компании России за 10 лет по данным ФНС. Где ниши растут и где мало игроков.</span></button></li></ol>
+    <ol class="pf-list"><li class="on"><button type="button" data-i="0" data-url="start"><span class="nm">Итог</span><span class="q">Сколько бизнес теряет в месяц и где</span><span class="a">Потери в рублях по местам, самое дорогое первым.</span></button></li><li><button type="button" data-i="1" data-url="review"><span class="nm">Сделки · Сегодня</span><span class="q">Кому звонить сегодня</span><span class="a">Сделки из CRM, которые остывают прямо сейчас.</span></button></li><li><button type="button" data-i="2" data-url="review"><span class="nm">Сделки · Сделка</span><span class="q">Что сказать клиенту</span><span class="a">Причина, следующий шаг и скрипт звонка. Задача ставится в amoCRM одной кнопкой.</span></button></li><li><button type="button" data-i="3" data-url="pulse"><span class="nm">Пульт продаж</span><span class="q">Кто добирает план, а кто нет</span><span class="a">Заявки, разговоры и оплаты за неделю. Где просело и сколько это в рублях.</span></button></li><li><button type="button" data-i="4" data-url="competitors"><span class="nm">Конкуренты</span><span class="q">За счёт чего растут конкуренты</span><span class="a">Сайты, вакансии и отчётность. Три рычага, на которых они растут.</span></button></li><li><button type="button" data-i="5" data-url="niche"><span class="nm">Выбор ниши</span><span class="q">Куда расти дальше</span><span class="a">Все компании России за 10 лет по данным ФНС. Где ниши растут и где мало игроков.</span></button></li></ol>
     <div class="pf-view"><div class="win"><div class="win-b"><i></i><i></i><i></i><span>lk.closery.ru<b>/start</b></span></div><div class="shots"><img class="tl on" data-i="0" src="/media/v3/itog-d-light.webp" width="1800" height="1125" alt="Итог: сколько бизнес теряет в месяц и где" loading="lazy" decoding="async"><img class="td on" data-i="0" src="/media/v3/itog-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="1" src="/media/v3/today-d-light.webp" width="1800" height="1125" alt="Сделки · Сегодня: кому звонить сегодня" loading="lazy" decoding="async"><img class="td" data-i="1" src="/media/v3/today-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="2" src="/media/v3/deal-d-light.webp" width="1800" height="1125" alt="Сделки · Сделка: что сказать клиенту" loading="lazy" decoding="async"><img class="td" data-i="2" src="/media/v3/deal-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="3" src="/media/v3/pulse-d-light.webp" width="1800" height="1125" alt="Пульт продаж: кто добирает план, а кто нет" loading="lazy" decoding="async"><img class="td" data-i="3" src="/media/v3/pulse-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="4" src="/media/v3/comp-d-light.webp" width="1800" height="1125" alt="Конкуренты: за счёт чего растут конкуренты" loading="lazy" decoding="async"><img class="td" data-i="4" src="/media/v3/comp-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"><img class="tl" data-i="5" src="/media/v3/niche-d-light.webp" width="1800" height="1125" alt="Выбор ниши: куда расти дальше" loading="lazy" decoding="async"><img class="td" data-i="5" src="/media/v3/niche-d-dark.webp" width="1800" height="1125" alt="" loading="lazy" decoding="async"></div></div><div class="ph"><div class="scr"><div class="sb"><b>9:41</b><i class="isl"></i><span class="ic"><svg class="sig" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1.1"/><rect x="4.67" y="5" width="3" height="6" rx="1.1"/><rect x="9.33" y="2.6" width="3" height="8.4" rx="1.1"/><rect x="14" y="0" width="3" height="11" rx="1.1"/></svg><svg class="bat" viewBox="0 0 28 13"><rect x=".5" y=".5" width="24" height="12" rx="3.9" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="2" y="2" width="21" height="9" rx="2.4"/><path d="M26 4.6a2.1 2.1 0 0 1 0 3.8z" fill-opacity=".4"/></svg></span></div><div class="shots"><img class="tl on" data-i="0" src="/media/v3/itog-m-light.webp" width="780" height="1688" alt="Итог: сколько бизнес теряет в месяц и где" loading="lazy" decoding="async"><img class="td on" data-i="0" src="/media/v3/itog-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="1" src="/media/v3/today-m-light.webp" width="780" height="1688" alt="Сделки · Сегодня: кому звонить сегодня" loading="lazy" decoding="async"><img class="td" data-i="1" src="/media/v3/today-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="2" src="/media/v3/deal-m-light.webp" width="780" height="1688" alt="Сделки · Сделка: что сказать клиенту" loading="lazy" decoding="async"><img class="td" data-i="2" src="/media/v3/deal-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="3" src="/media/v3/pulse-m-light.webp" width="780" height="1688" alt="Пульт продаж: кто добирает план, а кто нет" loading="lazy" decoding="async"><img class="td" data-i="3" src="/media/v3/pulse-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="4" src="/media/v3/comp-m-light.webp" width="780" height="1688" alt="Конкуренты: за счёт чего растут конкуренты" loading="lazy" decoding="async"><img class="td" data-i="4" src="/media/v3/comp-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"><img class="tl" data-i="5" src="/media/v3/niche-m-light.webp" width="780" height="1688" alt="Выбор ниши: куда расти дальше" loading="lazy" decoding="async"><img class="td" data-i="5" src="/media/v3/niche-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"></div><i class="home"></i></div></div></div>
   </div>
   <div class="go pf-go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=platform">Посчитать потери <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
@@ -777,13 +777,13 @@ html[data-theme="light"] .intro-word{color:#111110}
   </div>
   <div class="sx">
     <figure class="mri-doc rv">
-      <div class="doc-meta"><span>Листы настоящего отчёта МРТ</span></div>
+      <div class="doc-meta"><span>Листы отчёта МРТ</span></div>
       <div class="doc-stage" id="mriDoc"><button class="doc-page" type="button" style="--i:0;--j:-1.5deg" data-no="02" data-name="Резюме" data-cap="Теряется <em class=&quot;neg&quot;>3,09&nbsp;млн&nbsp;₽</em> валовой прибыли в месяц. <em class=&quot;pos&quot;>2,03&nbsp;млн&nbsp;₽</em> из них возвращаются после 90 дней." aria-label="Страница 02 из 20: Резюме" aria-pressed="false"><img src="media/report-pdf/summary.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:1;--j:2deg" data-no="04" data-name="Ведомость потерь" data-cap="Дороже всего переговоры и закрытие: <em class=&quot;neg&quot;>2,09&nbsp;млн&nbsp;₽</em> в месяц, 68% всех потерь." aria-label="Страница 04 из 20: Ведомость потерь" aria-pressed="false"><img src="media/report-pdf/ledger.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:2;--j:-2.5deg" data-no="07" data-name="Диагноз" data-cap="Корень один: продажи замкнуты на собственнике. Из него растут потери на трёх этапах воронки." aria-label="Страница 07 из 20: Диагноз" aria-pressed="false"><img src="media/report-pdf/diagnosis.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:3;--j:1deg" data-no="10" data-name="Что делать" data-cap="Разговоры не доходят до оплаты: <em class=&quot;neg&quot;>1,5&nbsp;млн&nbsp;₽</em> в месяц. Что меняем и как это посчитали." aria-label="Страница 10 из 20: Что делать" aria-pressed="false"><img src="media/report-pdf/fix.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:4;--j:-1deg" data-no="12" data-name="План на 90 дней" data-cap="Три волны за 90 дней. Каждую принимаем по метрике." aria-label="Страница 12 из 20: План на 90 дней" aria-pressed="false"><img src="media/report-pdf/plan.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:5;--j:2.5deg" data-no="14" data-name="Цена ожидания" data-cap="Если ничего не менять, за год компания недополучит <em class=&quot;neg&quot;>37,1&nbsp;млн&nbsp;₽</em>. Со стартом сейчас вернётся <em class=&quot;pos&quot;>20,5&nbsp;млн&nbsp;₽</em>." aria-label="Страница 14 из 20: Цена ожидания" aria-pressed="false"><img src="media/report-pdf/wait.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button></div>
       <figcaption class="doc-cap" aria-live="polite"><p class="doc-no" id="mriDocNo"><b>02</b> / 20 · Резюме</p><p class="doc-line" id="mriDocLine">Теряется <em class="neg">3,09&nbsp;млн&nbsp;₽</em> валовой прибыли в месяц. <em class="pos">2,03&nbsp;млн&nbsp;₽</em> из них возвращаются после 90 дней.</p>
         <div class="doc-nav"><button type="button" id="mriDocPrev" aria-label="Предыдущий лист"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" id="mriDocNext" aria-label="Следующий лист"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></button></div></figcaption>
     </figure>
     <div class="mri-offer rv">
-      <p class="mri-offer-intro">Выйдете с ответом: где теряются деньги, почему и в каком порядке это исправлять.</p>
+      <p class="mri-offer-intro">Вы уходите со списком потерь в рублях и порядком, в котором их закрывать.</p>
       <p class="mri-price">79&nbsp;990&nbsp;₽</p>
       <p class="mri-guarantee">Не найдём потерь в рублях, вернём оплату.</p>
       <ul class="mri-facts"><li><b>120 минут</b> онлайн с собственником</li><li><b>20 страниц</b> PDF и план на 90 дней</li></ul>
@@ -796,21 +796,21 @@ html[data-theme="light"] .intro-word{color:#111110}
   <div class="head">
     <div><p class="kick">Как начать</p><h2>Первая цифра через несколько минут после регистрации</h2></div>
   </div>
-  <ol class="st"><li><h3>Регистрация</h3><p>Телефон или почта и пароль. Кабинет открывается сразу.</p><em>Рынок вашей ниши по ФНС</em></li><li><h3>Цифры бизнеса</h3><p>Заявки, разговоры, оплаты, чек и маржа. Всё это вы знаете.</p><em>Потери в рублях и с чего начать</em></li><li><h3>amoCRM или Битрикс24</h3><p>Подключение за минуту.</p><em>Очередь остывающих сделок и Пульт</em></li><li><h3>Конкуренты</h3><p>Название компании или ИНН.</p><em>Три рычага роста</em></li></ol>
+  <ol class="st"><li><h3>Регистрация</h3><p>Телефон или почта и пароль. Кабинет открывается сразу.</p><em>Рынок вашей ниши по ФНС</em></li><li><h3>Цифры бизнеса</h3><p>Заявки, разговоры, оплаты, чек и маржа. Цифры, которые вы и так знаете.</p><em>Потери в рублях и с чего начать</em></li><li><h3>amoCRM или Битрикс24</h3><p>Подключение за минуту.</p><em>Очередь остывающих сделок и Пульт</em></li><li><h3>Конкуренты</h3><p>Хватит названия или ИНН.</p><em>За счёт чего они растут</em></li></ol>
   <div class="go st-go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=how">Зарегистрироваться <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
 </section>
 
 <section class="sec w" id="faq">
   <div class="faq-wrap">
     <div><p class="kick">Вопросы и ответы</p><h2>Что обычно спрашивают</h2></div>
-    <div class="faq"><div class="faq-item"><button class="faq-q" type="button">Что такое Closery?<i></i></button><div class="faq-a"><p>Платформа для бизнеса, меняющая прибыль. Находим, где бизнес теряет деньги, считаем потери в рублях и показываем, что менять первым. Кабинет бесплатный, платные только Коммерческий МРТ и работа после него.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Что будет после регистрации?<i></i></button><div class="faq-a"><p>Кабинет откроется сразу. Рынок, конкуренты и ниша работают по данным ФНС, а Сделки и Пульт до подключения CRM показаны на компании Техноснаб. Подключите amoCRM или Битрикс24, и появятся ваши сделки.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Откуда берутся цифры?<i></i></button><div class="faq-a"><p>Рынок и конкуренты из открытой отчётности ФНС. Потери считаем по вашим ответам и данным CRM, под каждой суммой стоит формула.</p></div></div><div class="faq-item"><button class="faq-q" type="button">CRM нет или продаю сам. Подойдёт?<i></i></button><div class="faq-a"><p>Да. Рынок, конкуренты и ниша открываются по названию компании, а Пульт считает по четырём цифрам в неделю, которые вы вносите сами.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Что вы делаете с данными CRM?<i></i></button><div class="faq-a"><p>Читаем этапы, задачи и звонки открытых сделок, чтобы найти те, что остывают. В CRM пишем только по вашей кнопке. Отключить CRM можно в разделе «Компания и CRM», доступ сотрём.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Чем кабинет отличается от Коммерческого МРТ?<i></i></button><div class="faq-a"><p>Кабинет каждый день следит за рынком, сделками и менеджерами. МРТ разбирает всю компанию за 120 минут: потери в рублях по шести системам бизнеса и план на 90 дней. NDA подписываем до доступа к данным, записаться можно в кабинете.</p></div></div></div>
+    <div class="faq"><div class="faq-item"><button class="faq-q" type="button">Что такое Closery?<i></i></button><div class="faq-a"><p>Платформа для бизнеса, меняющая прибыль. Считаем, где бизнес теряет деньги, и показываем, что менять первым. Кабинет бесплатный. Платные только Коммерческий МРТ и внедрение после него.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Что будет после регистрации?<i></i></button><div class="faq-a"><p>Кабинет откроется сразу. Рынок, конкуренты и ниша работают сразу. Сделки и Пульт до подключения CRM показаны на примере, после amoCRM или Битрикс24 там ваши сделки.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Откуда берутся цифры?<i></i></button><div class="faq-a"><p>Рынок и конкуренты из открытой отчётности ФНС. Потери по вашим ответам и CRM, под каждой суммой формула.</p></div></div><div class="faq-item"><button class="faq-q" type="button">CRM нет или продаю сам. Подойдёт?<i></i></button><div class="faq-a"><p>Да. Рынок, конкуренты и ниша открываются по названию компании, а Пульт считает по четырём цифрам в неделю, которые вы вносите сами.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Что вы делаете с данными CRM?<i></i></button><div class="faq-a"><p>Читаем этапы, задачи и звонки открытых сделок, чтобы найти остывающие. Пишем в CRM только по вашей кнопке. Отключите CRM в разделе «Компания и CRM», и доступ удалится.</p></div></div><div class="faq-item"><button class="faq-q" type="button">Чем кабинет отличается от Коммерческого МРТ?<i></i></button><div class="faq-a"><p>Кабинет каждый день следит за сделками, менеджерами и рынком. МРТ за 120 минут разбирает всю компанию по шести системам и даёт план на 90 дней. NDA подписываем до доступа к данным. Записаться можно в кабинете.</p></div></div></div>
   </div>
 </section>
 
 <section class="w end" id="end">
   <div>
     <h2>Посмотрите, где ваш бизнес теряет деньги</h2>
-    <p class="lede">Регистрация за минуту. Первую цифру увидите после ответов о бизнесе.</p>
+    <p class="lede">Регистрация займёт минуту. Первую потерю в рублях увидите сразу после ответов о бизнесе.</p>
     <div class="go"><a class="btn" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=end">Открыть кабинет <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
   </div>
   <div class="ph"><div class="scr"><div class="sb"><b>9:41</b><i class="isl"></i><span class="ic"><svg class="sig" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1.1"/><rect x="4.67" y="5" width="3" height="6" rx="1.1"/><rect x="9.33" y="2.6" width="3" height="8.4" rx="1.1"/><rect x="14" y="0" width="3" height="11" rx="1.1"/></svg><svg class="bat" viewBox="0 0 28 13"><rect x=".5" y=".5" width="24" height="12" rx="3.9" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="2" y="2" width="21" height="9" rx="2.4"/><path d="M26 4.6a2.1 2.1 0 0 1 0 3.8z" fill-opacity=".4"/></svg></span></div><div class="shots"><img class="tl on" data-i="0" src="/media/v3/itog-m-light.webp" width="780" height="1688" alt="Итог кабинета: места потерь в рублях" loading="lazy" decoding="async"><img class="td on" data-i="0" src="/media/v3/itog-m-dark.webp" width="780" height="1688" alt="" loading="lazy" decoding="async"></div><i class="home"></i></div></div>
@@ -900,11 +900,18 @@ html[data-theme="light"] .intro-word{color:#111110}
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}});},{rootMargin:'0px 0px -10% 0px'});
     pending.forEach(function(el){io.observe(el);});
   }
-  var bar=document.getElementById('progress'),head=document.querySelector('header.bar'),lastY=scrollY,tk=false;
+  var bar=document.getElementById('progress'),head=document.querySelector('header.bar'),lastY=scrollY,turnY=scrollY,down=false,tk=false;
   function onScroll(){
     sweep();
-    var y=scrollY,dy=y-lastY;   // шапка прячется, когда листают вниз, и выезжает при первом движении вверх
-    if(Math.abs(dy)>6||y<80){head.classList.toggle('away',y>=80&&dy>0&&!(menu&&menu.classList.contains('open')));lastY=y;}
+    // шапка уезжает, когда пролистали вниз 60 px подряд, и выезжает после 30 px вверх: мелкие рывки колеса её не дёргают
+    var y=scrollY,d=y>lastY;
+    if(y!==lastY&&d!==down){down=d;turnY=lastY;}
+    lastY=y;
+    var away=head.classList.contains('away');
+    if(y<120||(menu&&menu.classList.contains('open')))away=false;
+    else if(down&&y-turnY>60)away=true;
+    else if(!down&&turnY-y>30)away=false;
+    head.classList.toggle('away',away);
     var h=document.documentElement.scrollHeight-innerHeight;bar.style.setProperty('--p',h>0?Math.min(1,scrollY/h):0);
     var hb=hero.querySelector('.btn').getBoundingClientRect();   // плашка, пока кнопки обложки не видно
     sticky.classList.toggle('show',hb.bottom<0||hb.top>innerHeight-8);
