@@ -324,71 +324,73 @@ picture.tl,picture.td{display:block}
 .shot{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--rule-2);background:var(--bg)}
 .sx{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(32px,4.5vw,80px);align-items:start}
 .sx-f{margin:0}
-/* ── 01: портрет и письмо, рядом разбор связанного процесса ── */
-#story .head,#mri .head{margin-bottom:36px}
-#story h2,#mri h2{max-width:25ch}
-.story-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,4.5vw,80px);align-items:stretch}
-.founder-letter{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,4fr);margin:0;background:var(--ink);color:var(--bg);border-radius:18px;overflow:hidden;min-width:0}
-.founder-photo{margin:0;position:relative;min-height:410px}
-.founder-photo img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 36%}
-.founder-copy{position:relative;display:flex;flex-direction:column;align-items:start;padding:30px 28px;min-width:0}
-.founder-copy .hello{font-size:clamp(28px,2.7vw,40px);font-weight:500;letter-spacing:-.045em;line-height:1.08;margin-bottom:24px}
-.founder-copy .founder-quote{font-size:clamp(17px,1.5vw,21px);line-height:1.45;letter-spacing:-.015em;text-wrap:pretty}
-.founder-copy .origin{font-size:15px;line-height:1.55;margin-top:20px;opacity:.8;text-wrap:pretty}
-.founder-sign{margin-top:auto;padding-top:24px;font-size:12px;line-height:1.5;opacity:.8}
-.founder-sign b{display:block;font-weight:500;font-size:14px;opacity:1}
-.founder-history{margin-top:16px;width:100%;min-width:0}
-.founder-history summary{display:inline-flex;width:fit-content;cursor:pointer;list-style:none;font-size:13px;color:inherit;border-bottom:1px solid currentColor;padding-bottom:3px;gap:8px}
-.founder-history summary::-webkit-details-marker{display:none}
-.founder-history summary::after{content:'+'}
-.founder-history[open] summary::after{content:'−'}
-.history-copy{font-size:14px;line-height:1.55;padding-top:16px;overflow-wrap:anywhere}
-.history-copy p+p{margin-top:12px}
-.method{margin:0;min-width:0;display:flex;flex-direction:column;padding-top:2px}
-.method-top{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:13px;color:var(--ink-3)}
-.motion-toggle{background:none;border-top:0;border-left:0;border-right:0;border-radius:0;cursor:pointer;font-family:inherit;font-size:12px;font-weight:400;line-height:1.5;color:var(--ink-3)}
+/* ── 01: автор и непрерывный проход внутрь настоящего интерфейса ── */
+#story,#mri{scroll-margin-top:calc(96px - clamp(88px,9vw,144px))}
+#story .head,#mri .head{margin-bottom:34px}
+#story h2,#mri h2{max-width:24ch}
+.story-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,4.5vw,80px);align-items:center}
+.product-film{margin:0;min-width:0;overflow:clip}
+.film-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;color:var(--ink-3);font-size:12px}
+.motion-toggle{border:0;border-bottom:1px solid var(--rule-2);background:none;color:var(--ink-3);font:inherit;font-size:12px;cursor:pointer;padding-bottom:2px}
 .motion-toggle[hidden]{display:none}
-.method-stage{position:relative;height:295px;margin-top:15px;isolation:isolate}
-.method-stage svg{display:block;width:100%;height:100%;overflow:visible}
-.method-overview,.method-focus{position:absolute;inset:0}
-.method-overview{opacity:1;transform-origin:40% 40%}
-.method-overview text{fill:var(--ink-2);font-family:var(--ui);font-size:13px;font-weight:400}
-.method-overview .stream{fill:none;stroke:var(--ink);stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
-.method-overview .active{stroke:var(--loss)}
-.method-overview .signal{fill:none;stroke:var(--bg);stroke-width:4;stroke-linecap:round;stroke-dasharray:.035 .965;stroke-dashoffset:1}
-.method-overview .profit-word{font-size:28px;font-weight:500;letter-spacing:-.7px;fill:var(--ink)}
-.method-overview .profit-mark{fill:var(--ink)}
-.method-overview .process-flow{fill:none;stroke:var(--ok);stroke-width:12;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
-.method-overview .signal-fixed{opacity:0}
-.method-overview .fixed-mark{fill:var(--ok);opacity:0}
-.method-overview .active-label{fill:var(--loss)}
-.method-overview .fixed-label{fill:var(--ok);opacity:0}
-.method-overview .fixed-word{fill:var(--ok);opacity:0}
-.method-note{font-size:16px;line-height:1.5;color:var(--ink-2);max-width:34ch;margin-top:10px;min-height:3em}
-.method-foot{margin-top:auto;padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.method-foot .note{font-size:12px}
-.method-foot .more{font-size:14px;white-space:nowrap}
-@media(max-width:1100px) and (min-width:901px){.founder-letter{grid-template-columns:minmax(0,2fr) minmax(0,3fr)}.founder-copy{padding:24px 20px}.founder-copy .hello{font-size:30px}.founder-copy .founder-quote{font-size:17px}.founder-copy .origin{font-size:14px}.method-stage{height:275px}.method-foot{flex-wrap:wrap}}
-@media(max-width:900px){.story-body{grid-template-columns:minmax(0,1fr);gap:36px}.founder-letter{grid-template-columns:minmax(0,3fr) minmax(0,4fr)}.founder-photo{min-height:380px}.founder-copy{padding:28px 32px}.founder-copy .hello{font-size:34px}.founder-copy .founder-quote{font-size:20px}.method-stage{max-width:550px;width:100%;margin-inline:auto;height:280px}.method-note{max-width:45ch}.method-foot{margin-top:0}.sx{grid-template-columns:minmax(0,1fr);row-gap:28px}}
+.film-stage{height:auto;aspect-ratio:1000/560;position:relative;isolation:isolate;overflow:hidden;margin:12px 0 0}
+.film-world{position:absolute;left:50%;top:50%;width:1000px;height:560px;margin:-280px 0 0 -500px;transform:scale(var(--film-scale, .65));perspective:1800px;perspective-origin:50% 45%}
+.film-camera{position:absolute;inset:0;transform-style:preserve-3d;transform:translate3d(-12px,0,0) rotateX(23deg) rotateY(-16deg) rotateZ(-7deg) scale(.95)}
+.film-base{position:absolute;left:35px;top:10px;width:930px;height:530px;transform-style:preserve-3d}
+.film-surface{position:absolute;inset:0;border:1px solid var(--rule-2);border-radius:16px;overflow:hidden;background:var(--bg);box-shadow:0 40px 80px -34px rgba(17,17,16,.3),0 10px 30px -16px rgba(17,17,16,.16)}
+html:not([data-theme="light"]) .film-surface{box-shadow:0 40px 90px -30px rgba(0,0,0,.75)}
+.film-surface>img{position:absolute;display:block;max-width:none;width:1920px;height:1200px;left:-390px;top:-496px;opacity:1;transform:none;transition:none}
+.film-hole{position:absolute;left:35px;top:73px;width:918px;height:154px;background:var(--bg);opacity:0}
+.film-row{position:absolute;left:70px;top:83px;width:918px;height:154px;transform:translateZ(0);transform-style:preserve-3d}
+.film-row .film-surface{padding:23px 30px;display:flex;flex-direction:column;justify-content:center}
+.film-row .film-surface p{font-size:25px;letter-spacing:-.02em;line-height:1.25;color:var(--ink)}
+.film-row .film-surface b{font-size:64px;line-height:1.12;font-weight:500;letter-spacing:-.055em;color:var(--loss);white-space:nowrap}
+.film-row .film-surface small{font-size:17px;line-height:1.35;color:var(--ink-3);margin-top:6px}
+.film-row{height:220px}
+.film-detail{position:absolute;left:70px;top:83px;width:918px;height:443px;transform:translateZ(72px);opacity:0;transform-style:preserve-3d}
+.film-detail .film-surface{clip-path:inset(0 0 0 0 round 16px)}
+.film-detail .film-surface>img{width:918px;height:auto;left:0;top:0}
+.film-action{position:absolute;left:135px;top:342px;width:830px;height:176px;transform:translateZ(140px);opacity:0}
+.film-action .film-surface{border:1px solid var(--ok);border-radius:12px;background:var(--paper);padding:20px 28px}
+.film-action .film-surface span{display:block;font-size:17px;color:var(--ok);margin-bottom:8px}
+.film-action .film-surface p{font-size:40px;line-height:1.15;letter-spacing:-.02em;color:var(--ink)}
+.film-action .film-surface>img{width:918px;height:auto;left:-65px;top:-289px}
+.film-bottom{border-top:1px solid var(--rule-2);padding-top:15px;margin-top:8px;display:flex;align-items:start;gap:20px;justify-content:space-between}
+.film-caption{position:relative;min-height:48px;flex:1;font-size:20px;font-weight:500;letter-spacing:-.025em;line-height:1.25}
+.film-caption span{position:absolute;inset:0 auto auto 0;opacity:0;max-width:26ch}
+.film-caption span:first-child{opacity:1}
+.film-chapters{display:flex;gap:7px;align-items:center;padding-top:4px}
+.film-chapters button{width:27px;height:20px;position:relative;border:0;background:none;cursor:pointer;color:var(--ink-4)}
+.film-chapters button::after{content:'';position:absolute;left:0;right:0;top:8px;height:2px;background:currentColor}
+.film-chapters button[aria-pressed="true"]{color:var(--ink)}
+.film-note{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:12px;color:var(--ink-3);font-size:11px}
+.film-note .more{font-size:13px;white-space:nowrap;color:var(--ink)}
+.founder-letter{min-width:0;position:relative}
+.founder-intro{display:flex;align-items:center;gap:22px;margin-bottom:25px}
+.founder-photo{width:112px;height:132px;flex:none;overflow:hidden;border-radius:9px;background:var(--paper-2)}
+.founder-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 28%}
+.founder-intro .hello{font-size:clamp(27px,2.4vw,36px);font-weight:500;letter-spacing:-.04em;line-height:1.13}
+.founder-sign{font-size:12px;line-height:1.45;color:var(--ink-3);margin-top:12px}
+.founder-quote{font-size:clamp(19px,1.65vw,24px);line-height:1.42;letter-spacing:-.025em;color:var(--ink);max-width:33ch;text-wrap:pretty}
+.founder-origin{font-size:16px;line-height:1.55;color:var(--ink-2);margin-top:18px;max-width:43ch;text-wrap:pretty}
+.founder-history{margin-top:22px;max-width:44ch}
+.founder-history summary{display:inline-flex;gap:8px;cursor:pointer;list-style:none;font-size:13px;color:var(--ink-3);border-bottom:1px solid var(--rule-2);padding-bottom:3px}
+.founder-history summary::-webkit-details-marker{display:none}
+.founder-history summary::after{content:'+'}.founder-history[open] summary::after{content:'−'}
+.history-copy{font-size:14px;line-height:1.55;padding-top:16px;color:var(--ink-2)}.history-copy p+p{margin-top:12px}
+@media(max-width:1100px) and (min-width:901px){.founder-intro{gap:16px;margin-bottom:20px}.founder-photo{width:90px;height:110px}.founder-quote{font-size:19px}.founder-origin{font-size:14px}.film-caption{font-size:18px}.film-note{flex-wrap:wrap;gap:8px}}
+@media(max-width:900px){.story-body{grid-template-columns:minmax(0,1fr);gap:30px}.product-film{max-width:700px;width:100%;margin-inline:auto}.founder-letter{max-width:700px;width:100%;margin-inline:auto}.founder-intro{float:left;margin:0 28px 12px 0}.founder-photo{width:90px;height:110px}.founder-intro .hello{font-size:28px}.founder-quote{max-width:none;font-size:20px}.founder-origin{max-width:none}.founder-history{clear:both}.sx{grid-template-columns:minmax(0,1fr);row-gap:28px}}
 @media(max-width:560px){
-  #story .head,#mri .head{gap:18px;margin-bottom:28px}
-  #story h2,#mri h2{max-width:24ch}
-  #story .head .lede{display:none}
-  .founder-letter{grid-template-columns:minmax(0,2fr) minmax(0,3fr);border-radius:16px}
-  .founder-photo{min-height:345px}
-  .founder-copy{padding:22px 18px}
-  .founder-copy .hello{font-size:28px;margin-bottom:18px}
-  .founder-copy .founder-quote{font-size:16px;line-height:1.4}
-  .founder-copy .origin{font-size:13px;line-height:1.45;margin-top:16px}
-  .founder-sign{font-size:10px;padding-top:20px}.founder-sign b{font-size:12px}
-  .founder-history{margin-top:12px}.founder-history summary{font-size:11px}
-  .history-copy{font-size:12px}
-  .method-stage{height:230px;margin-top:10px}
-  .method-overview text{font-size:19px}
-  .method-overview .profit-word{font-size:30px}
-  .method-note{font-size:14px;margin-top:0}
-  .method-foot{padding-top:14px;flex-wrap:wrap;gap:10px}
+ #story .head,#mri .head{gap:16px;margin-bottom:23px}
+ #story .head .lede{display:none}#mri .head .lede{font-size:15px;line-height:1.45}
+ .story-body{gap:22px}.film-stage{margin:7px 0 0;aspect-ratio:1000/560}
+ .film-meta{font-size:10px}.motion-toggle{font-size:10px}
+ .film-bottom{margin-top:0;padding-top:12px;gap:12px}.film-caption{font-size:18px;min-height:44px}.film-chapters{gap:5px}.film-chapters button{width:22px}
+ .film-note{font-size:10px;gap:8px;flex-wrap:wrap;margin-top:5px}.film-note .more{font-size:12px}
+ .founder-intro{float:none;gap:16px;margin:0 0 15px}.founder-photo{width:60px;height:72px;border-radius:6px}.founder-intro .hello{font-size:25px}.founder-sign{font-size:10px;margin-top:5px}
+ .founder-quote{font-size:16px;line-height:1.45}.founder-origin{display:none}.founder-history{margin-top:13px}.founder-history summary{font-size:12px}.history-copy{font-size:13px}
 }
+@media(prefers-reduced-motion:reduce){.film-camera{transform:translate3d(-12px,0,0) rotateX(13deg) rotateY(-10deg) rotateZ(-4deg) scale(.95)}}
 
 /* ── платформа: слева разделы списком, у выбранного ответ; справа окно этого раздела. На телефоне сверху телефон ── */
 .pf{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(28px,4vw,64px);align-items:start}
@@ -437,48 +439,34 @@ picture.tl,picture.td{display:block}
 
 @media(max-width:480px){.facts li{grid-template-columns:minmax(0,1fr);gap:8px}}
 
-/* ── 03: сумма потерь и стоимость разбора, крупно и без интерфейсных карточек ── */
-.mri-study{margin:0;min-width:0}
-.mri-loss-field{background:var(--loss);color:var(--bg);border-radius:18px;padding:26px 30px 24px;overflow:hidden}
-.mri-study-top{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:12px;opacity:.85}
-.mri-total{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 14px;margin:20px 0 8px;line-height:.9;letter-spacing:-.065em;font-variant-numeric:tabular-nums}
-.mri-total b{font-size:clamp(90px,10vw,144px);font-weight:500}
-.mri-total span{font-size:clamp(26px,2.7vw,38px);letter-spacing:-.045em}
-.mri-total-note{font-size:16px;line-height:1.4}
-.mri-cause{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr) minmax(0,1fr);gap:20px;align-items:start;margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-2)}
-.mri-cause small{display:block;font-size:12px;font-weight:400;color:var(--ink-3);margin-bottom:7px}
-.mri-cause h3{font-size:17px;line-height:1.25;font-weight:500;letter-spacing:-.025em}
-.mri-cause .case-loss{display:block;margin-top:8px;font-size:23px;line-height:1.2;color:var(--loss);font-weight:500;letter-spacing:-.035em;white-space:nowrap}
-.mri-action p{font-size:14px;line-height:1.5;color:var(--ink-2)}
-.mri-return b{font-size:30px;font-weight:500;letter-spacing:-.045em;line-height:1.2;color:var(--ok);white-space:nowrap}
-.mri-return span{display:block;font-size:12px;line-height:1.45;color:var(--ink-3);margin-top:6px;max-width:22ch}
-.mri-study figcaption{font-size:12px;line-height:1.5;color:var(--ink-3);margin-top:14px}
-.mri-offer{display:flex;flex-direction:column;align-items:start;min-width:0;padding-top:2px}
+/* ── 03: фрагмент разбора и конкретное предложение ── */
+.mri-case{min-width:0;margin:0;padding:26px 30px 24px;border:1px solid var(--rule-2);border-radius:16px;background:var(--paper);position:relative;overflow:hidden}
+.mri-case-meta{display:flex;justify-content:space-between;align-items:baseline;gap:16px;color:var(--ink-3);font-size:12px}
+.mri-case-title{font-size:17px;letter-spacing:-.015em;margin-top:26px;color:var(--ink-2)}
+.mri-total{display:flex;gap:12px;align-items:baseline;letter-spacing:-.06em;line-height:1;margin-top:6px;color:var(--loss);font-variant-numeric:tabular-nums}
+.mri-total b{font-size:clamp(76px,7.8vw,112px);font-weight:500}.mri-total span{font-size:clamp(25px,2.5vw,36px);letter-spacing:-.04em}
+.mri-case-sub{font-size:13px;line-height:1.45;color:var(--ink-3);margin-top:12px;max-width:53ch}
+.mri-case-detail{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 24px;margin-top:26px;padding-top:21px;border-top:1px solid var(--rule-2);align-items:baseline}
+.mri-case-detail h3{font-size:24px;font-weight:500;line-height:1.2;letter-spacing:-.035em}.mri-case-detail .case-loss{font-size:24px;color:var(--loss);font-weight:500;letter-spacing:-.035em;white-space:nowrap}
+.mri-case-detail p{font-size:15px;color:var(--ink-2);line-height:1.5;grid-column:1/-1;max-width:51ch}
+.mri-result{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:22px;padding-top:20px;border-top:1px solid var(--rule-2)}
+.mri-result span{font-size:13px;color:var(--ink-3);line-height:1.45;max-width:24ch}.mri-result b{color:var(--ok);font-size:36px;letter-spacing:-.045em;line-height:1.2;font-weight:500;white-space:nowrap}.mri-result b small{font-size:18px;font-weight:400;letter-spacing:-.02em}
+.mri-offer{display:flex;flex-direction:column;align-items:start;min-width:0;padding-top:8px}
+.mri-offer-intro{font-size:17px;line-height:1.5;color:var(--ink-2);max-width:40ch;margin-bottom:24px}
 .mri-price{font-weight:500;font-size:clamp(44px,5vw,72px);letter-spacing:-.06em;line-height:1;white-space:nowrap}
-.mri-guarantee{font-size:clamp(17px,1.6vw,23px);letter-spacing:-.015em;line-height:1.4;color:var(--ink);margin-top:20px;max-width:28ch}
-.mri-facts{list-style:none;width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-top:28px;padding-top:22px;border-top:1px solid var(--rule-2)}
-.mri-facts b{display:block;font-size:24px;letter-spacing:-.035em;line-height:1.2;font-weight:500}
-.mri-facts span{display:block;margin-top:7px;font-size:14px;line-height:1.45;color:var(--ink-3);max-width:23ch}
-.mri-plan{font-size:14px;color:var(--ink-2);margin-top:18px}
+.mri-guarantee{font-size:clamp(17px,1.6vw,23px);letter-spacing:-.015em;line-height:1.4;color:var(--ink);margin-top:18px;max-width:29ch}
+.mri-facts{list-style:none;display:flex;gap:9px 20px;flex-wrap:wrap;font-size:14px;color:var(--ink-3);margin-top:24px;padding-top:20px;border-top:1px solid var(--rule-2);width:100%}.mri-facts b{color:var(--ink-2);font-weight:500}
 .mri-offer .go{margin-top:26px;gap:16px 22px}
-@media(max-width:1100px) and (min-width:901px){.mri-cause{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.mri-action{grid-column:1/-1;grid-row:2}.mri-return b{font-size:28px}.mri-total b{font-size:105px}}
+.mri-case-foot{margin-top:12px;font-size:11px;color:var(--ink-3);line-height:1.45}
+.mri-case-expand summary{display:none;cursor:pointer;list-style:none;color:var(--ink-2);font-size:12px;margin-top:16px}
+.mri-case-expand summary::-webkit-details-marker{display:none}.mri-case-expand summary::after{content:'+';margin-left:8px}.mri-case-expand[open] summary::after{content:'−'}
+@media(max-width:1100px) and (min-width:901px){.mri-case{padding:24px}.mri-case-detail h3,.mri-case-detail .case-loss{font-size:21px}.mri-result b{font-size:31px}.mri-offer-intro{font-size:15px;margin-bottom:22px}.mri-guarantee{font-size:20px}}
+@media(max-width:900px){.mri-example{max-width:700px;width:100%;margin-inline:auto}.mri-offer{max-width:700px;width:100%;margin-inline:auto}.mri-offer-intro{max-width:52ch}}
 @media(max-width:560px){
-  .mri-offer{order:-1}
-  .mri-price{font-size:58px}
-  .mri-guarantee{font-size:19px;margin-top:15px;max-width:28ch}
-  .mri-facts{margin-top:22px;padding-top:18px;gap:18px}.mri-facts b{font-size:23px}.mri-facts span{font-size:13px}
-  .mri-plan{font-size:13px;margin-top:16px}
-  .mri-offer .go{width:100%;margin-top:22px;gap:16px}
-  .mri-offer .btn{font-size:15px;justify-content:center}
-  .mri-loss-field{border-radius:16px;padding:22px 20px}
-  .mri-study-top{font-size:11px;gap:10px}.mri-study-top span:last-child{display:none}
-  .mri-total{gap:0 8px;margin-top:24px}.mri-total b{font-size:88px}.mri-total span{font-size:27px}
-  .mri-total-note{font-size:14px;max-width:24ch}
-  .mri-cause{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 18px;margin-top:20px;padding-top:16px}
-  .mri-cause h3{font-size:17px}.mri-cause .case-loss{font-size:23px}
-  .mri-action{grid-row:2;grid-column:1/-1}.mri-action p{font-size:14px}
-  .mri-return b{font-size:27px}.mri-return span{font-size:11px}
-  .mri-study figcaption{font-size:11px}
+ #mri .head{margin-bottom:19px}#mri .head .lede{display:none}.mri-offer{order:-1;padding-top:0}.mri-offer-intro{display:none}
+ .mri-price{font-size:55px}.mri-guarantee{font-size:18px;line-height:1.35;margin-top:12px}.mri-facts{font-size:12px;margin-top:17px;padding-top:14px;gap:6px 18px}.mri-offer .go{margin-top:19px;gap:14px;flex-direction:row;align-items:center}.mri-offer .btn{font-size:14px;padding-inline:18px}.mri-offer .more{font-size:12px}
+ .mri-case{padding:19px 20px;border-radius:12px}.mri-case-meta{font-size:10px}.mri-case-meta span:last-child{display:none}.mri-case-title{font-size:13px;margin-top:15px}.mri-total{gap:8px}.mri-total b{font-size:69px}.mri-total span{font-size:23px}.mri-case-sub{display:none}.mri-case-expand summary{display:inline-flex;border-bottom:1px solid var(--rule-2);padding-bottom:2px;margin-top:12px}
+ .mri-case-detail{margin-top:18px;padding-top:16px;gap:10px 12px}.mri-case-detail h3,.mri-case-detail .case-loss{font-size:19px}.mri-case-detail p{font-size:13px;line-height:1.45}.mri-result{margin-top:16px;padding-top:15px;gap:15px}.mri-result span{font-size:11px}.mri-result b{font-size:29px}.mri-result b small{font-size:15px}.mri-case-foot{font-size:10px;margin-top:5px}
 }
 
 /* ── финал: слева вопрос и кнопка, справа итог кабинета на телефоне ── */
@@ -747,43 +735,27 @@ html[data-theme="light"] .intro-word{color:#111110}
 
 <section class="sec w" id="story">
   <div class="head">
-    <div><p class="kick">Откуда Closery</p><h2>Разные бизнесы. Одни и те же причины потерь.</h2></div>
-    <p class="lede">Я видел это изнутри компаний. И два года создавал платформу, чтобы находить эти причины в каждом бизнесе.</p>
+    <div><p class="kick">Откуда Closery</p><h2>Разные бизнесы.<br>Одни и те же причины.</h2></div>
+    <p class="lede">Видеть потерю мало. Нужно дойти до причины, которая её создаёт. На этом построен Closery.</p>
   </div>
   <div class="story-body">
-    <div class="founder-letter rv">
-      <figure class="founder-photo"><img src="/founder.webp" width="790" height="905" alt="Николай Клименко, основатель Closery" loading="lazy" decoding="async"></figure>
-      <div class="founder-copy">
-        <p class="hello">Привет,<br>я Николай.</p>
-        <p class="founder-quote">Я работал в бизнесах от инфобизнеса до логистики. Был коммерческим директором, входил в совет директоров.</p>
-        <p class="origin">У разных компаний повторялись одни и те же причины потерь. Два года я разрабатывал Closery, чтобы этот опыт помогал каждому бизнесу.</p>
-        <p class="founder-sign"><b>Николай Клименко</b>Основатель Closery</p>
-        <details class="founder-history"><summary>Моя история</summary><div class="history-copy"><p>Я был коммерческим директором, входил в совет директоров. Видел бизнесы насквозь и находил причины, из-за которых компании не растут.</p><p>Два года назад мы с партнёром открыли агентство: помогать бизнесу через найм, адаптацию и качественный онбординг. Агентство не пошло: нам не хватило нужных инвестиций.</p><p>Идея осталась. Два года я разрабатывал платформу, чтобы найденный в проектах метод работал в разных бизнесах. Разбираем, что просело, и идём по причинно-следственной связи до причины.</p></div></details>
-      </div>
-    </div>
-    <figure class="method rv" id="closery-method" aria-label="Сначала смотрим на шесть параметров бизнеса целиком. Затем разбираем первый ответ: задержка мешает разговору и оплате. Исправление причины восстанавливает связанный процесс.">
-      <div class="method-top"><span>Как работает наш метод</span><button class="more motion-toggle" type="button" aria-pressed="false" aria-label="Остановить движение схемы" hidden>Остановить</button></div>
-      <div class="method-stage" aria-hidden="true">
-        <div class="method-overview"><svg viewBox="0 0 500 310" fill="none">
-          <g class="streams">
-            <path class="stream secondary" d="M145 35H170C270 35 205 148 350 148H430" pathLength="1"/>
-            <path class="stream active" d="M145 78H190C270 78 230 148 350 148H430" pathLength="1"/>
-            <path class="stream secondary" d="M145 121H210C260 121 270 148 350 148H430" pathLength="1"/>
-            <path class="stream secondary" d="M145 164H230C270 164 280 148 350 148H430" pathLength="1"/>
-            <path class="stream secondary" d="M145 207H190C270 207 230 148 350 148H430" pathLength="1"/>
-            <path class="stream secondary" d="M145 250H170C270 250 205 148 350 148H430" pathLength="1"/>
-          </g>
-          <path class="process-flow" d="M145 78H190C270 78 230 148 350 148H430" pathLength="1"/>
-          <path class="signal signal-stuck" d="M145 78H190C270 78 230 148 350 148H430" pathLength="1"/>
-          <path class="signal signal-fixed" d="M145 78H190C270 78 230 148 350 148H430" pathLength="1"/>
-          <g><text class="secondary" x="0" y="40">Заявки</text><text class="active-label" x="0" y="83">Первый ответ</text><text class="fixed-label" x="0" y="83">Первый ответ</text><text class="secondary" x="0" y="126">Разговор</text><text class="secondary" x="0" y="169">Оплата</text><text class="secondary" x="0" y="212">Средний чек</text><text class="secondary" x="0" y="245"><tspan x="0">Повторная</tspan><tspan x="0" dy="16">покупка</tspan></text></g>
-          <circle class="profit-mark" cx="441" cy="148" r="22"/><circle class="fixed-mark" cx="441" cy="148" r="22"/>
-          <text class="profit-word" x="330" y="215">Прибыль</text><text class="profit-word fixed-word" x="330" y="215">Прибыль</text>
-        </svg></div>
-      </div>
-      <figcaption class="method-note">Заявка ждёт ответа. Мы находим, почему её не взяли в работу, и исправляем первый контакт.</figcaption>
-      <div class="method-foot"><span class="note">Примените к своей компании</span><a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=leaks">Посчитать свой бизнес <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
+    <figure class="product-film rv" id="closery-method" aria-label="Настоящий интерфейс Closery: от общей картины потерь к расчёту и действию. Пример: компания Техноснаб.">
+      <div class="film-meta"><span>Метод внутри Closery</span><button class="motion-toggle" type="button" aria-pressed="false" aria-label="Приостановить показ платформы" hidden>Пауза</button></div>
+      <div class="film-stage shots" aria-hidden="true"><div class="film-world"><div class="film-camera">
+        <div class="film-base"><div class="film-surface"><img class="tl" src="/media/v3/itog-d-light.webp" width="1800" height="1125" alt="" loading="lazy"><img class="td" src="/media/v3/itog-d-dark.webp" width="1800" height="1125" alt="" loading="lazy"><div class="film-hole"></div></div></div>
+        <div class="film-row"><div class="film-surface"><p>Разговоры без оплаты</p><b>−605 000 ₽</b><small>Оплачивают 15 из 120 разговоров в месяц</small></div></div>
+        <div class="film-detail"><div class="film-surface"><img class="tl" src="/media/method/cause-light.webp" width="1760" height="849" alt="" loading="lazy"><img class="td" src="/media/method/cause-dark.webp" width="1760" height="849" alt="" loading="lazy"></div></div>
+        <div class="film-action"><div class="film-surface"><span>Сделайте сегодня</span><p>Что ответил клиент?<br>Когда следующий шаг?</p></div></div>
+      </div></div></div>
+      <div class="film-bottom"><figcaption class="film-caption"><span>Находим, где уходят деньги.</span><span>Раскрываем, откуда потеря.</span><span>Переходим к действию.</span></figcaption><div class="film-chapters" aria-label="Эпизоды показа"><button type="button" aria-label="Показать общую картину потерь" aria-pressed="true" data-scene="0"></button><button type="button" aria-label="Показать расчёт потери" aria-pressed="false" data-scene="1"></button><button type="button" aria-label="Показать действие" aria-pressed="false" data-scene="2"></button></div></div>
+      <div class="film-note"><span>Пример: компания Техноснаб</span><a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=leaks">Посчитать свой бизнес <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
     </figure>
+    <div class="founder-letter rv">
+      <div class="founder-intro"><figure class="founder-photo"><img src="/founder.webp" width="790" height="905" alt="Николай Клименко" loading="lazy" decoding="async"></figure><div><p class="hello">Привет,<br>я Николай.</p><p class="founder-sign">Николай Клименко<br>Основатель Closery</p></div></div>
+      <p class="founder-quote">Я работал в бизнесах от инфобизнеса до логистики. Компании разные, а причины, которые мешают им расти, повторяются.</p>
+      <p class="founder-origin">Два года я превращал этот опыт в платформу. Чтобы путь от потери к её причине можно было пройти в своём бизнесе.</p>
+      <details class="founder-history"><summary>Как родился Closery</summary><div class="history-copy"><p>Я был коммерческим директором, входил в совет директоров. Видел бизнесы изнутри и находил причины, из-за которых компании не растут.</p><p>Два года назад мы с партнёром открыли агентство: помогать бизнесу через найм, адаптацию и качественный онбординг. Агентство не пошло: нам не хватило нужных инвестиций.</p><p>Идея осталась. Два года я разрабатывал Closery, чтобы метод поиска причин, найденный в проектах, помогал расти и другим компаниям.</p></div></details>
+    </div>
   </div>
 </section>
 
@@ -801,28 +773,26 @@ html[data-theme="light"] .intro-word{color:#111110}
 
 <section class="sec w" id="mri">
   <div class="head">
-    <div><p class="kick">Коммерческий МРТ</p><h2>Разберёмся, где теряется прибыль. И что менять.</h2></div>
-    <p class="lede">МРТ показывает, что мешает зарабатывать, из-за чего это происходит и что менять первым.</p>
+    <div><p class="kick">Коммерческий МРТ</p><h2>Разберём ваш бизнес.<br>Соберём план на 90 дней.</h2></div>
+    <p class="lede">На МРТ связываем потери в деньгах с тем, как устроена работа компании. Так понятно, что менять первым.</p>
   </div>
   <div class="sx">
-    <figure class="mri-study rv" id="mri-study">
-      <div class="mri-loss-field">
-        <div class="mri-study-top"><span>Пример: компания Техноснаб</span><span>Коммерческий МРТ</span></div>
+    <div class="mri-example rv">
+      <figure class="mri-case" id="mri-study">
+        <div class="mri-case-meta"><span>Пример: компания Техноснаб</span><span>Фрагмент разбора</span></div>
+        <p class="mri-case-title">Теряется валовой прибыли в месяц</p>
         <p class="mri-total"><b>−653</b><span>тыс. ₽</span></p>
-        <p class="mri-total-note">валовой прибыли недобирает компания в месяц</p>
-      </div>
-      <div class="mri-cause">
-        <div><small>Одно из мест потерь</small><h3>Первый контакт</h3><b class="case-loss">−189 тыс. ₽</b></div>
-        <div class="mri-action"><small>Что меняем</small><p>Норматив первого ответа и контроль заявок, которые не взяли в работу.</p></div>
-        <div class="mri-return"><small>По плану на 90 дней</small><b>+156 тыс. ₽</b><span>расчётный возврат в месяц по этому этапу</span></div>
-      </div>
-      <figcaption>Весь разбор: причины потерь, расчёты и порядок работы.</figcaption>
-    </figure>
+        <p class="mri-case-sub">В отчёте каждая потеря раскрывается до причины и расчёта. Ниже один из этапов.</p>
+        <details class="mri-case-expand" open><summary>Откуда потеря и что меняем</summary><div class="mri-case-detail"><h3>Первый контакт</h3><b class="case-loss">−189 тыс. ₽</b><p>Что меняем: норматив первого ответа и контроль заявок, которые не взяли в работу.</p></div>
+        <div class="mri-result"><span>Расчётный возврат по этому этапу по плану на 90 дней</span><b>+156 <small>тыс. ₽/мес.</small></b></div></details>
+      </figure>
+      <p class="mri-case-foot">Расчёт по модели МРТ. Эффект проверяем при внедрении.</p>
+    </div>
     <div class="mri-offer rv">
+      <p class="mri-offer-intro">Выйдете с ответом: где теряются деньги, почему и в каком порядке это исправлять.</p>
       <p class="mri-price">79&nbsp;990&nbsp;₽</p>
       <p class="mri-guarantee">Не найдём потерь в рублях, вернём оплату.</p>
-      <ul class="mri-facts"><li><b>120 минут</b><span>онлайн с собственником</span></li><li><b>20 страниц</b><span>PDF с причинами потерь и расчётами</span></li></ul>
-      <p class="mri-plan">И план: что менять и в каком порядке за 90 дней.</p>
+      <ul class="mri-facts"><li><b>120 минут</b> онлайн с собственником</li><li><b>20 страниц</b> PDF и план на 90 дней</li></ul>
       <div class="go"><a class="btn" href="https://lk.closery.ru/register?next=/mri&amp;utm_source=site&amp;utm_content=mri">Записаться на МРТ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a><a class="more" href="/mri/">Как проходит <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
     </div>
   </div>
@@ -963,35 +933,40 @@ html[data-theme="light"] .intro-word{color:#111110}
 
 </script>
 <script>
-/* Схема: общая картина, приближение к причине, восстановление связанного потока.
-   Web Animations API сохраняет кадр на паузе; цвета берутся из токенов темы. */
+/* Камера проходит по слоям настоящего интерфейса. Единственная шкала времени
+   сохраняет синхронность камеры, деталей и подписей при паузе и переключении темы. */
 (function(){
-  var media=matchMedia('(prefers-reduced-motion: reduce)'),controls=[];
-  function motion(root,build){
-    if(!root)return;
-    var animations=[],visible=false,stopped=false,button=root.querySelector('.motion-toggle');
-    function sync(){var run=visible&&!document.hidden&&!stopped&&!media.matches;animations.forEach(function(a){run?a.play():a.pause();});root.dataset.motion=run?'running':'paused';}
-    function reset(){animations.forEach(function(a){a.cancel();});animations=[];if(!media.matches)animations=build(root);if(button)button.hidden=media.matches;sync();}
-    if(button)button.addEventListener('click',function(){stopped=!stopped;button.setAttribute('aria-pressed',String(stopped));button.setAttribute('aria-label',stopped?'Продолжить движение схемы':'Остановить движение схемы');button.textContent=stopped?'Продолжить':'Остановить';sync();});
-    if('IntersectionObserver' in window)new IntersectionObserver(function(es){visible=es[0].isIntersecting;sync();},{threshold:.2}).observe(root);else visible=true;
-    document.addEventListener('visibilitychange',sync);controls.push(reset);reset();
+  var root=document.getElementById('closery-method');if(!root)return;
+  var example=document.querySelector('.mri-case-expand'),compact=matchMedia('(max-width:560px)');
+  function fitExample(){if(example)example.open=!compact.matches}fitExample();compact.addEventListener('change',fitExample);
+  var stage=root.querySelector('.film-stage'),world=root.querySelector('.film-world'),camera=root.querySelector('.film-camera');
+  var media=matchMedia('(prefers-reduced-motion: reduce)'),duration=18000,animations=[],visible=false,held=false,lastScene=-1,raf=0;
+  var toggle=root.querySelector('.motion-toggle'),chapters=Array.from(root.querySelectorAll('[data-scene]'));
+  function fit(){world.style.setProperty('--film-scale',stage.clientWidth/1000)}
+  if(window.ResizeObserver)new ResizeObserver(fit).observe(stage);else addEventListener('resize',fit);fit();
+  function track(selector,frames){var el=typeof selector==='string'?root.querySelector(selector):selector;var a=el.animate(frames,{duration:duration,iterations:Infinity,fill:'both',easing:'linear'});a.pause();animations.push(a);return a;}
+  function frame(at,style,ease){return Object.assign({offset:at},style,ease?{easing:ease}:{});}
+  function build(){
+    animations.forEach(function(a){a.cancel()});animations=[];
+    var e=getComputedStyle(root).getPropertyValue('--ease').trim();
+    if(!media.matches){
+      track(camera,[frame(0,{transform:'translate3d(-12px,0,0) rotateX(23deg) rotateY(-16deg) rotateZ(-7deg) scale(.95)'}),frame(.12,{transform:'translate3d(8px,0,0) rotateX(20deg) rotateY(-12deg) rotateZ(-6deg) scale(.97)'},e),frame(.27,{transform:'translate3d(-30px,3px,30px) rotateX(6deg) rotateY(8deg) rotateZ(-2deg) scale(1.02)'}),frame(.34,{transform:'translate3d(-30px,3px,30px) rotateX(6deg) rotateY(8deg) rotateZ(-2deg) scale(1.02)'},e),frame(.49,{transform:'translate3d(-27px,7px,25px) rotateX(3deg) rotateY(-3deg) rotateZ(0deg) scale(.97)'}),frame(.62,{transform:'translate3d(-27px,7px,25px) rotateX(3deg) rotateY(-3deg) rotateZ(0deg) scale(.97)'},e),frame(.76,{transform:'translate3d(-30px,-15px,30px) rotateX(17deg) rotateY(-12deg) rotateZ(-4deg) scale(.97)'}),frame(.86,{transform:'translate3d(-30px,-15px,30px) rotateX(17deg) rotateY(-12deg) rotateZ(-4deg) scale(.97)'},e),frame(1,{transform:'translate3d(-12px,0,0) rotateX(23deg) rotateY(-16deg) rotateZ(-7deg) scale(.95)'})]);
+      track('.film-base',[frame(0,{opacity:1,transform:'translateZ(0)'}),frame(.16,{opacity:1,transform:'translateZ(0)'},e),frame(.36,{opacity:.18,transform:'translateZ(-100px)'}),frame(.84,{opacity:.18,transform:'translateZ(-100px)'},e),frame(1,{opacity:1,transform:'translateZ(0)'})]);
+      track('.film-hole',[frame(0,{opacity:0}),frame(.12,{opacity:0}),frame(.18,{opacity:1}),frame(.92,{opacity:1}),frame(1,{opacity:0})]);
+      track('.film-row',[frame(0,{opacity:0,transform:'translateZ(0)'}),frame(.08,{opacity:0,transform:'translateZ(0)'}),frame(.14,{opacity:1,transform:'translateZ(20px)'},e),frame(.27,{opacity:1,transform:'translateZ(72px)'}),frame(.35,{opacity:1,transform:'translateZ(72px)'}),frame(.39,{opacity:0,transform:'translateZ(72px)'}),frame(.91,{opacity:0,transform:'translateZ(72px)'}),frame(.94,{opacity:1,transform:'translateZ(72px)'},e),frame(1,{opacity:0,transform:'translateZ(0)'})]);
+      track('.film-detail',[frame(0,{opacity:0}),frame(.35,{opacity:0}),frame(.39,{opacity:1}),frame(.88,{opacity:1}),frame(.92,{opacity:0}),frame(1,{opacity:0})]);
+      track('.film-detail .film-surface',[frame(0,{clipPath:'inset(0 0 66% 0 round 16px)'}),frame(.37,{clipPath:'inset(0 0 66% 0 round 16px)'},e),frame(.48,{clipPath:'inset(0 0 0% 0 round 16px)'}),frame(.64,{clipPath:'inset(0 0 0% 0 round 16px)'},e),frame(.76,{clipPath:'inset(0 0 36% 0 round 16px)'}),frame(.86,{clipPath:'inset(0 0 36% 0 round 16px)'},e),frame(.93,{clipPath:'inset(0 0 66% 0 round 16px)'}),frame(1,{clipPath:'inset(0 0 66% 0 round 16px)'})]);
+      track('.film-action',[frame(0,{opacity:0,transform:'translateZ(72px)'}),frame(.64,{opacity:0,transform:'translateZ(72px)'}),frame(.68,{opacity:1,transform:'translateZ(72px)'},e),frame(.76,{opacity:1,transform:'translateZ(150px)'}),frame(.85,{opacity:1,transform:'translateZ(150px)'},e),frame(.91,{opacity:0,transform:'translateZ(72px)'}),frame(1,{opacity:0,transform:'translateZ(72px)'})]);
+      Array.from(root.querySelectorAll('.film-caption span')).forEach(function(el,i){var starts=[0,.35,.66],ends=[.35,.66,.94],start=starts[i],end=ends[i];var k=[frame(0,{opacity:i===0?1:0,transform:'translateY(0)'})];if(i>0)k.push(frame(start-.005,{opacity:0,transform:'translateY(6px)'}),frame(start+.035,{opacity:1,transform:'translateY(0)'}));k.push(frame(end-.04,{opacity:1,transform:'translateY(0)'}),frame(end-.01,{opacity:0,transform:'translateY(-6px)'}));if(i===0)k.push(frame(.965,{opacity:0,transform:'translateY(6px)'}));k.push(frame(1,{opacity:i===0?1:0,transform:'translateY(0)'}));track(el,k)});
+    }
+    toggle.hidden=media.matches;chapters.forEach(function(b){b.hidden=media.matches});lastScene=-1;sync();
   }
-  function loop(el,frames){var a=el.animate(frames,{duration:14000,iterations:Infinity,fill:'both',easing:'linear'});a.pause();return a;}
-  motion(document.getElementById('closery-method'),function(root){
-    var a=[],ease=getComputedStyle(root).getPropertyValue('--ease').trim()||'linear';
-    a.push(loop(root.querySelector('.method-overview'),[{offset:0,transform:'scale(1)'},{offset:.22,transform:'scale(1)',easing:ease},{offset:.36,transform:'scale(1.045)'},{offset:.86,transform:'scale(1.045)',easing:ease},{offset:1,transform:'scale(1)'}]));
-    root.querySelectorAll('path.secondary').forEach(function(el){a.push(loop(el,[{offset:0,opacity:1},{offset:.22,opacity:1},{offset:.34,opacity:.3},{offset:.78,opacity:.3},{offset:.92,opacity:1},{offset:1,opacity:1}]));});
-    a.push(loop(root.querySelector('.signal-stuck'),[{offset:0,strokeDashoffset:0,opacity:1},{offset:.12,strokeDashoffset:-.32,opacity:0},{offset:.13,strokeDashoffset:0,opacity:1},{offset:.26,strokeDashoffset:-.32,opacity:0},{offset:.27,strokeDashoffset:0,opacity:1},{offset:.42,strokeDashoffset:-.32,opacity:0},{offset:1,strokeDashoffset:-.32,opacity:0}]));
-    a.push(loop(root.querySelector('.signal-fixed'),[{offset:0,strokeDashoffset:0,opacity:0},{offset:.54,strokeDashoffset:0,opacity:0},{offset:.55,strokeDashoffset:0,opacity:1},{offset:.69,strokeDashoffset:-1,opacity:1},{offset:.7,strokeDashoffset:0,opacity:1},{offset:.84,strokeDashoffset:-1,opacity:1},{offset:.85,strokeDashoffset:0,opacity:1},{offset:.99,strokeDashoffset:-1,opacity:1},{offset:1,strokeDashoffset:-1,opacity:0}]));
-    a.push(loop(root.querySelector('.process-flow'),[{offset:0,strokeDashoffset:1},{offset:.5,strokeDashoffset:1,easing:'ease-in-out'},{offset:.72,strokeDashoffset:0},{offset:.92,strokeDashoffset:0},{offset:1,strokeDashoffset:1}]));
-    root.querySelectorAll('.fixed-label,.fixed-mark,.fixed-word').forEach(function(el,i){var at=i===0?.5:.7;a.push(loop(el,[{offset:0,opacity:0},{offset:at,opacity:0},{offset:at+.035,opacity:1},{offset:.92,opacity:1},{offset:1,opacity:0}]));});
-    return a;
-  });
-  motion(document.getElementById('mri-study'),function(root){
-    var ease=getComputedStyle(root).getPropertyValue('--ease').trim()||'linear';
-    var a=root.querySelector('.mri-return').animate([{opacity:.3,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:1800,delay:400,fill:'both',easing:ease});a.pause();return[a];
-  });
-  media.addEventListener('change',function(){controls.forEach(function(reset){reset();});});
+  function tick(){if(!animations.length)return;var t=((animations[0].currentTime||0)%duration)/duration,n=t<.35?0:t<.66?1:t<.94?2:0;if(n!==lastScene){lastScene=n;chapters.forEach(function(b,i){b.setAttribute('aria-pressed',String(i===n))})}raf=requestAnimationFrame(tick)}
+  function sync(){var run=visible&&!document.hidden&&!held&&!media.matches;animations.forEach(function(a){run?a.play():a.pause()});root.dataset.motion=run?'running':'paused';cancelAnimationFrame(raf);if(run)tick();}
+  toggle.addEventListener('click',function(){held=!held;toggle.setAttribute('aria-pressed',String(held));toggle.setAttribute('aria-label',held?'Продолжить показ платформы':'Приостановить показ платформы');toggle.textContent=held?'Продолжить':'Пауза';sync()});
+  chapters.forEach(function(b,i){b.addEventListener('click',function(){animations.forEach(function(a){a.currentTime=[1200,9000,14400][i]});lastScene=-1;if(held){chapters.forEach(function(x,j){x.setAttribute('aria-pressed',String(i===j))})}else sync();})});
+  if(window.IntersectionObserver)new IntersectionObserver(function(entries){visible=entries[0].isIntersecting;sync()},{threshold:.25}).observe(root);else visible=true;
+  document.addEventListener('visibilitychange',sync);media.addEventListener('change',build);build();
 })();
 </script>
 <script src="/lead.js" defer></script>
