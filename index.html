@@ -324,16 +324,43 @@ picture.tl,picture.td{display:block}
 .shot{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--rule-2);background:var(--bg)}
 .sx{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(32px,4.5vw,80px);align-items:start}
 .sx-f{margin:0}
-.lk-sum{display:flex;flex-direction:column;padding-top:28px;border-top:1px solid var(--rule-2)}
-.lk-tot{font-weight:600;font-size:clamp(40px,4vw,60px);letter-spacing:-.045em;line-height:.95;color:var(--loss);white-space:nowrap}
-.lk-tx{margin-top:14px;font-weight:500;font-size:clamp(17px,1.35vw,19px);line-height:1.4;letter-spacing:-.01em;max-width:15em}
-.lk-stack{display:flex;gap:3px;width:100%;height:10px;margin-top:clamp(24px,2.4vw,32px)}
-.lk-stack i{flex:var(--w) 1 0;border-radius:2px;background:var(--loss)}
-.lk-sum .note{margin:14px 0 28px;max-width:24ch}
-.lk-stack i{transform-origin:0 50%;transition:transform 1.1s var(--ease)}
-.js .lk-stack:not(.in) i{transform:scaleX(0)}
-.lk-stack i:nth-child(2){transition-delay:.14s}.lk-stack i:nth-child(3){transition-delay:.28s}
-@media(prefers-reduced-motion:reduce){.js .lk-stack:not(.in) i{transform:none}}
+/* ── 01 откуда Closery: фото и письмо основателя, под ними живая панель шести параметров ── */
+#story .head{grid-template-columns:minmax(0,1fr)}#story .head h2{max-width:22ch}
+.og{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(32px,6vw,110px);align-items:start}
+.og-ph{margin:0;border-radius:18px;overflow:hidden;background:var(--paper);aspect-ratio:790/905;max-width:460px}
+.og-ph img{display:block;width:100%;height:100%;object-fit:cover}
+html:not([data-theme="light"]) .og-ph img{filter:brightness(.88) contrast(1.04)}
+.og-tx{max-width:36em;padding-top:4px}
+.og-hi{font-family:var(--brand);font-weight:600;font-size:clamp(24px,2.2vw,32px);letter-spacing:-.03em;line-height:1.15;color:var(--ink);margin-bottom:clamp(22px,2.4vw,32px)}
+.og-tx p:not(.og-hi){font-size:clamp(16.5px,1.25vw,18.5px);line-height:1.62;color:var(--ink-2);text-wrap:pretty}
+.og-tx p+p{margin-top:1em}
+.og-tx p b{font-weight:500;color:var(--ink)}
+.og-sg{margin-top:clamp(26px,2.6vw,36px);padding-top:18px;border-top:1px solid var(--rule-2);font-size:14px;line-height:1.5;color:var(--ink-3)}
+.og-sg b{display:block;font-weight:500;font-size:16px;color:var(--ink)}
+.pm{margin-top:clamp(64px,7vw,112px);border:1px solid var(--rule-2);border-radius:clamp(18px,2vw,26px);background:var(--paper);padding:clamp(20px,3vw,44px)}
+.pm-h{display:flex;justify-content:space-between;align-items:end;gap:12px 32px;flex-wrap:wrap;margin-bottom:clamp(18px,2.4vw,30px)}
+.pm-h h3{font-weight:600;font-size:clamp(20px,1.8vw,26px);letter-spacing:-.025em;line-height:1.2;max-width:24ch;text-wrap:balance}
+.pm-h p{font-size:15px;line-height:1.5;color:var(--ink-3);max-width:40ch}
+.pm-rows{list-style:none;border-top:1px solid var(--rule)}
+.pm-rows li{display:grid;grid-template-columns:minmax(150px,1.1fr) minmax(0,4fr) 96px;align-items:center;column-gap:clamp(16px,2vw,28px);height:clamp(52px,4.6vw,64px);border-bottom:1px solid var(--rule)}
+.pm-rows span{font-size:15px;font-weight:500;color:var(--ink);transition:color .5s}
+.pm-rows canvas{display:block;width:100%;height:44px;min-width:0}
+.pm-rows em{font-style:normal;font-size:13px;text-align:right;color:var(--ink-4);transition:color .5s}
+.pm-rows li.src em{color:var(--loss)}
+.pm-rows li.dn em{color:color-mix(in srgb,var(--loss) 60%,var(--ink-3))}
+.pm-rows li.fx em{color:var(--ok)}
+.pm-c{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:8px clamp(20px,3vw,48px);align-items:baseline;margin-top:clamp(20px,2.4vw,30px);min-height:3.2em;transition:opacity .45s var(--ease)}
+.pm-c.out{opacity:0}
+.pm-c div{font-size:15px;line-height:1.45;color:var(--ink-2)}
+.pm-c div small{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);margin-bottom:4px}
+.pm-c b{font-weight:600;font-size:clamp(24px,2.2vw,32px);letter-spacing:-.035em;line-height:1;color:var(--loss);white-space:nowrap;font-variant-numeric:tabular-nums}
+.pm-f{display:flex;justify-content:space-between;align-items:center;gap:14px 24px;flex-wrap:wrap;margin-top:clamp(22px,2.6vw,32px);padding-top:18px;border-top:1px solid var(--rule)}
+@media(max-width:900px){.og{grid-template-columns:minmax(0,1fr);row-gap:36px}.og-ph{max-width:420px}}
+@media(max-width:640px){
+  .pm-rows li{grid-template-columns:minmax(0,1fr) auto;height:auto;padding:12px 0 8px;row-gap:6px}
+  .pm-rows canvas{grid-column:1/-1;grid-row:2;height:34px}
+  .pm-c{grid-template-columns:minmax(0,1fr)}
+}
 @media(max-width:900px){.sx{grid-template-columns:minmax(0,1fr);row-gap:40px}.sx-f{max-width:520px;margin-inline:auto;width:100%}}
 
 /* ── платформа: слева разделы списком, у выбранного ответ; справа окно этого раздела. На телефоне сверху телефон ── */
@@ -670,19 +697,37 @@ html[data-theme="light"] .intro-word{color:#111110}
   </div>
 </section>
 
-<section class="sec w" id="leaks">
+<section class="sec w" id="story">
   <div class="head">
-    <div><p class="kick">Где теряются деньги</p><h2>Деньги теряются в том, за что вы уже заплатили</h2></div>
-    <p class="lede">Реклама сработала, заявка пришла. Дальше деньги теряются на стыках, и в выручке их не видно.</p>
+    <div><p class="kick">Откуда Closery</p><h2>Closery родился из одинаковых причин в абсолютно разных бизнесах</h2></div>
   </div>
-  <div class="sx">
-    <figure class="sx-f rv"><picture class="tl"><source media="(max-width:900px)" srcset="/media/s/itog-m-light.webp" width="780" height="1776"><img class="shot" src="/media/s/itog-d-light.webp" width="1800" height="1424" alt="Итог кабинета: 936 000 ₽ валовой прибыли в месяц уходит в трёх местах, самое дорогое первым" loading="lazy" decoding="async"></picture><picture class="td"><source media="(max-width:900px)" srcset="/media/s/itog-m-dark.webp" width="780" height="1776"><img class="shot" src="/media/s/itog-d-dark.webp" width="1800" height="1424" alt="" loading="lazy" decoding="async"></picture></figure>
-    <div class="lk-sum">
-      <p class="lk-tot">936&nbsp;000&nbsp;₽</p><p class="lk-tx">валовой прибыли в месяц уходит в трёх местах</p>
-      <div class="lk-stack rv" aria-hidden="true"><i style="--w:236"></i><i style="--w:605"></i><i style="--w:95"></i></div>
-      <p class="note">Пример расчёта: компания Техноснаб</p>
-      <a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=leaks">Посчитать свой бизнес <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  <div class="og">
+    <figure class="og-ph rv"><img src="/founder.webp" width="790" height="905" alt="Николай Клименко, основатель Closery" loading="lazy" decoding="async"></figure>
+    <div class="og-tx rv">
+      <p class="og-hi">Привет, я Николай.</p>
+      <p>Я работал в бизнесах от инфобизнеса до логистики. Был коммерческим директором, входил в совет директоров. Видел компании насквозь, от первой заявки до отчёта собственнику.</p>
+      <p>И везде повторялось одно и то же. Компания упирается в потолок не из-за продукта и не из-за рекламы. <b>Деньги уходят в одних и тех же местах, просто никто не видит, где именно и сколько.</b></p>
+      <p>Два года назад мы с партнёром открыли агентство. Хотели растить бизнес через людей: найм, адаптацию, нормальный онбординг. Модель требовала больших вложений задолго до первых результатов. Мы это посчитали и остановились вовремя.</p>
+      <p>Идея осталась. Два года я строил платформу. В каждом проекте я находил причину по цепочке: что просело, из-за чего и сколько это стоит. Я хотел, чтобы этот метод работал в любом бизнесе, а не только там, где я лично. <b>Так появился Closery.</b></p>
+      <p class="og-sg"><b>Николай Клименко</b>основатель Closery</p>
     </div>
+  </div>
+
+  <div class="pm rv" id="pm">
+    <div class="pm-h">
+      <h3>Рост держится на шести параметрах</h3>
+      <p>Просядет один, и он потянет за собой остальные. Closery видит всю цепочку и показывает, что чинить первым.</p>
+    </div>
+    <ol class="pm-rows">
+      <li><span>Заявки</span><canvas aria-hidden="true"></canvas><em>в норме</em></li>
+      <li><span>Первый ответ</span><canvas aria-hidden="true"></canvas><em>в норме</em></li>
+      <li><span>Разговор</span><canvas aria-hidden="true"></canvas><em>в норме</em></li>
+      <li><span>Оплата</span><canvas aria-hidden="true"></canvas><em>в норме</em></li>
+      <li><span>Средний чек</span><canvas aria-hidden="true"></canvas><em>в норме</em></li>
+      <li><span>Повторные покупки</span><canvas aria-hidden="true"></canvas><em>в норме</em></li>
+    </ol>
+    <div class="pm-c" aria-live="polite"><div><small>Причина</small><span data-k="c">Разговор не доходит до оплаты</span></div><div><small>Что видно в цифрах</small><span data-k="e">оплачивают 15 из 120 разговоров</span></div><b data-k="m">−605&nbsp;000&nbsp;₽</b></div>
+    <div class="pm-f"><p class="note">Валовая прибыль в месяц. Пример расчёта: компания Техноснаб</p><a class="more" href="https://lk.closery.ru/register?utm_source=site&amp;utm_content=leaks">Посчитать свой бизнес <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
   </div>
 </section>
 
@@ -849,6 +894,61 @@ html[data-theme="light"] .intro-word{color:#111110}
   onScroll();
 })();
 
+</script>
+<script>
+/* 01: панель шести параметров. Линии идут справа налево как телеметрия; по очереди проседает причина, за ней следствия, потом линия выправляется */
+(function(){
+  var pm=document.getElementById('pm');if(!pm)return;
+  var rows=[].slice.call(pm.querySelectorAll('.pm-rows li')),cv=rows.map(function(li){return li.querySelector('canvas');});
+  var cap=pm.querySelector('.pm-c'),ck=cap.querySelector('[data-k=c]'),ek=cap.querySelector('[data-k=e]'),mk=cap.querySelector('[data-k=m]');
+  var S=[
+    {src:3,dn:[5],c:'Разговор не доходит до оплаты',e:'оплачивают 15 из 120 разговоров',m:'−605 000 ₽'},
+    {src:1,dn:[2,3],c:'Заявка ждёт первого ответа',e:'80 из 200 заявок остаются без разговора',m:'−236 000 ₽'},
+    {src:5,dn:[],c:'Клиент купил и пропал',e:'повторно покупают 20 из 100 клиентов',m:'−95 000 ₽'}
+  ];
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,STEP=3,SPEED=56,dpr=Math.min(devicePixelRatio||1,2);
+  var st=rows.map(function(_,i){return{buf:[],lv:1,tg:1,ph:i*1.7,acc:0};}),col={},si=0,t0=0,held=0,phase=-1,run=false,last=0;
+  function colors(){var cs=getComputedStyle(document.documentElement);['--ink-4','--loss','--ok','--rule-2'].forEach(function(k){col[k]=cs.getPropertyValue(k).trim()||'#888';});}
+  function size(){cv.forEach(function(c,i){var w=c.clientWidth,h=c.clientHeight;c.width=Math.round(w*dpr);c.height=Math.round(h*dpr);var n=Math.ceil(w/STEP)+2,b=st[i].buf;while(b.length<n)b.unshift(sample(i));if(b.length>n)b.splice(0,b.length-n);});}
+  function sample(i){var s=st[i],x=s.ph;s.ph+=.07;return s.lv+.045*Math.sin(x)+.022*Math.sin(x*2.3+i)+.01*Math.sin(x*5.7);}
+  function draw(i,shift){
+    var c=cv[i],g=c.getContext('2d'),w=c.width,h=c.height,b=st[i].buf,li=rows[i];if(!w)return;
+    g.clearRect(0,0,w,h);
+    var top=h*.1,bot=h*.94,y=function(v){return bot-(bot-top)*Math.max(0,Math.min(1.08,v))/1.08;};
+    g.setLineDash([2*dpr,4*dpr]);g.strokeStyle=col['--rule-2'];g.lineWidth=dpr;g.beginPath();g.moveTo(0,y(1));g.lineTo(w,y(1));g.stroke();g.setLineDash([]);
+    var k=li.classList.contains('src')?'--loss':li.classList.contains('dn')?'--loss':li.classList.contains('fx')?'--ok':'--ink-4';
+    g.beginPath();for(var j=0;j<b.length;j++){var X=(j*STEP-shift)*dpr,Y=y(b[j]);j?g.lineTo(X,Y):g.moveTo(X,Y);}
+    g.strokeStyle=col[k];g.globalAlpha=li.classList.contains('dn')?.6:1;g.lineWidth=1.6*dpr;g.lineJoin='round';g.stroke();
+    g.lineTo(w,h);g.lineTo(0,h);g.closePath();var gr=g.createLinearGradient(0,top,0,h);gr.addColorStop(0,col[k]);gr.addColorStop(1,'transparent');g.fillStyle=gr;g.globalAlpha=k=='--ink-4'?.07:.14;g.fill();g.globalAlpha=1;
+    var lx=(b.length-1)*STEP-shift;g.beginPath();g.arc(lx*dpr,y(b[b.length-1]),2.6*dpr,0,7);g.fillStyle=col[k];g.fill();
+  }
+  function setPhase(p,s){
+    phase=p;
+    if(p===0){rows.forEach(function(li,i){li.className='';li.querySelector('em').textContent='в норме';st[i].tg=1;});
+      cap.classList.add('out');setTimeout(function(){ck.textContent=s.c;ek.textContent=s.e;mk.textContent=s.m;cap.classList.remove('out');},450);}
+    if(p===1){rows[s.src].className='src';rows[s.src].querySelector('em').textContent='причина';st[s.src].tg=.3;}
+    if(p===2){s.dn.forEach(function(i){rows[i].className='dn';rows[i].querySelector('em').textContent='тянет вниз';st[i].tg=.58;});}
+    if(p===3){[s.src].concat(s.dn).forEach(function(i){rows[i].className='fx';rows[i].querySelector('em').textContent='починили';st[i].tg=1;});}
+  }
+  var T=[0,900,1900,5200,7600];
+  function frame(now){
+    if(!run)return;var dt=Math.min(.05,(now-(last||now))/1000);last=now;
+    var el=now-t0,s=S[si];while(phase<3&&el>=T[phase+1])setPhase(phase+1,s);
+    if(el>=T[4]){si=(si+1)%S.length;t0=now;phase=0;setPhase(0,S[si]);}
+    st.forEach(function(o,i){o.lv+=(o.tg-o.lv)*Math.min(1,dt*2.2);o.acc+=SPEED*dt;while(o.acc>=STEP){o.acc-=STEP;o.buf.push(sample(i));o.buf.shift();}draw(i,o.acc);});
+    requestAnimationFrame(frame);
+  }
+  function start(){if(run||reduce)return;run=true;last=0;var n=performance.now();if(!t0){t0=n;phase=0;setPhase(0,S[si]);}else t0=n-held;requestAnimationFrame(frame);}
+  function stop(){if(run)held=performance.now()-t0;run=false;}
+  colors();size();
+  if(reduce){var s=S[0];rows[s.src].className='src';rows[s.src].querySelector('em').textContent='причина';s.dn.forEach(function(i){rows[i].className='dn';rows[i].querySelector('em').textContent='тянет вниз';});
+    st.forEach(function(o,i){var n=o.buf.length;o.buf=o.buf.map(function(v,j){var tg=i===s.src?.3:s.dn.indexOf(i)>-1?.58:1,k=Math.max(0,Math.min(1,(j-n*.55)/(n*.2)));return v+(tg-1)*k;});draw(i,0);});}
+  addEventListener('resize',function(){size();if(!run)st.forEach(function(_,i){draw(i,0);});});
+  new MutationObserver(function(){colors();if(!run)st.forEach(function(_,i){draw(i,0);});}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  if(!reduce)st.forEach(function(_,i){draw(i,0);});
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){es[0].isIntersecting?start():stop();},{threshold:.2}).observe(pm);else start();
+  document.addEventListener('visibilitychange',function(){document.hidden?stop():pm.getBoundingClientRect().top<innerHeight&&start();});
+})();
 </script>
 <script src="/lead.js" defer></script>
 <script src="/cab.js" defer></script>
