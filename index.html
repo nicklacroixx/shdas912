@@ -446,41 +446,49 @@ html:not([data-theme="light"]) .film-surface{box-shadow:0 40px 90px -30px rgba(0
 
 @media(max-width:480px){.facts li{grid-template-columns:minmax(0,1fr);gap:8px}}
 
-/* ── 03: фрагмент разбора и конкретное предложение ── */
-.mri-case{min-width:0;margin:0;padding:26px 30px 24px;border:1px solid var(--rule-2);border-radius:16px;background:var(--paper);position:relative;overflow:hidden}
-.mri-case-meta{display:flex;justify-content:space-between;align-items:baseline;gap:16px;color:var(--ink-3);font-size:12px}
-.mri-case-title{font-size:17px;letter-spacing:-.015em;margin-top:26px;color:var(--ink-2)}
-.mri-total{display:flex;gap:12px;align-items:baseline;letter-spacing:-.06em;line-height:1;margin-top:6px;color:var(--loss);font-variant-numeric:tabular-nums}
-.mri-total b{font-size:clamp(76px,7.8vw,112px);font-weight:500}.mri-total span{font-size:clamp(25px,2.5vw,36px);letter-spacing:-.04em}
-.mri-case-sub{font-size:13px;line-height:1.45;color:var(--ink-3);margin-top:12px;max-width:53ch}
-.mri-case-detail{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 24px;margin-top:26px;padding-top:21px;border-top:1px solid var(--rule-2);align-items:baseline}
-.mri-case-detail h3{font-size:24px;font-weight:500;line-height:1.2;letter-spacing:-.035em}.mri-case-detail .case-loss{font-size:24px;color:var(--loss);font-weight:500;letter-spacing:-.035em;white-space:nowrap}
-.mri-case-detail p{font-size:15px;color:var(--ink-2);line-height:1.5;grid-column:1/-1;max-width:51ch}
-.mri-result{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:22px;padding-top:20px;border-top:1px solid var(--rule-2)}
-.mri-result span{font-size:13px;color:var(--ink-3);line-height:1.45;max-width:24ch}.mri-result b{color:var(--ok);font-size:36px;letter-spacing:-.045em;line-height:1.2;font-weight:500;white-space:nowrap}.mri-result b small{font-size:18px;font-weight:400;letter-spacing:-.02em}
-.mri-offer{display:flex;flex-direction:column;align-items:start;min-width:0;padding-top:8px}
+/* ── 03: настоящий отчёт МРТ веером. Пачка листов раскладывается по мере прокрутки, лист поднимается по наведению или нажатию,
+   под ним подпись с цифрой этой страницы. Рядом предложение и цена ── */
+.mri-doc{margin:0;min-width:0}
+.doc-meta{display:flex;justify-content:space-between;align-items:baseline;gap:16px;color:var(--ink-3);font-size:12px}
+.doc-stage{touch-action:pan-y;--p:1;--n:6;--pw:clamp(130px,13.6vw,196px);--sx:.37;--rz:3deg;position:relative;height:calc(var(--pw) * 1.41 + 84px);margin-top:4px;overflow-x:clip}
+.doc-stage::before{content:"";position:absolute;left:12%;right:12%;bottom:4px;height:46px;border-radius:50%;background:radial-gradient(closest-side,rgba(20,24,22,.16),transparent);filter:blur(6px);opacity:var(--p)}
+html:not([data-theme="light"]) .doc-stage::before{background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent)}
+.doc-page{--o:calc(var(--i) - (var(--n) - 1) / 2);--lift:0px;--up:1;position:absolute;left:50%;bottom:18px;width:var(--pw);margin-left:calc(var(--pw) / -2);padding:0;border:0;border-radius:3px;
+  background:#FBFAF6;cursor:pointer;z-index:calc(10 + var(--i));transform-origin:50% 140%;
+  transform:translateX(calc(var(--o) * var(--pw) * var(--sx) * var(--p))) translateY(var(--lift)) rotate(calc(var(--o) * var(--rz) * var(--p) * var(--up) + var(--j) * (1 - var(--p)))) scale(var(--s,1));
+  box-shadow:0 1px 1px rgba(20,24,22,.06),0 16px 34px -16px rgba(20,24,22,.32);transition:transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .5s,filter .5s}
+.doc-page img{display:block;width:100%;height:auto;border-radius:3px;pointer-events:none}
+.doc-page:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.doc-page.is-up{--lift:-30px;--up:.2;--s:1.1;z-index:30;box-shadow:0 2px 2px rgba(20,24,22,.06),0 34px 60px -24px rgba(20,24,22,.45)}
+html:not([data-theme="light"]) .doc-page{filter:brightness(.82);box-shadow:0 24px 50px -22px rgba(0,0,0,.85)}
+html:not([data-theme="light"]) .doc-page.is-up{filter:none;box-shadow:0 40px 80px -26px rgba(0,0,0,.9)}
+.doc-cap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 24px;align-items:end;margin-top:6px;padding-top:16px;border-top:1px solid var(--rule-2)}
+.doc-no{grid-column:1/-1;font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}.doc-no b{color:var(--ink);font-weight:500}
+.doc-line{font-size:clamp(17px,1.45vw,21px);line-height:1.35;letter-spacing:-.02em;min-height:2.7em;max-width:38ch}
+.doc-line em{font-style:normal;white-space:nowrap}.doc-line .neg{color:var(--loss)}.doc-line .pos{color:var(--ok)}
+.doc-nav{display:flex;gap:6px}
+.doc-nav button{width:36px;height:36px;border:1px solid var(--rule-2);border-radius:50%;background:none;color:var(--ink-2);cursor:pointer;display:grid;place-items:center}
+.doc-nav button:hover{color:var(--ink);border-color:var(--ink-3)}
+.mri-offer{display:flex;flex-direction:column;align-items:start;min-width:0;padding-top:36px}
 .mri-offer-intro{font-size:17px;line-height:1.5;color:var(--ink-2);max-width:40ch;margin-bottom:24px}
 .mri-price{font-weight:500;font-size:clamp(44px,5vw,72px);letter-spacing:-.06em;line-height:1;white-space:nowrap}
 .mri-guarantee{font-size:clamp(17px,1.6vw,23px);letter-spacing:-.015em;line-height:1.4;color:var(--ink);margin-top:18px;max-width:29ch}
-.mri-facts{list-style:none;display:flex;gap:9px 20px;flex-wrap:wrap;font-size:14px;color:var(--ink-3);margin-top:24px;padding-top:20px;border-top:1px solid var(--rule-2);width:100%}.mri-facts b{color:var(--ink-2);font-weight:500}
+.mri-facts{list-style:none;display:flex;gap:9px 20px;flex-wrap:wrap;font-size:14px;color:var(--ink-3);margin-top:24px;padding-top:20px;border-top:1px solid var(--rule-2);width:100%}.mri-facts b{color:var(--ink);font-weight:500}
 .mri-offer .go{margin-top:26px;gap:16px 22px}
-.mri-case-foot{margin-top:12px;font-size:11px;color:var(--ink-3);line-height:1.45}
-.mri-case-expand summary{display:none;cursor:pointer;list-style:none;color:var(--ink-2);font-size:12px;margin-top:16px}
-.mri-case-expand summary::-webkit-details-marker{display:none}.mri-case-expand summary::after{content:'+';margin-left:8px}.mri-case-expand[open] summary::after{content:'−'}
-@media(max-width:1100px) and (min-width:901px){.mri-case{padding:24px}.mri-case-detail h3,.mri-case-detail .case-loss{font-size:21px}.mri-result b{font-size:31px}.mri-offer-intro{font-size:15px;margin-bottom:22px}.mri-guarantee{font-size:20px}}
-@media(max-width:900px){.mri-example{max-width:700px;width:100%;margin-inline:auto}.mri-offer{max-width:700px;width:100%;margin-inline:auto}.mri-offer-intro{max-width:52ch}}
+@media(prefers-reduced-motion:reduce){.doc-page{transition:none}}
+@media(max-width:900px){.mri-doc,.mri-offer{max-width:700px;width:100%;margin-inline:auto}.mri-offer{padding-top:0}.mri-offer-intro{max-width:52ch}}
 @media(min-width:561px) and (max-width:900px){
- .mri-case{padding:22px}.mri-case-meta{font-size:10px;flex-wrap:wrap;gap:4px}.mri-case-meta span:last-child{display:none}.mri-case-title{font-size:14px;margin-top:21px}.mri-total b{font-size:76px}.mri-total span{font-size:25px}.mri-case-sub{font-size:11px}
- .mri-case-detail{margin-top:21px;padding-top:17px;gap:12px}.mri-case-detail h3,.mri-case-detail .case-loss{font-size:20px}.mri-case-detail p{font-size:13px}
- .mri-result{gap:12px}.mri-result span{font-size:11px}.mri-result b{font-size:29px}.mri-result b small{font-size:15px}
- .mri-offer-intro{font-size:15px;margin-bottom:20px}.mri-guarantee{font-size:19px}.mri-facts{font-size:12px;gap:8px}.mri-offer .go{width:100%;gap:16px}.mri-offer .btn{font-size:14px;padding-inline:12px}.mri-offer .more{font-size:13px}
+ .doc-stage{--pw:clamp(100px,14vw,132px);--sx:.36}.doc-meta{font-size:10px}.doc-line{font-size:16px}.doc-nav button{width:32px;height:32px}
+ .mri-offer-intro{font-size:15px;margin-bottom:20px}.mri-guarantee{font-size:19px}.mri-facts{font-size:12px;gap:8px}.mri-offer .go{width:100%;gap:16px}.mri-offer .btn{font-size:14px;padding-inline:12px}
 }
-@media(min-width:561px) and (max-width:740px){.mri-result{display:block}.mri-result span{display:block;max-width:none}.mri-result b{display:block;margin-top:8px}.mri-total{gap:8px}.mri-total b{font-size:66px}.mri-total span{font-size:22px}}
 @media(max-width:560px){
- #mri .head{margin-bottom:19px}#mri .head .lede{display:none}.mri-offer{order:-1;padding-top:0}.mri-offer-intro{display:none}
- .mri-price{font-size:55px}.mri-guarantee{font-size:18px;line-height:1.35;margin-top:12px}.mri-facts{font-size:12px;margin-top:17px;padding-top:14px;gap:6px 18px}.mri-offer .go{margin-top:19px;gap:14px;flex-direction:row;align-items:center}.mri-offer .btn{font-size:14px;padding-inline:18px}.mri-offer .more{font-size:12px}
- .mri-case{padding:19px 20px;border-radius:12px}.mri-case-meta{font-size:10px}.mri-case-meta span:last-child{display:none}.mri-case-title{font-size:13px;margin-top:15px}.mri-total{gap:8px}.mri-total b{font-size:69px}.mri-total span{font-size:23px}.mri-case-sub{display:none}.mri-case-expand summary{display:inline-flex;border-bottom:1px solid var(--rule-2);padding-bottom:2px;margin-top:12px}
- .mri-case-detail{margin-top:18px;padding-top:16px;gap:10px 12px}.mri-case-detail h3,.mri-case-detail .case-loss{font-size:19px}.mri-case-detail p{font-size:13px;line-height:1.45}.mri-result{margin-top:16px;padding-top:15px;gap:15px}.mri-result span{font-size:11px}.mri-result b{font-size:29px}.mri-result b small{font-size:15px}.mri-case-foot{font-size:10px;margin-top:5px}
+ #mri .head{margin-bottom:18px}#mri .head .lede{display:none}.mri-offer{order:-1}#mri .sx{row-gap:30px}
+ .doc-meta span:last-child{display:none}.doc-meta{font-size:10px}
+ .doc-stage{--pw:min(104px,27vw);--sx:.36;--rz:3deg;height:calc(var(--pw) * 1.41 + 66px);margin-top:2px}
+ .doc-page.is-up{--lift:-22px;--s:1.12}
+ .doc-cap{margin-top:2px;padding-top:12px;gap:4px 14px}.doc-no{font-size:11px}.doc-line{font-size:16px;min-height:2.7em}.doc-nav button{width:32px;height:32px}
+ .mri-offer-intro{display:none}.mri-price{font-size:52px}.mri-guarantee{font-size:17px;line-height:1.35;margin-top:10px}
+ .mri-facts{font-size:12px;margin-top:14px;padding-top:12px;gap:6px 18px}.mri-offer .go{margin-top:16px;gap:14px;width:100%}
 }
 
 /* ── финал: слева вопрос и кнопка, справа итог кабинета на телефоне ── */
@@ -787,21 +795,16 @@ html[data-theme="light"] .intro-word{color:#111110}
 
 <section class="sec w" id="mri">
   <div class="head">
-    <div><p class="kick">Коммерческий МРТ</p><h2>Разберём ваш бизнес.<br>Соберём план на 90 дней.</h2></div>
-    <p class="lede">На МРТ связываем потери в деньгах с тем, как устроена работа компании. Так понятно, что менять первым.</p>
+    <div><p class="kick">Коммерческий МРТ</p><h2>Разберём бизнес за два часа.<br>План на 90 дней останется у вас.</h2></div>
+    <p class="lede">Каждая потеря посчитана в рублях и доведена до причины. Отчёт ваш, даже если внедрять будете сами.</p>
   </div>
   <div class="sx">
-    <div class="mri-example rv">
-      <figure class="mri-case" id="mri-study">
-        <div class="mri-case-meta"><span>Пример: компания Техноснаб</span><span>Фрагмент разбора</span></div>
-        <p class="mri-case-title">Теряется валовой прибыли в месяц</p>
-        <p class="mri-total"><b>−653</b><span>тыс. ₽</span></p>
-        <p class="mri-case-sub">В отчёте каждая потеря раскрывается до причины и расчёта. Ниже один из этапов.</p>
-        <details class="mri-case-expand" open><summary>Откуда потеря и что меняем</summary><div class="mri-case-detail"><h3>Первый контакт</h3><b class="case-loss">−189 тыс. ₽</b><p>Что меняем: норматив первого ответа и контроль заявок, которые не взяли в работу.</p></div>
-        <div class="mri-result"><span>Расчётный возврат по этому этапу по плану на 90 дней</span><b>+156 <small>тыс. ₽/мес.</small></b></div></details>
-      </figure>
-      <p class="mri-case-foot">Расчёт по модели МРТ. Эффект проверяем при внедрении.</p>
-    </div>
+    <figure class="mri-doc rv">
+      <div class="doc-meta"><span>Пример на демо-данных: компания Демо-Опт выдуманная</span><span>Листы настоящего отчёта МРТ</span></div>
+      <div class="doc-stage" id="mriDoc"><button class="doc-page" type="button" style="--i:0;--j:-1.5deg" data-no="Обложка" data-name="Обложка" data-cap="Главный вывод выносим на обложку: <b>рост упёрся в собственника.</b>" aria-label="Обложка" aria-pressed="false"><img src="media/report-pdf/cover.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:1;--j:2deg" data-no="02" data-name="Резюме" data-cap="Теряется <em class=&quot;neg&quot;>3,09&nbsp;млн&nbsp;₽</em> валовой прибыли в месяц. <em class=&quot;pos&quot;>2,03&nbsp;млн&nbsp;₽</em> из них возвращаются после 90 дней." aria-label="Страница 02 из 20: Резюме" aria-pressed="false"><img src="media/report-pdf/summary.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:2;--j:-2.5deg" data-no="04" data-name="Ведомость потерь" data-cap="Дороже всего переговоры и закрытие: <em class=&quot;neg&quot;>2,09&nbsp;млн&nbsp;₽</em> в месяц, 68% всех потерь." aria-label="Страница 04 из 20: Ведомость потерь" aria-pressed="false"><img src="media/report-pdf/ledger.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:3;--j:1deg" data-no="07" data-name="Диагноз" data-cap="Корень один: продажи замкнуты на собственнике. Из него растут потери на трёх этапах воронки." aria-label="Страница 07 из 20: Диагноз" aria-pressed="false"><img src="media/report-pdf/diagnosis.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:4;--j:-1deg" data-no="10" data-name="Что делать" data-cap="Разговоры не доходят до оплаты: <em class=&quot;neg&quot;>1,5&nbsp;млн&nbsp;₽</em> в месяц. Что меняем и как это посчитали." aria-label="Страница 10 из 20: Что делать" aria-pressed="false"><img src="media/report-pdf/fix.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button><button class="doc-page" type="button" style="--i:5;--j:2.5deg" data-no="12" data-name="План на 90 дней" data-cap="Три волны за 90 дней. Каждую принимаем по метрике." aria-label="Страница 12 из 20: План на 90 дней" aria-pressed="false"><img src="media/report-pdf/plan.webp" width="640" height="902" alt="" loading="lazy" decoding="async"></button></div>
+      <figcaption class="doc-cap" aria-live="polite"><p class="doc-no" id="mriDocNo"><b>02</b> / 20 · Резюме</p><p class="doc-line" id="mriDocLine">Теряется <em class="neg">3,09&nbsp;млн&nbsp;₽</em> валовой прибыли в месяц. <em class="pos">2,03&nbsp;млн&nbsp;₽</em> из них возвращаются после 90 дней.</p>
+        <div class="doc-nav"><button type="button" id="mriDocPrev" aria-label="Предыдущий лист"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" id="mriDocNext" aria-label="Следующий лист"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></button></div></figcaption>
+    </figure>
     <div class="mri-offer rv">
       <p class="mri-offer-intro">Выйдете с ответом: где теряются деньги, почему и в каком порядке это исправлять.</p>
       <p class="mri-price">79&nbsp;990&nbsp;₽</p>
@@ -981,6 +984,55 @@ html[data-theme="light"] .intro-word{color:#111110}
   chapters.forEach(function(b,i){b.addEventListener('click',function(){animations.forEach(function(a){a.currentTime=[1200,9000,14400][i]});lastScene=-1;if(held){chapters.forEach(function(x,j){x.setAttribute('aria-pressed',String(i===j))})}else sync();})});
   if(window.IntersectionObserver)new IntersectionObserver(function(entries){visible=entries[0].isIntersecting;sync()},{threshold:.25}).observe(root);else visible=true;
   document.addEventListener('visibilitychange',sync);media.addEventListener('change',build);build();
+})();
+</script>
+<script>
+/* 03: пачка листов отчёта раскладывается веером, пока раздел входит в экран, и собирается обратно при прокрутке вверх.
+   Лист поднимается по наведению, нажатию или стрелкам; подпись под веером называет цифру этой страницы. */
+(function(){
+  var st = document.getElementById('mriDoc'); if (!st) return;
+  var pages = [].slice.call(st.querySelectorAll('.doc-page'));
+  var no = document.getElementById('mriDocNo'), line = document.getElementById('mriDocLine');
+  var cur = -1, raf = 0;
+  function pick(i){
+    i = (i + pages.length) % pages.length;
+    if (i === cur) return;
+    cur = i;
+    pages.forEach(function(p, k){ p.classList.toggle('is-up', k === i); p.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    var p = pages[i];
+    no.innerHTML = p.dataset.no === 'Обложка' ? '<b>Обложка</b> · 20 страниц' : '<b>' + p.dataset.no + '</b> / 20 · ' + p.dataset.name;
+    line.innerHTML = p.dataset.cap;
+  }
+  // Лист выбирается по месту над веером, а не по видимому краю: средние листы почти закрыты соседями.
+  // Мышь ведёт вдоль веера и листает, палец выбирает касанием или протяжкой.
+  function slot(e){
+    var r = st.getBoundingClientRect(), cs = getComputedStyle(st);
+    var step = pages[0].offsetWidth * parseFloat(cs.getPropertyValue('--sx')) * Math.max(.3, parseFloat(cs.getPropertyValue('--p')) || 1);
+    var i = Math.round((e.clientX - r.left - r.width / 2) / step + (pages.length - 1) / 2);
+    pick(Math.max(0, Math.min(pages.length - 1, i)));
+  }
+  st.addEventListener('pointermove', function(e){ if (e.pointerType === 'mouse' || e.buttons) slot(e); });
+  st.addEventListener('pointerdown', slot);
+  pages.forEach(function(p, k){
+    p.addEventListener('focus', function(){ pick(k); });
+    p.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){ e.preventDefault(); pick(cur + (e.key === 'ArrowRight' ? 1 : -1)); pages[cur].focus(); }
+    });
+  });
+  document.getElementById('mriDocPrev').addEventListener('click', function(){ pick(cur - 1); });
+  document.getElementById('mriDocNext').addEventListener('click', function(){ pick(cur + 1); });
+  pick(1);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function spread(){
+    raf = 0;
+    var r = st.getBoundingClientRect(), vh = window.innerHeight;
+    var p = Math.max(0, Math.min(1, (vh * .95 - r.top) / (vh * .5)));
+    st.style.setProperty('--p', p.toFixed(3));
+  }
+  function ask(){ if (!raf) raf = requestAnimationFrame(spread); }
+  window.addEventListener('scroll', ask, { passive: true });
+  window.addEventListener('resize', ask);
+  spread();
 })();
 </script>
 <script src="/lead.js" defer></script>
